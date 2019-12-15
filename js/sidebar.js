@@ -10,6 +10,7 @@ $(function () {
   }, {
     duration: 200
   })
+  // testing
   $('#toggle-sidebar').velocity('stop').velocity({
     rotateZ: '180deg',
     color: '#99a9bf'
