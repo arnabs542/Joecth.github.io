@@ -1,0 +1,50 @@
+<h2 id="rm-black-sides">rm black sides</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>╰─○ ffplay <span class="nt">-i</span> vn_hflip.mp4 <span class="nt">-t</span> 5 <span class="nt">-vf</span> cropdetect
+╰─○ ffplay <span class="nt">-i</span> vn_hflip.mp4 <span class="nt">-t</span> 5 <span class="nt">-vf</span> <span class="nv">crop</span><span class="o">=</span>1280:528:0:96
+</code></pre></div></div>
+
+<h2 id="save-to-json">save to json</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffprobe <span class="nt">-hide_banner</span> <span class="nt">-print_format</span> json <span class="nt">-show_streams</span> <span class="nt">-i</span> vn_hflip.mp4 <span class="o">&gt;</span> vn_json_streams.log
+</code></pre></div></div>
+
+<h2 id="check-error">check error</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffprobe <span class="nt">-show_frames</span> vn_hflip.mp4 <span class="o">&gt;</span> vn_show_frames.log
+</code></pre></div></div>
+
+<h2 id="video-to-pics">video to pics</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffmpeg <span class="nt">-i</span> vn_hflip.mp4 <span class="nt">-r</span> 40 <span class="nt">-f</span> image2         <span class="nt">-t</span> 1 my%d.jpg        <span class="c">## 跟下一行比會多了幾張重覆的，因為比來的video就25fps而已</span>
+<span class="s2">"""2938"""</span>  ffmpeg <span class="nt">-i</span> vn_hflip.mp4 <span class="nt">-r</span> 25 <span class="nt">-f</span> image2 <span class="nt">-t</span> 1 my25_%d.jpg <span class="c">## 跟上一行几乎一样，就是正常的25 rate</span>
+ffmpeg <span class="nt">-i</span> vn_hflip.mp4 <span class="nt">-vcodec</span> mjpeg <span class="nt">-ss</span> 0:0:2 <span class="nt">-t</span> 0:0:1 0m%04d.jpg  <span class="c">## 跟上面比主要就是从第二秒开始</span>
+
+2937  ffmpeg <span class="nt">-i</span> vn_hflip.mp4 <span class="nt">-r</span> 40 <span class="nt">-f</span> image2 <span class="nt">-t</span> 1 my25_%d.jpg
+★★★ <span class="nt">-r</span>, <span class="nt">-ss</span>, <span class="nt">-t</span>  本来的video要变成的rate，开始、抓多久
+
+ffmpeg <span class="nt">-i</span> vn_hflip.mp4 <span class="nt">-ss</span> 00:00:14.435 <span class="nt">-vframes</span> 1 out.png
+★★★ <span class="nt">-vframes</span> 抓几张
+</code></pre></div></div>
+
+<h2 id="pics-to-video">pics to video</h2>
+<p>把多个图像文件使用h264编码封装成avi文件，如有my0.jpg, my1.jpg … my99.jpg</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffmpeg <span class="nt">-i</span> my%d.jpg  <span class="nt">-vcodec</span> h264 my.avi
+</code></pre></div></div>
+
+<h2 id="video-to-gif">video to gif</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffmpeg <span class="nt">-i</span> vn_hflip.mp4 <span class="nt">-ss</span> 0 <span class="nt">-r</span> 1 <span class="nt">-vframes</span> 6 vn.gif
+ffmpeg <span class="nt">-i</span> vn_hflip.mp4 <span class="nt">-ss</span> 0 <span class="nt">-vf</span> <span class="nv">fps</span><span class="o">=</span>1 <span class="nt">-vframes</span> 6 vn_fps.gif <span class="c"># 这个似乎比上面的好一些 </span>
+</code></pre></div></div>
+
+<p>##EXTRACTION !!!</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 2999  ffmpeg <span class="nt">-i</span> ../vn_hflip.mp4 <span class="nt">-ss</span> 00:00:00 <span class="nt">-t</span> 10 <span class="nt">-vf</span> <span class="nv">fps</span><span class="o">=</span>1 fps1_%d.png
+<span class="o">(</span>joe_py36<span class="o">)</span> ┌─[joe@JoeMBP2] - <span class="o">[</span>~/Movies/exp/tmp] - <span class="o">[</span>3003]
+└─[<span class="nv">$]</span> <span class="nb">history</span> | <span class="nb">grep </span>r1                                                                                                                                                                           <span class="o">[</span>22:06:04]
+ 2975  ffmpeg <span class="nt">-i</span> ../vn_hflip.mp4 <span class="nt">-r</span> 1 r1_%d.png
+ 2977  ffmpeg <span class="nt">-i</span> ../vn_hflip.mp4 <span class="nt">-r</span> 1 <span class="nt">-vframes</span> 6 r1_vframes_%d.png
+</code></pre></div></div>
+
+<h2 id="add-logo">add logo</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffmpeg <span class="nt">-i</span> vn_hflip.mp4 <span class="nt">-i</span> ~/Pictures/Sackboy_0.jpeg <span class="nt">-filter_complex</span> <span class="nv">overlay</span><span class="o">=</span>W-w:H-h vn_logo.avi
+    如右下角: ffmpeg <span class="nt">-i</span> God.rm <span class="nt">-i</span> logo.png <span class="nt">-filter_complex</span> <span class="nv">overlay</span><span class="o">=</span>W-w:H-h my.avi
+    如居中:  ffmpeg <span class="nt">-i</span> God.rm <span class="nt">-i</span> logo.png <span class="nt">-filter_complex</span> <span class="nv">overlay</span><span class="o">=</span>W/2-w/2:H/2-h/2 my.avi
+</code></pre></div></div>
+

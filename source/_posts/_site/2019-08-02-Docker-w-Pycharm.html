@@ -1,0 +1,126 @@
+<h3 id="docker-ssh配置">docker ssh配置</h3>
+
+<h5 id="concept">Concept</h5>
+
+<p>进行实验时用挂载的，让本地跟docker内的文件夹一样</p>
+
+<p>#####新建docker container</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>nvidia-docker run <span class="nt">-it</span> <span class="nt">-p</span> <span class="o">[</span>host_port]:[container_port]<span class="o">(</span><span class="k">do </span>not use 8888<span class="o">)</span> <span class="nt">--name</span>:[container_name] <span class="o">[</span>image_name] <span class="nt">-v</span> <span class="o">[</span>container_path]:[host_path] /bin/bash
+</code></pre></div></div>
+
+<p>例如：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>nvidia-docker run <span class="nt">-p</span> 5592:5592 <span class="nt">-p</span> 5593:5593 <span class="nt">-p</span> 8022:22 <span class="nt">--name</span><span class="o">=</span><span class="s2">"liuzhen_tf"</span> <span class="nt">-v</span> ~/workspace/liuzhen/remote_workspace:/workspace/liuzhen/remote_workspace <span class="nt">-it</span> tensorflow/tensorflow:latest-gpu /bin/bash
+</code></pre></div></div>
+
+<h5 id="配置ssh服务">配置ssh服务</h5>
+
+<p>在新建的容器内配置ssh，安装openssh-server</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>apt update
+<span class="nv">$ </span>apt <span class="nb">install</span> <span class="nt">-y</span> openssh-server
+</code></pre></div></div>
+
+<p>设置ssh</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> /var/run/sshd
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s1">'root:passwd'</span> | chpasswd
+<span class="c"># 这里使用你自己想设置的用户名和密码，passwd是此处设置的密码</span>
+<span class="nv">$ </span><span class="nb">sed</span> <span class="nt">-i</span> <span class="s1">'s/PermitRootLogin prohibit-password/PermitRootLogin yes/'</span> /etc/ssh/sshd_config
+<span class="nv">$ </span><span class="nb">sed</span> <span class="s1">'s@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g'</span> <span class="nt">-i</span> /etc/pam.d/sshd
+<span class="nv">$ </span><span class="nb">echo</span> <span class="s2">"export VISIBLE=now"</span> <span class="o">&gt;&gt;</span> /etc/profile
+</code></pre></div></div>
+
+<h5 id="重启ssh激活配置">重启ssh激活配置</h5>
+
+<p>(<u>最常见的问题</u>就是docker容器停了以后里面的SSH服务也会相应停止，因此当你发现自己某一天连不上的时候，记得去docker里重启一下ssh服务：)</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>service ssh restart
+</code></pre></div></div>
+
+<p>在服务器（宿主机）上（不是服务器的docker里）测试刚刚新建docker容器中哪个端口转发到了服务器的22端口：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>docker port <span class="o">[</span>your_container_name] 22
+<span class="c"># 如果前面的配置生效了，你会看到如下输出</span>
+<span class="c"># 0.0.0.0:8022</span>
+</code></pre></div></div>
+
+<p>最后测试能否用SSH连接到远程docker：</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ssh root@[your_host_ip] <span class="nt">-p</span> 8022
+<span class="c"># 密码是你前面自己设置的</span>
+</code></pre></div></div>
+
+<h3 id="pycharm配置">pycharm配置</h3>
+
+<h5 id="打开本地代码">打开本地代码</h5>
+
+<p>打开PyCharm<code class="highlighter-rouge">Tools &gt; Deployment &gt; Configuration</code></p>
+
+<p>#####新建服务器SFTP</p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g6gtkcxaeaj315r0u03zh.jpg" alt="image-20190828175349739" /></p>
+
+<p>输入如下图配置，注意这里的端口是你刚刚设置的映射到容器22端口的宿主机中的端口，我这里使用的是8022，账号密码是你刚刚自己设置的，这里的Root Path设置一个远程docker容器里的路径。</p>
+
+<p>在Mappings中配置路径，这里的路径是你本地存放代码的路径，与刚刚配置的<em>Root Path</em>相互映射（意思是Mapping里本机的路径映射到远程的Root Path）<em>，</em>方便以后在本地和远程docker中进行代码和其他文件同步。</p>
+
+<p>#####配置远程解释器</p>
+
+<p>打开PyCharm<code class="highlighter-rouge">Preferences &gt; Project Interpreter</code></p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g6gtlykktsj317a0u0q4w.jpg" alt="image-20190828190716498" /></p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g6gtrxo163j307705et8o.jpg" alt="" /></p>
+
+<p>新建ssh Interpreter</p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g6gtml7aj1j31d30u0aam.jpg" alt="image-20190828191025481" /></p>
+
+<h5 id="配置运行环境变量">配置运行环境变量</h5>
+
+<p><code class="highlighter-rouge">run &gt; edit confuriguration</code></p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g6gtmztm35j30r80sk758.jpg" alt="image-20190828191253964" /></p>
+
+<h3 id="docker-jupyter使用">docker jupyter使用</h3>
+
+<p>jupyter-notebook的默认端口号是8888，映射几个外部端口，如前面的5592</p>
+
+<p>更新apt</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get update
+</code></pre></div></div>
+
+<p>安装jupyter</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>jupyter
+</code></pre></div></div>
+
+<p>(注意pip install jupyter notebook==5.7.5，高版本有bug)</p>
+
+<p>配置jupyter</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#生成jupyter配置文件，这个会生成配置文件.jupyter/jupyter_notebook_config.py</span>
+jupyter notebook <span class="nt">--generate-config</span>
+
+<span class="c">#使用ipython生成密码</span>
+In <span class="o">[</span>1]: from notebook.auth import passwd
+In <span class="o">[</span>2]: passwd<span class="o">()</span>
+Enter password: 
+Verify password: 
+Out[2]: <span class="s1">'sha1:38a5ecdf288b:c82dace8d3c7a212ec0bd49bbb99c9af3bae076e'</span>
+
+<span class="c">#去配置文件.jupyter/jupyter_notebook_config.py中修改以下参数</span>
+c.NotebookApp.ip<span class="o">=</span><span class="s1">'*'</span>                          <span class="c">#绑定所有地址</span>
+c.NotebookApp.password <span class="o">=</span> u<span class="s1">'sha1:38a5ecdf288b:c82dace8d3c7a212ec0bd49bbb99c9af3bae076e'</span>
+c.NotebookApp.open_browser <span class="o">=</span> False            <span class="c">#启动后是否在浏览器中自动打开</span>
+c.NotebookApp.port <span class="o">=</span>5592                      <span class="c">#指定一个访问端口，默认8888，注意和映射的docker端口对应</span>
+c.NotebookApp.allow_remote_access <span class="o">=</span> True
+c.NotebookApp.allow_root <span class="o">=</span> True               <span class="c">#allow the user to run the notebook as root</span>
+</code></pre></div></div>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>jupyter notebook 
+</code></pre></div></div>
+

@@ -1,0 +1,43 @@
+<h3 id="i-frame-extraction">I-frame extraction</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffmpeg <span class="nt">-i</span> vn_hflip.mp4 <span class="nt">-vf</span> <span class="k">select</span><span class="o">=</span><span class="s1">'eq(pict_type\,I)'</span> <span class="nt">-vsync</span> 2 <span class="nt">-s</span> 1280<span class="k">*</span>720 <span class="nt">-f</span> image2 keyframe-%03d.jpeg
+</code></pre></div></div>
+
+<p>-vf:是一个命令行，表示过滤图形的描述。选择过滤器select会选择帧进行输出：pict_type和对应的类型:PICT_TYPE_I 表示是I帧，即关键帧；
+-vsync 2:阻止每个关键帧产生多余的拷贝；
+-f image2 name_%02d.jpeg:将视频帧写入到图片中，样式的格式一般是: “%d” 或者 “%0Nd”</p>
+
+<h3 id="index-of-i-frame">Index of I-frame</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffprobe <span class="nt">-i</span> vn_hflip.mp4 <span class="nt">-select_streams</span> v <span class="nt">-show_frames</span> <span class="nt">-show_entries</span> <span class="nv">frame</span><span class="o">=</span>pict_type <span class="nt">-of</span> csv | <span class="nb">grep</span> <span class="nt">-n</span> I | <span class="nb">cut</span> <span class="nt">-d</span> <span class="s1">':'</span> <span class="nt">-f</span> 1 <span class="o">&gt;</span> frame_index.txt
+</code></pre></div></div>
+
+<h3 id="relates-the-twos">Relates the twos</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-1</span> keyframe<span class="k">*</span>.jpeg <span class="o">&gt;</span> keyframe.txt
+<span class="nb">paste </span>frame_index.txt  keyframe.txt&gt; result.txt
+</code></pre></div></div>
+
+<p>(joe_py36)
+~/workspace/exp/FFmpeg_
+☺  more result.txt
+☺  more result.txt
+1       keyframe-01.jpeg
+3       keyframe-02.jpeg
+16      keyframe-03.jpeg
+25      keyframe-04.jpeg
+30      keyframe-05.jpeg
+46      keyframe-06.jpeg
+55      keyframe-07.jpeg
+59      keyframe-08.jpeg
+70      keyframe-09.jpeg
+83      keyframe-10.jpeg
+100     keyframe-11.jpeg
+116     keyframe-12.jpeg</p>
+
+<h3 id="翻译ffmpeg-all文档40多媒体滤镜"><a href="http://blog.chinaunix.net/uid-10062010-id-5137275.html">翻译ffmpeg-all文档（40），多媒体滤镜</a></h3>
+
+<p>http://blog.chinaunix.net/uid-10062010-id-5137275.html</p>
+
+<p>Ref: https://superuser.com/questions/885452/extracting-the-index-of-key-frames-from-a-video-using-ffmpeg</p>
+

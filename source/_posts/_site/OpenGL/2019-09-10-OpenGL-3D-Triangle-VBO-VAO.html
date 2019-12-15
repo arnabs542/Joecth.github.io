@@ -1,0 +1,90 @@
+<h3 id="3d-2d">3D 2D</h3>
+
+<p>All 3D space concepts in OpenGL.</p>
+
+<p>3D coordinates (camera) –&gt; 2D plane –&gt; colored pixels.</p>
+
+<p><strong><em>2D坐标和像素也是不同的，2D坐标精确表示一个点在2D空间中的位置，而2D像素是这个点的近似值，2D像素受到你的屏幕/窗口分辨率的限制。</em></strong></p>
+
+<h3 id="shader">Shader</h3>
+
+<p>– program that GPU runs</p>
+
+<p>有些着色器允许开发者自己配置，这就允许我们用自己写的着色器来替换默认的。这样我们就可以更细致地控制图形渲染管线中的特定部分了，而且因为它们运行在GPU上，所以它们可以给我们节约宝贵的CPU时间。OpenGL着色器是用OpenGL着色器语言(OpenGL Shading Language, GLSL)写成的，在下一节中我们再花更多时间研究它。</p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g72v7ypj0gj30uk0ian1n.jpg" alt="image-20190917220604821" /></p>
+
+<p>CPU –&gt; GPU</p>
+
+<p>必用的 ：Vertex Shader, Fragment Shader</p>
+
+<h4 id="geometry-shader">Geometry Shader</h4>
+
+<p>可以偷補插點</p>
+
+<h4 id="vertex">Vertex</h4>
+
+<p>我们以数组的形式传递3个3D坐标作为图形渲染管线的输入，用来表示一个三角形，这个数组叫做顶点数据(Vertex Data)；顶点数据是一系列顶点的集合。一个顶点(Vertex)是一个3D坐标的数据的集合。而顶点数据是用顶点属性(Vertex Attribute)表示的，它可以包含任何我们想用的数据，但是简单起见，我们还是假定每个顶点只由一个3D位置和一些颜色值、UV组成。</p>
+
+<p><strong><em>为了让OpenGL知道我们的坐标和颜色值构成的到底是什么，OpenGL需要你去指定这些数据所表示的渲染类型。我们是希望把这些数据渲染成一系列的点？一系列的三角形？还是仅仅是一个长长的线？做出的这些提示叫做图元(Primitive)，任何一个绘制指令的调用都将把图元传递给OpenGL。这是其中的几个：GL_POINTS、GL_TRIANGLES、GL_LINE_STRIP。</em></strong></p>
+
+<h3>———</h3>
+
+<p>VertexShader -&gt; Rasterization -&gt; FragmentShader</p>
+
+<h3 id="normalized-device-coordinates-ndc">Normalized Device Coordinates (NDC)</h3>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74lnj2v91j30wq0i0dv3.jpg" alt="image-20190919100557092" /></p>
+
+<h3 id="vertex-data">Vertex Data</h3>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74m3bcwprj30uq0f4gss.jpg" alt="image-20190919102118610" /></p>
+
+<p>f: means 法向量</p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74m6drrucj31b30u0wyu.jpg" alt="image-20190919102416139" />   (in Blender)</p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74m5tdw1hj30xi0j2jzt.jpg" alt="image-20190919102343448" /></p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74m7xnz39j31c40q4dp7.jpg" alt="image-20190919102545255" /></p>
+
+<p>三角化</p>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74m927ogwj30kk0diwfb.jpg" alt="image-20190919102640344" /></p>
+
+<h3 id="vbo--vao">VBO &amp; VAO</h3>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74v9xvqztj30x60hedpb.jpg" alt="image-20190919153900923" /></p>
+
+<h3 id="uv">UV</h3>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74vebr40mj30h80c2447.jpg" alt="image-20190919154317764" /></p>
+
+<h3 id="-1">———–</h3>
+
+<h3 id="ebo">EBO</h3>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74vtx1bshj30w60i4mzf.jpg" alt="image-20190919155433545" /></p>
+
+<h3 id="vao">VAO</h3>
+
+<p>一個物件一個VAO</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">VAO</span><span class="p">;</span>
+<span class="n">glGenVertexArrays</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">VAO</span><span class="p">);</span>
+
+<span class="o">--------</span><span class="n">P</span><span class="p">.</span><span class="n">S</span><span class="p">.</span><span class="o">--------------------</span>
+<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">VAO</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span> <span class="c1">//  一次可造多個 array</span>
+<span class="n">glGenVertexArrays</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">VAO</span><span class="p">);</span>
+<span class="o">--------</span><span class="n">P</span><span class="p">.</span><span class="n">S</span><span class="p">.</span><span class="o">--------------------</span>
+  
+<span class="n">glBindVertexArray</span><span class="p">(</span><span class="n">VAO</span><span class="p">);</span>
+
+<span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">VBO</span><span class="p">;</span>
+<span class="n">glBindBuffer</span><span class="p">(</span><span class="n">GL_ARRAY_BUFFER</span><span class="p">,</span> <span class="n">VBO</span><span class="p">);</span>
+<span class="n">glBufferData</span><span class="p">(</span><span class="n">GL_ARRAY_BUFFER</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">vertices</span><span class="p">),</span> <span class="n">vertices</span><span class="p">,</span> <span class="n">GL_STATIC_DRAW</span><span class="p">);</span>
+
+
+</code></pre></div></div>
+
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g74wk2zb4dj30i304j41v.jpg" alt="image-20190919162325003" /></p>
