@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="LC/2019-09-30-LC 62&amp;63 Unique Paths I &amp; Ⅱ"><meta name="keywords" content="LC-DP"><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>LC/2019-09-30-LC 62&amp;63 Unique Paths I &amp; Ⅱ | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#LC-62"><span class="toc-number">1.</span> <span class="toc-text">LC 62.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LC-63-w-Obstructions"><span class="toc-number">2.</span> <span class="toc-text">LC 63.　w&#x2F; Obstructions</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Diff-at-Initialization"><span class="toc-number">2.1.</span> <span class="toc-text">Diff: at Initialization</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DP-vs-計劃遞歸-Memorization"><span class="toc-number">3.</span> <span class="toc-text">DP vs 計劃遞歸(Memorization)</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">189</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">24</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">21</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">LC/2019-09-30-LC 62&amp;63 Unique Paths I &amp; Ⅱ</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-09-30</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/LC/">LC</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>1 state variables</p>
+<p>2 init</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>1</th>
+<th>1</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>２</td>
+<td>３ｍ↓</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>３ｎ→</td>
+<td>６n+m</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>3 equation<br>$$<br>[i][j] = [i-1][j] + [i][j-1]<br>$$<br>4 result</p>
+<h3 id="LC-62"><a href="#LC-62" class="headerlink" title="LC 62."></a>LC 62.</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x, y)</span>:</span></span><br><span class="line">  dp = [[<span class="number">0</span>]*(x+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(y+<span class="number">1</span>)] <span class="comment">## take out of board into consideration as 0</span></span><br><span class="line">  dp[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, y+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, x+<span class="number">1</span>):</span><br><span class="line">      dp[i][j] = dp[i<span class="number">-1</span>][j] + dp[i][j<span class="number">-1</span>]</span><br><span class="line">  <span class="keyword">return</span> dp[y][x]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="LC-63-w-Obstructions"><a href="#LC-63-w-Obstructions" class="headerlink" title="LC 63.　w/ Obstructions"></a>LC 63.　w/ Obstructions</h3><p>之前走的２Ｄ地圖是有障礙物的</p>
+<h4 id="Diff-at-Initialization"><a href="#Diff-at-Initialization" class="headerlink" title="Diff: at Initialization"></a>Diff: at Initialization</h4><table>
+<thead>
+<tr>
+<th>1</th>
+<th>1</th>
+<th>0</th>
+<th>0</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td></td>
+<td>0/1</td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x, y)</span>:</span></span><br><span class="line">  dp = [[<span class="number">0</span>]*(x+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(y+<span class="number">1</span>)] <span class="comment">## take out of board into consideration as 0</span></span><br><span class="line">  dp[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, y+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, x+<span class="number">1</span>):</span><br><span class="line">      <span class="keyword">if</span> obstacle[i][j] != <span class="number">1</span>:　<span class="comment">### MAIN diff!</span></span><br><span class="line">      	dp[i][j] = dp[i<span class="number">-1</span>][j] + dp[i][j<span class="number">-1</span>]</span><br><span class="line">  <span class="keyword">return</span> dp[y][x]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Ref:</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hwe6l5e7j30hc0em78r.jpg" alt="image-20190930221007253"></p>
+<h3 id="DP-vs-計劃遞歸-Memorization"><a href="#DP-vs-計劃遞歸-Memorization" class="headerlink" title="DP vs 計劃遞歸(Memorization)"></a>DP vs 計劃遞歸(Memorization)</h3><p>Memorization omits loop of varaibles.</p>
+<p>Ref:</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hvqn3ekxj30w40fadn0.jpg" alt="image-20190930214729348"></p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hvp6agvkj30x20fo464.jpg" alt="image-20190930214602150"></p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hvplk9kmj30uq0cq78y.jpg" alt="image-20190930214630627"></p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/09/30/LC/2019-09-30-LC%2062&amp;63%20Unique%20Paths%20I%20&amp;%20%E2%85%A1/">http://yoursite.com/2019/09/30/LC/2019-09-30-LC%2062&amp;63%20Unique%20Paths%20I%20&amp;%20%E2%85%A1/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/LC-DP/">LC-DP</a></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/09/30/LC/2019-09-30-LC-790%20Domino&amp;Tromino%20Tiling/"><i class="fa fa-chevron-left">  </i><span>LC/2019-09-30-LC-790 Domino&amp;Tromino Tiling</span></a></div><div class="next-post pull-right"><a href="/2019/09/30/LC/2019-09-30-LC%2070%20Climbing%20Stairs/"><span>LC/2019-09-30-LC 70 Climbing Stairs</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2019 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
