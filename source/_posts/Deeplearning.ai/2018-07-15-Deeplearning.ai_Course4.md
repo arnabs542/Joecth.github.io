@@ -1,6 +1,7 @@
 ---
 layout: post
 categories: [Deep-Learning, AI]
+date: 2018-07-15
 ---
 ### More Edge Detection
 

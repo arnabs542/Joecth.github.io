@@ -1,6 +1,7 @@
 ---
 layout: post
 categories: Probability
+date: 2018-11-30
 tag: [] 
 
 

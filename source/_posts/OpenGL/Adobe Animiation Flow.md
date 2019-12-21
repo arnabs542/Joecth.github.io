@@ -1,6 +1,7 @@
 ---
 layout: post
 categories: Graphic
+date: 2019-08-24
 tag: [Adobe, Animation] 
 
 

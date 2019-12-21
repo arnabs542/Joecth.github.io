@@ -1,6 +1,7 @@
 ---
 layout: post
 categories: Graphic
+date: 2019-11-06
 tag: [Deep-Learning ] 
 
 

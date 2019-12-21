@@ -1,6 +1,7 @@
 ---
 layout: "post"
 categories: ffmpeg
+date: 2019-07-31
 ---
 
 1.通过ffmpeg对AE直接导出的大文件压缩，(a.mov:16M，a.mp4:2.7M)，(b.mov:13M，a.mp4:1.6M)

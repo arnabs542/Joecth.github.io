@@ -1,6 +1,7 @@
 ---
 layout: post
 categories:  [Deep-Learning, AI]
+date: 2019-08-04
 
 ---
 

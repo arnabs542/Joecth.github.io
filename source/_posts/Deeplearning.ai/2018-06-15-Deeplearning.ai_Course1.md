@@ -1,6 +1,7 @@
 ---
 layout: post
 categories: [Deep-Learning, AI]
+date: 2018-06-15
 ---
 ### Course1
 

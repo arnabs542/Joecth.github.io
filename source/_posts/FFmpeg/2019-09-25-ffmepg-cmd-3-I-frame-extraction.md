@@ -1,6 +1,7 @@
 ---
 layout: post
 # title:  "ffmpeg_cmd_3 I frame extraction"
+date: 2019-09-25
 # date:   2019-09-25 22:16:11 +0800
 categories: ffmpeg
 ---
