@@ -20,7 +20,7 @@ def writeinfile(path, cont, line=0):
 
 def foo(path):
     mds = glob(os.path.join(path, "[!_site]*/*md"))
-    # mds = glob(os.path.abspath(os.path.join(path, "Machine-Learning/*md")))
+    # mds = glob(os.path.abspath(os.path.join(path, "ML/*md")))
 
     print('\n'.join(mds))
     for md in mds:
