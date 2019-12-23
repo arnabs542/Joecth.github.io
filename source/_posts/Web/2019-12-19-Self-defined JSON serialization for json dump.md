@@ -29,9 +29,8 @@ class MySerialization(json.JSONEncoder):
             return super(NpEncoder, self).default(obj)
 ```
 
-然后在调用json.dump/dumps时，指定使用自定义序列化方法
 
-
+Then, 
 
 ```python
 json.dumps(data, cls=MySerialization) 
