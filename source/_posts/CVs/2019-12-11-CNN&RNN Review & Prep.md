@@ -101,3 +101,11 @@ ROI Pooling vs ROI Align
 * SMOTE
 
 ### Why Regularization ? example?
+
+
+### How to evaluate GAN
+
+### Attention mechanism
+
+
+### seq2seq 
