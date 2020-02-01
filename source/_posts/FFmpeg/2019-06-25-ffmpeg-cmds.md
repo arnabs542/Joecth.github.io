@@ -45,6 +45,24 @@ ffmpeg -i my%d.jpg  -vcodec h264 my.avi
 
 
 
+-r 选项的用法：
+
+预设是
+
+以25FPS读入所有图片，所以len(Images[])会是输出的video的duration. 
+
+作出25FPS的video, 所以如果 -r加在 output前面，会进行插帧、删帧。
+
+如果-r加在 input前面，就是每秒读进来几张图片
+
+如果　ffmpeg -r 10 -i z-%5d.jpeg -vcodec h264 -r 60 out10in60out.mp4
+
+那么因为每秒读进来10张而已，硬做成60fps的video，也是没用，因为中间只是内插成了60fps
+
+
+
+
+
 ## video to gif
 ```bash
 ffmpeg -i vn_hflip.mp4 -ss 0 -r 1 -vframes 6 vn.gif
@@ -62,6 +80,10 @@ ffmpeg -i vn_hflip.mp4 -ss 0 -vf fps=1 -vframes 6 vn_fps.gif # 这个似乎比�
  2975  ffmpeg -i ../vn_hflip.mp4 -r 1 r1_%d.png
  2977  ffmpeg -i ../vn_hflip.mp4 -r 1 -vframes 6 r1_vframes_%d.png
 ```
+
+
+
+
 
 
 
