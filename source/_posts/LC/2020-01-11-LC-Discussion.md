@@ -5,17 +5,7 @@ tag: []
 date: 2020-01-11
 ---
 
-2/1 setting
 
-看兩部FLAG高頻題的video
-
-看網紅的方向video
-
-
-
-2/2 TODO:
-
-Complex DataStructure
 
 ### 題目太長先放棄：
 
