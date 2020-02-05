@@ -53,10 +53,41 @@ date: 2020-01-11
 | [438. Find All Anagrams in a String](#438)                   |              | 照bucket sort方式编码然后loop找，但發生 Time Limit Exceeded  |                                                              |                            | v      | v                                                            | ~49                                 |
 | [173 Binary Search Tree Iterator](#173)                      |              | heapq, easy                                                  |                                                              |                            | v      | v                                                            |                                     |
 | [269 Alien Dictionary](#269)                                 |              | [leetcode.jp-269 wwwlink](https://leetcode.jp/leetcode-269-alien-dictionary-%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90/) |                                                              |                            | HARD   |                                                              | ~207, 210                           |
+| [921 Minimum Add to Make Parentheses Valid](#921)            |              |                                                              |                                                              |                            | v      | v                                                            | too easy                            |
+| [286 Walls and Gates](#286)                                  |              |                                                              |                                                              |                            | v      | v                                                            |                                     |
+| [20 Valid Parentheses](#20)                                  |              |                                                              |                                                              |                            | v      | v                                                            |                                     |
+| [146 LRU Cache](#146)                                        |              |                                                              |                                                              |                            | v      |                                                              |                                     |
+| [231 326 342 Power of 2, 3, 4](#231)                         |              |                                                              |                                                              |                            | v      | v                                                            |                                     |
 
 
 
-Arrays:
+## Stack
+
+|                                |      |                                    |      | status | coded |      |
+| ------------------------------ | ---- | ---------------------------------- | ---- | ------ | ----- | ---- |
+| [739 Daily Temperatures](#739) |      | Write down and observe the pattern |      | v      | v     |      |
+|                                |      |                                    |      |        |       |      |
+|                                |      |                                    |      |        |       |      |
+
+It seems like we don't have to use any stacks when we implement DFS recursively. But actually, we are using the implicit stack provided by the system, also known as the [Call Stack](https://en.wikipedia.org/wiki/Call_stack).
+
+ 
+
+### An Example
+
+------
+
+Let's take a look at an example. We want to find a path between node 0 and node 3 in the graph below. We also show you the stack's status during each call.
+
+![img](https://tva1.sinaimg.cn/large/006tNbRwgy1gbkp0e5xzdj317m0jkwgf.jpg)
+
+In each stack element, there is an integer `cur`, an integer `target`, a reference to array `visited` and a reference to array `edges`, which are exactly the parameters we have in the DFS function. We only show `cur` in the stack above.
+
+Each element costs constant space. And the size of the stack is exactly the depth of DFS. So in the worst case, it costs O(h) to maintain the system stack, where h is the maximum depth of DFS. You should never forget to take the system stack into consideration when calculating the space complexity.
+
+
+
+## Arrays:
 
 |                                          |                                                              |                                                              |      | status | coded    |        |
 | ---------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ---- | ------ | -------- | ------ |
@@ -68,6 +99,21 @@ Arrays:
 | **TWO WAYS recording**                   |                                                              |                                                              |      |        |          |        |
 | [42 Trapping Rain Water](#42)            |                                                              |                                                              |      | v      | v        | ~84    |
 | [238 Product of Array Except Self](#238) |                                                              |                                                              |      | v      | v        |        |
+
+
+
+
+
+
+## Linked List
+
+|                                 |      |      |                                         | status | cedod |      |
+| ------------------------------- | ---- | ---- | --------------------------------------- | ------ | ----- | ---- |
+| [206 Reverse Linked List](#206) |      |      |                                         | v      | v     |      |
+| [92 Reverse Linked List Ⅱ](#92) |      |      |                                         | v      | v     |      |
+| [141 Cycle Linked List](#141)   |      |      |                                         |        |       |      |
+| [142 Cycle Linked List 2](#142) |      |      |                                         |        |       |      |
+| [143 Reorder Linked List](#143) |      |      | 最後要記得cur.next =None, 不然會有cycle | v      | v     |      |
 
 
 
@@ -242,6 +288,12 @@ tree.root.right.right = Node(7)
 | [958 Completeness of a Binary Tree](#958)                    |      |                      |                                                              | v        |                                              |           |
 | [104 Maximum Depth of Binary Tree](#104)                     |      |                      |                                                              | v        | v                                            |           |
 | [111 Minimum Depth of Binary Tree](#111)                     |      |                      |                                                              | v        | v                                            |           |
+| [236 Lowest common Ancestor of a Binary Tree](#236)          |      |                      |                                                              | v        |                                              |           |
+| [144 Binary Tree Preorder Traversal](#144)                   |      |                      |                                                              | v        | v                                            |           |
+| [94 Binary Tree Inorder Traversal][#94]                      |      |                      |                                                              | v        |                                              |           |
+| [101 Symmetric Tree](#101)                                   |      |                      |                                                              | v        |                                              |           |
+| [112 Path Sum](#112)                                         |      |                      |                                                              | v        |                                              |           |
+| [113 Path Sum Ⅱ](#113)                                       |      |                      |                                                              |          |                                              |           |
 
 
 
@@ -249,26 +301,34 @@ tree.root.right.right = Node(7)
 
 <img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gbfy37o6xtj31ds0u04qp.jpg" alt="image-20200131174932656" style="zoom:50%;" />
 
-|                                                              |      |      |      | status      | coded                                            |                                  |
-| ------------------------------------------------------------ | ---- | ---- | ---- | ----------- | ------------------------------------------------ | -------------------------------- |
-| B-Search<br />1. 如果搭配(l+1, r-1)條件應該要是 l<=r 才對。不然兩個元素時，第二個元素是target就會找不到！<br /> |      |      |      |             |                                                  |                                  |
-| [35 Search Insertion Position](#35)                          |      |      |      | v           | v                                                | 邊界條件需要特別思考<br />Not in |
-| [34 Search for a Range](#34)                                 |      |      |      | v           | v                                                |                                  |
-|                                                              |      |      |      |             |                                                  |                                  |
-|                                                              |      |      |      | X　討論複雜 |                                                  |                                  |
-| B-Search 模板：https://www.jianshu.com/p/b72c80fdb240<br />https://www.jianshu.com/p/b72c80fdb240 |      |      |      |             |                                                  |                                  |
-| [69 Sqrt(x)](#69)                                            |      |      |      | v           | v<br />Template1                                 |                                  |
-| [374 Guess Number Higher or Lower](#374)                     |      |      |      | v           | v<br />Tempalte1                                 | Not in                           |
-| [33 Search in Rotated Sorted Array](#33)                     |      |      |      | v           | Not yet, should be Template1                     |                                  |
-| [278 First Bad Version](#75)                                 |      |      |      | v           | v <br />Template2                                |                                  |
-| [162 Find Peak Element](#162)                                |      |      |      | v           | △<br />Template2, 但r值却是设为了 len(nums)-1 ?! |                                  |
-| [153 Find Minimum in Rotated Sorted Array](#153)             |      |      |      |             | <br />Template2                                  |                                  |
-|                                                              |      |      |      |             |                                                  |                                  |
-| B-Search Tree (BST)　<br />左子樹所有節點的值都<=根<br />左右子樹也分別為B-Search Tree<br />等於的情況只能出現在左子樹或右子樹的某一側<br />由於中序是小到大的，所以又叫B-Sort Tree<br />插入 |      |      |      |             |                                                  |                                  |
-| [449 Serialize and Deserialize BST](#449)<br />BST的查找跟復原只有前序可以；中序會全向右靠；後序的話根要最後才生出，不合理 |      |      |      |             |                                                  |                                  |
-| [315 Count of Smaller Numbers After Self](#315)              |      |      |      | △           |                                                  | Not In                           |
-| High Freq.                                                   |      |      |      |             |                                                  |                                  |
-| [270 Closest Binary Search Tree Value](#270)                 |      |      |      | v           | v                                                |                                  |
+|                                                              |      |      |                                                | status      | coded                                            |                                  |
+| ------------------------------------------------------------ | ---- | ---- | ---------------------------------------------- | ----------- | ------------------------------------------------ | -------------------------------- |
+| B-Search<br />1. 如果搭配(l+1, r-1)條件應該要是 l<=r 才對。不然兩個元素時，第二個元素是target就會找不到！<br /> |      |      |                                                |             |                                                  |                                  |
+| [35 Search Insertion Position](#35)                          |      |      |                                                | v           | v                                                | 邊界條件需要特別思考<br />Not in |
+| [34 Search for a Range](#34)                                 |      |      |                                                | v           | v                                                |                                  |
+|                                                              |      |      |                                                |             |                                                  |                                  |
+|                                                              |      |      |                                                | X　討論複雜 |                                                  |                                  |
+| B-Search 模板：https://www.jianshu.com/p/b72c80fdb240<br />https://www.jianshu.com/p/b72c80fdb240 |      |      |                                                |             |                                                  |                                  |
+| [69 Sqrt(x)](#69)                                            |      |      |                                                | v           | v<br />Template1                                 |                                  |
+| [374 Guess Number Higher or Lower](#374)                     |      |      |                                                | v           | v<br />Tempalte1                                 | Not in                           |
+| [33 Search in Rotated Sorted Array](#33)                     |      |      |                                                | v           | Not yet, should be Template1                     |                                  |
+| [278 First Bad Version](#75)                                 |      |      |                                                | v           | v <br />Template2                                |                                  |
+| [162 Find Peak Element](#162)                                |      |      |                                                | v           | △<br />Template2, 但r值却是设为了 len(nums)-1 ?! |                                  |
+| [153 Find Minimum in Rotated Sorted Array](#153)             |      |      |                                                |             | <br />Template2                                  |                                  |
+|                                                              |      |      |                                                |             |                                                  |                                  |
+| B-Search Tree (BST)　<br />左子樹所有節點的值都<=根<br />左右子樹也分別為B-Search Tree<br />等於的情況只能出現在左子樹或右子樹的某一側<br />由於中序是小到大的，所以又叫B-Sort Tree<br />插入 |      |      |                                                |             |                                                  |                                  |
+| [449 Serialize and Deserialize BST](#449)<br />BST的查找跟復原只有前序可以；中序會全向右靠；後序的話根要最後才生出，不合理 |      |      |                                                |             |                                                  |                                  |
+| [315 Count of Smaller Numbers After Self](#315)              |      |      |                                                | △           |                                                  | Not In                           |
+| High Freq.                                                   |      |      |                                                |             |                                                  |                                  |
+| [270 Closest Binary Search Tree Value](#270)                 |      |      |                                                | v           | v                                                |                                  |
+| [98 Validate Binary Search Tree](98)                         |      |      |                                                | v           | v                                                |                                  |
+| [285 Inorder Successor in BST](#285)                         |      |      |                                                | v           |                                                  |                                  |
+| [173 Binary Search Tree Iterator](#173)                      |      |      |                                                | v           |                                                  |                                  |
+| [700 Search in a Binary Search Tree](#700)                   |      |      |                                                | v           | v                                                |                                  |
+| [701 Insert into a Binary Search Tree](#701)                 |      |      |                                                | v           |                                                  |                                  |
+| [235 Lowest Common Ancestor of a Binary Search Tree](#235)   |      |      |                                                |             |                                                  | vs 236, ancestor of Binary Tree  |
+| [108 Construct Sorted Array to BST](#108)                    |      |      |                                                |             |                                                  |                                  |
+| [109 Construct Sorted List to BST](#109)                     |      |      | 就是先把Linked List轉成 array存好，然後套108的 |             |                                                  |                                  |
 
 
 
@@ -291,34 +351,35 @@ tree.root.right.right = Node(7)
 
 ## Searching
 
-|                                   |      |      |      | status | coded |        |
-| --------------------------------- | ---- | ---- | ---- | ------ | ----- | ------ |
-| [200 Number of Islands](#200)     |      |      |      |        |       |        |
-| [127 Word Ladder](#127)           |      |      |      |        |       |        |
-| [473 Matchsticks to Square](#473) |      |      |      |        |       | Not in |
-| [107 Trapping Rain Water Ⅱ](#107) |      |      |      |        |       | Not in |
+|                                   |      |                                                              |      | status | coded |        |
+| --------------------------------- | ---- | ------------------------------------------------------------ | ---- | ------ | ----- | ------ |
+| [200 Number of Islands](#200)     |      | BFS 得到TLE...<br />np.pad(A, ((1,1), (1,1)))<br />分別是在前、後、上、下補０ |      | v      |       |        |
+| [127 Word Ladder](#127)           |      |                                                              |      |        |       |        |
+| [473 Matchsticks to Square](#473) |      |                                                              |      |        |       | Not in |
+| [107 Trapping Rain Water Ⅱ](#107) |      |                                                              |      |        |       | Not in |
 
 
 
 ## Dynamic Programming
 
-|                                                              |      |      |      | status                                          | coded                                                        |                             |
-| ------------------------------------------------------------ | ---- | ---- | ---- | ----------------------------------------------- | ------------------------------------------------------------ | --------------------------- |
-| [70 Climbing Stairs](#70)                                    |      |      |      | v                                               | v                                                            |                             |
-| [198 House Robber](#198)                                     |      |      |      | v                                               | v                                                            | Not in                      |
-| [53 Maximum Subarray](#53)                                   |      |      |      | v                                               | v                                                            |                             |
-| [322 Coin Change](#322) <br />dp[i]代表金额的最優解，就是最小使用張數 |      |      |      | v                                               | v<br />需要注意dp[i-coin]+1的這個１的位置                    | No t in                     |
-| [120 Triangle](#120)                                         |      |      |      |                                                 |                                                              | Not in   ~64                |
-| [300 Longest Increasing Subsequence](#300)                   |      |      |      | v<br /> O(nlg(n)) should combine with <a>35</a> | v                                                            |                             |
-| [64 Minimum Path Sum](#64)                                   |      |      |      |                                                 | v                                                            | Not in ~120                 |
-| [174 Dungeon Game](#174)                                     |      |      |      | 之後看…難                                       |                                                              | Not in                      |
-| High Freq.                                                   |      |      |      |                                                 |                                                              |                             |
-| [121 Best Time to Buy and Sell Stock](#121)                  |      |      |      |                                                 | v                                                            |                             |
-| [122 Best Time to Buy and Sell StockⅡ](#122)                 |      |      |      |                                                 | v                                                            |                             |
-| [523 Continuous Subarray Sum](#523)                          |      |      |      | v                                               | v 需考慮k 為０的情況                                         |                             |
-| [304 Range Sum Query 2D - Immutable](#304)                   |      |      |      | v                                               | v 要注意m, n代表pre_sum的長度所以要補加１，然後matrix都是拿 m-1, n-1的 |                             |
-| [303 Range Suym Query - Immutable](#303)                     |      |      |      | v                                               | v<br />做個pre_sum 就ｏｋ要注意長度需加１                    | Not in, but for prep of 304 |
-| [1027 Longest Arithmetic Sequence](#1027)                    |      |      |      | v                                               | v                                                            |                             |
+|                                                              |      |      |                       | status                                          | coded                                                        |                                                  |
+| ------------------------------------------------------------ | ---- | ---- | --------------------- | ----------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------ |
+| [70 Climbing Stairs](#70)                                    |      |      |                       | v                                               | v                                                            |                                                  |
+| [198 House Robber](#198)                                     |      |      |                       | v                                               | v                                                            | Not in                                           |
+| [53 Maximum Subarray](#53)                                   |      |      |                       | v                                               | v                                                            |                                                  |
+| [322 Coin Change](#322) <br />dp[i]代表金额的最優解，就是最小使用張數 |      |      |                       | v                                               | v<br />需要注意dp[i-coin]+1的這個１的位置                    | No t in                                          |
+| [120 Triangle](#120)                                         |      |      |                       |                                                 |                                                              | Not in   ~64                                     |
+| [300 Longest Increasing Subsequence](#300)                   |      |      |                       | v<br /> O(nlg(n)) should combine with <a>35</a> | v                                                            |                                                  |
+| [64 Minimum Path Sum](#64)                                   |      |      |                       |                                                 | v                                                            | Not in ~120                                      |
+| [174 Dungeon Game](#174)                                     |      |      |                       | 之後看…難                                       |                                                              | Not in                                           |
+| High Freq.                                                   |      |      |                       |                                                 |                                                              |                                                  |
+| [121 Best Time to Buy and Sell Stock](#121)                  |      |      |                       |                                                 | v                                                            |                                                  |
+| [122 Best Time to Buy and Sell StockⅡ](#122)                 |      |      |                       |                                                 | v                                                            |                                                  |
+| [523 Continuous Subarray Sum](#523)                          |      |      |                       | v                                               | v 需考慮k 為０的情況                                         |                                                  |
+| [304 Range Sum Query 2D - Immutable](#304)                   |      |      |                       | v                                               | v 要注意m, n代表pre_sum的長度所以要補加１，然後matrix都是拿 m-1, n-1的 |                                                  |
+| [303 Range Suym Query - Immutable](#303)                     |      |      |                       | v                                               | v<br />做個pre_sum 就ｏｋ要注意長度需加１                    | Not in, but for prep of 304                      |
+| [1027 Longest Arithmetic Sequence](#1027)                    |      |      |                       | v                                               | v                                                            |                                                  |
+| [1143 Longest Common Subsequence](#1143)                     |      |      | Sub array的话会更严格 | v                                               |                                                              | https://www.itread01.com/content/1546179722.html |
 
 
 
@@ -442,6 +503,30 @@ class Solution:
 v1 ~v5 
 
 local 
+
+### <a name="20">20</a>
+
+```python
+class Solution:
+    def isValid(self, s: str) -> bool:
+        d = {'(': ')', '[':']', '{':'}'}
+        
+        S = []
+        for c in s:
+            if c == '(' or c == '[' or c =='{':
+                S.append(c)
+            else:
+                if not S:
+                    return False
+                else:
+                    elem = S.pop()
+                    if d[elem] != c:
+                        return False
+
+        return not S
+```
+
+
 
 ### <a name="22">22</a>
 
@@ -987,6 +1072,197 @@ class Solution:
 
 
 
+### <a name="92">92</a>
+
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def reverseBetween(self, head: ListNode, m: int, n: int) -> ListNode:
+        if not head:
+            return None
+        if m == n:
+            return head
+        
+        dummy = ListNode(0)
+        dummy.next = head
+        cur = dummy
+        prev = None
+        k = 0
+        while k < m:
+            prev = cur
+            cur = cur.next
+            k += 1
+            
+        # self.reverseList(start, end)
+        start = self.reverseList(cur, m, n)
+        prev.next = start    
+        
+        return dummy.next
+        
+        
+    def reverseList(self, head: ListNode, m, n):#end: ListNode) -> ListNode:
+        if not head:
+            return head
+        
+        # X X X
+        cur = head
+        dummy = ListNode(0)
+        dummy.next = cur
+        # prev.next = cur
+        count = n - m
+        
+        while count:
+        # while cur.next != end:
+            tmp = cur.next
+            cur.next = tmp.next
+            tmp.next = dummy.next
+            dummy.next = tmp
+            # cur = tmp
+            count -= 1
+            
+        return dummy.next
+```
+
+
+
+### <a name="94">94</a>
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def inorderTraversal(self, root):
+        ans = []
+        stack = []
+
+        while stack or root:
+            if root:
+                stack.append(root)
+                root = root.left
+            else:
+                tmpNode = stack.pop()
+                ans.append(tmpNode.val)
+                root = tmpNode.right
+
+        return ans
+    
+    ''' Recursive
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        if not root:
+            return []
+        self.res = []
+        self.helper(root)
+        return self.res
+    
+    def helper(self, node):
+        if not node:
+            return 
+        self.helper(node.left)
+        self.res.append(node.val)
+        self.helper(node.right)
+    '''        
+        
+```
+
+
+
+### <a name="98">98</a>
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    # def isValidBST(self, root: TreeNode) -> bool:
+    def isValidBST(self, root, lo=float('-inf'), hi=float('inf')):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+        if not root:
+            return True
+
+        if not lo < root.val < hi:
+            return False
+        
+        return self.isValidBST(root.left, lo, min(root.val, hi)) and \
+               self.isValidBST(root.right, max(lo, root.val), hi)
+```
+
+
+
+### <a name="101">101</a>
+
+##### BFS
+
+```python
+from collections import deque
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+        
+        Q = deque()
+        Q.append(root)
+        while Q:
+            level_len = len(Q)
+            level_l = []
+            for i in range(level_len):
+                v = Q.popleft()
+                # level_l.append(v.val) # CRUCIAL!!!
+                if v.left:
+                    Q.append(v.left)
+                    level_l.append(v.left.val)
+                else:
+                    level_l.append(None)
+                if v.right:
+                    Q.append(v.right)
+                    level_l.append(v.right.val)
+                else:
+                    level_l.append(None)
+                # level_l.append(v.left)  # CRUCIAL!!! 麻煩！！！……　之後的list裡無法比較
+                # level_l.append(v.right) # CRUCIAL!!!
+                    
+            if len(level_l) > 1:
+                mid = len(level_l)//2
+                print(level_l)
+                if level_l[:mid] != level_l[mid:][::-1]:
+                    return False
+        return True
+
+```
+
+##### Recursive
+
+```python
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        def isSymmetricHelper(left,right):
+            if not left and not right:return True
+            if not right or not left:return False
+            if left.val!=right.val:return False
+            return isSymmetricHelper(left.left,right.right) and \
+        isSymmetricHelper(left.right,right.left)
+        if not root:return True
+        return isSymmetricHelper(root.left,root.right)
+```
+
+
+
 ### <a name="102">102</a>
 
 ```python
@@ -1028,6 +1304,8 @@ class Solution:
 
 ### <a name="104">104</a>
 
+##### Bottom-Up
+
 ```python
 # Definition for a binary tree node.
 # class TreeNode:
@@ -1050,6 +1328,48 @@ class Solution:
         r = self.height(root.right)
         
         return 1 + max(l, r)
+```
+
+##### Top-Down
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def maxDepth(self, root: TreeNode) -> int:
+        if not root: 
+            return 0
+        return self.topdown(root, 1)
+        
+    def topdown(self, node, level):
+        if not node:
+            return 0
+        if not node.left and not node.right:
+            return level
+        
+        l = self.topdown(node.left, level+1)
+        r = self.topdown(node.right, level+1)
+        
+        return max(l, r)
+    
+#     def maxDepth(self, root: TreeNode) -> int:
+#         if not root:
+#             return 0
+        
+#         return self.height(root)
+        
+#     def height(self, root):
+#         if not root:
+#             return 0
+#         l = self.height(root.left)
+#         r = self.height(root.right)
+        
+#         return 1 + max(l, r)
 ```
 
 
@@ -1089,6 +1409,79 @@ class Solution(object):
 
 
 
+### <a name="109">109</a> & <a name="108">108</a>
+
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def sortedListToBST(self, head: ListNode) -> TreeNode:
+        tree = []
+        while head:
+            tree.append(head.val)
+            head = head.next
+    		# 下面這塊是單就 108
+    		root = self.constructTree(tree)        
+        return root
+    
+    def constructTree(self, tree):
+        if not tree:
+            return
+        mid = len(tree)//2
+        root = TreeNode(tree[mid])
+        root.left = self.constructTree(tree[:mid])
+        root.right = self.constructTree(tree[mid+1:])
+        return root
+```
+
+
+
+### <a name="110">110</a>
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def isBalanced(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+        
+        # if not root.left and not root.right:
+        #     return True
+        
+        def height(node):
+            if not node:
+                return 0
+            l = height(node.left)
+            r = height(node.right)
+        
+            return 1 + max(l, r)
+        
+        L = height(root.left)
+        R = height(root.right)
+        # return abs(L-R) <= 1 and height(root.left) and height(root.right)
+        return abs(L-R) <= 1 and self.isBalanced(root.left) and self.isBalanced(root.right)
+        
+```
+
+
+
 ### <a name="111">111</a>
 
 ```python
@@ -1122,6 +1515,53 @@ class Solution:
         
         return ans
 
+```
+
+
+
+### <a name="112">112</a>
+
+```python
+        if not root:
+            return False
+
+        de = [(root, sum - root.val), ]
+        while de:
+            node, curr_sum = de.pop()
+            if not node.left and not node.right and curr_sum == 0:  
+                return True
+            if node.right:
+                de.append((node.right, curr_sum - node.right.val))
+            if node.left:
+                de.append((node.left, curr_sum - node.left.val))
+        return False
+```
+
+
+
+### <a name="113">113</a>
+
+```python
+class Solution:
+    def pathSum(self, root: TreeNode, sum: int) -> List[List[int]]:
+        self.sum = sum
+        result = []
+        self.pre(root, [], result)
+        
+        return result
+        
+    def pre(self, node, items, result):
+        if not node:
+            return
+        
+        items.append(node.val)
+        if not node.left and not node.right and sum(items) == self.sum:
+            result.append(items.copy())
+            # return    # CAN't return here, since items needs to POP
+            
+        self.pre(node.left, items, result)
+        self.pre(node.right, items, result)
+        items.pop() # should be post-order
 ```
 
 
@@ -1164,23 +1604,289 @@ class Solution:
 
 
 
+### <a name="141">141</a>
+
+```python
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+    def hasCycle(self, head):
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        
+        slow = head
+        fast = head
+        while fast and fast.next and fast.next.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                return True
+        return False
+```
+
+##### Try & Exception
+
+```python
+
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+
+        """
+        :type head: ListNode
+        :rtype: bool
+        """
+        slow = fast = head
+        try:
+            while fast:
+                slow = slow.next
+                fast = fast.next.next
+                if slow == fast:
+                    return True
+						return False
+        except Exception as e:
+            return False
+```
+
+
+
+
+
+### <a name="142">142</a>
+
+<img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gbkum6l7r7j30zc0qkn5i.jpg" alt="image-20200205004643509" style="zoom:50%;" />
+
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+# class Solution:
+#     def detectCycle(self, head: ListNode) -> ListNode:
+class Solution(object):
+    def getIntersect(self, head):
+        tortoise = head
+        hare = head
+
+        # A fast pointer will either loop around a cycle and meet the slow
+        # pointer or reach the `null` at the end of a non-cyclic list.
+        while hare is not None and hare.next is not None:
+            tortoise = tortoise.next
+            hare = hare.next.next
+            if tortoise == hare:
+                return tortoise
+
+        return None
+
+    def detectCycle(self, head):
+        if head is None:
+            return None
+
+        # If there is a cycle, the fast/slow pointers will intersect at some
+        # node. Otherwise, there is no cycle, so we cannot find an entrance to
+        # a cycle.
+        intersect = self.getIntersect(head)
+        if intersect is None:
+            return None
+
+        # To find the entrance to the cycle, we have two pointers traverse at
+        # the same speed -- one from the front of the list, and the other from
+        # the point of intersection.
+        ptr1 = head
+        ptr2 = intersect
+        while ptr1 != ptr2:
+            ptr1 = ptr1.next
+            ptr2 = ptr2.next
+
+        return ptr1
+```
+
+
+
+### <a name="143">143</a>
+
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+from collections import deque
+
+class Solution:
+    def reorderList(self, head: ListNode) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        if not head:
+            return head
+        
+        Q = deque()
+        cur = head
+        count = 1
+        while cur:
+            # if count % 2 == 1:
+            Q.append(cur)
+            cur = cur.next
+            count += 1
+        
+        i = 1
+        dummy = ListNode(0)
+        cur = dummy
+        while Q:
+            if i % 2 == 1:
+                v = Q.popleft()
+            else:
+                v = Q.pop()
+            print(v.val)
+            cur.next = v
+            cur = cur.next
+            # cur.next = v
+            # cur = cur.next
+            i += 1
+        cur.next = None     # CRUCIAL!!! or Cycle LinkedList
+            
+        return dummy.next
+```
+
+
+
+### <a name="144">144</a>
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+from collections import deque 
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:        
+        if not root:
+            return []
+        res = []
+        stack = []
+        stack.append(root)
+        while stack:
+            v = stack.pop()
+            res.append(v.val)
+            # if v.left:
+            #     stack.append(v.left)
+            # if v.right:
+            #     stack.append(v.right)
+            if v.right:
+                stack.append(v.right)    
+            if v.left:
+                stack.append(v.left)
+            
+        return res
+    
+        # WRONG ! Following is BFS...
+        # res = []
+        # Q = deque()
+        # Q.append(root)
+        # while Q:
+        #     v = Q.popleft()
+        #     res.append(v.val)
+        #     if v.left:
+        #         Q.append(v.left)
+        #     if v.right:
+        #         Q.append(v.right)
+        # return res
+            
+            
+        ''' recursive solution
+        self.res = []
+        self.helper(root)
+        return self.res
+        
+    def helper(self, node):
+        if not node:
+            return
+        self.res.append(node.val)
+        self.helper(node.left)
+        self.helper(node.right)
+        '''
+        # l = []
+        # l.append(root.val)
+        # l += self.preorderTraversal(root.left)
+        # l += self.preorderTraversal(root.right) 
+        # return l
+```
+
+
+
 ### <a name="145">145</a>
 
 ```python
 class Solution:
-        
     def postorderTraversal(self, root: TreeNode) -> List[int]:
-        self.result = []
-        self.helper(root)
-        return self.result
+        if not root:
+            return root
+        res = []
+        S = [root]
+        while S:
+            v = S.pop()
+            res.append(v.val)
+
+            if v.left:
+                S.append(v.left)
+            if v.right:
+                S.append(v.right) 
+                
+        return res[::-1] 
+
+
+#     def postorderTraversal(self, root: TreeNode) -> List[int]:
+#         self.result = []
+#         self.helper(root)
+#         return self.result
     
-    def helper(self, node):
-        if not node:
-            return 
+#     def helper(self, node):
+#         if not node:
+#             return 
         
-        self.helper(node.left)
-        self.helper(node.right)
-        self.result.append(node.val)
+#         self.helper(node.left)
+#         self.helper(node.right)
+#         self.result.append(node.val)
+```
+
+
+
+### <a name="146">146</a>
+
+```python
+class LRUCache(object):
+
+    def __init__(self, capacity):
+        self.od = collections.OrderedDict()
+        self.cap = capacity
+
+    def get(self, key):
+        if key not in self.od: return -1
+        val = self.od[key]
+        del self.od[key]       # 最近用到的在尾端
+        self.od[key] = val
+        return val
+
+    def put(self, key, value):
+        if key in self.od:
+            del self.od[key]
+            self.od[key] = value
+        else:
+            # while len(self.od) >= self.cap:
+            if len(self.od) == self.cap:      # 前面的最舊
+                toBeRemoved = next(iter(self.od))
+                del self.od[toBeRemoved]
+            self.od[key] = value
 ```
 
 
@@ -1266,6 +1972,58 @@ class BSTIterator:
 # param_2 = obj.hasNext()
 ```
 
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+import heapq
+class BSTIterator:
+
+    def __init__(self, root: TreeNode):
+        self.l = []
+        self.trvs(root)
+        
+    def trvs(self, root):
+        
+        if not root:
+            return None
+        
+        # heapq.heappush(self.l, root.val)
+        self.trvs(root.left)
+        self.l.append(root.val)
+        self.trvs(root.right)
+        
+
+    def next(self) -> int:
+        """
+        @return the next smallest number
+        """
+        # return heapq.heappop(self.l)
+        return self.l.pop(0)
+        
+
+    def hasNext(self) -> bool:
+        """
+        @return whether we have a next smallest number
+        """
+        if self.l:
+            return True
+        else:
+            return False
+
+
+# Your BSTIterator object will be instantiated and called as such:
+# obj = BSTIterator(root)
+# param_1 = obj.next()
+# param_2 = obj.hasNext()
+```
+
+
+
 
 
 ### <a name="199">199</a>
@@ -1301,6 +2059,122 @@ class Solution:
             res.append(level_l)
         
         return [item[-1] for item in res]
+```
+
+
+
+### <a name="200">200</a>
+
+##### TLE...
+
+```python
+'''
+1 1 1 1 0
+1 1 0 1 0
+1 1 0 1 0
+0 0 0 0 0
+'''
+# for 
+#     for 
+#         bfs_graph
+import numpy as np
+from collections import deque
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        if not grid or not grid[0]:
+            return 0
+        
+        # arr = [[0 for j in range(len(grid[0])+1)] for i in range(len(grid)+1)]
+        count = 0
+        
+        arr = np.pad(grid, ((1,1), (1,1)))
+        print(arr)
+        
+        # for i in range(1, len(arr)):
+        #     for j in range(1, len(arr[0])):
+        for i in range(1, len(arr)-1):
+            for j in range(1, len(arr[0])-1):
+                if arr[i][j] == '1':
+                    self.bfs((arr[i][j], i, j), arr)
+                    count += 1
+        return count
+        
+    def bfs(self, item, arr):
+        Q = deque()
+        Q.append(item)
+        
+        while Q:
+            val, i, j = Q.popleft()
+            if val == '1':
+                arr[i][j] = '0'
+                
+            if arr[i][j-1] == '1':         # '0' is True...
+                Q.append((arr[i][j-1], i, j-1))
+            if arr[i-1][j] == '1':
+                Q.append((arr[i-1][j], i-1, j))
+            if arr[i][j+1] == '1':
+                Q.append((arr[i][j+1], i, j+1))
+            if arr[i+1][j] == '1':
+                Q.append((arr[i+1][j], i+1, j))
+        
+# should set arr[row][col] = 'x' right after Q.append!!! to Solve TLE
+```
+
+##### Fix TLE: 
+
+```python
+        while Q:
+            val, i, j = Q.popleft()
+            if val == '1':
+                arr[i][j] = '0'
+                
+            if arr[i][j-1] == '1':         # '0' is True...
+                Q.append((arr[i][j-1], i, j-1))
+                arr[i][j-1] = 'x'
+            if arr[i-1][j] == '1':
+                Q.append((arr[i-1][j], i-1, j))
+                arr[i-1][j] = 'x'
+            if arr[i][j+1] == '1':
+                Q.append((arr[i][j+1], i, j+1))
+                arr[i][j+1] = 'x'
+            if arr[i+1][j] == '1':
+                Q.append((arr[i+1][j], i+1, j))
+                arr[i+1][j] = 'x'
+```
+
+
+
+### <a name="206">206</a>
+
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if not head:
+            return head
+        
+        # X X X
+        
+        cur = head
+        dummy = ListNode(0)
+        dummy.next = cur
+        # prev.next = cur
+        
+        while cur.next:
+            tmp = cur.next
+            cur.next = tmp.next
+            tmp.next = dummy.next
+            dummy.next = tmp
+            # cur = tmp
+            
+        return dummy.next
+            
+        
 ```
 
 
@@ -1344,6 +2218,75 @@ class Solution:
         
         return not any(degrees) # check whether any element in degrees is larger than 0
             
+```
+
+
+
+### <a name="208">208</a>
+
+```python
+class TrieNode(object):
+    def __init__(self):
+        self.children = {}
+        self.isEnd = False
+    
+class Trie:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.root = TrieNode()
+
+    def insert(self, word: str) -> None:
+        """
+        Inserts a word into the trie.
+        """
+        node = self.root
+        for c in word:
+            if c not in node.children:
+                node.children[c] = TrieNode()
+            node = node.children[c]
+        node.isEnd = True
+                
+
+    def search(self, word: str) -> bool:
+        """
+        Returns if the word is in the trie.
+        """
+        # should pass in node and word
+        def helper(node, i , word):
+            if i == len(word):
+                if node.isEnd:
+                    return True
+                return False
+            
+            if word[i] not in node.children:
+                # self.helper(i+1, word)
+                return False
+            else:
+                return helper(node.children[word[i]], i+1, word)
+        return helper(self.root, 0, word)
+    
+
+    def startsWith(self, prefix: str) -> bool:
+        """
+        Returns if there is any word in the trie that starts with the given prefix.
+        """
+        node = self.root
+        for c in prefix:
+            if c in node.children:
+                node = node.children[c]
+            else:
+                return False
+        return True
+
+
+# Your Trie object will be instantiated and called as such:
+# obj = Trie()
+# obj.insert(word)
+# param_2 = obj.search(word)
+# param_3 = obj.startsWith(prefix)
 ```
 
 
@@ -1446,6 +2389,122 @@ class Solution:
 
 
 
+### <a name="211">211</a>
+
+```python
+from collections import deque 
+
+class WordNode:
+    def __init__(self):
+        self.children = {}
+        self.isEnd = False
+
+class WordDictionary:
+    def __init__(self):
+        self.root = WordNode()
+
+    def addWord(self, word):
+        node = self.root
+        for w in word:
+            if w in node.children:
+                node = node.children[w]
+            else:
+                node.children[w] = WordNode()
+                node = node.children[w]
+        node.isEnd = True
+
+    def search(self, word: str) -> bool:
+        """
+        Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
+        """
+        def dfs(node, i, word):
+            if i == len(word):
+                return node.isEnd
+            if word[i] == '.':
+                for c in node.children:
+                    if dfs(node.children[c], i + 1, word):
+                        return True
+                return False
+            else:
+                if word[i] not in node.children:
+                    return False
+                else:
+                    return dfs(node.children[word[i]], i + 1, word)
+        
+        return dfs(self.root, 0, word)
+    # def search(self, word):
+    #     # node = self.root
+    #     # que = deque(word)
+    #     # while que:
+    #     #     c = que.popleft()
+    #     #     if c == '.':
+    #     #         for key in node.children.keys():
+    #     #             self.search(key + ''.join([c for c in que]))
+    #     #     node = node.children.get(c, None)
+    #     #     if not node:
+    #     #         return False
+    #     # return node.isEnd
+    #     stack = [(self.root,word)]
+    #     while stack:
+    #         node, w = stack.pop()
+    #         if not w:
+    #             if node.isEnd:
+    #                 return True
+    #         elif w[0]=='.':
+    #             for n in node.children.values():
+    #                 stack.append((n,w[1:]))
+    #         else:
+    #             if w[0] in node.children:
+    #                 n = node.children[w[0]]
+    #                 stack.append((n,w[1:]))
+    #     return False
+    
+# class TrieNode:
+# def __init__(self):
+#     self.children = {}
+#     self.isEnd = False
+
+# class WordDictionary:
+#     def __init__(self):
+#         """
+#         Initialize your data structure here.
+#         """
+#         self.root = TrieNode()
+
+#     def addWord(self, word: str) -> None:
+#         """
+#         Adds a word into the data structure.
+#         """
+#         node = self.root
+#         for char in word:
+#             if char not in node.children:
+#                 node.children[char] = TrieNode()
+#             node = node.children[char]
+#         node.isEnd = True
+
+#     def search(self, word: str) -> bool:
+#         """
+#         Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
+#         """
+#         def dfs(node, i, word):
+#             if i == len(word):
+#                 return node.isEnd
+#             if word[i] == '.':
+#                 for c in node.children:
+#                     if dfs(node.children[c], i + 1, word):
+#                         return True
+#                 return False
+#             else:
+#                 if word[i] not in node.children:
+#                     return False
+#                 else:
+#                     return dfs(node.children[word[i]], i + 1, word)
+        
+#         return dfs(self.root, 0, word)
+```
+
+
+
 ### <a name="215">215</a>
 
 ```python
@@ -1479,49 +2538,67 @@ class Solution:
 
 
 
-### <a name="210">210</a>
+### <a name="231">231</a>
 
 ```python
+import math
 class Solution:
-    def addEdge(self, child, parent, adjList):
-		#Creating Adjacency List
-        if parent in adjList:
-            adjList[parent].append(child)
-        else:
-            adjList[parent] = [child]
+    def isPowerOfFour(self, num: int) -> bool:
+        if not num:
+            return False
         
-    def TopoSort(self, course: int, adjList, visited: List, res: List):
-        #print("course: {}, visited: {}, res: {}".format(course, visited, res))
-		# Checking if the courses is in the recursion stack. If yes, then exit;
-        if visited[course] == 1: res.clear(); return False
-		
-		#If the course has already been visited, then return
-        if visited[course] == 2: return True
-        
-        visited[course] = 1
-        if course in adjList:
-            for c in adjList[course]:
-                if not self.TopoSort(c, adjList, visited, res): return False
-    
-        visited[course] = 2
-        res.insert(0, course)
-        return True
-            
-                
+        while num > 1:
+            num /= 4
+        return num == 1
+```
 
-    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        adjList = {}
-        res = []
-        visited = [0] * numCourses
-        for course in prerequisites:
-            c, pre = course
-            self.addEdge(c, pre, adjList)
-        #print("adjList: ", adjList)
-        for course in range(numCourses):
-            if visited[course] != 2 :
-                if not self.TopoSort(course, adjList, visited, res): break
-        return res
+
+
+### <a name="235">235</a>
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        curr = root
+        while curr:
+            if p.val > curr.val and q.val > curr.val:
+                curr = curr.right
+            elif p.val < curr.val and q.val < curr.val:
+                curr = curr.left
+            else:
+                return curr
         
+```
+
+
+
+#### <a name="236">236</a>
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None        
+
+class Solution:
+
+        
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if not root or p == root or q == root:
+            return root
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+        if left and right: return root
+        return left if left else right
 ```
 
 
@@ -1628,6 +2705,95 @@ class Solution:
 
 - Time complexity : O(*H*) since here one goes from root down to a leaf.
 - Space complexity : O(1).
+
+
+
+### <a name="285">285</a>
+
+```python
+class Solution:
+    def inorderSuccessor(self, root: 'TreeNode', p: 'TreeNode') -> 'TreeNode':
+        # if not root:
+        #     return []
+        # self.res = self.inorderSuccessor(root.left, p) 
+        # print(root.val, self.res)
+        # self.res += [root.val]
+        # if root.val == p.val:
+        #     self.find = True
+        #     return []
+        # if self.find:
+        #     self.ans = root.val
+        # self.res = self.inorderSuccessor(root.right, p)
+        
+
+        succ = None
+        while root:
+            if p.val < root.val:
+                succ = root
+                root = root.left
+            else:
+                root = root.right
+        return succ
+                
+```
+
+### <a name="286">286</a>
+
+```python
+# import numpy as np
+from collections import deque
+class Solution:
+    def __init__(self):
+        self.INF = 2**31-1 #float('inf')
+        self.m, self.n = 0, 0
+        
+    def wallsAndGates(self, rooms: List[List[int]]) -> None:
+        """
+        Do not return anything, modify rooms in-place instead.
+        """
+        if not rooms or not rooms[0]:
+            return None
+        
+        # arr = np.array(rooms)
+        # arr = np.pad(rooms, ((1,1), (1,1)), mode='constant', constant_values=(-1, -1))                 
+        arr = rooms
+        self.m, self.n = len(arr), len(arr[0])
+        for i in range(0, len(arr)):
+            for j in range(0, len(arr[0])):
+                if arr[i][j] == 0:
+                    self.bfs((arr[i][j], i, j), arr)
+                       
+        return arr
+    
+                       
+    def bfs(self, item, arr):
+        Q = deque()
+        Q.append(item)
+        INF = self.INF
+        dist = 0
+        while Q:
+            num_neighbors = len(Q)
+            
+            # if val == self.INF:
+            #     arr[i][j] = 'x'
+            dist += 1
+            for i in range(num_neighbors):
+                val, i, j = Q.popleft()
+                if j > 0 and (arr[i][j-1] == INF or arr[i][j-1] > dist):
+                    Q.append((arr[i][j-1], i, j-1))
+                    arr[i][j-1] = dist
+                if i > 0 and (arr[i-1][j] == INF or arr[i-1][j] > dist):
+                    Q.append((arr[i-1][j], i-1, j))
+                    arr[i-1][j] = dist
+                if j < (self.n-1) and (arr[i][j+1] == INF or arr[i][j+1] > dist):
+                    Q.append((arr[i][j+1], i, j+1))
+                    arr[i][j+1] = dist
+                if i < (self.m-1) and (arr[i+1][j] == INF or arr[i+1][j] > dist):
+                    Q.append((arr[i+1][j], i+1, j))
+                    arr[i+1][j] = dist
+```
+
+
 
 ### <a name="301">301</a>
 
@@ -2177,6 +3343,91 @@ class Solution:
 
 
 
+### <a name="700">700</a>
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def searchBST(self, root: TreeNode, val: int) -> TreeNode:
+        if not root:
+            return None
+        while root:
+            if val < root.val:
+                root = root.left
+            elif val > root.val:
+                root = root.right
+            else:
+                return root
+        return None
+```
+
+
+
+### <a name="701">701</a>
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def insertIntoBST(self, root: TreeNode, val: int) -> TreeNode:
+        if not root:
+            return root
+
+        t1 = root
+        while t1:
+            print(t1.val)
+            if t1.val > val:
+                if t1.left:
+                    t1 = t1.left
+                else:
+                    t1.left = TreeNode(val)
+                    break
+            else:
+                if t1.right:
+                    t1 = t1.right
+                else:
+                    t1.right = TreeNode(val)
+                    break
+
+
+        return root
+#         if not root:
+#             return root
+        
+#         # _root = root
+#         # prev = None
+#         _root = root
+#         while root:
+#             # prev = root
+#             print(root.val)
+#             if val < root.val:
+#                 if root.left:
+#                     root = root.left
+#                 else:
+#                     root.left = TreeNode(val)
+#                     break
+#             elif val > root.val:
+#                 if root.right:
+#                     root = root.right
+#                 else:
+#                     root.right = TreeNode(val)
+#                     break
+#             return _root
+```
+
+
+
 ### <a name="825">825</a>
 
 ```python
@@ -2409,3 +3660,52 @@ Time: O(n^2)
 Space: O(n^2)
 
 ref : [https://leetcode.flowerplayer.com/2019/04/12/leetcode-907-sum-of-subarray-minimums-%e8%a7%a3%e9%a2%98%e6%80%9d%e8%b7%af%e5%88%86%e6%9e%90/](https://leetcode.flowerplayer.com/2019/04/12/leetcode-907-sum-of-subarray-minimums-解题思路分析/)
+
+
+
+### <a name="1143">1143</a>
+
+##### Brute Force - 2**m because of backtracking to generate all subsequences
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200203163052247.png" alt="image-20200203163052247" style="zoom:50%;" />
+
+
+
+##### DP
+
+```python
+'''
+s1 = 'abcde'
+     
+s2 = 'ace'
+
+DP
+    a c e 
+  0 0 0 0 
+a 0 1 1 1 
+b 0 1 1 1
+c 0 1 2 2
+d 0 1 2 2
+e 0 1 2 3
+
+
+because s1[2] == s2[0], both are 'c'
+  DP[3][2] = DP[3-1][2-1] + 1
+    
+  DP[m][n] = DP[m-1][n] + D[m][n-1] + 1
+'''
+class Solution:
+    def longestCommonSubsequence(self, text1: str, text2: str) -> int:
+        m, n = len(text1), len(text2)
+        dp = [[0 for j in range(n+1)] for i in range(m+1)]
+        
+        for i in range(1, m+1):
+            for j in range(1, n+1):
+                if text1[i-1] != text2[j-1]:
+                    dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+                else:
+                    dp[i][j] = dp[i-1][j-1] + 1
+        return dp[m][n]
+        
+```
+
