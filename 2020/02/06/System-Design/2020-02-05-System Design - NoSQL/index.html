@@ -1,0 +1,143 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="System-Design/2020-02-05-System Design - NoSQL"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>System-Design/2020-02-05-System Design - NoSQL | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NoSQL"><span class="toc-number">1.</span> <span class="toc-text">NoSQL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Normalize-–-JOIN-在ORM用的，往往一個機器"><span class="toc-number">1.0.1.</span> <span class="toc-text">Normalize – JOIN　在ORM用的，往往一個機器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Denormalize-–-大量重複寫多份，寫麻煩，讀有利"><span class="toc-number">1.0.2.</span> <span class="toc-text">Denormalize – 大量重複寫多份，寫麻煩，讀有利　</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#缺點：冗缺、如果系統write-heavy就很不利，如logging-system、message-que"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">缺點：冗缺、如果系統write-heavy就很不利，如logging system、message que</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Quorum-假如有三個人，2-1，少數服從多數"><span class="toc-number">1.0.3.</span> <span class="toc-text">Quorum - 假如有三個人，2:1，少數服從多數</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Transaction-銀行的經典例子"><span class="toc-number">1.0.4.</span> <span class="toc-text">Transaction 銀行的經典例子 -</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#NoSQL-Cont"><span class="toc-number"></span> <span class="toc-text">NoSQL Cont.</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SQL"><span class="toc-number">0.0.1.</span> <span class="toc-text">SQL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NoSQL就有分流派了-主要就是四大流派"><span class="toc-number">0.0.2.</span> <span class="toc-text">NoSQL就有分流派了 主要就是四大流派</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Source-s-and-further-reading-key-value-store"><span class="toc-number">0.0.3.</span> <span class="toc-text">Source(s) and further reading: key-value store</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Document-Store-MongoDB"><span class="toc-number">0.0.4.</span> <span class="toc-text">Document Store - MongoDB</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#最重要的就是Schemaless-–-就是沒有schema"><span class="toc-number">0.0.4.1.</span> <span class="toc-text">最重要的就是Schemaless – 就是沒有schema,</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Document-store"><span class="toc-number">0.0.5.</span> <span class="toc-text">Document store</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Source-s-and-further-reading-document-store"><span class="toc-number">0.0.5.1.</span> <span class="toc-text">Source(s) and further reading: document store</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Wide-column-store"><span class="toc-number">0.0.6.</span> <span class="toc-text">Wide column store</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Graph-DB-–-for-social-Network"><span class="toc-number">0.0.7.</span> <span class="toc-text">Graph DB – for social Network</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Graph-database"><span class="toc-number">0.0.7.1.</span> <span class="toc-text">Graph database</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Source-s-and-further-reading-graph"><span class="toc-number">0.0.7.2.</span> <span class="toc-text">Source(s) and further reading: graph</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-vs-NoSQL"><span class="toc-number">1.</span> <span class="toc-text">SQL vs NoSQL</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Source-s-and-further-reading-SQL-or-NoSQL"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">Source(s) and further reading: SQL or NoSQL</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">1.0.1.</span> <span class="toc-text"></span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">216</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">24</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">27</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">System-Design/2020-02-05-System Design - NoSQL</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-06</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/System/">System</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>SQL - ORM</p>
+<h2 id="NoSQL"><a href="#NoSQL" class="headerlink" title="NoSQL"></a>NoSQL</h2><p>Not Only SQL</p>
+<p>本身有幾個派別如kv, document</p>
+<h4 id="Normalize-–-JOIN-在ORM用的，往往一個機器"><a href="#Normalize-–-JOIN-在ORM用的，往往一個機器" class="headerlink" title="Normalize – JOIN　在ORM用的，往往一個機器"></a>Normalize – JOIN　在ORM用的，往往一個機器</h4><h4 id="Denormalize-–-大量重複寫多份，寫麻煩，讀有利"><a href="#Denormalize-–-大量重複寫多份，寫麻煩，讀有利" class="headerlink" title="Denormalize – 大量重複寫多份，寫麻煩，讀有利　"></a>Denormalize – 大量重複寫多份，寫麻煩，讀有利　</h4><p>在nosql 裡用的 ，nosql往往為了多機器作分布</p>
+<p>數據中心要同步數據怎麼辦？跨data-center Denormalize就兩邊都寫</p>
+<p>寫時要保證各國的數據中心都寫進去了</p>
+<p>要知道是 read-heavy or write-heavy 大多是讀的多</p>
+<h5 id="缺點：冗缺、如果系統write-heavy就很不利，如logging-system、message-que"><a href="#缺點：冗缺、如果系統write-heavy就很不利，如logging-system、message-que" class="headerlink" title="缺點：冗缺、如果系統write-heavy就很不利，如logging system、message que"></a>缺點：冗缺、如果系統write-heavy就很不利，如logging system、message que</h5><p>kafka 對寫的支持很好</p>
+<ul>
+<li><p>要做join的話是在applicatin layer也是middle layer的　＝＝＞　<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200206221633536.png" alt="image-20200206221633536" style="zoom: 25%;" /></p>
+</li>
+<li><p>不支持ACID - <em>ACID</em> (<em>atomicity, consistency, isolation, durability</em>) is a set of properties of database transactions intended to guarantee validity ，那麼多機器不能保證事務</p>
+</li>
+<li><p>nosql不好鎖，多個當然不好鎖，慢慢才最終一致</p>
+</li>
+<li><p>linkedin發了文章，不是需要馬上好友都看到，可以有latency的，我的follower之後才收到沒差</p>
+<p>叫作 <strong><em>eventually consistency</em></strong></p>
+</li>
+<li><h4 id="Quorum-假如有三個人，2-1，少數服從多數"><a href="#Quorum-假如有三個人，2-1，少數服從多數" class="headerlink" title="Quorum - 假如有三個人，2:1，少數服從多數"></a>Quorum - 假如有三個人，2:1，少數服從多數</h4></li>
+</ul>
+<h4 id="Transaction-銀行的經典例子"><a href="#Transaction-銀行的經典例子" class="headerlink" title="Transaction 銀行的經典例子 -"></a>Transaction 銀行的經典例子 -</h4><p>銀行在意事務，所以ORM比較好。如果在一個地方取，中間</p>
+<p>帳號是個變量a, 本來有1000元，一邊要存5000元，另個人從我的帳戶也取1000元。如果沒有事務保護</p>
+<p>數據就亂了</p>
+<p>DBMS裡在　為保證transation可靠，所以要有ACID</p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200206222645993.png" alt="image-20200206222645993" style="zoom:50%;" />
+
+
+
+<h1 id="NoSQL-Cont"><a href="#NoSQL-Cont" class="headerlink" title="NoSQL Cont."></a>NoSQL Cont.</h1><ul>
+<li><p>CAP Theorem</p>
+</li>
+<li><p>在<a href="https://zh.wikipedia.org/wiki/理論計算機科學" target="_blank" rel="noopener">理論計算機科學</a>中，<strong>CAP定理</strong>（CAP theorem），又被稱作<strong>布魯爾定理</strong>（Brewer’s theorem），它指出對於一個<a href="https://zh.wikipedia.org/wiki/分布式计算" target="_blank" rel="noopener">分布式計算系統</a>來說，不可能同時滿足以下三點：<a href="https://zh.wikipedia.org/wiki/CAP定理#cite_note-Lynch-1" target="_blank" rel="noopener">[1]</a><a href="https://zh.wikipedia.org/wiki/CAP定理#cite_note-2" target="_blank" rel="noopener">[2]</a></p>
+<ul>
+<li>一致性（<strong>C</strong>onsistency） （等同於所有節點訪問同一份最新的數據副本）</li>
+<li><a href="https://zh.wikipedia.org/wiki/可用性" target="_blank" rel="noopener">可用性</a>（<strong>A</strong>vailability）（每次請求都能獲取到非錯的響應——但是不保證獲取的數據為最新數據）</li>
+<li><a href="https://zh.wikipedia.org/w/index.php?title=网络分区&action=edit&redlink=1" target="_blank" rel="noopener">分區容錯性</a>（<strong>P</strong>artition tolerance）（以實際效果而言，分區相當於對通信的時限要求。系統如果不能在時限內達成數據一致性，就意味著發生了分區的情況，必須就當前操作在C和A之間做出選擇<a href="https://zh.wikipedia.org/wiki/CAP定理#cite_note-3" target="_blank" rel="noopener">[3]</a>。）</li>
+</ul>
+<p>根據定理，分布式系統只能滿足三項中的兩項而不可能滿足全部三項<a href="https://zh.wikipedia.org/wiki/CAP定理#cite_note-4" target="_blank" rel="noopener">[4]</a>。理解CAP理論的最簡單方式是想像兩個節點分處分區兩側。允許至少一個節點更新狀態會導致數據不一致，即喪失了C性質。如果為了保證數據一致性，將分區一側的節點設置為不可用，那麼又喪失了A性質。除非兩個節點可以互相通信，才能既保證C又保證A，這又會導致喪失P性質。</p>
+<p><strong>BASE</strong> is often used to describe the properties of NoSQL databases. In comparison with the <a href="https://github.com/donnemartin/system-design-primer#cap-theorem" target="_blank" rel="noopener">CAP Theorem</a>, BASE chooses availability over consistency.</p>
+<ul>
+<li><strong>Basically available</strong> - the system guarantees availability.</li>
+<li><strong>Soft state</strong> - the state of the system may change over time, even without input.</li>
+<li><strong>Eventual consistency</strong> - the system will become consistent over a period of time, given that the system doesn’t receive input during that period.</li>
+</ul>
+</li>
+</ul>
+<h4 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h4><p>ORM object relational mapping, mysql oracle都是可以被java裡搞定起來</p>
+<p>DDL 時都是差不多的　－　Data Definition Language，DDL</p>
+<h4 id="NoSQL就有分流派了-主要就是四大流派"><a href="#NoSQL就有分流派了-主要就是四大流派" class="headerlink" title="NoSQL就有分流派了 主要就是四大流派"></a>NoSQL就有分流派了 主要就是四大流派</h4><p>Key-Value資料庫、記憶體資料庫、圖學資料庫和文件資料庫.</p>
+<h4 id="Source-s-and-further-reading-key-value-store"><a href="#Source-s-and-further-reading-key-value-store" class="headerlink" title="Source(s) and further reading: key-value store"></a>Source(s) and further reading: key-value store</h4><ul>
+<li><p><a href="https://en.wikipedia.org/wiki/Key-value_database" target="_blank" rel="noopener">Key-value database</a></p>
+<p>如cassandra</p>
+</li>
+<li><p><a href="http://stackoverflow.com/questions/4056093/what-are-the-disadvantages-of-using-a-key-value-table-over-nullable-columns-or" target="_blank" rel="noopener">Disadvantages of key-value stores</a></p>
+</li>
+<li><p><a href="http://qnimate.com/overview-of-redis-architecture/" target="_blank" rel="noopener">Redis architecture</a>　比較是緩存服務</p>
+</li>
+<li><p><a href="https://www.adayinthelifeof.nl/2011/02/06/memcache-internals/" target="_blank" rel="noopener">Memcached architecture</a>　比較是緩存服務</p>
+</li>
+</ul>
+<h4 id="Document-Store-MongoDB"><a href="#Document-Store-MongoDB" class="headerlink" title="Document Store - MongoDB"></a>Document Store - MongoDB</h4><h5 id="最重要的就是Schemaless-–-就是沒有schema"><a href="#最重要的就是Schemaless-–-就是沒有schema" class="headerlink" title="最重要的就是Schemaless – 就是沒有schema,"></a>最重要的就是Schemaless – 就是沒有schema,</h5><h4 id="Document-store"><a href="#Document-store" class="headerlink" title="Document store"></a>Document store</h4><blockquote>
+<p>Abstraction: key-value store with documents stored as values</p>
+</blockquote>
+<p>A document store is centered around documents (XML, JSON, binary, etc), where a document stores all information for a given object. Document stores provide APIs or a query language to query based on the internal structure of the document itself. <em>Note, many key-value stores include features for working with a value’s metadata, blurring the lines between these two storage types.</em></p>
+<p>Based on the underlying impleme</p>
+<h5 id="Source-s-and-further-reading-document-store"><a href="#Source-s-and-further-reading-document-store" class="headerlink" title="Source(s) and further reading: document store"></a>Source(s) and further reading: document store</h5><ul>
+<li><a href="https://en.wikipedia.org/wiki/Document-oriented_database" target="_blank" rel="noopener">Document-oriented database</a></li>
+<li><a href="https://www.mongodb.com/mongodb-architecture" target="_blank" rel="noopener">MongoDB architecture</a></li>
+<li><a href="https://blog.couchdb.org/2016/08/01/couchdb-2-0-architecture/" target="_blank" rel="noopener">CouchDB architecture</a></li>
+<li><a href="https://www.elastic.co/blog/found-elasticsearch-from-the-bottom-up" target="_blank" rel="noopener">Elasticsearch architecture</a></li>
+</ul>
+<h4 id="Wide-column-store"><a href="#Wide-column-store" class="headerlink" title="Wide column store"></a>Wide column store</h4><p><a href="https://tva1.sinaimg.cn/large/0082zybpgy1gbn4cnj0ioj30g506f0t2.jpg" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gbn4cnj0ioj30g506f0t2.jpg" alt="img"></a><br><strong><em><a href="http://blog.grio.com/2015/11/sql-nosql-a-brief-history.html" target="_blank" rel="noopener">Source: SQL &amp; NoSQL, a brief history</a></em></strong></p>
+<blockquote>
+<p>Abstraction: nested map <code>ColumnFamily&gt;</code></p>
+</blockquote>
+<p>Google introduced <a href="http://www.read.seas.harvard.edu/~kohler/class/cs239-w08/chang06bigtable.pdf" target="_blank" rel="noopener">Bigtable</a> as the first wide column store, which influenced the open-source <a href="https://www.mapr.com/blog/in-depth-look-hbase-architecture" target="_blank" rel="noopener">HBase</a> often-used in the Hadoop ecosystem, and <a href="http://docs.datastax.com/en/cassandra/3.0/cassandra/architecture/archIntro.html" target="_blank" rel="noopener">Cassandra</a> from Facebook. Stores such as BigTable, HBase, and Cassandra maintain keys in lexicographic order, allowing efficient retrieval of selective key ranges.</p>
+<h4 id="Graph-DB-–-for-social-Network"><a href="#Graph-DB-–-for-social-Network" class="headerlink" title="Graph DB – for social Network"></a>Graph DB – for social Network</h4><h5 id="Graph-database"><a href="#Graph-database" class="headerlink" title="Graph database"></a>Graph database</h5><p><a href="https://tva1.sinaimg.cn/large/0082zybpgy1gbn4cpicsqj30h40c4gps.jpg" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gbn4cpicsqj30h40c4gps.jpg" alt="img"></a><br><em><a href="https://en.wikipedia.org/wiki/File:GraphDatabase_PropertyGraph.png" target="_blank" rel="noopener">Source: Graph database</a></em></p>
+<blockquote>
+<p>Abstraction: graph</p>
+</blockquote>
+<p>In a graph database, each node is a record and each arc is a relationship between two nodes. Graph databases are optimized to represent complex relationships with many foreign keys or many-to-many relationships.</p>
+<p>Graphs databases offer high performance for data models with complex relationships, such as a social network. They are relatively new and are not yet widely-used; it might be more difficult to find development tools and resources. Many graphs can only be accessed with <a href="https://github.com/donnemartin/system-design-primer#representational-state-transfer-rest" target="_blank" rel="noopener">REST APIs</a>.</p>
+<h5 id="Source-s-and-further-reading-graph"><a href="#Source-s-and-further-reading-graph" class="headerlink" title="Source(s) and further reading: graph"></a>Source(s) and further reading: graph</h5><ul>
+<li><a href="https://en.wikipedia.org/wiki/Graph_database" target="_blank" rel="noopener">Graph database</a></li>
+<li><a href="https://neo4j.com/" target="_blank" rel="noopener">Neo4j</a></li>
+<li><a href="https://blog.twitter.com/2010/introducing-flockdb" target="_blank" rel="noopener">FlockDB</a></li>
+</ul>
+<h2 id="SQL-vs-NoSQL"><a href="#SQL-vs-NoSQL" class="headerlink" title="SQL vs NoSQL"></a>SQL vs NoSQL</h2><p>mysql vs cassandra 之間的區別之類的？</p>
+<p>Reasons for <strong>SQL</strong>:</p>
+<ul>
+<li>Structured data</li>
+<li>Strict schema</li>
+<li>Relational data</li>
+<li>Need for complex joins 如用戶跟group</li>
+<li>Transactions　事務</li>
+<li>Clear patterns for scaling</li>
+<li>More established: developers, community, code, tools, etc</li>
+<li>Lookups by <strong><em>index</em></strong> are very fast</li>
+</ul>
+<p>Reasons for <strong>NoSQL</strong>:</p>
+<ul>
+<li>Semi-structured data　　</li>
+<li><strong><em>Dynamic or flexible schema</em></strong></li>
+<li>Non-relational data</li>
+<li>No need for complex joins</li>
+<li><strong><em>Store many TB (or PB) of data</em></strong>　</li>
+<li><strong><em>Very data intensive workload</em></strong> </li>
+<li>Very high throughput for IOPS (Input/Output Operations Per Second</li>
+</ul>
+<p>Sample data well-suited for NoSQL:</p>
+<ul>
+<li>Rapid ingest of clickstream and <strong><em>log data</em></strong> 之前說的頻繁寫的</li>
+<li>Leaderboard or scoring data <strong><em>就 eventually consistency 就好的</em></strong></li>
+<li>Temporary data, such as a shopping cart  有cache就可以搞定</li>
+<li>Frequently accessed (‘hot’) tables</li>
+<li>Metadata/lookup tables</li>
+</ul>
+<h5 id="Source-s-and-further-reading-SQL-or-NoSQL"><a href="#Source-s-and-further-reading-SQL-or-NoSQL" class="headerlink" title="Source(s) and further reading: SQL or NoSQL"></a>Source(s) and further reading: SQL or NoSQL</h5><ul>
+<li><a href="https://www.youtube.com/watch?v=w95murBkYmU" target="_blank" rel="noopener">Scaling up to your first 10 million users</a></li>
+<li><a href="https://www.sitepoint.com/sql-vs-nosql-differences/" target="_blank" rel="noopener">SQL vs NoSQL differences</a></li>
+</ul>
+<p>![image-20200206225707917](/Users/joe/Library/Application Support/typora-user-images/image-20200206225707917.png)</p>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><p>![image-20200206225824207](/Users/joe/Library/Application Support/typora-user-images/image-20200206225824207.png)</p>
+<p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gbn4crkjxdj311005wdge.jpg" alt="image-20200206225934479"></p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200206230007842.png" alt="image-20200206230007842" style="zoom:50%;" />
+
+<p>量不大時　SQL 就夠了；如ACID、data不會變的或結構的</p>
+<p>量大時才會用 NoSQL 學校一般用不到那麼大流量啊 量大時一般沒結構，的確NoSQL也是比較靈活</p>
+<p>雲上一般要多個機器，硬體也都比較便宜</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/02/06/System-Design/2020-02-05-System%20Design%20-%20NoSQL/">http://yoursite.com/2020/02/06/System-Design/2020-02-05-System%20Design%20-%20NoSQL/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2020/02/06/System-Design/2020-02-05-System%20Design%20-%20Push%20vs%20Pull/"><i class="fa fa-chevron-left">  </i><span>System-Design/2020-02-05-System Design - Push vs Pull</span></a></div><div class="next-post pull-right"><a href="/2020/02/06/System-Design/2020-02-05-System%20Design%20-%20Sharding%20&amp;%20Queue/"><span>System-Design/2020-02-05-System Design - Sharding &amp; Queue</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
