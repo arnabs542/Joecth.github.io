@@ -30,7 +30,7 @@ date: 2020-01-11
 | [238 product of array except self](#238)                     |              |                                                              |                                                              |                            | v      | v                                                            |                                     |
 | [67 Add Binary](#67)                                         |              |                                                              |                                                              |                            | △      |                                                              |                                     |
 | [273 Integer to English Words](#273)                         |              |                                                              |                                                              |                            |        |                                                              |                                     |
-| [973 K Closest Points to Origin](#973)                       |              |                                                              |                                                              |                            | v      |                                                              |                                     |
+| [973 K Closest Points to Origin](#973)                       |              | heapq                                                        |                                                              |                            | v      | v                                                            |                                     |
 | [560 Subarray Sum equals K](#560)                            |              |                                                              |                                                              |                            | v      |                                                              |                                     |
 | [158 Read N Characters Given Read4 Ⅱ](#158)                  |              |                                                              |                                                              |                            |        |                                                              |                                     |
 | [621 Task Scheduler](#621)                                   |              |                                                              |                                                              |                            |        |                                                              |                                     |
@@ -107,13 +107,14 @@ Each element costs constant space. And the size of the stack is exactly the dept
 
 ## Linked List
 
-|                                 |      |      |                                         | status | cedod |      |
-| ------------------------------- | ---- | ---- | --------------------------------------- | ------ | ----- | ---- |
-| [206 Reverse Linked List](#206) |      |      |                                         | v      | v     |      |
-| [92 Reverse Linked List Ⅱ](#92) |      |      |                                         | v      | v     |      |
-| [141 Cycle Linked List](#141)   |      |      |                                         |        |       |      |
-| [142 Cycle Linked List 2](#142) |      |      |                                         |        |       |      |
-| [143 Reorder Linked List](#143) |      |      | 最後要記得cur.next =None, 不然會有cycle | v      | v     |      |
+|                                           |      |      |                                         | status | cedod |      |
+| ----------------------------------------- | ---- | ---- | --------------------------------------- | ------ | ----- | ---- |
+| [206 Reverse Linked List](#206)           |      |      |                                         | v      | v     |      |
+| [92 Reverse Linked List Ⅱ](#92)           |      |      |                                         | v      | v     |      |
+| [141 Cycle Linked List](#141)             |      |      |                                         |        |       |      |
+| [142 Cycle Linked List 2](#142)           |      |      |                                         |        |       |      |
+| [143 Reorder Linked List](#143)           |      |      | 最後要記得cur.next =None, 不然會有cycle | v      | v     |      |
+| [138 Copy List with Random Pointer](#138) |      |      |                                         |        |       |      |
 
 
 
@@ -280,6 +281,7 @@ tree.root.right.right = Node(7)
 | [297 Serialize and Deserialize Binary Tree](#297)            |      |                      |                                                              |          |                                              |           |
 | GRAPH<br />adjacent matrix & table                           |      |                      |                                                              |          |                                              |           |
 | [207 Course Schedule](#207)                                  |      | DFS                  | BFS Topological sorting<br />[leecode.jp link](https://leetcode.jp/leetcode-207-course-schedule%e8%a7%a3%e9%a2%98%e6%80%9d%e8%b7%af%e5%88%86%e6%9e%90/) | v        | v                                            | ~210, 269 |
+| [133 Clone Graph](#133)                                      |      |                      |                                                              | v        |                                              |           |
 | High Freq.                                                   |      |                      |                                                              |          |                                              |           |
 | [210 Course Schedule Ⅱ](#210)                                |      |                      |                                                              | v        | v                                            |           |
 | [269 Alien Dictionary](#269)                                 |      |                      |                                                              | Too HARD |                                              |           |
@@ -312,7 +314,7 @@ tree.root.right.right = Node(7)
 | [69 Sqrt(x)](#69)                                            |      |      |                                                | v           | v<br />Template1                                 |                                  |
 | [374 Guess Number Higher or Lower](#374)                     |      |      |                                                | v           | v<br />Tempalte1                                 | Not in                           |
 | [33 Search in Rotated Sorted Array](#33)                     |      |      |                                                | v           | Not yet, should be Template1                     |                                  |
-| [278 First Bad Version](#75)                                 |      |      |                                                | v           | v <br />Template2                                |                                  |
+| [278 First Bad Version](#278)                                |      |      |                                                | v           | v <br />Template2                                |                                  |
 | [162 Find Peak Element](#162)                                |      |      |                                                | v           | △<br />Template2, 但r值却是设为了 len(nums)-1 ?! |                                  |
 | [153 Find Minimum in Rotated Sorted Array](#153)             |      |      |                                                |             | <br />Template2                                  |                                  |
 |                                                              |      |      |                                                |             |                                                  |                                  |
@@ -380,6 +382,7 @@ tree.root.right.right = Node(7)
 | [303 Range Suym Query - Immutable](#303)                     |      |      |                       | v                                               | v<br />做個pre_sum 就ｏｋ要注意長度需加１                    | Not in, but for prep of 304                      |
 | [1027 Longest Arithmetic Sequence](#1027)                    |      |      |                       | v                                               | v                                                            |                                                  |
 | [1143 Longest Common Subsequence](#1143)                     |      |      | Sub array的话会更严格 | v                                               |                                                              | https://www.itread01.com/content/1546179722.html |
+| [139 word break](#139)                                       |      |      |                       |                                                 |                                                              |                                                  |
 
 
 
@@ -1604,6 +1607,88 @@ class Solution:
 
 
 
+### <a name="133">133</a>
+
+```python
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = []):
+        self.val = val
+        self.neighbors = neighbors
+"""
+from collections import deque, OrderedDict
+class Solution:
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        if not node:
+            return node
+        Q = deque()
+        Q.append(node)
+        
+        visited = OrderedDict()
+        new_node = Node(node.val)
+        visited[node] = new_node
+        
+        while Q:
+            v_old = Q.popleft()
+            copy_v = visited[v_old]
+            if not v_old: 
+                continue
+            for vn in v_old.neighbors:
+                # node = Node()
+                if vn not in visited:    # visited contains old nodes
+                    Q.append(vn)
+                    new_tmp = Node(vn.val)
+                    visited[vn] = new_tmp
+                    copy_v.neighbors.append(new_tmp)
+                else:
+                    copy_v.neighbors.append(visited[vn]) 
+        # return new_node
+        return visited[next(iter(visited))] # same as return new_node
+                
+                # nb_l.append()
+                # nodenb_l
+                
+        
+```
+
+
+
+### <a name="138">138</a>
+
+```python
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+"""
+from collections import deque
+class Solution:
+    def copyRandomList(self, head: 'Node') -> 'Node':
+        queue = []
+        copy = {}
+        if not head:
+            return
+        queue.append(head)
+        copy[head] = Node(head.val,None,None)
+        while queue:
+            cur = queue.pop(0)
+            n,r = cur.next,cur.random
+            if n:
+                if n not in copy:
+                    copy[n] = Node(n.val,None,None)
+                queue.append(n)
+                copy[cur].next = copy[n]
+            if r:
+                if r not in copy:
+                    copy[r] = Node(r.val,None,None)
+                copy[cur].random = copy[r]
+        return copy[head]
+```
+
 ### <a name="141">141</a>
 
 ```python
@@ -1918,6 +2003,34 @@ class Solution:
                 break
         return s == t or s == t[:-1]
 
+```
+
+
+
+### <a name="162">162</a>
+
+```python
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        ''' TLE
+        res = 1.0
+        for _ in range(abs(n)):
+            if n > 0:
+                res *= x
+            else:
+                res /= x
+        return res
+        '''
+        
+        m = abs(n)
+        p, q = 1, x
+        while m > 0:
+            if (m & 1) == 1:
+                p *= q
+            m //= 2
+            q *= q
+            
+        return 1/p if n < 0 else p
 ```
 
 
@@ -3020,7 +3133,50 @@ class Solution:
         return res
 ```
 
+##### Two pointers
 
+```python
+nums1=sorted(nums1)
+nums2=sorted(nums2)
+
+i=0
+j=0
+sol=[]
+while i<len(nums1) and j<len(nums2):
+	if(nums1[i]==nums2[j]):
+		sol.append(nums1[i])
+		i+=1
+		j+=1
+
+	elif(nums1[i]<nums2[j]):
+		i+=1
+	else:
+		j+=1
+
+return sol
+```
+
+> **Follow Up**
+>
+> **Q1:** What if the given array is already sorted? How would you optimize your algorithm?
+>
+> **A: 采用solution 2**
+>
+> **Q2:** What if *nums1*'s size is small compared to *nums2*'s size? Which algorithm is better?
+>
+> A: 如果nums1相对于nums2非常小，那么把nums1做成哈希表，哈希表占用空间更小
+>
+> **Q3:** What if elements of *nums2* are stored on disk, and the memory is limited such that you cannot load all elements into the memory at once?
+>
+> **A：**
+>
+> 如果只有nums2不能放在内存中，则将nums1做成哈希表，nums2分批加载到内存中处理。(If only nums2 cannot fit in memory, put all elements of nums1 into a HashMap, read chunks of array that fit into the memory, and record the intersections.)
+>
+> 如果nums1和nums2都很大，都不适合储存在内存，那么就用外部排序分别来sort它们。将每2G(举例)读入内存，使用2指针技术，然后从内存中读取更多的2G。重复此操作，直到没有更多数据从磁盘读取。(If both nums1 and nums2 are so huge that neither fit into the memory, sort them using external sort, read (let’s say) 2G of each into memory and then using the 2 pointer technique, then read 2G more from the array that has been exhausted. Repeat this until no more data to read from disk.)
+>
+> **关于外部排序的参考资料：**[External Sorting](https://link.zhihu.com/?target=http%3A//faculty.simpson.edu/lydia.sinapova/www/cmsc250/LN250_Weiss/L17-ExternalSortEX2.htm)
+>
+> 还有一种思路是将这两个字符串存放在分布式系统中（不管是否自设计），然后使用MapReduce技术来解决问题。
 
 ### <a name="378">378</a>
 
@@ -3616,6 +3772,129 @@ class Solution:
 
 
 
+### <a name="973">973</a>
+
+```python
+import math
+import heapq
+class Solution:
+    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
+        ''' N*log(N)
+        # Q-sort tech
+        # [dis1, dis2, dis3]
+        if not points or not K:
+            return 0
+        l = []
+        for xy in points:
+            heapq.heappush(l, (self.distance(xy), xy[0], xy[1]))  # n*log(n)
+            # if len(l) > K:
+            #     heapq._heappop_max(l)
+
+        # map(points, self.distance)
+        # for point in points:
+        #     self.distance(point)
+        
+        res = []
+        for i in range(K):
+            dis, x, y = heapq.heappop(l)
+            res.append([x,y])
+            
+        return res
+        '''
+        
+        '''Following is N*log(K)'''
+        l = []
+        for xy in points:
+            dist = self.distance(xy)
+            dist = -1*dist
+            if len(l) <= K-1:
+                heapq.heappush(l, (dist, xy))
+            else:
+                # print('---', dist)
+                if dist > l[0][0]:
+                    heapq.heappop(l)
+                    heapq.heappush(l, (dist, xy))
+                    
+        res = []
+        # for i in range(len(l)):
+        for i in range(K):
+            res.append(heapq.heappop(l)[1])
+        return res
+            
+    def distance(self, xy):
+        return math.sqrt(xy[0]**2 + xy[1]**2)#, xy[0], xy[1]
+```
+
+As we can see here, we used heap, but the problem is we still sorted all the element, the time complexity is O(NlogN) .Still we only need the top k smallest element. We don't need to take of other elements' order. So if we keep a size of k's heap, use the heap[0] element as threshhold, interate through the array, only those meet the requirment element get into the heap.
+
+```python
+    def kClosest(self, points, K):
+        points.sort(key = lambda P: P[0]**2 + P[1]**2)
+        return points[:K]
+```
+
+
+
+##### Quick Select
+
+```python
+class Solution:
+    def kClosest(self, points: 'List[List[int]]', K: 'int') -> 'List[List[int]]':
+        
+        # Time complexity : O(N)
+        # Space complexity : O(1)
+        
+        dist = lambda x : points[x][0]**2 + points[x][1]**2
+        
+        def quickselect(l, r, K):
+            
+            while l < r :
+                
+                # To avoid the worst case
+                i = random.randint(l, r)
+                points[i], points[l] = points[l], points[i]
+                
+                mid = partition(l, r)
+                
+                if K > mid :
+                    l = mid+1
+                elif K < mid :
+                    r = mid-1
+                else :
+                    break
+            
+        def partition(l, r):
+            
+            i = l # start index
+            pivot = dist(i)
+            
+            l += 1
+            
+            while True :
+                
+                while l<r and dist(l)<pivot:
+                    l+=1
+                    
+                while l<=r and dist(r)>=pivot:
+                    r-=1
+                    
+                if l>=r:
+                    break
+                
+                points[l], points[r] = points[r], points[l]
+                
+            points[r], points[i] = points[i], points[r]
+            return r
+            
+        quickselect(0, len(points)-1, K)
+        return points[:K]
+    
+```
+
+
+
+
+
 ### <a name="1027">1027</a>
 
 ```python
@@ -3669,7 +3948,7 @@ ref : [https://leetcode.flowerplayer.com/2019/04/12/leetcode-907-sum-of-subarray
 
 <img src="/Users/joe/Library/Application Support/typora-user-images/image-20200203163052247.png" alt="image-20200203163052247" style="zoom:50%;" />
 
-
+REF: [常見最長子串及子序列](https://www.itread01.com/content/1546179722.html)
 
 ##### DP
 
