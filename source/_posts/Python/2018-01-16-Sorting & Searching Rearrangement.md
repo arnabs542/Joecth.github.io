@@ -252,6 +252,16 @@ class Solution:
     
 ```
 
+The worst-case time taken by a randomized quick-select is not O(n). It is O(n^2).
+{The worst case is when you want to select the minimum element and your pivot at every stage happens to be the last element in the list at that stage.Comment if you didn't get this.}
+
+However the expected time taken by a randomized quick-select is O(n).
+I hope you understand the difference.
+
+4.7k views · [View Upvoters](https://www.quora.com/How-is-time-taken-by-a-randomized-quick-select-algorithm-in-O-n#)
+
+
+
 
 
 ### M-Sort

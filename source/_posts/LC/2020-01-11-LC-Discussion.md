@@ -6,10 +6,13 @@ date: 2020-01-11
 ---
 
 
-
-### 題目太長先放棄：
+### 題目太長先跳過：
 
 489robot room cleaner, 785, 721, 65validnumber, 133 clone graph, 636 executive time of functions, 269 alien dictionary
+
+太計算特定型而非算法技巧型的的 - 29Divide Two Integers
+
+知道大方向就好先不熟練的 - 935Knight Dialer
 
 
 
@@ -26,7 +29,7 @@ date: 2020-01-11
 |                                                              |              |                                                              |                                                              |                            |        |                                                              |                                     |
 | High Freq.                                                   |              |                                                              |                                                              |                            |        |                                                              |                                     |
 | [953 LeetCode 953 Verifying an Alien Dictionary](#953)       |              |                                                              | 邊界check要另做                                              |                            | v      | v                                                            |                                     |
-| [301Remove Invalid Parentheses](#301)                        |              |                                                              |                                                              |                            | HARD   | HARD..                                                       |                                     |
+| **[301Remove Invalid Parentheses](#301)**                    |              |                                                              |                                                              |                            | HARD   | HARD..                                                       | TRY BFS sol on *geeksforgeeks*      |
 | [238 product of array except self](#238)                     |              |                                                              |                                                              |                            | v      | v                                                            |                                     |
 | [67 Add Binary](#67)                                         |              |                                                              |                                                              |                            | △      |                                                              |                                     |
 | [273 Integer to English Words](#273)                         |              |                                                              |                                                              |                            |        |                                                              |                                     |
@@ -44,7 +47,7 @@ date: 2020-01-11
 | [240 Search a 2D Matrix II -- Sorted nxn Matrix](#240)       |              | <u>Binary</u> OK!<br />O(m x lg(n) x lg(DIFF))               | D&C <br />O(n)                                               |                            | v      |                                                              | ~74                                 |
 | [74 Search a 2D Matrix](#74)                                 |              |                                                              |                                                              |                            | v      | v                                                            | ~240, but A\[i+1][0] > A\[i-1][n-1] |
 | [23 Merge K Sorted Lists](#23)                               |              |                                                              |                                                              |                            | v      | v                                                            | ~378                                |
-| [692 Top K frequent words](#692)                             |              | heapify                                                      |                                                              |                            | v      |                                                              |                                     |
+| [692 Top K frequent words](#692)                             |              | heapify                                                      | Sorting                                                      |                            | v      | v                                                            |                                     |
 | [252 Meeting Room](#252)                                     |              |                                                              |                                                              |                            | v      | v                                                            | ~253, 56                            |
 | [253 Meeting Room Ⅱ](#253)                                   |              |                                                              |                                                              |                            | v      |                                                              | ~252, 56                            |
 | [56 Merge Intervals](#56)                                    |              |                                                              |                                                              |                            |        |                                                              | ~252, 253, 435                      |
@@ -107,14 +110,15 @@ Each element costs constant space. And the size of the stack is exactly the dept
 
 ## Linked List
 
-|                                           |      |      |                                         | status | cedod |      |
-| ----------------------------------------- | ---- | ---- | --------------------------------------- | ------ | ----- | ---- |
-| [206 Reverse Linked List](#206)           |      |      |                                         | v      | v     |      |
-| [92 Reverse Linked List Ⅱ](#92)           |      |      |                                         | v      | v     |      |
-| [141 Cycle Linked List](#141)             |      |      |                                         |        |       |      |
-| [142 Cycle Linked List 2](#142)           |      |      |                                         |        |       |      |
-| [143 Reorder Linked List](#143)           |      |      | 最後要記得cur.next =None, 不然會有cycle | v      | v     |      |
-| [138 Copy List with Random Pointer](#138) |      |      |                                         |        |       |      |
+|                                           |      |                                   |                                                              | status | cedod |      |
+| ----------------------------------------- | ---- | --------------------------------- | ------------------------------------------------------------ | ------ | ----- | ---- |
+| [206 Reverse Linked List](#206)           |      |                                   |                                                              | v      | v     |      |
+| [92 Reverse Linked List Ⅱ](#92)           |      |                                   |                                                              | v      | v     |      |
+| [141 Cycle Linked List](#141)             |      |                                   |                                                              |        |       |      |
+| [142 Cycle Linked List 2](#142)           |      |                                   |                                                              |        |       |      |
+| [143 Reorder Linked List](#143)           |      |                                   | 最後要記得cur.next =None, 不然會有cycle                      | v      | v     |      |
+| [138 Copy List with Random Pointer](#138) |      |                                   |                                                              |        |       |      |
+| [234 Palindrome Linked List](#234)        |      | turned into list + 2 pointer trvs | Add dummy node before head and check fast==None or fast.next == None to know odd/even nodes. <br />Then, reverse 2nd part and compare 1st part and 2nd part. | v      |       |      |
 
 
 
@@ -153,7 +157,7 @@ Greedy
 | [90 Subsets Ⅱ](#90)                             |      |      |      | v      | v                                                            |      |
 | [40 Combination Sum Ⅱ](#40)                     |      |      |      | v      | v                                                            | ~113 |
 | [22 Generate Parentheses](#22)                  |      |      |      | v      | △ 未想出return條件；<br />　 然後item的更新仍該在result更新前 |      |
-| [51 N-Queens](#51)                              |      |      |      |        | X                                                            |      |
+| [51 N-Queens](#51)                              |      |      |      | v      |                                                              |      |
 | Merge                                           |      |      |      |        |                                                              |      |
 | [315 Count of Smaller Numbers After Self](#315) |      |      |      |        | X                                                            |      |
 | high freq.                                      |      |      |      |        |                                                              |      |
@@ -323,7 +327,7 @@ tree.root.right.right = Node(7)
 | [315 Count of Smaller Numbers After Self](#315)              |      |      |                                                | △           |                                                  | Not In                           |
 | High Freq.                                                   |      |      |                                                |             |                                                  |                                  |
 | [270 Closest Binary Search Tree Value](#270)                 |      |      |                                                | v           | v                                                |                                  |
-| [98 Validate Binary Search Tree](98)                         |      |      |                                                | v           | v                                                |                                  |
+| [98 Validate Binary Search Tree](#98)                        |      |      |                                                | v           | v                                                |                                  |
 | [285 Inorder Successor in BST](#285)                         |      |      |                                                | v           |                                                  |                                  |
 | [173 Binary Search Tree Iterator](#173)                      |      |      |                                                | v           |                                                  |                                  |
 | [700 Search in a Binary Search Tree](#700)                   |      |      |                                                | v           | v                                                |                                  |
@@ -506,6 +510,56 @@ class Solution:
 v1 ~v5 
 
 local 
+
+
+
+### <a name="3">3</a>
+
+```python
+''' 
+  a b c a b c b b 
+          j   i
+
+[a b c b] ==> [c b]
+j = i = -1
+d = {a:3, b:4, c:5}
+j = d[a]+1  ==>0, 
+i = 3
+(0, 3]   3 - 0 ==> leng=3
+ 
+i 6
+j 4 ...however, we didn't del a from lkup
+'''
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if not s:
+            return 0
+        j = -1
+        lkup = {}
+        res_max = 0
+        for i in range(0, len(s)):
+            if s[i] not in lkup:
+                lkup[s[i]] = i
+            else:
+                j = max(lkup[s[i]], j)  # should be b4 next line, 
+                                # if abba, j should stay at idx2, not go back idx0
+                
+                # del lkup[s[i]]
+                lkup[s[i]] = i
+                # TODO: del a
+                # tmp = []
+                # for k in lkup.keys():
+                #     if lkup[k] < i:
+                #         # del lkup[k]
+                #         tmp.append(k)
+                # for k in tmp:
+                #     del lkup[k]
+            res_max = max(res_max, i - j)  # 2 - (-1) => 3
+ 
+        return res_max
+```
+
+
 
 ### <a name="20">20</a>
 
@@ -3288,6 +3342,8 @@ class Solution(object):
 
 
 ### <a name="438">438</a>
+
+
 
 ##### TLE...
 

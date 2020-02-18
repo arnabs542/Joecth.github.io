@@ -8,6 +8,83 @@ date: 2020-01-11
 
 
 
+## Thoughts
+
+* *Find permutatino of s within b ==> find all anagram of s within b*
+
+
+
+## Easy
+
+|                      |      |      |      | status | Coded |      |
+| -------------------- | ---- | ---- | ---- | ------ | ----- | ---- |
+| [67 Add Binary](#67) |      |      |      | v      | v     |      |
+|                      |      |      |      |        |       |      |
+|                      |      |      |      |        |       |      |
+
+```python
+'''
+10101 => 10101
+1011  => 1101
+
+1100110 => 010011
+10111   => 11101
+
+'''
+
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        if not a:
+            return b
+        if not b:
+            return a
+        
+        if len(b) > len(a):
+            a, b = b, a
+        
+        a, b = a[::-1], b[::-1] # 10101, 1101
+        carry = 0
+        i, j = 0, 0
+        res = ''
+        while i < len(b):
+            m = ord(a[i]) - ord('0')
+            n = ord(b[i]) - ord('0')
+            
+            # carry, digit = (m+n)//2, (m+n)%2+carry
+            carry, digit = (m+n+carry)//2, (m+n+carry)%2
+            res += str(digit)
+            i += 1
+        
+        # i == 4
+        while i <= len(a) - 1:  # 4 <= 5-1
+            m = ord(a[i]) - ord('0')
+            carry, digit = (m+carry)//2, (m+carry)%2
+            res += str(digit)
+            i += 1
+            
+        if carry == 1:
+            res += str(carry)
+            
+        return res[::-1]
+```
+
+
+
+fib memory
+
+```python
+
+def fib(n, mem=[]):
+	if n == 0 or n == 1:
+    return 1
+  else:
+    if mem[n] == 0:
+      mem[n] = fib(n-1) + fib(n-1)
+  return mem[n]
+```
+
+
+
 
 
 |                                                 |      |      |      | status | coded |      |
@@ -20,21 +97,146 @@ date: 2020-01-11
 
 ## Sorting and Searching
 
-|                               |      |      |      | status | coded |      |
-| ----------------------------- | ---- | ---- | ---- | ------ | ----- | ---- |
-| [29 Divide Two Integers](#29) |      |      |      | v      | v     |      |
-| [50 Pow](#50)                 |      |      |      |        |       |      |
-| [75 Sort Colors](#75)         |      |      |      | v      | v     |      |
+|                                           |      |      |          | status | coded |      |
+| ----------------------------------------- | ---- | ---- | -------- | ------ | ----- | ---- |
+| [29 Divide Two Integers](#29)             |      |      |          | v      | v     |      |
+| [50 Pow](#50)                             |      |      |          |        |       |      |
+| [75 Sort Colors](#75)                     |      |      |          | v      | v     |      |
+| [692 Top K frequent words](#692)          |      |      |          | v      | v     |      |
+| [973 K Close points to origin](#973)      |      |      |          | v      | v     |      |
+| [215 K largest element in an Array](#215) |      | heap | Q-select | v      | v     |      |
+
+
+
+### <a name="215">215</a>
+
+```python
+'''
+def partition(l, r, arr)
+    3 5 2 1 5 6 4   k=2
+
+    pvt 3 l 2 r 4
+
+    fn to set 3 at idx2
+    while l<r:
+        while arr[i] 5 < 3: wrong
+            l ++
+        l 2
+        while arr[j]  > 3: till 1 idx -4 == idx 3
+            r -- 
+        r 3
+        swap(arr[l], arr[r])
+      3 1 2 5 5 6 4 
+          l
+          r
+      2 1 3 5 5 6 4   
+        return l
+    
+2 1 3 5 5 6 4   
+1 2 3 4 5 6  2nd large means idx 4 == 6 - 2 
+K largest means K_idx = len(arr) - K small
+while l < r
+    idx = partition()    
+    K_idx = len(arr) - K
+    if K_idx < idx:
+        r = idx - 1
+    elif k_idx > idx:
+        l = idx +1
+    else:
+        break
+return arr[K_idx]
+'''
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        if not nums:
+            return 0
+        
+        return self.helper(nums, 0, len(nums)-1)
+    
+    def helper(self, nums, i, j):
+        if i >= j:
+            return 0
+        
+        i, j = 0, len(nums)-1
+        # 1 2 3 4 5 6
+        
+        # k = 2 ==> idx 4.  6-2
+        k_idx = len(nums) - k
+        while i < j:
+            pvt_idx = self.partition(i, j, nums)
+            if k_idx < pvt_idx:
+                j = pvt_idx - 1
+            elif k_idx > pvt_idx:
+                i = pvt_idx + 1
+            else:
+                break
+        return nums[k_idx]
+            
+    # 3 2 5 4 1 6
+    def partition(self, l, r, arr):
+        pvt = arr[l]
+        ll = l+1
+        while ll < r:    
+            while arr[ll] < pvt and ll < r:
+                ll += 1
+            while arr[r] > pvt and ll < r:
+                r -= 1
+            arr[ll], arr[r] = arr[r], arr[ll]
+            
+        return ll
+
+
+
+
+## TODO: k largest ==> len(nums) - k + 1 small
+# 1 2 3 4 5 6
+# k  = 2 ==> 5
+# ks = 5 ==> 6-2+1
+import heapq
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        # l = nums
+        if not nums:
+            return 0
+
+        heapq.heapify(nums) #O(N)
+        ks = len(nums) - k + 1
+        for i in range(ks-1):
+            heapq.heappop(nums) # ks * O(lgN)
+        return heapq.heappop(nums)
+        
+    
+```
 
 
 
 ## DP
 
-|                                     |      |       |      | status | coded |      |
-| ----------------------------------- | ---- | ----- | ---- | ------ | ----- | ---- |
-| [32 Longest Valid Parentheses](#32) |      | Stack |      | v      | v     |      |
-|                                     |      |       |      |        |       |      |
-|                                     |      |       |      |        |       |      |
+|                                     |      |                                                         |      | status | coded |           |
+| ----------------------------------- | ---- | ------------------------------------------------------- | ---- | ------ | ----- | --------- |
+| [32 Longest Valid Parentheses](#32) |      | Stack                                                   |      | v      | v     |           |
+| [518 coin changes 2](#518)          |      |                                                         |      | v      |       |           |
+| [91 Decode Ways](#91)               |      | backtracking並紀錄樹的每條路徑，就像wrod break時做的dfs |      |        |       | dp[0] = 1 |
+
+
+
+### <a name="91">91</a>
+
+https://www.tianmaying.com/tutorial/LC91
+
+```python
+class Solution:
+    def numDecodings(self, s):
+        if not s: return 0
+        len_s = len(s)
+        dp = [1] + [0] * len_s
+        for i in range(1, len_s + 1):
+            if s[i - 1] != '0': 
+                dp[i] += dp[i - 1]
+            if i >= 2 and 10 <= int(s[i - 2: i]) <= 26: 
+                dp[i] += dp[i - 2]
+        return dp[len_s]
+```
 
 
 
@@ -187,6 +389,8 @@ class Solution:
 
 
 ## Recursion
+
+
 
 ### <a name="17">17</a>
 
@@ -381,3 +585,89 @@ class Solution:
 ![image-20200208232444790](https://tva1.sinaimg.cn/large/0082zybpgy1gbpeq1jl8ij30rw116k6y.jpg)
 
 ![image-20200208232746397](https://tva1.sinaimg.cn/large/0082zybpgy1gbpet5afu8j30u00zxnax.jpg)
+
+
+
+### <a name="518">518</a>
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200209233108458.png" alt="image-20200209233108458" style="zoom:50%;" />
+
+
+
+
+
+### <a name="973">973</a>
+
+```python
+import math
+import heapq
+class Solution:
+    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
+        ''' N*log(N)
+        # Q-sort tech
+        # [dis1, dis2, dis3]
+        if not points or not K:
+            return 0
+        l = []
+        for xy in points:
+            heapq.heappush(l, (self.distance(xy), xy[0], xy[1]))  # n*log(n)
+            # if len(l) > K:
+            #     heapq._heappop_max(l)
+
+        # map(points, self.distance)
+        # for point in points:
+        #     self.distance(point)
+        
+        res = []
+        for i in range(K):
+            dis, x, y = heapq.heappop(l)
+            res.append([x,y])
+            
+        return res
+        '''
+        l = []
+        for xy in points:
+            dist = self.distance(xy)
+            dist = -1*dist
+            if len(l) <= K-1:
+                heapq.heappush(l, (dist, xy))
+            else:
+                # print('---', dist)
+                if dist > l[0][0]:
+                    heapq.heappop(l)
+                    heapq.heappush(l, (dist, xy))
+                    
+        res = []
+        # for i in range(len(l)):
+        for i in range(K):
+            res.append(heapq.heappop(l)[1])
+        return res
+            
+    def distance(self, xy):
+        return math.sqrt(xy[0]**2 + xy[1]**2)#, xy[0], xy[1]
+```
+
+
+
+##### Build-in
+
+```python
+
+# Python program for implementation of  
+# above approach 
+  
+# Function to return required answer 
+def pClosest(points, K): 
+  
+    points.sort(key = lambda K: K[0]**2 + K[1]**2) 
+  
+    return points[:K] 
+  
+# Driver program 
+points = [[3, 3], [5, -1], [-2, 4]] 
+  
+K = 2
+  
+print(pClosest(points, K)) 
+```
+
