@@ -1,0 +1,454 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="LC/Pandas/2015-02-21-Pandas review"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>LC/Pandas/2015-02-21-Pandas review | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#layout-post"><span class="toc-number">1.</span> <span class="toc-text">layout: post</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setting-indices"><span class="toc-number"></span> <span class="toc-text">setting indices</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Case-ShoeFly-com"><span class="toc-number"></span> <span class="toc-text">Case : ShoeFly.com</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Review"><span class="toc-number"></span> <span class="toc-text">Review</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Case-2"><span class="toc-number"></span> <span class="toc-text">Case 2:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rename-column"><span class="toc-number"></span> <span class="toc-text">rename column</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Case-ShoeFly-com-1"><span class="toc-number"></span> <span class="toc-text">Case ShoeFly.com</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Add-Columns"><span class="toc-number">1.</span> <span class="toc-text">Add Columns</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">226</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">24</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">28</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">LC/Pandas/2015-02-21-Pandas review</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-21</time></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h4 id="layout-post"><a href="#layout-post" class="headerlink" title="layout: post"></a>layout: post</h4><p>categories: Pandas<br>tag: []<br>date: 2015-02-21</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">df1 = pd.DataFrame(&#123;</span><br><span class="line">  <span class="string">'Product ID'</span>: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">  <span class="comment"># add Product Name and Color here</span></span><br><span class="line">  <span class="string">'Product Name'</span>:[<span class="string">'t-shirt'</span>, <span class="string">'t-shirt'</span>, <span class="string">'skirt'</span>, <span class="string">'skirt'</span>], </span><br><span class="line">  <span class="string">'Color'</span>:[<span class="string">'blue'</span>, <span class="string">'green'</span>, <span class="string">'red'</span>, <span class="string">'black'</span>]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">print(df1)</span><br></pre></td></tr></table></figure>
+
+<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc4f7b94uej30py09qdg6.jpg" alt="image-20200221230441471" style="zoom:50%;" />
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">df2 = pd.DataFrame([</span><br><span class="line">  [<span class="number">1</span>, <span class="string">'San Diego'</span>, <span class="number">100</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="string">'Los Angeles'</span>, <span class="number">120</span>],</span><br><span class="line">  <span class="comment"># Fill in rows 3 and 4</span></span><br><span class="line">  [<span class="number">3</span>, <span class="string">'San Francisco'</span>, <span class="number">90</span>],</span><br><span class="line">  [<span class="number">4</span>, <span class="string">'Sacramento'</span>, <span class="number">115</span>],</span><br><span class="line">],</span><br><span class="line">  columns=[</span><br><span class="line">    <span class="comment">#add column names here</span></span><br><span class="line">    <span class="string">'Store ID'</span>, <span class="string">'Location'</span>, <span class="string">'Number of Employees'</span></span><br><span class="line">  ])</span><br><span class="line"></span><br><span class="line">print(df2)</span><br></pre></td></tr></table></figure>
+
+<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc4f7o819gj30pw0a8q3d.jpg" alt="image-20200221230502087" style="zoom: 50%;" />
+
+
+
+
+
+<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc4fgr9zz2j30xj0u0n2t.jpg" alt="image-20200221231348325" style="zoom:67%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc4flj5cvgj319q0ru44j.jpg" alt="image-20200221231823180" style="zoom:67%;" />
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">march = df.iloc[<span class="number">2</span>]	<span class="comment"># single row</span></span><br><span class="line">april_may_june = df.iloc[<span class="number">3</span>:<span class="number">6</span>]	<span class="comment"># multi row</span></span><br><span class="line">january = df[df.month == <span class="string">'January'</span>] <span class="comment"># condition, single row</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">month</th>
+<th align="left">clinic_east</th>
+<th align="left">clinic_north</th>
+<th align="left">clinic_south</th>
+<th>clinic_west</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">January</td>
+<td align="left">100</td>
+<td align="left">100</td>
+<td align="left">23</td>
+<td>100</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame([</span><br><span class="line">  [<span class="string">'January'</span>, <span class="number">100</span>, <span class="number">100</span>, <span class="number">23</span>, <span class="number">100</span>],</span><br><span class="line">  [<span class="string">'February'</span>, <span class="number">51</span>, <span class="number">45</span>, <span class="number">145</span>, <span class="number">45</span>],</span><br><span class="line">  [<span class="string">'March'</span>, <span class="number">81</span>, <span class="number">96</span>, <span class="number">65</span>, <span class="number">96</span>],</span><br><span class="line">  [<span class="string">'April'</span>, <span class="number">80</span>, <span class="number">80</span>, <span class="number">54</span>, <span class="number">180</span>],</span><br><span class="line">  [<span class="string">'May'</span>, <span class="number">51</span>, <span class="number">54</span>, <span class="number">54</span>, <span class="number">154</span>],</span><br><span class="line">  [<span class="string">'June'</span>, <span class="number">112</span>, <span class="number">109</span>, <span class="number">79</span>, <span class="number">129</span>]],</span><br><span class="line">  columns=[<span class="string">'month'</span>, <span class="string">'clinic_east'</span>,</span><br><span class="line">           <span class="string">'clinic_north'</span>, <span class="string">'clinic_south'</span>,</span><br><span class="line">           <span class="string">'clinic_west'</span>])</span><br><span class="line"></span><br><span class="line">march_april = df[(df.month == <span class="string">'March'</span>) | (df.month == <span class="string">'April'</span>)]</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">month</th>
+<th align="left">clinic_east</th>
+<th align="left">clinic_north</th>
+<th align="left">clinic_south</th>
+<th align="left">clinic_west</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">2</td>
+<td align="left">March</td>
+<td align="left">81</td>
+<td align="left">96</td>
+<td align="left">65</td>
+<td align="left">96</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">April</td>
+<td align="left">80</td>
+<td align="left">80</td>
+<td align="left">54</td>
+<td align="left">180</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">january_february_march = df[df.month.isin([<span class="string">'January'</span>, <span class="string">'February'</span>, <span class="string">'March'</span>])]</span><br><span class="line">print(january_february_march)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">month</th>
+<th align="left">clinic_east</th>
+<th align="left">clinic_north</th>
+<th align="left">clinic_south</th>
+<th>clinic_west</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">January</td>
+<td align="left">100</td>
+<td align="left">100</td>
+<td align="left">23</td>
+<td>100</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">February</td>
+<td align="left">51</td>
+<td align="left">45</td>
+<td align="left">145</td>
+<td>45</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">March</td>
+<td align="left">81</td>
+<td align="left">96</td>
+<td align="left">65</td>
+<td>96</td>
+</tr>
+</tbody></table>
+<h3 id="setting-indices"><a href="#setting-indices" class="headerlink" title="setting indices"></a>setting indices</h3><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">month</th>
+<th align="left">clinic_east</th>
+<th align="left">clinic_north</th>
+<th align="left">clinic_south</th>
+<th>clinic_west</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">February</td>
+<td align="left">51</td>
+<td align="left">45</td>
+<td align="left">145</td>
+<td>45</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">April</td>
+<td align="left">80</td>
+<td align="left">80</td>
+<td align="left">54</td>
+<td>180</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">June</td>
+<td align="left">112</td>
+<td align="left">109</td>
+<td align="left">79</td>
+<td>129</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">df2 = df.loc[[<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(df2)</span></span><br><span class="line"></span><br><span class="line">df3 = df2.reset_index()</span><br><span class="line"></span><br><span class="line">print(df3)</span><br><span class="line"></span><br><span class="line">df2.reset_index(inplace = <span class="literal">True</span>, drop = <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">print(df2)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">index</th>
+<th align="left">month</th>
+<th align="left">clinic_east</th>
+<th align="left">clinic_north</th>
+<th align="left">clinic_south</th>
+<th align="left">clinic_west</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">February</td>
+<td align="left">51</td>
+<td align="left">45</td>
+<td align="left">145</td>
+<td align="left">45</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">3</td>
+<td align="left">April</td>
+<td align="left">80</td>
+<td align="left">80</td>
+<td align="left">54</td>
+<td align="left">180</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">5</td>
+<td align="left">June</td>
+<td align="left">112</td>
+<td align="left">109</td>
+<td align="left">79</td>
+<td align="left">129</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">month</th>
+<th align="left">clinic_east</th>
+<th align="left">clinic_north</th>
+<th align="left">clinic_south</th>
+<th align="left">clinic_west</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">February</td>
+<td align="left">51</td>
+<td align="left">45</td>
+<td align="left">145</td>
+<td align="left">45</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">April</td>
+<td align="left">80</td>
+<td align="left">80</td>
+<td align="left">54</td>
+<td align="left">180</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">June</td>
+<td align="left">112</td>
+<td align="left">109</td>
+<td align="left">79</td>
+<td align="left">129</td>
+</tr>
+</tbody></table>
+<h2 id="Case-ShoeFly-com"><a href="#Case-ShoeFly-com" class="headerlink" title="Case : ShoeFly.com"></a>Case : ShoeFly.com</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">orders = pd.read_csv(<span class="string">'shoefly.csv'</span>)</span><br><span class="line">print(orders.iloc([:<span class="number">5</span>]))  <span class="comment"># check first 5 lines</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">id</th>
+<th align="left">first_name</th>
+<th align="left">last_name</th>
+<th align="left">email</th>
+<th align="left">shoe_type</th>
+<th align="left">shoe_material</th>
+<th align="left">shoe_color</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">54791</td>
+<td align="left">Rebecca</td>
+<td align="left">Lindsay</td>
+<td align="left"><a href="mailto:RebeccaLindsay57@hotmail.com">RebeccaLindsay57@hotmail.com</a></td>
+<td align="left">clogs</td>
+<td align="left">faux-leather</td>
+<td>black</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">53450</td>
+<td align="left">Emily</td>
+<td align="left">Joyce</td>
+<td align="left"><a href="mailto:EmilyJoyce25@gmail.com">EmilyJoyce25@gmail.com</a></td>
+<td align="left">ballet flats</td>
+<td align="left">faux-leather</td>
+<td>navy</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">91987</td>
+<td align="left">Joyce</td>
+<td align="left">Waller</td>
+<td align="left"><a href="mailto:Joyce.Waller@gmail.com">Joyce.Waller@gmail.com</a></td>
+<td align="left">sandals</td>
+<td align="left">fabric</td>
+<td>black</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">14437</td>
+<td align="left">Justin</td>
+<td align="left">Erickson</td>
+<td align="left"><a href="mailto:Justin.Erickson@outlook.com">Justin.Erickson@outlook.com</a></td>
+<td align="left">clogs</td>
+<td align="left">faux-leather</td>
+<td>red</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">79357</td>
+<td align="left">Andrew</td>
+<td align="left">Banks</td>
+<td align="left"><a href="mailto:AB4318@gmail.com">AB4318@gmail.com</a></td>
+<td align="left">boots</td>
+<td align="left">leather</td>
+<td>brown</td>
+</tr>
+</tbody></table>
+<h3 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h3><p>You’ve completed the lesson! You’ve just learned the basics of working with a single table in Pandas, including:</p>
+<ul>
+<li>Create a table from scratch</li>
+<li>Loading data from another file</li>
+<li>Selecting certain rows or columns of a table</li>
+</ul>
+<p>Let’s practice what you’ve learned.</p>
+<p>Instructions</p>
+<p><strong>1.</strong></p>
+<p>In this example, you’ll be the data analyst for ShoeFly.com, a fictional online shoe store. You’ve seen this data; now it’s your turn to work with it!</p>
+<p>Load the data from <code>shoefly.csv</code> into the variable <code>orders</code>.</p>
+<p>Hint</p>
+<p>You’ll need to use <code>pd.read_csv</code>.</p>
+<p><strong>2.</strong></p>
+<p>Inspect the first 5 lines of the data.</p>
+<p>Stuck? Get a hint</p>
+<p><strong>3.</strong></p>
+<p>Your marketing department wants to send out an email blast to everyone who ordered shoes!</p>
+<p>Select all of the email addresses from the column <code>email</code> and save them to a variable called <code>emails</code>.</p>
+<p>Stuck? Get a hint</p>
+<p><strong>4.</strong></p>
+<p>Frances Palmer claims that her order was wrong. What did Frances Palmer order?</p>
+<p>Use logic to select that row of <code>orders</code> and save it to the variable <code>frances_palmer</code>.</p>
+<p>Stuck? Get a hint</p>
+<p><strong>5.</strong></p>
+<p>We need some customer reviews for our comfortable shoes. Select all orders for <code>shoe_type</code>: <code>clogs</code>, <code>boots</code>, and <code>ballet flats</code> and save them to the variable <code>comfy_shoes</code>.</p>
+<p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc4gjxbp5vj32380sin7i.jpg" alt="image-20200221235121135"></p>
+<h2 id="Case-2"><a href="#Case-2" class="headerlink" title="Case 2:"></a>Case 2:</h2><p>Use the lambda function <code>get_last_name</code> to create a new column <code>last_name</code> with only the employees’ last name.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add columns here</span></span><br><span class="line">get_last_name = <span class="keyword">lambda</span> s: s.split()[<span class="number">-1</span>]</span><br><span class="line">df[<span class="string">'last_name'</span>] = df.name.apply(get_last_name)</span><br><span class="line">print(df)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">id</th>
+<th align="left">name</th>
+<th align="left">hourly_wage</th>
+<th align="left">hours_worked</th>
+<th>last_name</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">10310</td>
+<td align="left">Lauren Durham</td>
+<td align="left">19</td>
+<td align="left">43</td>
+<td>Durham</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">18656</td>
+<td align="left">Grace Sellers</td>
+<td align="left">17</td>
+<td align="left">40</td>
+<td>Sellers</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">61254</td>
+<td align="left">Shirley Rasmussen</td>
+<td align="left">16</td>
+<td align="left">30</td>
+<td>Rasmussen</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">16886</td>
+<td align="left">Brian Rojas</td>
+<td align="left">18</td>
+<td align="left">47</td>
+<td>Rojas</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">89010</td>
+<td align="left">Samantha Mosley</td>
+<td align="left">11</td>
+<td align="left">38</td>
+<td>Mosley</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">87246</td>
+<td align="left">Louis Guzman</td>
+<td align="left">14</td>
+<td align="left">39</td>
+<td>Guzman</td>
+</tr>
+</tbody></table>
+<p>花俏。。，但就熟悉下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">total_earned = <span class="keyword">lambda</span> row: (row.hourly_wage * <span class="number">40</span>) + ((row.hourly_wage * <span class="number">1.5</span>) * (row.hours_worked - <span class="number">40</span>)) \</span><br><span class="line">	<span class="keyword">if</span> row.hours_worked &gt; <span class="number">40</span> \</span><br><span class="line">  <span class="keyword">else</span> row.hourly_wage * row.hours_worked</span><br><span class="line">  </span><br><span class="line">df[<span class="string">'total_earned'</span>] = df.apply(total_earned, axis = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">print(df)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">id</th>
+<th align="left">name</th>
+<th align="left">hourly_wage</th>
+<th align="left">hours_worked</th>
+<th align="left">total_earned</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">10310</td>
+<td align="left">Lauren Durham</td>
+<td align="left">19</td>
+<td align="left">43</td>
+<td align="left">845.5</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">18656</td>
+<td align="left">Grace Sellers</td>
+<td align="left">17</td>
+<td align="left">40</td>
+<td align="left">680.0</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">61254</td>
+<td align="left">Shirley Rasmussen</td>
+<td align="left">16</td>
+<td align="left">30</td>
+<td align="left">480.0</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">16886</td>
+<td align="left">Brian Rojas</td>
+<td align="left">18</td>
+<td align="left">47</td>
+<td align="left">909.0</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">89010</td>
+<td align="left">Samantha Mosley</td>
+<td align="left">11</td>
+<td align="left">38</td>
+<td align="left">418.0</td>
+</tr>
+</tbody></table>
+<h3 id="rename-column"><a href="#rename-column" class="headerlink" title="rename column"></a>rename column</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df.rename(columns=&#123;</span><br><span class="line">  <span class="string">'name'</span>: <span class="string">'movie_title'</span></span><br><span class="line">  &#125;, </span><br><span class="line">  inplace=<span class="literal">True</span>)</span><br><span class="line">print(df)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Case-ShoeFly-com-1"><a href="#Case-ShoeFly-com-1" class="headerlink" title="Case ShoeFly.com"></a>Case ShoeFly.com</h2><h4 id="Add-Columns"><a href="#Add-Columns" class="headerlink" title="Add Columns"></a>Add Columns</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">orders[<span class="string">'shoe_source'</span>] = orders.shoe_material.apply(<span class="keyword">lambda</span> x: \</span><br><span class="line">                        	<span class="string">'animal'</span> <span class="keyword">if</span> x == <span class="string">'leather'</span><span class="keyword">else</span> <span class="string">'vegan'</span>)</span><br><span class="line"></span><br><span class="line">orders[<span class="string">'salutation'</span>] = orders.apply(<span class="keyword">lambda</span> row: \</span><br><span class="line">                                    <span class="string">'Dear Mr. '</span> + row[<span class="string">'last_name'</span>]</span><br><span class="line">                                    <span class="keyword">if</span> row[<span class="string">'gender'</span>] == <span class="string">'male'</span></span><br><span class="line">                                    <span class="keyword">else</span> <span class="string">'Dear Ms. '</span> + row[<span class="string">'last_name'</span>],</span><br><span class="line">                                    axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/02/21/LC/Pandas/2015-02-21-Pandas%20review/">http://yoursite.com/2020/02/21/LC/Pandas/2015-02-21-Pandas%20review/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="next-post pull-right"><a href="/2020/02/21/SQL/2020-02-21-SQL-Churn%20Rate%20with%20Case/"><span>SQL/2020-02-21-SQL-Churn Rate with Case</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
