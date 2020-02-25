@@ -1,0 +1,336 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="CVs/2019-12-11-CNN &amp; RNN Review &amp; Prep"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>CVs/2019-12-11-CNN &amp; RNN Review &amp; Prep | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Faster-RCNN"><span class="toc-number">1.</span> <span class="toc-text">Faster RCNN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#VGG-backbone"><span class="toc-number">1.1.</span> <span class="toc-text">VGG backbone</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#for-ZF-backbone"><span class="toc-number">1.2.</span> <span class="toc-text">*for ZF backbone *</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#YOLO-v1"><span class="toc-number">2.</span> <span class="toc-text">YOLO v1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#YOLO-v2"><span class="toc-number">3.</span> <span class="toc-text">YOLO v2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSD"><span class="toc-number">4.</span> <span class="toc-text">SSD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FPN-–-didn’t-dig-into-this-too-much"><span class="toc-number">5.</span> <span class="toc-text">FPN – didn’t dig into this too much.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Focal-Loss"><span class="toc-number">6.</span> <span class="toc-text">Focal Loss</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optimization"><span class="toc-number">7.</span> <span class="toc-text">Optimization</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MobileNet"><span class="toc-number">8.</span> <span class="toc-text">MobileNet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MobileNet-v2"><span class="toc-number">9.</span> <span class="toc-text">MobileNet v2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ShuffleNet"><span class="toc-number">10.</span> <span class="toc-text">ShuffleNet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1x1"><span class="toc-number">11.</span> <span class="toc-text">1x1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ResNet"><span class="toc-number">12.</span> <span class="toc-text">ResNet</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mask-RCNN"><span class="toc-number">13.</span> <span class="toc-text">Mask RCNN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RF-Receptive-Field"><span class="toc-number">14.</span> <span class="toc-text">RF (Receptive Field)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradient-Vanishing"><span class="toc-number">15.</span> <span class="toc-text">Gradient Vanishing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradient-Explosion"><span class="toc-number">16.</span> <span class="toc-text">Gradient Explosion</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Machine-Learning"><span class="toc-number"></span> <span class="toc-text">Machine Learning</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AdaBoost"><span class="toc-number">1.</span> <span class="toc-text">AdaBoost</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SVM"><span class="toc-number">2.</span> <span class="toc-text">SVM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DT"><span class="toc-number">3.</span> <span class="toc-text">DT</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ensemble"><span class="toc-number"></span> <span class="toc-text">Ensemble</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RF-Random-Forest"><span class="toc-number">1.</span> <span class="toc-text">RF (Random Forest)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Adaboost"><span class="toc-number">2.</span> <span class="toc-text">Adaboost</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Decision-Tree"><span class="toc-number">3.</span> <span class="toc-text">Decision Tree</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gini-Index-吉尼係數"><span class="toc-number"></span> <span class="toc-text">Gini Index (吉尼係數)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#決策樹演算法的步驟"><span class="toc-number"></span> <span class="toc-text">決策樹演算法的步驟</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#設限"><span class="toc-number"></span> <span class="toc-text">設限</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Training-Imbalance"><span class="toc-number">1.</span> <span class="toc-text">Training Imbalance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Why-Regularization-example"><span class="toc-number">2.</span> <span class="toc-text">Why Regularization ? example?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Backward"><span class="toc-number">3.</span> <span class="toc-text">Backward</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Comparison"><span class="toc-number">4.</span> <span class="toc-text">Comparison:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Contrastive-loss"><span class="toc-number">4.1.</span> <span class="toc-text">Contrastive loss</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Triplet-loss"><span class="toc-number">4.2.</span> <span class="toc-text">Triplet loss</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Center-loss"><span class="toc-number">4.3.</span> <span class="toc-text">Center loss</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ArcFace-loss"><span class="toc-number">4.4.</span> <span class="toc-text">ArcFace loss</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GAN"><span class="toc-number">5.</span> <span class="toc-text">GAN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#seq2seq"><span class="toc-number">6.</span> <span class="toc-text">seq2seq</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#ImageTOseq"><span class="toc-number">6.0.1.</span> <span class="toc-text">ImageTOseq</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Attention"><span class="toc-number">7.</span> <span class="toc-text">Attention</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Saliency-Detection"><span class="toc-number">8.</span> <span class="toc-text">Saliency Detection</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">229</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">24</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">29</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">CVs/2019-12-11-CNN &amp; RNN Review &amp; Prep</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-12-12</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/AI/">AI</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><blockquote>
+<p>Two stages: RPN for localization, then classification &amp; bbox regression on proposals</p>
+<p>Single shot: classification + bbox regression at one time</p>
+</blockquote>
+<h3 id="Faster-RCNN"><a href="#Faster-RCNN" class="headerlink" title="Faster RCNN"></a>Faster RCNN</h3><h4 id="VGG-backbone"><a href="#VGG-backbone" class="headerlink" title="VGG backbone"></a><code>VGG</code> backbone</h4><ul>
+<li><p>VGG: Input 224x224, therefore, 224/2^4 = 14, 14x14 for conv-5 (ch-512, same as conv-4),  13 conv, 13 ReLU, 4 Pooling</p>
+</li>
+<li><p>Faster RCNN’s image size :  ==&gt; 800x600 (image’s input by python ‘s cv2)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># reshape network inputs</span><br><span class="line"> net.blobs[&#39;data&#39;].reshape(*(blobs[&#39;data&#39;].shape))</span><br></pre></td></tr></table></figure>
+
+<p>As we can see, the input blob <code>&#39;data&#39;</code> is reshaped according to the input image size. Once you <code>forward</code> caffe will reshape all consequent blobs according to the input shape；　<code>*</code> means convert passed argument from tuple to positional parameters</p>
+</li>
+<li><p>RPN: 3x3x512, as each point fuses 3x3 info arounding it. and then calc + &amp; - anchors as well as bbox regression shift, and then calc proposals;</p>
+<p><code>ROI Pooling</code> extract <code>proposal feature</code> from <code>feature map</code>for FC and softmax</p>
+</li>
+<li><p>9 anchors for each point –&gt; + &amp; -</p>
+</li>
+<li><p>TRAINING: 128 + anchors and 128 - anchors</p>
+<ul>
+<li>Suitable Anchors:</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://www.zhihu.com/equation?tex=%5Ctext%7Bceil%7D(800%2F16)+%5Ctimes+%5Ctext%7Bceil%7D(600%2F16)+%5Ctimes+9%3D50%5Ctimes38+%5Ctimes9%3D17100" alt="[公式]"></p>
+<blockquote>
+<p><a href="https://github.com/rbgirshick/py-faster-rcnn/tree/master/models/pascal_voc/VGG16/faster_rcnn_end2end" target="_blank" rel="noopener">https://github.com/rbgirshick/py-faster-rcnn/tree/master/models/pascal_voc/VGG16/faster_rcnn_end2end</a></p>
+</blockquote>
+<p>那么为何要在softmax前后都接一个reshape layer？其实只是为了便于softmax分类，至于具体原因这就要从caffe的实现形式说起了。在caffe基本数据结构blob中以如下形式保存数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blob&#x3D;[batch_size, channel，height，width]</span><br></pre></td></tr></table></figure>
+
+<p>对应至上面的保存positive/negative anchors的矩阵，其在caffe blob中的存储形式为[1, 2x9, H, W]。而在softmax分类时需要进行positive/negative二分类，所以reshape layer会将其变为[1, 2, 9xH, W]大小，即单独“腾空”出来一个维度以便softmax分类，之后再reshape回复原状。贴一段caffe softmax_loss_layer.cpp的reshape函数的解释，非常精辟：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"Number of labels must match number of predictions; "</span></span><br><span class="line"><span class="string">"e.g., if softmax axis == 1 and prediction shape is (N, C, H, W), "</span></span><br><span class="line"><span class="string">"label count (number of labels) must be N*H*W, "</span></span><br><span class="line"><span class="string">"with integer values in &#123;0, 1, ..., C-1&#125;."</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>soomth-L1</li>
+<li>ROI pooliing 7x7</li>
+</ul>
+<h4 id="for-ZF-backbone"><a href="#for-ZF-backbone" class="headerlink" title="*for ZF backbone *"></a>*for <code>ZF</code> backbone *</h4><p>==&gt; ch-256 before RPN</p>
+<hr>
+<h3 id="YOLO-v1"><a href="#YOLO-v1" class="headerlink" title="YOLO v1"></a>YOLO v1</h3><ul>
+<li><p>45FPS</p>
+</li>
+<li><p>Can we just out bbox (x,y,w,h) and (c) ? But we found as objected to be detected increase, output dimension of model also increase, not able to be determined.</p>
+<p>==&gt; YOLO does this by gridding image into grids, within each of which being able to output class and bbox.</p>
+</li>
+<li><p>7x7 grids on image, 30 channels, as No RPN, just use a big net to catch all fishes</p>
+</li>
+<li><p>2 predictor for each cell.</p>
+</li>
+<li><p>Q: If class prediction is not sharing, can one cell predict two obj?</p>
+<ul>
+<li>No. In this way,  how do the two predictor divide their works?</li>
+<li>Faster RCNN OK because of anhchors and IOU w/ GT, which got introduced in YOLO v2</li>
+</ul>
+</li>
+<li><p>Why 2 bounding boxes?</p>
+<ul>
+<li>Predictor with bigger IOU with GT while training, is responsible for detecting the corresponding object.</li>
+</ul>
+</li>
+<li><p>x, y means shift relative to cell’s upper-left corner; w, h relative to the whole image</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gamijfkmaej30oy0iy77z.jpg" alt="image-20200106075944588"></p>
+</li>
+<li><p>confidence = <em>Pr(Object) x IOU</em>,  IOU is calculated during training, Pr(Object) is bool</p>
+<p>So, Pr(Classi|Object) x <em>Pr(Object) x IOU</em> , Pr(Classi|Object) is meaningful only when Pr(Object) is not 0.</p>
+</li>
+</ul>
+<p>Ref: <a href="https://zhuanlan.zhihu.com/p/37850811" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/37850811</a></p>
+<hr>
+<h3 id="YOLO-v2"><a href="#YOLO-v2" class="headerlink" title="YOLO v2"></a>YOLO v2</h3><ul>
+<li><p>input: 416x416 ==&gt; 13 x 13</p>
+</li>
+<li><p>No FC (YOLO v1 has FC to turn 1024x7x7 into 30x7x7)</p>
+</li>
+<li><p>5 Anchor, so that <strong>able to predict not only one obj for each cell</strong>, but 5</p>
+</li>
+<li><p>BN – quickly converge, and for regularization</p>
+</li>
+<li><p>Fully convolutional network architecture, so any size of image.</p>
+</li>
+<li><p>Skipping <code>reorg</code> layer –  after conv5-5, making gradient able forward. </p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gamo1nin68j30u60700ul.jpg" alt="image-20200106111017191"></p>
+</li>
+<li><p>Prediction:<br>(4 + 1 + num_class) for <code>each anchor</code>。Use sigmoid to make value btw 0~1. Use exponential for scaling.</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gamoddpf2zj30um0ta140.jpg" alt="image-20200106112133343"></p>
+</li>
+<li><p>anchor with largest IOU (by moving both of anchor and GT_box to upper-left corner) to predict correcponding obj</p>
+</li>
+<li><p>Loss: </p>
+<ul>
+<li>anchor predicting obj xywh: L2</li>
+<li>anchor not predicing obj xywh: for correct anchor’s xywh</li>
+<li>anchor predicting obj confidence: IOU btw predicted bbox and GT bbox</li>
+<li>anchor not predicing obj confidence: for correct anchor’s xywh</li>
+</ul>
+</li>
+<li><p>Multi-scale:</p>
+<p>[320,320]，[416,416]和[512,512]，==&gt; grids: [10,10], [13,13], [16,16]. </p>
+<p>During training, every 10 batches, one size btw 320x320 ~ 608x608 is chosen</p>
+</li>
+</ul>
+<p>Ref: <a href="https://zhuanlan.zhihu.com/p/40659490" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/40659490</a></p>
+<hr>
+<h3 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h3><p>prototxt: <a href="https://github.com/intel/caffe/blob/master/models/intel_optimized_models/ssd/VGGNet/VOC0712/SSD_300x300/deploy.prototxt" target="_blank" rel="noopener">https://github.com/intel/caffe/blob/master/models/intel_optimized_models/ssd/VGGNet/VOC0712/SSD_300x300/deploy.prototxt</a></p>
+<ul>
+<li><p>as YOLO, turn <code>detection</code> problem into <code>regression</code> problem</p>
+</li>
+<li><p>as FasterRCNN’s anchor, proposed <code>prior box</code>,  for each feature map</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gamqauu7ioj30l402smxd.jpg" alt="image-20200106122821151"></p>
+<p>By this formula, Prior Box size could be determined for each feature map together with <code>aspect ratio</code></p>
+<p>m: total feature maps adopted</p>
+<ul>
+<li><p><code>default box</code> : abstract concept of <code>prior box</code></p>
+</li>
+<li><p><code>prior box</code>: adopted during training, the actually chosen default box for training</p>
+</li>
+<li><p>for <code>k default box</code> on their own feature maps: k x  (c+4) x  m x n</p>
+<ul>
+<li><p>for confidence’s output: c x k x m x n,<br>c x m x n for each of the k default box </p>
+<p>if 20 classes, then we have </p>
+</li>
+<li><p>for localization’s output: 4 x k x m x n<br>4 x m x n for each of the k default box </p>
+</li>
+<li><p>All prior box amount:<br>$$<br>38x38x4 + 19x19x6 +10x10x6 + 5x5x6 + 3x3x4 +1x1x4 = 8732<br>$$<br>k x (20+1), if k is 6 for each prior box; thus, 6x21 = 126 kernels<br>k x 4, if k is 6 for each prior box; thus, 6x4 = 24 kernels</p>
+</li>
+<li><p>TRAINING to make prior box regress to GT box </p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>as FPN, use Pyramidal Feature Hierarchy</p>
+</li>
+<li><p>DIDN’T generate RPN, thus speed-up</p>
+</li>
+<li><p>VGG-16 as backbone, the final 2 FC were turned into conv layers</p>
+</li>
+<li><p>Permute: 32x19x19x24 ==&gt; 32x24x19x19</p>
+<p>Flatten: 32x19x19x24 ==&gt; 32x8664, where 32 is batch_size</p>
+<p>mbox_priorbox – for training only</p>
+<p>mbox_loc</p>
+<p>mbox_conf</p>
+</li>
+<li><p><strong>Sample augmentation</strong></p>
+</li>
+<li><p><strong>+/- sampling</strong></p>
+<p>Match <code>prior box</code> and <code>GT</code> according to IOU (Jaccard Overlap). </p>
+<p>+ prior box  : matching to GT</p>
+<p>- prior box : not mathcing to GT</p>
+<p>and soft all - prior boxes according to classificatin loss, to control + : -  is around 1 : 3</p>
+</li>
+<li><p>GT : each GT has it mapping anchor. anchors are mapped into original image to match GT box</p>
+<img src="https://tva1.sinaimg.cn/large/006tNbRwly1gams525z5sj30ha0f67ap.jpg" alt="image-20200106133152958" style="zoom:50%;" />
+</li>
+<li><p>input 300x300, pooling stride 2, thus conv4_3 length is 38, keep all left equals to 19, and final feature-map’s length is 10</p>
+</li>
+<li><p><strong>Loss</strong></p>
+<ul>
+<li>loc-loss: smooth-L1 loss as Faster-RCNN</li>
+<li>conf-loss: softmax loss for each class</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gampfyf6l8j31200ju46v.jpg" alt="image-20200106115837659"></p>
+<p>ref: <a href="https://www.cnblogs.com/xuanyuyt/p/7222867.html" target="_blank" rel="noopener">https://www.cnblogs.com/xuanyuyt/p/7222867.html</a></p>
+<hr>
+<h3 id="FPN-–-didn’t-dig-into-this-too-much"><a href="#FPN-–-didn’t-dig-into-this-too-much" class="headerlink" title="FPN – didn’t dig into this too much."></a>FPN – didn’t dig into this too much.</h3><h3 id="Focal-Loss"><a href="#Focal-Loss" class="headerlink" title="Focal Loss"></a>Focal Loss</h3><h3 id="Optimization"><a href="#Optimization" class="headerlink" title="Optimization"></a>Optimization</h3><ul>
+<li><h3 id="MobileNet"><a href="#MobileNet" class="headerlink" title="MobileNet"></a>MobileNet</h3></li>
+<li><p>Explanation:</p>
+</li>
+</ul>
+<h3 id="MobileNet-v2"><a href="#MobileNet-v2" class="headerlink" title="MobileNet v2"></a>MobileNet v2</h3><h3 id="ShuffleNet"><a href="#ShuffleNet" class="headerlink" title="ShuffleNet"></a>ShuffleNet</h3><h3 id="1x1"><a href="#1x1" class="headerlink" title="1x1"></a>1x1</h3><h3 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h3><ul>
+<li>To solve what problem?</li>
+<li>Explanation:</li>
+<li>Keywords:<ul>
+<li>Downsampling</li>
+</ul>
+</li>
+</ul>
+<h3 id="Mask-RCNN"><a href="#Mask-RCNN" class="headerlink" title="Mask RCNN"></a>Mask RCNN</h3><h3 id="RF-Receptive-Field"><a href="#RF-Receptive-Field" class="headerlink" title="RF (Receptive Field)"></a>RF (Receptive Field)</h3><ul>
+<li>Top-Down (Easy!)</li>
+<li>Bottom Up (Hard..)</li>
+</ul>
+<h3 id="Gradient-Vanishing"><a href="#Gradient-Vanishing" class="headerlink" title="Gradient Vanishing"></a>Gradient Vanishing</h3><h3 id="Gradient-Explosion"><a href="#Gradient-Explosion" class="headerlink" title="Gradient Explosion"></a>Gradient Explosion</h3><p>ROI Pooling vs ROI Align</p>
+<hr>
+<h2 id="Machine-Learning"><a href="#Machine-Learning" class="headerlink" title="Machine Learning"></a>Machine Learning</h2><h3 id="AdaBoost"><a href="#AdaBoost" class="headerlink" title="AdaBoost"></a>AdaBoost</h3><ul>
+<li><p>Explanation</p>
+<p>The delta btw y_hat and y will be fed into another weak classifier </p>
+</li>
+</ul>
+<h3 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h3><p><strong>SVM本身是一个二值分类器</strong></p>
+<p>　　SVM算法最初是为二值分类问题设计的，当处理多类问题时，就需要构造合适的多类分类器。</p>
+<p>　　目前，构造SVM多类分类器的方法主要有两类</p>
+<p>　　（1）直接法，直接在目标函数上进行修改，将多个分类面的参数求解合并到一个最优化问题中，通过求解该最优化问题“一次性”实现多类分类。这种方法看似简单，但其计算复杂度比较高，实现起来比较困难，只适合用于小型问题中；</p>
+<p>　　（2）间接法，主要是通过组合多个二分类器来实现多分类器的构造，常见的方法有one-against-one和one-against-all两种。</p>
+<h3 id="DT"><a href="#DT" class="headerlink" title="DT"></a>DT</h3><p>smaller entropy means less wrongly classified</p>
+<ul>
+<li><p>ID3 (granually too small), </p>
+<p>info gain  = Entropy </p>
+</li>
+<li><p>C4.5, </p>
+</li>
+<li><p>CART (binary tree, generally better than previous twos, needs some pruning sometimes)</p>
+<p>with gini coefficient</p>
+</li>
+</ul>
+<h2 id="Ensemble"><a href="#Ensemble" class="headerlink" title="Ensemble"></a>Ensemble</h2><h3 id="RF-Random-Forest"><a href="#RF-Random-Forest" class="headerlink" title="RF (Random Forest)"></a>RF (Random Forest)</h3><h3 id="Adaboost"><a href="#Adaboost" class="headerlink" title="Adaboost"></a>Adaboost</h3><ul>
+<li><p>Bagging</p>
+<p>​    to decrease variance</p>
+</li>
+<li><p>Boosting </p>
+<p>​    to decrease bias</p>
+<p>mainly to enhance weak classifier into a strong one. According to the training result from previous classifie, and then train next classifier according to new sample’s distribution.</p>
+</li>
+<li><p>Adaboost increase wrongly-classifed samples’ weights</p>
+</li>
+</ul>
+<p>Ref: <a href="https://zhuanlan.zhihu.com/p/37358517" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/37358517</a></p>
+<hr>
+<p>used to eliminate the redundant features</p>
+<h3 id="Decision-Tree"><a href="#Decision-Tree" class="headerlink" title="Decision Tree"></a>Decision Tree</h3><p>copied from : <a href="https://chtseng.wordpress.com/2017/02/10/決策樹-decision-trees/" target="_blank" rel="noopener">https://chtseng.wordpress.com/2017/02/10/%E6%B1%BA%E7%AD%96%E6%A8%B9-decision-trees/</a></p>
+<ul>
+<li>Entropy definition</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gb23fhkw46j30l710otgs.jpg" alt="image-20200119192602821"></p>
+<h2 id="Gini-Index-吉尼係數"><a href="#Gini-Index-吉尼係數" class="headerlink" title="Gini Index (吉尼係數)"></a><strong>Gini Index (吉尼係數)</strong></h2><p>採用GINI Index的代表是CART tree。CART是Classification And Regression Tree的縮寫，從字面上可看出它兼具分類與迴歸兩種功能，同時支援分類(Classification)與數字預測(Regression)，由於不限制應變數與自變數的類型，因此在使用上較具彈性，是目前最為常用的決策樹方法。</p>
+<p>GINI係數與INFORMATION GAIN兩者有一個最大的差別：INFORMATION GAIN一次可產生多個不同節點，而GINI係數一次僅能產生兩個，即True或False的Binary分類。</p>
+<p>下方一樣以板球為例來說明：（Gini係數公式為p2+q2）</p>
+<p><strong>用性別來分類：</strong> </p>
+<p><img src="https://chtseng.files.wordpress.com/2017/02/3148_gxdl-o-obg.png?w=1140" alt="img"></p>
+<p>Femail節點：十位女性，其中有2位打板球10位不打，Gini係數為<br>(0.2)2+(0.8)2=0.68</p>
+<p>Male節點：20位男性，其中有13位打板球7位不打，Gini係數為<br>(0.65)2+(0.35)2=0.55</p>
+<p>因此以性別分類的Gini係數加權後為：(10/30)<em>0.68+(20/30)</em>0.55 = 0.59。</p>
+<p><strong>用班級來分類：</strong></p>
+<p><img src="https://chtseng.files.wordpress.com/2017/02/3148_jsuhhmuveq1.png?w=1140" alt="img"></p>
+<p>  Class IX節點：此班14位同學，其中6位打板球8位不打，因此Gini係數為<br>(0.43)2+(0.57)2=0.51</p>
+<p>  Class X節點：此班16位同學，其中9位打板球7位不打，因此Gini係數為<br>(0.56)2+(0.44)2=0.51</p>
+<p>因此以班級分類的決策樹，其Gini係數加權結果：(14/30)<em>0.51+(16/30)</em>0.51 = 0.51。兩樹相互比較，以性別分類的吉尼係數大於以班級分類，因此系統會採用性別來進行節點的分類。</p>
+<h1 id="決策樹演算法的步驟"><a href="#決策樹演算法的步驟" class="headerlink" title="決策樹演算法的步驟"></a><strong>決策樹演算法的步驟</strong></h1><ol>
+<li><strong>資料設定：</strong>將原始資料分成兩組，一部分為訓練資料，一部分為測試資料</li>
+<li><strong>決策樹生成：</strong>使用訓練資料來建立決策樹，而在每一個內部節點，則依據屬性選擇指標 (如：資訊理論(Information Theory)…) 來評估選擇哪個屬性做分支的依據。此又稱節點分割 (Splitting Node)</li>
+<li><strong>剪枝：</strong>使用測試資料來進行決策樹修剪，將以上1~3步驟不斷重複進行，直到所有的新產生節點都是樹葉節點為止。</li>
+</ol>
+<p>不過決策樹很容易有「Overfitting（過度擬合）」的問題，因為我們如果沒有對樹的成長作限制，演算法最後就會為每個不同特徵值創建新的分類節點，最後將所有資料作到100%正確的分類，因此為了預防Overfitting，我們會採取下列兩種方式：設限及剪枝。</p>
+<h2 id="設限"><a href="#設限" class="headerlink" title="設限"></a><strong>設限</strong></h2><ol>
+<li>Minimum samples for a node split：資料數目不得小於多少才能再產生新節點。</li>
+<li>Minimum samples for a terminal node (leaf)：要成為葉節點，最少需要多少資料。</li>
+<li>Maximum depth of tree (vertical depth)：限制樹的高度最多幾層。</li>
+<li>Maximum number of terminal nodes：限制最終葉節點的數目</li>
+<li>Maximum features to consider for split：在分離節點時，最多考慮幾種特徵值。</li>
+</ol>
+<p><img src="https://chtseng.files.wordpress.com/2017/02/3148_vgszibb2dq.png?w=1140" alt="img"></p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gb23urtakpj30g410pdkb.jpg" alt="image-20200119194043890"></p>
+<h3 id="Training-Imbalance"><a href="#Training-Imbalance" class="headerlink" title="Training Imbalance"></a>Training Imbalance</h3><ul>
+<li><p>Undersampling</p>
+</li>
+<li><p>Oversampling</p>
+</li>
+<li><p>SMOTE</p>
+</li>
+</ul>
+<h3 id="Why-Regularization-example"><a href="#Why-Regularization-example" class="headerlink" title="Why Regularization ? example?"></a>Why Regularization ? example?</h3><h3 id="Backward"><a href="#Backward" class="headerlink" title="Backward"></a>Backward</h3><hr>
+<h3 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison:"></a>Comparison:</h3><p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gb20p3423tj30kf0b7dhi.jpg" alt="image-20200119175125694"></p>
+<h4 id="Contrastive-loss"><a href="#Contrastive-loss" class="headerlink" title="Contrastive loss"></a>Contrastive loss</h4><p>​        2006, Yann LeCun’s paper, mainly adopted for dimension reduction, 即本来相似的样本，在经过降维（特征提取）后，两个样本仍旧相似；而原本不相似的样本，在经过降维后，两个样本仍旧不相似。同样，该损失函数也可以很好的表达成对样本的匹配程度<br>​        F = kX, as SPRING model</p>
+<h4 id="Triplet-loss"><a href="#Triplet-loss" class="headerlink" title="Triplet loss"></a>Triplet loss</h4><p>​        2015, Google</p>
+<p>​        三元组损失：最小化锚点和具有相同的身份的正例之间的距离，并最大化锚点和不同身份的负例之间的距离。 目标： 相同标签的两个示例使其嵌入在嵌入空间中靠近在一起，不同标签的两个示例的嵌入距离要很远 但不希望推动每个标签的训练嵌入到非常小的簇中。 唯一的要求是给出同一类的两个正例和一个负例，负例应该比正例的距离至少远margin。 这与SVM中使用的margin非常相似，这里希望每个类的簇由margin分隔。        </p>
+<p>​    <strong>Triplet的选取</strong></p>
+<ul>
+<li><p>如何选择triplet，如何用正负例构建triplet，对模型训练的效率有很大影响。easy negative example比较容易识别，没必要训练，否则会严重降低训练效率。若都采用hard negative example，又可能会影响训练效果。</p>
+</li>
+<li><p>Facenet论文中采用了随机的semi-hard negative构建triplet进行训练。</p>
+</li>
+<li><p>基于negative example与anchor和positive距离，分为三类三元组：</p>
+</li>
+<li><ul>
+<li>容易三元组(easy triplets)：损失为0的三元组，因为d(a,n)&gt;d(a,p)+margin</li>
+<li>困难三元组(hard triplets) ：其中负例比正例更靠近锚点，即d(a,n)&lt;d(a,p)</li>
+<li>半困难三元组(semi-hard triplets)：其中负例不比正例更接近锚点，但仍有大于0的损失，d(a,p)&lt;d(a,n)&lt;d(a,p)+margin</li>
+</ul>
+</li>
+</ul>
+<h4 id="Center-loss"><a href="#Center-loss" class="headerlink" title="Center loss"></a>Center loss</h4><p>Center Loss源于深圳先研院乔宇、Yandong Wen等在ECCV 2016上发表的 <a href="https://link.zhihu.com/?target=http%3A//ydwen.github.io/papers/WenECCV16.pdf">A Discriminative Feature Learning Approach for Deep Face Recognition</a>。<br><strong>判别性</strong></p>
+<ul>
+<li>深度学习的特征需要具有discriminative(判别性)和泛化能力，以便在没有标签预测的情况下识别新的未见类别，如一个人脸即便没有训练过也能判断类别。判别性同时表征了紧凑的类内差异和可分离的类间差异。</li>
+<li>判别性特征可以通过最近邻（NN）或k近邻（k-NN）算法进行良好分类，其不一定取决于标签预测。</li>
+<li>而softmax损失仅鼓励特征的可分离性，所得到的特征对于人脸识别不是足够有效的。</li>
+<li>对比损失和三元组损失分别构成图像对和三元组的损失函数，然而与原样本相比，训练对或三元组的数量急剧增加，导致了网络收敛缓慢。</li>
+</ul>
+<p><strong>中心损失的定义</strong></p>
+<ul>
+<li>中心损失：为每一个类别提供一个类别中心，最小化min-batch中每个样本与该类别中心的距离，即缩小类内距离。</li>
+<li>有效地表征了深度特征的类内距离，提升深度特征的判别能力，在保持不同类别的特征可分离的同时最小化类内距离是关键。公式如下，c_yi就是第yi个类别的特征中心，xi表示全连接层之前的特征，m表示mini-batch的大小</li>
+</ul>
+<h4 id="ArcFace-loss"><a href="#ArcFace-loss" class="headerlink" title="ArcFace loss"></a>ArcFace loss</h4><ul>
+<li><p>性能高，易于编程实现，复杂性低，训练效率高</p>
+</li>
+<li><p>ArcFace直接优化geodesic distance margin(弧度)，因为归一化超球体中的角和弧度的对应。</p>
+</li>
+<li><p>为了性能的稳定，ArcFace不需要与其他loss函数实现联合监督，可以很容易地收敛于任何训练数据集。</p>
+</li>
+<li><p>缺点：W模型很大</p>
+</li>
+</ul>
+<h3 id="GAN"><a href="#GAN" class="headerlink" title="GAN"></a>GAN</h3><ul>
+<li>metric</li>
+</ul>
+<h3 id="seq2seq"><a href="#seq2seq" class="headerlink" title="seq2seq"></a>seq2seq</h3><p><em>Ilya Sutskever, Oriol Vinyals, Quoc V. Le, 2014, “Sequence to Sequence Learning with Neural Networks,” pp. 3104–311 in NIPS 2014</em></p>
+<p>Take AlexNet for example, by eliminating softmax, we’ll be able to extract a 4096 dimension embedding.</p>
+<p>Now, feed the vector into RNN, as what language translation does, it’ll generate a output sequence, the CAPTION for the image.</p>
+<ul>
+<li><h5 id="ImageTOseq"><a href="#ImageTOseq" class="headerlink" title="ImageTOseq"></a>ImageTOseq</h5><p>Image Caption, mean</p>
+<p><em>Deep Captioning with Multimodal Recurrent Neural Networks (m-RNN) – ICLR2015, San Diego</em><br><em>by Junua Mao</em></p>
+<p>Meanwhile, Oriol Vinyals, (Andrej, Fei-Fei Li) also acquired the similar conclusion.</p>
+</li>
+</ul>
+<p>After obtaining this vector, decoder part of the network starts its processing with this fixed vector representation and at <strong>each time step of the decoder network it produces outputs</strong>. <strong>Operation stops when a special token</strong> showing the end of the sentence is produced. Distributed representations of the words are used as inputs to the encoder network. At the output side at each time step, a Word is chosen from a specific vocabulary list. At the decoder side, after decoder part a classifier network is used to produce a Word from the output at each time step. <strong>LSTM networks are used in this paper due to their capability of capturing long term relationships</strong>. Paper also shows experiments on machine translation task, which is from English to French. Simulation results reveal that presented approach outperforms existing studies.</p>
+<h3 id="Attention"><a href="#Attention" class="headerlink" title="Attention"></a>Attention</h3><p>The Encoder + Decoder mechanism based on RNN (LSTM or GRU). </p>
+<p>For Image caption, it explains different region afftectin the output text series BY</p>
+<p>weighing differently in X and therefore extracts important info for model making more precies judgement.</p>
+<p><a href="https://zhuanlan.zhihu.com/p/31547842" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/31547842</a></p>
+<h3 id="Saliency-Detection"><a href="#Saliency-Detection" class="headerlink" title="Saliency Detection"></a>Saliency Detection</h3><p>The region within the image where user most care about.</p>
+<p>![image-20200119174713586](/Users/joe/Library/Application Support/typora-user-images/image-20200119174713586.png)</p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/12/12/CVs/2019-12-11-CNN%20&amp;%20RNN%20Review%20&amp;%20Prep/">http://yoursite.com/2019/12/12/CVs/2019-12-11-CNN%20&amp;%20RNN%20Review%20&amp;%20Prep/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/12/13/Web/2019-12-13-Hexo/"><i class="fa fa-chevron-left">  </i><span>Web/2019-12-13-Hexo</span></a></div><div class="next-post pull-right"><a href="/2019/12/12/CVs/2019-12-12-Problems%20Collection%20from%20EGN/"><span>CVs/2019-12-12-Problems Collection from EGN</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
