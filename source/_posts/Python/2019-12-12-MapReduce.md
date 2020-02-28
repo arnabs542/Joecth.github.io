@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: BigData
+categories: BigData, Python
 date: 2019-12-12
 tag: [] 
 

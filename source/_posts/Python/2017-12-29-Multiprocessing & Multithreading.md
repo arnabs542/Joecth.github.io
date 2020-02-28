@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: Web
+categories: Python
 tag: []
 date: 2017-12-29
 ---

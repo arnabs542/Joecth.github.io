@@ -1,6 +1,6 @@
 ---
 layout: post
-categories: LC
+categories: Python
 tag: []
 date: 2018-01-16
 ---

@@ -16,51 +16,51 @@ date: 2020-01-11
 
 
 
-|                                                              | Brute  Force | Thoughts1                                                    | Thoughts2                                                    |                            | Status | coded                                                        |                                     |
-| ------------------------------------------------------------ | ------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | -------------------------- | ------ | ------------------------------------------------------------ | ----------------------------------- |
-|                                                              |              |                                                              |                                                              |                            |        |                                                              |                                     |
-| [84 Largest Rectangle in Histogram](#84)                     |              | ● Stack:  Greedy:   <br />                                   | Greedy<br />● Time: O(n^2) ==> O(3n) <br />● Space: O(2n) ==> O(3n) | Self-minimum               | v      |                                                              | Not in<br />~42, 907                |
-| [85 Maximal Rectangle](#85)                                  |              |                                                              | Greedy<br />● Time: O(n^2) ==> O(m*3n) <br />● Space: O(2n) ==> O(3n) | Self-minimum x len(arr_2d) | v      |                                                              | Not in                              |
-| [907 sum of subarrays minumums](#907)                        |              |                                                              | Greedy<br />● Time: O(n^2) ==> O(3n) <br />● Space: O(2n) ==> O(3n) | Self-minimum               | v      |                                                              | Not in<br />~84                     |
-|                                                              |              |                                                              |                                                              |                            |        |                                                              |                                     |
-| [392 Is SubSequence](#392)                                   |              | with deque()                                                 |                                                              |                            | v      |                                                              | Not in                              |
-| [792 Number of Matching Subsequences](#792)                  |              |                                                              |                                                              |                            | v      |                                                              | Not in                              |
-| [1055 Shortest Way to From String](#1055)                    |              |                                                              |                                                              |                            | v      |                                                              | Not in                              |
-|                                                              |              |                                                              |                                                              |                            |        |                                                              |                                     |
-| High Freq.                                                   |              |                                                              |                                                              |                            |        |                                                              |                                     |
-| [953 LeetCode 953 Verifying an Alien Dictionary](#953)       |              |                                                              | 邊界check要另做                                              |                            | v      | v                                                            |                                     |
-| **[301Remove Invalid Parentheses](#301)**                    |              |                                                              |                                                              |                            | HARD   | HARD..                                                       | TRY BFS sol on *geeksforgeeks*      |
-| [238 product of array except self](#238)                     |              |                                                              |                                                              |                            | v      | v                                                            |                                     |
-| [67 Add Binary](#67)                                         |              |                                                              |                                                              |                            | △      |                                                              |                                     |
-| [273 Integer to English Words](#273)                         |              |                                                              |                                                              |                            |        |                                                              |                                     |
-| [973 K Closest Points to Origin](#973)                       |              | heapq                                                        |                                                              |                            | v      | v                                                            |                                     |
-| [560 Subarray Sum equals K](#560)                            |              |                                                              |                                                              |                            | v      |                                                              |                                     |
-| [158 Read N Characters Given Read4 Ⅱ](#158)                  |              |                                                              |                                                              |                            |        |                                                              |                                     |
-| [621 Task Scheduler](#621)                                   |              |                                                              |                                                              |                            |        |                                                              |                                     |
-| [325 Maximum Size Subarray Sum Equals k](#325)               |              |                                                              |                                                              |                            |        |                                                              | ~ 560                               |
-|                                                              |              |                                                              |                                                              |                            |        |                                                              |                                     |
-| [243 Shortest Word Distance Ⅰ](#243) ~ [245 Ⅲ](#245)         |              |                                                              |                                                              |                            | v      |                                                              |                                     |
-|                                                              |              |                                                              |                                                              |                            |        |                                                              |                                     |
-| **Heap**<br />●　O(N) for all arr's heapify<br />●　O(NlogN) if insert one after one<br /> ● O(lgN) for pop() & insert(), 从 n/2 地方开始进行调整 |              |                                                              |                                                              |                            |        |                                                              |                                     |
-| [215 Kth largest elem in unsorted array](#215)               |              | Heapify<br />O(N + klgN) -- N for heapify, klgN for pop() k elem | Q-sort<br />O(N)                                             |                            | v      | v                                                            |                                     |
-| [378 Kth Smallest Element in a Sorted Matrix](#378)          |              | heap                                                         | m-sort, w/ heap helping manage running idx                   |                            | v      | https://www.bilibili.com/video/av58960675/<br />仍是需要注意實踐的方式還有熟練度<br />v | ~23                                 |
-| [240 Search a 2D Matrix II -- Sorted nxn Matrix](#240)       |              | <u>Binary</u> OK!<br />O(m x lg(n) x lg(DIFF))               | D&C <br />O(n)                                               |                            | v      |                                                              | ~74                                 |
-| [74 Search a 2D Matrix](#74)                                 |              |                                                              |                                                              |                            | v      | v                                                            | ~240, but A\[i+1][0] > A\[i-1][n-1] |
-| [23 Merge K Sorted Lists](#23)                               |              |                                                              |                                                              |                            | v      | v                                                            | ~378                                |
-| [692 Top K frequent words](#692)                             |              | heapify                                                      | Sorting                                                      |                            | v      | v                                                            |                                     |
-| [252 Meeting Room](#252)                                     |              |                                                              |                                                              |                            | v      | v                                                            | ~253, 56                            |
-| [253 Meeting Room Ⅱ](#253)                                   |              |                                                              |                                                              |                            | v      |                                                              | ~252, 56                            |
-| [56 Merge Intervals](#56)                                    |              |                                                              |                                                              |                            |        |                                                              | ~252, 253, 435                      |
-| [435 Non-overlapping Intervals](#435)                        |              |                                                              |                                                              |                            |        |                                                              | ~56, 252, 253                       |
-| **[282 Expression Add Operators](#282)**                     |              |                                                              |                                                              |                            |        |                                                              |                                     |
-| [438. Find All Anagrams in a String](#438)                   |              | 照bucket sort方式编码然后loop找，但發生 Time Limit Exceeded  |                                                              |                            | v      | v                                                            | ~49                                 |
-| [173 Binary Search Tree Iterator](#173)                      |              | heapq, easy                                                  |                                                              |                            | v      | v                                                            |                                     |
-| [269 Alien Dictionary](#269)                                 |              | [leetcode.jp-269 wwwlink](https://leetcode.jp/leetcode-269-alien-dictionary-%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90/) |                                                              |                            | HARD   |                                                              | ~207, 210                           |
-| [921 Minimum Add to Make Parentheses Valid](#921)            |              |                                                              |                                                              |                            | v      | v                                                            | too easy                            |
-| [286 Walls and Gates](#286)                                  |              |                                                              |                                                              |                            | v      | v                                                            |                                     |
-| [20 Valid Parentheses](#20)                                  |              |                                                              |                                                              |                            | v      | v                                                            |                                     |
-| [146 LRU Cache](#146)                                        |              |                                                              |                                                              |                            | v      |                                                              |                                     |
-| [231 326 342 Power of 2, 3, 4](#231)                         |              |                                                              |                                                              |                            | v      | v                                                            |                                     |
+|                                                              | Thoughts1                                                    | Thoughts2                                                    |                            | Status | coded                                                        |                                     |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | -------------------------- | ------ | ------------------------------------------------------------ | ----------------------------------- |
+|                                                              |                                                              |                                                              |                            |        |                                                              |                                     |
+| [84 Largest Rectangle in Histogram](#84)                     | ● Stack:  Greedy:   <br />                                   | Greedy<br />● Time: O(n^2) ==> O(3n) <br />● Space: O(2n) ==> O(3n) | Self-minimum               | v      |                                                              | Not in<br />~42, 907                |
+| [85 Maximal Rectangle](#85)                                  |                                                              | Greedy<br />● Time: O(n^2) ==> O(m*3n) <br />● Space: O(2n) ==> O(3n) | Self-minimum x len(arr_2d) | v      |                                                              | Not in                              |
+| [907 sum of subarrays minumums](#907)                        |                                                              | Greedy<br />● Time: O(n^2) ==> O(3n) <br />● Space: O(2n) ==> O(3n) | Self-minimum               | v      |                                                              | Not in<br />~84                     |
+|                                                              |                                                              |                                                              |                            |        |                                                              |                                     |
+| [392 Is SubSequence](#392)                                   | with deque()                                                 |                                                              |                            | v      |                                                              | Not in                              |
+| [792 Number of Matching Subsequences](#792)                  |                                                              |                                                              |                            | v      |                                                              | Not in                              |
+| [1055 Shortest Way to From String](#1055)                    |                                                              |                                                              |                            | v      |                                                              | Not in                              |
+|                                                              |                                                              |                                                              |                            |        |                                                              |                                     |
+| High Freq.                                                   |                                                              |                                                              |                            |        |                                                              |                                     |
+| [953 LeetCode 953 Verifying an Alien Dictionary](#953)       |                                                              | 邊界check要另做                                              |                            | v      | v                                                            |                                     |
+| **[301Remove Invalid Parentheses](#301)**                    |                                                              |                                                              |                            | HARD   | HARD..                                                       | TRY BFS sol on *geeksforgeeks*      |
+| [238 product of array except self](#238)                     |                                                              |                                                              |                            | v      | v                                                            |                                     |
+| [67 Add Binary](#67)                                         |                                                              |                                                              |                            | △      |                                                              |                                     |
+| [273 Integer to English Words](#273)                         |                                                              |                                                              |                            |        |                                                              |                                     |
+| [973 K Closest Points to Origin](#973)                       | heapq                                                        |                                                              |                            | v      | v                                                            |                                     |
+| [560 Subarray Sum equals K](#560)                            |                                                              |                                                              |                            | v      |                                                              |                                     |
+| [158 Read N Characters Given Read4 Ⅱ](#158)                  |                                                              |                                                              |                            |        |                                                              |                                     |
+| [621 Task Scheduler](#621)                                   |                                                              |                                                              |                            |        |                                                              |                                     |
+| [325 Maximum Size Subarray Sum Equals k](#325)               |                                                              |                                                              |                            |        |                                                              | ~ 560                               |
+|                                                              |                                                              |                                                              |                            |        |                                                              |                                     |
+| [243 Shortest Word Distance Ⅰ](#243) ~ [245 Ⅲ](#245)         |                                                              |                                                              |                            | v      |                                                              |                                     |
+|                                                              |                                                              |                                                              |                            |        |                                                              |                                     |
+| **Heap**<br />●　O(N) for all arr's heapify<br />●　O(NlogN) if insert one after one<br /> ● O(lgN) for pop() & insert(), 从 n/2 地方开始进行调整 |                                                              |                                                              |                            |        |                                                              |                                     |
+| [215 Kth largest elem in unsorted array](#215)               | Heapify<br />O(N + klgN) -- N for heapify, klgN for pop() k elem | Q-sort<br />O(N)                                             |                            | v      | v                                                            |                                     |
+| [378 Kth Smallest Element in a Sorted Matrix](#378)          | heap                                                         | m-sort, w/ heap helping manage running idx                   |                            | v      | https://www.bilibili.com/video/av58960675/<br />仍是需要注意實踐的方式還有熟練度<br />v | ~23                                 |
+| [240 Search a 2D Matrix II -- Sorted nxn Matrix](#240)       | <u>Binary</u> OK!<br />O(m x lg(n) x lg(DIFF))               | D&C <br />O(n)                                               |                            | v      |                                                              | ~74                                 |
+| [74 Search a 2D Matrix](#74)                                 |                                                              |                                                              |                            | v      | v                                                            | ~240, but A\[i+1][0] > A\[i-1][n-1] |
+| [23 Merge K Sorted Lists](#23)                               |                                                              |                                                              |                            | v      | v                                                            | ~378                                |
+| [692 Top K frequent words](#692)                             | heapify                                                      | Sorting                                                      |                            | v      | v                                                            |                                     |
+| [252 Meeting Room](#252)                                     |                                                              |                                                              |                            | v      | v                                                            | ~253, 56                            |
+| [253 Meeting Room Ⅱ](#253)                                   |                                                              |                                                              |                            | v      |                                                              | ~252, 56                            |
+| [56 Merge Intervals](#56)                                    |                                                              |                                                              |                            |        |                                                              | ~252, 253, 435                      |
+| [435 Non-overlapping Intervals](#435)                        |                                                              |                                                              |                            |        |                                                              | ~56, 252, 253                       |
+| **[282 Expression Add Operators](#282)**                     |                                                              |                                                              |                            |        |                                                              |                                     |
+| [438. Find All Anagrams in a String](#438)                   | 照bucket sort方式编码然后loop找，但發生 Time Limit Exceeded  |                                                              |                            | v      | v                                                            | ~49                                 |
+| [173 Binary Search Tree Iterator](#173)                      | heapq, easy                                                  |                                                              |                            | v      | v                                                            |                                     |
+| [269 Alien Dictionary](#269)                                 | [leetcode.jp-269 wwwlink](https://leetcode.jp/leetcode-269-alien-dictionary-%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90/) |                                                              |                            | HARD   |                                                              | ~207, 210                           |
+| [921 Minimum Add to Make Parentheses Valid](#921)            |                                                              |                                                              |                            | v      | v                                                            | too easy                            |
+| [286 Walls and Gates](#286)                                  |                                                              |                                                              |                            | v      | v                                                            |                                     |
+| [20 Valid Parentheses](#20)                                  |                                                              |                                                              |                            | v      | v                                                            |                                     |
+| [146 LRU Cache](#146)                                        |                                                              |                                                              |                            | v      |                                                              |                                     |
+| [231 326 342 Power of 2, 3, 4](#231)                         |                                                              |                                                              |                            | v      | v                                                            |                                     |
 
 
 
@@ -92,16 +92,16 @@ Each element costs constant space. And the size of the stack is exactly the dept
 
 ## Arrays:
 
-|                                          |                                                              |                                                              |      | status | coded    |        |
-| ---------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ---- | ------ | -------- | ------ |
-| [349 Intersection of Two Arrays](#349)   |                                                              |                                                              |      | v      | v        |        |
-| [350 Intersection of Two Arrays Ⅱ](#350) | Two pointers:<br />Time Complexity: O(*n*log*n*+*m*log*m*), where n*n* and m*m* are the lengths of the arrays.<br />Space complexity: \mathcal{O}(1)O(1). We sort the arrays in-place. | Time complexity: \mathcal{O}(n + m)O(*n*+*m*), where n*n* and m*m* are the lengths of the arrays. We iterate through the first, and then through the second array; insert and lookup operations in the hash map take a constant time. <br />Space complexity: \mathcal{O}(\min(n, m))O(min(*n*,*m*)). We use hash map to store numbers (and their counts) from the smaller array. |      | v      | v        |        |
-| [896 Monotonic rAray](#896)              |                                                              |                                                              |      | v      |          | too ye |
-| [31 Next Permutation](#31)               |                                                              |                                                              |      | v      | Once     |        |
-| [825 Friends of Appropriate Ages](#825)  |                                                              |                                                              |      | v      | Abstract |        |
-| **TWO WAYS recording**                   |                                                              |                                                              |      |        |          |        |
-| [42 Trapping Rain Water](#42)            |                                                              |                                                              |      | v      | v        | ~84    |
-| [238 Product of Array Except Self](#238) |                                                              |                                                              |      | v      | v        |        |
+|                                          |                                                              |                                                              | status | coded    |        |
+| ---------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------ | -------- | ------ |
+| [349 Intersection of Two Arrays](#349)   |                                                              |                                                              | v      | v        |        |
+| [350 Intersection of Two Arrays Ⅱ](#350) | Two pointers:<br />Time Complexity: O(*n*log*n*+*m*log*m*), where n*n* and m*m* are the lengths of the arrays.<br />Space complexity: \mathcal{O}(1)O(1). We sort the arrays in-place. | Time complexity: \mathcal{O}(n + m)O(*n*+*m*), where n*n* and m*m* are the lengths of the arrays. We iterate through the first, and then through the second array; insert and lookup operations in the hash map take a constant time. <br />Space complexity: \mathcal{O}(\min(n, m))O(min(*n*,*m*)). We use hash map to store numbers (and their counts) from the smaller array. | v      | v        |        |
+| [896 Monotonic rAray](#896)              |                                                              |                                                              | v      |          | too ye |
+| [31 Next Permutation](#31)               |                                                              |                                                              | v      | Once     |        |
+| [825 Friends of Appropriate Ages](#825)  |                                                              |                                                              | v      | Abstract |        |
+| **TWO WAYS recording**                   |                                                              |                                                              |        |          |        |
+| [42 Trapping Rain Water](#42)            |                                                              |                                                              | v      | v        | ~84    |
+| [238 Product of Array Except Self](#238) |                                                              |                                                              | v      | v        |        |
 
 
 
@@ -110,26 +110,26 @@ Each element costs constant space. And the size of the stack is exactly the dept
 
 ## Linked List
 
-|                                           |      |                                   |                                                              | status | cedod |      |
-| ----------------------------------------- | ---- | --------------------------------- | ------------------------------------------------------------ | ------ | ----- | ---- |
-| [206 Reverse Linked List](#206)           |      |                                   |                                                              | v      | v     |      |
-| [92 Reverse Linked List Ⅱ](#92)           |      |                                   |                                                              | v      | v     |      |
-| [141 Cycle Linked List](#141)             |      |                                   |                                                              |        |       |      |
-| [142 Cycle Linked List 2](#142)           |      |                                   |                                                              |        |       |      |
-| [143 Reorder Linked List](#143)           |      |                                   | 最後要記得cur.next =None, 不然會有cycle                      | v      | v     |      |
-| [138 Copy List with Random Pointer](#138) |      |                                   |                                                              |        |       |      |
-| [234 Palindrome Linked List](#234)        |      | turned into list + 2 pointer trvs | Add dummy node before head and check fast==None or fast.next == None to know odd/even nodes. <br />Then, reverse 2nd part and compare 1st part and 2nd part. | v      |       |      |
+|                                           |                                   |                                                              | status | cedod |      |
+| ----------------------------------------- | --------------------------------- | ------------------------------------------------------------ | ------ | ----- | ---- |
+| [206 Reverse Linked List](#206)           |                                   |                                                              | v      | v     |      |
+| [92 Reverse Linked List Ⅱ](#92)           |                                   |                                                              | v      | v     |      |
+| [141 Cycle Linked List](#141)             |                                   |                                                              |        |       |      |
+| [142 Cycle Linked List 2](#142)           |                                   |                                                              |        |       |      |
+| [143 Reorder Linked List](#143)           |                                   | 最後要記得cur.next =None, 不然會有cycle                      | v      | v     |      |
+| [138 Copy List with Random Pointer](#138) |                                   |                                                              |        |       |      |
+| [234 Palindrome Linked List](#234)        | turned into list + 2 pointer trvs | Add dummy node before head and check fast==None or fast.next == None to know odd/even nodes. <br />Then, reverse 2nd part and compare 1st part and 2nd part. | v      |       |      |
 
 
 
 ## Sliding Window
 
-|                                                              |      |      |      | coded                      | Status |          |
-| ------------------------------------------------------------ | ---- | ---- | ---- | -------------------------- | ------ | -------- |
-| [209 Minimum Size Subarray Sum](#209)                        |      |      |      | v                          | v      |          |
-| [159 Longest Substring with At Most Two Distinct Characters](#159) |      |      |      | v                          | v      | ~340     |
-| [340 Longest Substring with At Most k Distinct Characters](#340) |      |      |      | v 比159多了個 k==0 的check | v      | ~159, ~3 |
-| [3 Longest Substring Without Repeating Characters](#3)       |      |      |      |                            |        |          |
+|                                                              |      |      | coded                      | Status |          |
+| ------------------------------------------------------------ | ---- | ---- | -------------------------- | ------ | -------- |
+| [209 Minimum Size Subarray Sum](#209)                        |      |      | v                          | v      |          |
+| [159 Longest Substring with At Most Two Distinct Characters](#159) |      |      | v                          | v      | ~340     |
+| [340 Longest Substring with At Most k Distinct Characters](#340) |      |      | v 比159多了個 k==0 的check | v      | ~159, ~3 |
+| [3 Longest Substring Without Repeating Characters](#3)       |      |      |                            |        |          |
 
 ３３3232222232322
 
@@ -139,13 +139,13 @@ Coded 32324
 
 Greedy
 
-|                 |      |      |      |      |      |        |
-| --------------- | ---- | ---- | ---- | ---- | ---- | ------ |
-| 135 分發糖果    |      |      |      |      |      | Not in |
-| 376 搖擺序列    |      |      |      |      |      | Not in |
-| 402 移除K個數字 |      |      |      |      |      | Not in |
-| 55              |      |      |      |      |      | Not in |
-| **45**          |      |      |      |      |      |        |
+|                 |      |      |      |      |        |
+| --------------- | ---- | ---- | ---- | ---- | ------ |
+| 135 分發糖果    |      |      |      |      | Not in |
+| 376 搖擺序列    |      |      |      |      | Not in |
+| 402 移除K個數字 |      |      |      |      | Not in |
+| 55              |      |      |      |      | Not in |
+| **45**          |      |      |      |      |        |
 
 
 
@@ -267,39 +267,38 @@ tree.root.right.right = Node(7)
 
 
 
-|                                                              |      |                      |                                                              | status   | coded                                        |           |
-| ------------------------------------------------------------ | ---- | -------------------- | ------------------------------------------------------------ | -------- | -------------------------------------------- | --------- |
-| DFS preorder                                                 |      |                      |                                                              |          |                                              |           |
-| [113 Path Sum Ⅱ](#113)                                       |      |                      |                                                              | v        | △ return的時機未抓好，造成items未被pop()足夠 | ~40       |
-| [236 Lowest Common Ancestor of a Binary Tree](#236)          |      |                      |                                                              | v        |                                              |           |
-| [114 Flatten Binary Tree to Linked List](#114)               |      | 左边先拉平，常规思维 | 右边从底部建上来，酷                                         | v        |                                              |           |
-| BFS                                                          |      |                      |                                                              |          |                                              |           |
-| [199 Binary Tree Right Side View](#199)                      |      |                      |                                                              |          |                                              |           |
-| *HIgh Freq.*                                                 |      |                      |                                                              |          |                                              |           |
-| [105 Construct Binary Tree from Preorder and Inorder Traversal](#105) |      |                      |                                                              |          |                                              |           |
-| [110 Balanced Binary Tree](#110)                             |      |                      |                                                              |          |                                              |           |
-| [111 Minimum Depth of Binary Tree](#111)                     |      |                      |                                                              |          |                                              |           |
-| [112 Path Sum](#112)                                         |      |                      |                                                              |          |                                              |           |
-| [113 Path Sum Ⅱ](#113) repeated                              |      |                      |                                                              |          |                                              |           |
-| [124 Binary Tree Maximum Path Sum](#124)                     |      |                      |                                                              |          |                                              |           |
-| [297 Serialize and Deserialize Binary Tree](#297)            |      |                      |                                                              |          |                                              |           |
-| GRAPH<br />adjacent matrix & table                           |      |                      |                                                              |          |                                              |           |
-| [207 Course Schedule](#207)                                  |      | DFS                  | BFS Topological sorting<br />[leecode.jp link](https://leetcode.jp/leetcode-207-course-schedule%e8%a7%a3%e9%a2%98%e6%80%9d%e8%b7%af%e5%88%86%e6%9e%90/) | v        | v                                            | ~210, 269 |
-| [133 Clone Graph](#133)                                      |      |                      |                                                              | v        |                                              |           |
-| High Freq.                                                   |      |                      |                                                              |          |                                              |           |
-| [210 Course Schedule Ⅱ](#210)                                |      |                      |                                                              | v        | v                                            |           |
-| [269 Alien Dictionary](#269)                                 |      |                      |                                                              | Too HARD |                                              |           |
-| [102 Binary Tree Level Order Traversal](#102)                |      |                      |                                                              |          |                                              |           |
-| [145 Binary Tree Postorder Traversal](#145)                  |      |                      |                                                              | v        | v                                            |           |
-| [958 Completeness of a Binary Tree](#958)                    |      |                      |                                                              | v        |                                              |           |
-| [104 Maximum Depth of Binary Tree](#104)                     |      |                      |                                                              | v        | v                                            |           |
-| [111 Minimum Depth of Binary Tree](#111)                     |      |                      |                                                              | v        | v                                            |           |
-| [236 Lowest common Ancestor of a Binary Tree](#236)          |      |                      |                                                              | v        |                                              |           |
-| [144 Binary Tree Preorder Traversal](#144)                   |      |                      |                                                              | v        | v                                            |           |
-| [94 Binary Tree Inorder Traversal][#94]                      |      |                      |                                                              | v        |                                              |           |
-| [101 Symmetric Tree](#101)                                   |      |                      |                                                              | v        |                                              |           |
-| [112 Path Sum](#112)                                         |      |                      |                                                              | v        |                                              |           |
-| [113 Path Sum Ⅱ](#113)                                       |      |                      |                                                              |          |                                              |           |
+|                                                              |                      |                                                              | status   | coded                                        |           |
+| ------------------------------------------------------------ | -------------------- | ------------------------------------------------------------ | -------- | -------------------------------------------- | --------- |
+| DFS preorder                                                 |                      |                                                              |          |                                              |           |
+| [113 Path Sum Ⅱ](#113)                                       |                      |                                                              | v        | △ return的時機未抓好，造成items未被pop()足夠 | ~40       |
+| [236 Lowest Common Ancestor of a Binary Tree](#236)          |                      |                                                              | v        | v                                            |           |
+| [114 Flatten Binary Tree to Linked List](#114)               | 左边先拉平，常规思维 | 右边从底部建上来，酷                                         | v        | v                                            |           |
+| BFS                                                          |                      |                                                              |          |                                              |           |
+| [199 Binary Tree Right Side View](#199)                      |                      |                                                              | v        | v                                            |           |
+| *HIgh Freq.*                                                 |                      |                                                              |          |                                              |           |
+| [105 Construct Binary Tree from Preorder and Inorder Traversal](#105) |                      |                                                              | v        | v                                            |           |
+| [110 Balanced Binary Tree](#110)                             |                      |                                                              | v        | v                                            |           |
+| [111 Minimum Depth of Binary Tree](#111)                     |                      |                                                              | v        | v                                            |           |
+| [112 Path Sum](#112)                                         |                      |                                                              | v        | v                                            |           |
+| [113 Path Sum Ⅱ](#113) repeated                              |                      |                                                              | v        | v                                            |           |
+| [124 Binary Tree Maximum Path Sum](#124)                     |                      |                                                              | v        | v                                            |           |
+| [297 Serialize and Deserialize Binary Tree](#297)            |                      |                                                              |          |                                              |           |
+| GRAPH<br />adjacent matrix & table                           |                      |                                                              |          |                                              |           |
+| [207 Course Schedule](#207)                                  | DFS                  | BFS Topological sorting<br />[leecode.jp link](https://leetcode.jp/leetcode-207-course-schedule%e8%a7%a3%e9%a2%98%e6%80%9d%e8%b7%af%e5%88%86%e6%9e%90/) | v        | v                                            | ~210, 269 |
+| [133 Clone Graph](#133)                                      |                      |                                                              | v        |                                              |           |
+| High Freq.                                                   |                      |                                                              |          |                                              |           |
+| [210 Course Schedule Ⅱ](#210)                                |                      |                                                              | v        | v                                            |           |
+| [269 Alien Dictionary](#269)                                 |                      |                                                              | Too HARD |                                              |           |
+| [102 Binary Tree Level Order Traversal](#102)                |                      |                                                              | v        | v                                            |           |
+| [145 Binary Tree Postorder Traversal](#145)                  |                      |                                                              | v        | v                                            |           |
+| [958 Completeness of a Binary Tree](#958)                    |                      |                                                              | v        |                                              |           |
+| [104 Maximum Depth of Binary Tree](#104)                     |                      |                                                              | v        | v                                            |           |
+| [111 Minimum Depth of Binary Tree](#111)                     |                      |                                                              | v        | v                                            |           |
+| [144 Binary Tree Preorder Traversal](#144)                   |                      |                                                              | v        | v                                            |           |
+| [94 Binary Tree Inorder Traversal][#94]                      |                      |                                                              | v        | v                                            |           |
+| [101 Symmetric Tree](#101)                                   |                      |                                                              | v        | v                                            |           |
+| [112 Path Sum](#112)                                         |                      |                                                              | v        | v                                            |           |
+| [113 Path Sum Ⅱ](#113)                                       |                      |                                                              | v        | v                                            |           |
 
 
 
@@ -346,10 +345,10 @@ tree.root.right.right = Node(7)
 | [409. Longest Palindrome](#409)                              |      |              |                                                              | v      | v     | Not in  |
 | [290 Word Pattern](#290)                                     |      |              |                                                              | v      | v     | Not in  |
 | [49 Group Anagrams](#49)                                     |      | sort(string) | onehot coding string                                         | v      | v     | ~438    |
-| [3 Longest Substring Without Repeating Characters](#3)       |      |              |                                                              |        |       |         |
+| [3 Longest Substring Without Repeating Characters](#3)       |      |              |                                                              | v      | v     |         |
 | [187 Repeated DNA Sequences](#187)                           |      |              |                                                              |        |       | No t in |
-| [76 [ Minimum Window Substring]](#76)                        |      |              |                                                              |        |       | ~209    |
-| [161 One Edit Distance](#161)                                |      |              |                                                              | v      |       |         |
+| [76 [ Minimum Window Substring]](#76)                        |      |              |                                                              | v      | v     | ~209    |
+| [161 One Edit Distance](#161)                                |      |              |                                                              | v      | v     |         |
 | [415 Add Strings](#415)                                      |      |              | 注意地方：<br />1. # if len(num1) > len(num2)    ## CAUTIOUS!!! SHOULD USE WHILE<br/>        while len(num1) > len(num2) and i < len(num1)-1:<br />2. 最後要的答案反轉跟res在append時的type要是str() | v      | v     |         |
 | [71 Simplify Path](#71)                                      |      |              |                                                              | v      |       |         |
 
@@ -359,7 +358,7 @@ tree.root.right.right = Node(7)
 
 |                                   |      |                                                              |      | status | coded |        |
 | --------------------------------- | ---- | ------------------------------------------------------------ | ---- | ------ | ----- | ------ |
-| [200 Number of Islands](#200)     |      | BFS 得到TLE...<br />np.pad(A, ((1,1), (1,1)))<br />分別是在前、後、上、下補０ |      | v      |       |        |
+| [200 Number of Islands](#200)     |      | BFS 得到TLE...<br />np.pad(A, ((1,1), (1,1)))<br />分別是在前、後、上、下補０ |      | v      | v     |        |
 | [127 Word Ladder](#127)           |      |                                                              |      |        |       |        |
 | [473 Matchsticks to Square](#473) |      |                                                              |      |        |       | Not in |
 | [107 Trapping Rain Water Ⅱ](#107) |      |                                                              |      |        |       | Not in |
@@ -379,14 +378,14 @@ tree.root.right.right = Node(7)
 | [64 Minimum Path Sum](#64)                                   |      |      |                       |                                                 | v                                                            | Not in ~120                                      |
 | [174 Dungeon Game](#174)                                     |      |      |                       | 之後看…難                                       |                                                              | Not in                                           |
 | High Freq.                                                   |      |      |                       |                                                 |                                                              |                                                  |
-| [121 Best Time to Buy and Sell Stock](#121)                  |      |      |                       |                                                 | v                                                            |                                                  |
-| [122 Best Time to Buy and Sell StockⅡ](#122)                 |      |      |                       |                                                 | v                                                            |                                                  |
+| [121 Best Time to Buy and Sell Stock](#121)                  |      |      |                       | v                                               | v                                                            |                                                  |
+| [122 Best Time to Buy and Sell StockⅡ](#122)                 |      |      |                       | v                                               | v                                                            |                                                  |
 | [523 Continuous Subarray Sum](#523)                          |      |      |                       | v                                               | v 需考慮k 為０的情況                                         |                                                  |
 | [304 Range Sum Query 2D - Immutable](#304)                   |      |      |                       | v                                               | v 要注意m, n代表pre_sum的長度所以要補加１，然後matrix都是拿 m-1, n-1的 |                                                  |
 | [303 Range Suym Query - Immutable](#303)                     |      |      |                       | v                                               | v<br />做個pre_sum 就ｏｋ要注意長度需加１                    | Not in, but for prep of 304                      |
 | [1027 Longest Arithmetic Sequence](#1027)                    |      |      |                       | v                                               | v                                                            |                                                  |
-| [1143 Longest Common Subsequence](#1143)                     |      |      | Sub array的话会更严格 | v                                               |                                                              | https://www.itread01.com/content/1546179722.html |
-| [139 word break](#139)                                       |      |      |                       |                                                 |                                                              |                                                  |
+| [1143 Longest Common Subsequence](#1143)                     |      |      | Sub array的话会更严格 | v                                               | v                                                            | https://www.itread01.com/content/1546179722.html |
+| [139 word break](#139)                                       |      | dfs  | dp                    | v                                               | v                                                            |                                                  |
 
 
 
@@ -394,8 +393,8 @@ tree.root.right.right = Node(7)
 
 |                                                         |      |                                     |      | Status | coded |        |
 | ------------------------------------------------------- | ---- | ----------------------------------- | ---- | ------ | ----- | ------ |
-| [208 Implement Trie(Prefix Tree)](#208)                 |      |                                     |      |        |       |        |
-| [211 Add and Search Word - Data Structure Design](#211) |      | Trie Tree                           |      |        |       |        |
+| [208 Implement Trie(Prefix Tree)](#208)                 |      |                                     |      | v      | v     |        |
+| [211 Add and Search Word - Data Structure Design](#211) |      | Trie Tree                           |      | v      | v     |        |
 | [547 Friend Circles](#547)                              |      | 並查集                              |      |        |       | Not in |
 | [307 Range Sum Query - Mutable](#307)                   |      | 線段樹！讓update跟query都可是 lg(n) |      |        |       | Not in |
 
@@ -2324,22 +2323,36 @@ class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
         if not head:
             return head
+        return self.recursive(head, None)
+    
+        return self.helper(head)
+    
+    # None 1 2 3 4 5
+    " Recursive "
+    def recursive(self, root, prev=None):
+        if not root:
+            return prev
+        cur = root
+        tmp = cur.next
+        cur.next = prev
+        prev = cur
+        return self.recursive(tmp, prev)
+        # return 
         
-        # X X X
+    " Iterative "      
+    def helper(self, root):
         
-        cur = head
         dummy = ListNode(0)
-        dummy.next = cur
-        # prev.next = cur
+        dummy.next = cur = root
+        prev = None
         
-        while cur.next:
+        while cur:
             tmp = cur.next
-            cur.next = tmp.next
-            tmp.next = dummy.next
-            dummy.next = tmp
-            # cur = tmp
-            
-        return dummy.next
+            cur.next = prev
+            prev = cur 
+            cur = tmp
+        return prev
+        
             
         
 ```
@@ -2390,6 +2403,75 @@ class Solution:
 
 
 ### <a name="208">208</a>
+
+2/27
+
+```python
+class TrieNode:
+    def __init__(self):
+        self.children = [None]*26
+        self.is_end = False
+    
+class Trie:
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.root = TrieNode()
+
+    def insert(self, word: str) -> None:
+        """
+        Inserts a word into the trie.
+        """
+        node = self.root
+        for i in range(len(word)):
+            offset = ord(word[i]) - ord('a')
+            if not node.children[offset]:   # IMPORTANT
+                node.children[offset] = TrieNode()
+            node = node.children[offset]
+        node.is_end = True
+
+
+    def search(self, word: str) -> bool:
+        """
+        Returns if the word is in the trie.
+        """
+        node = self.root
+        for i in range(len(word)):
+            offset = ord(word[i]) - ord('a')
+            if not node.children[offset]:
+                return False
+            node = node.children[offset]
+        # return True
+        return node.is_end
+        
+
+    def startsWith(self, prefix: str) -> bool:
+        """
+        Returns if there is any word in the trie that starts with the given prefix.
+        """
+        # pass
+        node = self.root
+        for i in range(len(prefix)):
+            offset = ord(prefix[i]) - ord('a')
+            if not node.children[offset]:
+                return False
+            node = node.children[offset]
+        return True
+        
+        
+
+
+# Your Trie object will be instantiated and called as such:
+# obj = Trie()
+# obj.insert(word)
+# param_2 = obj.search(word)
+# param_3 = obj.startsWith(prefix)
+```
+
+
+
+First time
 
 ```python
 class TrieNode(object):
