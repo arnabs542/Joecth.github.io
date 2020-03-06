@@ -95,6 +95,97 @@ def fib(n, mem=[]):
 
 
 
+### Bit Manipulation
+
+|                                |                                         |      | status | coded |      |
+| ------------------------------ | --------------------------------------- | ---- | ------ | ----- | ---- |
+| [190 Reverse Bits](#190)       | zfill("1100") --> 前面補齊0讓這串到32位 |      | v      | v     |      |
+| [7 Reverse Interger](#7)       |                                         |      | v      | v     |      |
+| [191 Number of 1's bits](#191) |                                         |      | v      | v     |      |
+| [461 Hamming Distance](#461)   |                                         |      | v      | v     |      |
+
+
+
+### <a name="7">7</a>
+
+```python
+class Solution:
+    def reverse(self, x: int) -> int:
+        if x == 0:return 0
+        
+        flag = -1 if x < 0 else 1
+        y = list(str(abs(x)))
+        self.helper(y, 0, len(y)-1)
+        
+        res = int(''.join(y))
+        
+        # print(res)
+        if flag == 1:
+            return flag*res if flag*res <= 2**31-1 else 0
+        else:
+            return flag*res if flag*res >= -2**31 else 0
+        
+    
+    def helper(self, s, l, r):
+        if l >= r:
+            return
+        s[l], s[r] = s[r], s[l]
+        self.helper(s, l+1, r-1)
+```
+
+
+
+### <a name="190">190</a>
+
+```python
+class Solution:
+    def reverseBits(self, n: int) -> int:
+        return int(bin(n)[2:].zfill(32)[::-1], 2)
+```
+
+
+
+### <a name="191">191</a>
+
+```python
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        count = 0
+        mask = 1
+        while n:
+            # print(n)
+            if n & mask != 0:
+                count += 1
+            n >>= 1
+        return count
+```
+
+
+
+### <a name="461">461</a>
+
+```python
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
+        ans = x ^ y
+        return self.count1s(ans)
+        
+        
+    def count1s(self, num):
+        count = 0
+        mask = 1
+        while num:
+            if num & mask != 0:
+                count += 1
+            num >>= 1
+            
+        return count
+```
+
+
+
+
+
 ## Sorting and Searching
 
 |                                           |      |      |          | status | coded |      |

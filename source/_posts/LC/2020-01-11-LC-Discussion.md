@@ -282,7 +282,7 @@ tree.root.right.right = Node(7)
 | [112 Path Sum](#112)                                         |                      |                                                              | v        | v                                            |           |
 | [113 Path Sum Ⅱ](#113) repeated                              |                      |                                                              | v        | v                                            |           |
 | [124 Binary Tree Maximum Path Sum](#124)                     |                      |                                                              | v        | v                                            |           |
-| [297 Serialize and Deserialize Binary Tree](#297)            |                      |                                                              |          |                                              |           |
+| [297 Serialize and Deserialize Binary Tree](#297)            |                      |                                                              | v        | v                                            |           |
 | GRAPH<br />adjacent matrix & table                           |                      |                                                              |          |                                              |           |
 | [207 Course Schedule](#207)                                  | DFS                  | BFS Topological sorting<br />[leecode.jp link](https://leetcode.jp/leetcode-207-course-schedule%e8%a7%a3%e9%a2%98%e6%80%9d%e8%b7%af%e5%88%86%e6%9e%90/) | v        | v                                            | ~210, 269 |
 | [133 Clone Graph](#133)                                      |                      |                                                              | v        |                                              |           |
@@ -3040,6 +3040,88 @@ class Solution:
                 if i < (self.m-1) and (arr[i+1][j] == INF or arr[i+1][j] > dist):
                     Q.append((arr[i+1][j], i+1, j))
                     arr[i+1][j] = dist
+```
+
+
+
+### <a name="297">297</a>
+
+```python
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Codec:
+    def __init__(self):
+        self.d_count = 0
+    def serialize(self, root):
+        """Encodes a tree to a single string.
+        
+        :type root: TreeNode
+        :rtype: str
+        """
+        pod = []
+        # iod = []
+        self.preorder(root, pod)
+        pod.append('END')
+        # self.inorder(root, iod)
+        encoded = '$'.join(pod)
+        # print(encoded)
+        return encoded
+        
+    def preorder(self, root, s):
+        if not root:    
+            s.append('None')
+            return
+        
+        s.append(str(root.val)+'')
+        self.preorder(root.left, s)
+        self.preorder(root.right, s)
+        
+    def inorder(self, root, s):
+        if not root:    
+            return
+
+        self.inorder(root.left, s)
+        s.append(root.val)
+        self.inorder(root.right, s)
+        
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+        
+        :type data: str
+        :rtype: TreeNode
+        """
+        s = data.split('$')[:-1]
+        # print(s)
+        root = self.build_preorder(s)#, 0)
+        
+        self.d_count = -1
+        return root
+    
+    # def build_preorder(self, s, idx):
+    def build_preorder(self, s):
+        if self.d_count == len(s):
+            return None
+        elem = s[self.d_count]
+        self.d_count += 1
+        if elem == 'None':
+            return None
+        
+        root = TreeNode(elem)
+        root.left = self.build_preorder(s)
+        root.right = self.build_preorder(s)
+    
+        return root
+        
+        
+
+# Your Codec object will be instantiated and called as such:
+# codec = Codec()
+# codec.deserialize(codec.serialize(root))
 ```
 
 
