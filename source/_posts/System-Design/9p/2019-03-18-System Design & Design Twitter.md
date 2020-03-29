@@ -2,7 +2,7 @@
 layout: post
 categories: SystemDesign
 tag: []
-date: 2020-03-18
+date: 2019-03-18
 
 ---
 
@@ -136,8 +136,9 @@ Step2. Sort - 選出核心功能
 >   - 就是说查询的时候，database 通过 index 进行查询，会比一个一个数据查过去的方式更快
 >   - select * from xxx table where yyy=1, 如果 yyy 有 index，就是一个 index query，否则就是一个 sequential query
 > - join应该是变慢，index query是加快，为什么都会让qps变小呢？
->   - index query 这里指的是相对于按照 primary key(id) 去 query。因为 index query 要先query index 的内部表，再去具体的表单里取数据，相比直接通过 id 去取数据要慢的。
->
+>   
+> - index query 这里指的是相对于按照 primary key(id) 去 query。因为 index query 要先query index 的内部表，再去具体的表单里取数据，相比直接通过 id 去取数据要慢的。
+>   
 > - 为啥NOSQL承受量这么多， 跟SQL比起来
 >
 >   - 因为 NoSQL 的数据结构比较简单，支持的查询操作也比较简单。结构简单的话，处理效率就高。SQL 为了支持一些很复杂的查询，所以处理效率较低。
