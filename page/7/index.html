@@ -7,419 +7,340 @@
     error: 'Copy error',
     noSupport: 'The browser does not support'
   }
-} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">249</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">24</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">36</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2017/11/24/DevOps/2017-11-24-Inter%20Process%20communication%20(IPC)/">DevOps/2017-11-24-Inter Process communication (IPC)</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-11-24</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/DevOps/">DevOps</a></span><div class="content"><h3 id="IPC"><a href="#IPC" class="headerlink" title="IPC"></a>IPC</h3><h4 id="Pipe"><a href="#Pipe" class="headerlink" title="Pipe"></a>Pipe</h4><p>This can be only one directional.</p>
-<h5 id="Anonymous-Pipe"><a href="#Anonymous-Pipe" class="headerlink" title="Anonymous Pipe"></a>Anonymous Pipe</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tulnp | grep 8080</span><br></pre></td></tr></table></figure>
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">249</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">24</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">36</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/06/System-Design/2020-02-05-System%20Design%20-%20Cache/">System-Design/2020-02-05-System Design - Cache</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-06</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/System/">System</a></span><div class="content"><h3 id="https-kknews-cc-zh-tw-code-8vljmng-html"><a href="#https-kknews-cc-zh-tw-code-8vljmng-html" class="headerlink" title="https://kknews.cc/zh-tw/code/8vljmng.html"></a><a href="https://kknews.cc/zh-tw/code/8vljmng.html" target="_blank" rel="noopener">https://kknews.cc/zh-tw/code/8vljmng.html</a></h3><p><a href="https://www.zhihu.com/question/319817091" target="_blank" rel="noopener">https://www.zhihu.com/question/319817091</a></p>
+<h2 id="Cache"><a href="#Cache" class="headerlink" title="Cache"></a>Cache</h2><p>對比disk and memory, 內存貴，跟disk比，它寫跟讀快很多</p>
+<p>local sidk cmp to memory</p>
+<img src="https://camo.githubusercontent.com/7acedde6aa7853baf2eb4a53f88e2595ebe43756/687474703a2f2f692e696d6775722e636f6d2f51367a32344c612e706e67" alt="img" style="zoom:48%;" />
 
-<h5 id="Named-Pipe"><a href="#Named-Pipe" class="headerlink" title="Named Pipe"></a>Named Pipe</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkfifo pp</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Pipe testing"</span> &gt; <span class="built_in">test</span> // Writing data</span><br><span class="line">cat &lt; pp // Read from pipe</span><br></pre></td></tr></table></figure>
+<p>方法算法被多次叫怎辦？就是說要加Cache。</p>
+<p>Cacheing service : Memcache, Redis</p>
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd3rkssomcj310c0kgaj0.jpg" alt="image-20200206192031055" style="zoom:50%;" />
 
-<p>In the example above, Line2 will be blocking until Line3 is executed in other shell.</p>
-<ol>
-<li><p><strong>Pros: Makin sure data is really taken away by the other process.</strong></p>
+<h3 id="Cache-aside"><a href="#Cache-aside" class="headerlink" title="Cache aside"></a>Cache aside</h3><p>照理redis不需要知道業務邏輯，應該都是client控制的，所以redis跟db應該沒分前後</p>
+<p>並發時噁心</p>
+<p>機率非常低，還可以設上個ttl，讓他自動expire，減小髒的機率，髒指的就是cache、db不同</p>
+<p>這個是最常用的</p>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd3rkxfaonj30uc0hk44g.jpg" alt="image-20200206192751483"></p>
+<h2 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h2><p>分布式cache</p>
+<p>如果用redis他有很多模式，最好的就是如果有三台機器，希望每台都分擔些</p>
+<p>traffic用一致性哈希　不同key知道要去哪台找，每個node 就是 1/n</p>
+<p>雲計算就是堆機器。</p>
+<h5 id="缺點："><a href="#缺點：" class="headerlink" title="缺點："></a>缺點：</h5><p>要是一個機器掛了，有時有個備份。要是一台機器突然沒了，要是用consistent哈希，會重新算每個從 1/5變1/4。cache miss就是去　DB拿。要是突然一台掛了，瞬間會對，一致性哈希有個hash ring。目標就是當一個走了後，盡量讓原來的機器，每個機器要從1/4 –&gt; 1/3　差為1/12。每台要增加這麼多的數據量。讓遷坤大挪移緩和點。</p>
+<p>一致性哈希是說讓遷移。讓</p>
+<p>distributed hash　就是取模</p>
+<p>CDN　content distributed network，也是緩存，更像file system。縣到市市到省</p>
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd3rl19ugwj30ze0k0wp2.jpg" alt="image-20200206194335424" style="zoom:50%;" />
+
+<p>　</p>
+<h3 id="Read-Write-Through"><a href="#Read-Write-Through" class="headerlink" title="Read/Write Through"></a>Read/Write Through</h3><p>使用者寫到cache, cache自己會負責跟db更新，不用你來管，對應用來說簡單多。</p>
+<p>嚴格上跟memorycached、redis不一樣，這種cache是知道業務邏輯是知道schema、數據的。</p>
+<h5 id="Cache-就是個Service了"><a href="#Cache-就是個Service了" class="headerlink" title="Cache　就是個Service了"></a>Cache　<strong>就是個Service了</strong></h5><p>調cache的人就舒服了什麼都不用管，服務本身在做cache</p>
+<p>它會同步寫到db，必須DB完成後才能返回給３，會慢一點寫慢一點，讀仍是快</p>
+<p>把client做的邏輯給cache做</p>
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd3rl5r877j30ea0k8go4.jpg" alt="img" style="zoom:67%;" />
+
+
+
+<h5 id="Disadvantage-s-write-through"><a href="#Disadvantage-s-write-through" class="headerlink" title="Disadvantage(s): write through"></a>Disadvantage(s): write through</h5><ul>
+<li><p>When a new node is created due to failure or scaling, the new node will not cache entries until the entry is updated in the database. <strong>Cache-aside in conjunction with write through can mitigate this issue.</strong>　來個新node要去db找來寫代價大</p>
 </li>
-<li><p><strong>Cons: One direction 2. Low efficiency.</strong></p>
+<li><p>Most data written might never be read, which can be minimized with a TTL.　給個死掉的時間</p>
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd3rl9vcz3j30s60k0dty.jpg" alt="image-20200206195432938" style="zoom:50%;" />
+
+
+
 </li>
-</ol>
-<h4 id="Advanced-Pipe"><a href="#Advanced-Pipe" class="headerlink" title="Advanced Pipe"></a>Advanced Pipe</h4><p>Popen; when a process is executed as a whole new process within current process, it’s a sub-process of current process. Also, we called it <code>Advanced Pipe</code>.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pipes = subprocess.Popen([<span class="string">'cp'</span>, <span class="string">'-rf'</span>, src, dest], stderr=subprocess.PIPE, stdout=subprocess.PIPE)</span><br><span class="line">std_o, std_err = pipes.communicate()</span><br><span class="line"><span class="keyword">if</span> pipes.returncode != <span class="number">0</span>:</span><br><span class="line">    <span class="keyword">raise</span> Exception(<span class="string">"Copy SC directory Failed.. &#123;&#125;"</span>.format(std_err.decode(<span class="string">'utf-8'</span>)))</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="Info-Queue"><a href="#Info-Queue" class="headerlink" title="Info Queue"></a>Info Queue</h4><p>Information queue can be used to solve the <code>waiting problem</code> mentioned in <code>Pipe</code>, i.e. not being blocked for the one which sends data, which is  similiar to buffer mechanism.</p>
-<ol>
-<li><strong>Pros: not being blocked.</strong></li>
-<li><strong>Cons: time wasting for huge data. (Copy takes great amount of time to access memory)</strong></li>
-</ol>
-<h4 id="Shared-Memory"><a href="#Shared-Memory" class="headerlink" title="Shared Memory"></a>Shared Memory</h4><p>Shared mm can be used to solve time-wasting problem when the data copied is huge mentioned in<code>Info Queue</code>.</p>
-<p>When a system loads a process, the memory it allocates is the <code>virtual memory</code> rather than the <code>physical memory</code>. Therefore, the virtual addresses fromt the two different processes can be mapped to the same part of physical memory to achieve <code>shared memory</code>  mechanism, even though the twos have disparate virtual memory spaces.</p>
-<ol>
-<li><p><strong>Pros: No need to wait for so long when the data copied is too large.</strong></p>
-</li>
-<li><p><strong>Cons: Competitive problem</strong></p>
-</li>
-</ol>
-<h3 id="Semophore"><a href="#Semophore" class="headerlink" title="Semophore"></a>Semophore</h3><p>Competitive problem is the most serious one happened in <code>shared memory</code>. And semaphore physically acting as a counter can be adopted to solve this problem.</p>
-<p>It’s just like a traffic light to tell a process whether the other one is occupiing this resource.</p>
-<ol>
-<li><p><strong>Pros: Have the different process accesses the resource in turn and thus solve the competitve problem.</strong></p>
-</li>
-<li><p><strong>Cons: LIMITATION, concisely; On one machine</strong></p>
-</li>
-</ol>
-<h3 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h3><p>The 4 mechanisms mentioned above are merely <code>IPC</code> mechanism on one machine. How if we want to make available communication btw tw machines far apart from each other?</p>
-<p>Yeah, <code>Socket</code> can be used to solve this problem. </p>
-<p>E.g. When we sent a http request via browser, the server returns back the corresponding data. This is what <code>socket</code> is applied in <code>IPC</code>.</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2017/06/07/DevOps/2017-06-07-Mac-Alg-and-Dev-Configuration/">DevOps/2017-06-07-Mac-Alg-and-Dev-Configuration</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-06-07</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/DevOps/">DevOps</a></span><div class="content"><p>#Alg &amp; Dev Configuration for a NEW Mac Pro</p>
-<!--![aaa](http://img2.3png.com/efa7ac2948c7148fb02c1cfc57afe5170de6.png)
--->
-
-<p>##Z-shell</p>
-<p>##Homebrew</p>
-<ol>
-<li><a href="http://brew.sh" target="_blank" rel="noopener" title="install_HB">Install</a> homebrew </li>
-</ol>
-<p>##MacVim</p>
-<ol>
-<li>Add export PATH=/usr/local/bin:$PATH to .zshrc</li>
-<li>brew update</li>
-<li>brew install macvim </li>
-<li>Run brew link macvim<br><img src="https://i.imgur.com/mOqtUOD.png" alt="aaa"><br><a href="https://imgchr.com/i/A4e9Hg" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/04/07/A4e9Hg.md.png" alt="A4e9Hg.md.png"></a></li>
-</ol>
-<p>P.S. vim in the same way<br>We now have the latest versions of macvim managed by brew. Run brew update &amp;&amp; brew upgrade every once in a while to upgrade them.</p>
-<!--This includes the installation of the CLI mvim and the mac application (which both point to the same thing).-->
-
-
-<p>##.vimrc<br><a href="https://github.com/Joecth/gvim_Linux" target="_blank" rel="noopener">Joecth’s github</a>  setting<br>Just put .vimrc under $HOME dir (~/), all settings are done (font size, color, theme, etc. )</p>
-<p>##iterm2<br>![iterm2_zshell_done](<a href="https://i.imgur.com/iq3gCAu.png" target="_blank" rel="noopener">https://i.imgur.com/iq3gCAu.png</a> =30x) <!-- .element height="50%" width="50%" --></p>
-<p>##MacDown</p>
-<p>##tmux</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2017/04/03/DevOps/2017-04-03-awk/">DevOps/2017-04-03-awk</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-04-03</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/DevOps/">DevOps</a></span><div class="content"><p>ref from: <a href="https://coolshell.cn/articles/9070.html" target="_blank" rel="noopener">https://coolshell.cn/articles/9070.html</a></p>
-<p>我从netstat命令中提取了如下信息作为用例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`$ ``cat` `netstat``.txt``Proto Recv-Q Send-Q Local-Address          Foreign-Address             State``tcp        0      0 0.0.0.0:3306           0.0.0.0:*                   LISTEN``tcp        0      0 0.0.0.0:80             0.0.0.0:*                   LISTEN``tcp        0      0 127.0.0.1:9000         0.0.0.0:*                   LISTEN``tcp        0      0 coolshell.cn:80        124.205.5.146:18245         TIME_WAIT``tcp        0      0 coolshell.cn:80        61.140.101.185:37538        FIN_WAIT2``tcp        0      0 coolshell.cn:80        110.194.134.189:1032        ESTABLISHED``tcp        0      0 coolshell.cn:80        123.169.124.111:49809       ESTABLISHED``tcp        0      0 coolshell.cn:80        116.234.127.77:11502        FIN_WAIT2``tcp        0      0 coolshell.cn:80        123.169.124.111:49829       ESTABLISHED``tcp        0      0 coolshell.cn:80        183.60.215.36:36970         TIME_WAIT``tcp        0   4166 coolshell.cn:80        61.148.242.38:30901         ESTABLISHED``tcp        0      1 coolshell.cn:80        124.152.181.209:26825       FIN_WAIT1``tcp        0      0 coolshell.cn:80        110.194.134.189:4796        ESTABLISHED``tcp        0      0 coolshell.cn:80        183.60.212.163:51082        TIME_WAIT``tcp        0      1 coolshell.cn:80        208.115.113.92:50601        LAST_ACK``tcp        0      0 coolshell.cn:80        123.169.124.111:49840       ESTABLISHED``tcp        0      0 coolshell.cn:80        117.136.20.85:50025         FIN_WAIT2``tcp        0      0 :::22                  :::*                        LISTEN`</span><br></pre></td></tr></table></figure>
-
-<p>下面是最简单最常用的awk示例，其输出第1列和第4例，</p>
-<ul>
-<li>其中单引号中的被大括号括着的就是awk的语句，注意，其只能被单引号包含。</li>
-<li>其中的$1..$n表示第几例。注：$0表示整个行。</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`$ ``awk` `<span class="string">'&#123;print $1, $4&#125;'</span>` `netstat``.txt``Proto Local-Address``tcp 0.0.0.0:3306``tcp 0.0.0.0:80``tcp 127.0.0.1:9000``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp :::22`</span><br></pre></td></tr></table></figure>
+<h3 id="Write-behind-↓-下面"><a href="#Write-behind-↓-下面" class="headerlink" title="Write-behind　↓　下面"></a>Write-behind　↓　下面</h3><p>cache不是馬上去更新db，當大量高併發寫時，撐不住，所以先buffer一下個10秒</p>
+<p>k:v1, v2, v3，直接就一次v3就好了 </p>
+<p>DB可batch更新　時間到或queue到其值</p>
+<p>萬一buffer時掛了怎辦？linux RO</p>
+<p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gbn4cmhb4sj30lu0k8aao.jpg" alt="img"></p>
+<h5 id="Refresh-ahead…-↓"><a href="#Refresh-ahead…-↓" class="headerlink" title="Refresh ahead… ↓"></a>Refresh ahead… ↓</h5><h5 id=""><a href="#" class="headerlink" title=""></a></h5><p>简单的说就是在缓存数据过期前，能自动的刷新缓存数据。举个例子来说，某条数据在缓存中，过期时间是60秒。我们给他设置一个参数，比如是0.8，60x0.8=48秒，那么在前48秒访问该数据，就照正常的取法，直接返回缓存中的数据。当在48-60秒这个区间取数据时，缓存先将之前缓存的结果返回给外部应用程序，然后异步的再从数据库去更新缓存中的值，以尽可能的保证缓存的值是最新的。如果取数据的的时候超过了60秒，就安装read-through的方式。<br> Refresh-ahead是对未来数据的访问情形的估算，我们猜测这个数据在过期后，仍然可能被频繁的访问，那么这种设计的策略获得的优势会更明显。<br> 但是，如果有大量的数据是用refresh-ahead策略，但是这个数据被重新缓存后，又一次都没有被访问过，那这个策略就是很失算的了。<br> 那么，有人可能会问，既然如此，我把过期的时间延长不就好了，之前60秒过期，改成6000秒过期，这样就不会用Refresh-ahead策略来刷新数据了。<br> 然而，事实是缓存的数据越久，出现脏数据的可能性也就越大，更重要的是，如果你的估算也是失误的，大量的超期缓存数据没有被实际访问，那么你就浪费了很多的内存，做了无用的事情，这也是应该避免的。</p>
+<p>作者：周小春<br>链接：<a href="https://www.jianshu.com/p/6321d4f823c1" target="_blank" rel="noopener">https://www.jianshu.com/p/6321d4f823c1</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/05/System-Design/2020-02-04-System%20Design%20-%20LB/">System-Design/2020-02-04-System Design - LB</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-05</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/System/">System</a></span><div class="content"><h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="SNAKE"><a href="#SNAKE" class="headerlink" title="SNAKE"></a>SNAKE</h2><ul>
+<li>Scenario: case/interface</li>
+<li>Necessary: constrain/hypothesis</li>
+<li>Application: service/algo</li>
+<li>Kilobit: data</li>
+<li>Evolve</li>
+</ul>
+<p>使用redis 緩存的地方</p>
+<ul>
+<li>獎品，數量少，更新頻率低，最佳的全量緩存對象</li>
+<li>優惠券，一次性導入，優惠券編碼緩存為set類型</li>
+<li>中獎紀錄，讀寫差不多，可以緩存部分統計數據</li>
+<li>黑名單</li>
+</ul>
+<h2 id="Loading-Balancing"><a href="#Loading-Balancing" class="headerlink" title="Loading Balancing"></a>Loading Balancing</h2><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd3rkbx8ooj319y0acwkc.jpg" alt="image-20200205225415969" style="zoom:50%;" />
 
-<p>我们再来看看awk的格式化输出，和C语言的printf没什么两样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;&#123;printf &quot;%-8s %-8s %-8s %-18s %-22s %-15s\n&quot;,$1,$2,$3,$4,$5,$6&#125;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;Proto    Recv-Q   Send-Q   Local-Address      Foreign-Address        State&#96;&#96;tcp      0        0        0.0.0.0:3306       0.0.0.0:*              LISTEN&#96;&#96;tcp      0        0        0.0.0.0:80         0.0.0.0:*              LISTEN&#96;&#96;tcp      0        0        127.0.0.1:9000     0.0.0.0:*              LISTEN&#96;&#96;tcp      0        0        coolshell.cn:80    124.205.5.146:18245    TIME_WAIT&#96;&#96;tcp      0        0        coolshell.cn:80    61.140.101.185:37538   FIN_WAIT2&#96;&#96;tcp      0        0        coolshell.cn:80    110.194.134.189:1032   ESTABLISHED&#96;&#96;tcp      0        0        coolshell.cn:80    123.169.124.111:49809  ESTABLISHED&#96;&#96;tcp      0        0        coolshell.cn:80    116.234.127.77:11502   FIN_WAIT2&#96;&#96;tcp      0        0        coolshell.cn:80    123.169.124.111:49829  ESTABLISHED&#96;&#96;tcp      0        0        coolshell.cn:80    183.60.215.36:36970    TIME_WAIT&#96;&#96;tcp      0        4166     coolshell.cn:80    61.148.242.38:30901    ESTABLISHED&#96;&#96;tcp      0        1        coolshell.cn:80    124.152.181.209:26825  FIN_WAIT1&#96;&#96;tcp      0        0        coolshell.cn:80    110.194.134.189:4796   ESTABLISHED&#96;&#96;tcp      0        0        coolshell.cn:80    183.60.212.163:51082   TIME_WAIT&#96;&#96;tcp      0        1        coolshell.cn:80    208.115.113.92:50601   LAST_ACK&#96;&#96;tcp      0        0        coolshell.cn:80    123.169.124.111:49840  ESTABLISHED&#96;&#96;tcp      0        0        coolshell.cn:80    117.136.20.85:50025    FIN_WAIT2&#96;&#96;tcp      0        0        :::22              :::*                   LISTEN&#96;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>nginx async</p>
+</li>
+<li><p>HAProxy 加了機器要自己再改配置</p>
+<img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gblx1909c6j31c20i2h6v.jpg" alt="image-20200205225556197" style="zoom:50%;" />
 
-<h4 id="脱掉外套"><a href="#脱掉外套" class="headerlink" title="脱掉外套"></a>脱掉外套</h4><h5 id="过滤记录"><a href="#过滤记录" class="headerlink" title="过滤记录"></a>过滤记录</h5><p>我们再来看看如何过滤记录（下面过滤条件为：第三列的值为0 &amp;&amp; 第6列的值为LISTEN）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;$3&#x3D;&#x3D;0 &amp;&amp; $6&#x3D;&#x3D;&quot;LISTEN&quot; &#39;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;tcp        0      0 0.0.0.0:3306               0.0.0.0:*              LISTEN&#96;&#96;tcp        0      0 0.0.0.0:80                 0.0.0.0:*              LISTEN&#96;&#96;tcp        0      0 127.0.0.1:9000             0.0.0.0:*              LISTEN&#96;&#96;tcp        0      0 :::22                      :::*                   LISTEN&#96;</span><br></pre></td></tr></table></figure>
 
-<p>其中的“==”为比较运算符。其他比较运算符：!=, &gt;, &lt;, &gt;=, &lt;=</p>
-<p>我们来看看各种过滤记录的方式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39; $3&gt;0 &#123;print $0&#125;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;Proto Recv-Q Send-Q Local-Address          Foreign-Address             State&#96;&#96;tcp        0   4166 coolshell.cn:80        61.148.242.38:30901         ESTABLISHED&#96;&#96;tcp        0      1 coolshell.cn:80        124.152.181.209:26825       FIN_WAIT1&#96;&#96;tcp        0      1 coolshell.cn:80        208.115.113.92:50601        LAST_ACK&#96;</span><br></pre></td></tr></table></figure>
 
-<p>如果我们需要表头的话，我们可以引入内建变量NR：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;$3&#x3D;&#x3D;0 &amp;&amp; $6&#x3D;&#x3D;&quot;LISTEN&quot; || NR&#x3D;&#x3D;1 &#39;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;Proto Recv-Q Send-Q Local-Address          Foreign-Address             State&#96;&#96;tcp        0      0 0.0.0.0:3306           0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 0.0.0.0:80             0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 127.0.0.1:9000         0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 :::22                  :::*                        LISTEN&#96;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="設計-Serverside-Load-Balancer-選server"><a href="#設計-Serverside-Load-Balancer-選server" class="headerlink" title="設計 Serverside Load Balancer 選server"></a>設計 Serverside Load Balancer 選server</h3><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gblyao5twoj314a0jk7jx.jpg" alt="image-20200205233939163" style="zoom:50%;" />
 
-<p>再加上格式化输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;$3&#x3D;&#x3D;0 &amp;&amp; $6&#x3D;&#x3D;&quot;LISTEN&quot; || NR&#x3D;&#x3D;1 &#123;printf &quot;%-20s %-20s %s\n&quot;,$4,$5,$6&#125;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;Local-Address        Foreign-Address      State&#96;&#96;0.0.0.0:3306         0.0.0.0:*            LISTEN&#96;&#96;0.0.0.0:80           0.0.0.0:*            LISTEN&#96;&#96;127.0.0.1:9000       0.0.0.0:*            LISTEN&#96;&#96;:::22                :::*                 LISTEN&#96;</span><br></pre></td></tr></table></figure>
+<img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gblyb6gizej314y0lik65.jpg" alt="image-20200205234009523" style="zoom:50%;" />
 
-<h5 id="内建变量"><a href="#内建变量" class="headerlink" title="内建变量"></a><strong>内建变量</strong></h5><p>说到了内建变量，我们可以来看看awk的一些内建变量：</p>
+<p>Load balancing 可以用一致性哈希的機制　key是一樣永遠會去一樣的機器</p>
+<p>希望對某一個key去固定的server取緩存</p>
+<h5 id="Spring-Cloud-Ribbon"><a href="#Spring-Cloud-Ribbon" class="headerlink" title="Spring Cloud - Ribbon"></a>Spring Cloud - Ribbon</h5><p>來了新的ABC Service，LB會知道，因為有Service Registration，LB會考慮第11個進來</p>
+<p>Smart LB</p>
+<img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gblyg6va34j30z20pqgw1.jpg" alt="image-20200205234458185" style="zoom:50%;" />
+
+<p>１ AvailabilityFilteringRule 10秒、100, 1000秒再試 exponential</p>
+<p>２ WeightedResponseTimeRule 要等愈長，權重給它愈小，我相對應該要發給response快的。</p>
+<p>​    但不知道是DB慢還是API自己慢，還可講更底層的 TLS(Transpor Layer Security)、握手等機制都是routing的因素，所以smart LB都要考慮</p>
+<h2 id="System-Design-Primer"><a href="#System-Design-Primer" class="headerlink" title="System Design Primer"></a>System Design Primer</h2><p><a href="https://github.com/kevingo/system-design-primer-zh-tw#how-to-approach-a-system-design-interview-question" target="_blank" rel="noopener">https://github.com/kevingo/system-design-primer-zh-tw#how-to-approach-a-system-design-interview-question</a>　</p>
+<img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gblyxvhf3ij30sb0ixwfc.jpg" alt="img" style="zoom:48%;" />
+
+<ul>
+<li><p>Sticky session / cookies 指的就是之前提到的 constant hash</p>
+</li>
+<li><p>傳輸層安全性協定（英語：Transport Layer Security，縮寫：TLS）及其前身安全通訊協定（英語：Secure Sockets Layer，縮寫：SSL）是一種安全協定，目的是為網際網路通訊提供安全及資料完整性保障。</p>
+</li>
+<li><p>TLS與SSL協定可加密客戶端與伺服器端的網路通訊，它們利用憑證來建立身分鏈，以確保客戶端所通訊的對象是經過驗證的合法伺服器。而進行HTTPS監聽的方法則是在客戶端與伺服器端之間建立一個中間代理人，類似中間人攻擊（man-in-the-middle）的手法，這些可執行HTTPS監聽的安全產品會先攔截流量、檢查流量內容，再重建連結。</p>
+</li>
+<li><p>内部自己用RPC</p>
+</li>
+<li><p>Load balancers can be implemented with hardware (expensive) or with software such as HAProxy.</p>
+<p>Additional benefits include:</p>
+<ul>
+<li>SSL termination</li>
+</ul>
+</li>
+</ul>
+<pre><code>\- Decrypt incoming requests and encrypt server responses so backend servers do not have to perform these potentially expensive operations
+
+- Removes the need to install [X.509 certificates](https://en.wikipedia.org/wiki/X.509) on each server</code></pre><ul>
+<li><p><strong>Session persistence</strong> - Issue cookies and route a specific client’s requests to same instance if the web apps do not keep track of sessions === 如購物車時</p>
+</li>
+<li><h3 id="Fail-over"><a href="#Fail-over" class="headerlink" title="Fail-over"></a>Fail-over</h3><h4 id="Active-passive-有替補的當主要的掛了時馬上補上去"><a href="#Active-passive-有替補的當主要的掛了時馬上補上去" class="headerlink" title="Active-passive　有替補的當主要的掛了時馬上補上去"></a>Active-passive　有替補的當主要的掛了時馬上補上去</h4><p>With active-passive fail-over, heartbeats are sent between the active and the passive server on standby. If the heartbeat is interrupted, the passive server takes over the active’s IP address and resumes service.</p>
+<p>The length of downtime is determined by whether the passive server is already running in ‘hot’ standby or whether it needs to start up from ‘cold’ standby. Only the active server handles traffic.</p>
+<p>Active-passive failover can also be referred to as master-slave failover.</p>
+<h4 id="Active-active"><a href="#Active-active" class="headerlink" title="Active-active"></a>Active-active</h4><p>In active-active, both servers are managing traffic, spreading the load between them.</p>
+<p>If the servers are public-facing, the DNS would need to know about the public IPs of both servers. If the servers are internal-facing, application logic would need to know about both servers.</p>
+<p>Active-active failover can also be referred to as master-master failover.</p>
+</li>
+</ul>
+<ul>
+<li><h3 id="NAT-Network-Address-Translation-NAT"><a href="#NAT-Network-Address-Translation-NAT" class="headerlink" title="NAT - Network Address Translation (NAT)"></a>NAT - Network Address Translation (NAT)</h3><p>對外會把ip映射成一個對外的ip</p>
+<p>當在配置一個data center 時，內外ip的mapping</p>
+<h3 id="Layer-4-load-balancing"><a href="#Layer-4-load-balancing" class="headerlink" title="Layer 4 load balancing"></a>Layer 4 load balancing</h3><p>Layer 4 load balancers look at info at the <a href="https://github.com/kevingo/system-design-primer-zh-tw#communication" target="_blank" rel="noopener">transport layer</a> to decide how to distribute requests. Generally, this involves the source, destination IP addresses, and ports in the header, but not the contents of the packet. Layer 4 load balancers forward network packets to and from the upstream server, performing <a href="https://www.nginx.com/resources/glossary/layer-4-load-balancing/" target="_blank" rel="noopener">Network Address Translation (NAT)</a>.</p>
+<h3 id="Layer-7-load-balancing"><a href="#Layer-7-load-balancing" class="headerlink" title="Layer 7 load balancing"></a>Layer 7 load balancing</h3><p>Layer 7 load balancers look at the <a href="https://github.com/kevingo/system-design-primer-zh-tw#communication" target="_blank" rel="noopener">application layer</a> to decide how to distribute requests. This can involve contents of the header, message, and cookies. Layer 7 load balancers terminates network traffic, reads the message, makes a load-balancing decision, then opens a connection to the selected server. <strong>For example, a layer 7 load balancer can direct video traffic to servers that host videos while directing more sensitive user billing traffic to security-hardened servers.</strong><br>就是根據 URLroute 到不同的服務</p>
+<p>spring cloud zuul裡就有得配置　path ==&gt; serviceId </p>
+</li>
+</ul>
+<pre><code>&lt;img src=&quot;https://camo.githubusercontent.com/1d761d5688d28ce1fb12a0f1c8191bca96eece4c/687474703a2f2f692e696d6775722e636f6d2f354b656f6351732e6a7067&quot; alt=&quot;img&quot;  /&gt;
+
+At the cost of flexibility, ***layer 4 load balancing requires less time and computing resources than Layer 7***, although the performance impact can be minimal on modern commodity hardware.</code></pre><p>  ​        愈底下愈快啊　如Application Server用IPC　肯定比http快</p>
+<h3 id="Horizontal-scaling-加機器"><a href="#Horizontal-scaling-加機器" class="headerlink" title="Horizontal scaling     加機器"></a>Horizontal scaling     加機器</h3><p>Load balancers can also help with horizontal scaling, improving performance and availability. Scaling out using commodity machines is more cost efficient and results in higher availability than scaling up a single server on more expensive hardware, called <strong>Vertical Scaling　==&gt;　加CPU、RAM</strong>. It is also easier to hire for talent working on commodity hardware than it is for specialized enterprise systems.</p>
+<h4 id="Disadvantage-s-horizontal-scaling"><a href="#Disadvantage-s-horizontal-scaling" class="headerlink" title="Disadvantage(s): horizontal scaling"></a>Disadvantage(s): horizontal scaling</h4><ul>
+<li>Scaling horizontally introduces complexity and involves cloning servers<ul>
+<li>Servers should be <strong>stateless</strong>: they should not contain any user-related data like sessions or profile pictures　<strong>不管去哪台web server機器都應該要是一樣的　不該有session這樣的東西</strong></li>
+<li><strong>Sessions</strong> can be stored in a centralized data store such as a <a href="https://github.com/kevingo/system-design-primer-zh-tw#database" target="_blank" rel="noopener">database</a> (SQL, NoSQL) or a persistent <a href="https://github.com/kevingo/system-design-primer-zh-tw#cache" target="_blank" rel="noopener">cache</a> (Redis, Memcached). <strong>Session 就是 Stateful</strong></li>
+</ul>
+</li>
+<li>Downstream servers such as caches and databases need to handle more simultaneous connections as upstream servers scale out</li>
+</ul>
+<p>​        </p>
+<h3 id="Disadvantage-s-load-balancer"><a href="#Disadvantage-s-load-balancer" class="headerlink" title="Disadvantage(s): load balancer"></a>Disadvantage(s): load balancer</h3><ul>
+<li><p>The load balancer can become a performance bottleneck if it does not have enough resources or if it is not configured properly.　掛了就沒</p>
+</li>
+<li><p>Introducing a load balancer to help eliminate single points of failure results in increased complexity.</p>
+</li>
+</ul>
+<ul>
+<li><p>A single load balancer is a single point of failure, configuring multiple load balancers further increases complexity.</p>
+</li>
+<li><h3 id="Source-s-and-further-reading"><a href="#Source-s-and-further-reading" class="headerlink" title="Source(s) and further reading"></a>Source(s) and further reading</h3><ul>
+<li><a href="https://www.nginx.com/blog/inside-nginx-how-we-designed-for-performance-scale/" target="_blank" rel="noopener">NGINX architecture</a></li>
+<li><a href="http://www.haproxy.org/download/1.2/doc/architecture.txt" target="_blank" rel="noopener">HAProxy architecture guide</a></li>
+<li><a href="http://www.lecloud.net/post/7295452622/scalability-for-dummies-part-1-clones" target="_blank" rel="noopener">Scalability</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Load_balancing_(computing)" target="_blank" rel="noopener">Wikipedia</a></li>
+<li><a href="https://www.nginx.com/resources/glossary/layer-4-load-balancing/" target="_blank" rel="noopener">Layer 4 load balancing</a></li>
+<li><a href="https://www.nginx.com/resources/glossary/layer-7-load-balancing/" target="_blank" rel="noopener">Layer 7 load balancing</a></li>
+<li><a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html" target="_blank" rel="noopener">ELB listener config</a>　　這個是亞馬遜自己開發的</li>
+</ul>
+</li>
+</ul>
+<p>LB 某種意義上就是 reversed proxy (Web Server)了</p>
+<p>ref : </p>
+<p><a href="https://www.youtube.com/watch?v=RlkA1NRoYJ8&amp;list=PLbhaS_83B97vSWVslD63vjIi5OTYmSVrk&amp;index=80" target="_blank" rel="noopener">https://www.youtube.com/watch?v=RlkA1NRoYJ8&amp;list=PLbhaS_83B97vSWVslD63vjIi5OTYmSVrk&amp;index=80</a></p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/05/Web/2020-02-03-Database/">Web/2020-02-03-Database</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-05</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Web/">Web</a></span><div class="content"><h3 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h3><p>用一條SQL 語句 查詢出每門課都大於80 分的學生姓名<br>name kecheng fenshu<br>張三 語文 81<br>張三 數學 75<br>李四 語文 76<br>李四 數學 90<br>王五 語文 81<br>王五 數學 100<br>王五 英語 90</p>
+<p>A: select distinct name from table where name not in (select distinct name from table where fenshu&lt;=80);<br>  select name from table group by name having min(fenshu)&gt;80;</p>
+<p> select name from table group by name having count(kecheng)&gt;=3 and min(fenshu)&gt;=80;</p>
+<h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> redis <span class="keyword">import</span> StrictRedis</span><br><span class="line">rds = StrictRedis(host=<span class="string">'127.0.0.1'</span>, port=<span class="number">6379</span>, db=<span class="number">4</span>, password=<span class="string">''</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">producer</span><span class="params">()</span>:</span></span><br><span class="line">	info = &#123;<span class="string">"job_id"</span>: job_id, <span class="string">"dir"</span>: E_dir, <span class="string">"paras"</span>: params&#125;</span><br><span class="line">	rds.rpush(task_que_name, json.dumps(info))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">status_checker</span><span class="params">()</span>:</span></span><br><span class="line">  result_check = rds.hmget(result_que_name, job_id)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">worker</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="comment"># job = q.get</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">1</span>:</span><br><span class="line">            <span class="comment"># running = True</span></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="string">""" Get job_id from task_que """</span></span><br><span class="line">                _, info = rds.blpop(task_que_name)</span><br><span class="line"></span><br><span class="line">                <span class="comment"># &#123;'job_id': '9c5c2780-32e0-11ea-805b-005056ab266c', 'dir': 'M_', 'paras': &#123;'_name': 'testxxxxx7373'&#125;&#125;</span></span><br><span class="line">                info = json.loads(info.decode())    <span class="comment"># info is byte from redis</span></span><br><span class="line">                result = foo(info[<span class="string">"dir"</span>], info[<span class="string">"paras"</span>])</span><br><span class="line">                <span class="comment"># time.sleep(500)</span></span><br><span class="line"></span><br><span class="line">                rds.hmset(result_que_name, &#123;info[<span class="string">"job_id"</span>]: json.dumps(result)&#125;)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                print(<span class="string">"Caught exception: &#123;&#125;"</span>.format(e))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/05/Web/2018-02-04-Web-Arrangement/">Web/2018-02-04-Web-Arrangement</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-05</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Web/">Web</a></span><div class="content"><h3 id="TCP-vs-UDP"><a href="#TCP-vs-UDP" class="headerlink" title="TCP vs UDP"></a>TCP vs UDP</h3><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200205172545061.png" alt="image-20200205172545061" style="zoom:50%;" />
+
+<p>ISO, the International Organization for Standardization</p>
+<p>Open System Interconnection Model，</p>
 <table>
 <thead>
 <tr>
-<th>$0</th>
-<th>当前记录（这个变量中存放着整个行的内容）</th>
+<th align="right"></th>
+<th align="left">TCP</th>
+<th>UDP</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>$1~$n</td>
-<td>当前记录的第n个字段，字段间由FS分隔</td>
+<td align="right">Acronym for</td>
+<td align="left">Transmission Control Protocol</td>
+<td>User Datagram Protocol or Universal Datagram Protocol</td>
 </tr>
 <tr>
-<td>FS</td>
-<td>输入字段分隔符 默认是空格或Tab</td>
+<td align="right">Connection</td>
+<td align="left">Transmission Control Protocol is a connection-oriented protocol.</td>
+<td>User Datagram Protocol is a connectionless protocol.</td>
 </tr>
 <tr>
-<td>NF</td>
-<td>当前记录中的字段个数，就是有多少列</td>
+<td align="right">Function</td>
+<td align="left">As a message makes its way across the <a href="https://www.diffen.com/difference/Internet_vs_World_Wide_Web" target="_blank" rel="noopener">internet</a> from one computer to another. This is connection based.</td>
+<td>UDP is also a protocol used in message transport or transfer. This is not connection based which means that one program can send a load of packets to another and that would be the end of the relationship.</td>
 </tr>
 <tr>
-<td>NR</td>
-<td>已经读出的记录数，就是行号，从1开始，如果有多个文件话，这个值也是不断累加中。</td>
+<td align="right">Usage</td>
+<td align="left">TCP is suited for applications that require high reliability, and transmission time is relatively less critical.</td>
+<td>UDP is suitable for applications that need fast, efficient transmission, such as games. UDP’s stateless nature is also useful for servers that answer small queries from huge numbers of clients.</td>
 </tr>
 <tr>
-<td>FNR</td>
-<td>当前记录数，与NR不同的是，这个值会是各个文件自己的行号</td>
+<td align="right">Use by other protocols</td>
+<td align="left">HTTP, HTTPs, FTP, SMTP, Telnet</td>
+<td>DNS, DHCP, TFTP, SNMP, RIP, VOIP.</td>
 </tr>
 <tr>
-<td>RS</td>
-<td>输入的记录分隔符， 默认为换行符</td>
+<td align="right">Ordering of data packets</td>
+<td align="left">TCP rearranges <a href="https://www.diffen.com/difference/Data_vs_Information" target="_blank" rel="noopener">data</a> packets in the order specified.</td>
+<td>UDP has no inherent order as all packets are independent of each other. If ordering is required, it has to be managed by the application layer.</td>
 </tr>
 <tr>
-<td>OFS</td>
-<td>输出字段分隔符， 默认也是空格</td>
+<td align="right">Speed of transfer</td>
+<td align="left">The speed for TCP is slower than UDP.</td>
+<td>UDP is faster because error recovery is not attempted. It is a “best effort” protocol.</td>
 </tr>
 <tr>
-<td>ORS</td>
-<td>输出的记录分隔符，默认为换行符</td>
+<td align="right">Reliability</td>
+<td align="left">There is absolute guarantee that the data transferred remains intact and arrives in the same order in which it was sent.</td>
+<td>There is no guarantee that the messages or packets sent would reach at all.</td>
 </tr>
 <tr>
-<td>FILENAME</td>
-<td>当前输入文件的名字</td>
+<td align="right">Header Size</td>
+<td align="left">TCP header size is 20 bytes</td>
+<td>UDP Header size is 8 bytes.</td>
+</tr>
+<tr>
+<td align="right">Common Header Fields</td>
+<td align="left">Source port, Destination port, Check Sum</td>
+<td>Source port, Destination port, Check Sum</td>
+</tr>
+<tr>
+<td align="right">Streaming of data</td>
+<td align="left">Data is read as a byte stream, no distinguishing indications are transmitted to signal message (segment) boundaries.</td>
+<td>Packets are sent individually and are checked for integrity only if they arrive. Packets have definite boundaries which are honored upon receipt, meaning a read operation at the receiver socket will yield an entire message as it was originally sent.</td>
+</tr>
+<tr>
+<td align="right">Weight</td>
+<td align="left">TCP is heavy-weight. TCP requires three packets to set up a socket connection, before any user data can be sent. TCP handles reliability and congestion control.</td>
+<td>UDP is lightweight. There is no ordering of messages, no tracking connections, etc. It is a small transport layer designed on top of IP.</td>
+</tr>
+<tr>
+<td align="right">Data Flow Control</td>
+<td align="left">TCP does Flow Control. TCP requires three packets to set up a socket connection, before any user data can be sent. TCP handles reliability and congestion control.</td>
+<td>UDP does not have an option for flow control</td>
+</tr>
+<tr>
+<td align="right">Error Checking</td>
+<td align="left">TCP does error checking and error recovery. Erroneous packets are retransmitted from the source to the destination.</td>
+<td>UDP does error checking but simply discards erroneous packets. Error recovery is not attempted.</td>
+</tr>
+<tr>
+<td align="right">Fields</td>
+<td align="left">1. Sequence Number, 2. AcK number, 3. Data offset, 4. Reserved, 5. Control bit, 6. Window, 7. Urgent Pointer 8. Options, 9. Padding, 10. Check Sum, 11. Source port, 12. Destination port</td>
+<td>1. Length, 2. Source port, 3. Destination port, 4. Check Sum</td>
+</tr>
+<tr>
+<td align="right">Acknowledgement</td>
+<td align="left">Acknowledgement segments</td>
+<td>No Acknowledgment</td>
+</tr>
+<tr>
+<td align="right">Handshake</td>
+<td align="left">SYN, SYN-ACK, ACK</td>
+<td>No handshake (connectionless protocol)</td>
 </tr>
 </tbody></table>
-<p>怎么使用呢，比如：我们如果要输出行号：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;$3&#x3D;&#x3D;0 &amp;&amp; $6&#x3D;&#x3D;&quot;ESTABLISHED&quot; || NR&#x3D;&#x3D;1 &#123;printf &quot;%02s %s %-20s %-20s %s\n&quot;,NR, FNR, $4,$5,$6&#125;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;01 1 Local-Address        Foreign-Address      State&#96;&#96;07 7 coolshell.cn:80      110.194.134.189:1032 ESTABLISHED&#96;&#96;08 8 coolshell.cn:80      123.169.124.111:49809 ESTABLISHED&#96;&#96;10 10 coolshell.cn:80      123.169.124.111:49829 ESTABLISHED&#96;&#96;14 14 coolshell.cn:80      110.194.134.189:4796 ESTABLISHED&#96;&#96;17 17 coolshell.cn:80      123.169.124.111:49840 ESTABLISHED&#96;</span><br></pre></td></tr></table></figure>
-
-<h5 id="指定分隔符"><a href="#指定分隔符" class="headerlink" title="指定分隔符"></a><strong>指定分隔符</strong></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$  &#96;&#96;awk&#96;  &#96;&#39;BEGIN&#123;FS&#x3D;&quot;:&quot;&#125; &#123;print $1,$3,$6&#125;&#39;&#96; &#96;&#x2F;etc&#x2F;passwd&#96;&#96;root 0 &#96;&#96;&#x2F;root&#96;&#96;bin 1 &#96;&#96;&#x2F;bin&#96;&#96;daemon 2 &#96;&#96;&#x2F;sbin&#96;&#96;adm 3 &#96;&#96;&#x2F;var&#x2F;adm&#96;&#96;lp 4 &#96;&#96;&#x2F;var&#x2F;spool&#x2F;lpd&#96;&#96;sync&#96; &#96;5 &#96;&#96;&#x2F;sbin&#96;&#96;shutdown&#96; &#96;6 &#96;&#96;&#x2F;sbin&#96;&#96;halt 7 &#96;&#96;&#x2F;sbin&#96;</span><br></pre></td></tr></table></figure>
-
-<p>上面的命令也等价于：（-F的意思就是指定分隔符）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96;  &#96;-F: &#96;&#96;&#39;&#123;print $1,$3,$6&#125;&#39;&#96; &#96;&#x2F;etc&#x2F;passwd&#96;</span><br></pre></td></tr></table></figure>
-
-<p>注：如果你要指定多个分隔符，你可以这样来：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;awk&#96; &#96;-F &#96;&#96;&#39;[;:]&#39;&#96;</span><br></pre></td></tr></table></figure>
-
-<p>再来看一个以\t作为分隔符输出的例子（下面使用了/etc/passwd文件，这个文件是以:分隔的）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96;  &#96;-F: &#96;&#96;&#39;&#123;print $1,$3,$6&#125;&#39;&#96; &#96;OFS&#x3D;&#96;&#96;&quot;\t&quot;&#96; &#96;&#x2F;etc&#x2F;passwd&#96;&#96;root    0       &#96;&#96;&#x2F;root&#96;&#96;bin     1       &#96;&#96;&#x2F;bin&#96;&#96;daemon  2       &#96;&#96;&#x2F;sbin&#96;&#96;adm     3       &#96;&#96;&#x2F;var&#x2F;adm&#96;&#96;lp      4       &#96;&#96;&#x2F;var&#x2F;spool&#x2F;lpd&#96;&#96;sync&#96;    &#96;5       &#96;&#96;&#x2F;sbin&#96;</span><br></pre></td></tr></table></figure>
-
-<h4 id="脱掉衬衫"><a href="#脱掉衬衫" class="headerlink" title="脱掉衬衫"></a>脱掉衬衫</h4><h5 id="字符串匹配"><a href="#字符串匹配" class="headerlink" title="字符串匹配"></a>字符串匹配</h5><p>我们再来看几个字符串匹配的示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;$6 ~ &#x2F;FIN&#x2F; || NR&#x3D;&#x3D;1 &#123;print NR,$4,$5,$6&#125;&#39;&#96; &#96;OFS&#x3D;&#96;&#96;&quot;\t&quot;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;1       Local-Address   Foreign-Address State&#96;&#96;6       coolshell.cn:80 61.140.101.185:37538    FIN_WAIT2&#96;&#96;9       coolshell.cn:80 116.234.127.77:11502    FIN_WAIT2&#96;&#96;13      coolshell.cn:80 124.152.181.209:26825   FIN_WAIT1&#96;&#96;18      coolshell.cn:80 117.136.20.85:50025     FIN_WAIT2&#96; &#96;$ $ &#96;&#96;awk&#96; &#96;&#39;$6 ~ &#x2F;WAIT&#x2F; || NR&#x3D;&#x3D;1 &#123;print NR,$4,$5,$6&#125;&#39;&#96; &#96;OFS&#x3D;&#96;&#96;&quot;\t&quot;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;1       Local-Address   Foreign-Address State&#96;&#96;5       coolshell.cn:80 124.205.5.146:18245     TIME_WAIT&#96;&#96;6       coolshell.cn:80 61.140.101.185:37538    FIN_WAIT2&#96;&#96;9       coolshell.cn:80 116.234.127.77:11502    FIN_WAIT2&#96;&#96;11      coolshell.cn:80 183.60.215.36:36970     TIME_WAIT&#96;&#96;13      coolshell.cn:80 124.152.181.209:26825   FIN_WAIT1&#96;&#96;15      coolshell.cn:80 183.60.212.163:51082    TIME_WAIT&#96;&#96;18      coolshell.cn:80 117.136.20.85:50025     FIN_WAIT2&#96;</span><br></pre></td></tr></table></figure>
-
-<p>上面的第一个示例匹配FIN状态， 第二个示例匹配WAIT字样的状态。其实 ~ 表示模式开始。/ /中是模式。这就是一个正则表达式的匹配。</p>
-<p>其实awk可以像grep一样的去匹配第一行，就像这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;&#x2F;LISTEN&#x2F;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN&#96;&#96;tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN&#96;&#96;tcp        0      0 127.0.0.1:9000          0.0.0.0:*               LISTEN&#96;&#96;tcp        0      0 :::22                   :::*                    LISTEN&#96;</span><br></pre></td></tr></table></figure>
-
-<p>我们可以使用 “/FIN|TIME/” 来匹配 FIN 或者 TIME :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;$6 ~ &#x2F;FIN|TIME&#x2F; || NR&#x3D;&#x3D;1 &#123;print NR,$4,$5,$6&#125;&#39;&#96; &#96;OFS&#x3D;&#96;&#96;&quot;\t&quot;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;1       Local-Address   Foreign-Address State&#96;&#96;5       coolshell.cn:80 124.205.5.146:18245     TIME_WAIT&#96;&#96;6       coolshell.cn:80 61.140.101.185:37538    FIN_WAIT2&#96;&#96;9       coolshell.cn:80 116.234.127.77:11502    FIN_WAIT2&#96;&#96;11      coolshell.cn:80 183.60.215.36:36970     TIME_WAIT&#96;&#96;13      coolshell.cn:80 124.152.181.209:26825   FIN_WAIT1&#96;&#96;15      coolshell.cn:80 183.60.212.163:51082    TIME_WAIT&#96;&#96;18      coolshell.cn:80 117.136.20.85:50025     FIN_WAIT2&#96;</span><br></pre></td></tr></table></figure>
-
-<p>再来看看模式取反的例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;$6 !~ &#x2F;WAIT&#x2F; || NR&#x3D;&#x3D;1 &#123;print NR,$4,$5,$6&#125;&#39;&#96; &#96;OFS&#x3D;&#96;&#96;&quot;\t&quot;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;1       Local-Address   Foreign-Address State&#96;&#96;2       0.0.0.0:3306    0.0.0.0:*       LISTEN&#96;&#96;3       0.0.0.0:80      0.0.0.0:*       LISTEN&#96;&#96;4       127.0.0.1:9000  0.0.0.0:*       LISTEN&#96;&#96;7       coolshell.cn:80 110.194.134.189:1032    ESTABLISHED&#96;&#96;8       coolshell.cn:80 123.169.124.111:49809   ESTABLISHED&#96;&#96;10      coolshell.cn:80 123.169.124.111:49829   ESTABLISHED&#96;&#96;12      coolshell.cn:80 61.148.242.38:30901     ESTABLISHED&#96;&#96;14      coolshell.cn:80 110.194.134.189:4796    ESTABLISHED&#96;&#96;16      coolshell.cn:80 208.115.113.92:50601    LAST_ACK&#96;&#96;17      coolshell.cn:80 123.169.124.111:49840   ESTABLISHED&#96;&#96;19      :::22   :::*    LISTEN&#96;</span><br></pre></td></tr></table></figure>
-
-<p>或是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;awk&#96; &#96;&#39;!&#x2F;WAIT&#x2F;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96;</span><br></pre></td></tr></table></figure>
-
-<p><strong>折分文件</strong></p>
-<p>awk拆分文件很简单，使用重定向就好了。下面这个例子，是按第6例分隔文件，相当的简单（其中的NR!=1表示不处理表头）。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;NR!&#x3D;1&#123;print &gt; $6&#125;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96; &#96;$ &#96;&#96;ls&#96;&#96;ESTABLISHED  FIN_WAIT1  FIN_WAIT2  LAST_ACK  LISTEN  &#96;&#96;netstat&#96;&#96;.txt  TIME_WAIT&#96; &#96;$ &#96;&#96;cat&#96; &#96;ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        110.194.134.189:1032        ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        123.169.124.111:49809       ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        123.169.124.111:49829       ESTABLISHED&#96;&#96;tcp        0   4166 coolshell.cn:80        61.148.242.38:30901         ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        110.194.134.189:4796        ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        123.169.124.111:49840       ESTABLISHED&#96; &#96;$ &#96;&#96;cat&#96; &#96;FIN_WAIT1&#96;&#96;tcp        0      1 coolshell.cn:80        124.152.181.209:26825       FIN_WAIT1&#96; &#96;$ &#96;&#96;cat&#96; &#96;FIN_WAIT2&#96;&#96;tcp        0      0 coolshell.cn:80        61.140.101.185:37538        FIN_WAIT2&#96;&#96;tcp        0      0 coolshell.cn:80        116.234.127.77:11502        FIN_WAIT2&#96;&#96;tcp        0      0 coolshell.cn:80        117.136.20.85:50025         FIN_WAIT2&#96; &#96;$ &#96;&#96;cat&#96; &#96;LAST_ACK&#96;&#96;tcp        0      1 coolshell.cn:80        208.115.113.92:50601        LAST_ACK&#96; &#96;$ &#96;&#96;cat&#96; &#96;LISTEN&#96;&#96;tcp        0      0 0.0.0.0:3306           0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 0.0.0.0:80             0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 127.0.0.1:9000         0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 :::22                  :::*                        LISTEN&#96; &#96;$ &#96;&#96;cat&#96; &#96;TIME_WAIT&#96;&#96;tcp        0      0 coolshell.cn:80        124.205.5.146:18245         TIME_WAIT&#96;&#96;tcp        0      0 coolshell.cn:80        183.60.215.36:36970         TIME_WAIT&#96;&#96;tcp        0      0 coolshell.cn:80        183.60.212.163:51082        TIME_WAIT&#96;</span><br></pre></td></tr></table></figure>
-
-<p>你也可以把指定的列输出到文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;awk&#96; &#96;&#39;NR!&#x3D;1&#123;print $4,$5 &gt; $6&#125;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96;</span><br></pre></td></tr></table></figure>
-
-<p>再复杂一点：（注意其中的if-else-if语句，可见awk其实是个脚本解释器）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;NR!&#x3D;1&#123;&#96;&#96;if&#96;&#96;($6 ~ &#96;&#96;&#x2F;TIME&#96;&#96;|ESTABLISHED&#x2F;) print &gt; &#96;&#96;&quot;1.txt&quot;&#96;&#96;;&#96;&#96;else&#96; &#96;if&#96;&#96;($6 ~ &#96;&#96;&#x2F;LISTEN&#x2F;&#96;&#96;) print &gt; &#96;&#96;&quot;2.txt&quot;&#96;&#96;;&#96;&#96;else&#96; &#96;print &gt; &#96;&#96;&quot;3.txt&quot;&#96; &#96;&#125;&#39; &#96;&#96;netstat&#96;&#96;.txt&#96; &#96;$ &#96;&#96;ls&#96; &#96;?.txt&#96;&#96;1.txt  2.txt  3.txt&#96; &#96;$ &#96;&#96;cat&#96; &#96;1.txt&#96;&#96;tcp        0      0 coolshell.cn:80        124.205.5.146:18245         TIME_WAIT&#96;&#96;tcp        0      0 coolshell.cn:80        110.194.134.189:1032        ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        123.169.124.111:49809       ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        123.169.124.111:49829       ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        183.60.215.36:36970         TIME_WAIT&#96;&#96;tcp        0   4166 coolshell.cn:80        61.148.242.38:30901         ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        110.194.134.189:4796        ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        183.60.212.163:51082        TIME_WAIT&#96;&#96;tcp        0      0 coolshell.cn:80        123.169.124.111:49840       ESTABLISHED&#96; &#96;$ &#96;&#96;cat&#96; &#96;2.txt&#96;&#96;tcp        0      0 0.0.0.0:3306           0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 0.0.0.0:80             0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 127.0.0.1:9000         0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 :::22                  :::*                        LISTEN&#96; &#96;$ &#96;&#96;cat&#96; &#96;3.txt&#96;&#96;tcp        0      0 coolshell.cn:80        61.140.101.185:37538        FIN_WAIT2&#96;&#96;tcp        0      0 coolshell.cn:80        116.234.127.77:11502        FIN_WAIT2&#96;&#96;tcp        0      1 coolshell.cn:80        124.152.181.209:26825       FIN_WAIT1&#96;&#96;tcp        0      1 coolshell.cn:80        208.115.113.92:50601        LAST_ACK&#96;&#96;tcp        0      0 coolshell.cn:80        117.136.20.85:50025         FIN_WAIT2&#96;</span><br></pre></td></tr></table></figure>
-
-<h5 id="统计"><a href="#统计" class="headerlink" title="统计"></a>统计</h5><p>下面的命令计算所有的C文件，CPP文件和H文件的文件大小总和。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;ls&#96; &#96;-l  *.cpp *.c *.h | &#96;&#96;awk&#96; &#96;&#39;&#123;sum+&#x3D;$5&#125; END &#123;print sum&#125;&#39;&#96;&#96;2511401&#96;</span><br></pre></td></tr></table></figure>
-
-<p>我们再来看一个统计各个connection状态的用法：（我们可以看到一些编程的影子了，大家都是程序员我就不解释了。注意其中的数组的用法）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;NR!&#x3D;1&#123;a[$6]++;&#125; END &#123;for (i in a) print i &quot;, &quot; a[i];&#125;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;TIME_WAIT, 3&#96;&#96;FIN_WAIT1, 1&#96;&#96;ESTABLISHED, 6&#96;&#96;FIN_WAIT2, 3&#96;&#96;LAST_ACK, 1&#96;&#96;LISTEN, 4&#96;</span><br></pre></td></tr></table></figure>
-
-<p>再来看看统计每个用户的进程的占了多少内存（注：sum的RSS那一列）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;ps&#96; &#96;aux | &#96;&#96;awk&#96; &#96;&#39;NR!&#x3D;1&#123;a[$1]+&#x3D;$6;&#125; END &#123; for(i in a) print i &quot;, &quot; a[i]&quot;KB&quot;;&#125;&#39;&#96;&#96;dbus, 540KB&#96;&#96;mysql, 99928KB&#96;&#96;www, 3264924KB&#96;&#96;root, 63644KB&#96;&#96;hchen, 6020KB&#96;</span><br></pre></td></tr></table></figure>
-
-<h4 id="脱掉内衣"><a href="#脱掉内衣" class="headerlink" title="脱掉内衣"></a>脱掉内衣</h4><h5 id="awk脚本"><a href="#awk脚本" class="headerlink" title="awk脚本"></a>awk脚本</h5><p>在上面我们可以看到一个END关键字。END的意思是“处理完所有的行的标识”，即然说到了END就有必要介绍一下BEGIN，这两个关键字意味着执行前和执行后的意思，语法如下：</p>
-<ul>
-<li>BEGIN{ 这里面放的是执行前的语句 }</li>
-<li>END {这里面放的是处理完所有的行后要执行的语句 }</li>
-<li>{这里面放的是处理每一行时要执行的语句}</li>
-</ul>
-<p>为了说清楚这个事，我们来看看下面的示例：</p>
-<p>假设有这么一个文件（学生成绩表）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;cat&#96; &#96;score.txt&#96;&#96;Marry   2143 78 84 77&#96;&#96;Jack    2321 66 78 45&#96;&#96;Tom     2122 48 77 71&#96;&#96;Mike    2537 87 97 95&#96;&#96;Bob     2415 40 57 62&#96;</span><br></pre></td></tr></table></figure>
-
-<p>我们的awk脚本如下（我没有写有命令行上是因为命令行上不易读，另外也在介绍另一种用法）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;cat&#96; &#96;cal&#96;&#96;.&#96;&#96;awk&#96;&#96;#!&#x2F;bin&#x2F;awk -f&#96;&#96;#运行前&#96;&#96;BEGIN &#123;&#96;&#96;    &#96;&#96;math &#x3D; 0&#96;&#96;    &#96;&#96;english &#x3D; 0&#96;&#96;    &#96;&#96;computer &#x3D; 0&#96; &#96;    &#96;&#96;printf&#96; &#96;&quot;NAME    NO.   MATH  ENGLISH  COMPUTER   TOTAL\n&quot;&#96;&#96;    &#96;&#96;printf&#96; &#96;&quot;---------------------------------------------\n&quot;&#96;&#96;&#125;&#96;&#96;#运行中&#96;&#96;&#123;&#96;&#96;    &#96;&#96;math+&#x3D;$3&#96;&#96;    &#96;&#96;english+&#x3D;$4&#96;&#96;    &#96;&#96;computer+&#x3D;$5&#96;&#96;    &#96;&#96;printf&#96; &#96;&quot;%-6s %-6s %4d %8d %8d %8d\n&quot;&#96;&#96;, $1, $2, $3,$4,$5, $3+$4+$5&#96;&#96;&#125;&#96;&#96;#运行后&#96;&#96;END &#123;&#96;&#96;    &#96;&#96;printf&#96; &#96;&quot;---------------------------------------------\n&quot;&#96;&#96;    &#96;&#96;printf&#96; &#96;&quot;  TOTAL:%10d %8d %8d \n&quot;&#96;&#96;, math, english, computer&#96;&#96;    &#96;&#96;printf&#96; &#96;&quot;AVERAGE:%10.2f %8.2f %8.2f\n&quot;&#96;&#96;, math&#96;&#96;&#x2F;NR&#96;&#96;, english&#96;&#96;&#x2F;NR&#96;&#96;, computer&#96;&#96;&#x2F;NR&#96;&#96;&#125;&#96;</span><br></pre></td></tr></table></figure>
-
-<p>我们来看一下执行结果：（也可以这样运行 ./cal.awk score.txt）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`$ ``awk` `-f ``cal``.``awk` `score.txt``NAME    NO.   MATH  ENGLISH  COMPUTER   TOTAL``---------------------------------------------``Marry  2143     78       84       77      239``Jack   2321     66       78       45      189``Tom    2122     48       77       71      196``Mike   2537     87       97       95      279``Bob    2415     40       57       62      159``---------------------------------------------``  ``TOTAL:       319      393      350``AVERAGE:     63.80    78.60    70.00`</span><br></pre></td></tr></table></figure>
-
-<h5 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h5><p>即然说到了脚本，我们来看看怎么和环境变量交互：（使用-v参数和ENVIRON，使用ENVIRON的环境变量需要export）</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`$ x=5` `$ y=10``$ ``<span class="built_in">export</span>` `y` `$ ``<span class="built_in">echo</span>` `<span class="variable">$x</span> <span class="variable">$y</span>``5 10` `$ ``awk` `-``v` `val=<span class="variable">$x</span> ``<span class="string">'&#123;print $1, $2, $3, $4+val, $5+ENVIRON["y"]&#125;'</span>` `OFS=``<span class="string">"\t"</span>` `score.txt``Marry   2143    78      89      87``Jack    2321    66      83      55``Tom     2122    48      82      81``Mike    2537    87      102     105``Bob     2415    40      62      72`</span><br></pre></td></tr></table></figure>
-
-<h4 id="几个花活"><a href="#几个花活" class="headerlink" title="几个花活"></a>几个花活</h4><p>最后，我们再来看几个小例子：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`<span class="comment">#从file文件中找出长度大于80的行``awk` `'length&gt;80'` `file` `#按连接数查看客户端IP``netstat` `-ntu | ``awk` `'&#123;print $5&#125;'` `| ``cut` `-d: -f1 | ``sort` `| ``uniq` `-c | ``sort` `-nr` `#打印99乘法表``seq` `9 | ``sed` `'H;g'` `| ``awk` `-``v` `RS=``''` `'&#123;for(i=1;i&lt;=NF;i++)printf("%dx%d=%d%s", i, NR, i*NR, i==NR?"\n":"\t")&#125;'`</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="自己撸吧"><a href="#自己撸吧" class="headerlink" title="自己撸吧"></a>自己撸吧</h4><p>关于其中的一些知识点可以参看<a href="http://www.gnu.org/software/gawk/manual/gawk.html" target="_blank" rel="noopener">gawk的手册</a>：</p>
-<ul>
-<li>内建变量，参看：<a href="http://www.gnu.org/software/gawk/manual/gawk.html#Built_002din-Variables" target="_blank" rel="noopener">http://www.gnu.org/software/gawk/manual/gawk.html#Built_002din-Variables</a></li>
-<li>流控方面，参看：<a href="http://www.gnu.org/software/gawk/manual/gawk.html#Statements" target="_blank" rel="noopener">http://www.gnu.org/software/gawk/manual/gawk.html#Statements</a></li>
-<li>内建函数，参看：<a href="http://www.gnu.org/software/gawk/manual/gawk.html#Built_002din" target="_blank" rel="noopener">http://www.gnu.org/software/gawk/manual/gawk.html#Built_002din</a></li>
-<li>正则表达式，参看：<a href="http://www.gnu.org/software/gawk/manual/gawk.html#Regexp" target="_blank" rel="noopener">http://www.gnu.org/software/gawk/manual/gawk.html#Regexp</a></li>
-</ul>
-<p>（全文完）</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2017/03/22/LC/2017-03-22-LC-Shells/">LC/2017-03-22-LC-Shells</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-22</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/LC/">LC</a></span><div class="content"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">head -n 10 file.txt | tail -n +10 <span class="comment"># 4ms</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 首先输入file文件从第十行开始的所有内容，然后将输出内容的第一行打印出来即为第十行：</span></span><br><span class="line">tail -n +10 file.txt | head -n 1 <span class="comment"># 0 ms</span></span><br><span class="line"></span><br><span class="line">awk <span class="string">'NR == 10'</span> file.txt <span class="comment"># 0 ms</span></span><br></pre></td></tr></table></figure>
-
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2017/02/28/Web/2017-02-28-cURL/">Web/2017-02-28-cURL</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-02-28</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Web/">Web</a></span><div class="content"><ul>
-<li>-I : only head</li>
-<li>-i head + body</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -I http://www.yahoo.com</span><br></pre></td></tr></table></figure>
+<h3 id="TCP-Keep-Alive"><a href="#TCP-Keep-Alive" class="headerlink" title="TCP Keep Alive"></a>TCP Keep Alive</h3><p>刚刚被问到请求头的keep-alive，虽然没能答上来，但回头一查，真是好问题！</p>
+<p>【补习ing……】</p>
+<p>1、什么是<strong>Keep-Alive模式</strong>？</p>
+<p>HTTP协议采用请求-应答模式，有普通的非KeepAlive模式，也有KeepAlive模式。</p>
+<p>非KeepAlive模式时，每个请求/应答客户和服务器都要新建一个连接，完成 之后立即断开连接（HTTP协议为无连接的协议）；当使用Keep-Alive模式（又称持久连接、连接重用）时，Keep-Alive功能使客户端到服 务器端的连接持续有效，当出现对服务器的后继请求时，Keep-Alive功能避免了建立或者重新建立连接。</p>
+<p>2、如何启用或者关闭<strong>Keep-Alive模式？</strong></p>
+<p><strong>浏览器发起建议，服务器视情况统一。</strong></p>
+<p>（1）http 1.0中默认是关闭的，如果客户端浏览器支持Keep-Alive，那么就在HTTP请求头中添加一个字段 <strong>Connection: Keep-Alive</strong>，当服务器收到附带有Connection: Keep-Alive的请求时，它也会在响应头中添加一个同样的字段来使用Keep-Alive。这样一来，客户端和服务器之间的HTTP连接就会被保持，不会断开（超过Keep-Alive规定的时间，意外断电等情况除外），当客户端发送另外一个请求时，就使用这条已经建立的连接。</p>
+<p>也有可能是Keep-Alive</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Keep-Alive: timeout&#x3D;5, max&#x3D;100</span><br><span class="line">timeout：过期时间5秒（对应httpd.conf里的参数是：KeepAliveTimeout），max是最多一百次请求，强制断掉连接</span><br></pre></td></tr></table></figure>
 
 
 
-<ul>
-<li>-o output</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o page.html www.yahoo.com -o page2.html www.google.com</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>-L redirect</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L www.yahoo.com</span><br></pre></td></tr></table></figure>
-
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2016/12/10/CVs/2016-12-10-ML-Regularization/">CVs/2016-12-10-ML-Regularization</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2016-12-10</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/ML/">ML</a></span><div class="content"><h2 id="1-The-Problem-of-Overfitting"><a href="#1-The-Problem-of-Overfitting" class="headerlink" title="1. The Problem of Overfitting"></a>1. The Problem of Overfitting</h2><p><a href="https://images0.cnblogs.com/blog/663864/201411/081949249876584.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081949392689088.png" alt="image"></a></p>
-<h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>还是来看预测房价的这个例子，我们先对该数据做线性回归，也就是左边第一张图。</p>
-<p>如果这么做，我们可以获得拟合数据的这样一条直线，但是，实际上这并不是一个很好的模型。我们看看这些数据，很明显，随着房子面积增大，住房价格的变化趋于稳定或者说越往右越平缓。因此线性回归并没有很好拟合训练数据。</p>
-<blockquote>
-<p><strong>我们把此类情况称为欠拟合(underfitting)，或者叫作叫做高偏差(bias)。</strong></p>
-</blockquote>
-<p>这两种说法大致相似，都表示没有很好地拟合训练数据。高偏差这个词是 machine learning 的研究初期传下来的一个专业名词，具体到这个问题，意思就是说如果用线性回归这个算法去拟合训练数据，那么该算法实际上会产生一个非常大的偏差或者说存在一个很强的偏见。</p>
-<p>第二幅图，我们在中间加入一个二次项，也就是说对于这幅数据我们用二次函数去拟合。自然，可以拟合出一条曲线，事实也证明这个拟合效果很好。</p>
-<p>另一个极端情况是，如果在第三幅图中对于该数据集用一个四次多项式来拟合。因此在这里我们有五个参数θ0到θ4，这样我们同样可以拟合一条曲线，通过我们的五个训练样本，我们可以得到如右图的一条曲线。</p>
-<p>一方面，我们似乎对训练数据做了一个很好的拟合，因为这条曲线通过了所有的训练实例。但是，这实际上是一条很扭曲的曲线，它不停上下波动。因此，事实上我们并不认为它是一个预测房价的好模型。</p>
-<blockquote>
-<p><strong>所以，我们把这类情况叫做过拟合(overfitting)，也叫高方差(variance)。</strong></p>
-</blockquote>
-<p>与高偏差一样，高方差同样也是一个历史上的叫法。从第一印象上来说，如果我们拟合一个高阶多项式，那么这个函数能很好的拟合训练集（能拟合几乎所有的训练数据），但这也就面临函数可能太过庞大的问题，变量太多。</p>
-<p><strong>同时如果我们没有足够的数据集（训练集）去约束这个变量过多的模型，那么就会发生过拟合。</strong></p>
-<h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><p>过度拟合的问题通常发生在变量（特征）过多的时候。这种情况下训练出的方程总是能很好的拟合训练数据，也就是说，我们的代价函数可能非常接近于 0 或者就为 0。</p>
-<p>但是，这样的曲线千方百计的去拟合训练数据，这样会导致它无法泛化到新的数据样本中，以至于无法预测新样本价格。在这里，<strong>术语”泛化”指的是一个假设模型能够应用到新样本的能力。</strong>新样本数据是指没有出现在训练集中的数据。</p>
-<p><a href="https://images0.cnblogs.com/blog/663864/201411/081950012995058.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081950152375432.png" alt="image"></a><br>之前，我们看到了线性回归情况下的过拟合。类似的情况也适用于逻辑回归。</p>
-<h3 id="3"><a href="#3" class="headerlink" title="3"></a>3</h3><p>那么，如果发生了过拟合问题，我们应该如何处理？</p>
-<p>过多的变量（特征），同时只有非常少的训练数据，会导致出现过度拟合的问题。因此为了解决过度拟合，有以下两个办法。</p>
-<p><a href="https://images0.cnblogs.com/blog/663864/201411/081950204873029.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081950339879703.png" alt="image"></a></p>
-<blockquote>
-<p>*<em>方法一：尽量减少选取变量的数量<br>*</em></p>
-</blockquote>
-<p>具体而言，我们可以人工检查每一项变量，并以此来确定哪些变量更为重要，然后，保留那些更为重要的特征变量。至于，哪些变量应该舍弃，我们以后在讨论，这会涉及到模型选择算法，这种算法是可以自动选择采用哪些特征变量，自动舍弃不需要的变量。这类做法非常有效，但是其缺点是当你舍弃一部分特征变量时，你也舍弃了问题中的一些信息。例如，也许所有的特征变量对于预测房价都是有用的，我们实际上并不想舍弃一些信息或者说舍弃这些特征变量。</p>
-<blockquote>
-<p><strong>方法二：正则化</strong></p>
-</blockquote>
-<p>正则化中我们将保留所有的特征变量，但是会减小特征变量的数量级（参数数值的大小θ(j)）。</p>
-<p>这个方法非常有效，当我们有很多特征变量时，其中每一个变量都能对预测产生一点影响。正如我们在房价预测的例子中看到的那样，我们可以有很多特征变量，其中每一个变量都是有用的，因此我们不希望把它们删掉，这就导致了正则化概念的发生。</p>
-<p>接下来我们会讨论怎样应用正则化和什么叫做正则化均值，然后将开始讨论怎样使用正则化来使学习算法正常工作，并避免过拟合。</p>
-<h2 id="2-Cost-Function"><a href="#2-Cost-Function" class="headerlink" title="2. Cost Function"></a>2. Cost Function</h2><p><a href="https://images0.cnblogs.com/blog/663864/201411/081950392065543.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081950460499853.png" alt="image"></a></p>
-<h3 id="1-1"><a href="#1-1" class="headerlink" title="1"></a>1</h3><p>在前面的介绍中，我们看到了如果用一个二次函数来拟合这些数据，那么它给了我们一个对数据很好的拟合。然而，如果我们用一个更高次的多项式去拟合，最终我们可能会得到一个曲线，它能很好地拟合训练集，但却并不是一个好的结果，因为它过度拟合了数据，因此，一般性并不是很好。</p>
-<p>让我们考虑下面的假设，我们想要加上<strong>惩罚项</strong>，从而使参数 θ3 和 θ4 足够的小。</p>
-<p><a href="https://images0.cnblogs.com/blog/663864/201411/081950493939765.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081950538152248.png" alt="image"></a></p>
-<p>这里我的意思就是，上图的式子是我们的优化目标，也就是说我们需要尽量减少代价函数的均方误差。</p>
-<p>对于这个函数我们对它添加一些项，加上 1000 乘以 θ3 的平方，再加上 1000 乘以 θ4 的平方，</p>
-<p><a href="https://images0.cnblogs.com/blog/663864/201411/081950595497528.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081951047539138.png" alt="image"></a></p>
-<p>1000 只是我随便写的某个较大的数字而已。现在，如果我们要最小化这个函数，那么为了最小化这个新的代价函数，我们要让 θ3 和 θ4 尽可能小。因为，如果你在原有代价函数的基础上加上 1000 乘以 θ3 这一项 ，那么这个新的代价函数将变得很大，所以，当我们最小化这个新的代价函数时， 我们将使 θ3 的值接近于 0，同样 θ4 的值也接近于 0，就像我们忽略了这两个值一样。如果我们做到这一点（ θ3 和 θ4 接近 0 ），那么我们将得到一个近似的二次函数。</p>
-<p><a href="https://images0.cnblogs.com/blog/663864/201411/081951193621142.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081951300032292.png" alt="image"></a></p>
-<p>因此，我们最终恰当地拟合了数据，我们所使用的正是二次函数加上一些非常小，贡献很小项（因为这些项的 θ3、 θ4 非常接近于0）。显然，这是一个更好的假设。</p>
-<h3 id="2-1"><a href="#2-1" class="headerlink" title="2"></a>2</h3><p><a href="https://images0.cnblogs.com/blog/663864/201411/081951469871136.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081951588935799.png" alt="image"></a></p>
-<p>更一般地，这里给出了正规化背后的思路。这种思路就是，如果我们的参数值对应一个较小值的话（参数值比较小），那么往往我们会得到一个形式更简单的假设。</p>
-<p>在我们上面的例子中，我们惩罚的只是 θ3 和 θ4 ，使这两个值均接近于零，从而我们得到了一个更简单的假设，实际上这个假设大抵上是一个二次函数。</p>
-<p>但更一般地说，如果我们像惩罚 θ3 和 θ4 这样惩罚其它参数，那么我们往往可以得到一个相对较为简单的假设。</p>
-<blockquote>
-<p>*<em>实际上，这些参数的值越小，通常对应于越光滑的函数，也就是更加简单的函数。因此 就不易发生过拟合的问题。<br>*</em></p>
-</blockquote>
-<p>我知道，为什么越小的参数对应于一个相对较为简单的假设，对你来说现在不一定完全理解，但是在上面的例子中使 θ3 和 θ4 很小，并且这样做能给我们一个更加简单的假设，这个例子至少给了我们一些直观感受。</p>
-<p>来让我们看看具体的例子，对于房屋价格预测我们可能有上百种特征，与刚刚所讲的多项式例子不同，我们并不知道 θ3 和 θ4 是高阶多项式的项。所以，如果我们有一百个特征，我们并不知道如何选择关联度更好的参数，如何缩小参数的数目等等。</p>
-<p>因此在正则化里，我们要做的事情，就是把减小我们的代价函数（例子中是线性回归的代价函数）所有的参数值，因为我们并不知道是哪一个或哪几个要去缩小。</p>
-<p>因此，我们需要修改代价函数，在这后面添加一项，就像我们在方括号里的这项。当我们添加一个额外的正则化项的时候，我们收缩了每个参数。</p>
-<p><a href="https://images0.cnblogs.com/blog/663864/201411/081952091127076.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081952152064015.png" alt="image"></a></p>
-<p>顺便说一下，按照惯例，我们没有去惩罚 θ0，因此 θ0 的值是大的。这就是一个约定从 1 到 n 的求和，而不是从 0 到 n 的求和。但其实在实践中<br>这只会有非常小的差异，无论你是否包括这 θ0 这项。但是按照惯例，通常情况下我们还是只从 θ1 到 θn 进行正则化。</p>
-<p><a href="https://images0.cnblogs.com/blog/663864/201411/081952259717893.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081952330495431.png" alt="image"></a></p>
-<p>下面的这项就是一个正则化项</p>
-<p><a href="https://images0.cnblogs.com/blog/663864/201411/081952338934773.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081952345967158.png" alt="image"></a><br>并且 λ 在这里我们称做正则化参数。</p>
-<blockquote>
-<p><strong>λ 要做的就是控制在两个不同的目标中的平衡关系。</strong></p>
-</blockquote>
-<p><strong>第一个目标就是我们想要训练，使假设更好地拟合训练数据。</strong>我们希望假设能够很好的适应训练集。</p>
-<p><strong>而第二个目标是我们想要保持参数值较小。（通过正则化项）</strong></p>
-<p>而 λ 这个正则化参数需要控制的是这两者之间的平衡，即平衡拟合训练的目标和保持参数值较小的目标。从而来保持假设的形式相对简单，来避免过度的拟合。</p>
-<p>对于我们的房屋价格预测来说，我们之前所用的非常高的高阶多项式来拟合，我们将会得到一个非常弯曲和复杂的曲线函数，现在我们只需要使用正则化目标的方法，那么你就可以得到一个更加合适的曲线，但这个曲线不是一个真正的二次函数，而是更加的流畅和简单的一个曲线。这样就得到了对于这个数据更好的假设。</p>
-<p>再一次说明下，这部分内容的确有些难以明白，为什么加上参数的影响可以具有这种效果？但如果你亲自实现了正规化，你将能够看到这种影响的最直观的感受。</p>
-<h3 id="3-1"><a href="#3-1" class="headerlink" title="3"></a>3</h3><p><a href="https://images0.cnblogs.com/blog/663864/201411/081952576123726.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081953140499371.png" alt="image"></a></p>
-<p>在正则化线性回归中，如果正则化参数值 λ 被设定为非常大，那么将会发生什么呢？</p>
-<p>我们将会非常大地惩罚参数θ1 θ2 θ3 θ4 … 也就是说，我们最终惩罚θ1 θ2 θ3 θ4 … 在一个非常大的程度，那么我们会使所有这些参数接近于零。</p>
-<p><a href="https://images0.cnblogs.com/blog/663864/201411/081953329569128.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081953465963762.png" alt="image"></a></p>
-<p>如果我们这么做，那么就是我们的假设中相当于去掉了这些项，并且使我们只是留下了一个简单的假设，这个假设只能表明房屋价格等于 θ0 的值，那就是类似于拟合了一条水平直线，对于数据来说这就是一个欠拟合 (underfitting)。这种情况下这一假设它是条失败的直线，对于训练集来说这只是一条平滑直线，它没有任何趋势，它不会去趋向大部分训练样本的任何值。</p>
-<p>这句话的另一种方式来表达就是这种假设有过于强烈的”偏见” 或者过高的偏差 (bais)，认为预测的价格只是等于 θ0 。对于数据来说这只是一条水平线。</p>
-<p>因此，为了使正则化运作良好，我们应当注意一些方面，应该去选择一个不错的正则化参数 λ 。当我们以后讲到多重选择时我们将讨论一种方法来自动选择正则化参数 λ ，为了使用正则化，接下来我们将把这些概念应用到到线性回归和逻辑回归中去，那么我们就可以让他们避免过度拟合了。</p>
-<h2 id="3-Regularized-Linear-Regression"><a href="#3-Regularized-Linear-Regression" class="headerlink" title="3. Regularized Linear Regression"></a>3. Regularized Linear Regression</h2><p>之前我们已经介绍过，岭回归的代价函数如下：</p>
-<p><a href="https://images0.cnblogs.com/blog/663864/201411/081953500814930.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081953557536697.png" alt="image"></a><br>对于线性回归(的求解)，我们之前运用了两种学习算法，一种基于梯度下降，一种基于正规方程。</p>
-<h3 id="1-2"><a href="#1-2" class="headerlink" title="1"></a>1</h3><p>梯度下降，如下：</p>
-<p><a href="https://images0.cnblogs.com/blog/663864/201411/081954132218927.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081954274561745.png" alt="image"></a></p>
-<h3 id="2-2"><a href="#2-2" class="headerlink" title="2"></a>2</h3><p>正规方程，如下：</p>
-<p><a href="https://images0.cnblogs.com/blog/663864/201411/081954343629568.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081954443152563.png" alt="image"></a></p>
-<h3 id="3-2"><a href="#3-2" class="headerlink" title="3"></a>3</h3><p><a href="https://images0.cnblogs.com/blog/663864/201411/081954502994300.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081954592215008.png" alt="image"></a></p>
-<p>现在考虑 M（即样本量）， 比 N（即特征的数量）小或等于N。</p>
-<p>通过之前的博文，我们知道如果你只有较少的样本，导致特征数量大于样本数量，那么矩阵 XTX 将是不可逆矩阵或奇异（singluar）矩阵，或者用另一种说法是这个矩阵是退化（degenerate）的，那么我们就没有办法使用正规方程来求出 θ 。</p>
-<p>幸运的是，正规化也为我们解决了这个问题，具体的说只要正则参数是严格大于零，实际上，可以证明如下矩阵：</p>
-<p><a href="https://images0.cnblogs.com/blog/663864/201411/081955003621092.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081955014244135.png" alt="image"></a></p>
-<p>将是可逆的。因此，使用正则还可以照顾任何 XTX 不可逆的问题。</p>
-<p>所以，你现在知道如何实现岭回归，利用它，你就可以避免过度拟合，即使你在一个相对较小的训练集里有很多特征。这应该可以让你在很多问题上更好的运用线性回归。</p>
-<p>在接下来的视频中，我们将把这种正则化的想法应用到 Logistic 回归，这样我们就可以让 logistic 回归也避免过度拟合，从而表现的更好。</p>
-<h2 id="4-Regularized-Logistic-Regression"><a href="#4-Regularized-Logistic-Regression" class="headerlink" title="4. Regularized Logistic Regression"></a>4. Regularized Logistic Regression</h2><p>Regularized Logistic Regression 实际上与 Regularized Linear Regression 是十分相似的。</p>
-<p><a href="https://images0.cnblogs.com/blog/663864/201411/081955184567964.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081955311908741.png" alt="image"></a></p>
-<p>同样使用梯度下降：</p>
-<p><a href="https://images0.cnblogs.com/blog/663864/201411/081955407211863.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081955489245956.png" alt="image"></a></p>
-<p>如果在高级优化算法中，使用正则化技术的话，那么对于这类算法我们需要自己定义costFunction。</p>
-<blockquote>
-<p>For those methods what we needed to do was to define the function that’s called the cost function.</p>
-</blockquote>
-<p><a href="https://images0.cnblogs.com/blog/663864/201411/081956439096258.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081957037373100.png" alt="image"></a></p>
-<p>这个我们自定义的 costFunction 的输入为向量 θ ，返回值有两项，分别是代价函数 jVal 以及 梯度gradient。</p>
-<p>总之我们需要的就是这个自定义函数costFunction，针对Octave而言，我们可以将这个函数作为参数传入到 fminunc 系统函数中（fminunc 用来求函数的最小值，将@costFunction作为参数代进去，注意 @costFunction 类似于C语言中的函数指针），fminunc返回的是函数 costFunction 在无约束条件下的最小值，即我们提供的代价函数 jVal 的最小值，当然也会返回向量 θ 的解。</p>
-<p>上述方法显然对正则化逻辑回归是适用的。</p>
-<h2 id="5-尾声"><a href="#5-尾声" class="headerlink" title="5. 尾声"></a>5. 尾声</h2><p>通过最近的几篇文章，我们不难发现，无论是线性回归问题还是逻辑回归问题都可以通过构造多项式来解决。但是，你将逐渐发现其实还有更为强大的非线性分类器可以用来解决多项式回归问题。下篇文章中，我们将会讨论。</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2016/08/09/LC/2016-08-09-LC%20198&amp;213%20House-Robber%20I%20&amp;%20II/">LC/2016-08-09-LC 198&amp;213 House-Robber I &amp; II</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2016-08-09</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/LC/">LC</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/LC-DP/">LC-DP</a></span><div class="content"><h3 id="198-house-robber"><a href="#198-house-robber" class="headerlink" title="198. house robber"></a>198. house robber</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">rob</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        nums = list(nums)</span><br><span class="line">        <span class="keyword">if</span> len(nums) == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span> len(nums) == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> nums[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">if</span> len(nums) == <span class="number">2</span>:   <span class="comment"># duplicated with lineno.19, but OK, clear to understand</span></span><br><span class="line">            <span class="keyword">return</span> max(nums[<span class="number">0</span>], nums[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">        dp = [<span class="number">0</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums))]</span><br><span class="line">        <span class="keyword">for</span> idx, num <span class="keyword">in</span> enumerate(nums):</span><br><span class="line">            <span class="keyword">if</span> idx == <span class="number">0</span>:</span><br><span class="line">                dp[<span class="number">0</span>] = nums[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">elif</span> idx == <span class="number">1</span>:</span><br><span class="line">                dp[<span class="number">1</span>] = max(nums[<span class="number">0</span>], nums[<span class="number">1</span>])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dp[idx] = max(dp[idx - <span class="number">2</span>] + nums[idx], dp[idx - <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">-1</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    sol = Solution()</span><br><span class="line">    ex1_in = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>]</span><br><span class="line">    ex2_in = [<span class="number">2</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    ans = sol.rob(ex1_in)</span><br><span class="line">    print(<span class="string">"ans1: &#123;&#125;"</span>.format(ans))</span><br><span class="line">    <span class="keyword">assert</span> (<span class="number">4</span> == ans)</span><br><span class="line"></span><br><span class="line">    ans = sol.rob(ex2_in)</span><br><span class="line">    print(<span class="string">"ans2: &#123;&#125;"</span>.format(ans))</span><br><span class="line">    <span class="keyword">assert</span> (<span class="number">12</span> == ans)</span><br></pre></td></tr></table></figure>
-
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2016/03/10/Microservice/2016-03-10-Microservice%201/">Microservice/2016-03-10-Microservice 1</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2016-03-10</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Microservice/">Microservice</a></span><div class="content"><p>MSA</p>
-<blockquote>
-<p>Building microservices in Python. Inthis video we’re going to be focusing onthe microservices approach, we’re goingto be investigating what is a microservice, and explain the advantages anddisadvantages of using microservices. Now themicroservice architecture can be shortened toMSA, it is a variant of the serviceorient architecture, or SOA. Its purposeis to decouple and MA July’s systemservices and it follows the UNIXphilosophy. Some of the advantages of using microservices is that itseparates the system concerns. Alsomicroservices our language and design agnostic, so you can have multiplemicroservices that are designed in differentlanguages. We isolate and decouple our deployments because each microserviceis separate. Smaller services can besimpler to understand. Basically you’re moving away from the monolithicarchitecture, and you’re simplifying yourapplication in a single concern. Itallows for continuous delivery because a microservice can be available whenother microservices are not. It alsoallows for horizontal scalability, so youcan scale your microservices to suit the needs and demands of your system.Let’s focus on some of these in a littlebit more detail. So splitting a system into mini Services separates andisolates the system responsibilities, meaning that each responsibility of asystem now has its own little place tolive. Services do not have to conform tothe same technologies that other services require, you could have amicroservice written in one programming language, you could have another onewritten in another programming language,they all use perhaps a common API kindof communication structure, but the actual technologies that these microservices use can be completely different, which means that you can actuallyyour microservices to best suit theneeds for your system. Services can bedeployed independently and continuously,which means that a service doesn’t haveto rely on another service to be active.You can continuously update your code inone service without having huge impactto other services in your system. Smaller services are easier to understand asthey are disconnected from a monolithic application, which means that you canactually microscopically understand parts of the application, you don’t haveto understand the whole application, just the services that you are working with,which means that it’s perfect for teamsof multiple developers. And services canbe scaled independently. If, for instance,you have a lot of registration going on, then you would scale your registrationservice. If, for instance, you had a lot of demand on a particular other service,then you could scale that too, but you’re not affecting the other services byscaling singular services at once. So now let’s go and focus on some of thedisadvantages of using microservices.For one there is more overhead, and alsoit can be very difficult to test microservices together. There are more security points to consider and this canlead to complicated and duplicated dependencies across your microservices.By splitting an application into microservices you’re increasing the amount ofcommunication between those services in the background, and this can often leadto more load time. Testing Serviceintegration can also be a challenge, themore services you have the bigger theattack surface. More services means moretechnical debt, when I said in the advantages that you can have multipleprogramming languages across your microservices, you are then also creatingoverhead on the maintenance of thoseservices. And lastly you will probably face duplication of code dependenciesacross services, which means that you might have codethat is the same in different services because they are a dependent that isrequired for that microservice to run. In the next video we’re going to be</p>
-</blockquote>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcpvihqcmej31660mojx5.jpg" alt="image-20200311122557154"></p>
-<blockquote>
-<p>In this video, we’re going to be discussing how microservices arestructured. We’re going to be exploringthe typical structure of a microservice,explain each of the layers within amicroservice, and talk about thecommunication between microservices. Asan oversimplification, a microservicehas three layers. The first is a communication layer, then we have aprocessing layer, and then we have astorage layer. In a over simplistic casewe could have a set up like so, where youhave a front-end website, and perhaps twoor three microservices, each service hasan API that is the communication. We havea process layer which is typically acontrol layer, and then we have a DB, which is the database. Now not allservices require a storage layer, theinvoice service for example just needs an API, and a way of processing thoseinvoices. The communication layer istypically a RESTful API, and it shouldfollow the HTTP response and requestprotocols. They can also make internalservice calls as well, so for instance you could have a microservice talkingto another microservice within yourapplication. They may allow access to andfrom external sources, and they should bewell documented. And of course each APIthat you have should be consistent throughout your application. Theprocessing layer processes are therequests given by the API. It alsogenerates the responses that APIendpoint has, and it also may use othersystems such as queues and libraries tohandle the data that it is given. Thestorage layer is optional, your microservice may not need to persist data.Each service should however have its owndatabase if it is required. You shouldn’thave a microservice using anotherdatabase within another microservice.Of course it could also be file storageas well. If you think of the entry pointsinto your application typically you mayhave a front-end website, you might alsohave a back-end website, and of courseyou could have a mobile app. In order tohandle the requests from these entrypoints, you typically have a gateway. Nowthis gateway will then send thoserequests to the relevant microservices.</p>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcpvkkczpij31800msagu.jpg" alt="image-20200311122743720"></p>
-<p>The API gateway can ensure securityamongst these API requests, and also itcan be used to map the relevant requeststo the relevant microservice API.Notice that this setup has communicationbetween the user service, the orderservice, and the invoice service. By usinga gateway we no longer have to haveinter service communication. What we cando is use the gateway in order to trackand transfer communication between theseservices. So the API gateway is an entrypoint for API endpoints, it orchestratesthe API requests, and it can alsooptimize the request by collapsing knownrequests, we no longer have to makesingle requests quite often, what we can do is collapse them down into a singlerequest if we wanted to. It also abstracts the implementationfrom the interface. Other things that wecan use our API gateway for include loadbalancing and traffic control, we canalso handle authentication, and we canalso start logging our API requests. Whatdo I mean by orchestrating API requests? Wellthe API gateway could be used to sendportions of traffic to differentservices. Let’s say for example you have this user service, and you want toupgrade its features. You want to try all those features out, and so what you coulddo with the mobile app is send 90% oftraffic to the old user server, and you could be sending 10% of trafficto the new user service, and then youcould be monitoring those API requests,and monitoring how the users interactwith your new features. And what do Imean by collapsing API requests? Well inthis case we have a user service, we havean order service, and an invoice service, each of these are going to return theirown API responses. So we have a userobject a invoice object in an orderobject all coming back as a JSON. By having an API gateway what we could dois collapse those API responses into asingle response, which means that there is a single API request to get thosethings, because the communication between the services is handled with the Gateway,which means that we have a single response here an invoice in order and auser. Of course we can also add someclever caching at this level as well. Inthe next video we’re going to be looking at what tools are used to build Hide transcript In this video, we will take a look at how microservices are structured. Explore the typical structure of a microservice Get explanation to each layer in a microservice Discuss communication between microservices</p>
-</blockquote>
-<h2 id="What-Tools-Are-Used-to-Build-Microservices-in-Python"><a href="#What-Tools-Are-Used-to-Build-Microservices-in-Python" class="headerlink" title="What Tools Are Used to Build Microservices in Python?"></a>What Tools Are Used to Build Microservices in Python?</h2><ul>
-<li>Flask, Swagger, JSON, SQL and Docker</li>
-</ul>
-<h2 id="Designing-the-Order-Management-Microservices"><a href="#Designing-the-Order-Management-Microservices" class="headerlink" title="Designing the Order Management Microservices"></a>Designing the Order Management Microservices</h2><p>Play Mute Remaining Time -5:15 Playback Rate1.25x CaptionsFullscreen Designing the order management microservices, the order managementsystem. In this video, we’re going to be taking a look at the requirements thatmake up the system specification for theorder management microservices. We’re going to be looking at the overalldesign of each of the microservices, and at the end we’re going to have ademonstration of how this system couldbe used. The basic requirements of this order management system is that it ismade up of three services. Each serviceshould have its own business domain, andeach service should not be tightly coupled to another service. A serviceshould be able to run independently fromthe other services. So we’ve got threeservices here, a user service, a productservice, and an order service. These services will make up our ordermanagement system. The overall requirements for the system is that auser can log in, a user can register, anda user can log out, a user can browse theproducts, and a user can add a product to an order, a user can also remove aproduct from an order, and a user can adjust the quantity of an order item, andfinally a user can place an order. Basedon the fact that these services are going to be independently housed andcreated we can start having some rulesthat define how these services shouldbehave. </p>
-<p>*<em>So *</em></p>
-<p>*<em>if the product service goes down a user must still be able toregister. *</em></p>
-<p>*<em>If the order service fails thenall the products must still be shown, and *</em></p>
-<p><strong>users should be able to login even if the order or product services are down.</strong></p>
-<p>Let’s take a look at the design of thesemicroservices. Firstly each service should be self-contained.A service should not depend on anotherservice to function, and services shouldbe lightweight in terms of code. Here we can see the three services each having adatabase and their own processes, we canalso see the API endpoints that connectto the front-end website, and we can see that each of these things aredecoupled from one another. The front end should be shown regardless of servicestate and the service data should be held within the service, the processeswithin the service should only be performed within the service, weshouldn’t have other services that we use just to get a service to work. Inbetween the front end website and theservices we can have an API gateway, moreon this later on in the course. This isthe application running in its entirety,all of the microservices are currently built and running, and I’ll talk abouthow to deploy microservices later on in the course.For now though, let me just give a walkthrough of what the application cando. So we have the home page here this is listing out the products from theproduct service. I can click view moreand then I can add that to my own cart.Obviously I need to be logged in, so Ineed to have a user record in the userservice. So we click on register, I’m justgoing to create myself a temporary user,with the user name of temp 20, the firstname of Peter, and the last name ofFisher, I’m just going to have a verytemporary email address so test at temp20 com, and then the password, I’m just going tohave as test, we hit register that’sgoing to submit the page, that’s going tosave a record in the user service. Sothat’s firing the API request to theuser service from this front-end website.We can now login using the username thatwe’ve supplied, so temp 20 and thepassword of test. If I hit login that should now log us into the system, sowelcome back temp 20, and we can now addthings to our cart. So let’s add the bananas, let’s add that to the cart, wecan add another one to the cart if we wished, we click back on the homepage,let’s add some coffee, and then finallywhat I can do is I can click checkout,and this will set the order to becreated and published. So let’s hit checkout this will then process the order andgive us this thank you message. If I haven’t got anything in the cart myclick checkout it’ll say no order found,so there is logic to handle those usecases. Also what we can do is log out from the system, by clicking on loginI can then log back in to that user account and I can create another order.The order that has been previouslycreated has been published and processed, which means that a new order that getscreated is completely different from anorder that already exists. In the next few videos we’re going to be drillingdown even further into each one of these services to see what their features are.</p>
-<h2 id="The-User-Registration-Service"><a href="#The-User-Registration-Service" class="headerlink" title="The User Registration Service"></a>The User Registration Service</h2><p>In this video, we’re going to be taking a look at the featureset that makes up the user service. We’re going to be looking at the <strong>design of the user service</strong> as well, and after that we’re going to be discussing and exploring future improvements that wecan have on this user service. </p>
-<p>Let’s take a look at the features that this user service has to offer. First of all, we canregister a user and that user can then login to the system. The user can alsolog out and we can retrieve informationabout that logged in user. The userregistration requires a database to holdthe user information, it also requires aunique identifier to identify the user,so this could be an email address or auser name. It also requires a HTML formin the front-end, this must handle a postrequest and a get request. The user loginfeature also requires a database to holdthe security information of that user, so here I’m talking about passwords, I’mtalking about usernames, and I’m talking about access tokens. We must send backauthentication data if the login wassuccessful, and upon successful login auser session must be instantiated on thefront-end. It also requires the front-endto have a HTML login form that can alsohandle both post and get requests. The user logout is slightly simpler, allwe’re doing here is we’re stopping the front-end session which means that theuser can no longer access secure areas of the website, and when we’re retrievinguser data we must only return the dataof the logged in user. So they are the features, let’s take a look at the APIendpoints. Here we got three post requests and one get requests. The post requests will create a user that’s going to be used in the user registration, wealso have user logout and login. The get request however is going to retrieveuser information, so that is API slashuser. The user registration API endpointwill be processed similar to this. So in the front endthe user submits a form, if the form is valid then it goes on to check if theform is unique. So here we’re checking the unique identifiers of the user. Ifany of those are incorrect then wedisplay an error back to the front end,if they are correct however we go andsave the user to the database. Once the user has registered into the system theuser can now login to the system. So here the user submits the login form andagain it checks if the form is valid. Ifthe form isn’t valid then we display anerror to the front end, however if it is valid then we start the session on thefront end, and we redirect the user to a secure area. The logout process isextremely simple. Here the user clicks a logout button from that point on thesession is stopped and we redirect theuser to the public area, which means that the user can no longer access their ownareas and find their own orders. The onlyget request that this user service has is to retrieve the current locked inuser. Here the user is making a requestwhich has headers. The headers willidentify if the user has beenauthenticated, if not we will display anerror back to the front-end, and if it is then we return the user data. There are anumber of future improvements that we can do to this user service. Some ofwhich include a forgotten password feature, we can also issue passwordresets, and we can allow logins throughsocial accounts. So this is a third-party logins using things like Facebook,Twitter, Linkedin and GitHub. We couldalso have different user roles and one of those roles could be an admin role,that admin role could supply an optionalparameter be it a user name or an ID tothe get request which gets the user information. This means that the adminscan retrieve different user accounts if</p>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcq963wpqej31vs0u0wlh.jpg" alt="image-20200311201420855"></p>
-<h2 id="The-Product-Service"><a href="#The-Product-Service" class="headerlink" title="The Product Service"></a>The Product Service</h2><p><strong>The product service only has two features.</strong> </p>
-<p>The firstfeature returns a single product, the second feature will return multiple products. </p>
-<p>When we’re returning all of theproducts we do so in a JSON format, hereis a typical response that we get fromthe API call. Here we have an array ofresults. When we return a single productwe only return a single result. Both API endpoints are get requests and the single product API endpoint takes a Product ID, this is used to identify which product will be returned. </p>
-<p><strong>Future improvements</strong> could include pagination,this could be both paging and limits, this could be added to the multipleproduct API endpoint, we can also addcaching between the database calls, thiswill speed up subsequent database callsthat retrieve the same page, or the same data set. And of course we could addfilters to the API endpoints, this couldsort and filter the returned data. In thenext video we’re going to be focusing on</p>
-<h2 id="The-Order-Service"><a href="#The-Order-Service" class="headerlink" title="The Order Service"></a>The Order Service</h2><p>In this video, we’re going to be discussing the feature setof the order service, we’re going to be taking a look at how this service isdesigned, and we’re going to be exploring future improvements that this orderservice could have. So let’s take a look at the features. </p>
-<p>An order can be created, an item can be added to an order, and anorder can be updated. A single order can also be returned. So we have create, add,update and get. </p>
-<p>So we must only allow logged in users to create an order.Orders can be created without orderitems, so this would be an empty order. Anorder will also have a total cost, whichis the sum cost of all the other orderitems. </p>
-<p>Order items can only be added toan order if you are logged in, an order item can also be added to an existing order, and if an order doesn’t exist when the order item is being added, then a new order is created. An order item quantityand total cost is required for everyorder item, and the order total is recalculated when a new item is added tothe order. </p>
-<p>We must only allow logged-inusers to update orders. Quantities can beadjusted and order items can be removedfrom the order. The order total must berecalculated when the order is updated.</p>
-<p>We must only return the order if theuser is logged in. The total quantity will be used in the front-endas a basket counter, so this will show onthe front-end website how many items arein the users basket. </p>
-<p>The API endpointsfor the order service are both postrequests and get requests. <strong>The add item,update, and order creation API endpoints,they are all post requests, however whenwe are retrieving an order that is a getrequest.</strong></p>
-<p><strong>Future improvements</strong> for the order service could include merging both theupdate and add item endpoints together,multiple orders could be made and savedin a draft state, and this might requirethe orders to have their own order statuses. In the next video we’re goingto be discussing how the order management system in its entirety could</p>
-<h2 id="How-the-order-management-service-could-be-improved"><a href="#How-the-order-management-service-could-be-improved" class="headerlink" title="How the order management service could be improved?"></a>How the order management service could be improved?</h2><p>How the order management system could be improved. In this video, we’re going to bediscussing some potential issues with this order management system. We’re goingto be looking at some future improvements that we could do, and we’realso going to explore some of my recommendations. </p>
-<p>Some of the potential <strong>issues</strong> could be that </p>
-<ul>
-<li><p>multiple orderscannot be made at the same time, this order management system requires that a single order is made by a single user at any one point. </p>
+<p>（2）http 1.1中默认启用Keep-Alive， 默认情况下所在HTTP1.1中所有连接都被保持，除非在请求头或响应头中指明要关闭：Connection: Close ，这也就是为什么Connection: Keep-Alive字段再没有意义的原因。另外，还添加了一个新的字段Keep-Alive:，因为这个字段并没有详细描述用来做什么，可忽略它</p>
+<p>目前大部分浏览器都是用http1.1协议，也就是说默认都会发起Keep-Alive的连接请求了，所以是否能完成一个完整的Keep- Alive连接就看服务器设置情况。</p>
+<p>3、启用Keep-Alive的优点</p>
+<p>从上面的分析来看，启用Keep-Alive模式肯定更高效，性能更高。因为避免了建立/释放连接的开销。下面是RFC 2616 上的总结：</p>
+<p>（1）TCP连接更少，这样就会节约TCP连接在建立、释放过程中，主机和路由器上的CPU和内存开销。<br>By opening and closing fewer TCP connections, CPU time is saved in routers and hosts (clients, servers, proxies, gateways, tunnels, or caches), and memory used for TCP protocol control blocks can be saved in hosts.<br><strong>HTTP requests and responses can be pipelined on a connection. Pipelining allows a client to make multiple requests without waiting for each response, allowing a single TCP connection to be used much more efficiently, with much lower elapsed time.</strong></p>
+<p>（2）网络拥塞也减少了，拿到响应的延时也减少了<br><strong>Network congestion</strong> is reduced by reducing the number of packets caused by TCP opens, and by allowing TCP sufficient time to determine the congestion state of the network.<br><strong>Latency</strong> on subsequent requests is reduced since there is no time spent in TCP’s connection opening handshake.</p>
+<p>（3）错误处理更优雅：不会粗暴地直接关闭连接，而是report，retry<br>HTTP can evolve more gracefully, since errors can be reported without the penalty of closing the TCP connection. Clients using future versions of HTTP might optimistically try a new feature, but if communicating with an older server, retry with old semantics after an error is reported.<br>RFC 2616 （P47）还指出：单用户客户端与任何服务器或代理之间的连接数不应该超过2个。一个代理与其它服务器或代码之间应该使用不超过2 * N的活跃并发连接。这是为了提高HTTP响应时间，避免拥塞（冗余的连接并不能代码执行性能的提升）。</p>
+<p>4、Keep-Alive模式，客户端如何判断请求所得到的响应数据已经接收完成（或者说如何知道服务器已经发生完了数据）？</p>
+<p>对于非持续连接，浏览器可以通过连接是否关闭来界定请求或响应实体的边界；而对于持续连接，这种方法显然不奏效。有时，尽管我已经发送完所有数据，但浏览器并不知道这一点，它无法得知这个打开的连接上是否还会有新数据进来，只能傻傻地等了。</p>
+<p>（1）使用消息首部字段Conent-Length</p>
+<p>Conent-Length表示实体内容长度，当客户端向服务器请求一个静态页面或者一张图片时，服务器可以很清楚的知道内容大小，然后通过Content-length消息首部字段告诉客户端 需要接收多少数据。</p>
+<p>（2）使用消息首部字段Transfer-Encoding</p>
+<p>如果是动态页面等时，服务器是不可能预先知道内容大小。因为对于动态生成的内容来说，在内容创建完之前，长度是不可知的。这时候要想准确获取长度，只能开一个足够大的 buffer，等内容全部生成好再计算。但这样做一方面需要更大的内存开销，另一方面也会让客户端等更久。所以不可能这么做。Conent-Length就失效了。</p>
+<p>这时就可以使用Transfer-Encoding：chunk模式：服务器就需要使用Transfer-Encoding: chunked这样的方式来代替Content-Length。即如果要一边产生数据，一边发给客户端。</p>
+<p>5、 分块编码（Transfer-Encoding: chunked）</p>
+<ol>
+<li><p>Transfer-Encoding，是一个 HTTP 头部字段（响应头域），字面意思是「传输编码」。最新的 HTTP 规范里，只定义了一种编码传输：分块编码(chunked)。</p>
 </li>
-<li><p>orders cannot have any statuses, which means that you can’t havean order in a pending state or as atdraft state, and </p>
+<li><p>分块传输编码（Chunked transfer encoding）是超文本传输协议（HTTP）中的一种数据传输机制，允许HTTP由网页服务器发送给客户端的数据可以分成多个部分。分块传输编码只在HTTP协议1.1版本（HTTP/1.1）中提供。</p>
 </li>
-<li><p>a specific user cannot bereturned unless we have the ability todefine roles. Another issue is thissession. </p>
-<p>Both sessions front-end and APIsessions must be separated, that isn’tvery easy in the current setup. </p>
+<li><p>数据分解成一系列数据块，并以一个或多个块发送，这样服务器可以发送数据而不需要预先知道发送内容的总大小。</p>
 </li>
-</ul>
-<p>Improvements could include </p>
-<ul>
-<li><p>adding product stock levels in the product service, </p>
+<li><p>具体方法</p>
 </li>
-<li><p>we could also add a cachingbetween product database calls, and </p>
+<li><ol>
+<li>在头部加入 Transfer-Encoding: chunked 之后，就代表这个报文采用了分块编码。这时，报文中的实体需要改为用一系列分块来传输。</li>
+<li>每个分块包含十六进制的长度值和数据，长度值独占一行，长度不包括它结尾的 CRLF(\r\n)，也不包括分块数据结尾的 CRLF。</li>
+<li>最后一个分块长度值必须为 0，对应的分块数据没有内容，表示实体结束。</li>
+</ol>
 </li>
-<li><p>we could add an API call to fetch previousorders. </p>
-<p>My recommendations would be toonly use the code in this course for demonstration purposes. Please don’t usethis in production, it is not productionready, also ideally what you would haveis separate source control for each ofthese services, and ideally each of theseservices would have its own database. Inthe next set of videos, we’re going to be building the order management service,and we’re going to be taking a look at the individual microservices, and I’mgoing to be demonstrating the code that Hide transcript In this video, we look at the issues and flaws of the microservices. We explore potential improvements and discuss recommendations. Discuss the potential issues with this setup Look at what improvements could be made Explore recommendations</p>
+<li><p>Content-Encoding 和 Transfer-Encoding 二者经常会结合来用，其实就是针对 Transfer-Encoding 的分块再进行 Content-Encoding压缩。</p>
 </li>
-</ul>
-<h2 id="Security-Monitoring-Tools"><a href="#Security-Monitoring-Tools" class="headerlink" title="Security Monitoring Tools"></a>Security Monitoring Tools</h2><ul>
-<li><p>zipkin</p>
-</li>
-<li><p>raygun</p>
-</li>
-<li><p>Elastic search, cabana, log stash, beats</p>
-</li>
-<li><p>wireshark</p>
-</li>
-<li><p>chaos monkey </p>
-</li>
-<li><p>siege</p>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcr9216tyxj314w0l2tah.jpg" alt="image-20200312170003754"></p>
-</li>
-</ul>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2015/05/14/DevOps/2015-05-14-pdb/">DevOps/2015-05-14-pdb</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2015-05-14</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/DevOps/">DevOps</a></span><div class="content"><h3 id="pdb"><a href="#pdb" class="headerlink" title="pdb"></a>pdb</h3><h4 id="Conditional-Break-Point"><a href="#Conditional-Break-Point" class="headerlink" title="Conditional Break Point"></a>Conditional Break Point</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(Pdb) b  <span class="number">3</span>,  ii==<span class="number">3</span></span><br><span class="line">Breakpoint <span class="number">3</span> at /mnt/raid3/home/huangjiancong/test.py:<span class="number">3</span></span><br><span class="line">(Pdb) l</span><br><span class="line">[EOF]</span><br><span class="line">(Pdb) l <span class="number">3</span></span><br><span class="line">  <span class="number">1</span></span><br><span class="line">  2  -&gt; for ii, val in enumerate(range(10)):</span><br><span class="line">  <span class="number">3</span> B           print(ii)</span><br><span class="line">[EOF]</span><br></pre></td></tr></table></figure>
+</ol>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">HTTP&#x2F;1.1 200 OK</span><br><span class="line">Content-Type: text&#x2F;plain</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line"></span><br><span class="line">25\r\n</span><br><span class="line">This is the data in the first chunk\r\n</span><br><span class="line"></span><br><span class="line">1C\r\n</span><br><span class="line">and this is the second one\r\n</span><br><span class="line"></span><br><span class="line">3\r\n</span><br><span class="line">con\r\n</span><br><span class="line"></span><br><span class="line">8\r\n</span><br><span class="line">sequence\r\n</span><br><span class="line"></span><br><span class="line">0\r\n</span><br><span class="line">\r\n</span><br></pre></td></tr></table></figure>
 
-<p><a href="https://www.wandouip.com/t5i100987/#jekyll_33" target="_blank" rel="noopener">https://www.wandouip.com/t5i100987/#jekyll_33</a></p>
-</div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+
+
+<h3 id="3-ways-handshake"><a href="#3-ways-handshake" class="headerlink" title="3 ways handshake"></a>3 ways handshake</h3><p><a href="https://notfalse.net/7/three-way-handshake" target="_blank" rel="noopener">https://notfalse.net/7/three-way-handshake</a></p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gblnwn98uhj30fq0gedgq.jpg" alt="三向交握 範例"></p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gblnxhmf7cj30xs0mfwi6.jpg" alt="TCP-Header-Format"></p>
+<h3 id="HTTP-methods"><a href="#HTTP-methods" class="headerlink" title="HTTP methods"></a>HTTP methods</h3><p>Restfule API - GET POST PUT DELETE</p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/01/15/Python/2020-01-15-bisect%20in%20python%20/">Python/2020-01-15-bisect in python </a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-01-15</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span><div class="content"><h3 id="Finding-Pos"><a href="#Finding-Pos" class="headerlink" title="Finding Pos"></a>Finding Pos</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> bisect</span><br><span class="line"> </span><br><span class="line">a = [<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">12</span>,<span class="number">15</span>,<span class="number">20</span>]</span><br><span class="line">position = bisect.bisect(a,<span class="number">13</span>)</span><br><span class="line">print(position)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 用可变序列内置的insert方法插入</span></span><br><span class="line">a.insert(position,<span class="number">13</span>)</span><br><span class="line">print(a)</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<p>5<br>[1, 4, 6, 8, 12, 13, 15, 20]</p>
+<hr>
+<h3 id="Insert"><a href="#Insert" class="headerlink" title="Insert"></a>Insert</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> bisect</span><br><span class="line"> </span><br><span class="line">a = [<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">12</span>,<span class="number">15</span>,<span class="number">20</span>]</span><br><span class="line">bisect.insort(a,<span class="number">13</span>)</span><br><span class="line">print(a)</span><br></pre></td></tr></table></figure>
+
+</div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/50/">50</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
   $('#nav').addClass('is-mobile')
   $('footer').addClass('is-mobile')
   $('#top-container').addClass('is-mobile')
