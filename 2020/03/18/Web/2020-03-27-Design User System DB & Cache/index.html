@@ -1,0 +1,245 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Web/2020-03-27-Design User System DB &amp; Cache"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>Web/2020-03-27-Design User System DB &amp; Cache | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Design-User-System"><span class="toc-number">1.</span> <span class="toc-text">Design User System</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-以下四个操作哪个最频繁？"><span class="toc-number">1.0.0.0.1.</span> <span class="toc-text">[单选题]以下四个操作哪个最频繁？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scenario"><span class="toc-number">1.0.1.</span> <span class="toc-text">Scenario</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Service"><span class="toc-number">1.0.2.</span> <span class="toc-text">Service</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Storage"><span class="toc-number">1.0.3.</span> <span class="toc-text">Storage</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#多选题-注册，登录，信息修改使用哪种数据库可以满足？"><span class="toc-number">1.0.3.0.1.</span> <span class="toc-text">[多选题]注册，登录，信息修改使用哪种数据库可以满足？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#多选题-文件系统可以用作缓存么？如果可以，可以做什么的缓存？"><span class="toc-number">1.0.3.0.2.</span> <span class="toc-text">[多选题]文件系统可以用作缓存么？如果可以，可以做什么的缓存？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#多选题-下面哪些写法是“不对”的？"><span class="toc-number">1.0.3.0.3.</span> <span class="toc-text">[多选题]下面哪些写法是“不对”的？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-有没有可能第一个执行失败，第二个执行成功？"><span class="toc-number">1.0.3.0.4.</span> <span class="toc-text">[单选题]有没有可能第一个执行失败，第二个执行成功？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#多选题-cache-delete-db-set-什么情况下会造成数据不一致？"><span class="toc-number">1.0.3.0.5.</span> <span class="toc-text">[多选题]cache.delete + db.set 什么情况下会造成数据不一致？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-能否给数据库和缓存的操作加锁来保证数据一致性？"><span class="toc-number">1.0.3.0.6.</span> <span class="toc-text">[单选题]能否给数据库和缓存的操作加锁来保证数据一致性？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-User-Table-的-Cache-Hit-Rate-一般有多少？"><span class="toc-number">1.0.3.0.7.</span> <span class="toc-text">[单选题]User Table 的 Cache Hit Rate 一般有多少？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Authentication-Service"><span class="toc-number">1.1.</span> <span class="toc-text">Authentication Service</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Session"><span class="toc-number">1.1.1.</span> <span class="toc-text">Session</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookies"><span class="toc-number">1.1.2.</span> <span class="toc-text">Cookies</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-Cookie-里存的东西是越多越好么？"><span class="toc-number">1.1.2.0.1.</span> <span class="toc-text">[单选题]Cookie 里存的东西是越多越好么？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-服务器需要主动删除掉过期的-Session-么？"><span class="toc-number">1.1.2.0.2.</span> <span class="toc-text">[单选题]服务器需要主动删除掉过期的 Session 么？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-Session-Table-适合存储在什么数据库里？"><span class="toc-number">1.1.2.0.3.</span> <span class="toc-text">[单选题]Session Table 适合存储在什么数据库里？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Friendship-Storage-amp-Query"><span class="toc-number">1.2.</span> <span class="toc-text">Friendship Storage &amp; Query</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-为什么要区分-smaller-user-id-和-bigger-user-id？"><span class="toc-number">1.2.0.0.1.</span> <span class="toc-text">[单选题]为什么要区分 smaller_user_id 和 bigger_user_id？</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">249</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">24</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">36</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">Web/2020-03-27-Design User System DB &amp; Cache</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-03-18</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="Design-User-System"><a href="#Design-User-System" class="headerlink" title="Design User System"></a>Design User System</h1><p>註冊、登錄、查詢 (看別的好友之類)、修改info</p>
+<blockquote>
+<h5 id="单选题-以下四个操作哪个最频繁？"><a href="#单选题-以下四个操作哪个最频繁？" class="headerlink" title="[单选题]以下四个操作哪个最频繁？"></a>[单选题]以下四个操作哪个最频繁？</h5><p>A.注册3.36% 选择</p>
+<p>B.登录44.02% 选择</p>
+<p>C.用户信息查询50.67% 选择</p>
+<p>D.用户信息修改1.94% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>C</p>
+</blockquote>
+<h3 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h3><h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><ul>
+<li>Authentication Service</li>
+<li>UserService</li>
+<li>FriendshipService</li>
+</ul>
+<h3 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h3><p>check SQL &amp; NoSQL &amp; Redis 對 QPS數的支持</p>
+<blockquote>
+<h5 id="多选题-注册，登录，信息修改使用哪种数据库可以满足？"><a href="#多选题-注册，登录，信息修改使用哪种数据库可以满足？" class="headerlink" title="[多选题]注册，登录，信息修改使用哪种数据库可以满足？"></a>[多选题]注册，登录，信息修改使用哪种数据库可以满足？</h5><p>A.MySQL60.32% 选择</p>
+<p>B.Cassandra18.05% 选择</p>
+<p>C.Redis13.46% 选择</p>
+<p>D.Memcached8.18% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是ACD</p>
+<p><strong>正确答案:</strong>ABC</p>
+<p><strong>解析:</strong></p>
+<p>Memcached 不能持久化存储数据，不适合用来存储用户信息</p>
+</blockquote>
+<blockquote>
+<ul>
+<li><p>Q: 10k ~ 100k QPS?</p>
+<ul>
+<li>看需求。可以使用单台redis或者使用多台Cassandra的集群，又或者如果你的场景需要高可靠性的事务支持，但是读多写少，那就MySQL做持久化+memcached做cache优化。不同的数据库有不同的功能，这里列出的QPS只是为了告诉你各个数据库的承载能力，不是说xxxQPS就一定要用xxx数据库，QPS不是唯一决定因素，需要结合实际需求分析。</li>
+</ul>
+</li>
+<li><p>为什么Mysql只支持1k 的QPS,但facebook 依然会选择。 facebook的QPS应该远高于1k吧</p>
+<ul>
+<li>单机1k左右，但是facebook的是mysql集群，QPS肯定不是这个量级的</li>
+</ul>
+</li>
+<li><p>redis，memcached会比普通的存储贵吗</p>
+<ul>
+<li>redis memcached 用 memory 多，肯定比主要用 disk 的机器要贵的。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>讀多寫少，代表經常不會變！</p>
+<blockquote>
+<h5 id="多选题-文件系统可以用作缓存么？如果可以，可以做什么的缓存？"><a href="#多选题-文件系统可以用作缓存么？如果可以，可以做什么的缓存？" class="headerlink" title="[多选题]文件系统可以用作缓存么？如果可以，可以做什么的缓存？"></a>[多选题]文件系统可以用作缓存么？如果可以，可以做什么的缓存？</h5><p>A.不可以1.22% 选择</p>
+<p>B.用来做网络请求的缓存。30.30% 选择</p>
+<p>C.用来做计算结果的缓存34.45% 选择</p>
+<p>D.用来做数据库的缓存34.04% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是BD</p>
+<p><strong>正确答案:</strong>BC</p>
+<p><strong>解析:</strong></p>
+<p>缓存的目的是让访问变得更快。文件系统的访问比网络访问快，一些耗时很长的计算得到的结果也可以缓存在文件中，但是文件系统的访问速度和数据库的访问速度基本上是差不多，所以一般不会用文件系统来做数据库的缓存，意义不大。</p>
+</blockquote>
+<blockquote>
+<h5 id="多选题-下面哪些写法是“不对”的？"><a href="#多选题-下面哪些写法是“不对”的？" class="headerlink" title="[多选题]下面哪些写法是“不对”的？"></a>[多选题]下面哪些写法是“不对”的？</h5><p>哪些写法可能造成数据的不一致？也就是数据库和缓存中存储的数据不一样。</p>
+<p>A.db.set; cache.set29.67% 选择</p>
+<p>B.db.set; cache.delete29.48% 选择</p>
+<p>C.cache.set; db.set29.83% 选择</p>
+<p>D.cache.delete; db.set11.02% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是ABCD</p>
+<p><strong>正确答案:</strong>ABCD</p>
+</blockquote>
+<blockquote>
+<h5 id="单选题-有没有可能第一个执行失败，第二个执行成功？"><a href="#单选题-有没有可能第一个执行失败，第二个执行成功？" class="headerlink" title="[单选题]有没有可能第一个执行失败，第二个执行成功？"></a>[单选题]有没有可能第一个执行失败，第二个执行成功？</h5><p>A.可能，会造成数据不一致55.52% 选择</p>
+<p>B.可能，不会造成数据不一致12.52% 选择</p>
+<p>C.不可能，不会造成数据不一致31.96% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>C</p>
+<p><strong>解析:</strong></p>
+<p>不可能。程序的执行是顺序执行的，第一个语句执行出错以后，第二个语句就不会执行了，用户会收到整个 setUser 操作失败的信息。</p>
+</blockquote>
+<blockquote>
+<h5 id="多选题-cache-delete-db-set-什么情况下会造成数据不一致？"><a href="#多选题-cache-delete-db-set-什么情况下会造成数据不一致？" class="headerlink" title="[多选题]cache.delete + db.set 什么情况下会造成数据不一致？"></a>[多选题]cache.delete + db.set 什么情况下会造成数据不一致？</h5><p>A.多线程38.22% 选择</p>
+<p>B.多进程28.27% 选择</p>
+<p>C.多机器28.65% 选择</p>
+<p>D.cache.delete 成功但 db.set 失败4.87% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是D</p>
+<p><strong>正确答案:</strong>ABC</p>
+<p><strong>解析:</strong></p>
+<p>多机器的话自然而然也是多进程的。</p>
+</blockquote>
+<blockquote>
+<h5 id="单选题-能否给数据库和缓存的操作加锁来保证数据一致性？"><a href="#单选题-能否给数据库和缓存的操作加锁来保证数据一致性？" class="headerlink" title="[单选题]能否给数据库和缓存的操作加锁来保证数据一致性？"></a>[单选题]能否给数据库和缓存的操作加锁来保证数据一致性？</h5><p>A.可以加锁47.11% 选择</p>
+<p>B.加不了锁52.89% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>加锁以后只能保证在同一个数据上的操作顺序执行，但是无法执行“回滚”，也就是说如果第一个操作成功，第二个操作失败了，也会导致数据的不一致。<br>另外互斥锁（mutex）是多线程内共享的，多进程内无法共享。如果要加锁，只能使用分布式锁，比如 Zookeeper，但是这会导致读取效率急剧降低。得不偿失。</p>
+</blockquote>
+<blockquote>
+<h5 id="单选题-User-Table-的-Cache-Hit-Rate-一般有多少？"><a href="#单选题-User-Table-的-Cache-Hit-Rate-一般有多少？" class="headerlink" title="[单选题]User Table 的 Cache Hit Rate 一般有多少？"></a>[单选题]User Table 的 Cache Hit Rate 一般有多少？</h5><p>A.20%5.16% 选择</p>
+<p>B.50%8.32% 选择</p>
+<p>C.95%24.54% 选择</p>
+<p>D.98%61.98% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是D</p>
+<p><strong>正确答案:</strong>D</p>
+<p><strong>解析:</strong></p>
+<p>hit rate = cache hit / (cache hit + cache miss)</p>
+</blockquote>
+<ul>
+<li>我们允许数据库和缓存有“短时间”内的不一致，但最终会一致。</li>
+</ul>
+<blockquote>
+<ul>
+<li>database.set(key, user);cache.set(key)我觉得没有脏数据啊。当第一个线程1执行到15-16行之间的时候。假如有另一个线程2进入setUser这个函数。线程2的cache.set也会覆盖线程1的cache.set结果的啊，所以旧数据就被覆盖了啊。没有脏数据啊，求解释？</li>
+</ul>
+<p>假设执行顺序如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">thread 1 line 15: database.set(user) &#x2F;&#x2F; old data</span><br><span class="line">thread 2 line 15: database.set(user) &#x2F;&#x2F; new data</span><br><span class="line">thread 2 line 16: cache.set(user) &#x2F;&#x2F; new data</span><br><span class="line">thread 1 line 15: cache.set(user) &#x2F;&#x2F; old data</span><br></pre></td></tr></table></figure>
+
+<p>最后 cache 里是 old data, database 里是 new data</p>
+<p>线程2的cache.set也会覆盖线程1的cache.set结果的啊<br>在上面列举的情况中，是 thread 1 覆盖了 thread 2。要注意 user 是一个局部变量。thread 2 里的 user 和 thread 1 里的 user 的内容是不同的。</p>
+</blockquote>
+<p>如果寫真的太多太多了，在Cache Aside下，就是加DB啊。</p>
+<blockquote>
+<ul>
+<li>redis包含cache和一个db，是说redis里面包含了relational database management system , rdbms么？ 我记得redis只是缓存，没mysql的呢。<ul>
+<li>redis可以跟mysql配合使用，redis会完全接管mysql，自己从mysql里面load数据，所以在外界<strong>看起来</strong>就像是redis里面包了一个mysql一样。并不是说redis里面有一个mysql。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Authentication-Service"><a href="#Authentication-Service" class="headerlink" title="Authentication Service"></a>Authentication Service</h2><h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><p>可以用uuid()算這個hash值</p>
+<p>通常用UUID来作为Session Key(Session Token)，UUID(Universal Unique ID): UUID是由一组32位数的16进制数字所构成，所以UUID理论上的总数为16^32=2^128，约等于3.4 x 10^38。也就是说若每纳秒产生1兆个UUID，要花100亿年才会将所有UUID用完。所以通俗的称之为宇宙爆炸都不会出现重复的ID字段。</p>
+<blockquote>
+<ul>
+<li>cookie 存在browser 的哪里？<ul>
+<li>browser 就是一个 client 就是一个客户端软件，是一个 application 是一个 software，一个程序，一段代码。一个 software 要持久化的存储一个东西，最终都是存储在操作系统的文件系统上的。</li>
+</ul>
+</li>
+<li>session key一般有效期多久？<ul>
+<li>取决于网站的安全等级，比如银行类的一般浏览器关掉 session key就过期了。社交类的一般就三个月甚至更长。这个可以由网站开发人员自行定义。</li>
+</ul>
+</li>
+<li>any security problems regarding to session key?<ul>
+<li>如果你的 session key 被盗，比如你拿了你男朋友女朋友的电脑，悄悄的记录下了 session key，你就可以以你男朋友女朋友的身份登录了。所以通常一些安全性较高的网站，如银行，session key 几分钟就会失效。</li>
+</ul>
+</li>
+<li>session table 是存在数据库里， 还是存在In memory db 里面?<ul>
+<li>都是可以的。不过一般都是存在 数据库里，否则memory数据丢了所有用户都会被logout 这个体验并不好。</li>
+</ul>
+</li>
+<li>what if i never log in again? my session will live forever?<ul>
+<li>通常网站的逻辑都是最多3个月。session table 里有 expire_at 这个 field，记录了什么时候会过期。一般用户登陆以后，这一项设置为 3 个月。当然你可以根据你网站的安全性要求来设置不同的过期时间，安全性越高的网站过期时间越短。一般不会设置为永久不过期。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="Cookies"><a href="#Cookies" class="headerlink" title="Cookies"></a>Cookies</h3><ul>
+<li>用户 Login 以后，为他创建一个 session 对象</li>
+<li>并把 session_key 返回给浏览器，让浏览器存储起来</li>
+<li>浏览器将该值记录在浏览器的 cookie 中</li>
+<li>用户每次向服务器发送的访问，都会自动带上该网站所有的 cookie</li>
+<li>此时服务器拿到 cookie 中的 session_key，在 Session Table 中检测是否存在，是否过期</li>
+<li>Cookie:HTTP协议中浏览器和服务器的沟通机制，服务器把一些用于标记用户身份的信息，传递给 浏览器，浏览器每次访问任何网页链接的时候，都会在 HTTP 请求中带上所有的该网站相关的 Cookie 信息。Cookie 可以理解为一个 Client 端的 hash table。</li>
+</ul>
+<blockquote>
+<h5 id="单选题-Cookie-里存的东西是越多越好么？"><a href="#单选题-Cookie-里存的东西是越多越好么？" class="headerlink" title="[单选题]Cookie 里存的东西是越多越好么？"></a>[单选题]Cookie 里存的东西是越多越好么？</h5><p>A.是的3.13% 选择</p>
+<p>B.不是96.87% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>首先 Cookie 的大小 HTTP 协议是有限制的。其次因为每次 Request 都要带上 Cookie 里的内容，因此 Cookie 里存的东西是越少越好而不是越多越好。</p>
+</blockquote>
+<p>一般就是放個session key表明用戶身份，如掛在胸前的牌，代表授權訪問的用戶。然後去session table查是不是過期了，查uuid(就是session key), 然後知道 user_id，就是client端的hash table。</p>
+<blockquote>
+<h5 id="单选题-服务器需要主动删除掉过期的-Session-么？"><a href="#单选题-服务器需要主动删除掉过期的-Session-么？" class="headerlink" title="[单选题]服务器需要主动删除掉过期的 Session 么？"></a>[单选题]服务器需要主动删除掉过期的 Session 么？</h5><p>A.需要34.19% 选择</p>
+<p>B.不需要65.81% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>做 lazy loading 就好了。因为有 expire_at，无需主动删除，被动删除即可，即在用户登陆的时候发现过期了再删。</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>session table 是存在数据库里， 还是存在In memory db 里面?<ul>
+<li>都是可以的。不过一般都是存在 数据库里，否则memory数据丢了所有用户都会被logout 这个体验并不好。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>device token 也可紀錄在 session table, </p>
+<blockquote>
+<h5 id="单选题-Session-Table-适合存储在什么数据库里？"><a href="#单选题-Session-Table-适合存储在什么数据库里？" class="headerlink" title="[单选题]Session Table 适合存储在什么数据库里？"></a>[单选题]Session Table 适合存储在什么数据库里？</h5><p>A.Memcached21.64% 选择</p>
+<p>B.MySQL22.46% 选择</p>
+<p>C.Memcached + MySQL55.90% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>C</p>
+</blockquote>
+<p>如果自己建個網站，用戶不多，放在Memcache裡也Ok, 就算斷了，用戶就是再重登一次，不會怎樣，畢竟不是用戶信息的不能丟的。</p>
+<p>大網站就最好撐久點，讓體驗好，訪問效率高</p>
+<blockquote>
+<ul>
+<li>那个device id那一块，如何实现？有点模糊。<ul>
+<li>就是在每个device第一次登录的时候给他分配一个id，然后把这个id放到该设备的cookie中，每次访问网站的时候都要带上这个id，这样根据id就能知道当前活动的是哪台设备了。</li>
+</ul>
+</li>
+<li>db如何设计呢？如何判断这个session 是这个user，然后把之前的ipad的session logout，再让这个iphone的session建立？<ul>
+<li>如果用NoSQL，那么表中的每一行可以是{user_id, session, expire_at，其中user_id是foreign key并且建立了index方便快速查找，session在生成的时候可以encode进去user_id的信息，方便直接从session中识别出当前用户。如果是key-value NoSQL，那就直接把上述结构改为user_id ==&gt; {session, expire_at}就行了。<br>当用户登录的时候直接生成一个新的session替换掉原来的。<br>当旧设备的session再次尝试请求数据的时候，先从session中decode出user_id，然后去查表，然后会发现表中的session跟当前的session不是同一个，那就强制logout。</li>
+</ul>
+</li>
+<li>每个device 都会有一个 session key 吗？<ul>
+<li>session key 和 device 不是绑定的关系。 session key 是记录某次登录后所形成的客户端与服务器端的保持通话的记录的 key。同一台机器上的不同的浏览器登录以后的 session key一般就是不同的。像 Google Chrome 这种支持多用户的浏览器，切换用户以后，就相当于切换浏览器一样，session 记录也是不同的。</li>
+</ul>
+</li>
+<li>如果一个ipad来登陆来了，如何把iphone的session key给expire还是删除呢？如何判断，这2个device是一个user？如果问，如何回答。<ul>
+<li>用同一个账号登录肯定就是同一个user。如果登录之后发现在session table中该账号有一个active的session，就可以把这个session 给expire了然后写一个新的进去。</li>
+</ul>
+</li>
+<li>登陆之后，发现该账号已经有一个active user，就可以把这个session给expire了。这个“expire”操作具体是怎样进行的？<ul>
+<li>这种情况可以直接删除该行记录。</li>
+</ul>
+</li>
+<li>想问一下RESTful API里面比如POST一个新blog的请求会用session_key来验证user吗？<ul>
+<li>也会的，只要是需要authorization的操作都需要验证当前用户的session.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Friendship-Storage-amp-Query"><a href="#Friendship-Storage-amp-Query" class="headerlink" title="Friendship Storage &amp; Query"></a>Friendship Storage &amp; Query</h2><p>單向：Twitter, Ins, Weibo</p>
+<p>雙向：WeChat, FB, WhatsApp</p>
+<blockquote>
+<h5 id="单选题-为什么要区分-smaller-user-id-和-bigger-user-id？"><a href="#单选题-为什么要区分-smaller-user-id-和-bigger-user-id？" class="headerlink" title="[单选题]为什么要区分 smaller_user_id 和 bigger_user_id？"></a>[单选题]为什么要区分 smaller_user_id 和 bigger_user_id？</h5><p>A.否则查询 A 和 B 是否为好友的时候会变慢55.84% 选择</p>
+<p>B.否则查询 A 的所有好友的时候会变慢32.22% 选择</p>
+<p>C.猜不到11.94% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>A</p>
+<p><strong>解析:</strong></p>
+<p>查询 A 的所有好友不会变慢，因为依然是 select * from friendship where user_id1=A or user_id2=A。</p>
+</blockquote>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/03/18/Web/2020-03-27-Design%20User%20System%20DB%20&amp;%20Cache/">http://yoursite.com/2020/03/18/Web/2020-03-27-Design%20User%20System%20DB%20&amp;%20Cache/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2020/03/18/Books/2020-03-23-Lifes%20in%20English/"><i class="fa fa-chevron-left">  </i><span>Books/2020-03-23-Lifes in English</span></a></div><div class="next-post pull-right"><a href="/2020/03/18/System-Design/JiuZhang/2020-03-18-System%20Design%20&amp;%20Design%20Twitter/"><span>System-Design/JiuZhang/2020-03-18-System Design &amp; Design Twitter</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
