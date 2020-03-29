@@ -188,14 +188,15 @@ class Solution:
 
 ## Sorting and Searching
 
-|                                           |      |      |          | status | coded |      |
-| ----------------------------------------- | ---- | ---- | -------- | ------ | ----- | ---- |
-| [29 Divide Two Integers](#29)             |      |      |          | v      | v     |      |
-| [50 Pow](#50)                             |      |      |          |        |       |      |
-| [75 Sort Colors](#75)                     |      |      |          | v      | v     |      |
-| [692 Top K frequent words](#692)          |      |      |          | v      | v     |      |
-| [973 K Close points to origin](#973)      |      |      |          | v      | v     |      |
-| [215 K largest element in an Array](#215) |      | heap | Q-select | v      | v     |      |
+|                                                              |      |      |          | status | coded |      |
+| ------------------------------------------------------------ | ---- | ---- | -------- | ------ | ----- | ---- |
+| [29 Divide Two Integers](#29)                                |      |      |          | v      | v     |      |
+| [50 Pow](#50)                                                |      |      |          |        |       |      |
+| [75 Sort Colors](#75)                                        |      |      |          | v      | v     |      |
+| [692 Top K frequent words](#692)                             |      |      |          | v      | v     |      |
+| [973 K Close points to origin](#973)                         |      |      |          | v      | v     |      |
+| [215 K largest element in an Array](#215)                    |      | heap | Q-select | v      | v     |      |
+| [34 Find First and Last Position of Element in Sorted Array](#34) |      |      |          | v      | v     |      |
 
 
 
@@ -237,16 +238,17 @@ while l < r
         break
 return arr[K_idx]
 '''
+import heapq
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         if not nums:
             return 0
-        
-        return self.helper(nums, 0, len(nums)-1)
+        # return self.helper_heapq(nums, k)
+        return self.helper_Q_select(nums, k)
     
-    def helper(self, nums, i, j):
-        if i >= j:
-            return 0
+    def helper_Q_select(self, nums, k):
+        # if i >= j:
+        #     return 0
         
         i, j = 0, len(nums)-1
         # 1 2 3 4 5 6
@@ -254,7 +256,8 @@ class Solution:
         # k = 2 ==> idx 4.  6-2
         k_idx = len(nums) - k
         while i < j:
-            pvt_idx = self.partition(i, j, nums)
+            # pvt_idx = self.partition(i, j, nums)
+            pvt_idx = self.partition(nums, i, j)
             if k_idx < pvt_idx:
                 j = pvt_idx - 1
             elif k_idx > pvt_idx:
@@ -262,30 +265,38 @@ class Solution:
             else:
                 break
         return nums[k_idx]
-            
-    # 3 2 5 4 1 6
-    def partition(self, l, r, arr):
+    
+    def partition(self, arr,low,high): 
+        i = low-1        # index of smaller element 
+        pivot = arr[high]     # pivot 
+
+        for j in range(low , high): 
+
+            # If current element is smaller than or 
+            # equal to pivot 
+            if   arr[j] <= pivot: 
+
+                # increment index of smaller element 
+                i = i+1 
+                arr[i],arr[j] = arr[j],arr[i] 
+
+        arr[i+1],arr[high] = arr[high],arr[i+1] 
+        return i+1
+
+    def partition_X(self, l, r, arr):
+        def swap(x, y):
+            x, y = y, x
+        
+        i, j = l, r
         pvt = arr[l]
-        ll = l+1
-        while ll < r:    
-            while arr[ll] < pvt and ll < r:
-                ll += 1
-            while arr[r] > pvt and ll < r:
-                r -= 1
-            arr[ll], arr[r] = arr[r], arr[ll]
-            
-        return ll
-
-
-
-
-## TODO: k largest ==> len(nums) - k + 1 small
-# 1 2 3 4 5 6
-# k  = 2 ==> 5
-# ks = 5 ==> 6-2+1
-import heapq
-class Solution:
-    def findKthLargest(self, nums: List[int], k: int) -> int:
+        while i < j:
+            while arr[i] < pvt and i < j:
+                i += 1
+            while arr[j] > pvt and i < j:
+                j -= 1
+            swap(arr[i], arr[j])
+                 
+    def helper_heapq(self, nums: List[int], k: int) -> int:
         # l = nums
         if not nums:
             return 0
@@ -295,9 +306,10 @@ class Solution:
         for i in range(ks-1):
             heapq.heappop(nums) # ks * O(lgN)
         return heapq.heappop(nums)
-        
-    
 ```
+
+- Time complexity : O(*N*) in the average case, O(*N*2) in the worst case.
+- Space complexity : O(1).
 
 
 
@@ -415,6 +427,48 @@ class Solution:
                     stack.append(i)
                 g_max = max(g_max, i-stack[-1])     # pop後，拿棧頂的值
         return g_max
+```
+
+
+
+### <a name="34">34</a>
+
+```python
+from bisect import * # bisect_left() bisect_right()
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        if not nums:
+            return [-1, -1]
+        # if len(nums) == 1:
+        #     if nums[0] == target:
+        #         return [0,0]
+        #     else:
+        #         return [-1,-1]
+        
+        # l, r = 0, len(nums)-1
+        l, r = 0, len(nums)
+        while l<r:
+            mid = l + (r-l)//2
+            if target <= nums[mid]:     # [5,7,7,8,8,10]
+                r = mid
+            else:
+                l = mid + 1
+                # r = mid
+        
+        # i, j = 0, len(nums)-1
+        i, j = 0, len(nums)
+        while i<j:
+            mid = i + (j-i)//2
+            if target < nums[mid]:
+                j = mid
+            else:
+                i = mid + 1
+        
+        # print(l, i)
+        if l == i:# and nums[l] != target:
+            return [-1, -1]
+        
+        return [l, i-1]
 ```
 
 

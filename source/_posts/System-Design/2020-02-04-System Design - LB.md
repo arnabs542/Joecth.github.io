@@ -28,7 +28,7 @@ tag: []
 
 ## Loading Balancing
 
-<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200205225415969.png" alt="image-20200205225415969" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd3rkbx8ooj319y0acwkc.jpg" alt="image-20200205225415969" style="zoom:50%;" />
 
 * nginx async
 
@@ -178,4 +178,6 @@ LB 某種意義上就是 reversed proxy (Web Server)了
 
 
 
-### 
+ref : 
+
+https://www.youtube.com/watch?v=RlkA1NRoYJ8&list=PLbhaS_83B97vSWVslD63vjIi5OTYmSVrk&index=80

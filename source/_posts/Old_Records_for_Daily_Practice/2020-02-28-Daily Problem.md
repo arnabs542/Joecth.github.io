@@ -483,4 +483,640 @@ class Solution:
 
 
 
+###  Sudoku Check
+
+```python
+from collections import defaultdict
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        
+        dict_cols = defaultdict(defaultdict)
+        for i in range(len(board)):
+            dict_row = defaultdict(str)
+            if i % 3 == 0:
+                dict_boxes = defaultdict(defaultdict)
+            
+            for j in range(len(board[0])):
+                if board[i][j] != '.':
+                    if board[i][j] in dict_row:
+                        return False
+                    else:
+                        dict_row[board[i][j]] = True
+                        
+                    if board[i][j] in dict_cols[j]:
+                        return False
+                    else:
+                        dict_cols[j][board[i][j]] = True
+                        
+                    # if board[i][j] in dict_boxes
+                    if 0 <= j % 9 <= 2:
+                        if board[i][j] in dict_boxes[0]:
+                            return False
+                        dict_boxes[0][board[i][j]] = True
+                    elif 3 <= j % 9 <= 5:
+                        if board[i][j] in dict_boxes[1]:
+                            return False                        
+                        dict_boxes[1][board[i][j]] = True
+                    elif 6 <= j % 9 <= 8:
+                        if board[i][j] in dict_boxes[2]:
+                            return False                        
+                        dict_boxes[2][board[i][j]] = True
+        return True
+```
+
+
+
+### ~~Sum of Squares~~
+
+
+
+### RM Duplicate from Sorted Linked List
+
+```python
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        if not head :
+            return head
+
+        cur = head
+        
+        while cur.next:
+            if cur.next.val == cur.val: # TODO check cur.next
+                cur.next = cur.next.next
+            else:
+                cur = cur.next
+        return head
+```
+
+
+
+### ~~N-Queens~~
+
+
+
+### ~~Remove One Layer of Parentheses~~
+
+```python
+'''
+algo.
+( score+1
+) -1
+res = []
+if score == 0:
+    item.pop()
+    res.append(item[1:-1])
+return ''.join(res)
+'''
+
+class Solution:
+    def removeOuterParentheses(self, S: str) -> str:
+        score = 0
+        item = ''
+        res = []
+        
+        for i in range(len(S)):
+            # if S[j] == 0:
+            if S[i] == '(':
+                score += 1
+            elif S[i] == ')':
+                score -= 1
+            item += S[i]    # '(() ...'
+            
+            if score == 0:
+                res.append(item[1:-1])  # NO OOR since slicing helps handle it
+                item = ''
+        return ''.join(res)
+```
+
+
+
+### Count Primes
+
+```python
+'''
+0 1 2 3 4 5 6 7 8 9 10 11 
+x x v v   v   v         v
+'''
+class Solution:
+    def countPrimes(self, m: int) -> int:
+        n = m - 1
+        if n <= 1:
+            return 0
+            
+        isPrime = [None] + [None] * n
+        isPrime[0] = isPrime[1] = False
+        
+        for i in range(2, n+1):
+            if isPrime[i] == None:
+                isPrime[i] = True
+                for j in range(i*2, n+1, i):
+                    isPrime[j] = False
+        return sum(isPrime)
+```
+
+
+
 ###  Inorder Successor
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+'''
+      5
+    3     6
+   2  4 
+'''    
+class Solution:
+    # def __init__(self):
+        # self.flag = False
+    
+    def inorderSuccessor(self, root: 'TreeNode', p: 'TreeNode') -> 'TreeNode': 
+        if not root:
+            return None
+        # self.result = []
+#         self.helper(root, p, [])
+        return self.helper(root, p.val)
+#         if not self.result:
+#             return None
+#         else:
+#             return self.result[0].val
+    '''
+          5
+        3     33
+       2  4     40
+               34
+                 36 v
+    '''  
+    def helper(self, root, target):
+        cur = root
+        suc = None
+        while cur:
+            # suc = cur
+            if target > cur.val:
+                cur = cur.right
+            elif target == cur.val:
+                cur = cur.right
+                # if target == cur.val:
+            else:
+                suc = cur
+                cur = cur.left
+        return suc
+```
+
+
+
+### Number of Connected Components in an Undirected Graph
+
+
+
+### Split BST
+
+Ref: 
+
+- https://www.coursera.org/lecture/data-structures/split-and-merge-22BgE
+- https://leetcode.com/problems/split-bst/discuss/159985/Python-DFS-tm
+
+```python
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+'''
+          4                 V == 2
+        /   \
+      2      6
+     / \    / \
+    1   3  5   7
+'''
+class Solution:
+    def splitBST(self, root: TreeNode, V: int) -> List[TreeNode]:
+        return self.helper(root, V)
+    
+    def helper(self, root, V):
+        if not root: 
+            return [None, None]
+        
+        if V < root.val:
+            R1, R2 = self.helper(root.left, V)    # keep splitting LHS, 
+                                             # R1 means LEFT, R2 means RIGHT
+                                             # [2->1, 3]
+            # Merge R1 and root.right with root 
+            self.merge(R2, root.right, root)      # [3 subtree, 657, 4]
+            return [R1, root]                       # [2, 4]
+        
+        else: # V >= root.val
+            R1, R2 = self.helper(root.right, V) # if V==5 or 5.5 
+                                                # [5, 6->7]
+            self.merge(root.left, R1, root)          # [2 subtree, 5, 4]
+            return [root, R2]                   # [4, 6]
+            
+    def merge(self, l, r, T):
+        T.left = l
+        T.right = r
+```
+
+
+
+### Find the Closest Points
+
+```python
+import math
+import heapq
+from collections import deque 
+class Solution:
+    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
+        # return self.helper_heap_KlgK(points, K)
+        return self.helper_Q_select(points, K)
+    
+    def helper_Q_select(self, points, K):
+        dis = []
+        for pt in points:
+            dis.append(self.distance(pt, [0,0]))
+        
+        self.Q_select(dis, K, points) # 0, len(dis)-1, K)
+        return points[:K]
+        
+    def Q_select(self, dis, K, points):
+        
+        l, r = 0, len(dis)-1
+        while l < r:
+            meetup = self.partition(dis, l, r, points)
+
+            if meetup == K:
+                return 
+            elif meetup < K:
+                l = meetup + 1
+            else:
+                r = meetup - 1        
+                
+    def partition(self, arr, low, high, points):
+        # def swap(x, y):
+        #     x, y = y, x
+            
+        i = low - 1
+        pvt = arr[high]      
+        '''
+              3    0 5 4 1 8 2 2
+        low              high 
+        X    X X 2 Y Y Y Y 
+               i         4   
+        # 0 1 2 2
+        '''
+        for j in range(low, high):
+            if arr[j] <= pvt:
+                i += 1
+                arr[i], arr[j] = arr[j], arr[i]
+                points[i], points[j] = points[j], points[i]
+                # swap(arr[j], arr[i])      # NO USE
+                # swap(points[j], points[i])
+            
+        # swap(arr[i+1], arr[high])
+        # swap(points[i+1], points[high])
+        arr[i+1], arr[high] = arr[high], arr[i+1]
+        points[i+1], points[high] = points[high], points[i+1]
+        return i+1
+    
+    def partitionX(self, arr, l, r, points): # 18, 26, 20
+        pvt = arr[l]
+        pvt_point = points[l]
+        i = l+1
+        j = r
+                    
+        while i < j:
+            '''
+               3 2 1 5 0 8 7 4   
+             pvt i i i
+                       j, 
+
+               3 2 1 0
+             pvt  
+                     i
+            '''            
+            while arr[i] < pvt and i < j:
+                i += 1
+            while arr[j] > pvt and i < j:
+                j -= 1
+            # if i < j:
+            if True:
+                arr[i], arr[j] = arr[j], arr[i]
+                points[i], points[j] = points[j], points[i]
+                # i += 1
+                # j -= 1
+        # arr[l], arr[i] = arr[i], pvt   # arr[l] WRONG!
+        # points[l], points[i] = points[i], pvt_point   # arr[l] WRONG!
+        return j
+        
+        
+    
+    def helper_heap_KlgK(self, points, K):  # should use max-heap since we pop out unwanted ones   
+        l = []
+        for pt in points:   # O(N*lg(K))
+            # heapq._heappush_max(l, (self.distance(pt, [0,0]), pt))
+            heapq.heappush(l, (-1*self.distance(pt, [0,0]), pt))
+            if len(l) == K+1:
+                heapq.heappop(l)
+        
+        Q = deque()
+        for j in range(len(l)):
+            _, pt = heapq.heappop(l)
+            Q.appendleft(pt)
+            
+        return Q
+    
+    def helper_heap_NlgN(self, points, K):
+        
+        l = []
+        for pt in points:   # O(N*lg(N))
+            # l.append(self.distance(pt, [0,0]), pt)
+            heapq.heappush(l, (self.distance(pt, [0,0]), pt))
+            
+        ans = []
+        for j in range(K):
+            _, pt = heapq.heappop(l)
+            ans.append(pt)
+            
+        return ans
+    
+    def kClosest_old(self, points: List[List[int]], K: int) -> List[List[int]]:
+        ''' N*log(N)
+        # Q-sort tech
+        # [dis1, dis2, dis3]
+        if not points or not K:
+            return 0
+        l = []
+        for xy in points:
+            heapq.heappush(l, (self.distance(xy), xy[0], xy[1]))  # n*log(n)
+            # if len(l) > K:
+            #     heapq._heappop_max(l)
+
+        # map(points, self.distance)
+        # for point in points:
+        #     self.distance(point)
+        
+        res = []
+        for i in range(K):
+            dis, x, y = heapq.heappop(l)
+            res.append([x,y])
+            
+        return res
+        '''
+        l = []
+        for xy in points:
+            dist = self.distance(xy)
+            dist = -1*dist
+            if len(l) <= K-1:
+                heapq.heappush(l, (dist, xy))
+            else:
+                # print('---', dist)
+                if dist > l[0][0]:
+                    heapq.heappop(l)
+                    heapq.heappush(l, (dist, xy))
+                    
+        res = []
+        # for i in range(len(l)):
+        for i in range(K):
+            res.append(heapq.heappop(l)[1])
+        return res
+            
+    def distance(self, xy, xy2=[0,0]):
+        return math.sqrt((xy[0]-xy2[0])**2 + (xy[1]-xy2[1])**2)#, xy[0], xy[1]
+```
+
+**For Quick-Select Complexity Analysis**
+
+- Time Complexity: *O*(*N*) in *average case* complexity, where *N* is the length of `points`., worst when O(N^2)
+- Space Complexity: *O*(*N*).
+
+
+
+### Duplicate Subtrees
+
+```python
+from collections import defaultdict
+class Solution:
+    def findDuplicateSubtrees(self, root: TreeNode) -> List[TreeNode]:
+        
+        """
+        serialize each node in post order
+        """
+        self.mapping = defaultdict(int)
+        self.res = []
+        self.helper(root)
+        return self.res
+        
+    '''
+                1
+       /                    \
+      2 (2 (4 # #) #)         3
+     /          / \
+    4 (4 # #)      2   4
+                   /
+                  4 (4 # #)
+    '''
+    
+    def helper(self, root):
+        # post order 
+        if not root:
+            return "#"
+        # if not root.left and not root.right:
+            
+        
+        L = self.helper(root.left)
+        R = self.helper(root.right)
+        
+        pattern = "({} {} {})".format(root.val, L, R)
+        # 4 # #
+        self.mapping[pattern] += 1
+
+        if self.mapping[pattern] == 2:
+            self.res += [root]    
+        return pattern
+```
+
+
+
+###  K Closest Elements
+
+```python
+class Solution:
+    def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
+        # use a max-heap to maintain 
+        # return self.helper_random_when_tie(arr, k, x)
+        return self.helper(arr, k, x)
+    def helper(self, arr, k, x):
+        num_rm = len(arr) - k
+        l, r = 0, len(arr)-1
+        for i in range(num_rm):
+            if abs(arr[l]-x) <= abs(arr[r]-x):
+                r -= 1
+            else:
+                l += 1
+        return arr[l:r+1]
+  ref: https://www.bilibili.com/video/av92867152?from=search&seid=10589543388785979484
+```
+
+
+
+### Index of Larger Next Number 
+
+![image-20200322202508690](https://tva1.sinaimg.cn/large/00831rSTgy1gd2z6g4039j318i0r4h4c.jpg)
+
+
+
+### Number of Meeting Rooms
+
+```python
+    def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+        if not intervals:
+            return 0
+        arr = sorted(intervals, key=lambda x: x[0])
+        """
+        0   5   10.  15   20.  25.  30     
+        s.                           e 
+            s    e
+                     s     e 
+        """
+        count = 0
+        ends = []
+        for i in range(len(arr)):
+            if not ends:
+                ends.append(arr[i][1])
+                count += 1
+            # can use while, to compare arr[i][0] with all ends, but we dont' have to store so manu 
+            # but if it's ends is sorted ACS, we can compare only once , so , use min-heap
+            else:
+                # if ends[0] < arr[i][1]:
+                if ends[0] <= arr[i][0]:    
+                    """結束的那瞬間跟別人開始時一樣是OK的，第二組人馬還是可以用"""
+                    # count += 1
+                    heapq.heapreplace(ends, arr[i][1])
+                else:
+                    count += 1
+                    heapq.heappush(ends, arr[i][1])
+            
+        
+        return count
+```
+
+### ~~Primes~~
+
+### Multiply Strings
+
+```python
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        a = self.string2num(num1)
+        b = self.string2num(num2)
+        
+        return str(a*b)
+        
+    def string2num(self, n):
+        ret = 0
+        for i in range(len(n)):
+            digit = ord(n[i]) - ord('0')
+            ret = 10*ret + digit
+        
+        return ret
+```
+
+
+
+### Remove Adjacent Duplicate Characters
+
+```python
+class Solution:
+    def removeDuplicates(self, S: str) -> str:
+        return self.helper2(S)
+    
+    def helper2(self, S):
+        # if len(S)
+        tmp = []
+        for i in range(len(S)):
+            if tmp and tmp[-1] == S[i]:
+                tmp.pop()
+            else:
+                tmp.append(S[i])
+                
+        return ''.join(tmp)
+```
+
+```python
+class Solution:
+    def removeDuplicates(self, s: str, k: int) -> str:  
+        return "".join(self.helper(s, k))
+    
+    def helper(self, s, k):
+        stack = [['#', 0]]
+        for i in range(len(s)):
+            if stack[-1][0] != s[i]:
+                stack.append([s[i], 1])
+            else:
+                # stack[-1] = [stack[-1][0], stack[-1][1]+1]
+                stack[-1][1] += 1
+            if stack[-1][1] == k:
+                stack.pop()
+        res = ''
+        for j in range(len(stack)):
+            res += stack[j][0] * stack[j][1]
+            
+        return res
+```
+
+
+
+### Common Characters
+
+```python
+from collections import Counter, defaultdict
+class Solution:
+    def commonChars(self, A: List[str]) -> List[str]:
+        
+        c_maps = Counter(A[0])
+        # keys, values = c_maps.keys(), c_maps.values()
+        
+        for i in range(1, len(A)):
+            ret = defaultdict(int)
+            for j in range(len(A[i])):
+                if A[i][j] in c_maps and c_maps[A[i][j]] > 0:
+                    ret[A[i][j]] += 1
+                    c_maps[A[i][j]] -= 1
+            c_maps = ret
+        
+        res = ''
+        for k in ret:
+            res += k * ret[k]
+            
+        return list(res)
+```
+
+
+
+### ~~Matrix Transpose~~
+
+
+
+### Convert to Hexadecimal
+
+
+
+
+
+###  Remove Character to Create Palindrome
+
+==> Turn into LCS if num of deletion is not limited
+
+
+
+### Convert Fraction to Decimal
+
+
+
+### 
+
+### 

@@ -110,15 +110,16 @@ Each element costs constant space. And the size of the stack is exactly the dept
 
 ## Linked List
 
-|                                           |                                   |                                                              | status | cedod |      |
-| ----------------------------------------- | --------------------------------- | ------------------------------------------------------------ | ------ | ----- | ---- |
-| [206 Reverse Linked List](#206)           |                                   |                                                              | v      | v     |      |
-| [92 Reverse Linked List Ⅱ](#92)           |                                   |                                                              | v      | v     |      |
-| [141 Cycle Linked List](#141)             |                                   |                                                              |        |       |      |
-| [142 Cycle Linked List 2](#142)           |                                   |                                                              |        |       |      |
-| [143 Reorder Linked List](#143)           |                                   | 最後要記得cur.next =None, 不然會有cycle                      | v      | v     |      |
-| [138 Copy List with Random Pointer](#138) |                                   |                                                              |        |       |      |
-| [234 Palindrome Linked List](#234)        | turned into list + 2 pointer trvs | Add dummy node before head and check fast==None or fast.next == None to know odd/even nodes. <br />Then, reverse 2nd part and compare 1st part and 2nd part. | v      |       |      |
+|                                              |                                   |                                                              | status | cedod |      |
+| -------------------------------------------- | --------------------------------- | ------------------------------------------------------------ | ------ | ----- | ---- |
+| [206 Reverse Linked List](#206)              |                                   |                                                              | v      | v     |      |
+| [92 Reverse Linked List Ⅱ](#92)              |                                   |                                                              | v      | v     |      |
+| [141 Cycle Linked List](#141)                |                                   |                                                              |        |       |      |
+| [142 Cycle Linked List 2](#142)              |                                   |                                                              |        |       |      |
+| [143 Reorder Linked List](#143)              |                                   | 最後要記得cur.next =None, 不然會有cycle                      | v      | v     |      |
+| [138 Copy List with Random Pointer](#138)    |                                   |                                                              |        |       |      |
+| [234 Palindrome Linked List](#234)           | turned into list + 2 pointer trvs | Add dummy node before head and check fast==None or fast.next == None to know odd/even nodes. <br />Then, reverse 2nd part and compare 1st part and 2nd part. | v      |       |      |
+| [83 Remove Duplicated from Sorted List](#83) |                                   |                                                              | v      | v     |      |
 
 
 
@@ -1088,6 +1089,26 @@ class Solution:
         item = item[:-1]
         self.helper(i+1, nums, item.copy(), result)
         
+```
+
+
+
+### <a name="83">83</a>
+
+```python
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        if not head :
+            return head
+
+        cur = head
+        
+        while cur.next:
+            if cur.next.val == cur.val: # TODO check cur.next
+                cur.next = cur.next.next
+            else:
+                cur = cur.next
+        return head
 ```
 
 
@@ -2831,23 +2852,54 @@ class Solution:
 #### <a name="236">236</a>
 
 ```python
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None        
+'''
+        3
+       / \
+      5.  1
+     / \  / \
+    6   2 0  8
+       /
+      3
+    (root, 6, 3)
+    (root, 2, 3)
+'''
 
-class Solution:
+class Solution:        
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if not root:
+            return None
+        # print(p.val, q.val)
+        # return self.dfs(root, p.val, q.val)
+        # return self.dfs(root, p, q)
+        return self.helper(root, p, q)
+       #    1
+       #  2  3 
+       # N 4    
 
         
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        if not root or p == root or q == root:
+    def helper(self, root, p, q):
+        if not root:
+            return None
+        
+        if root.val == p.val or root.val == q.val:
             return root
-        left = self.lowestCommonAncestor(root.left, p, q)
-        right = self.lowestCommonAncestor(root.right, p, q)
-        if left and right: return root
-        return left if left else right
+        
+        # if not root.left and not root.right:
+        #     return None
+        
+        L = self.helper(root.left, p, q)      # got 7! None
+        R = self.helper(root.right, p, q)     # got 4! 2
+        
+        if not L and not R:
+            return None
+        
+        if L and R: 
+            return root
+        if not L: 
+            return R
+        # elif not R:
+        else:
+            return L
 ```
 
 
@@ -4058,60 +4110,128 @@ As we can see here, we used heap, but the problem is we still sorted all the ele
 ##### Quick Select
 
 ```python
+import math
+import heapq
+from collections import deque 
 class Solution:
-    def kClosest(self, points: 'List[List[int]]', K: 'int') -> 'List[List[int]]':
-        
-        # Time complexity : O(N)
-        # Space complexity : O(1)
-        
-        dist = lambda x : points[x][0]**2 + points[x][1]**2
-        
-        def quickselect(l, r, K):
-            
-            while l < r :
-                
-                # To avoid the worst case
-                i = random.randint(l, r)
-                points[i], points[l] = points[l], points[i]
-                
-                mid = partition(l, r)
-                
-                if K > mid :
-                    l = mid+1
-                elif K < mid :
-                    r = mid-1
-                else :
-                    break
-            
-        def partition(l, r):
-            
-            i = l # start index
-            pivot = dist(i)
-            
-            l += 1
-            
-            while True :
-                
-                while l<r and dist(l)<pivot:
-                    l+=1
-                    
-                while l<=r and dist(r)>=pivot:
-                    r-=1
-                    
-                if l>=r:
-                    break
-                
-                points[l], points[r] = points[r], points[l]
-                
-            points[r], points[i] = points[i], points[r]
-            return r
-            
-        quickselect(0, len(points)-1, K)
-        return points[:K]
+    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
+        # return self.helper_heap_KlgK(points, K)
+        return self.helper_Q_select(points, K)
     
+    def helper_Q_select(self, points, K):
+        dis = []
+        for pt in points:
+            dis.append(self.distance(pt, [0,0]))
+        
+        self.Q_select(dis, K, points) # 0, len(dis)-1, K)
+        return points[:K]
+        
+    def Q_select(self, dis, K, points):
+        
+        l, r = 0, len(dis)-1
+        while l < r:
+            meetup = self.partition(dis, l, r, points)
+
+            if meetup == K:
+                return 
+            elif meetup < K:
+                l = meetup + 1
+            else:
+                r = meetup - 1        
+                
+    def partition(self, arr, low, high, points):
+        # def swap(x, y):
+        #     x, y = y, x
+            
+        i = low - 1
+        pvt = arr[high]      
+        '''
+              3    0 5 4 1 8 2 2
+        low              high 
+        X    X X 2 Y Y Y Y 
+               i         4   
+        # 0 1 2 2
+        '''
+        for j in range(low, high):
+            if arr[j] <= pvt:
+                i += 1
+                arr[i], arr[j] = arr[j], arr[i]
+                points[i], points[j] = points[j], points[i]
+                # swap(arr[j], arr[i])      # NO USE
+                # swap(points[j], points[i])
+            
+        # swap(arr[i+1], arr[high])
+        # swap(points[i+1], points[high])
+        arr[i+1], arr[high] = arr[high], arr[i+1]
+        points[i+1], points[high] = points[high], points[i+1]
+        return i+1
+    
+    def partitionX(self, arr, l, r, points): # 18, 26, 20
+        pvt = arr[l]
+        pvt_point = points[l]
+        i = l+1
+        j = r
+                    
+        while i < j:
+            '''
+               3 2 1 5 0 8 7 4   
+             pvt i i i
+                       j, 
+
+               3 2 1 0
+             pvt  
+                     i
+            '''            
+            while arr[i] < pvt and i < j:
+                i += 1
+            while arr[j] > pvt and i < j:
+                j -= 1
+            # if i < j:
+            if True:
+                arr[i], arr[j] = arr[j], arr[i]
+                points[i], points[j] = points[j], points[i]
+                # i += 1
+                # j -= 1
+        # arr[l], arr[i] = arr[i], pvt   # arr[l] WRONG!
+        # points[l], points[i] = points[i], pvt_point   # arr[l] WRONG!
+        return j
+        
+        
+    
+    def helper_heap_KlgK(self, points, K):  # should use max-heap since we pop out unwanted ones   
+        l = []
+        for pt in points:   # O(N*lg(K))
+            # heapq._heappush_max(l, (self.distance(pt, [0,0]), pt))
+            heapq.heappush(l, (-1*self.distance(pt, [0,0]), pt))
+            if len(l) == K+1:
+                heapq.heappop(l)
+        
+        Q = deque()
+        for j in range(len(l)):
+            _, pt = heapq.heappop(l)
+            Q.appendleft(pt)
+            
+        return Q
+    
+    def helper_heap_NlgN(self, points, K):
+        
+        l = []
+        for pt in points:   # O(N*lg(N))
+            # l.append(self.distance(pt, [0,0]), pt)
+            heapq.heappush(l, (self.distance(pt, [0,0]), pt))
+            
+        ans = []
+        for j in range(K):
+            _, pt = heapq.heappop(l)
+            ans.append(pt)
+            
+        return ans
 ```
 
+**Complexity Analysis**
 
+- Quick: Time Complexity: *O*(*N*) in *average case* complexity, where N*N* is the length of `points`., worst is O(N^2)
+- Space Complexity: *O*(*N*).
 
 
 
@@ -4162,7 +4282,7 @@ ref : [https://leetcode.flowerplayer.com/2019/04/12/leetcode-907-sum-of-subarray
 
 
 
-### <a name="1143">1143</a>
+### <a name="1143">1143 LCS</a>
 
 ##### Brute Force - 2**m because of backtracking to generate all subsequences
 

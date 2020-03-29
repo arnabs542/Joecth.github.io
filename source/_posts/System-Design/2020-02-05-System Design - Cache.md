@@ -21,9 +21,9 @@ local sidk cmp to memory
 
 Cacheing service : Memcache, Redis
 
-<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200206192031055.png" alt="image-20200206192031055" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd3rkssomcj310c0kgaj0.jpg" alt="image-20200206192031055" style="zoom:50%;" />
 
-##### Cache aside
+### Cache aside
 
 照理redis不需要知道業務邏輯，應該都是client控制的，所以redis跟db應該沒分前後
 
@@ -33,7 +33,7 @@ Cacheing service : Memcache, Redis
 
 這個是最常用的
 
-![image-20200206192751483](/Users/joe/Library/Application Support/typora-user-images/image-20200206192751483.png)
+![image-20200206192751483](https://tva1.sinaimg.cn/large/00831rSTgy1gd3rkxfaonj30uc0hk44g.jpg)
 
 
 
@@ -61,11 +61,11 @@ distributed hash　就是取模
 
 CDN　content distributed network，也是緩存，更像file system。縣到市市到省
 
-<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200206194335424.png" alt="image-20200206194335424" style="zoom:50%;" />
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd3rl19ugwj30ze0k0wp2.jpg" alt="image-20200206194335424" style="zoom:50%;" />
 
 　
 
-#### Read/Write Through
+### Read/Write Through
 
 使用者寫到cache, cache自己會負責跟db更新，不用你來管，對應用來說簡單多。
 
@@ -79,7 +79,7 @@ CDN　content distributed network，也是緩存，更像file system。縣到市
 
 把client做的邏輯給cache做
 
-<img src="https://camo.githubusercontent.com/56b870f4d199335ccdbc98b989ef6511ed14f0e2/687474703a2f2f692e696d6775722e636f6d2f3076426330684e2e706e67" alt="img" style="zoom:67%;" />
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd3rl5r877j30ea0k8go4.jpg" alt="img" style="zoom:67%;" />
 
 
 
@@ -89,11 +89,11 @@ CDN　content distributed network，也是緩存，更像file system。縣到市
 
 - Most data written might never be read, which can be minimized with a TTL.　給個死掉的時間
 
-  <img src="/Users/joe/Library/Application Support/typora-user-images/image-20200206195432938.png" alt="image-20200206195432938" style="zoom:50%;" />
+  <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd3rl9vcz3j30s60k0dty.jpg" alt="image-20200206195432938" style="zoom:50%;" />
 
 
 
-##### Write-behind　↓　下面
+### Write-behind　↓　下面
 
 cache不是馬上去更新db，當大量高併發寫時，撐不住，所以先buffer一下個10秒
 

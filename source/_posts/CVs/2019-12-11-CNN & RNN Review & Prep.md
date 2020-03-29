@@ -261,7 +261,35 @@ ref: https://www.cnblogs.com/xuanyuyt/p/7222867.html
 ### RF (Receptive Field)
 
 * Top-Down (Easy!)
+
+  VGG as e.g.
+
+  | Layer     |                                                              |      |
+  | --------- | ------------------------------------------------------------ | ---- |
+  | 1-1       | 1 + 1x2^1                                                    | 3    |
+  | 1-2       | 1 + 2x2^1                                                    | 5    |
+  | Pooling 1 | 1 + 2x2^1 + **2^0**                                          | 6    |
+  | 2-1       | 1 + 2x2^1 + **2^0** + 1x2^2                                  | 10   |
+  | 2-2       | 1 + 2x2^1 + **2^0** + 2x2^2                                  | 14   |
+  | Pooling 2 | 1 + 2x2^1 + **2^0** + 2x2^2 + **2^1**                        | 16   |
+  | 3-1       | 1 + 2x2^1 + **2^0** + 2x2^2 + **2^1** + 1x2^3                | 24   |
+  | 3-2       | 1 + 2x2^1 + **2^0** + 2x2^2 + **2^1** + 2x2^3                | 32   |
+  | 3-3       | 1 + 2x2^1 + **2^0** + 2x2^2 + **2^1** + 3x2^3                | 40   |
+  | Pooling 3 | 1 + 2x2^1 + **2^0** + 2x2^2 + **2^1** + 3x2^3 + **2^2**      | 44   |
+  | 4-1       | 1 + 2x2^1 + **2^0** + 2x2^2 + **2^1** + 3x2^3 + **2^2** + 1x2^4 | 60   |
+  | 4-2       | 1 + 2x2^1 + **2^0** + 2x2^2 + **2^1** + 3x2^3 + **2^2** + 2x2^4 | 76   |
+  | 4-3       | 1 + 2x2^1 + **2^0** + 2x2^2 + **2^1** + 3x2^3 + **2^2 **+ 3x2^4 | 92   |
+  | Pooling 4 | 1 + 2x2^1 + **2^0** + 2x2^2 + **2^1** + 3x2^3 + **2^2** + 3x2^4 + **2^3** | 100  |
+  | 5-1       | 1 + 2x2^1 + **2^0** + 2x2^2 + **2^1** + 3x2^3 + **2^2** + 3x2^4 + **2^3** + 1x2^5 | 132  |
+  | 5-2       | 1 + 2x2^1 + **2^0** + 2x2^2 + **2^1** + 3x2^3 + **2^2** + 3x2^4 + **2^3** + 2x2^5 | 164  |
+  | 5-3       | 1 + 2x2^1 + **2^0** + 2x2^2 + **2^1** + 3x2^3 + **2^2** + 3x2^4 + **2^3** + 3x2^5 | 196  |
+  | Pooling 5 | 1 + 2x2^1 + **2^0** + 2x2^2 + **2^1** + 3x2^3 + **2^2** + 3x2^4 + **2^3** + 3x2^5 + **2^4** | 212  |
+
+  ​	
+
 * Bottom Up (Hard..)
+
+
 
 ### Gradient Vanishing
 
@@ -337,6 +365,18 @@ Ref: https://zhuanlan.zhihu.com/p/37358517
 
 used to eliminate the redundant features
 
+
+
+### SVM
+
+- hinge loss
+
+- 分类间隔为1/||w||，||w||代表向量的模
+
+- 当参数C越小时，分类间隔越大，分类错误越多，趋于欠学习
+
+  考虑软间隔的时候，C对优化问题的影响就在于把a的范围从[0，+inf]限制到了[0,C]。C越小，那么a就会越小，目标函数拉格朗日函数导数为0可以求出w=求和ai∗yi∗xi，a变小使得w变小，因此间隔2/||w||变大
+
 ### Decision Tree 
 
 copied from : [https://chtseng.wordpress.com/2017/02/10/%E6%B1%BA%E7%AD%96%E6%A8%B9-decision-trees/](https://chtseng.wordpress.com/2017/02/10/決策樹-decision-trees/)
@@ -378,6 +418,16 @@ Male節點：20位男性，其中有13位打板球7位不打，Gini係數為
 (0.56)2+(0.44)2=0.51
 
 因此以班級分類的決策樹，其Gini係數加權結果：(14/30)*0.51+(16/30)*0.51 = 0.51。兩樹相互比較，以性別分類的吉尼係數大於以班級分類，因此系統會採用性別來進行節點的分類。
+
+
+
+### Naive Bayes
+
+- 特征变量X的各个维度是类别条件独立随机变量
+
+
+
+
 
 # **決策樹演算法的步驟**
 
@@ -519,5 +569,254 @@ The region within the image where user most care about.
 
 
 
+### Reason of LR as Linear
+
+有人說，因為邏輯迴歸不是線性的，這個說法是不對的！因為我們可以把邏輯回歸的模型轉成線性的形式如下：
+
+ 
+
+![螢幕快照 2017-12-22 上午12.41.33](https://tva1.sinaimg.cn/large/00831rSTgy1gcx9msq25oj311a0b6411.jpg)
+
+ 
+
+主要原因很簡單，因為迴歸分析中 ![Y](https://tva1.sinaimg.cn/large/00831rSTgy1gcx9mt6yxrj300o00n08d.jpg) 是已經觀察到的資料，可是邏輯迴歸中 ![P(https://tva1.sinaimg.cn/large/00831rSTgy1gcx9mo7366j301q00y0fi.jpg)](https://s0.wp.com/latex.php?zoom=2&latex=P%28Y%3D1%7CX%29&bg=ffffff&fg=000&s=0) 是資料裡面無法觀察到的，所以我們就沒辦法用傳統的最小平方法估計，而要採用最大概似法 (Maximum Likelihood Estimation)。至於最大概似法的原理是什麼，可以用下面這張圖很清楚的解釋。
+
+ 
+
+### 关于logit 回归和SVM 不正确的是（A） 机器学习 ML模型 中
+
+A. Logit回归本质上是一种根据样本对权值进行极大似然估计的方法，而后验概率正比于先验概率和似然函数的乘积。logit仅仅是最大化似然函数，并没有最大化后验概率，更谈不上最小化后验概率。**A错误**
+B. Logit回归的输出就是样本属于正类别的几率，可以计算出概率，正确
+C. SVM的目标是找到使得训练数据尽可能分开且分类间隔最大的超平面，应该属于结构风险最小化。
+D. SVM可以通过正则化系数控制模型的复杂度，避免过拟合。
+@BlackEyes_SGC：**Logit回归目标函数是最小化后验概率，Logit回归可以用于预测事件发生概率的大小，**SVM目标是结构风险最小化，SVM可以有效避免模型过拟合。
 
 
+
+![螢幕快照 2017-12-22 上午12.44.31](https://tva1.sinaimg.cn/large/00831rSTgy1gcx9mu07mkj314s0u0tjz.jpg)
+
+
+
+### 为什么xgboost要用泰勒展开，优势在哪里？机器学习 ML模型 难
+
+@AntZ：xgboost使用了一阶和二阶偏导, 二阶导数有利于梯度下降的更快更准. 使用泰勒展开取得函数做自变量的二阶导数形式, 可以在不选定损失函数具体形式的情况下, 仅仅依靠输入数据的值就可以进行叶子分裂优化计算, 本质上也就把损失函数的选取和模型算法优化/参数选择分开了. 这种去耦合增加了xgboost的适用性, 使得它按需选取损失函数, 可以用于分类, 也可以用于回归。
+————————————————
+版权声明：本文为CSDN博主「v_JULY_v」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/v_JULY_v/article/details/78121924 
+
+
+
+### L1和L2正则先验分别服从什么分布。机器学习 ML基础 易
+
+- L1和L2正则先验分别服从什么分布，L1是拉普拉斯分布，L2是高斯分布。
+- 先验就是优化的起跑线, 有先验的好处就是可以在较小的数据集中有良好的泛化性能，当然这是在先验分布是接近真实分布的情况下得到的了，从信息论的角度看，向系统加入了正确先验这个信息，肯定会提高系统的性能。
+  对参数引入高斯正态先验分布相当于L2正则化, 这个大家都熟悉：
+
+
+
+### How to choose K for K-Means Clustering
+
+- sqrt(n/2) -- bad
+- elbow method - Y-axis means sum(square errors)
+
+https://rpubs.com/skydome20/R-Note9-Clustering
+
+https://www.biaodianfu.com/k-means-choose-k.html
+
+
+
+### How to choose K for kNN
+
+- CV error might rise after a specific lowest value of K
+
+如果选择较小的K值，就相当于用较小的领域中的训练实例进行预测，“学习”近似误差会减小，只有与输入实例较近或相似的训练实例才会对预测结果起作用，与此同时带来的问题是“学习”的估计误差会增大，换句话说，K值的减小就意味着整体模型变得复杂，容易发生过拟合；
+如果选择较大的K值，就相当于用较大领域中的训练实例进行预测，其优点是可以减少学习的估计误差，但缺点是学习的近似误差会增大。这时候，与输入实例较远（不相似的）训练实例也会对预测器作用，使预测发生错误，且K值的增大就意味着整体的模型变得简单。
+K=N，则完全不足取，因为此时无论输入实例是什么，都只是简单的预测它属于在训练实例中最多的累，模型过于简单，忽略了训练实例中大量有用信息。
+    在实际应用中，K值一般取一个比较小的数值，例如采用交叉验证法（简单来说，就是一部分样本做训练集，一部分做测试集）来选择最优的K值。
+
+```python
+K = 10
+batch_size = 16
+epochs = 100
+error_histories = []
+num_val_samples = len(train_data) // K
+
+for i in range(K):
+    print('Processing fold #', i)
+    val_data = train_data[i*num_val_samples : (i+1)*num_val_samples]
+    val_targets = train_targets[i*num_val_samples : (i+1)*num_val_samples]
+    
+    partial_train_data = np.concatenate( 
+                         [train_data[: i*num_val_samples],
+                         train_data[(i+1)*num_val_samples :]],
+                         axis = 0)
+    partial_train_targets = np.concatenate(
+                         [train_targets[: i*num_val_samples],
+                         train_targets[(i+1)*num_val_samples :]],
+                         axis = 0)
+    model = build_model()
+    history = model.fit(partial_train_data,
+                        partial_train_targets,
+                        validation_data = (val_data, val_targets),
+                        epochs = epochs,
+                        batch_size = batch_size,
+                        verbose = 1)
+    mae_history = history.history['val_mean_absolute_error']
+    error_histories.append(mae_history)
+    average_error = [ np.mean([x[i] for x in error_histories]) for i in range(epochs)]
+
+fr: 
+  https://jason-chen-1992.weebly.com/home/-cross-validation
+```
+
+
+
+### 防止过拟合, 
+
+　　过拟合的原因是算法的学习能力过强；一些假设条件（如样本独立同分布）可能是不成立的；训练样本过少不能对整个空间进行分布估计。 
+　　处理方法：
+
+早停止：如在训练中多次迭代后发现模型性能没有显著提高就停止训练
+数据集扩增：原有数据增加、原有数据加随机噪声、重采样
+正则化
+交叉验证
+特征选择/特征降维
+创建一个验证集是最基本的防止过拟合的方法。我们最终训练得到的模型目标是要在验证集上面有好的表现，而不训练集。
+正则化可以限制模型的复杂度。
+
+在训练中，我们希望在中间箭头的位置停止训练。而Early stopping就可以实现该功能，这时获得的模型泛化能力较强，还可以得到一个中等大小的w的弗罗贝尼乌斯范数。其与L2正则化相似，选择参数w范数较小的神经网络。
+
+可以用L2正则化代替early stopping。因为只要训练的时间足够长，多试几个lambda。总可以得到比较好的结果。
+
+
+
+### Early stopping:
+
+优点：只运行一次梯度下降，我们就可以找出w的较小值，中间值和较大值。而无需尝试L2正则化超级参数lambda的很多值。
+
+缺点：不能独立地处理以上两个问题，使得要考虑的东西变得复杂。举例如下：
+
+
+
+一般机器学习的步骤分为以上两步，第一步我们确定一个成本函数J，然后可以用梯度下降等方法去优化它；第二步我们不希望模型发生过拟合，就有正则化等方式去操作，这是一个动态的过程。但是如果采用early stopping，这就相当于用一种方式来控制两个问题的结束，这会使得问题变得复杂。如图一所示，在中间位置时，模型已经停止训练了，而成本函数还没有下降到合适的区域。
+
+
+
+### AUC
+
+二階混淆矩陣
+
+有了混淆矩陣，就可以定義**ROC**曲線了。**ROC**曲線將假陽性率（FPR）定義為 X 軸，真陽性率（TPR）定義為 Y 軸。其中：
+
+- TPR：在所有實際為陽性的樣本中，被正確地判斷為陽性的樣本比率。
+- FPR：在所有實際為陰性的樣本中，被錯誤地判斷為陽性的樣本比率。
+- TPR = TP / (TP + FN)
+- FPR = FP / (FP + TN)
+- <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcydclzpf2j30hs0csdgb.jpg" alt="img" style="zoom:50%;" />
+
+### ML Flow
+
+Abstract as math problem -> acquire data, pca ... -> feature selection -> train & optimize model -> analyze model -> deploy (time complexity, resource consumption, stability)
+
+
+
+### Linear vs Non-linear classifiers
+
+非线性分类器效果拟合能力较强，不足之处是数据量不足容易过拟合、计算复杂度高、可解释性不好。
+常见的线性分类器有：LR,贝叶斯分类，单层感知机、线性回归
+常见的非线性分类器：决策树、RF、GBDT、多层感知机
+SVM两种都有（看线性核还是高斯核）
+
+
+
+### 参数初始化
+
+下面几种方式,随便选一个,结果基本都差不多。但是一定要做。否则可能会减慢收敛速度，影响收敛结果，甚至造成Nan等一系列问题。
+
+下面的n_in为网络的输入大小，n_out为网络的输出大小，n为n_in或(n_in+n_out)*0.5
+
+Xavier初始法论文：http://jmlr.org/proceedings/papers/v9/glorot10a/glorot10a.pdf
+
+He初始化论文：https://arxiv.org/abs/1502.01852
+————————————————
+版权声明：本文为CSDN博主「v_JULY_v」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/v_JULY_v/article/details/78121924
+
+
+
+### k-d tree
+
+
+
+### Ave Pooling
+
+但是average-pooling在全局平均池化操作中应用也比较广，在ResNet和Inception结构中最后一层都使用了平均池化。有的时候在模型接近分类器的末端使用全局平均池化还可以代替Flatten操作，使输入数据变成一位向量。
+
+
+
+### Newton's method for Optimization
+
+牛顿法的优缺点总结：
+
+优点：二阶收敛，收敛速度快；
+
+缺点：牛顿法是一种迭代算法，每一步都需要求解目标函数的Hessian矩阵的逆矩阵，计算比较复杂。
+
+什么是拟牛顿法（Quasi-Newton Methods）？机器学习 ML基础 中
+
+@wtq1993，http://blog.csdn.net/wtq1993/article/details/51607040
+拟牛顿法是求解非线性优化问题最有效的方法之一，于20世纪50年代由美国Argonne国家实验室的物理学家W.C.Davidon所提出来。Davidon设计的这种算法在当时看来是非线性优化领域最具创造性的发明之一。不久R. Fletcher和M. J. D. Powell证实了这种新的算法远比其他方法快速和可靠，使得非线性优化这门学科在一夜之间突飞猛进。
+
+拟牛顿法的本质思想是改善牛顿法每次需要求解复杂的Hessian矩阵的逆矩阵的缺陷，它使用正定矩阵来近似Hessian矩阵的逆，从而简化了运算的复杂度。拟牛顿法和最速下降法一样只要求每一步迭代时知道目标函数的梯度。通过测量梯度的变化，构造一个目标函数的模型使之足以产生超线性收敛性。这类方法大大优于最速下降法，尤其对于困难的问题。另外，因为拟牛顿法不需要二阶导数的信息，所以有时比牛顿法更为有效。如今，优化软件中包含了大量的拟牛顿算法用来解决无约束，约束，和大规模的优化问题。
+
+
+
+### 共轭梯度法？
+
+​    共轭梯度法是介于梯度下降法（最速下降法）与牛顿法之间的一个方法，它仅需利用一阶导数信息，但克服了梯度下降法收敛慢的缺点，又避免了牛顿法需要存储和计算Hessian矩阵并求逆的缺点，共轭梯度法不仅是解决大型线性方程组最有用的方法之一，也是解大型非线性最优化最有效的算法之一。在各种优化算法中，共轭梯度法是非常重要的一种。其优点是所需存储量小，具有逐步收敛性，稳定性高，而且不需要任何外来参数。
+
+
+
+### 直觀理解正定、半正定矩陣　positive definite和positive semi-definite:
+
+半正定与正定矩阵同意用半正定矩阵来事例：
+首先半正定矩阵定义为: ![[公式]](https://www.zhihu.com/equation?tex=X^TMX+\geq+0)
+其中X 是向量，M 是变换矩阵
+
+我们换一个思路看这个问题，矩阵变换中，![[公式]](https://www.zhihu.com/equation?tex=MX)代表对向量 X进行变换，我们假设变换后的向量为Y，记做![[公式]](https://www.zhihu.com/equation?tex=Y%3DMX)。于是半正定矩阵可以写成：
+![[公式]](https://www.zhihu.com/equation?tex=X^TY+\geq+0)
+
+这个是不是很熟悉呢？ 他是两个向量的内积。 同时我们也有公式：
+
+![[公式]](https://www.zhihu.com/equation?tex=cos(\theta)+%3D+\frac{X^TY}{||X||*+||Y||})
+
+||X||, ||Y||代表向量 X,Y的长度，![[公式]](https://www.zhihu.com/equation?tex=\theta)是他们之间的夹角。 于是半正定矩阵意味着![[公式]](https://www.zhihu.com/equation?tex=cos(\theta)\geq+0), 这下明白了么？
+
+正定、半正定矩阵的直觉代表一个向量经过它的变化后的向量与其本身的夹角小于等于90度。
+
+
+
+### GAN
+
+
+
+### Convolutinon 實現
+
+img2col
+
+note: https://zhuanlan.zhihu.com/p/63974249
+
+
+
+### 随机森林如何处理缺失值？
+
+方法一（na.roughfix）简单粗暴，对于训练集,同一个class下的数据，如果是分类变量缺失，用众数补上，如果是连续型变量缺失，用中位数补。
+方法二（rfImpute）这个方法计算量大，至于比方法一好坏？不好判断。先用na.roughfix补上缺失值，然后构建森林并计算proximity matrix，再回头看缺失值，如果是分类变量，则用没有缺失的观测实例的proximity中的权重进行投票。如果是连续型变量，则用proximity矩阵进行加权平均的方法补缺失值。然后迭代4-6次，这个补缺失值的思想和KNN有些类似12。
+
+
+
+### Why Smooth-L1 in Faster & SSD?
+
+
+
+### LSTM

@@ -209,3 +209,7 @@ Sample data well-suited for NoSQL:
 量大時才會用 NoSQL 學校一般用不到那麼大流量啊 量大時一般沒結構，的確NoSQL也是比較靈活
 
 雲上一般要多個機器，硬體也都比較便宜
+
+
+
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd5cj2dgicj30u00wv1g9.jpg" alt="image-20200324213805414" style="zoom: 33%;" />
