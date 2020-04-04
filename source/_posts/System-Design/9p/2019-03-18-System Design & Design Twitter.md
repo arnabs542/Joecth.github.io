@@ -22,6 +22,123 @@ date: 2019-03-18
 
 # Design Twitter
 
+```python
+'''
+Definition of Tweet:
+class Tweet:
+    @classmethod
+    def create(cls, user_id, tweet_text):
+         # This will create a new tweet object,
+         # and auto fill id
+'''
+from collections import defaultdict
+import heapq
+class MiniTwitter:
+    
+    def __init__(self):
+        # do intialization if necessary
+        self.users = defaultdict(list)  # self's tweets
+        self.following = defaultdict(list)  # as an Adjacent list 
+        self.article_id = 0
+    """
+    @param: user_id: An integer
+    @param: tweet_text: a string
+    @return: a tweet
+    """
+    def postTweet(self, user_id, tweet_text):
+        # write your code here
+        tweet = Tweet.create(user_id, tweet_text)
+
+        self.article_id += 1    # necessary for time info
+        self.users[user_id].append([self.article_id, tweet])   # TODO: WRONG, requires time info for
+        
+        return tweet
+        
+    # @param {int} user_id
+    # return {Tweet[]} 10 new feeds recently
+    # and sort by timeline
+    def getNewsFeed(self, user_id):
+        # Write your code here
+        rt = []
+        if user_id in self.users:
+            rt = self.users[user_id][-10:]
+
+        if user_id in self.following:
+            for friend in self.following[user_id]:
+                if friend in self.users:
+                    rt.extend(self.users[friend][-10:])
+
+        rt.sort(key=lambda x: x[0])
+        return [tweet[1] for tweet in rt[-10:][::-1]]
+        
+        
+    """
+    @param: user_id: An integer
+    @return: a list of 10 new feeds recently and sort by timeline
+    """
+    def getNewsFeed_mywrong(self, user_id):
+        # write your code here
+        # return []
+        # if user_id not in self.users:
+            # return [] # 給沒建帳號也可以呼叫follow函數…
+        res = []
+        if user_id in self.users:
+            res = [mypost[1] for mypost in self.users[user_id][-10:][::-1]]
+        
+        # print('aaaaa', res)
+        if user_id in self.following:
+            for i in self.following[user_id]:   
+                # res.append(self.users[guy_id])
+                # res.append(self.users[i][-10:])
+                if i not in self.users:
+                    continue
+            
+                this_user = []
+                this_user.append(like[1] for like in self.users[i][-10:][::-1])
+                res.extend(this_user)
+        print(res)
+        return res
+        
+    """
+    @param: user_id: An integer
+    @return: a list of 10 new posts recently and sort by timeline
+    """
+    def getTimeline(self, user_id):
+        # write your code here
+        if user_id not in self.users:
+            return []
+            
+
+        return [like[1] for like in self.users[user_id][-10:][::-1]]
+
+        
+    """
+    @param: from_user_id: An integer
+    @param: to_user_id: An integer
+    @return: nothing
+    """
+    def follow(self, from_user_id, to_user_id):
+        # write your code here
+        # if from_user_id not in self.following[from_user_id]:
+        self.following[from_user_id].append(to_user_id)
+        
+    """
+    @param: from_user_id: An integer
+    @param: to_user_id: An integer
+    @return: nothing
+    """
+    def unfollow(self, from_user_id, to_user_id):
+        # write your code here
+        friends = self.following[from_user_id]
+        try:
+            idx = friends.index(to_user_id)
+            self.following[from_user_id] = friends[:idx] + friends[idx+1:]
+        except Exception as e:
+            print('This guy has no this friend!')
+```
+
+
+
 ## General
 
 1. 注意事項：

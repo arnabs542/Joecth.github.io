@@ -142,6 +142,8 @@ correlation coefficient(*ρ*，有的時候會用*r*來表示)會落在-1到1之
 
 <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdamss07xmj30dp064dgk.jpg" alt="img" style="zoom:50%;" />
 
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb5eunlj2j30wu0nc10s.jpg" alt="image-20200329220516911" style="zoom:67%;" />
+
 ### selection bias
 
 只聽信某人的話或是相信綴學就是像Steve Jobbs, Bill Gate 那樣

@@ -1097,7 +1097,103 @@ class Solution:
 
 
 
+### Intersection of lists
+
+```python
+class Solution:
+    def arraysIntersection(self, arr1: List[int], arr2: List[int], arr3: List[int]) -> List[int]:
+        return self.helper2(arr1, arr2, arr3)
+        
+        
+    def helper2(self, arr1, arr2, arr3):
+        inter = [0] * 2001
+        def foo(arr):
+            for i in arr:
+                inter[i] += 1
+        foo(arr1)
+        foo(arr2)
+        foo(arr3)
+        
+        res = []
+        for j in range(len(inter)):
+            if inter[j] == 3:
+                res.append(j)
+        return res
+```
+
+```js
+/**
+ * @param {number[]} arr1
+ * @param {number[]} arr2
+ * @param {number[]} arr3
+ * @return {number[]}
+ */
+var arraysIntersection = function(arr1, arr2, arr3) {
+    return helper(arr1, arr2, arr3);
+    // return Array('aaa');
+};
+
+var helper = function(arr1, arr2, arr3){
+    // console.log('aaa');
+    let l = new Array(2001);
+    l.fill(0);
+    for (let i of arr1) l[i]++;
+    for (let j of arr2) l[j]++;
+    
+    let res = []
+    for (let k of arr3) {
+        if (l[k] == 2) res.push(k);
+    }
+    // console.log(res);
+    return res;
+}
+```
+
+```cpp
+class Solution {
+public:
+    vector<int> arraysIntersection(vector<int>& arr1, vector<int>& arr2, vector<int>& arr3) {
+        vector<int> arr12;
+        set_intersection(arr1.begin(), arr1.end(), arr2.begin(), arr2.end(), back_inserter(arr12));
+        vector<int> res;
+        set_intersection(arr12.begin(), arr12.end(), arr3.begin(), arr3.end(), back_inserter(res));
+        return res;        
+    }
+};
+```
+
+
+
 ### ~~Matrix Transpose~~
+
+### ~~Minimum Number of Operations~~
+
+###  ~~Remove Character to Create Palindrome~~
+
+==> Turn into LCS if num of deletion is not limited
+
+### Shortest Distance to a Character
+
+```python
+class Solution:
+    def shortestToChar(self, S: str, C: str) -> List[int]:
+        return self.helper(S, C)
+    
+    def helper(self, S, C):
+        l = []
+        for i in range(len(S)):
+            if S[i] == C:
+                l.append(i)
+                
+        print(l)
+        # res = [float('inf')] * len(S)      
+        res = []
+        for j in range(len(S)):   # O(N) since len(l) is constant
+            res.append(min([abs(j-x) for x in l]))
+            # for idx in range(len(l)):
+            #     res[j] = min(abs(j-l[idx]), res[j])
+        return res
+```
 
 
 
@@ -1106,10 +1202,6 @@ class Solution:
 
 
 
-
-###  Remove Character to Create Palindrome
-
-==> Turn into LCS if num of deletion is not limited
 
 
 

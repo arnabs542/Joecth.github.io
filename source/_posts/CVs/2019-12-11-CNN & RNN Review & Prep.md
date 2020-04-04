@@ -13,7 +13,49 @@ tag: []
 >
 > Single shot: classification + bbox regression at one time
 
+### RCNN
+
+- ~2000 forward passes for each image
+
+- Train 3 models seperately
+
+  <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdd7ffqcltj30pi0ku17e.jpg" alt="image-20200331164611434" style="zoom:50%;" />
+
+- Selective search(texture, adjecent color, and intensity) to clustering pixeles as RPN function, and then feed into AlexNet to extract embeddings. 
+- SVM to classify each bbox into categoies.
+- linear regression on bbox for tighter bbox.
+
+### SPP Net
+
+1.結合空間金字塔方法實現CNNs的多尺度輸入。
+SPP Net的第一個貢獻就是在最後一個卷積層後，接入了金字塔池化層，保證傳到下一層全連線層的輸入固定。
+換句話說，在普通的CNN機構中，輸入影象的尺寸往往是固定的（比如224*224畫素），輸出則是一個固定維數的向量。SPP Net在普通的CNN結構中加入了ROI池化層（ROI Pooling），使得網路的輸入影象可以是任意尺寸的，輸出則不變，同樣是一個固定維數的向量。
+
+簡言之，CNN原本只能固定輸入、固定輸出，CNN加上SSP之後，便能任意輸入、固定輸出。神奇吧？
+
+ROI池化層一般跟在卷積層後面，此時網路的輸入可以是任意尺度的，在SPP layer中每一個pooling的filter會根據輸入調整大小，而SPP的輸出則是固定維數的向量，然後給到全連線FC層。
+![img](https://tva1.sinaimg.cn/large/00831rSTgy1gdd8d9rgnxj30al0750sy.jpg)
+2.只對原圖提取一次卷積特徵
+在R-CNN中，每個候選框先resize到統一大小，然後分別作為CNN的輸入，這樣是很低效的。
+而SPP Net根據這個缺點做了優化：只對原圖進行一次卷積計算，便得到整張圖的卷積特徵feature map，然後找到每個候選框在feature map上的對映patch，將此patch作為每個候選框的卷積特徵輸入到SPP layer和之後的層，完成特徵提取工作。
+
+如此這般，R-CNN要對每個區域計算卷積，而SPPNet只需要計算一次卷積，從而節省了大量的計算時間，比R-CNN有一百倍左右的提速。
+
+### Fast
+
+- ROI pool to share process
+
+- Search selective algorithm is computed base on the output feature map of the previous step. Then, ROI pooling layer is used to ensure the standard and pre-defined output size.
+
+- These valid outputs are passed to a fully connected layer as inputs. Finally, two output vectors are used to predict the observed object with a softmax classifier and adapt bounding box localisations with a linear regressor.
+
+  ![img](https://tva1.sinaimg.cn/large/00831rSTgy1gddbgk1y3dj30in097my5.jpg)
+
+
+
 ### Faster RCNN
+
+![image-20200331165148305](https://tva1.sinaimg.cn/large/00831rSTgy1gdd7vl10thj30om0l8q4a.jpg)
 
 #### `VGG` backbone
 
@@ -62,7 +104,7 @@ blob=[batch_size, channel，height，width]
 * soomth-L1
 * ROI pooliing 7x7
 
-
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdddgum6x0j31jk0esacq.jpg" alt="img" style="zoom:67%;" />
 
 #### *for `ZF` backbone *
 
@@ -230,6 +272,26 @@ ref: https://www.cnblogs.com/xuanyuyt/p/7222867.html
 ---
 
 ### FPN -- didn't dig into this too much.
+
+
+
+### Why ReLU Better than Sigmoid?
+
+- 一方面，ReLU比sigmoid效果好的分析都是基于深度神经网络的前提，比如网络足够深时sigmoid会有明显的梯度消失问题，如果是浅层神经网络的话这些问题并不存在。另一方面，它们的用处不同，sigmoid输出范围是01之间，可以当作概率。深度神经网络中sigmoid可以用作门控单元（比如LSTM的三种门都是sigmoid）或attention（比如SENet中excitation部分），这些ReLU并不能取代。
+
+- 说白了还是具体问题具体分析。如果神经网络是进行二分类，你用relu做输出层激励函数，你的输出是不是很难控制？如果你的神经网络层数很深，你用sigmoid，反向传播过程是不是会有梯度消失？现在sigmoid更多的情况下，在小型神经网络和二分类型的输出层中出现的比较多，relu效果好不代表在任何应用条件下都好
+
+- 隐含层就放心用Relu吧,
+  -  relu的好处是可以解决梯度消失问题
+  - sigmoid的好处是可以把输入缩放到0--1之前，并且连续没有绝对的好与坏，具体情况具体分析
+- sigmoid和tanh的gradient在饱和区域非常平缓，接近于0，很容易造成vanishing gradient的问题，减缓收敛速度。vanishing gradient在网络层数多的时候尤其明显，是加深网络结构的主要障碍之一。
+- Relu的另一个优势是在生物上的合理性, with 0s so sparse network，它是单边的，相比sigmoid和tanh，更符合生物神经元的特征。
+
+- Relu的另一个优势是在生物上的合理性，它是单边的，相比sigmoid和tanh，更符合生物神经元的特征。
+
+### Why Non-linear
+
+- or you can just use LR... same meaning.
 
 
 
@@ -671,6 +733,12 @@ fr:
 
 
 
+### DBSCAN
+
+Density-based spatial clustering of applications with noise
+
+
+
 ### 防止过拟合, 
 
 　　过拟合的原因是算法的学习能力过强；一些假设条件（如样本独立同分布）可能是不成立的；训练样本过少不能对整个空间进行分布估计。 
@@ -819,4 +887,32 @@ note: https://zhuanlan.zhihu.com/p/63974249
 
 
 
-### LSTM
+### RNN
+
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdc5yneca2j31400g6di2.jpg" alt="img" style="zoom:67%;" />
+
+### ★ LSTM & GRU
+
+Ref: https://kknews.cc/zh-tw/code/vegon84.html
+
+https://mp.weixin.qq.com/s/aV9Rj-CnJZRXRm0rDOK6gg
+
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdc37qy1wmj30oo0bbwf7.jpg" alt="img" style="zoom:67%;" />
+
+Ref: https://blog.floydhub.com/long-short-term-memory-from-zero-to-hero-with-pytorch/
+
+神經元數跟參數個數
+
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdc734yxpjj307u00kmwy.jpg" alt="img" style="zoom:67%;" />
+
+隱向量長度應該是要比字典短不少，不過例子裡的字在字典裡長度是５，隱向量長度是10，所以　(5+10)x10 + 10 共四個 for３個gates	
+
+Ref: https://www.cnblogs.com/wushaogui/p/9176617.html, https://blog.csdn.net/Hello_word5/article/details/88918075
+
+
+
+![img](https://tva1.sinaimg.cn/large/00831rSTgy1gdc7csb4tuj30u01dn0x9.jpg)
+
+
+
+### Word Representation to Word Embedding
