@@ -1,0 +1,401 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="System-Design/9p/2019-03-28-Design Data Augmentation &amp; Consistent Hash"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>System-Design/9p/2019-03-28-Design Data Augmentation &amp; Consistent Hash | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Design-Data-Aug-amp-Consistent-Hash"><span class="toc-number">1.</span> <span class="toc-text">Design Data Aug. &amp; Consistent Hash</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Outline"><span class="toc-number">1.1.</span> <span class="toc-text">Outline</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-Scale"><span class="toc-number">1.2.</span> <span class="toc-text">How to Scale</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-除了-QPS-承受力的问题以外，还有什么问题是“最主要”需要考虑的？"><span class="toc-number">1.2.0.0.1.</span> <span class="toc-text">[单选题]除了 QPS 承受力的问题以外，还有什么问题是“最主要”需要考虑的？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sharding-in-SQL-vs-NoSQL"><span class="toc-number">1.3.</span> <span class="toc-text">Sharding in SQL vs NoSQL</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vertical"><span class="toc-number">1.3.1.</span> <span class="toc-text">Vertical</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#缺點：可能就是洗菜、切菜就是比較久，煮很快，所以不該都一個人"><span class="toc-number">1.3.1.0.1.</span> <span class="toc-text">缺點：可能就是洗菜、切菜就是比較久，煮很快，所以不該都一個人</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Horizontal"><span class="toc-number">1.3.2.</span> <span class="toc-text">Horizontal</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-新数据放新机器，老数据放老机器的问题是什么？"><span class="toc-number">1.3.2.0.1.</span> <span class="toc-text">[单选题]新数据放新机器，老数据放老机器的问题是什么？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#模三好嗎？"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">模三好嗎？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-理想状况下，3台机器变4台机器，多少数据需要迁移？"><span class="toc-number">1.3.2.1.1.</span> <span class="toc-text">[单选题]理想状况下，3台机器变4台机器，多少数据需要迁移？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Consistent-Hash"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">Consistent Hash</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-机器-D-加入-Consistent-Hash-Ring-以后，应该问谁要数据？"><span class="toc-number">1.3.2.2.1.</span> <span class="toc-text">[单选题]机器 D 加入 Consistent Hash Ring 以后，应该问谁要数据？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-找比某个数大的最小值可以用什么数据结构？"><span class="toc-number">1.3.2.2.2.</span> <span class="toc-text">[单选题]找比某个数大的最小值可以用什么数据结构？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Consistent-HashⅡ"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">Consistent HashⅡ</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Replica"><span class="toc-number">1.4.</span> <span class="toc-text">Replica</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#多选题-下列关于-Backup-和-Replica-的区别描述正确的有？"><span class="toc-number">1.4.0.0.1.</span> <span class="toc-text">[多选题]下列关于 Backup 和 Replica 的区别描述正确的有？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL-用-Master-vs-Slave"><span class="toc-number">1.4.1.</span> <span class="toc-text">SQL - 用 Master vs Slave,</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Write-Ahead-Log"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">Write Ahead Log</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ex-1-Sharding-User-Table"><span class="toc-number">1.5.</span> <span class="toc-text">Ex.1 Sharding User Table</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-User-Table-最常见的需求是按照什么去查询？"><span class="toc-number">1.5.0.0.1.</span> <span class="toc-text">[单选题]User Table 最常见的需求是按照什么去查询？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Session-Table-Sharding"><span class="toc-number">1.6.</span> <span class="toc-text">Session Table Sharding</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-Session-Table-通常按照哪一项去查询？"><span class="toc-number">1.6.0.0.1.</span> <span class="toc-text">[单选题]Session Table 通常按照哪一项去查询？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#News-Feed-Timeline-Shardings"><span class="toc-number">1.7.</span> <span class="toc-text">News Feed &#x2F; Timeline Shardings</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#leetcode可能怎麼sharding"><span class="toc-number">1.8.</span> <span class="toc-text">leetcode可能怎麼sharding?</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-LintCode-Submission-Table-按照什么进行-Sharding？"><span class="toc-number">1.8.0.0.1.</span> <span class="toc-text">[单选题]LintCode Submission Table 按照什么进行 Sharding？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Rate-Limiter"><span class="toc-number">1.9.</span> <span class="toc-text">Rate Limiter</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">251</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">24</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">36</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">System-Design/9p/2019-03-28-Design Data Augmentation &amp; Consistent Hash</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-28</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="Design-Data-Aug-amp-Consistent-Hash"><a href="#Design-Data-Aug-amp-Consistent-Hash" class="headerlink" title="Design Data Aug. &amp; Consistent Hash"></a>Design Data Aug. &amp; Consistent Hash</h1><h2 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h2><ul>
+<li>Hash</li>
+<li>Consistent Hash</li>
+<li>Load Balancer</li>
+<li>Rate Limiter</li>
+<li>Web Logger</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param key: A string you should hash</span></span><br><span class="line"><span class="string">    @param HASH_SIZE: An integer</span></span><br><span class="line"><span class="string">    @return: An integer</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hashCode</span><span class="params">(self, key, HASH_SIZE)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">helper_LTE</span><span class="params">(key, HASH_SIZE)</span>:</span></span><br><span class="line">            res = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(key)):</span><br><span class="line">                <span class="comment"># print(pow(33, len(key)-i))</span></span><br><span class="line">                res += ord(key[i]) * pow(<span class="number">33</span>,len(key)<span class="number">-1</span>-i)</span><br><span class="line">            <span class="comment"># print(res)</span></span><br><span class="line">            <span class="keyword">return</span> res%HASH_SIZE</span><br><span class="line">            </span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">helper</span><span class="params">(key, HASH_SIZE)</span>:</span></span><br><span class="line">            </span><br><span class="line">            res = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(key)):</span><br><span class="line">                <span class="comment"># 同余定理：</span></span><br><span class="line">                <span class="comment"># (a * b ) % MOD = ((a % MOD) * (b % MOD)) % MOD</span></span><br><span class="line">                res = (res*<span class="number">33</span> + ord(key[i]))%HASH_SIZE</span><br><span class="line">            </span><br><span class="line">            <span class="comment"># return res%HASH_SIZE  STILL LTE</span></span><br><span class="line">            <span class="keyword">return</span> res</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># return helper_LTE(key, HASH_SIZE)</span></span><br><span class="line">        <span class="keyword">return</span> helper(key, HASH_SIZE)</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">一般的数据库进行horizontal shard的方法是指，把 id 对 数据库服务器总数 n 取模，然后来得到他在哪台机器上。这种方法的缺点是，当数据继续增加，我们需要增加数据库服务器，将 n 变为 n+1 时，几乎所有的数据都要移动，这就造成了不 consistent。为了减少这种 naive 的 hash方法(%n) 带来的缺陷，出现了一种新的hash算法：一致性哈希的算法——Consistent Hashing。这种算法有很多种实现方式，这里我们来实现一种简单的 Consistent Hashing。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">将 id 对 360 取模，假如一开始有3台机器，那么让3台机器分别负责0~119, 120~239, 240~359 的三个部分。那么模出来是多少，查一下在哪个区间，就去哪台机器。</span></span><br><span class="line"><span class="string">当机器从 n 台变为 n+1 台了以后，我们从n个区间中，找到最大的一个区间，然后一分为二，把一半给第n+1台机器。</span></span><br><span class="line"><span class="string">比如从3台变4台的时候，我们找到了第3个区间0~119是当前最大的一个区间，那么我们把0~119分为0~59和60~119两个部分。0~59仍然给第1台机器，60~119给第4台机器。</span></span><br><span class="line"><span class="string">然后接着从4台变5台，我们找到最大的区间是第3个区间120~239，一分为二之后，变为 120~179, 180~239。</span></span><br><span class="line"><span class="string">假设一开始所有的数据都在一台机器上，请问加到第 n 台机器的时候，区间的分布情况和对应的机器编号分别是多少？</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Example</span></span><br><span class="line"><span class="string">例1:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">输入:</span></span><br><span class="line"><span class="string"> n = 1, </span></span><br><span class="line"><span class="string">输出:</span></span><br><span class="line"><span class="string">[</span></span><br><span class="line"><span class="string">  [0,359,1]</span></span><br><span class="line"><span class="string">]</span></span><br><span class="line"><span class="string">解释:</span></span><br><span class="line"><span class="string">表示 0~359 属于机器 1.</span></span><br><span class="line"><span class="string">例2:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">输入:</span></span><br><span class="line"><span class="string"> n = 2,</span></span><br><span class="line"><span class="string">输出:</span></span><br><span class="line"><span class="string">[</span></span><br><span class="line"><span class="string">  [0,179,1],</span></span><br><span class="line"><span class="string">  [180,359,2]</span></span><br><span class="line"><span class="string">]</span></span><br><span class="line"><span class="string">解释:</span></span><br><span class="line"><span class="string">表示 0~179 属于机器 1.</span></span><br><span class="line"><span class="string">表示 180~359 属于机器 2.</span></span><br><span class="line"><span class="string">例3:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">输入:</span></span><br><span class="line"><span class="string">n = 3,</span></span><br><span class="line"><span class="string">输出:</span></span><br><span class="line"><span class="string">[</span></span><br><span class="line"><span class="string">  [0,89,1]</span></span><br><span class="line"><span class="string">  [90,179,3],</span></span><br><span class="line"><span class="string">  [180,359,2]</span></span><br><span class="line"><span class="string">]</span></span><br><span class="line"><span class="string">Clarification</span></span><br><span class="line"><span class="string">如果最大间隔是[x，y]，并且它属于机器id z，当你添加一个id为n的新机器时，你应该将[x，y，z]分成两个区间：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[x，（x + y）/ 2，z]和[（x + y）/ 2 + 1，y，n]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Notice</span></span><br><span class="line"><span class="string">你可以假设 n &lt;= 360. 同时我们约定，当最大区间出现多个时，我们拆分编号较小的那台机器。</span></span><br><span class="line"><span class="string">比如0~119， 120~239区间的大小都是120，但是前一台机器的编号是1，后一台机器的编号是2, 所以我们拆分0~119这个区间。</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>sharding 也可叫 拆分、division</p>
+<p>md5 16^32 用在登入密碼加密，有可能有衝突，現在已經已經不怎麼安全啦</p>
+<p>SHA512</p>
+<p>密碼加鹽</p>
+<h2 id="How-to-Scale"><a href="#How-to-Scale" class="headerlink" title="How to Scale"></a>How to Scale</h2><p>就是要Scale Database 的問題，因為DB 要是被訪問多了，會掛。</p>
+<p>假如user有1k, Server，DB都OK, 最大的問題是什麼？</p>
+<p>它病死了！</p>
+<blockquote>
+<h5 id="单选题-除了-QPS-承受力的问题以外，还有什么问题是“最主要”需要考虑的？"><a href="#单选题-除了-QPS-承受力的问题以外，还有什么问题是“最主要”需要考虑的？" class="headerlink" title="[单选题]除了 QPS 承受力的问题以外，还有什么问题是“最主要”需要考虑的？"></a>[单选题]除了 QPS 承受力的问题以外，还有什么问题是“最主要”需要考虑的？</h5><p>如果只用一台数据库</p>
+<p>A.硬盘大小7.42% 选择</p>
+<p>B.CPU 的运算速度8.71% 选择</p>
+<p>C.单点失效 Single Point Failure82.66% 选择</p>
+<p>D.价格是否昂贵1.21% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是C</p>
+<p><strong>正确答案:</strong>C</p>
+<p><strong>解析:</strong></p>
+<p>硬盘大小，CPU运算速度，价格当然也重要。但是问题最大的还是单点失效，即如果挂了没有其他机器可以马上替代的问题。</p>
+</blockquote>
+<p>網站不能用=&gt;數據全丟了=&gt;用戶不來啦</p>
+<p>Server是無狀態的，是不存用戶的信息的。</p>
+<p>如果想增加數據庫的話，我們該怎麼拆分數據？就是Sharding，or partition，此外還要做Replica數據複製。</p>
+<p>希望能用機器去拆分掉進來的流量。</p>
+<ul>
+<li>Sharding<ul>
+<li>分攤讀寫流量</li>
+<li>不會一個掛就全掛</li>
+</ul>
+</li>
+<li>Replica<ul>
+<li>一式三份，兩台近，一台遠</li>
+<li>分攤讀請求</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>一般导致数据库挂了的原因是什么？硬盘损坏么？<ul>
+<li>也可能运算量太大卡主了</li>
+</ul>
+</li>
+<li>那负责拆分的机器的qps是不是要很大<ul>
+<li>因此通常是每台 WebServer 自己根据同样的算法来计算出该去哪一台数据库存取数据，而不是都跑到一个中心节点去。</li>
+</ul>
+</li>
+<li>所以说数据拆分是因为 分担流量，不是因为太多数据一台电脑装不下是吗<ul>
+<li>两个都是目的。大部分时候是为了分摊流量。也有因为装不下需要分摊的情况。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Sharding-in-SQL-vs-NoSQL"><a href="#Sharding-in-SQL-vs-NoSQL" class="headerlink" title="Sharding in SQL vs NoSQL"></a>Sharding in SQL vs NoSQL</h2><p>NoSQL多是自己就提供好了</p>
+<h3 id="Vertical"><a href="#Vertical" class="headerlink" title="Vertical"></a>Vertical</h3><p>照table的不同類型，粗暴簡單</p>
+<p>可以把user不常改的跟常改的分去到兩個不同的 Table，流量就分開了</p>
+<h5 id="缺點：可能就是洗菜、切菜就是比較久，煮很快，所以不該都一個人"><a href="#缺點：可能就是洗菜、切菜就是比較久，煮很快，所以不該都一個人" class="headerlink" title="缺點：可能就是洗菜、切菜就是比較久，煮很快，所以不該都一個人"></a>缺點：可能就是洗菜、切菜就是比較久，煮很快，所以不該都一個人</h5><p>[单选题]Vertical Sharding 不能解决什么问题？</p>
+<p>A.数据库 table 很多的情况6.64% 选择</p>
+<p>B.一个 table 中有很多关联度不大的 columns8.77% 选择</p>
+<p>C.一个 table 里存储的内容太大，且 columns 无法再做拆分84.58% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是C</p>
+<p><strong>正确答案:</strong>C</p>
+<p><strong>解析:</strong></p>
+<p>Vertical Sharding 是按照 column / table 来进行的，如果一个表单（table）里存储的内容太多，且 column 数目又无法再拆分，就无法使用 Vertical Sharding 了</p>
+<h3 id="Horizontal"><a href="#Horizontal" class="headerlink" title="Horizontal"></a>Horizontal</h3><ul>
+<li>新的數據放新的好嗎？<ul>
+<li>所有數據被訪問的機率是相等的這個假設是錯的！當然一般是新的被訪問得多。一年前寫的都比較少在過問了。</li>
+</ul>
+</li>
+</ul>
+<h5 id="单选题-新数据放新机器，老数据放老机器的问题是什么？"><a href="#单选题-新数据放新机器，老数据放老机器的问题是什么？" class="headerlink" title="[单选题]新数据放新机器，老数据放老机器的问题是什么？"></a>[单选题]新数据放新机器，老数据放老机器的问题是什么？</h5><p>A.数据访问不均匀45.88% 选择</p>
+<p>B.数据存储不均匀12.10% 选择</p>
+<p>C.取数据时无法确定数据存在哪儿42.02% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>A</p>
+<p><strong>解析:</strong></p>
+<p>根据数据的新旧程度来拆分的话，新数据的访问次数比旧数据的访问次数是要明显多的，会导致数据访问不均匀的问题。<br>这种方法并不会导致存储不均匀，最多只有最新的一台机器的数据相对少一些，其他的机器都还是均匀的。也不会导致不知道数据去哪台机器取，比如根据 id 来拆分，0~99在1号机器，1-199 在2号机器的话，根据 id 可以算出对应的机器是哪个。</p>
+<h4 id="模三好嗎？"><a href="#模三好嗎？" class="headerlink" title="模三好嗎？"></a>模三好嗎？</h4><p>買新機器／有機器掛時就要大遷移了、</p>
+<ul>
+<li>慢，容易􏰀成数据的不一致性</li>
+<li>迁移期间，服务器压力增大，容易挂</li>
+</ul>
+<blockquote>
+<h5 id="单选题-理想状况下，3台机器变4台机器，多少数据需要迁移？"><a href="#单选题-理想状况下，3台机器变4台机器，多少数据需要迁移？" class="headerlink" title="[单选题]理想状况下，3台机器变4台机器，多少数据需要迁移？"></a>[单选题]理想状况下，3台机器变4台机器，多少数据需要迁移？</h5><p>A.33.3%15.00% 选择</p>
+<p>B.25%65.56% 选择</p>
+<p>C.50%2.30% 选择</p>
+<p>D.75%17.14% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>理想状况下，这台新机器存储 1/4 的数据，因此需要移动的数据也是 1/4。</p>
+</blockquote>
+<p>就是理想下只想移動25%，不要全都移動</p>
+<blockquote>
+<ul>
+<li>对于登入数据，如果按新旧存放，是否还会遇到“C.取数据时无法确定数据存在哪儿”的问题？因为用户名不是sequential的，而用户登入时并不知道自己的id<ul>
+<li>yes</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="Consistent-Hash"><a href="#Consistent-Hash" class="headerlink" title="Consistent Hash"></a>Consistent Hash</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">A general database method <span class="keyword">for</span> performing a horizontal shard is to take the id against the total number of database servers n and <span class="keyword">then</span> to find out <span class="built_in">which</span> machine it is on. The downside of this approach is that as the data continues to increase, we need to increase the database server. When n is changed to n+1, almost all of the data has to be moved, <span class="built_in">which</span> is not consistent. In order to reduce the defects caused by this naive<span class="string">'s hash method (%n), a new hash algorithm emerges: Consistent Hashing, Consistent Hashing. There are many ways to implement this algorithm. Here we implement a simple Consistent Hashing.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Take id to 360. If there are 3 machines at the beginning, then let 3 machines be responsible for the three parts of 0~119, 120~239, 240~359. Then, how much is the model, check which zone you are in, and which machine to go to.</span></span><br><span class="line"><span class="string">When the machine changes from n to n+1, we find the largest one from the n intervals, then divide it into two and give half to the n+1th machine.</span></span><br><span class="line"><span class="string">For example, when changing from 3 to 4, we find the third interval 0~119 is the current largest interval, then we divide 0~119 into 0~59 and 60~119. 0~59 is still given to the first machine, 60~119 to the fourth machine.</span></span><br><span class="line"><span class="string">Then change from 4 to 5, we find the largest interval is the third interval 120~239, after splitting into two, it becomes 120~179, 180~239.</span></span><br><span class="line"><span class="string">Suppose all the data is on one machine at the beginning. When adding to the nth machine, what is the distribution of the interval and the corresponding machine number?</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Example</span></span><br><span class="line"><span class="string">Example 1:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Input:</span></span><br><span class="line"><span class="string"> n = 1, </span></span><br><span class="line"><span class="string">Output:</span></span><br><span class="line"><span class="string">[</span></span><br><span class="line"><span class="string">  [0,359,1]</span></span><br><span class="line"><span class="string">]</span></span><br><span class="line"><span class="string">Explanation:</span></span><br><span class="line"><span class="string">represent 0~359 belongs to machine 1.</span></span><br><span class="line"><span class="string">Example 2:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Input:</span></span><br><span class="line"><span class="string"> n = 2,</span></span><br><span class="line"><span class="string">Output:</span></span><br><span class="line"><span class="string">[</span></span><br><span class="line"><span class="string">  [0,179,1],</span></span><br><span class="line"><span class="string">  [180,359,2]</span></span><br><span class="line"><span class="string">]</span></span><br><span class="line"><span class="string">Explanation:</span></span><br><span class="line"><span class="string">represent 0~179 belongs to machine 1.</span></span><br><span class="line"><span class="string">represent 180~359 belongs to machine 2.</span></span><br><span class="line"><span class="string">Example 3:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Input:</span></span><br><span class="line"><span class="string">n = 3,</span></span><br><span class="line"><span class="string">Output:</span></span><br><span class="line"><span class="string">[</span></span><br><span class="line"><span class="string">  [0,89,1]</span></span><br><span class="line"><span class="string">  [90,179,3],</span></span><br><span class="line"><span class="string">  [180,359,2]</span></span><br><span class="line"><span class="string">]</span></span><br><span class="line"><span class="string">Clarification</span></span><br><span class="line"><span class="string">If the maximal interval is [x, y], and it belongs to machine id z, when you add a new machine with id n, you should divide [x, y, z] into two intervals:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[x, (x + y) / 2, z] and [(x + y) / 2 + 1, y, n]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Notice</span></span><br><span class="line"><span class="string">You can assume n &lt;= 360. At the same time, we agree that when there are multiple occurrences in the maximum interval, we split the machine with the smaller number.</span></span><br><span class="line"><span class="string">For example, the size of 0~119, 120~239 is 120, but the number of the previous machine is 1, and the number of the next machine is 2, so we split the range of 0~119.</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>指的是對於ｎ台或 n+1 台機器時會是一致的</p>
+<p>一致性哈希表存在每個server上。</p>
+<ul>
+<li>如果在相鄰的兩個各自挪一些來<ul>
+<li>缺陷：<ul>
+<li>仍是會有一台特別load重</li>
+<li>遷移時就只有兩個鄰居，他們兩個人特別負載重</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>360这个数值是经验值么？这个数字对于任何数量的机器都合适么？<ul>
+<li>360 只是为了让理解一个圆有 360°，比较形象。这个数字当然不是实际的工程中使用的数字。实际使用的数字一般是 2^64 ==&gt; 宇宙爆炸的機率</li>
+</ul>
+</li>
+<li>反正都要用一个表来记录key-&gt;db号码， 为什么还要hash 2^64呢？ 直接把key和机器号码存到表里不行吗？<ul>
+<li>没有 Key-&gt;db号码的这张表。通过 key 得到 db 是靠 consistent hashing 这个算法计算出来的，而不是把每个 key 存在哪个 db 都存下来。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>讓不同的key的時候的機率是2^64幾乎是宇宙爆炸的機率。</p>
+<blockquote>
+<h5 id="单选题-机器-D-加入-Consistent-Hash-Ring-以后，应该问谁要数据？"><a href="#单选题-机器-D-加入-Consistent-Hash-Ring-以后，应该问谁要数据？" class="headerlink" title="[单选题]机器 D 加入 Consistent Hash Ring 以后，应该问谁要数据？"></a>[单选题]机器 D 加入 Consistent Hash Ring 以后，应该问谁要数据？</h5><p>A.机器 A78.58% 选择</p>
+<p>B.机器 B6.53% 选择</p>
+<p>C.机器 C14.89% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是C</p>
+<p><strong>正确答案:</strong>A</p>
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdcduksozaj30og0jatfy.jpg" alt="image-20200330234246254" style="zoom:67%;" />
+</blockquote>
+<p>Virtual node</p>
+<p>理想新加入的機器的「分身」可以去均勻占到不同的前ｎ台機器的分身。如一台切成1000個，理想就是其他的10台，每台可以分到100個我的分身。</p>
+<blockquote>
+<h5 id="单选题-找比某个数大的最小值可以用什么数据结构？"><a href="#单选题-找比某个数大的最小值可以用什么数据结构？" class="headerlink" title="[单选题]找比某个数大的最小值可以用什么数据结构？"></a>[单选题]找比某个数大的最小值可以用什么数据结构？</h5><p>A.堆 Heap24.45% 选择</p>
+<p>B.红黑树 Red-black Tree(Balanced Binary Search Tree)65.64% 选择</p>
+<p>C.哈希表 HashMap2.45% 选择</p>
+<p>D.链表 Linked List7.45% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>Heap 只能找全局最大最小。</p>
+</blockquote>
+<p>要增刪查改還是用Binary Search Tree, 可快速找到比某數大的最小數。</p>
+<p>從順時間碰到的node的真實機器作遷移</p>
+<blockquote>
+<ul>
+<li>key如何设计才能保证hash算出来几乎均匀分布在0到2的64次方这么大的范围？<ul>
+<li>选择一个好的哈希函数就行了，比如： MurmurHash, xxHash, MetroHash or SipHash1–3</li>
+</ul>
+</li>
+<li>问题同上面的同学：怎么保持key均匀分布？<ul>
+<li>选择一个好的哈希函数是可以保证这个性质的。<a href="https://en.wikipedia.org/wiki/Hash_function#Uniformity" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Hash_function#Uniformity</a></li>
+</ul>
+</li>
+<li>这个哈希算法是用来做数据库horizontal sharding的吗，它能用在分配服务器上吗？能用在vertical sharding上吗？<ul>
+<li>是的，用来做 <strong>Horizontal Sharding</strong>。不能用在 Veritical Sharding 上。Vertical Sharding 是按照 column / table 进行 sharding 并不按照数据本身的值来进行 sharding。他可以用在分配数据服务器上，但是不能用在分配 web 服务器上。因为 web 服务器是 stateless 的，不需要固定的去同一个 web server，只需要随机分配即可。</li>
+</ul>
+</li>
+<li>新增加机器时，增加的虚拟的点的位置是随机的么？<ul>
+<li>本质上都是根据机器名字 hash 出来的，不能认为是随机的。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="Consistent-HashⅡ"><a href="#Consistent-HashⅡ" class="headerlink" title="Consistent HashⅡ"></a>Consistent HashⅡ</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">描述</span><br><span class="line">在 Consistent Hashing I 中我们介绍了一个比较简单的一致性哈希算法，这个简单的版本有两个缺陷：</span><br><span class="line"></span><br><span class="line">增加一台机器之后，数据全部从其中一台机器过来，这一台机器的读负载过大，对正常的服务会造成影响。</span><br><span class="line">当增加到3台机器的时候，每台服务器的负载量不均衡，为1:1:2。</span><br><span class="line">为了解决这个问题，引入了 micro-shards 的概念，一个更好的算法是这样：</span><br><span class="line"></span><br><span class="line">将 360° 的区间分得更细。从 0~359 变为一个 0 ~ n-1 的区间，将这个区间首尾相接，连成一个圆。</span><br><span class="line">当加入一台新的机器的时候，随机选择在圆周中撒 k 个点，代表这台机器的 k 个 micro-shards。</span><br><span class="line">每个数据在圆周上也对应一个点，这个点通过一个 <span class="built_in">hash</span> <span class="keyword">function</span> 来计算。</span><br><span class="line">一个数据该属于哪台机器负责管理，是按照该数据对应的圆周上的点在圆上顺时针碰到的第一个 micro-shard 点所属的机器来决定。</span><br><span class="line">n 和 k在真实的 NoSQL 数据库中一般是 2^64 和 1000。</span><br><span class="line"></span><br><span class="line">请实现这种引入了 micro-shard 的 consistent hashing 的方法。主要实现如下的三个函数：</span><br><span class="line"></span><br><span class="line">create(int n, int k)</span><br><span class="line">addMachine(int machine_id) // add a new machine, <span class="built_in">return</span> a list of shard ids.</span><br><span class="line">getMachineIdByHashCode(int hashcode) // <span class="built_in">return</span> machine id</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Replica"><a href="#Replica" class="headerlink" title="Replica"></a>Replica</h2><blockquote>
+<h5 id="多选题-下列关于-Backup-和-Replica-的区别描述正确的有？"><a href="#多选题-下列关于-Backup-和-Replica-的区别描述正确的有？" class="headerlink" title="[多选题]下列关于 Backup 和 Replica 的区别描述正确的有？"></a>[多选题]下列关于 Backup 和 Replica 的区别描述正确的有？</h5><p>A.Backup 一般是周期性的，Replica 是实时的31.83% 选择</p>
+<p>B.Backup 一天做一次7.07% 选择</p>
+<p>C.Replica 一般一式三份27.59% 选择</p>
+<p>D.Backup 可以分摊读请求1.54% 选择</p>
+<p>E.Replica 可以分摊读请求29.77% 选择</p>
+<p>F.有了 Replica 之后就不需要 Backup 了2.21% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是ACE</p>
+<p><strong>正确答案:</strong>ACE</p>
+<p><strong>解析:</strong></p>
+<p>Backup 一般一天做一次，但是这个完全是因人而异，不是强制的。<br>Backup 存储的是离线数据，无法分摊在线读请求。<br>虽然 Replica 很强大，但是 Backup 也是很有必要的，可以认为是一个双保险。且可以服务于一些离线数据计算，这样不会给在线数据库带来压力。</p>
+</blockquote>
+<p>雙重保險</p>
+<p>不是每種DB都有replica，所以backup還是保險</p>
+<p>更穩定，就是發展的先後問題。</p>
+<blockquote>
+<ul>
+<li>replica和backup代价是一样的吗？比如说都需要一台机器？是不是说replica的机器可能性能好一点，而backup对机器性能没有要求<ul>
+<li>有的。你说的方式就是很多 NoSQL 现在用的方式，选择一个 Replica 写进去，然后这个 Replica 负责同步给其他的 Replica。 Replica 之间的地位是等价的，没有 master-slave 的上下级之分。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="SQL-用-Master-vs-Slave"><a href="#SQL-用-Master-vs-Slave" class="headerlink" title="SQL - 用 Master vs Slave,"></a>SQL - 用 Master vs Slave,</h3><ul>
+<li>也可手動作 Consistent Hash Ring</li>
+</ul>
+<h4 id="Write-Ahead-Log"><a href="#Write-Ahead-Log" class="headerlink" title="Write Ahead Log"></a>Write Ahead Log</h4><p>就只會一直追加</p>
+<p>所以slave上讀會比較慢</p>
+<ul>
+<li><p>Master 掛了時要是Slave還沒拉過去，雖然Slave被升級成了Master，但data還是就不見了。</p>
+</li>
+<li><p>也要根據這個支持把 transaction 反向。</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>How to do consistent hashing for a web server? For DB, the web server can compute the hashcode and then choose DB. Which component to do this for Web Server? DNS? NGIX?<ul>
+<li>Web Server 是不需要做 Consistent Hashing 的。因为 Web Server 是 stateless 的，你不需要保证每个用户每次访问的都是同一个 Web Server，随机来一个 Server 服务他就可以了，就跟你去银行不一定每次都去一个窗口排队，哪个人少去哪个排队就可以了。只有 DB 才需要做 Consistent Hashing 因为你的钱如果存在工商银行你去建设银行是取不到钱的。 Web Server 只需要做 Load Balancing ，这个步骤是 NGINX 或者专门的 Load Balancing 的硬件 或者 AWS 的 Load Balanacing 服务负责做的。</li>
+</ul>
+</li>
+<li>replica和backup代价是一样的吗？比如说都需要一台机器？是不是说replica的机器可能性能好一点，而backup对机器性能没有要求<ul>
+<li>代价不一样。replica 要实时，而且要服务在线请求，要求是比较高的。backup 只是做一下存储备份，不服务用户，要求比较低。</li>
+</ul>
+</li>
+<li>replica方法除了master slave，还有别的方法吗，比如说所有服务器都是master，都能接受写操作，隔一段时间同步一次<ul>
+<li>有的。你说的方式就是很多 NoSQL 现在用的方式，选择一个 Replica 写进去，然后这个 Replica 负责同步给其他的 Replica。 Replica 之间的地位是等价的，没有 master-slave 的上下级之分。</li>
+</ul>
+</li>
+<li>“下列关于 Backup 和 Replica 的区别描述正确的有？” 为什么replica一般一式三份？<ul>
+<li>經驗值</li>
+</ul>
+</li>
+<li>Replica在一致性哈希环上顺时针存三份我理解的是紧挨着的3个位置，对吗？这样读请求来的时候可以分摊给这3个机器吗？<ul>
+<li>对的。读请求可以分摊给replica。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Ex-1-Sharding-User-Table"><a href="#Ex-1-Sharding-User-Table" class="headerlink" title="Ex.1 Sharding User Table"></a>Ex.1 Sharding User Table</h2><ul>
+<li><p>某個數據庫如按哪個key, Column去sharding好？</p>
+<p>User Table怎麼算sharding 好？</p>
+<p>就是說要拿什麼去跑一次consistent hash去得到機器的編號，然後連上那台機器，然後去那台機器拿出數據呢？</p>
+<ul>
+<li><p>怎麼取數據就怎麼拆數據</p>
+<p>就是看最常見是按什麼去查呢？就把這個拆開去作sharding吧。</p>
+<p>舉例：user_id是最常被其他的表單用到的foreign_key，就用它作拆分</p>
+<ul>
+<li>但一般都是用username找用戶啊？<ul>
+<li>就再建個表單作username =&gt; user_id映射，多查一個步驟就好。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Insert時怎辦？該去哪台數據庫作insert呢？</p>
+<ul>
+<li>同一台機器時可以設sequential id，就是有另張表紀錄這張表的sequential id到了哪了，然後會加鎖去保持連續性。</li>
+<li>這時可以自己自建一個uuid作為用戶的user_id,  不同人不會撞啦！因為是uuid，宇宙爆炸的機率<ul>
+<li>然後再拿去作consistent hashing</li>
+</ul>
+</li>
+<li>擴機器時怎辦？uuid是字串，本來人少時是用整數呀，怎辦？<ul>
+<li>建個表，在一個新的service裡（這個可以全局共享），就是要先去那個表查，那個表在查時會加鎖，再map到uuid。<ul>
+<li>也就是說用加鎖保證數據的原子性。</li>
+<li>創建用戶也不是大QPS，所以問題也不是特大。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h5 id="单选题-User-Table-最常见的需求是按照什么去查询？"><a href="#单选题-User-Table-最常见的需求是按照什么去查询？" class="headerlink" title="[单选题]User Table 最常见的需求是按照什么去查询？"></a>[单选题]User Table 最常见的需求是按照什么去查询？</h5><p>A.username21.85% 选择</p>
+<p>B.id (user_id)76.69% 选择</p>
+<p>C.phone number0.09% 选择</p>
+<p>D.email1.37% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>user_id 会作为其他 Table 的 Foreign key 存在，所以是最频繁的查询需求。</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>这个新的表单存储username, userid, 这个不需要sharding对吧？ 因为读取比较少？<ul>
+<li>如果读取比较少的情况下，不 sharding 也没问题。不过一般这类 Key-value 的查询都会放在 NoSQL 数据库里，默认就会 sharding。</li>
+</ul>
+</li>
+<li>好像可以用当前时间加其他的限制条件来创建ID，这样可以让ID有其他的信息，这样好么？<ul>
+<li>这样做也是可以的，相当于denormalization，但是有一定风险，要注意保持id的随机性，否则可能会让id的生成变得predictable。</li>
+</ul>
+</li>
+<li>如果table QPS需求大的话，而且已经采用了自增id，是不是就不用自增id， 创建一个新table， 用uuid来做key， 然后把原有数据移植到新的table？ 然后更新其他 引用它的table的foreign key？<ul>
+<li>更新 foreign key 是一个很大的工程（引用太多了。而且随时可能更改）。所以最后一点说的是，创立一个单独的 UserIdService 来负责产生这个全局自增的 user_id。更新 foreign key 这个并不现实。</li>
+</ul>
+</li>
+<li>可以通过hash把原来的id改成uuid吗<ul>
+<li>uuid是有标准的生成方式的，不能仅仅通过求Hash的方式来获得uuid: <a href="https://en.wikipedia.org/wiki/Universally_unique_identifier#Versions" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Universally_unique_identifier#Versions</a></li>
+</ul>
+</li>
+<li>这个UserIdservice是不是一种分布式锁啊？<ul>
+<li>原理有些类似，但是这个还算不上一个general-purpose的分布式锁，只是在系统中设计了一个单点来保证生成ID的顺序和唯一性。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Session-Table-Sharding"><a href="#Session-Table-Sharding" class="headerlink" title="Session Table Sharding"></a>Session Table Sharding</h2><blockquote>
+<h5 id="单选题-Session-Table-通常按照哪一项去查询？"><a href="#单选题-Session-Table-通常按照哪一项去查询？" class="headerlink" title="[单选题]Session Table 通常按照哪一项去查询？"></a>[单选题]Session Table 通常按照哪一项去查询？</h5><p>A.session key (session token)84.15% 选择</p>
+<p>B.user_id14.54% 选择</p>
+<p>C.expire_at1.31% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>A</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>为什么哪一项最常用就要根据哪一项去sharding呢，能详细解释一下吗<ul>
+<li>不是哪一项常用就按照哪一项去 sharding，是按照哪一项查询就按照哪一项 sharding。假如一个数据有 col1, col2 两项，按照 col1 sharding 的意思就是，如果两条数据的 col1 相同，就会被分配在同一台机器上。所以当你按照 col1 查询的时候，才能保证在同一台机器上找到这两条数据。如果你查询是按照 col1 来查询，存的时候却按照 col2 来sharding 的话，那么就没法保证 col1 相同的都在同一台机器上，这样 sharding 的意义就没有了，sharding 就是要让你能分摊查询请求到不同的机器，如果你的一次查询需要去所有机器汇总结果的话，这个 sharding 就是失败的 sharding。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="News-Feed-Timeline-Shardings"><a href="#News-Feed-Timeline-Shardings" class="headerlink" title="News Feed / Timeline Shardings"></a>News Feed / Timeline Shardings</h2><blockquote>
+<ul>
+<li><em>TimeLine table 即 Post Table 刚才课上说到了是以User ID做为sharding key。 我有一个问题：如果我想查 Post 详情的话， 那是不是每次请求都要带上 User ID 才能定位到具体某台机器上。但是基本获取Post 详情的请求都只会带 Post ID而不是 Post ID 和 User ID啊。 求解答~</em><ul>
+<li><em>这种情况下，通常的做法是 post_id 里，前缀就带上 user_id。这样可以通过 post_id 得到 user_id。此时 post_id 通常是一个字符串，可以自定义格式。</em></li>
+</ul>
+</li>
+<li><em>news feed一般是会专门存一个table吗？比如我要看我的news feed，是拿我的user id去news feed table里面找，而不是拿我的所有关注user的id去post table里面找然后汇总？那么这个news feed table里面的信息总归是通过去post table里面查找汇总好了以后存在news feed table里的吧？可不可以介绍一下： 1. 这个table的schema。 2. 去post table查找和汇总发生在什么时候？</em><ul>
+<li><em>news feed 一般就是一个专门的 table。</em><br><em>news feed table 的 schema 在 PPT 里有，你看一下。视频里也有讲到的。</em><br><em>去 post table 里查找和汇总可能不会发生，因为 news feed table 可以通过 denormalize 的方法把 post 的内容复制一份存在 news feed table 里来加速这个查询过程。</em></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>Ref:</p>
+<ol>
+<li><a href="https://afghl.github.io/2016/07/04/consistent-hashing.html" target="_blank" rel="noopener">https://afghl.github.io/2016/07/04/consistent-hashing.html</a></li>
+<li><a href="http://blog.codinglabs.org/articles/consistent-hashing.html" target="_blank" rel="noopener">http://blog.codinglabs.org/articles/consistent-hashing.html</a></li>
+</ol>
+<h2 id="leetcode可能怎麼sharding"><a href="#leetcode可能怎麼sharding" class="headerlink" title="leetcode可能怎麼sharding?"></a>leetcode可能怎麼sharding?</h2><p>submission, user, timestamp, problem, status</p>
+<blockquote>
+<h5 id="单选题-LintCode-Submission-Table-按照什么进行-Sharding？"><a href="#单选题-LintCode-Submission-Table-按照什么进行-Sharding？" class="headerlink" title="[单选题]LintCode Submission Table 按照什么进行 Sharding？"></a>[单选题]LintCode Submission Table 按照什么进行 Sharding？</h5><p>A.user_id13.52% 选择</p>
+<p>B.submission_id19.07% 选择</p>
+<p>C.problem_id4.17% 选择</p>
+<p>D.status0.28% 选择</p>
+<p>E.用两个表单，分别按照 user_id 和 problem_id 来 sharding62.96% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是E</p>
+<p><strong>正确答案:</strong>E</p>
+</blockquote>
+<p>需求１我們要查詢某個題的所有提交紀錄</p>
+<p>Where problem_id = 999;</p>
+<p>需求２我們要查詢某個人的所有提交紀錄</p>
+<p>Where user_id = 999;</p>
+<p>如果按user_id作sharding時，那當被查詢需求１時，就要去每台機器都拿過來，這樣效率就低。</p>
+<p>NoSQL一般可Sharding, 也就比較不支持multi-index。麻煩。</p>
+<p>用於篩選的info可以存兩份。</p>
+<blockquote>
+<ul>
+<li>可以把code存在一个单独的table里面然后让两个表都去reference一个code id。当然也可以把code冗余地存在两个表中。前一种方法省空间，但是需要读两次数据库，后一种方法浪费一点空间但是只需要读一次数据库。</li>
+</ul>
+</blockquote>
+<h2 id="Rate-Limiter"><a href="#Rate-Limiter" class="headerlink" title="Rate Limiter"></a>Rate Limiter</h2><p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdgxpdr0mpj31ci0lae0x.jpg" alt="image-20200403221207316"></p>
+<p>主要滿足大多人的滿意度、別有惡劣的影響</p>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdgxvl4bxej31f00kmq6n.jpg" alt="image-20200403221757444"></p>
+<blockquote>
+<ul>
+<li>key,你这个event+feature+ts，无法区分是谁，哪个用户来的req啊？你如何block恶意的点击呢？<ul>
+<li>这里举的只是一个简单的例子，实际中feature里面除了ip也可以包含user id之类的信息，你可以根据自己的需要去扩展。</li>
+</ul>
+</li>
+<li>memcahed是一个字典还是一个自定义的类？<ul>
+<li>memcached是一个内存型key-value数据库，你可以把它当作字典用。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdgxy3he6jj31100js4k6.jpg" alt="image-20200403222029916"></p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/03/28/System-Design/9p/2019-03-28-Design%20Data%20Augmentation%20&amp;%20Consistent%20Hash/">http://yoursite.com/2019/03/28/System-Design/9p/2019-03-28-Design%20Data%20Augmentation%20&amp;%20Consistent%20Hash/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/04/01/System-Design/9p/2019-04-01-Web%20System%20API%20Design%20&amp;%20TinyURL/"><i class="fa fa-chevron-left">  </i><span>System-Design/9p/2019-04-01-Web System API Design &amp; TinyURL</span></a></div><div class="next-post pull-right"><a href="/2019/03/18/System-Design/9p/2019-03-18-System%20Design%20&amp;%20Design%20Twitter/"><span>System-Design/9p/2019-03-18-System Design &amp; Design Twitter</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
