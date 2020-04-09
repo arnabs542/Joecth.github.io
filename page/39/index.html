@@ -7,19 +7,87 @@
     error: 'Copy error',
     noSupport: 'The browser does not support'
   }
-} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">253</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">24</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">36</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2019/09/30/LC/2019-09-30-LC%2070%20Climbing%20Stairs/">LC/2019-09-30-LC 70 Climbing Stairs</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-09-30</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/LC/">LC</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/LC-DP/">LC-DP</a></span><div class="content"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(n)</span>:</span></span><br><span class="line">	dp = [<span class="number">-1</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(n+<span class="number">1</span>)]</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, n+<span class="number">1</span>):</span><br><span class="line">		dp[i] = dp[i<span class="number">-1</span>] + dp[i<span class="number">-2</span>]</span><br><span class="line">	<span class="keyword">return</span> dp[n]</span><br></pre></td></tr></table></figure>
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">253</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">24</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">36</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2019/09/30/LC/2019-09-30-LC%2062&amp;63%20Unique%20Paths%20I%20&amp;%20%E2%85%A1/">LC/2019-09-30-LC 62&amp;63 Unique Paths I &amp; Ⅱ</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-09-30</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/LC/">LC</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/LC-DP/">LC-DP</a></span><div class="content"><p>1 state variables</p>
+<p>2 init</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>1</th>
+<th>1</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>２</td>
+<td>３ｍ↓</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td>３ｎ→</td>
+<td>６n+m</td>
+<td></td>
+</tr>
+<tr>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>3 equation<br>$$<br>[i][j] = [i-1][j] + [i][j-1]<br>$$<br>4 result</p>
+<h3 id="LC-62"><a href="#LC-62" class="headerlink" title="LC 62."></a>LC 62.</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x, y)</span>:</span></span><br><span class="line">  dp = [[<span class="number">0</span>]*(x+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(y+<span class="number">1</span>)] <span class="comment">## take out of board into consideration as 0</span></span><br><span class="line">  dp[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, y+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, x+<span class="number">1</span>):</span><br><span class="line">      dp[i][j] = dp[i<span class="number">-1</span>][j] + dp[i][j<span class="number">-1</span>]</span><br><span class="line">  <span class="keyword">return</span> dp[y][x]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="LC-63-w-Obstructions"><a href="#LC-63-w-Obstructions" class="headerlink" title="LC 63.　w/ Obstructions"></a>LC 63.　w/ Obstructions</h3><p>之前走的２Ｄ地圖是有障礙物的</p>
+<h4 id="Diff-at-Initialization"><a href="#Diff-at-Initialization" class="headerlink" title="Diff: at Initialization"></a>Diff: at Initialization</h4><table>
+<thead>
+<tr>
+<th>1</th>
+<th>1</th>
+<th>0</th>
+<th>0</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td></td>
+<td>0/1</td>
+<td></td>
+</tr>
+<tr>
+<td>0</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x, y)</span>:</span></span><br><span class="line">  dp = [[<span class="number">0</span>]*(x+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(y+<span class="number">1</span>)] <span class="comment">## take out of board into consideration as 0</span></span><br><span class="line">  dp[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, y+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, x+<span class="number">1</span>):</span><br><span class="line">      <span class="keyword">if</span> obstacle[i][j] != <span class="number">1</span>:　<span class="comment">### MAIN diff!</span></span><br><span class="line">      	dp[i][j] = dp[i<span class="number">-1</span>][j] + dp[i][j<span class="number">-1</span>]</span><br><span class="line">  <span class="keyword">return</span> dp[y][x]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Ref:</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hwe6l5e7j30hc0em78r.jpg" alt="image-20190930221007253"></p>
+<h3 id="DP-vs-計劃遞歸-Memorization"><a href="#DP-vs-計劃遞歸-Memorization" class="headerlink" title="DP vs 計劃遞歸(Memorization)"></a>DP vs 計劃遞歸(Memorization)</h3><p>Memorization omits loop of varaibles.</p>
+<p>Ref:</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hvqn3ekxj30w40fadn0.jpg" alt="image-20190930214729348"></p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hvp6agvkj30x20fo464.jpg" alt="image-20190930214602150"></p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hvplk9kmj30uq0cq78y.jpg" alt="image-20190930214630627"></p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/09/30/LC/2019-09-30-LC%2070%20Climbing%20Stairs/">LC/2019-09-30-LC 70 Climbing Stairs</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-09-30</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/LC/">LC</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/LC-DP/">LC-DP</a></span><div class="content"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(n)</span>:</span></span><br><span class="line">	dp = [<span class="number">-1</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(n+<span class="number">1</span>)]</span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, n+<span class="number">1</span>):</span><br><span class="line">		dp[i] = dp[i<span class="number">-1</span>] + dp[i<span class="number">-2</span>]</span><br><span class="line">	<span class="keyword">return</span> dp[n]</span><br></pre></td></tr></table></figure>
 
 <p>O(n) , O(n)</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(n)</span>:</span></span><br><span class="line">  dp1, dp2 = <span class="number">1</span>, <span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, n+<span class="number">1</span>):</span><br><span class="line">    dp2, dp1 = dp1 + dp2, dp2</span><br><span class="line">   <span class="keyword">return</span> dp2</span><br></pre></td></tr></table></figure>
 
 <p>O(n) , O(1)</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/09/30/LC/2019-09-30-LC-790%20Domino&amp;Tromino%20Tiling/">LC/2019-09-30-LC-790 Domino&amp;Tromino Tiling</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-09-30</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/LC/">LC</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/LC-DP/">LC-DP</a><span class="article-meta__link">-</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/TODO/">TODO</a></span><div class="content"><p>Problem: 2x1 XX</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">numTilings</span><span class="params">(self, N)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        :type N: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="keyword">if</span> N &lt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        N += <span class="number">1</span></span><br><span class="line">        module = pow(<span class="number">10</span>, <span class="number">9</span>)+<span class="number">7</span>   </span><br><span class="line">        dp = [[<span class="number">0</span>, <span class="number">0</span>]*N <span class="keyword">for</span> _ <span class="keyword">in</span> range(N)]</span><br><span class="line">        dp[<span class="number">0</span>][<span class="number">0</span>], dp[<span class="number">1</span>][<span class="number">0</span>], dp[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2</span>, N):</span><br><span class="line">            dp[i][<span class="number">0</span>] = dp[i<span class="number">-1</span>][<span class="number">0</span>] + dp[i<span class="number">-2</span>][<span class="number">0</span>] + dp[i<span class="number">-2</span>][<span class="number">1</span>]</span><br><span class="line">            dp[i][<span class="number">1</span>] = dp[i<span class="number">-1</span>][<span class="number">0</span>]*<span class="number">2</span> + dp[i<span class="number">-1</span>][<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">return</span> dp[N<span class="number">-1</span>][<span class="number">0</span>] % module</span><br></pre></td></tr></table></figure>
-
-<p>Ref:</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7iv5nfkjdj31hl0u01ds.jpg" alt="image-20191001181252686"></p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7ivtlhge4j31580katgw.jpg" alt="image-20191001183553311"></p>
-<p>Ref: <a href="https://www.jianshu.com/p/2104df9de5d5" target="_blank" rel="noopener">https://www.jianshu.com/p/2104df9de5d5</a></p>
 </div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/09/25/FFmpeg/2019-09-25-ffmepg-cmd-3-I-frame-extraction/">FFmpeg/2019-09-25-ffmepg-cmd-3-I-frame-extraction</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-09-25</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/ffmpeg/">ffmpeg</a></span><div class="content"><h3 id="I-frame-extraction"><a href="#I-frame-extraction" class="headerlink" title="I-frame extraction"></a>I-frame extraction</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i vn_hflip.mp4 -vf select=<span class="string">'eq(pict_type\,I)'</span> -vsync 2 -s 1280*720 -f image2 keyframe-%03d.jpeg</span><br></pre></td></tr></table></figure>
 
 <p>-vf:是一个命令行，表示过滤图形的描述。选择过滤器select会选择帧进行输出：pict_type和对应的类型:PICT_TYPE_I 表示是I帧，即关键帧；<br>-vsync 2:阻止每个关键帧产生多余的拷贝；<br>-f image2 name_%02d.jpeg:将视频帧写入到图片中，样式的格式一般是: “%d” 或者 “%0Nd”</p>
