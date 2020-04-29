@@ -1,0 +1,522 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="System-Design/9p/2019-04-15-BigTable"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>System-Design/9p/2019-04-15-BigTable | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#General"><span class="toc-number">1.</span> <span class="toc-text">General</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Big-Table"><span class="toc-number">2.</span> <span class="toc-text">Big Table</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Scenario"><span class="toc-number">2.1.</span> <span class="toc-text">Scenario</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storage"><span class="toc-number">2.2.</span> <span class="toc-text">Storage</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#One-Work-Solution"><span class="toc-number">3.</span> <span class="toc-text">One Work Solution</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#寫入過程"><span class="toc-number">3.0.1.</span> <span class="toc-text">寫入過程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#機器掛了怎辦？"><span class="toc-number">3.0.2.</span> <span class="toc-text">機器掛了怎辦？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#讀取優化"><span class="toc-number">4.</span> <span class="toc-text">讀取優化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Bloom-Filter"><span class="toc-number">4.1.</span> <span class="toc-text">Bloom Filter</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#繼續讀優化"><span class="toc-number">4.1.1.</span> <span class="toc-text">繼續讀優化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SS-Table-amp-Skip-List"><span class="toc-number">4.2.</span> <span class="toc-text">SS Table &amp; Skip List</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Scale-Sharding"><span class="toc-number">5.</span> <span class="toc-text">Scale - Sharding</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#所以水平-consistent-hashing"><span class="toc-number">5.0.1.</span> <span class="toc-text">所以水平 consistent hashing</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BigTable的分布式鎖"><span class="toc-number">6.</span> <span class="toc-text">BigTable的分布式鎖</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Appendixes"><span class="toc-number">7.</span> <span class="toc-text">Appendixes</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#K-sorted-merge"><span class="toc-number">7.1.</span> <span class="toc-text">K sorted merge</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#外排序"><span class="toc-number">7.2.</span> <span class="toc-text">外排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GFS-amp-BigTable"><span class="toc-number">7.3.</span> <span class="toc-text">GFS &amp; BigTable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#B-Tree"><span class="toc-number">7.4.</span> <span class="toc-text">B+ Tree</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bloom-Filter-vs-Hash-Table"><span class="toc-number">7.5.</span> <span class="toc-text">Bloom Filter vs Hash Table</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跳跃表-Skip-List"><span class="toc-number">7.6.</span> <span class="toc-text">跳跃表 Skip List</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#QA"><span class="toc-number">8.</span> <span class="toc-text">QA</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">258</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">35</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">System-Design/9p/2019-04-15-BigTable</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-15</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ul>
+<li>NoSQL DB</li>
+<li>SS table 的讀跟寫</li>
+<li>Bloom Filter</li>
+<li>Look up service</li>
+<li>Merge K Sorted Arrays</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 486. Merge K Sorted Arrays</span></span><br><span class="line"><span class="comment"># 中文English</span></span><br><span class="line"><span class="comment"># Given k sorted integer arrays, merge them into one sorted array.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Example</span></span><br><span class="line"><span class="comment"># Example 1:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Input: </span></span><br><span class="line"><span class="comment">#   [</span></span><br><span class="line"><span class="comment">#     [1, 3, 5, 7],</span></span><br><span class="line"><span class="comment">#     [2, 4, 6],</span></span><br><span class="line"><span class="comment">#     [0, 8, 9, 10, 11]</span></span><br><span class="line"><span class="comment">#   ]</span></span><br><span class="line"><span class="comment"># Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]</span></span><br><span class="line"><span class="comment"># Example 2:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Input:</span></span><br><span class="line"><span class="comment">#   [</span></span><br><span class="line"><span class="comment">#     [1,2,3],</span></span><br><span class="line"><span class="comment">#     [1,2]</span></span><br><span class="line"><span class="comment">#   ]</span></span><br><span class="line"><span class="comment"># Output: [1,1,2,2,3]</span></span><br><span class="line"><span class="comment"># Challenge</span></span><br><span class="line"><span class="comment"># Do it in O(N log k).</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># N is the total number of integers.</span></span><br><span class="line"><span class="comment"># k is the number of arrays.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param arrays: k sorted integer arrays</span></span><br><span class="line"><span class="string">    @return: a sorted array</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mergekSortedArrays</span><span class="params">(self, arrays)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="keyword">return</span> self.helper_heapq(arrays)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper_heapq</span><span class="params">(self, arrays)</span>:</span></span><br><span class="line">        hp = []</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(len(arrays)):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> arrays[k]: <span class="keyword">continue</span></span><br><span class="line">            heapq.heappush(hp, (arrays[k][<span class="number">0</span>], k, <span class="number">0</span>))</span><br><span class="line">            </span><br><span class="line">        <span class="comment"># print(hp)</span></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">while</span> hp: </span><br><span class="line">            _, kth, idx = heapq.heappop(hp)</span><br><span class="line">            <span class="comment"># print(val, arrays[kth][idx], kth, idx)</span></span><br><span class="line">            res.append(arrays[kth][idx])</span><br><span class="line">            <span class="keyword">if</span> idx+<span class="number">1</span> &lt;= len(arrays[kth])<span class="number">-1</span>:</span><br><span class="line">                heapq.heappush(hp, (arrays[kth][idx+<span class="number">1</span>], kth, idx+<span class="number">1</span>))</span><br><span class="line">            <span class="comment"># else:</span></span><br><span class="line">            <span class="comment"># 大可以等下一輪拉出來再push那條的下一個元素，不急</span></span><br><span class="line">            <span class="comment">#     # while idx+1 &gt; len(array[kth])-1:</span></span><br><span class="line">            <span class="comment">#     val, kth, idx = heapq.heappop(hp)</span></span><br><span class="line">            <span class="comment">#     res.append(val)</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Binary Tree Serialization</li>
+</ul>
+<h1 id="Big-Table"><a href="#Big-Table" class="headerlink" title="Big Table"></a>Big Table</h1><p>Big Table vs GFS</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>GFS</th>
+<th>BiGTable</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>本質</td>
+<td>分布式File System</td>
+<td>分布式 NoSQL DB</td>
+</tr>
+<tr>
+<td>開發公司</td>
+<td>Google</td>
+<td>Google</td>
+</tr>
+<tr>
+<td>是否開源</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>類似開源產品</td>
+<td>HDFS</td>
+<td>HBase</td>
+</tr>
+<tr>
+<td>操作</td>
+<td>Read &amp; Write</td>
+<td>CRUD</td>
+</tr>
+<tr>
+<td>類似什麼</td>
+<td>家用電腦的文件系統</td>
+<td>大數據版的Excel</td>
+</tr>
+</tbody></table>
+<p>結構化文件可上BigTable終究是存上GFS。</p>
+<blockquote>
+<ul>
+<li>BigTable 和 Dremel 主要有什么区别？<ul>
+<li>bigtable是nosql storage system，dremel是query system。</li>
+</ul>
+</li>
+<li></li>
+</ul>
+</blockquote>
+<h2 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h2><ul>
+<li>修改 CUD</li>
+<li>查找 R</li>
+</ul>
+<p>後端通常給web server 使用，Scenario比較單一</p>
+<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><p>數據庫在邏輯上就是kv型式。硬盤不能存表結構，最終都轉成string去存在disk上。</p>
+<p>就是要從文件系統的基礎上去思考搭數據庫系統。</p>
+<p>Q: 在文件裡怎麼更好支持查詢操作？</p>
+<ol>
+<li>把文件硬盤全讀到內存，然後在內存作流程管理</li>
+<li>Better, 讀文件進內存後，排序+二分。有什麼問題？==&gt; <ul>
+<li>直接在硬盤中對數據作排序 + 硬盤中二分。<ul>
+<li>How? 外排序</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>Q: 如果有相應的feature有修改操作了，怎辦？</p>
+<ol>
+<li>直接在文件裡修改？==&gt; 大家都要移動</li>
+<li>讀整個文件，修改好後，把原文件刪了，重新寫入新文件。==&gt; 耗時，每次要讀出寫入其他多餘不變的內容</li>
+<li>不修改，直接append操作追加一條紀錄。V! ==&gt; 特快！<ul>
+<li>怎麼識別最新的紀錄？<ul>
+<li>在所有數據後面加個時間戳，時間戳最大的就是真正的我們要找的紀錄</li>
+</ul>
+</li>
+<li>沒順序怎麼二分？<ul>
+<li>分塊有序<ul>
+<li>每個塊內部有序</li>
+<li>寫時候只有最後一塊無序，並且隔一段時間整理成有序。</li>
+<li>例：每次寫時就是在最後塊append一條紀錄，for看最後塊有沒有那個值，沒的話就往前一塊作二分查找；每隔時間到就把最後塊給整理成有序下，然後啟新的塊。一個塊是256MB，滿了後就不再寫了。</li>
+</ul>
+</li>
+<li>分塊太多時會有很多重複紀錄啊？如某個feature一直被改改改<ul>
+<li>Solution: 把有序塊中作去重，作k路去重merge，如果是根據時間去重，當時間一樣時，</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>Big Table 為了寫優化，選了３作。</p>
+<blockquote>
+<ul>
+<li>老师，请问，数据库系统不存储数据，所有数据最终都存储在文件系统当中， 数据库只是负责查询和组织诗句是吗<ul>
+<li>是的，大多DB都使用现有的文件系统作为底层存储机制</li>
+</ul>
+</li>
+<li>数据库是不是可以建立在任何的文件系统， 还是要为数据库写一个特殊的文件系统以提高效率？<ul>
+<li>一般没有必要，使用普通的文件系统在性能上已经足够了。</li>
+</ul>
+</li>
+<li>利用数据库系统查询文件系统的时候 是在写入文件时就将文件里的所有表内容 按key-value的形式 再写入数据库么？<ul>
+<li>按特定的数据结构存储，正如你说的key-value的形式，然后写入数据库中</li>
+</ul>
+</li>
+<li>这里除去duplicate的k路归并也是全部读到内存中进行么？每一块中可以有duplicate存在么？<ul>
+<li>K路归并的方法在后面的拓展视频中有讲到，每一个块中可以有duplicate</li>
+</ul>
+</li>
+<li>我如果想查找k的值，我怎么知道k在哪个文件里？<ul>
+<li>每个文件存储的k都是一个范围内的k值，直接二分搜索找到k在哪个范围内就找到了那个文件</li>
+</ul>
+</li>
+<li>append到文件末尾也会增加文件大小啊，怎么避免和其他文件储存的位置冲突？<ul>
+<li>如果是基于文件系统上搭建数据库，不必考虑此问题，操作系统会帮你完成；如果是自己直接基于disk搭建数据库，每个数据块初始化的时候就预先开辟适量的disk空间，当写入增加的数据量超过原有分配的空间的时候就需要申请一块更大的disk空间，将它拷贝过去，然后将原有的空间释放即可。（可以看下操作系统书中有关机械磁盘基本原理的介绍）</li>
+</ul>
+</li>
+<li>直接把修改内容append到最后，这个方法，如果修改得太多了，会不会感觉很乱，每次读的时候cost增加，因为一个file可能有三分之一的size是修修改改？需不需要在修改的量超过一个比例的时候处理一下？<ul>
+<li>首先要明确一点的是，没有任何一个数据库是生来都适合所有操作和场景的。也就是说，BigTable 本来就不适合修改特别多的场景。另外 BigTable 这类数据库会定期 Merge sstable，从而消除那些中间态的修改记录。</li>
+</ul>
+</li>
+<li>分块是什么意思？<ul>
+<li>是指将指定的“filename” 这个文件分成很多块，然后每次存储的时候找该文件编号的最后一块进行写入。如果写满了 是需要在文件系统里追加写入一个新的对应该文件名的块</li>
+</ul>
+</li>
+<li>在讲到“分块有序”时，老师说到每个块之间都是有序的。但是块与块之间是不是有序的呢？也就是说是不是第1个块的 key 值都小于第2块的 key 值，第2块的 key 值都小于第3块的key值？（最后一块除外）<ul>
+<li>块与块之间是有序的。这里可以是key-value存储记录块的索引地址；也可以是B+树索引，方便查找修改。</li>
+</ul>
+</li>
+<li>那每次查询都要查询每一个块吗？不能直接锁定就在哪一个块中（例如索引之类的）？<ul>
+<li><strong><em>好问题，后面的视频中讲到了索引，带着问题继续学习，棒！</em></strong></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h1 id="One-Work-Solution"><a href="#One-Work-Solution" class="headerlink" title="One Work Solution"></a>One Work Solution</h1><h3 id="寫入過程"><a href="#寫入過程" class="headerlink" title="寫入過程"></a>寫入過程</h3><p>​    一個無序快快寫滿時，就排序然後寫入到FS。</p>
+<ol>
+<li>讀入到內存作快排 X</li>
+<li>外排序 X;  <ul>
+<li>每個文件最多就也256M，一個內存完全可放下，完全不需要外排</li>
+</ul>
+</li>
+<li>可不可一開始就放在內存？V!</li>
+</ol>
+<p>比方，內存會用跳表這個結構，</p>
+<h3 id="機器掛了怎辦？"><a href="#機器掛了怎辦？" class="headerlink" title="機器掛了怎辦？"></a>機器掛了怎辦？</h3><p>Write Ahead Log (WAL)，就只是append而已</p>
+<p>append寫disk非常快和一般寫不同，打開模式為寫</p>
+<p>如果要把最後一個塊放在硬盤的話，它不只要可以append還要可以read的操作；</p>
+<p>append和寫不同，打開如果是append模式時，ptr是在尾巴；如果是寫模式，文件原內容會被清楚，ptr會指在文件頭。</p>
+<p>所以：</p>
+<p>内存排序+1次硬盘统一写入+1次硬盘写Log</p>
+<p>Link: <a href="http://www.larsgeorge.com/2010/01/hbase-architecture-101-write-" target="_blank" rel="noopener">http://www.larsgeorge.com/2010/01/hbase-architecture-101-write-</a> ahead-log.html</p>
+<blockquote>
+<ul>
+<li>每个块最大256M，是Google的Big Table自己定义的吗？还是一种通用的标准呢？而且这个“块”的学名是什么呀？谢谢！<ul>
+<li>是的，是官方定义。<br>256M 块的大小是google工程师长期实践的一个经验值，统计过这个值比较合理。<br>最后，块的专业名词为：chunk</li>
+</ul>
+</li>
+<li>什么是硬盘外部排序？<ul>
+<li>当参加排序的数的量太大，或内存不足以存放时，需要使用外排序。外部排序指的是大文件的排序，即待排序的记录存储在外存储器上，待排序的文件无法一次装入内存，需要在内存和外部存储器之间进行多次数据交换，以达到排序整个文件的目的。</li>
+</ul>
+</li>
+<li>老师，最后一个块是存在内存里的，存满256MB之后再写入硬盘。请问每次append一条数据到块里，是每次利用二分查找来保证这条数据插入到正确位置，还是每次就直接在块的尾部直接添加数据，直到块满了256MB，再排序变为有序啊。<ul>
+<li>直接在尾部添加，直到块满就进行排序。</li>
+</ul>
+</li>
+<li>这里的WAL 不是应该 每次有新的数据到内存都要写一次WAL吗？ 为什么说是1次的硬盘写LOG ？<ul>
+<li>是的，Write Ahead Log，就是对内存中Sorted Table里，new append data在HDD做一次append的操作。请再认真听讲，要确认每一个细节，其实再认真听讲是可以找到答案的，老师有讲到此细节。确实有问题了，仔细思考后再提出问题，这样学习深刻。</li>
+</ul>
+</li>
+<li>Write ahead log 为什么是一次， 不应该每次有update 都要写一次吗？<ul>
+<li>这块的WAL是多次的数据操作才会触发一次log写操作。这是为了性能的考量，HDD写的速度相比磁头寻道速度还是很快的，不想把太多时间浪费在寻道上，也就是每次写操作就需要寻道一次。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h1 id="讀取優化"><a href="#讀取優化" class="headerlink" title="讀取優化"></a>讀取優化</h1><p>本來是只能在FS上作二分，更好的是建index</p>
+<ul>
+<li>一個簡單的建index 的方法：<ul>
+<li>Key<ul>
+<li>就不需要整個文件作二分</li>
+<li>把一些Key放入內存作為index</li>
+<li>Index有效減少磁盤讀寫次數</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>B-tree Index</li>
+</ul>
+<blockquote>
+<ul>
+<li>所以内存中有无序的存储块，和sorted存储块（sorted list），先用for查找无序没有，再去有内存中sorted list上跳跃查找？<ul>
+<li>大体思路是对的，详细流程稍微更正如下：<br>(1)query Master server by the key;<br>(2) tablet server（即SSTable slave server）;<br>(3) check skip list(即跳表，在memory中) in the tablet server（对象没有排序的Sorted List）;<br>(4) check bloom filter(memory) for a SSTable(Sorted String Table)（最好一块有序块）;<br>(5) check index(memory) for a SSTable(查找其key的大致范围);<br>(6) find the value in the SSTable(根据在内存index定位到的小范围，在磁盘中通过二分查找这个key的文件内容).</li>
+</ul>
+</li>
+<li>“看到这里我对于建立index又有些迷茫了。本来一个块中就是有序的，直接二分不就行了。就算是先看index，也是要先对index进行二分，再拿着找到的位置去块本身里找东西。那么index的好处是不是因为index比数据本身的size小，所以在index里二分比在数据里二分块？ “<ul>
+<li>index 是在内存里的，你在内存里二分 index 比直接去 disk 上二分要快好几十倍。<strong><em>文件操作远远慢于内存操作</em></strong>。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>这里是课上提到的 B-Tree / B+ Tree 的一些资料：</p>
+<p>Wiki:<br><a href="https://en.wikipedia.org/wiki/B-tree" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/B-tree</a></p>
+<p>以B tree和B+ tree的区别来分析mysql索引实现:<br><a href="https://www.jianshu.com/p/0371c9569736" target="_blank" rel="noopener">https://www.jianshu.com/p/0371c9569736</a></p>
+<p>这部分的内容只需要了解原理，不需要代码实现。</p>
+</blockquote>
+<h2 id="Bloom-Filter"><a href="#Bloom-Filter" class="headerlink" title="Bloom Filter"></a>Bloom Filter</h2><h3 id="繼續讀優化"><a href="#繼續讀優化" class="headerlink" title="繼續讀優化"></a>繼續讀優化</h3><p>因為寫的時候我們用的是append, 但就是讀的時候被搞亂了，所以讀就要一直優化。</p>
+<p>數組長度自己定。</p>
+<ul>
+<li>多個 hash fn時，還是一樣同個數組在作mapping作查詢。</li>
+<li>是可能會有False Positive的；但就是起了filter的作用</li>
+<li>精度跟<ol>
+<li>加入的字符串數目</li>
+<li>hash個字</li>
+<li>array長度。</li>
+</ol>
+</li>
+<li>有誤判率計算公式</li>
+</ul>
+<p><strong><em>先用bloom filter看這個塊有沒有、有的話再用index找key可能在塊中的範圍，再用二分找這個塊裡的值</em></strong>　當然，在這之前是要先做完對最後那個在內存的塊的線性查找。</p>
+<h2 id="SS-Table-amp-Skip-List"><a href="#SS-Table-amp-Skip-List" class="headerlink" title="SS Table &amp; Skip List"></a>SS Table &amp; Skip List</h2><ul>
+<li>String is Store in the File. </li>
+<li>SSTable = Sorted String Table</li>
+<li>Sorted List 用 Skip List 实现</li>
+</ul>
+<ol>
+<li>Skip List<br> Code: <a href="https://github.com/petegoodliffe/skip_list" target="_blank" rel="noopener">https://github.com/petegoodliffe/skip_list</a> Wiki: <a href="http://bit.ly/2g0C29a" target="_blank" rel="noopener">http://bit.ly/2g0C29a</a></li>
+<li>SSTable<br> Google SSTable Page: <a href="http://bit.ly/1kqwrFe" target="_blank" rel="noopener">http://bit.ly/1kqwrFe</a></li>
+</ol>
+<blockquote>
+<ul>
+<li>“比如如果我用64个hash函数，每个文件按256M算(按每行数据256bytes算就是一百万行)。你这里难道把一百万个key都放在bloom filter里么 “<ul>
+<li>是的，bloom filter的基本单位是bit，这里记录的是hash后的数字，不是文件，<strong><em>一个字节8bit，大约10w 字节，就是100kb，也就是0.1mb</em></strong>。（为了精度可能需要大概几mb的内存就够了）</li>
+</ul>
+</li>
+<li>之前一小节讲的查一个key在不在这个块里需要先把这个块的index load到内存中再二分。你load index文件的时候不也是O(n)么？不在硬盘上二分是因为磁头移动的时间？所以宁愿先load一整个index file到内存中<ul>
+<li>是的，因为磁头寻道时间开销相对内存来说很大。（可以读下《现代操作系统》 5.4 磁盘臂调度算法）为了减少磁头寻道的开销衍生出的一些算法</li>
+</ul>
+</li>
+<li>“算两次hash值是为了防止collision么？可以扩大bloom filter的array大小，这样hash也不容易碰撞，这样可以么？ “<ul>
+<li>多个hash function可以减少误判率，扩大array的大小也可以减少误判率</li>
+</ul>
+</li>
+<li>index是B+ tree对吧，那为什么只能找到范围？最后一步，二分搜索在磁盘上进行，不是会非常慢么？<ul>
+<li>对的，因为具体的内容要到块当中去找，块里的内容key是用字典序排列的，因此存在相同字母开头的key，所以只能锁定一个范围。锁定这个范围之后就可以二分了，logn的速度可以接受</li>
+</ul>
+</li>
+<li>之前提到BigTable会定期执行Disk Merge Sort，这样不就可以直接对磁盘Blocks二分了吗? 为什么还要设计Bloom Filter？<ul>
+<li>有很多请求是需要判断key是否在文件中，HDD二分查找也是log级别的操作，Bloom Filter来过滤掉很多不必要的HDD操作</li>
+</ul>
+</li>
+<li>对于SSTable来说好像Index和Bloomfilter都是想要做一件事。视频的图中为什么两个都需要建立呢？<ul>
+<li>Boom Filter是起到快速筛选的，如果Bloom Filter中key存在，那么就可能在此SSTable中存在，如果不存在那么肯定就不存在此有序列块中。当key经过Bloom Filter确定可能存在后，再通过index确定其所限的查找范围，确定后，再去磁盘中进行二分查找。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h1 id="Scale-Sharding"><a href="#Scale-Sharding" class="headerlink" title="Scale - Sharding"></a>Scale - Sharding</h1><ul>
+<li><p>垂直沒那麼好，因為可能也想關心這筆data的其他元素。會增加讀取其他feature的難度。</p>
+</li>
+<li><h3 id="所以水平-consistent-hashing"><a href="#所以水平-consistent-hashing" class="headerlink" title="所以水平 consistent hashing"></a>所以水平 consistent hashing</h3><ul>
+<li>大表被拆成了很多個小表們</li>
+</ul>
+</li>
+</ul>
+<h1 id="BigTable的分布式鎖"><a href="#BigTable的分布式鎖" class="headerlink" title="BigTable的分布式鎖"></a>BigTable的分布式鎖</h1><ul>
+<li><p>讀寫鎖</p>
+<ul>
+<li><p>一把鎖，兩種屬性：讀跟寫</p>
+<ul>
+<li><p>讀鎖：讀的時候上的</p>
+</li>
+<li><p>寫鎖：寫的時候上的</p>
+</li>
+<li><p>特性</p>
+<ol>
+<li><p>線程一加讀鎖成功了，又來了兩個讀線程，可以加鎖成功，可進行讀共享</p>
+</li>
+<li><p>線程一加寫鎖成功了，又來了兩個讀線程，不能加鎖成功，兩個讀的要block；</p>
+<p>寫的時候只允許一個線程對內存作寫操作</p>
+</li>
+<li><p>線程一加讀鎖成功了，來了寫被block，又來了讀就要被block了；寫的優先級是比較高的，並且線程二來得早線程三就得要等了。</p>
+<ol>
+<li>讀是共享</li>
+<li>寫是獨占</li>
+<li>寫的優先級更高</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge0l4p7wsnj30nw0nwte3.jpg" alt="image-20200420195125198" style="zoom:50%;" />
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge0h80fthij30s00j0n0m.jpg" alt="image-20200420195309119"></p>
+<ul>
+<li><p>鎖服務器：</p>
+<ul>
+<li>Master的一致性哈希分配小弟也就這邊執行了</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>如果是多台锁服务器，怎么处理并发呢，或者说这么保证对同一个key的上锁操作在同一台锁服务器上进行呢？也是hash吗？map存在web server 上？<ul>
+<li>如果锁是一个cluster，<strong><em>多个节点之间会通过一致性协议来保持同步，对外表现得就像是只有一个节点一样，所以不用担心不一致的问题</em></strong>。</li>
+</ul>
+</li>
+<li>这里的图显示 读 和写的都要LOCK 这个KEY，那不是会神慢吗？ 如果KEY LOCKED了后续怎么样呢？ 写一个RETRY吗？ 如果 很多程序同时读这个 KEY，那都得等待了？<ul>
+<li>从安全和数据一致性来说，会相对重要些。lock肯定会慢些，但是这不影响总体的运行效率和用户体验。lock本身就是一个信号量互斥的实现机制，也线程间通信的基础， 详阅<a href="https://en.wikipedia.org/wiki/Lock_(computer_science)" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Lock_(computer_science)</a></li>
+</ul>
+</li>
+<li>consistent hash map存在lock server上，那master还有什么作用？<ul>
+<li>比如 heatbeat 。还有好多事儿要做呢，除了存储还有计算的工作呀。包括管理很多机器的启动，备份恢复等等。</li>
+</ul>
+</li>
+<li>感觉这个lock server不是distributed lock, 实际上是一个centralized locking service?<ul>
+<li>lock service内部是distributed实现的，但对外接口是中心化锁服务。具体使用的是chubby。</li>
+</ul>
+</li>
+<li>如果写入的是一个新key，metadata里面还没有这个key对应的consistent hashing value，这时候的写入过程是什么呢？<ul>
+<li>lock server查找有这个key的话锁上-》lock server返回server id-》去tablet server对应id写入-》写入GFS-》成功写入 返回True-》lock server释放锁</li>
+</ul>
+</li>
+<li>请问 summary of write 这张图里的 master， 所以其实没有起到任何作用， master 的功能全部被 lock server代替了么？<ul>
+<li>master还是提供分发控制的作用；lock server就是保证数据一致性（同一时间只有一个线程操作）</li>
+</ul>
+</li>
+<li>另外你这个读请求的锁，应该只是block其他的对于这个key的write request吧。如果有很多对这个key的read request怎么办？这种情况下难道不能单机多线程读这个key吗。 虽然这种hot partition的case很多情况下是用户没设计好partition key..<ul>
+<li>如果有很多对这个key的read request，系统只能等待，性能确实就会下降很多。如果想提这块的性能，可以使用双指针的方法，数据多份备份，这样这块的性能就会提升，但是数据脏读概率增大了。</li>
+</ul>
+</li>
+<li>读取data这种操作 为何也需要锁 没有锁也没有任何问题吧。<ul>
+<li>因为在read的同时可能还有针对同一个对象的updata/delete正在进行，为了防止读数据读到一半数据被删了这种不愉快的事情发生，加锁是必要的。</li>
+</ul>
+</li>
+<li>所以timestamp这个信息是存在lock server上的内存中么？一旦完成了上一个，lock server会向下一个最新的request的server发送消息告诉它，现在unlock了，可以开始处理它的请求了？还是以别的方式做信息交互？<ul>
+<li>你说的是对的，不过需要知道的是timestamp在sstable上也会存，便于查找的时候知道哪一个是现在最新的值</li>
+</ul>
+</li>
+<li>如果client 拿到锁之后 还没来得及写就意外挂了， 锁怎么释放？有时间限制吗？<ul>
+<li>“A client’s session<br>expires if it is unable to renew its session lease within the<br>lease expiration time. When a client’s session expires, it<br>loses any locks and open handles.” client超时后，会释放锁资源。</li>
+</ul>
+</li>
+<li>Disk 中的 每个SSTable 都有自己的bloomfilter 和 index 吗？ 不同SSTable 的可以不一样吗<ul>
+<li>对，这样理解是对的。当TableServer启动后开始服务初始化期间，会读取所有的有序块（SSTable）的Bloom Filer和Index到某个内存区域，以便服务查找。</li>
+</ul>
+</li>
+<li>Lock Server存的metadata的数据来源是哪里呢？从BigTable Master里来的？他们之间怎么交流的呢？<ul>
+<li>BigTable Master的key<br>这个系统对外会提供一个接口，接口不可直接操作bigtable master、lock server等，这些操作都是内部同步实现的逻辑<br>通信都是socket，可以考虑之间加上消息队列，直接append提交任务给目标server</li>
+</ul>
+</li>
+<li>the entire process did not involve the master server… are we saying that if we have lock/zookeeper, we dont have to access master when reading and writing?<ul>
+<li>only the first time from the a client for request, the master server should handle it, as master server need all the tablet server status for the first time of health-check, later then master server will synchronize/delegate all the tablet server status to locking server for the task hand-over. in that case, master server will move on to focus the health-check only.</li>
+</ul>
+</li>
+<li>分布式锁这里面的“分布式”是什么意思？就是说这个锁适用于处理distributed system里面多台服务器需要对同一个资源进行读写的情形？那么不分布式的锁是怎么回事呢？<ul>
+<li>这里的分布式指的是适用于多台服务器试图访问同一资源，相当于多台服务器上的多个进程共享资源。<br>非分布式的锁，就是单机上对资源的访问锁。通常就是线程间的资源共享或者单机上多个进程资源共享，通常使用操作系统提供的基础锁设施就可以完成。</li>
+</ul>
+</li>
+<li>整个write 过程， 那一点是系统最慢的过程？ 同样，整个read 过程哪一点是系统最慢的过程？ 这个分布式锁应该会让系统变慢不少把？<ul>
+<li>写的过程中，写满一个SSTable序列化到硬盘的时候相对比较慢，读的时候查引索时相对慢一点。实际在使用时，bigtable会使用一种叫做copy on write(cow)的机制，来保证读写操作的原子性，降低分布式锁对速度的影响</li>
+</ul>
+</li>
+<li>感觉bigtable 这种read 的时候需要一个个SSTable 分别查找的方式不如Cassandra 这种直接一个 consistent hashing ring，一步就能知道data 在哪个node上面快啊？<ul>
+<li>bigtable首先会在锁服务器上查一致性哈希表，得到在哪个server上。得知之后，会去那个server上查memtable、bloomfilter、sstable</li>
+</ul>
+</li>
+<li>为什么一开始shard还是要通过master 来进行呢，为什么不能通过Locker 来进行呢<ul>
+<li>通过最开始的文件sharding，取得与其负责管辖的tablet servers的建立联系，并且记录其各自的运行情况（alive/not alive）和健康信息。</li>
+</ul>
+</li>
+<li>这里讲的master会shard file是什么意思？以及consistent hashing的map如果是存在 master/lock server的内存里，master/lock挂了怎么办<ul>
+<li>shard file是共享文件的意思，就是master所管理的各个node server都可以访问和操作这个文件。<br>以前确出现在master挂掉导致整个集群挂掉的情况，现在master都会加有数据持久化的功能、master备份（主master挂掉，备份master就会启动，基本不影响集群运行）</li>
+</ul>
+</li>
+<li>把metadata放在lock里跟放在master里比有什么优势吗？如果这样做会使系统性能更好，那是为什么呢？<ul>
+<li>这里相当于将lock这个服务从master里面拆分了出来，这样肯定好的，master一般就是系统的性能瓶颈，减少master的负载，提高系统性能。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h1 id="Appendixes"><a href="#Appendixes" class="headerlink" title="Appendixes"></a>Appendixes</h1><h2 id="K-sorted-merge"><a href="#K-sorted-merge" class="headerlink" title="K sorted merge"></a>K sorted merge</h2><p>每次找最小的都要O(K), N個下來就要 O(NxK), 用個heap吧 可O(Nxlg(K))</p>
+<h2 id="外排序"><a href="#外排序" class="headerlink" title="外排序"></a>外排序</h2><p>一共8G的話，每次load進來2G, 就有四條排好的。可再接用K-sorte merge</p>
+<ul>
+<li><p>最小可以就維護４個元素</p>
+</li>
+<li><p>改善heap的效能可用</p>
+<ul>
+<li><p>敗者樹 可以改善選取最小項的常數項的Ｋ</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge0l4pvld7j31460ggwgt.jpg" alt="image-20200420202745772" style="zoom:50%;" />
+</li>
+<li><p>可用選擇-置換的方法　替換掉每組2G的平均分組，就減了少組數，也就是K的大小更小，跑起來更快；每條長度不等就是</p>
+<p><a href="https://www.bilibili.com/video/av69423198/" target="_blank" rel="noopener">https://www.bilibili.com/video/av69423198/</a></p>
+<ul>
+<li>搭配最佳歸併樹，讓IO次數最少的==&gt;帶權路徑最小：Huffman Tree</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>之前write 过程的去重就是在merge过程将重复的key中老的数据去除就好了对吧。<ul>
+<li>Yes</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="GFS-amp-BigTable"><a href="#GFS-amp-BigTable" class="headerlink" title="GFS &amp; BigTable"></a>GFS &amp; BigTable</h2><p>Disk vs Excel</p>
+<h2 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B+ Tree"></a>B+ Tree</h2><ul>
+<li>BST 如果有10億數據怎辦？1Gx4Byte == 4GB<ul>
+<li>一顆樹就要4GB，多棵樹肯定不行在內存，長期只能在disk</li>
+<li>一次尋軌10ms</li>
+<li>順序讀取 80MB/S</li>
+</ul>
+</li>
+</ul>
+<p>Methods:</p>
+<ol>
+<li><p>找一次就要4GB/80MB的時間，不可行</p>
+</li>
+<li><p>只讀取訪問路徑上的數，就是30多個元素 即 30x10ms = 300ms</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge0j7utyd2j314q0eogpr.jpg" alt="image-20200420210210409" style="zoom:67%;" />
+</li>
+<li><p>把二叉變多叉讓樹高降低！</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge0j9nfovbj31460ggk0s.jpg" alt="image-20200420210355659" style="zoom:67%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200420211217773.png" alt="image-20200420211217773" style="zoom:67%;" />
+
+<p>17是key, data是一堆的其他的feature；B-Tree 為了存硬盤中的數據設計</p>
+</li>
+<li><p>B+ </p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200420211622972.png" alt="image-20200420211622972" style="zoom:67%;" />
+
+
+
+</li>
+</ol>
+<h2 id="Bloom-Filter-vs-Hash-Table"><a href="#Bloom-Filter-vs-Hash-Table" class="headerlink" title="Bloom Filter vs Hash Table"></a>Bloom Filter vs Hash Table</h2><p>一種數據結構，跟hash table類似，檢測一個元素在一個集合有沒有出現。</p>
+<ul>
+<li>區別在 BF 更省空間。Hash還是比較費內存。BloomFilter沒有鏈表，主要是用0/1數組，叫Bit Array，沒有鏈表操作，用到多個hash function。</li>
+<li>Hash fn 也不是愈多愈好，這會讓0/1消耗愈快；一般取4~16個，有理論結果。</li>
+<li>快速檢測一條紀錄有沒有在某一個大塊之中。</li>
+<li>在big table中查大多時候都是沒在某一個小塊，不希望每個小塊都去查二分，小塊其實不小。</li>
+<li>hash不是等長結構因為有linked list, 無法直接存出；BF可以存出去，就是個bit array了。</li>
+</ul>
+<p>當要在兩個超過內存的大file裡找交集的urls時，相比hash一長字串就可以節省很多很多空間；但可能小誤報啦。</p>
+<ul>
+<li>Counting BF vs Standard BF</li>
+<li>數組動態膨脹，依據被標為1超過的比例；但BF不存key, 所以複製不過去，膨脹時就是新舊的bit array都要查。效率不是特別好。。短的話誤報率高</li>
+</ul>
+<blockquote>
+<ul>
+<li>一个bit 怎么做加法？<ul>
+<li>如果是 Counting bloom filter 的话，每一位就用 int 不用 bit 了。</li>
+</ul>
+</li>
+<li>Bloom filter自动膨胀的时候，能不能把原来的bit array丢掉，把所有数据全部拿来重算一遍？我不理解老师说的不能重算一遍这个点。<ul>
+<li>不能。比如你把单词 hello world 放到 bloomfilter 里以后，得到的 bit array 是 <code>[1,0,0,1,0,1,0,0,0,0,1,0,0]</code>，难道你可以根据这些0和1反向推导出是 Hello 和 World 这两个单词么？BF 不可逆。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge0l4frsejj311m0fqgpt.jpg" alt="image-20200420214218446" style="zoom:50%;" />
+
+
+
+<h2 id="跳跃表-Skip-List"><a href="#跳跃表-Skip-List" class="headerlink" title="跳跃表 Skip List"></a>跳跃表 Skip List</h2><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200420215801422.png" alt="image-20200420215801422" style="zoom:67%;" />
+
+<ul>
+<li>為什麼要用跳表？<ul>
+<li>是個有序鏈表</li>
+<li>可提取一些元素，加一層引索</li>
+</ul>
+</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200420220446625.png" alt="image-20200420220446625" style="zoom:67%;" />
+
+
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge0l405klnj311m0fqgpt.jpg" alt="image-20200420220653019"></p>
+<ul>
+<li>本質是一個分層鏈錶</li>
+</ul>
+<h1 id="QA"><a href="#QA" class="headerlink" title="QA"></a>QA</h1><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200420123257444.png" alt="image-20200420123257444" style="zoom:50%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200420163656675.png" alt="image-20200420163656675" style="zoom:50%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200420163734278.png" alt="image-20200420163734278" style="zoom:50%;" /></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/04/15/System-Design/9p/2019-04-15-BigTable/">http://yoursite.com/2019/04/15/System-Design/9p/2019-04-15-BigTable/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/04/18/System-Design/9p/2019-04-18-MapReuce/"><i class="fa fa-chevron-left">  </i><span>System-Design/9p/2019-04-18-MapReuce</span></a></div><div class="next-post pull-right"><a href="/2019/04/11/System-Design/9p/2019-04-11-Distributed%20System%20GFS/"><span>System-Design/9p/2019-04-11-Distributed System GFS</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
