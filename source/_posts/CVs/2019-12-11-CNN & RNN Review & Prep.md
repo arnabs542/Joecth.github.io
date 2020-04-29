@@ -297,9 +297,21 @@ ref: https://www.cnblogs.com/xuanyuyt/p/7222867.html
 
 ### Focal Loss
 
-### Optimization
+### Optimization Functions
 
-* 
+* SGD => momentum, to make local minimum to global min
+* AdaGrad: 衰減 α,  
+
+ref:
+
+[https://medium.com/@chih.sheng.huang821/%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92-%E5%9F%BA%E7%A4%8E%E6%95%B8%E5%AD%B8-%E4%B8%89-%E6%A2%AF%E5%BA%A6%E6%9C%80%E4%BD%B3%E8%A7%A3%E7%9B%B8%E9%97%9C%E7%AE%97%E6%B3%95-gradient-descent-optimization-algorithms-b61ed1478bd7](https://medium.com/@chih.sheng.huang821/機器學習-基礎數學-三-梯度最佳解相關算法-gradient-descent-optimization-algorithms-b61ed1478bd7)
+
+- ##### **Adam**
+
+  Adam全名Adaptive Moment Estimation。剛剛介紹的Momentum是「計算參數更新方向前會考慮前一次參數更新的方向」， RMSprop則是「在學習率上依據梯度的大小對學習率進行加強或是衰減」。
+
+  ***Adam則是兩者合併加強版本(Momentum+RMSprop+各自做偏差的修正)。***
+
 
 ### MobileNet
 
@@ -319,6 +331,33 @@ ref: https://www.cnblogs.com/xuanyuyt/p/7222867.html
   * Downsampling
 
 ### Mask RCNN
+
+![image-20200409214203203](https://tva1.sinaimg.cn/large/00831rSTgy1gdnuk0bzxaj31aw0kqtrn.jpg)
+
+![image-20200409220551821](https://tva1.sinaimg.cn/large/00831rSTgy1gdnv8pvmiwj315q09qai1.jpg)
+
+**双线性插值**
+
+
+
+双线性插值本质上就是在两个方向上做线性插值。
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200409221718377.png" alt="image-20200409221718377" style="zoom: 33%;" />
+
+> 如图，假设我们想得到P点的插值，我们可以先在x方向上，对Q11和Q21 之间做线性插值得到R1 ，R2 同理可得。然后在y方向上对R1和R2 进行线性插值就可以得到最终的P。其实知道这个就已经理解了双线性插值的意思了，如果用公式表达则如下（注意 f 前面的系数看成权重就很好理解了）。
+>
+> 下面通过一个例子来讲解ROI Align操作。如下图所示，虚线部分表示feature map，实线表示ROI，这里将ROI切分成2x2的单元格。如果采样点数是4，那我们首先将每个单元格子均分成四个小方格（如红色线所示），每个小方格中心就是采样点。这些采样点的坐标通常是浮点数，所以需要对采样点像素进行双线性插值（如四个箭头所示），就可以得到该像素点的值了。然后对每个单元格内的四个采样点进行maxpooling，就可以得到最终的ROIAlign的结果。
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200409221825219.png" alt="image-20200409221825219" style="zoom: 33%;" />
+
+> 需要说明的是，在相关实验中，作者发现将采样点设为4会获得最佳性能，甚至直接设为1在性能上也相差无几。事实上，ROI Align 在遍历取样点的数量上没有ROIPooling那么多，但却可以获得更好的性能，这主要归功于解决了misalignment的问题。
+>
+> 作者：数据智能谷
+> 链接：https://www.jianshu.com/p/a5c46271dc9e
+> 来源：简书
+> 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+
 
 ### RF (Receptive Field)
 
@@ -489,9 +528,21 @@ Male節點：20位男性，其中有13位打板球7位不打，Gini係數為
 
 
 
+### One-hot
+
+拆成更多個不同的字段，分別表示０、１
 
 
-# **決策樹演算法的步驟**
+
+### Categorical 特徵處理方式
+
+### 感知機
+
+用的是Step function
+
+
+
+## **決策樹演算法的步驟**
 
 1. **資料設定：**將原始資料分成兩組，一部分為訓練資料，一部分為測試資料
 2. **決策樹生成：**使用訓練資料來建立決策樹，而在每一個內部節點，則依據屬性選擇指標 (如：資訊理論(Information Theory)…) 來評估選擇哪個屬性做分支的依據。此又稱節點分割 (Splitting Node)
@@ -916,3 +967,27 @@ Ref: https://www.cnblogs.com/wushaogui/p/9176617.html, https://blog.csdn.net/Hel
 
 
 ### Word Representation to Word Embedding
+
+
+
+## Race Condition
+
+# 為什麼 a++ 會發生 race condition
+
+當你寫了 `a++` 時電腦實際上做了三件事：
+
+1. CPU 把 a 的值取出來
+2. 把剛剛取得的值加 1
+3. 把運算的結果存回變數 a
+
+但萬一你有**多核 CPU** 就有可能會這樣：
+
+![img](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge0guxph51j301o00r3y9.jpg)
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge0gux2c7vj30kp09c0ss.jpg" alt="img" style="zoom:33%;" />
+
+兩個 CPU 同時去拿變數 a 的值，各自加 1 後存回，導致 a 只被加了一次，因此結果（9903）會小於正確的 10000
+
+## 解法：互斥鎖
+
+這裡會發生 race condition 最根本的原因是「兩個 goroutine 可能會同時存取變數 a」，如果能限制**同時只能有一個** goroutine 做 `a++`，那就能解決這個問題，為了達到這個目的我們要使用 `sync.Mutex`
