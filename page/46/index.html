@@ -7,7 +7,515 @@
     error: 'Copy error',
     noSupport: 'The browser does not support'
   }
-} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">273</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">40</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2019/04/11/System-Design/9p/2019-04-11-Distributed%20System%20GFS/">System-Design/9p/2019-04-11-Distributed System GFS</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-11</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></span><div class="content"><h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ul>
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">274</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">40</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2019/04/15/System-Design/9p/2019-04-15-BigTable/">System-Design/9p/2019-04-15-BigTable</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-15</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></span><div class="content"><h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ul>
+<li>NoSQL DB</li>
+<li>SS table 的讀跟寫</li>
+<li>Bloom Filter</li>
+<li>Look up service</li>
+<li>Merge K Sorted Arrays</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 486. Merge K Sorted Arrays</span></span><br><span class="line"><span class="comment"># 中文English</span></span><br><span class="line"><span class="comment"># Given k sorted integer arrays, merge them into one sorted array.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Example</span></span><br><span class="line"><span class="comment"># Example 1:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Input: </span></span><br><span class="line"><span class="comment">#   [</span></span><br><span class="line"><span class="comment">#     [1, 3, 5, 7],</span></span><br><span class="line"><span class="comment">#     [2, 4, 6],</span></span><br><span class="line"><span class="comment">#     [0, 8, 9, 10, 11]</span></span><br><span class="line"><span class="comment">#   ]</span></span><br><span class="line"><span class="comment"># Output: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]</span></span><br><span class="line"><span class="comment"># Example 2:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Input:</span></span><br><span class="line"><span class="comment">#   [</span></span><br><span class="line"><span class="comment">#     [1,2,3],</span></span><br><span class="line"><span class="comment">#     [1,2]</span></span><br><span class="line"><span class="comment">#   ]</span></span><br><span class="line"><span class="comment"># Output: [1,1,2,2,3]</span></span><br><span class="line"><span class="comment"># Challenge</span></span><br><span class="line"><span class="comment"># Do it in O(N log k).</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># N is the total number of integers.</span></span><br><span class="line"><span class="comment"># k is the number of arrays.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param arrays: k sorted integer arrays</span></span><br><span class="line"><span class="string">    @return: a sorted array</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mergekSortedArrays</span><span class="params">(self, arrays)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="keyword">return</span> self.helper_heapq(arrays)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">helper_heapq</span><span class="params">(self, arrays)</span>:</span></span><br><span class="line">        hp = []</span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(len(arrays)):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> arrays[k]: <span class="keyword">continue</span></span><br><span class="line">            heapq.heappush(hp, (arrays[k][<span class="number">0</span>], k, <span class="number">0</span>))</span><br><span class="line">            </span><br><span class="line">        <span class="comment"># print(hp)</span></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">while</span> hp: </span><br><span class="line">            _, kth, idx = heapq.heappop(hp)</span><br><span class="line">            <span class="comment"># print(val, arrays[kth][idx], kth, idx)</span></span><br><span class="line">            res.append(arrays[kth][idx])</span><br><span class="line">            <span class="keyword">if</span> idx+<span class="number">1</span> &lt;= len(arrays[kth])<span class="number">-1</span>:</span><br><span class="line">                heapq.heappush(hp, (arrays[kth][idx+<span class="number">1</span>], kth, idx+<span class="number">1</span>))</span><br><span class="line">            <span class="comment"># else:</span></span><br><span class="line">            <span class="comment"># 大可以等下一輪拉出來再push那條的下一個元素，不急</span></span><br><span class="line">            <span class="comment">#     # while idx+1 &gt; len(array[kth])-1:</span></span><br><span class="line">            <span class="comment">#     val, kth, idx = heapq.heappop(hp)</span></span><br><span class="line">            <span class="comment">#     res.append(val)</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Binary Tree Serialization</li>
+</ul>
+<h1 id="Big-Table"><a href="#Big-Table" class="headerlink" title="Big Table"></a>Big Table</h1><p>Big Table vs GFS</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>GFS</th>
+<th>BiGTable</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>本質</td>
+<td>分布式File System</td>
+<td>分布式 NoSQL DB</td>
+</tr>
+<tr>
+<td>開發公司</td>
+<td>Google</td>
+<td>Google</td>
+</tr>
+<tr>
+<td>是否開源</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>類似開源產品</td>
+<td>HDFS</td>
+<td>HBase</td>
+</tr>
+<tr>
+<td>操作</td>
+<td>Read &amp; Write</td>
+<td>CRUD</td>
+</tr>
+<tr>
+<td>類似什麼</td>
+<td>家用電腦的文件系統</td>
+<td>大數據版的Excel</td>
+</tr>
+</tbody></table>
+<p>結構化文件可上BigTable終究是存上GFS。</p>
+<blockquote>
+<ul>
+<li>BigTable 和 Dremel 主要有什么区别？<ul>
+<li>bigtable是nosql storage system，dremel是query system。</li>
+</ul>
+</li>
+<li></li>
+</ul>
+</blockquote>
+<h2 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h2><ul>
+<li>修改 CUD</li>
+<li>查找 R</li>
+</ul>
+<p>後端通常給web server 使用，Scenario比較單一</p>
+<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><p>數據庫在邏輯上就是kv型式。硬盤不能存表結構，最終都轉成string去存在disk上。</p>
+<p>就是要從文件系統的基礎上去思考搭數據庫系統。</p>
+<p>Q: 在文件裡怎麼更好支持查詢操作？</p>
+<ol>
+<li>把文件硬盤全讀到內存，然後在內存作流程管理</li>
+<li>Better, 讀文件進內存後，排序+二分。有什麼問題？==&gt; <ul>
+<li>直接在硬盤中對數據作排序 + 硬盤中二分。<ul>
+<li>How? 外排序</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>Q: 如果有相應的feature有修改操作了，怎辦？</p>
+<ol>
+<li>直接在文件裡修改？==&gt; 大家都要移動</li>
+<li>讀整個文件，修改好後，把原文件刪了，重新寫入新文件。==&gt; 耗時，每次要讀出寫入其他多餘不變的內容</li>
+<li>不修改，直接append操作追加一條紀錄。V! ==&gt; 特快！<ul>
+<li>怎麼識別最新的紀錄？<ul>
+<li>在所有數據後面加個時間戳，時間戳最大的就是真正的我們要找的紀錄</li>
+</ul>
+</li>
+<li>沒順序怎麼二分？<ul>
+<li>分塊有序<ul>
+<li>每個塊內部有序</li>
+<li>寫時候只有最後一塊無序，並且隔一段時間整理成有序。</li>
+<li>例：每次寫時就是在最後塊append一條紀錄，for看最後塊有沒有那個值，沒的話就往前一塊作二分查找；每隔時間到就把最後塊給整理成有序下，然後啟新的塊。一個塊是256MB，滿了後就不再寫了。</li>
+</ul>
+</li>
+<li>分塊太多時會有很多重複紀錄啊？如某個feature一直被改改改<ul>
+<li>Solution: 把有序塊中作去重，作k路去重merge，如果是根據時間去重，當時間一樣時，</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>Big Table 為了寫優化，選了３作。</p>
+<blockquote>
+<ul>
+<li>老师，请问，数据库系统不存储数据，所有数据最终都存储在文件系统当中， 数据库只是负责查询和组织诗句是吗<ul>
+<li>是的，大多DB都使用现有的文件系统作为底层存储机制</li>
+</ul>
+</li>
+<li>数据库是不是可以建立在任何的文件系统， 还是要为数据库写一个特殊的文件系统以提高效率？<ul>
+<li>一般没有必要，使用普通的文件系统在性能上已经足够了。</li>
+</ul>
+</li>
+<li>利用数据库系统查询文件系统的时候 是在写入文件时就将文件里的所有表内容 按key-value的形式 再写入数据库么？<ul>
+<li>按特定的数据结构存储，正如你说的key-value的形式，然后写入数据库中</li>
+</ul>
+</li>
+<li>这里除去duplicate的k路归并也是全部读到内存中进行么？每一块中可以有duplicate存在么？<ul>
+<li>K路归并的方法在后面的拓展视频中有讲到，每一个块中可以有duplicate</li>
+</ul>
+</li>
+<li>我如果想查找k的值，我怎么知道k在哪个文件里？<ul>
+<li>每个文件存储的k都是一个范围内的k值，直接二分搜索找到k在哪个范围内就找到了那个文件</li>
+</ul>
+</li>
+<li>append到文件末尾也会增加文件大小啊，怎么避免和其他文件储存的位置冲突？<ul>
+<li>如果是基于文件系统上搭建数据库，不必考虑此问题，操作系统会帮你完成；如果是自己直接基于disk搭建数据库，每个数据块初始化的时候就预先开辟适量的disk空间，当写入增加的数据量超过原有分配的空间的时候就需要申请一块更大的disk空间，将它拷贝过去，然后将原有的空间释放即可。（可以看下操作系统书中有关机械磁盘基本原理的介绍）</li>
+</ul>
+</li>
+<li>直接把修改内容append到最后，这个方法，如果修改得太多了，会不会感觉很乱，每次读的时候cost增加，因为一个file可能有三分之一的size是修修改改？需不需要在修改的量超过一个比例的时候处理一下？<ul>
+<li>首先要明确一点的是，没有任何一个数据库是生来都适合所有操作和场景的。也就是说，BigTable 本来就不适合修改特别多的场景。另外 BigTable 这类数据库会定期 Merge sstable，从而消除那些中间态的修改记录。</li>
+</ul>
+</li>
+<li>分块是什么意思？<ul>
+<li>是指将指定的“filename” 这个文件分成很多块，然后每次存储的时候找该文件编号的最后一块进行写入。如果写满了 是需要在文件系统里追加写入一个新的对应该文件名的块</li>
+</ul>
+</li>
+<li>在讲到“分块有序”时，老师说到每个块之间都是有序的。但是块与块之间是不是有序的呢？也就是说是不是第1个块的 key 值都小于第2块的 key 值，第2块的 key 值都小于第3块的key值？（最后一块除外）<ul>
+<li>块与块之间是有序的。这里可以是key-value存储记录块的索引地址；也可以是B+树索引，方便查找修改。</li>
+</ul>
+</li>
+<li>那每次查询都要查询每一个块吗？不能直接锁定就在哪一个块中（例如索引之类的）？<ul>
+<li><strong><em>好问题，后面的视频中讲到了索引，带着问题继续学习，棒！</em></strong></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h1 id="One-Work-Solution"><a href="#One-Work-Solution" class="headerlink" title="One Work Solution"></a>One Work Solution</h1><h3 id="寫入過程"><a href="#寫入過程" class="headerlink" title="寫入過程"></a>寫入過程</h3><p>​    一個無序快快寫滿時，就排序然後寫入到FS。</p>
+<ol>
+<li>讀入到內存作快排 X</li>
+<li>外排序 X;  <ul>
+<li>每個文件最多就也256M，一個內存完全可放下，完全不需要外排</li>
+</ul>
+</li>
+<li>可不可一開始就放在內存？V!</li>
+</ol>
+<p>比方，內存會用跳表這個結構，</p>
+<h3 id="機器掛了怎辦？"><a href="#機器掛了怎辦？" class="headerlink" title="機器掛了怎辦？"></a>機器掛了怎辦？</h3><p>Write Ahead Log (WAL)，就只是append而已</p>
+<p>append寫disk非常快和一般寫不同，打開模式為寫</p>
+<p>如果要把最後一個塊放在硬盤的話，它不只要可以append還要可以read的操作；</p>
+<p>append和寫不同，打開如果是append模式時，ptr是在尾巴；如果是寫模式，文件原內容會被清楚，ptr會指在文件頭。</p>
+<p>所以：</p>
+<p>内存排序+1次硬盘统一写入+1次硬盘写Log</p>
+<p>Link: <a href="http://www.larsgeorge.com/2010/01/hbase-architecture-101-write-" target="_blank" rel="noopener">http://www.larsgeorge.com/2010/01/hbase-architecture-101-write-</a> ahead-log.html</p>
+<blockquote>
+<ul>
+<li>每个块最大256M，是Google的Big Table自己定义的吗？还是一种通用的标准呢？而且这个“块”的学名是什么呀？谢谢！<ul>
+<li>是的，是官方定义。<br>256M 块的大小是google工程师长期实践的一个经验值，统计过这个值比较合理。<br>最后，块的专业名词为：chunk</li>
+</ul>
+</li>
+<li>什么是硬盘外部排序？<ul>
+<li>当参加排序的数的量太大，或内存不足以存放时，需要使用外排序。外部排序指的是大文件的排序，即待排序的记录存储在外存储器上，待排序的文件无法一次装入内存，需要在内存和外部存储器之间进行多次数据交换，以达到排序整个文件的目的。</li>
+</ul>
+</li>
+<li>老师，最后一个块是存在内存里的，存满256MB之后再写入硬盘。请问每次append一条数据到块里，是每次利用二分查找来保证这条数据插入到正确位置，还是每次就直接在块的尾部直接添加数据，直到块满了256MB，再排序变为有序啊。<ul>
+<li>直接在尾部添加，直到块满就进行排序。</li>
+</ul>
+</li>
+<li>这里的WAL 不是应该 每次有新的数据到内存都要写一次WAL吗？ 为什么说是1次的硬盘写LOG ？<ul>
+<li>是的，Write Ahead Log，就是对内存中Sorted Table里，new append data在HDD做一次append的操作。请再认真听讲，要确认每一个细节，其实再认真听讲是可以找到答案的，老师有讲到此细节。确实有问题了，仔细思考后再提出问题，这样学习深刻。</li>
+</ul>
+</li>
+<li>Write ahead log 为什么是一次， 不应该每次有update 都要写一次吗？<ul>
+<li>这块的WAL是多次的数据操作才会触发一次log写操作。这是为了性能的考量，HDD写的速度相比磁头寻道速度还是很快的，不想把太多时间浪费在寻道上，也就是每次写操作就需要寻道一次。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h1 id="讀取優化"><a href="#讀取優化" class="headerlink" title="讀取優化"></a>讀取優化</h1><p>本來是只能在FS上作二分，更好的是建index</p>
+<ul>
+<li>一個簡單的建index 的方法：<ul>
+<li>Key<ul>
+<li>就不需要整個文件作二分</li>
+<li>把一些Key放入內存作為index</li>
+<li>Index有效減少磁盤讀寫次數</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>B-tree Index</li>
+</ul>
+<blockquote>
+<ul>
+<li>所以内存中有无序的存储块，和sorted存储块（sorted list），先用for查找无序没有，再去有内存中sorted list上跳跃查找？<ul>
+<li>大体思路是对的，详细流程稍微更正如下：<br>(1)query Master server by the key;<br>(2) tablet server（即SSTable slave server）;<br>(3) check skip list(即跳表，在memory中) in the tablet server（对象没有排序的Sorted List）;<br>(4) check bloom filter(memory) for a SSTable(Sorted String Table)（最好一块有序块）;<br>(5) check index(memory) for a SSTable(查找其key的大致范围);<br>(6) find the value in the SSTable(根据在内存index定位到的小范围，在磁盘中通过二分查找这个key的文件内容).</li>
+</ul>
+</li>
+<li>“看到这里我对于建立index又有些迷茫了。本来一个块中就是有序的，直接二分不就行了。就算是先看index，也是要先对index进行二分，再拿着找到的位置去块本身里找东西。那么index的好处是不是因为index比数据本身的size小，所以在index里二分比在数据里二分块？ “<ul>
+<li>index 是在内存里的，你在内存里二分 index 比直接去 disk 上二分要快好几十倍。<strong><em>文件操作远远慢于内存操作</em></strong>。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>这里是课上提到的 B-Tree / B+ Tree 的一些资料：</p>
+<p>Wiki:<br><a href="https://en.wikipedia.org/wiki/B-tree" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/B-tree</a></p>
+<p>以B tree和B+ tree的区别来分析mysql索引实现:<br><a href="https://www.jianshu.com/p/0371c9569736" target="_blank" rel="noopener">https://www.jianshu.com/p/0371c9569736</a></p>
+<p>这部分的内容只需要了解原理，不需要代码实现。</p>
+</blockquote>
+<h2 id="Bloom-Filter"><a href="#Bloom-Filter" class="headerlink" title="Bloom Filter"></a>Bloom Filter</h2><h3 id="繼續讀優化"><a href="#繼續讀優化" class="headerlink" title="繼續讀優化"></a>繼續讀優化</h3><p>因為寫的時候我們用的是append, 但就是讀的時候被搞亂了，所以讀就要一直優化。</p>
+<p>數組長度自己定。</p>
+<ul>
+<li>多個 hash fn時，還是一樣同個數組在作mapping作查詢。</li>
+<li>是可能會有False Positive的；但就是起了filter的作用</li>
+<li>精度跟<ol>
+<li>加入的字符串數目</li>
+<li>hash個字</li>
+<li>array長度。</li>
+</ol>
+</li>
+<li>有誤判率計算公式</li>
+</ul>
+<p><strong><em>先用bloom filter看這個塊有沒有、有的話再用index找key可能在塊中的範圍，再用二分找這個塊裡的值</em></strong>　當然，在這之前是要先做完對最後那個在內存的塊的線性查找。</p>
+<h2 id="SS-Table-amp-Skip-List"><a href="#SS-Table-amp-Skip-List" class="headerlink" title="SS Table &amp; Skip List"></a>SS Table &amp; Skip List</h2><ul>
+<li>String is Store in the File. </li>
+<li>SSTable = Sorted String Table</li>
+<li>Sorted List 用 Skip List 实现</li>
+</ul>
+<ol>
+<li>Skip List<br> Code: <a href="https://github.com/petegoodliffe/skip_list" target="_blank" rel="noopener">https://github.com/petegoodliffe/skip_list</a> Wiki: <a href="http://bit.ly/2g0C29a" target="_blank" rel="noopener">http://bit.ly/2g0C29a</a></li>
+<li>SSTable<br> Google SSTable Page: <a href="http://bit.ly/1kqwrFe" target="_blank" rel="noopener">http://bit.ly/1kqwrFe</a></li>
+</ol>
+<blockquote>
+<ul>
+<li>“比如如果我用64个hash函数，每个文件按256M算(按每行数据256bytes算就是一百万行)。你这里难道把一百万个key都放在bloom filter里么 “<ul>
+<li>是的，bloom filter的基本单位是bit，这里记录的是hash后的数字，不是文件，<strong><em>一个字节8bit，大约10w 字节，就是100kb，也就是0.1mb</em></strong>。（为了精度可能需要大概几mb的内存就够了）</li>
+</ul>
+</li>
+<li>之前一小节讲的查一个key在不在这个块里需要先把这个块的index load到内存中再二分。你load index文件的时候不也是O(n)么？不在硬盘上二分是因为磁头移动的时间？所以宁愿先load一整个index file到内存中<ul>
+<li>是的，因为磁头寻道时间开销相对内存来说很大。（可以读下《现代操作系统》 5.4 磁盘臂调度算法）为了减少磁头寻道的开销衍生出的一些算法</li>
+</ul>
+</li>
+<li>“算两次hash值是为了防止collision么？可以扩大bloom filter的array大小，这样hash也不容易碰撞，这样可以么？ “<ul>
+<li>多个hash function可以减少误判率，扩大array的大小也可以减少误判率</li>
+</ul>
+</li>
+<li>index是B+ tree对吧，那为什么只能找到范围？最后一步，二分搜索在磁盘上进行，不是会非常慢么？<ul>
+<li>对的，因为具体的内容要到块当中去找，块里的内容key是用字典序排列的，因此存在相同字母开头的key，所以只能锁定一个范围。锁定这个范围之后就可以二分了，logn的速度可以接受</li>
+</ul>
+</li>
+<li>之前提到BigTable会定期执行Disk Merge Sort，这样不就可以直接对磁盘Blocks二分了吗? 为什么还要设计Bloom Filter？<ul>
+<li>有很多请求是需要判断key是否在文件中，HDD二分查找也是log级别的操作，Bloom Filter来过滤掉很多不必要的HDD操作</li>
+</ul>
+</li>
+<li>对于SSTable来说好像Index和Bloomfilter都是想要做一件事。视频的图中为什么两个都需要建立呢？<ul>
+<li>Boom Filter是起到快速筛选的，如果Bloom Filter中key存在，那么就可能在此SSTable中存在，如果不存在那么肯定就不存在此有序列块中。当key经过Bloom Filter确定可能存在后，再通过index确定其所限的查找范围，确定后，再去磁盘中进行二分查找。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h1 id="Scale-Sharding"><a href="#Scale-Sharding" class="headerlink" title="Scale - Sharding"></a>Scale - Sharding</h1><ul>
+<li><p>垂直沒那麼好，因為可能也想關心這筆data的其他元素。會增加讀取其他feature的難度。</p>
+</li>
+<li><h3 id="所以水平-consistent-hashing"><a href="#所以水平-consistent-hashing" class="headerlink" title="所以水平 consistent hashing"></a>所以水平 consistent hashing</h3><ul>
+<li>大表被拆成了很多個小表們</li>
+</ul>
+</li>
+</ul>
+<h1 id="BigTable的分布式鎖"><a href="#BigTable的分布式鎖" class="headerlink" title="BigTable的分布式鎖"></a>BigTable的分布式鎖</h1><ul>
+<li><p>讀寫鎖</p>
+<ul>
+<li><p>一把鎖，兩種屬性：讀跟寫</p>
+<ul>
+<li><p>讀鎖：讀的時候上的</p>
+</li>
+<li><p>寫鎖：寫的時候上的</p>
+</li>
+<li><p>特性</p>
+<ol>
+<li><p>線程一加讀鎖成功了，又來了兩個讀線程，可以加鎖成功，可進行讀共享</p>
+</li>
+<li><p>線程一加寫鎖成功了，又來了兩個讀線程，不能加鎖成功，兩個讀的要block；</p>
+<p>寫的時候只允許一個線程對內存作寫操作</p>
+</li>
+<li><p>線程一加讀鎖成功了，來了寫被block，又來了讀就要被block了；寫的優先級是比較高的，並且線程二來得早線程三就得要等了。</p>
+<ol>
+<li>讀是共享</li>
+<li>寫是獨占</li>
+<li>寫的優先級更高</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge0l4p7wsnj30nw0nwte3.jpg" alt="image-20200420195125198" style="zoom:50%;" />
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge0h80fthij30s00j0n0m.jpg" alt="image-20200420195309119"></p>
+<ul>
+<li><p>鎖服務器：</p>
+<ul>
+<li>Master的一致性哈希分配小弟也就這邊執行了</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>如果是多台锁服务器，怎么处理并发呢，或者说这么保证对同一个key的上锁操作在同一台锁服务器上进行呢？也是hash吗？map存在web server 上？<ul>
+<li>如果锁是一个cluster，<strong><em>多个节点之间会通过一致性协议来保持同步，对外表现得就像是只有一个节点一样，所以不用担心不一致的问题</em></strong>。</li>
+</ul>
+</li>
+<li>这里的图显示 读 和写的都要LOCK 这个KEY，那不是会神慢吗？ 如果KEY LOCKED了后续怎么样呢？ 写一个RETRY吗？ 如果 很多程序同时读这个 KEY，那都得等待了？<ul>
+<li>从安全和数据一致性来说，会相对重要些。lock肯定会慢些，但是这不影响总体的运行效率和用户体验。lock本身就是一个信号量互斥的实现机制，也线程间通信的基础， 详阅<a href="https://en.wikipedia.org/wiki/Lock_(computer_science)" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Lock_(computer_science)</a></li>
+</ul>
+</li>
+<li>consistent hash map存在lock server上，那master还有什么作用？<ul>
+<li>比如 heatbeat 。还有好多事儿要做呢，除了存储还有计算的工作呀。包括管理很多机器的启动，备份恢复等等。</li>
+</ul>
+</li>
+<li>感觉这个lock server不是distributed lock, 实际上是一个centralized locking service?<ul>
+<li>lock service内部是distributed实现的，但对外接口是中心化锁服务。具体使用的是chubby。</li>
+</ul>
+</li>
+<li>如果写入的是一个新key，metadata里面还没有这个key对应的consistent hashing value，这时候的写入过程是什么呢？<ul>
+<li>lock server查找有这个key的话锁上-》lock server返回server id-》去tablet server对应id写入-》写入GFS-》成功写入 返回True-》lock server释放锁</li>
+</ul>
+</li>
+<li>请问 summary of write 这张图里的 master， 所以其实没有起到任何作用， master 的功能全部被 lock server代替了么？<ul>
+<li>master还是提供分发控制的作用；lock server就是保证数据一致性（同一时间只有一个线程操作）</li>
+</ul>
+</li>
+<li>另外你这个读请求的锁，应该只是block其他的对于这个key的write request吧。如果有很多对这个key的read request怎么办？这种情况下难道不能单机多线程读这个key吗。 虽然这种hot partition的case很多情况下是用户没设计好partition key..<ul>
+<li>如果有很多对这个key的read request，系统只能等待，性能确实就会下降很多。如果想提这块的性能，可以使用双指针的方法，数据多份备份，这样这块的性能就会提升，但是数据脏读概率增大了。</li>
+</ul>
+</li>
+<li>读取data这种操作 为何也需要锁 没有锁也没有任何问题吧。<ul>
+<li>因为在read的同时可能还有针对同一个对象的updata/delete正在进行，为了防止读数据读到一半数据被删了这种不愉快的事情发生，加锁是必要的。</li>
+</ul>
+</li>
+<li>所以timestamp这个信息是存在lock server上的内存中么？一旦完成了上一个，lock server会向下一个最新的request的server发送消息告诉它，现在unlock了，可以开始处理它的请求了？还是以别的方式做信息交互？<ul>
+<li>你说的是对的，不过需要知道的是timestamp在sstable上也会存，便于查找的时候知道哪一个是现在最新的值</li>
+</ul>
+</li>
+<li>如果client 拿到锁之后 还没来得及写就意外挂了， 锁怎么释放？有时间限制吗？<ul>
+<li>“A client’s session<br>expires if it is unable to renew its session lease within the<br>lease expiration time. When a client’s session expires, it<br>loses any locks and open handles.” client超时后，会释放锁资源。</li>
+</ul>
+</li>
+<li>Disk 中的 每个SSTable 都有自己的bloomfilter 和 index 吗？ 不同SSTable 的可以不一样吗<ul>
+<li>对，这样理解是对的。当TableServer启动后开始服务初始化期间，会读取所有的有序块（SSTable）的Bloom Filer和Index到某个内存区域，以便服务查找。</li>
+</ul>
+</li>
+<li>Lock Server存的metadata的数据来源是哪里呢？从BigTable Master里来的？他们之间怎么交流的呢？<ul>
+<li>BigTable Master的key<br>这个系统对外会提供一个接口，接口不可直接操作bigtable master、lock server等，这些操作都是内部同步实现的逻辑<br>通信都是socket，可以考虑之间加上消息队列，直接append提交任务给目标server</li>
+</ul>
+</li>
+<li>the entire process did not involve the master server… are we saying that if we have lock/zookeeper, we dont have to access master when reading and writing?<ul>
+<li>only the first time from the a client for request, the master server should handle it, as master server need all the tablet server status for the first time of health-check, later then master server will synchronize/delegate all the tablet server status to locking server for the task hand-over. in that case, master server will move on to focus the health-check only.</li>
+</ul>
+</li>
+<li>分布式锁这里面的“分布式”是什么意思？就是说这个锁适用于处理distributed system里面多台服务器需要对同一个资源进行读写的情形？那么不分布式的锁是怎么回事呢？<ul>
+<li>这里的分布式指的是适用于多台服务器试图访问同一资源，相当于多台服务器上的多个进程共享资源。<br>非分布式的锁，就是单机上对资源的访问锁。通常就是线程间的资源共享或者单机上多个进程资源共享，通常使用操作系统提供的基础锁设施就可以完成。</li>
+</ul>
+</li>
+<li>整个write 过程， 那一点是系统最慢的过程？ 同样，整个read 过程哪一点是系统最慢的过程？ 这个分布式锁应该会让系统变慢不少把？<ul>
+<li>写的过程中，写满一个SSTable序列化到硬盘的时候相对比较慢，读的时候查引索时相对慢一点。实际在使用时，bigtable会使用一种叫做copy on write(cow)的机制，来保证读写操作的原子性，降低分布式锁对速度的影响</li>
+</ul>
+</li>
+<li>感觉bigtable 这种read 的时候需要一个个SSTable 分别查找的方式不如Cassandra 这种直接一个 consistent hashing ring，一步就能知道data 在哪个node上面快啊？<ul>
+<li>bigtable首先会在锁服务器上查一致性哈希表，得到在哪个server上。得知之后，会去那个server上查memtable、bloomfilter、sstable</li>
+</ul>
+</li>
+<li>为什么一开始shard还是要通过master 来进行呢，为什么不能通过Locker 来进行呢<ul>
+<li>通过最开始的文件sharding，取得与其负责管辖的tablet servers的建立联系，并且记录其各自的运行情况（alive/not alive）和健康信息。</li>
+</ul>
+</li>
+<li>这里讲的master会shard file是什么意思？以及consistent hashing的map如果是存在 master/lock server的内存里，master/lock挂了怎么办<ul>
+<li>shard file是共享文件的意思，就是master所管理的各个node server都可以访问和操作这个文件。<br>以前确出现在master挂掉导致整个集群挂掉的情况，现在master都会加有数据持久化的功能、master备份（主master挂掉，备份master就会启动，基本不影响集群运行）</li>
+</ul>
+</li>
+<li>把metadata放在lock里跟放在master里比有什么优势吗？如果这样做会使系统性能更好，那是为什么呢？<ul>
+<li>这里相当于将lock这个服务从master里面拆分了出来，这样肯定好的，master一般就是系统的性能瓶颈，减少master的负载，提高系统性能。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h1 id="Appendixes"><a href="#Appendixes" class="headerlink" title="Appendixes"></a>Appendixes</h1><h2 id="K-sorted-merge"><a href="#K-sorted-merge" class="headerlink" title="K sorted merge"></a>K sorted merge</h2><p>每次找最小的都要O(K), N個下來就要 O(NxK), 用個heap吧 可O(Nxlg(K))</p>
+<h2 id="外排序"><a href="#外排序" class="headerlink" title="外排序"></a>外排序</h2><p>一共8G的話，每次load進來2G, 就有四條排好的。可再接用K-sorte merge</p>
+<ul>
+<li><p>最小可以就維護４個元素</p>
+</li>
+<li><p>改善heap的效能可用</p>
+<ul>
+<li><p>敗者樹 可以改善選取最小項的常數項的Ｋ</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge0l4pvld7j31460ggwgt.jpg" alt="image-20200420202745772" style="zoom:50%;" />
+</li>
+<li><p>可用選擇-置換的方法　替換掉每組2G的平均分組，就減了少組數，也就是K的大小更小，跑起來更快；每條長度不等就是</p>
+<p><a href="https://www.bilibili.com/video/av69423198/" target="_blank" rel="noopener">https://www.bilibili.com/video/av69423198/</a></p>
+<ul>
+<li>搭配最佳歸併樹，讓IO次數最少的==&gt;帶權路徑最小：Huffman Tree</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>之前write 过程的去重就是在merge过程将重复的key中老的数据去除就好了对吧。<ul>
+<li>Yes</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="GFS-amp-BigTable"><a href="#GFS-amp-BigTable" class="headerlink" title="GFS &amp; BigTable"></a>GFS &amp; BigTable</h2><p>Disk vs Excel</p>
+<h2 id="B-Tree"><a href="#B-Tree" class="headerlink" title="B+ Tree"></a>B+ Tree</h2><ul>
+<li>BST 如果有10億數據怎辦？1Gx4Byte == 4GB<ul>
+<li>一顆樹就要4GB，多棵樹肯定不行在內存，長期只能在disk</li>
+<li>一次尋軌10ms</li>
+<li>順序讀取 80MB/S</li>
+</ul>
+</li>
+</ul>
+<p>Methods:</p>
+<ol>
+<li><p>找一次就要4GB/80MB的時間，不可行</p>
+</li>
+<li><p>只讀取訪問路徑上的數，就是30多個元素 即 30x10ms = 300ms</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge0j7utyd2j314q0eogpr.jpg" alt="image-20200420210210409" style="zoom:67%;" />
+</li>
+<li><p>把二叉變多叉讓樹高降低！</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge0j9nfovbj31460ggk0s.jpg" alt="image-20200420210355659" style="zoom:67%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200420211217773.png" alt="image-20200420211217773" style="zoom:67%;" />
+
+<p>17是key, data是一堆的其他的feature；B-Tree 為了存硬盤中的數據設計</p>
+</li>
+<li><p>B+ </p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200420211622972.png" alt="image-20200420211622972" style="zoom:67%;" />
+
+
+
+</li>
+</ol>
+<h2 id="Bloom-Filter-vs-Hash-Table"><a href="#Bloom-Filter-vs-Hash-Table" class="headerlink" title="Bloom Filter vs Hash Table"></a>Bloom Filter vs Hash Table</h2><p>一種數據結構，跟hash table類似，檢測一個元素在一個集合有沒有出現。</p>
+<ul>
+<li>區別在 BF 更省空間。Hash還是比較費內存。BloomFilter沒有鏈表，主要是用0/1數組，叫Bit Array，沒有鏈表操作，用到多個hash function。</li>
+<li>Hash fn 也不是愈多愈好，這會讓0/1消耗愈快；一般取4~16個，有理論結果。</li>
+<li>快速檢測一條紀錄有沒有在某一個大塊之中。</li>
+<li>在big table中查大多時候都是沒在某一個小塊，不希望每個小塊都去查二分，小塊其實不小。</li>
+<li>hash不是等長結構因為有linked list, 無法直接存出；BF可以存出去，就是個bit array了。</li>
+</ul>
+<p>當要在兩個超過內存的大file裡找交集的urls時，相比hash一長字串就可以節省很多很多空間；但可能小誤報啦。</p>
+<ul>
+<li>Counting BF vs Standard BF</li>
+<li>數組動態膨脹，依據被標為1超過的比例；但BF不存key, 所以複製不過去，膨脹時就是新舊的bit array都要查。效率不是特別好。。短的話誤報率高</li>
+</ul>
+<blockquote>
+<ul>
+<li>一个bit 怎么做加法？<ul>
+<li>如果是 Counting bloom filter 的话，每一位就用 int 不用 bit 了。</li>
+</ul>
+</li>
+<li>Bloom filter自动膨胀的时候，能不能把原来的bit array丢掉，把所有数据全部拿来重算一遍？我不理解老师说的不能重算一遍这个点。<ul>
+<li>不能。比如你把单词 hello world 放到 bloomfilter 里以后，得到的 bit array 是 <code>[1,0,0,1,0,1,0,0,0,0,1,0,0]</code>，难道你可以根据这些0和1反向推导出是 Hello 和 World 这两个单词么？BF 不可逆。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge0l4frsejj311m0fqgpt.jpg" alt="image-20200420214218446" style="zoom:50%;" />
+
+
+
+<h2 id="跳跃表-Skip-List"><a href="#跳跃表-Skip-List" class="headerlink" title="跳跃表 Skip List"></a>跳跃表 Skip List</h2><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200420215801422.png" alt="image-20200420215801422" style="zoom:67%;" />
+
+<ul>
+<li>為什麼要用跳表？<ul>
+<li>是個有序鏈表</li>
+<li>可提取一些元素，加一層引索</li>
+</ul>
+</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200420220446625.png" alt="image-20200420220446625" style="zoom:67%;" />
+
+
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ge0l405klnj311m0fqgpt.jpg" alt="image-20200420220653019"></p>
+<ul>
+<li>本質是一個分層鏈錶</li>
+</ul>
+<h1 id="QA"><a href="#QA" class="headerlink" title="QA"></a>QA</h1><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200420123257444.png" alt="image-20200420123257444" style="zoom:50%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200420163656675.png" alt="image-20200420163656675" style="zoom:50%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200420163734278.png" alt="image-20200420163734278" style="zoom:50%;" /></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/04/11/System-Design/9p/2019-04-11-Distributed%20System%20GFS/">System-Design/9p/2019-04-11-Distributed System GFS</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-11</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></span><div class="content"><h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ul>
 <li>GFS Client</li>
 <li>Heart Beat</li>
 </ul>
@@ -1210,441 +1718,7 @@
 
 <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdlb2i72zyj30ow0msn15.jpg" alt="image-20200407165647857" style="zoom:67%;" />
 
-<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdlb36wqt9j30pa0t00yp.jpg" alt="image-20200407165727152" style="zoom:67%;" /></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/04/01/System-Design/9p/2019-04-01-Web%20System%20API%20Design%20&amp;%20TinyURL/">System-Design/9p/2019-04-01-Web System API Design &amp; TinyURL</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-01</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></span><div class="content"><h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><h2 id="Web-Framework"><a href="#Web-Framework" class="headerlink" title="Web Framework"></a>Web Framework</h2><ul>
-<li><p>登錄, session, cookies</p>
-</li>
-<li><p>CSRF攻擊 - Cross-site Request Forgery 如果拿的link是建數據的post請求，現在也是server會給browser一個CSRF token，去防無效token。</p>
-<ul>
-<li>python - django，flask輕巧要裝一堆插件，把密碼md5哈希，現在是SHA256</li>
-<li>java - spring</li>
-<li>ruby - ruby on rail</li>
-</ul>
-</li>
-<li><p>ORM </p>
-</li>
-<li><p>登入登出</p>
-</li>
-<li><p><strong>http server</strong> is between user and web framwork, 管理多進程。</p>
-<ul>
-<li>Uwsgi 多進程啟多個Django的進程，服務如100個用戶就自己刪了重啟之類</li>
-<li>Apache</li>
-<li>Unicorn</li>
-<li>Gunicorn</li>
-<li>Nginx 不同網站去不同站口避免打架</li>
-</ul>
-</li>
-</ul>
-<h1 id="APIs"><a href="#APIs" class="headerlink" title="APIs"></a>APIs</h1><blockquote>
-<h5 id="单选题-www-net-cn-的根域名（不含后缀）是什么？"><a href="#单选题-www-net-cn-的根域名（不含后缀）是什么？" class="headerlink" title="[单选题]www.net.cn 的根域名（不含后缀）是什么？"></a>[单选题]<a href="http://www.net.cn" target="_blank" rel="noopener">www.net.cn</a> 的根域名（不含后缀）是什么？</h5><p>A.net72.88% 选择</p>
-<p>B.www27.12% 选择</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是A</p>
-<p><strong>正确答案:</strong>B</p>
-<p><strong>解析:</strong></p>
-<p><a href="http://www.net.cn" target="_blank" rel="noopener">www.net.cn</a> 是一个 .net.cn 为后缀的域名，而不是一个 .cn 为后缀的域名。意不意外，惊不惊喜！</p>
-</blockquote>
-<h2 id="Basics-amp-Flows"><a href="#Basics-amp-Flows" class="headerlink" title="Basics &amp; Flows"></a>Basics &amp; Flows</h2><p>網站開發：</p>
-<p>跑通流程</p>
-<p>申域名、綁ip地址、在AWS買server、在上面跑http server (Apache; Unicorn, Gunicorn; Uwsgi 都ok) 、用任一個框架 flask, django 搭起網站，搭個todo list就OK、message queue搭起來。</p>
-<blockquote>
-<ul>
-<li><p>可以认为web server 是由http server和web application组成吗？感觉当我们访问了google.com的时候，是这样的流程：浏览器URL-&gt;DNS服务器(http request)-&gt;Http Server(可以认为是SpringMVC里的DispatcherServlet吗) -&gt; Web App(可以认为是SpringMVC里的Controller吗？就是找到对应哪个action进行处理这个请求)。不好意思对于这些概念和spring mvc都不是很理解，希望助教能指正</p>
-<ul>
-<li>HTTP Server 不是 Spring 里的任何东西。Web App 才是 Spring。HTTP Server 一般是在 Web APP 的前面会配置起来用作控制 Web App 多进程并发的一个软件，一般典型代表是 UWSGI, Unicorn 这种。你所知道的 Spring 的任何概念，都属于一个 Web App 里的一部分。</li>
-</ul>
-</li>
-<li><p>我除了GET以外的操作（例如PUT和DELETE的操作）都使用POST Method是不是就可以了呢（操作类别通过url或parameter区分）？</p>
-<ul>
-<li>一般的Rest API设计规范是要求POST, DELETE, GET, PUT，分别对应增删查改，符合规范会让别人更容易理解你的接口。你说的方法虽然也可以，但是不符合Rest的规范。</li>
-</ul>
-</li>
-<li><p>web application在哪里运行的呢？听说用docker来deploy web application，这个是执行application的地方吗？</p>
-<ul>
-<li>web application 可以在 docker 里执行。 docker 的概念可以理解为在 Operating System 上包装出来的一个独立的小 operating system。其实 web application 就是跑在操作系统上的，可以是 linux，可以是 windows。因为 web application 就是一个程序，一个进程。代码该在什么地方执行就在什么地方执行。</li>
-</ul>
-</li>
-<li><p>请问，Async Server和Web Server在功能上的区别是什么？ 是否Web server一般用来接收用户的request和跑web application，而Async Server就是用来存储message queue的呢？</p>
-<ul>
-<li><p>在News Feed Push model的senario中，fanout本质上是一个写扩散的过程。<br>（1）Web Server主要是接受用户请求并dispatch到不同的wap app经controller直至具体某个处理特定businesslogic的service上。<br>（2）Async server的作用就是从这个人（明星）中frenship service中找到其相应的followers(粉丝)然后，对每一个follower用户对应的news_feed_table[id, owner_id, tweet_id, create]写入相关的记录，这样用户登录使用时就能看到news feeds。<br>如果存储的表(tweet_table, news_feed_table)都在都在同一个数据，那么这个写扩散的过程，其实就是在同一个数据库中创建相应的触发器(trigger)、存储过程(procedure)和定时执行作业，就能实现。<br>但是如果在不同的地理分布位置，而且follower数据量庞大，那么就要借助中间件(message queue)来完成, 利用中间件message queue是采用生产者与消费者的模式实现的publish/subscribe的技术，保证把每一个发布的（tweet）信息，准确返送到每一个subsrriptio端的consumer来完成消息的写扩散（fan out）过程。具体的messge queue的理解请阅读维基百科相关内容<a href="https://bit.ly/2kwnxNl" target="_blank" rel="noopener">https://bit.ly/2kwnxNl</a>, message queue具体实现场景，请阅《蚂蚁金服：消息队列事务型消息原理浅析》<a href="https://bit.ly/2lAJOKe" target="_blank" rel="noopener">https://bit.ly/2lAJOKe</a></p>
-<p>显示我</p>
-</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h2 id="API-Design"><a href="#API-Design" class="headerlink" title="API Design"></a>API Design</h2><blockquote>
-<h5 id="单选题-以下API设计哪个是对的？"><a href="#单选题-以下API设计哪个是对的？" class="headerlink" title="[单选题]以下API设计哪个是对的？"></a>[单选题]以下API设计哪个是对的？</h5><p>API用于获取当前登录用户在题号1000这个题上的所有提交记录</p>
-<p>A./api/users/<current_user_id>/submissions/?problem_id=100017.61% 选择</p>
-<p>B./api/users/me/submissions/?problem_id=10006.82% 选择</p>
-<p>C./api/submissions/?problem_id=1000&amp;user_id=<current_user_id>33.28% 选择</p>
-<p>D./api/submissions/?problem_id=100032.01% 选择</p>
-<p>E./api/problems/1000/submissions/10.28% 选择</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是D</p>
-<p><strong>正确答案:</strong>D</p>
-</blockquote>
-<p>A、B、C不科學，別人可以查自己哦？</p>
-<p>E不對, D才符合REST API的約束、規範，一級目錄要是自己要獲取的東西</p>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdh1w428fgj30p419sq94.jpg" alt="image-20200404003659176"></p>
-<h2 id="REST-API"><a href="#REST-API" class="headerlink" title="REST API"></a>REST API</h2><blockquote>
-<ul>
-<li>post request 推荐 return 什么信息最好<ul>
-<li>it depends。创建一个 instance 一般就 return 这个 instance 的json。</li>
-</ul>
-</li>
-<li>get all accounts 呢？<ul>
-<li>get /api/accounts/?filter=xxx&amp;sort_by=xxx</li>
-</ul>
-</li>
-<li>请问加header 和 加parameter 的区别是什么<ul>
-<li>一般验证信息，身份信息会放在 header 里。其他的普通参数放在 parameter 里。</li>
-</ul>
-</li>
-<li>是否header里面的参数是加密的 而url parameter没有加密？<ul>
-<li>是可以的，比如在Post/Put/Del的Rest Method中就是在message header中存放加密的Authentication信息（即token内容），在url的参数则是具体操作对象的id值等path variable。</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h2 id="News-Feed-API"><a href="#News-Feed-API" class="headerlink" title="News Feed API"></a>News Feed API</h2><h3 id="Req-amp-Res"><a href="#Req-amp-Res" class="headerlink" title="Req &amp; Res"></a>Req &amp; Res</h3><blockquote>
-<ul>
-<li>JSON 和XML 是两种格式。HTTP URL 里的路径不对应文件夹。URL和文件 path 是不同的概念。文件path的是对应有 folder 才行，url 可以随意指定，不一定要有真实的 folder 或者文件与之对应。同一份数据是不需要存两份的，一般都是存在数据库的表单里，如果你需要 JSON 的格式，就组织成 JSON 的格式返回，如果需要 XML 就组织成 XML 的格式返回。</li>
-</ul>
-</blockquote>
-<h3 id="Pagination"><a href="#Pagination" class="headerlink" title="Pagination"></a>Pagination</h3><blockquote>
-<ul>
-<li><h5 id="单选题-哪种分页方法更加适合-News-Feed？"><a href="#单选题-哪种分页方法更加适合-News-Feed？" class="headerlink" title="[单选题]哪种分页方法更加适合 News Feed？"></a>[单选题]哪种分页方法更加适合 News Feed？</h5><p>A.页码翻页（Page Number）14.95% 选择</p>
-<p>B.光标翻页（Cursor）85.05% 选择</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
-<p><strong>正确答案:</strong>B</p>
-</li>
-</ul>
-</blockquote>
-<p>要注意怎麼去避免空白頁的request</p>
-<p>秀出100個的話就拿101個！</p>
-<blockquote>
-<ul>
-<li><p>使用max_id的话，如果用户删除了之前的某一个item，这样不还是会出现第二页出现之前第一页的item吗</p>
-<ul>
-<li>不会有影响的。比如第一页的帖子是 <code>[10, 9, 8]</code> 第二页是 <code>[7, 6, 5]</code>，用户拿到第一页以后，同时得到的 next page max_id 是 7。即便此时用户删除了 10 这个帖子，依然不影响 通过 max_id = 7 拿到的是 7 6 5。如果用户删除了 7 这个帖子，那拿到的就是 <code>[6, 5, 4]</code> 也是没有问题的。</li>
-</ul>
-</li>
-<li><p>能不能更具体地讲讲光标翻页的实现。举个例子，一共3页，客户端需要传什么数据给后台，首页，中间和末页。</p>
-<ul>
-<li><p>问：<strong>是不是不管push还是pull模型，如果翻页的话都得pull?</strong><br>翻页是用户主动操作的过程，所以肯定是由client 发给 server，肯定是一个pull的过程。</p>
-<p>问：<strong>假设前100条中最早的timestamp是T，就分别请求follow的人在T之前的100条feed，然后再进行合并？</strong><br>答：对</p>
-<p>问：<strong>如果恰好有几条feed的timestamp一样该如何处理？</strong><br>答：首先不会有帖子的timestamp一样，timestamp的精度很高的（微秒级别）</p>
-<p>通常来说，翻页这个完全可以作为一道单独的系统设计面试题来问你。翻页并不是简单的1-100，101-200这样去翻页。因为当你在翻页的时候，你的news feed可能已经添加了新的 内容，这个时候你再去索引最新的101-200可能和你的1-100就有重叠了。</p>
-<p>通常的做法是，拿第101个帖子的timestamp作为下一页的起始位置，也就是说，当用户在看到第一页的前100个帖子的时候，他还有第101个帖子的timestamp信息（隐藏在你看不到的地方），然后你请求下一页的时候，会带上这个timestamp的信息，server端会去数据库里请求 &gt;= timestamp 的前101个帖子，然后也同样把第101个帖子作为下一页的timestamp。这个方法比直接用第100个帖子的timestamp好的地方是，你如果读不到第101个帖子，说明没有下一页了，如果你刚才只有100个帖子的话，用第100个帖子的timestamp的坏处是，你会有一次<code>空翻</code>。</p>
-<p>留给你一个思考题：怎么实现往上翻页（刷朋友圈，查看最新的帖子）</p>
-<ul>
-<li>可以利用和向下翻页类似的方法，用当前第一条feed的时间T去数据库取T之后的feeds。<br>如果是pull模型的话，就去所有follow的人的feed list去取然后merge<br>push的话，去直接去queue里面取时间大于T的就好了</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li><h5 id="单选题-如果-Post-存储在-NoSQL-中，没有-Sequential-ID，还可以使用光标翻页法么？"><a href="#单选题-如果-Post-存储在-NoSQL-中，没有-Sequential-ID，还可以使用光标翻页法么？" class="headerlink" title="[单选题]如果 Post 存储在 NoSQL 中，没有 Sequential ID，还可以使用光标翻页法么？"></a>[单选题]如果 Post 存储在 NoSQL 中，没有 Sequential ID，还可以使用光标翻页法么？</h5><p>Sequential ID 是递增的，可以通过 max_id 和 min_id 来筛选。但是如果在 NoSQL 中，ID 是 UUID ，这个是完全无序的字符串，并不是后发的帖子 UUID 就会比先发的帖子 UUID 大。</p>
-<p>A.用不了5.06% 选择</p>
-<p>B.可以用，用 timestamp 之类的有序信息翻页即可94.94% 选择</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
-<p><strong>正确答案:</strong>B</p>
-<p><strong>解析:</strong></p>
-<p>timestamp 的精度是微妙级别的，是足够的，一个人的朋友圈里有两个人在同一个 timestamp 发了帖子的概率几乎为0。如果你还是担心 timestamp 的精度不够的话，一个简单的办法是 + 一个随机后缀，如 timestamp 取出来到微妙是 <code>1554553786168125</code> 的话，后面填 5 位随机整数如<code>13234</code>，凑成 <code>155455378616812513234</code>。当然存储的时候类型上得是 bigint 了，因为很大。不可以用 float / double 存储，精度不够。</p>
-</li>
-</ul>
-</blockquote>
-<h3 id="Mentions"><a href="#Mentions" class="headerlink" title="Mentions"></a>Mentions</h3><p>讓前端拿到時候可以顯示成可以llink的樣式</p>
-<blockquote>
-<ul>
-<li><p>不是说返回的是Json么？这里为什么是HTML？</p>
-<ul>
-<li><p>总体的数据是 JSON 的，这里的 html 是其中的某个数据的值。比如：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="attr">"title"</span>: <span class="string">"hello"</span>,</span><br><span class="line">	 <span class="attr">"content"</span>: <span class="string">"&lt;html&gt;hello world&lt;/html&gt;"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>mobile的格式是什么样子的？</p>
-<ul>
-<li><p>API 返回给 mobile 的格式通常就是 JSON 格式，直接只有具体的数据内容。如</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="attr">"content"</span>: <span class="string">"Thanks to &lt;user username='someone'&gt;hello world&lt;/user&gt;"</span>,</span><br><span class="line">	 ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h1 id="TinyURL"><a href="#TinyURL" class="headerlink" title="TinyURL"></a>TinyURL</h1><p>eg. bitly.com/, goo.gl/</p>
-<h2 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h2><p>就是創一個post請求，建一個短網址</p>
-<p>給了一個301跳轉，讓browser去完成跳轉的動作。</p>
-<ul>
-<li>長跟短的URL要是一一對應嗎？</li>
-</ul>
-<blockquote>
-<h5 id="单选投票题-Long-Url-和-Short-Url-是否需要一一对应？"><a href="#单选投票题-Long-Url-和-Short-Url-是否需要一一对应？" class="headerlink" title="[单选投票题]Long Url 和 Short Url 是否需要一一对应？"></a>[单选投票题]Long Url 和 Short Url 是否需要一一对应？</h5><p>您选择的答案是B</p>
-<p>感谢您参与投票！</p>
-<p>A.需要41.63% 选择</p>
-<p>B.不需要58.37% 选择</p>
-</blockquote>
-<blockquote>
-<h5 id="单选投票题-Short-Url-长时间不用是否需要释放？"><a href="#单选投票题-Short-Url-长时间不用是否需要释放？" class="headerlink" title="[单选投票题]Short Url 长时间不用是否需要释放？"></a>[单选投票题]Short Url 长时间不用是否需要释放？</h5><p>您选择的答案是B</p>
-<p>感谢您参与投票！</p>
-<p>A.需要58.08% 选择</p>
-<p>B.不需要41.92% 选择</p>
-</blockquote>
-<p>這兩個是開放的問題</p>
-<p>不同的設計有不同的體驗。各有好壞處。</p>
-<p>沒釋放出去就存disk，又不占什麼空間，又便宜。</p>
-<h2 id="QPS"><a href="#QPS" class="headerlink" title="QPS"></a>QPS</h2><p>是否是真需要很多的機器？</p>
-<p>ave QPS = 日活跃*每个用户平均请求次数/一天多少秒</p>
-<p>系統一般不是特別頻繁</p>
-<p>QPS這問題跟Storage都還好。</p>
-<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>就陽春一個而已</p>
-<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><blockquote>
-<h5 id="单选题-TinyUrl-用什么类型的数据库比较合适？"><a href="#单选题-TinyUrl-用什么类型的数据库比较合适？" class="headerlink" title="[单选题]TinyUrl 用什么类型的数据库比较合适？"></a>[单选题]TinyUrl 用什么类型的数据库比较合适？</h5><p>A.SQL / 关系型数据库10.37% 选择</p>
-<p>B.NoSQL / 非关系型数据库17.76% 选择</p>
-<p>C.都可以，取决于算法是什么71.88% 选择</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是B</p>
-<p><strong>正确答案:</strong>C</p>
-<p><strong>解析:</strong></p>
-<p>如果你需要用 Auto-increment ID，就用关系型数据库，否则可以用非关系型数据库，操作更简单一些。</p>
-</blockquote>
-<blockquote>
-<ul>
-<li>为什么sql比nosql要写的代码少呢？<ul>
-<li>因为很多的 web framework，调用 SQL 部分的接口什么的代码都帮你写得很丰富，很多事儿你也都不用管。很多 NoSQL 的调用，包括 Serialization 之类的事情程序员都需要额外的代码去做。所以会长一些。</li>
-</ul>
-</li>
-<li>除了seq id，还有什么方法确保两个不同的longUrl 得到不同的shorturl呢<ul>
-<li>还可以随机生成一个 shortUrl 然后用数据库来判断用过没有，用过就再生成一个。</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h2 id="Alg"><a href="#Alg" class="headerlink" title="Alg."></a>Alg.</h2><ul>
-<li>HASH –&gt; 再好的也會有conflict; md5本身就有，更不用說基於它再取６位</li>
-<li>隨機生成再去DB去重</li>
-</ul>
-<blockquote>
-<h5 id="多选题-下面哪些“码”可能是随机生成-数据库去重的？"><a href="#多选题-下面哪些“码”可能是随机生成-数据库去重的？" class="headerlink" title="[多选题]下面哪些“码”可能是随机生成+数据库去重的？"></a>[多选题]下面哪些“码”可能是随机生成+数据库去重的？</h5><p>A.短信验证码20.86% 选择</p>
-<p>B.邮箱激活码21.60% 选择</p>
-<p>C.酒店订单确认码28.84% 选择</p>
-<p>D.机票订单确认码28.70% 选择</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是ABCD</p>
-<p><strong>正确答案:</strong>CD</p>
-<p><strong>解析:</strong></p>
-<p>验证码和激活码没有去重的需求。订单确认码才有去重的需求。</p>
-</blockquote>
-<p>驗證碼一下就過期了。訂單本身碼很長，所以有確認碼跟客服比較好溝通。</p>
-<blockquote>
-<ul>
-<li><p>sequential id vs. non-sequential id 是怎么用的？ 为什么很重要？</p>
-<ul>
-<li>sequential id就是关系型数据库中每增加一行系统会自动给这一行数据分配一个自增id，这样可以保证每一行的id递增且不重复。如果id是随机生成的而不是有顺序的那就叫non sequenctial id，一般需要手动生成。</li>
-</ul>
-</li>
-<li><p>随机生成函数是什么？可以具体讲讲么</p>
-<ul>
-<li><p>比如这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#39;&#39;.join([for i in range(6) random.choice(&quot;ABCDEF&quot;)])</span><br></pre></td></tr></table></figure>
-
-<p>这段python 代码就是一个 for 循环，循环6次，每次从一个字符串里随机挑一个字符出来。这样就随机生成了一个 6位的code。</p>
-</li>
-</ul>
-</li>
-<li><p>不是说Hash的冲突概率很小吗?</p>
-<ul>
-<li>Hash冲突小的前提是，获得的 hashcode 的长度要足够长，一般生产的类似 UUID 这样的 hash 值，好几十位字符串，这样才不会冲突。只有6位字符很容易冲突。</li>
-</ul>
-</li>
-<li><p>算法二除了速度慢外，如要处理并发问题吗，如果需要，如何处理？加锁吗？谢谢</p>
-<ul>
-<li>不需要做任何代码的修改。不需要加锁。并发没有问题。首先就算并发，两个 process 调用了 Random 函数之后得到的也是不同的随机串，冲突的概率很小。第二，就算有冲突，数据库也会进行加锁保证不会出现2个重复的被插入。第三如果因为 Race Condition 的原因，刚好会向数据库里插入两次一样的 short_key 的话，那么可以设置 short_key 是 unique 的，然后其中一次 fail 掉，报错给用户，用户重试一次即可解决问题。</li>
-</ul>
-</li>
-<li><p>感觉可以随机生成10个candidate 然后batch query。这样就可以最大限度避免DDB read。</p>
-<ul>
-<li>这样是不对的。相当于你为了解决一个1%的case，降低了 99% 的case的运行效率。</li>
-</ul>
-</li>
-<li><p>database.filter(shortURL)不会很慢么？</p>
-<ul>
-<li>不会，shortUrl有index。</li>
-</ul>
-</li>
-<li><p>进制转换的方法是如何把longUrl 转换成 shortUrl的呢？</p>
-<ul>
-<li>将 long url 插入 database, 拿到 auto-increment id (sequential id)</li>
-<li>将 id 进制转换得到 shortUrl</li>
-</ul>
-</li>
-<li><p>sequential ID数据类型是整型啊？</p>
-<ul>
-<li>是的，整数。要不然做不到 sequential。sequential id 又叫做 auto-increment id</li>
-</ul>
-</li>
-<li><p>那如果有人用同样的longUrl要求做shortUrl, 是会每次返回不一样的shortUrl么？</p>
-<ul>
-<li>相同的 longUrl 可以先查一下是否有和这个 longUrl对应的 shortUrl。查询的办法一方面可以通过数据库对 longUrl 建立 Index 来加速查询。另外也可以再加上 cache，把 longUrl to ShortUrl 的映射 cache 起来。先查 cache，查不到再去 db 查，这样就更快了。</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<blockquote>
-<p>[单选投票题]随机生成和进制转换两种算法你认为哪种更好？</p>
-<p>你的选择:A</p>
-<p>感谢您参与投票！</p>
-<p>A:随机生成(36.58% 选择)</p>
-<p>B:进制转换(63.42% 选择)</p>
-</blockquote>
-<h2 id="表單結構＆可行解"><a href="#表單結構＆可行解" class="headerlink" title="表單結構＆可行解"></a>表單結構＆可行解</h2><h3 id="隨機生成法"><a href="#隨機生成法" class="headerlink" title="隨機生成法"></a>隨機生成法</h3><p>​    不好</p>
-<blockquote>
-<ul>
-<li>short long，这2个存在sql，哪一个做pk呢？这个是一一对应的么？是说，建了index，就可以用其他column去查pk也是可以的么？<ul>
-<li>Primary Key 可以用 short，因为一个short 不能用两次，一个long 可以对应多个 short 所以可以存多次。用任意 column 做pk是可以的只要这个column 是 unique 的，不允许重复的。一一对应在课程中有讲到，short 到 long 是 1 short 对应 1 个 long。反过来一个 long 可以对应多个 short。</li>
-</ul>
-</li>
-<li>为了快速查找而对short-&gt;long, long-&gt;short都建立index，那么index也就要求long url之间不能重复，对吗？如果允许long url重复，也就不能建立log的index<ul>
-<li><strong><em>好问题！您对 index 的理解有误。 index 是可以有重复的，没有重复的 index 叫做 unique index。SQL 语句里如果你执行 <code>create index on long_url</code> 是可以重复的。如果你希望不重复，就<code>create unique index on long_url</code>。在 long url 建立 index 的情况下，您可以使用 index filter 出相同的 long_url 记录的第一条记录就可以了。</em></strong></li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h2 id="Scale-優化response-time"><a href="#Scale-優化response-time" class="headerlink" title="Scale 優化response time"></a>Scale 優化response time</h2><ul>
-<li><p>提速，讀多的用Cache 優化，可用Cache Aside，存兩個表long2short, and short2long。</p>
-</li>
-<li><p>提速：地理上server靠近訪問地點。或中心化的，靠兩邊都還ok中間的。</p>
-<ul>
-<li>DNS根據用戶地區給不同的IP去美國的web server找memcached裡的，找不到再去Shared DB。</li>
-<li>用戶一次的request等於Web Server對DB一次的請求。</li>
-<li>如果Web對DB請求是多次的，那最好吧DB放到跟Server一樣的地方，異地的SErver頂多再來訪問本地的Server，也就一次，這樣Server 對DB的延遲不會被放大。</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<ul>
-<li><h5 id="单选题-TinyUrl-是读多写少还是读少写多？"><a href="#单选题-TinyUrl-是读多写少还是读少写多？" class="headerlink" title="[单选题]TinyUrl 是读多写少还是读少写多？"></a>[单选题]TinyUrl 是读多写少还是读少写多？</h5><p>A.读多写少94.90% 选择</p>
-<p>B.读少写多5.10% 选择</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是A</p>
-<p><strong>正确答案:</strong>A</p>
-</li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li>两个cache和DB之间的sync怎么解决<ul>
-<li>写入一般都是先写db再写cache的，允许cache写入失败，但是db要写入成功。两者之间可以允许不一致</li>
-</ul>
-</li>
-<li><strong>memcached 如何跟shared db sync</strong><ul>
-<li><strong>这个就是典型的cache aside。从shared db读取结果到之后将结果放在memchached，这样再次查询同样的数据就可以直接从cache取。当有数据发生变动的时候，先写数据库，然后delete缓存里面受影响的数据。</strong></li>
-</ul>
-</li>
-<li>为啥create short url 也需要 memcache？如果使用呢？<ul>
-<li>因为create short url要先查询一下当前的long url是否已经有对应的short url了，这个可以查缓存里的long2short信息，如果缓存里有的话就不用创建了，如果缓存里没有再查db里有没有，如果有就直接返回现有的shorturl，如果没有就创建一个新的。</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h3 id="How-to-Scale"><a href="#How-to-Scale" class="headerlink" title="How to Scale"></a>How to Scale</h3><p>要是量翻了10倍，怎麼用多台數據庫怎麼去解決TinyURL的架構問題？</p>
-<ul>
-<li>什麼時候要多台DB Server<ul>
-<li>Cache hit rate小</li>
-<li>寫操作比較多 =&gt; 無法透過 Cache優化</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<h5 id="单选题-TinyUrl-最主要要解决的是存不下还是忙不过来？"><a href="#单选题-TinyUrl-最主要要解决的是存不下还是忙不过来？" class="headerlink" title="[单选题]TinyUrl 最主要要解决的是存不下还是忙不过来？"></a>[单选题]TinyUrl 最主要要解决的是存不下还是忙不过来？</h5><p>A.存不下22.14% 选择    Storage</p>
-<p>B.忙不过来77.86% 选择　QPS issue</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
-<p><strong>正确答案:</strong>B</p>
-</blockquote>
-<blockquote>
-<h5 id="单选投票题-Tiny-Url-你会选择用什么做-Sharding-Key"><a href="#单选投票题-Tiny-Url-你会选择用什么做-Sharding-Key" class="headerlink" title="[单选投票题]Tiny Url 你会选择用什么做 Sharding Key?"></a>[单选投票题]Tiny Url 你会选择用什么做 Sharding Key?</h5><p>您选择的答案是A</p>
-<p>感谢您参与投票！</p>
-<p>A.Long Url17.21% 选择</p>
-<p>B.Short Url82.79% 选择</p>
-</blockquote>
-<blockquote>
-<ul>
-<li>多机随机生成URL算法，如何处理并发问题呢？<ul>
-<li>并发没有问题。首先就算并发，两个 process 调用了 Random 函数之后得到的也是不同的随机串，冲突的概率很小。第二，就算有冲突，数据库也会进行加锁保证不会出现2个重复的被插入。第三如果因为 Race Condition 的原因，刚好会向数据库里插入两次一样的 short_key 的话，那么可以设置 short_key 是 unique 的，然后其中一次 fail 掉，报错给用户，用户重试一次即可解决问题。</li>
-</ul>
-</li>
-<li>专门一台db做seq id服务，请问下，db table的schema长什么样子？<ul>
-<li>schema 里就一个 column 一个数据，就是 last_seq_id，大整数。</li>
-</ul>
-</li>
-<li>有一点想确定一下 最后介绍的base62 sharding key方法是用来解决原本查询需要broadcast的情况 对吧？全局自增ID问题依旧需要有专项服务器处理吧<ul>
-<li>是的，你的理解是对的。</li>
-</ul>
-</li>
-<li>用base 62的方法做sharding key, 我们还需要存两份映射吗？<ul>
-<li>如果你用 SQL 数据库的话，都 long 和short 都建了 index 就不需要了。通过sharding key找到机器，通过这台机器上的 index 找到具体数据。</li>
-</ul>
-</li>
-<li>hash（long_url）就是得到的short url么？<ul>
-<li><code>hash(long_url) % 62</code>得到的是 short url 的第一位字符</li>
-</ul>
-</li>
-<li>这个并不解决全局自增ID的问题啊？？<ul>
-<li>这并没有解决自增id的问题，只是在查询的时候不用broadcast了。要做全局自增id还是需要使用前述方法。</li>
-</ul>
-</li>
-<li>能否在储存shorturl的表单里加入sharding_key，这样就没有62台机器的数量限制了<ul>
-<li>在存储shorturl的表单里加入sharding_key的话仍然没有解决查询short2long时需要广播的问题。这里说的方案是把sharding key给embed到shorturl中，因此需要占用一定的shorturl位数。当sharding key占shorturl中的一位的时候就是限定62台机器，占两位的时候就是62 * 62台，只能是在这个占的位数上做trade off。</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h3 id="Multi-Region-Optimization"><a href="#Multi-Region-Optimization" class="headerlink" title="Multi Region Optimization"></a>Multi Region Optimization</h3><ul>
-<li>數據庫在美、台各地各放一份？<ul>
-<li>一致性問題難解決</li>
-</ul>
-</li>
-<li>可根據網站的地域信息作Sharding ，避免存多份的不一致<ul>
-<li>域名- 可根據長尾理論作白名單</li>
-<li>Short url的前置位</li>
-<li>大不了跨境需求讓它慢一點</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<ul>
-<li>db usa 和db cn 如果保持数据一致性？<ul>
-<li>不需要保持一致，两边存储的是不一样的数据。DB USA只存属于美国的long2short和short2long，而DB CN是只存中国的long2short和short2long。如果担心分配的shorturl有冲突的话可以给不同的区域分别分配不同的可用shorturl范围。</li>
-</ul>
-</li>
-<li>分布式DB的机器距离变远之后（一个在中国，一个在美国），进行操作所需要的时间会变慢吗？影响大不大？<ul>
-<li>会，但是你可以将美国那边近期的热点ur（中国用户最近访问得比较多得美国url)做一个中国本地的cache，这样可以很大程度上减轻这种影响。</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>一般是各方法有自己的優缺、優劣</p>
-<ul>
-<li>TinyURL related <ul>
-<li>知乎 <a href="http://bit.ly/22FHP5o" target="_blank" rel="noopener">http://bit.ly/22FHP5o</a></li>
-<li>The System Design Process <a href="http://bit.ly/1B6HOEc" target="_blank" rel="noopener">http://bit.ly/1B6HOEc</a></li>
-</ul>
-</li>
-<li>用Django搭建一个网站 <a href="http://bit.ly/21LApIb" target="_blank" rel="noopener">http://bit.ly/21LApIb</a><ul>
-<li>搭建一个tiny url的网站</li>
-</ul>
-</li>
-<li>Emoji URL<ul>
-<li><a href="http://www.xn--vi8hiv.ws" target="_blank" rel="noopener">http://www.xn--vi8hiv.ws</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h2><h1 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h1><blockquote>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdi4zq7rxxj30r80tw783.jpg" alt="image-20200404230945535"></p>
-</blockquote>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdi53cccn3j30r80tugqk.jpg" alt="image-20200404231317707"></p>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdi548ss55j30qe0o8dil.jpg" alt="image-20200404231410186"></p>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdi54ljrx1j30qe0siwis.jpg" alt="image-20200404231430477"></p>
-</div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/45/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><span class="page-number current">46</span><a class="page-number" href="/page/47/">47</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" href="/page/47/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdlb36wqt9j30pa0t00yp.jpg" alt="image-20200407165727152" style="zoom:67%;" /></div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/45/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><span class="page-number current">46</span><a class="page-number" href="/page/47/">47</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" href="/page/47/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
   $('#nav').addClass('is-mobile')
   $('footer').addClass('is-mobile')
   $('#top-container').addClass('is-mobile')
