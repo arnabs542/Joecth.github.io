@@ -26,3 +26,17 @@ brew镜像源
 
 - 中科大brew镜像源    http://mirrors.ustc.edu.cn/homebrew.git
 - 清华brew镜像源  http://mirrors.ustc.edu.cn/homebrew.git
+
+
+
+```shell
+# 重置brew.git:
+$ cd "$(brew --repo)"
+$ git remote set-url origin https://github.com/Homebrew/brew.git
+
+# 重置homebrew-core.git:
+$ cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
+$ git remote set-url origin https://github.com/Homebrew/homebrew-core.git
+# REF: https://blog.csdn.net/qq_43213352/article/details/104343627
+```
+

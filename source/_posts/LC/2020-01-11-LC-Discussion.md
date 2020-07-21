@@ -1,4 +1,5 @@
 ---
+
 layout: post
 categories: LC
 tag: []
@@ -74,7 +75,21 @@ date: 2020-01-11
 
 It seems like we don't have to use any stacks when we implement DFS recursively. But actually, we are using the implicit stack provided by the system, also known as the [Call Stack](https://en.wikipedia.org/wiki/Call_stack).
 
+
+
+### Monotonic Stack
+
+#### next greater elem i
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200514205317113.png" alt="image-20200514205317113" style="zoom:50%;" />
+
  
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200514205420424.png" alt="image-20200514205420424" style="zoom:50%;" />
+
+#### next greater elem ii
+
+
 
 ### An Example
 
@@ -268,38 +283,40 @@ tree.root.right.right = Node(7)
 
 
 
-|                                                              |                      |                                                              | status   | coded                                        |           |
-| ------------------------------------------------------------ | -------------------- | ------------------------------------------------------------ | -------- | -------------------------------------------- | --------- |
-| DFS preorder                                                 |                      |                                                              |          |                                              |           |
-| [113 Path Sum Ⅱ](#113)                                       |                      |                                                              | v        | △ return的時機未抓好，造成items未被pop()足夠 | ~40       |
-| [236 Lowest Common Ancestor of a Binary Tree](#236)          |                      |                                                              | v        | v                                            |           |
-| [114 Flatten Binary Tree to Linked List](#114)               | 左边先拉平，常规思维 | 右边从底部建上来，酷                                         | v        | v                                            |           |
-| BFS                                                          |                      |                                                              |          |                                              |           |
-| [199 Binary Tree Right Side View](#199)                      |                      |                                                              | v        | v                                            |           |
-| *HIgh Freq.*                                                 |                      |                                                              |          |                                              |           |
-| [105 Construct Binary Tree from Preorder and Inorder Traversal](#105) |                      |                                                              | v        | v                                            |           |
-| [110 Balanced Binary Tree](#110)                             |                      |                                                              | v        | v                                            |           |
-| [111 Minimum Depth of Binary Tree](#111)                     |                      |                                                              | v        | v                                            |           |
-| [112 Path Sum](#112)                                         |                      |                                                              | v        | v                                            |           |
-| [113 Path Sum Ⅱ](#113) repeated                              |                      |                                                              | v        | v                                            |           |
-| [124 Binary Tree Maximum Path Sum](#124)                     |                      |                                                              | v        | v                                            |           |
-| [297 Serialize and Deserialize Binary Tree](#297)            |                      |                                                              | v        | v                                            |           |
-| GRAPH<br />adjacent matrix & table                           |                      |                                                              |          |                                              |           |
-| [207 Course Schedule](#207)                                  | DFS                  | BFS Topological sorting<br />[leecode.jp link](https://leetcode.jp/leetcode-207-course-schedule%e8%a7%a3%e9%a2%98%e6%80%9d%e8%b7%af%e5%88%86%e6%9e%90/) | v        | v                                            | ~210, 269 |
-| [133 Clone Graph](#133)                                      |                      |                                                              | v        |                                              |           |
-| High Freq.                                                   |                      |                                                              |          |                                              |           |
-| [210 Course Schedule Ⅱ](#210)                                |                      |                                                              | v        | v                                            |           |
-| [269 Alien Dictionary](#269)                                 |                      |                                                              | Too HARD |                                              |           |
-| [102 Binary Tree Level Order Traversal](#102)                |                      |                                                              | v        | v                                            |           |
-| [145 Binary Tree Postorder Traversal](#145)                  |                      |                                                              | v        | v                                            |           |
-| [958 Completeness of a Binary Tree](#958)                    |                      |                                                              | v        |                                              |           |
-| [104 Maximum Depth of Binary Tree](#104)                     |                      |                                                              | v        | v                                            |           |
-| [111 Minimum Depth of Binary Tree](#111)                     |                      |                                                              | v        | v                                            |           |
-| [144 Binary Tree Preorder Traversal](#144)                   |                      |                                                              | v        | v                                            |           |
-| [94 Binary Tree Inorder Traversal][#94]                      |                      |                                                              | v        | v                                            |           |
-| [101 Symmetric Tree](#101)                                   |                      |                                                              | v        | v                                            |           |
-| [112 Path Sum](#112)                                         |                      |                                                              | v        | v                                            |           |
-| [113 Path Sum Ⅱ](#113)                                       |                      |                                                              | v        | v                                            |           |
+|                                                              |                      |                                                              | status   | coded                                        |                                 |
+| ------------------------------------------------------------ | -------------------- | ------------------------------------------------------------ | -------- | -------------------------------------------- | ------------------------------- |
+| DFS preorder                                                 |                      |                                                              |          |                                              |                                 |
+| [113 Path Sum Ⅱ](#113)                                       |                      |                                                              | v        | △ return的時機未抓好，造成items未被pop()足夠 | ~40                             |
+| [236 Lowest Common Ancestor of a Binary Tree](#236)          |                      |                                                              | v        | v                                            |                                 |
+| [114 Flatten Binary Tree to Linked List](#114)               | 左边先拉平，常规思维 | 右边从底部建上来，酷                                         | v        | v                                            |                                 |
+| BFS                                                          |                      |                                                              |          |                                              |                                 |
+| [199 Binary Tree Right Side View](#199)                      |                      |                                                              | v        | v                                            |                                 |
+| *HIgh Freq.*                                                 |                      |                                                              |          |                                              |                                 |
+| [105 Construct Binary Tree from Preorder and Inorder Traversal](#105) |                      |                                                              | v        | v                                            |                                 |
+| [110 Balanced Binary Tree](#110)                             |                      |                                                              | v        | v                                            |                                 |
+| [111 Minimum Depth of Binary Tree](#111)                     |                      |                                                              | v        | v                                            |                                 |
+| [112 Path Sum](#112)                                         |                      |                                                              | v        | v                                            |                                 |
+| [113 Path Sum Ⅱ](#113) repeated                              |                      |                                                              | v        | v                                            |                                 |
+| [124 Binary Tree Maximum Path Sum](#124)                     |                      |                                                              | v        | v                                            |                                 |
+| [297 Serialize and Deserialize Binary Tree](#297)            |                      |                                                              | v        | v                                            |                                 |
+| GRAPH<br />adjacent matrix & table                           |                      |                                                              |          |                                              |                                 |
+| [207 Course Schedule](#207)                                  | DFS                  | BFS Topological sorting<br />[leecode.jp link](https://leetcode.jp/leetcode-207-course-schedule%e8%a7%a3%e9%a2%98%e6%80%9d%e8%b7%af%e5%88%86%e6%9e%90/) | v        | v                                            | ~210, 269                       |
+| [133 Clone Graph](#133)                                      |                      |                                                              | v        |                                              |                                 |
+| High Freq.                                                   |                      |                                                              |          |                                              |                                 |
+| [210 Course Schedule Ⅱ](#210)                                |                      |                                                              | v        | v                                            |                                 |
+| [269 Alien Dictionary](#269)                                 |                      |                                                              | Too HARD |                                              |                                 |
+| [102 Binary Tree Level Order Traversal](#102)                |                      |                                                              | v        | v                                            |                                 |
+| [145 Binary Tree Postorder Traversal](#145)                  |                      |                                                              | v        | v                                            |                                 |
+| [958 Completeness of a Binary Tree](#958)                    |                      |                                                              | v        |                                              |                                 |
+| [104 Maximum Depth of Binary Tree](#104)                     |                      |                                                              | v        | v                                            |                                 |
+| [111 Minimum Depth of Binary Tree](#111)                     |                      |                                                              | v        | v                                            |                                 |
+| [144 Binary Tree Preorder Traversal](#144)                   |                      |                                                              | v        | v                                            |                                 |
+| [94 Binary Tree Inorder Traversal][#94]                      |                      |                                                              | v        | v                                            |                                 |
+| [101 Symmetric Tree](#101)                                   |                      |                                                              | v        | v                                            |                                 |
+| [112 Path Sum](#112)                                         |                      |                                                              | v        | v                                            |                                 |
+| [113 Path Sum Ⅱ](#113)                                       |                      |                                                              | v        | v                                            |                                 |
+| [543.diameter-of-binary-tree](#543)                          |                      |                                                              | v        | v                                            | Binary-tree-maximum-path-length |
+| [124.binary-tree-maximum-path-sum](#124)                     |                      |                                                              | v        | v                                            |                                 |
 
 
 
@@ -1678,6 +1695,38 @@ class Solution:
         return res
             
 ```
+
+
+
+### <a name="124">124</a>
+
+```python
+class Solution:
+    def maxPathSum(self, root: TreeNode) -> int:
+        
+        if not root:
+            return 0
+        # self.max = 0
+        self.ans = root.val
+        self.dfs(root)
+        return self.ans
+    
+    def dfs(self, node):
+        if not node:
+            return 0
+        
+        L_sum = max(self.dfs(node.left), 0)   # 要取max, 當下面如果是負數過來時把下面給割了！
+        R_sum = max(self.dfs(node.right), 0)  # 42. 
+        
+        self.ans = max(self.ans, L_sum+R_sum+node.val)
+        
+        return max(L_sum, R_sum) + node.val
+        # ref: https://www.bilibili.com/video/av92694072/
+```
+
+
+
+
 
 
 
@@ -3767,6 +3816,32 @@ class Solution:
 
         return False
 
+```
+
+
+
+### <a name="543">543</a>
+
+```python
+class Solution:
+    def diameterOfBinaryTree(self, root: TreeNode) -> int:
+        
+        # self.ans = 0
+        self.g_max = 0
+        self.dfs(root)
+        # self.helper(root)
+        return self.g_max
+    
+    def dfs(self, root):
+        if not root:
+            return 0
+        # if not root.left and not root.right:
+        #     return 0
+
+        L_dia = self.dfs(root.left)
+        R_dia = self.dfs(root.right)
+        self.g_max = max(self.g_max, L_dia+R_dia)
+        return max(L_dia, R_dia) + 1    # CAUTIOUS! 這個不是答案，上一行才是
 ```
 
 

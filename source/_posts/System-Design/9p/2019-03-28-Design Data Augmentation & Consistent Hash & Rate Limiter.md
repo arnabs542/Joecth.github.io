@@ -54,64 +54,6 @@ class Solution:
 
 
 
-```python
-'''
-一般的数据库进行horizontal shard的方法是指，把 id 对 数据库服务器总数 n 取模，然后来得到他在哪台机器上。这种方法的缺点是，当数据继续增加，我们需要增加数据库服务器，将 n 变为 n+1 时，几乎所有的数据都要移动，这就造成了不 consistent。为了减少这种 naive 的 hash方法(%n) 带来的缺陷，出现了一种新的hash算法：一致性哈希的算法——Consistent Hashing。这种算法有很多种实现方式，这里我们来实现一种简单的 Consistent Hashing。
-
-将 id 对 360 取模，假如一开始有3台机器，那么让3台机器分别负责0~119, 120~239, 240~359 的三个部分。那么模出来是多少，查一下在哪个区间，就去哪台机器。
-当机器从 n 台变为 n+1 台了以后，我们从n个区间中，找到最大的一个区间，然后一分为二，把一半给第n+1台机器。
-比如从3台变4台的时候，我们找到了第3个区间0~119是当前最大的一个区间，那么我们把0~119分为0~59和60~119两个部分。0~59仍然给第1台机器，60~119给第4台机器。
-然后接着从4台变5台，我们找到最大的区间是第3个区间120~239，一分为二之后，变为 120~179, 180~239。
-假设一开始所有的数据都在一台机器上，请问加到第 n 台机器的时候，区间的分布情况和对应的机器编号分别是多少？
-
-Example
-例1:
-
-输入:
- n = 1, 
-输出:
-[
-  [0,359,1]
-]
-解释:
-表示 0~359 属于机器 1.
-例2:
-
-输入:
- n = 2,
-输出:
-[
-  [0,179,1],
-  [180,359,2]
-]
-解释:
-表示 0~179 属于机器 1.
-表示 180~359 属于机器 2.
-例3:
-
-输入:
-n = 3,
-输出:
-[
-  [0,89,1]
-  [90,179,3],
-  [180,359,2]
-]
-Clarification
-如果最大间隔是[x，y]，并且它属于机器id z，当你添加一个id为n的新机器时，你应该将[x，y，z]分成两个区间：
-
-[x，（x + y）/ 2，z]和[（x + y）/ 2 + 1，y，n]
-
-Notice
-你可以假设 n <= 360. 同时我们约定，当最大区间出现多个时，我们拆分编号较小的那台机器。
-比如0~119， 120~239区间的大小都是120，但是前一台机器的编号是1，后一台机器的编号是2, 所以我们拆分0~119这个区间。
-'''
-
-
-```
-
-
-
 sharding 也可叫 拆分、division
 
 md5 16^32 用在登入密碼加密，有可能有衝突，現在已經已經不怎麼安全啦
@@ -328,9 +270,9 @@ For example, the size of 0~119, 120~239 is 120, but the number of the previous m
     - 遷移時就只有兩個鄰居，他們兩個人特別負載重
 
 > - 360这个数值是经验值么？这个数字对于任何数量的机器都合适么？
->   - 360 只是为了让理解一个圆有 360°，比较形象。这个数字当然不是实际的工程中使用的数字。实际使用的数字一般是 2^64 ==> 宇宙爆炸的機率
+>   - 3*60 只是为了让理解一个圆有 360°，比较形象。这个数字当然不是实际的工程中使用的数字。实际使用的数字一般是 **2^64 ==> 宇宙爆炸的機率***
 > - 反正都要用一个表来记录key->db号码， 为什么还要hash 2^64呢？ 直接把key和机器号码存到表里不行吗？
->   - 没有 Key->db号码的这张表。通过 key 得到 db 是靠 consistent hashing 这个算法计算出来的，而不是把每个 key 存在哪个 db 都存下来。
+>   - 没有 Key->db号码的这张表。***通过 key 得到 db 是靠 consistent hashing 这个算法计算出***来的，而不是把每个 key 存在哪个 db 都存下来。
 
 讓不同的key的時候的機率是2^64幾乎是宇宙爆炸的機率。
 
@@ -381,7 +323,7 @@ Virtual node
 > - 问题同上面的同学：怎么保持key均匀分布？
 >   - 选择一个好的哈希函数是可以保证这个性质的。https://en.wikipedia.org/wiki/Hash_function#Uniformity
 > - 这个哈希算法是用来做数据库horizontal sharding的吗，它能用在分配服务器上吗？能用在vertical sharding上吗？
->   - 是的，用来做 **Horizontal Sharding**。不能用在 Veritical Sharding 上。Vertical Sharding 是按照 column / table 进行 sharding 并不按照数据本身的值来进行 sharding。他可以用在分配数据服务器上，但是不能用在分配 web 服务器上。因为 web 服务器是 stateless 的，不需要固定的去同一个 web server，只需要随机分配即可。
+>   - 是的，用来做 **Horizontal Sharding**。不能用在 Veritical Sharding 上。Vertical Sharding 是按照 column / table 进行 sharding 并不按照数据本身的值来进行 sharding。***他可以用在分配数据服务器上***，但是不能用在分配 web 服务器上。**因为 web 服务器是 stateless 的，不需要固定的去同一个 web server，只需要随机分配即可。**
 > - 新增加机器时，增加的虚拟的点的位置是随机的么？
 >   - 本质上都是根据机器名字 hash 出来的，不能认为是随机的。
 
@@ -437,20 +379,20 @@ getMachineIdByHashCode(int hashcode) // return machine id
 >
 > Backup 一般一天做一次，但是这个完全是因人而异，不是强制的。
 > Backup 存储的是离线数据，无法分摊在线读请求。
-> 虽然 Replica 很强大，但是 Backup 也是很有必要的，可以认为是一个双保险。且可以服务于一些离线数据计算，这样不会给在线数据库带来压力。
+> **虽然 Replica 很强大，但是 Backup 也是很有必要的，可以认为是一个双保险。且可以服务于一些离线数据计算，这样不会给在线数据库带来压力**。
 
 雙重保險
 
-不是每種DB都有replica，所以backup還是保險
+**不是每種DB都有replica，所以backup還是保險**
 
 更穩定，就是發展的先後問題。
 
 > - replica和backup代价是一样的吗？比如说都需要一台机器？是不是说replica的机器可能性能好一点，而backup对机器性能没有要求
->   - 有的。你说的方式就是很多 NoSQL 现在用的方式，选择一个 Replica 写进去，然后这个 Replica 负责同步给其他的 Replica。 Replica 之间的地位是等价的，没有 master-slave 的上下级之分。
+>   - 有的。你说的方式就是很多 NoSQL 现在用的方式，选择一个 Replica 写进去，然后这个 Replica 负责同步给其他的 Replica。 ***Replica 之间的地位是等价的，没有 master-slave 的上下级之分。***
 
 
 
-### SQL - 用 Master vs Slave, 
+### SQL - 用 MasterSlave VS NoSQL 用等價的replica w/ Consistent Hashing 作傳遞
 
 - 也可手動作 Consistent Hash Ring
 
@@ -467,15 +409,15 @@ getMachineIdByHashCode(int hashcode) // return machine id
 - 也要根據這個支持把 transaction 反向。
 
 > - How to do consistent hashing for a web server? For DB, the web server can compute the hashcode and then choose DB. Which component to do this for Web Server? DNS? NGIX?
->   - Web Server 是不需要做 Consistent Hashing 的。因为 Web Server 是 stateless 的，你不需要保证每个用户每次访问的都是同一个 Web Server，随机来一个 Server 服务他就可以了，就跟你去银行不一定每次都去一个窗口排队，哪个人少去哪个排队就可以了。只有 DB 才需要做 Consistent Hashing 因为你的钱如果存在工商银行你去建设银行是取不到钱的。 Web Server 只需要做 Load Balancing ，这个步骤是 NGINX 或者专门的 Load Balancing 的硬件 或者 AWS 的 Load Balanacing 服务负责做的。
+>   - ***Web Server 是不需要做 Consistent Hashing 的。因为 Web Server 是 stateless 的，你不需要保证每个用户每次访问的都是同一个 Web Server***，随机来一个 Server 服务他就可以了，就跟你去银行不一定每次都去一个窗口排队，哪个人少去哪个排队就可以了。只有 DB 才需要做 Consistent Hashing 因为你的钱如果存在工商银行你去建设银行是取不到钱的。 **Web Server 只需要做 Load Balancing ，这个步骤是 NGINX 或者专门的 Load Balancing 的硬件 或者 AWS 的 Load Balanacing 服务负责做的**。
 > - replica和backup代价是一样的吗？比如说都需要一台机器？是不是说replica的机器可能性能好一点，而backup对机器性能没有要求
 >   - 代价不一样。replica 要实时，而且要服务在线请求，要求是比较高的。backup 只是做一下存储备份，不服务用户，要求比较低。
-> - replica方法除了master slave，还有别的方法吗，比如说所有服务器都是master，都能接受写操作，隔一段时间同步一次
->   - 有的。你说的方式就是很多 NoSQL 现在用的方式，选择一个 Replica 写进去，然后这个 Replica 负责同步给其他的 Replica。 Replica 之间的地位是等价的，没有 master-slave 的上下级之分。
+> - ***replica方法除了master slave，还有别的方法吗，比如说所有服务器都是master，都能接受写操作，隔一段时间同步一次***
+>   - ***有的。你说的方式就是很多 NoSQL 现在用的方式，选择一个 Replica 写进去，然后这个 Replica 负责同步给其他的 Replica。 Replica 之间的地位是等价的，没有 master-slave 的上下级之分**。*
 > - "下列关于 Backup 和 Replica 的区别描述正确的有？" 为什么replica一般一式三份？
 >   - 經驗值
 > - Replica在一致性哈希环上顺时针存三份我理解的是紧挨着的3个位置，对吗？这样读请求来的时候可以分摊给这3个机器吗？
->   - 对的。读请求可以分摊给replica。
+>   - 对的。***读请求可以分摊给replica***。
 
 
 
@@ -489,24 +431,24 @@ getMachineIdByHashCode(int hashcode) // return machine id
 
   User Table怎麼算sharding 好？
 
-  就是說要拿什麼去跑一次consistent hash去得到機器的編號，然後連上那台機器，然後去那台機器拿出數據呢？
+  ***就是說要拿什麼去跑一次consistent hash去得到機器的編號，然後連上那台機器，然後去那台機器拿出數據呢？***
 
   - 怎麼取數據就怎麼拆數據
 
     就是看最常見是按什麼去查呢？就把這個拆開去作sharding吧。
 
-    舉例：user_id是最常被其他的表單用到的foreign_key，就用它作拆分
+    *舉例：**user_id是最常被其他的表單用到的foreign_key，就用它作拆分***
 
     - 但一般都是用username找用戶啊？
-      - 就再建個表單作username => user_id映射，多查一個步驟就好。
+      - ***就再建個表單作username => user_id映射，多查一個步驟就好**。*
 
 - Insert時怎辦？該去哪台數據庫作insert呢？
 
-  - 同一台機器時可以設sequential id，就是有另張表紀錄這張表的sequential id到了哪了，然後會加鎖去保持連續性。
-  - 這時可以自己自建一個uuid作為用戶的user_id,  不同人不會撞啦！因為是uuid，宇宙爆炸的機率
+  - ***同一台機器時可以設sequential id，就是有另張表紀錄這張表的sequential id到了哪了，然後會加鎖去保持連續性。***
+  - 這時可以自己自建一個uuid作為用戶的user_id,  不同人不會撞啦！***因為是uuid，宇宙爆炸的機率***
     - 然後再拿去作consistent hashing
-  - 擴機器時怎辦？uuid是字串，本來人少時是用整數呀，怎辦？
-    - 建個表，在一個新的service裡（這個可以全局共享），就是要先去那個表查，那個表在查時會加鎖，再map到uuid。
+  - **擴機器時怎辦？uuid是字串，本來人少時是用整數呀，怎辦？**
+    - ***建個表，在一個新的service裡（這個可以全局共享），就是要先去那個表查，那個表在查時會加鎖，再map到uuid。***
       - 也就是說用加鎖保證數據的原子性。
       - 創建用戶也不是大QPS，所以問題也不是特大。
 
@@ -528,16 +470,16 @@ getMachineIdByHashCode(int hashcode) // return machine id
 >
 > user_id 会作为其他 Table 的 Foreign key 存在，所以是最频繁的查询需求。
 
-> - 这个新的表单存储username, userid, 这个不需要sharding对吧？ 因为读取比较少？
->   - 如果读取比较少的情况下，不 sharding 也没问题。不过一般这类 Key-value 的查询都会放在 NoSQL 数据库里，默认就会 sharding。
+> - ***这个新的表单存储username, userid, 这个不需要sharding对吧？ 因为读取比较少？***
+>   - ***如果读取比较少的情况下，不 sharding 也没问题。不过一般这类 Key-value 的查询都会放在 NoSQL 数据库里，默认就会 sharding。***
 > - 好像可以用当前时间加其他的限制条件来创建ID，这样可以让ID有其他的信息，这样好么？
->   - 这样做也是可以的，相当于denormalization，但是有一定风险，要注意保持id的随机性，否则可能会让id的生成变得predictable。
+>   - ***这样做也是可以的，相当于denormalization，但是有一定风险，要注意保持id的随机性，否则可能会让id的生成变得predictable***。
 > - 如果table QPS需求大的话，而且已经采用了自增id，是不是就不用自增id， 创建一个新table， 用uuid来做key， 然后把原有数据移植到新的table？ 然后更新其他 引用它的table的foreign key？
->   - 更新 foreign key 是一个很大的工程（引用太多了。而且随时可能更改）。所以最后一点说的是，创立一个单独的 UserIdService 来负责产生这个全局自增的 user_id。更新 foreign key 这个并不现实。
+>   - 更新 foreign key 是一个很大的工程（引用太多了。而且随时可能更改）。***所以最后一点说的是，创立一个单独的 UserIdService 来负责产生这个全局自增的 user_id***。**更新 foreign key 这个并不现实**。
 > - 可以通过hash把原来的id改成uuid吗
->   - uuid是有标准的生成方式的，不能仅仅通过求Hash的方式来获得uuid: https://en.wikipedia.org/wiki/Universally_unique_identifier#Versions
+>   - ***uuid是有标准的生成方式的，不能仅仅通过求Hash的方式来获得uuid:*** https://en.wikipedia.org/wiki/Universally_unique_identifier#Versions
 > - 这个UserIdservice是不是一种分布式锁啊？
->   - 原理有些类似，但是这个还算不上一个general-purpose的分布式锁，只是在系统中设计了一个单点来保证生成ID的顺序和唯一性。
+>   - ***原理有些类似，但是这个还算不上一个general-purpose的分布式锁，只是在系统中设计了一个单点来保证生成ID的顺序和唯一性***。
 
 
 
@@ -557,19 +499,19 @@ getMachineIdByHashCode(int hashcode) // return machine id
 >
 > **正确答案:**A
 
-> - 为什么哪一项最常用就要根据哪一项去sharding呢，能详细解释一下吗
->   - 不是哪一项常用就按照哪一项去 sharding，是按照哪一项查询就按照哪一项 sharding。假如一个数据有 col1, col2 两项，按照 col1 sharding 的意思就是，如果两条数据的 col1 相同，就会被分配在同一台机器上。所以当你按照 col1 查询的时候，才能保证在同一台机器上找到这两条数据。如果你查询是按照 col1 来查询，存的时候却按照 col2 来sharding 的话，那么就没法保证 col1 相同的都在同一台机器上，这样 sharding 的意义就没有了，sharding 就是要让你能分摊查询请求到不同的机器，如果你的一次查询需要去所有机器汇总结果的话，这个 sharding 就是失败的 sharding。
+> - *为什么哪一项最常用就要根据哪一项去sharding呢，能详细解释一下吗*
+>   - ***不是哪一项常用就按照哪一项去 sharding，是按照哪一项查询***就按照哪一项 sharding。假如一个数据有 col1, col2 两项，按照 col1 sharding 的意思就是，如果两条数据的 col1 相同，就会被分配在同一台机器上。所以当你按照 col1 查询的时候，才能保证在同一台机器上找到这两条数据。如果你查询是按照 col1 来查询，存的时候却按照 col2 来sharding 的话，那么就没法保证 col1 相同的都在同一台机器上，这样 sharding 的意义就没有了，***sharding 就是要让你能分摊查询请求到不同的机器***，***如果你的一次查询需要去所有机器汇总结果的话，这个 sharding 就是失败的 sharding***。
 
 
 
 ## News Feed / Timeline Shardings
 
 > - *TimeLine table 即 Post Table 刚才课上说到了是以User ID做为sharding key。 我有一个问题：如果我想查 Post 详情的话， 那是不是每次请求都要带上 User ID 才能定位到具体某台机器上。但是基本获取Post 详情的请求都只会带 Post ID而不是 Post ID 和 User ID啊。 求解答~*
->   - *这种情况下，通常的做法是 post_id 里，前缀就带上 user_id。这样可以通过 post_id 得到 user_id。此时 post_id 通常是一个字符串，可以自定义格式。*
-> - *news feed一般是会专门存一个table吗？比如我要看我的news feed，是拿我的user id去news feed table里面找，而不是拿我的所有关注user的id去post table里面找然后汇总？那么这个news feed table里面的信息总归是通过去post table里面查找汇总好了以后存在news feed table里的吧？可不可以介绍一下： 1. 这个table的schema。 2. 去post table查找和汇总发生在什么时候？*
+>   - **这种情况下，通常的做法是 post_id 里，前缀就带上 user_id。这样可以通过 post_id 得到 user_id。此时 post_id** 通常是一个字符串，可以自定义格式。*
+> - news feed一般是会专门存一个table吗？比如我要看我的news feed，是**拿我的user id去news feed table里面找，而不是拿我的所有关注user的id去post table里面找然后汇总**？那么这个news feed table里面的信息总归是通过去post table里面查找汇总好了以后存在news feed table里的吧？可不可以介绍一下： 1. 这个table的schema。 2. 去post table查找和汇总发生在什么时候？
 >   - *news feed 一般就是一个专门的 table。*
 >     *news feed table 的 schema 在 PPT 里有，你看一下。视频里也有讲到的。*
->     *去 post table 里查找和汇总可能不会发生，因为 news feed table 可以通过 denormalize 的方法把 post 的内容复制一份存在 news feed table 里来加速这个查询过程。*
+>     ****去 post table 里查找和汇总可能不会发生，因为 news feed table 可以通过 denormalize 的方法把 post 的内容复制一份存在 news feed table*** 里来加速这个查询过程。*
 
 
 

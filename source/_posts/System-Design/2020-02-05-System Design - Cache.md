@@ -11,19 +11,37 @@ https://www.zhihu.com/question/319817091
 
 ## Cache
 
-對比disk and memory, 內存貴，跟disk比，它寫跟讀快很多
+對比**disk** and **memory**, 內存貴，跟disk比，它寫跟讀快很多
 
-local sidk cmp to memory
+#### local disk V.S. memory
+
+能不能把一部份的數據放到memory讓它快?
+
+讀不到才去worker 找，
+
+Cache kv對，很快，repeated Query可這樣做，當一個fn被多次調用，就是要加 Cache
 
 <img src="https://camo.githubusercontent.com/7acedde6aa7853baf2eb4a53f88e2595ebe43756/687474703a2f2f692e696d6775722e636f6d2f51367a32344c612e706e67" alt="img" style="zoom:48%;" />
 
 方法算法被多次叫怎辦？就是說要加Cache。
 
-Cacheing service : Memcache, Redis
+![image-20200711204719225](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggnblny6qkj312c0g8qch.jpg)
+
+緩存的應用很多。
+
+DB會受益；同個URL來，他不的
+
+
+
+#### Cacheing service : Memcache, Redis
+
+
 
 <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd3rkssomcj310c0kgaj0.jpg" alt="image-20200206192031055" style="zoom:50%;" />
 
 ### Cache aside
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggrhq7cinxj30zk0ign31.jpg" alt="image-20200715112132396" style="zoom: 50%;" />
 
 照理redis不需要知道業務邏輯，應該都是client控制的，所以redis跟db應該沒分前後
 
@@ -32,6 +50,8 @@ Cacheing service : Memcache, Redis
 機率非常低，還可以設上個ttl，讓他自動expire，減小髒的機率，髒指的就是cache、db不同
 
 這個是最常用的
+
+### Cache Aside 也會有的併發的問題，但概率很低，也可以設ttl解
 
 ![image-20200206192751483](https://tva1.sinaimg.cn/large/00831rSTgy1gd3rkxfaonj30uc0hk44g.jpg)
 

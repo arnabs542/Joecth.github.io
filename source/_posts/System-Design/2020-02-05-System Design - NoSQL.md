@@ -7,45 +7,68 @@ tag: []
 
 
 
-SQL - ORM
+SQL - ORM, basics
 
-## NoSQL 
+# NoSQL 
 
 Not Only SQL
 
 本身有幾個派別如kv, document
 
-#### Normalize -- JOIN　在ORM用的，往往一個機器
+#### 4種型式的存儲方式
+
+1. kv
+2. document store
+3. wide column store
+4. graph database
+
+#### Normalize -- JOIN　在SQL ORM用的，往往一個機器
+
+RDBMS避免冗餘
 
 
 
-#### Denormalize -- 大量重複寫多份，寫麻煩，讀有利　 
+#### Denormalize -- 大量重複要寫到多份，寫就麻煩，但讀有利　 
 
-在nosql 裡用的 ，nosql往往為了多機器作分布
+多餘的重複寫到多個tables去，就是避免join, 
+
+在nosql 裡大量用的 ，nosql往往為了多機器作分布
 
 數據中心要同步數據怎麼辦？跨data-center Denormalize就兩邊都寫
 
-寫時要保證各國的數據中心都寫進去了
+寫時要保證***各國的數據中心都寫進去了***，
 
-要知道是 read-heavy or write-heavy 大多是讀的多
+要知道是 read-heavy or write-heavy 大多是讀的多，
 
-##### 缺點：冗缺、如果系統write-heavy就很不利，如logging system、message que 
+如youtube讀的人遠大於寫的人
 
-kafka 對寫的支持很好
+##### 缺點：不利於寫、冗缺、如果系統write-heavy就很不利，如logging system、message que 
 
-- 要做join的話是在applicatin layer也是middle layer的　＝＝＞　<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200206221633536.png" alt="image-20200206221633536" style="zoom: 25%;" />
+什麼系統是寫多的? logging系統如卡夫卡
+
+
+
+- 要做join的話是在**applicatin layer也是middle layer?!**的　＝＝＞　<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200206221633536.png" alt="image-20200206221633536" style="zoom: 25%;" />
 
 - 不支持ACID - *ACID* (*atomicity, consistency, isolation, durability*) is a set of properties of database transactions intended to guarantee validity ，那麼多機器不能保證事務
 
-- nosql不好鎖，多個當然不好鎖，慢慢才最終一致
+- nosql不好鎖，多個當然不好鎖，慢慢才最終一致, 跨機器不容易鎖呀，所以是eventually consistency
 
-- linkedin發了文章，不是需要馬上好友都看到，可以有latency的，我的follower之後才收到沒差
+  - 例如：linkedin發了文章，不是需要馬上好友都看到，可以有latency的，我的follower之後才收到沒差
 
-  叫作 ***eventually consistency***
+  叫作 ***eventually consistency***，可能就不是毫秒級的，是秒級的，也不會到慢到一分鐘之類
 
-- #### Quorum - 假如有三個人，2:1，少數服從多數
+  - #### 為何是Eventually Consistency?
 
-#### Transaction 銀行的經典例子 - 
+    - #### Quorum - 就是假如有三個人，2:1，少數服從多數，儘管第三台還沒寫到，它在第二台被寫後，也會要因為大家投票變了，要服從是變第2版
+
+      ![image-20200715100536958](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggrfjal4ukj30ym0hw0xh.jpg)
+
+# ACID in SQL - (*atomicity, consistency, isolation, durability*)
+
+一台機器時，SQL就可保證事務，銀行Transaction 銀行的經典例子 - 
+
+一個事務裡：原子性。
 
 銀行在意事務，所以ORM比較好。如果在一個地方取，中間
 
@@ -53,7 +76,7 @@ kafka 對寫的支持很好
 
 數據就亂了
 
-DBMS裡在　為保證transation可靠，所以要有ACID
+DBMS裡在　為保證transation可靠，所以要有ACID,事務中只能有一個會成功
 
 <img src="/Users/joe/Library/Application Support/typora-user-images/image-20200206222645993.png" alt="image-20200206222645993" style="zoom:50%;" />
 
@@ -61,7 +84,7 @@ DBMS裡在　為保證transation可靠，所以要有ACID
 
 # NoSQL Cont.
 
-- CAP Theorem
+- **CAP Theorem**
 
 - 在[理論計算機科學](https://zh.wikipedia.org/wiki/理論計算機科學)中，**CAP定理**（CAP theorem），又被稱作**布魯爾定理**（Brewer's theorem），它指出對於一個[分布式計算系統](https://zh.wikipedia.org/wiki/分布式计算)來說，不可能同時滿足以下三點：[[1\]](https://zh.wikipedia.org/wiki/CAP定理#cite_note-Lynch-1)[[2\]](https://zh.wikipedia.org/wiki/CAP定理#cite_note-2)
 
@@ -83,7 +106,7 @@ DBMS裡在　為保證transation可靠，所以要有ACID
 
 ORM object relational mapping, mysql oracle都是可以被java裡搞定起來
 
-DDL 時都是差不多的　－　Data Definition Language，DDL
+DDL 時就是schema都是差不多的　－　Data Definition Language，DDL
 
 #### NoSQL就有分流派了 主要就是四大流派
 
@@ -107,7 +130,11 @@ Key-Value資料庫、記憶體資料庫、圖學資料庫和文件資料庫.
 
 ##### 最重要的就是Schemaless -- 就是沒有schema, 
 
-#### Document store
+#### Document store，
+
+##### Schemaless
+
+如JSON就是kv, 就是schemaless
 
 > Abstraction: key-value store with documents stored as values
 
@@ -129,7 +156,7 @@ Based on the underlying impleme
 
 > Abstraction: nested map `ColumnFamily>`
 
-Google introduced [Bigtable](http://www.read.seas.harvard.edu/~kohler/class/cs239-w08/chang06bigtable.pdf) as the first wide column store, which influenced the open-source [HBase](https://www.mapr.com/blog/in-depth-look-hbase-architecture) often-used in the Hadoop ecosystem, and [Cassandra](http://docs.datastax.com/en/cassandra/3.0/cassandra/architecture/archIntro.html) from Facebook. Stores such as BigTable, HBase, and Cassandra maintain keys in lexicographic order, allowing efficient retrieval of selective key ranges.
+**Google introduced [Bigtable](http://www.read.seas.harvard.edu/~kohler/class/cs239-w08/chang06bigtable.pdf)** as the first wide column store, which influenced the open-source **[HBase](https://www.mapr.com/blog/in-depth-look-hbase-architecture) (by Hadoop)** often-used in the Hadoop ecosystem, and [Cassandra](http://docs.datastax.com/en/cassandra/3.0/cassandra/architecture/archIntro.html) from Facebook. Stores such as BigTable, HBase, and Cassandra maintain keys in lexicographic order, allowing efficient retrieval of selective key ranges.
 
 
 
@@ -149,21 +176,21 @@ Graphs databases offer high performance for data models with complex relationshi
 ##### Source(s) and further reading: graph
 
 - [Graph database](https://en.wikipedia.org/wiki/Graph_database)
-- [Neo4j](https://neo4j.com/)
+- **[Neo4j](https://neo4j.com/)**
 - [FlockDB](https://blog.twitter.com/2010/introducing-flockdb)
 
 
 
-## SQL vs NoSQL
+## SQL vs NoSQL 何時用?
 
-mysql vs cassandra 之間的區別之類的？
+如mysql vs cassandra (mongoDB) 之間的區別之類的？
 
 Reasons for **SQL**:
 
 - Structured data
 - Strict schema
-- Relational data
-- Need for complex joins 如用戶跟group
+- **Relational data**
+- Need for complex **joins** 如用戶跟group
 - Transactions　事務
 - Clear patterns for scaling
 - More established: developers, community, code, tools, etc
@@ -181,7 +208,7 @@ Reasons for **NoSQL**:
 
 Sample data well-suited for NoSQL:
 
-- Rapid ingest of clickstream and ***log data*** 之前說的頻繁寫的
+- Rapid ingest of clickstream and ***log data*** **之前說的頻繁寫的!!**
 - Leaderboard or scoring data ***就 eventually consistency 就好的***
 - Temporary data, such as a shopping cart  有cache就可以搞定
 - Frequently accessed ('hot') tables

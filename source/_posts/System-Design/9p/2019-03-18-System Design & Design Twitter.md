@@ -401,7 +401,7 @@ NoSQL 有index吗？
 
 別人在發帖時，就把他的推到了我的News Feed List裡 -- ***Fanout***
 
-需要一個News Feed Table。
+需要一個**News Feed Table**。
 
 - 用戶需要查看News Feed時，只要從該News Feed Lists中讀取最新的100條就可
 

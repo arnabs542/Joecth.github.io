@@ -75,6 +75,12 @@ O(n^2), O(n^2)
 
 ### H-sort, Heap-sort
 
+#### Fina Style, fr, G4G
+
+https://www.youtube.com/watch?v=JSmFZMJURug
+
+https://www.bilibili.com/video/av18980178/
+
 ```python
 # Python program for implementation of heap Sort 
   
@@ -204,6 +210,8 @@ Also,
 
 https://alrightchiu.github.io/SecondRound/comparison-sort-heap-sortdui-ji-pai-xu-fa.html
 
+
+
 ### Q-Sort
 
 ```python
@@ -282,6 +290,32 @@ print(data)
 
 
 
+#### Final Style: Small to Large
+
+```python
+    def Q_Sort(self, nums, left, right):
+        if left > right:
+            return 
+            
+        pivot = nums[left]
+        i, j = left, right
+        while i <= j:
+            while i <= j and nums[i] < pivot:
+                i += 1
+            while i <= j and nums[j] > pivot:
+                j -= 1
+            
+            if i <= j:
+                nums[i], nums[j] = nums[j], nums[i]
+                i += 1
+                j -= 1
+        # print(i, j)
+        self.Q_Sort(nums, left, j)
+        self.Q_Sort(nums, i, right)
+```
+
+
+
 ### Q-Select
 
 ```python
@@ -346,6 +380,102 @@ I hope you understand the difference.
 
 4.7k views · [View Upvoters](https://www.quora.com/How-is-time-taken-by-a-randomized-quick-select-algorithm-in-O-n#)
 
+#### Q-Select Recursive, K largest
+
+
+
+
+
+
+
+![image-20200707211441434](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggis7t29ubj30q00e03zo.jpg)
+
+
+
+![image-20200707223346040](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggis76piakj30ni0kygrn.jpg)
+
+
+
+##### Code
+
+```python
+    def kthLargestElement(self, n, nums):
+        # write your code here
+        return self.Q_select(nums, 0, len(nums)-1, n)
+        
+    def Q_select(self, nums, left, right, k):
+        pivot = nums[left]
+        i, j = left, right
+        
+        while i <= j:    
+            while i <= j and nums[i] > pivot:
+                i += 1
+            while i <= j and nums[j] < pivot:
+                j -= 1
+            
+            if i <= j:
+                tmp = nums[i]
+                nums[i] = nums[j]
+                nums[j] = tmp
+                i += 1
+                j -= 1
+        # print(nums)
+        # if k <= j:
+        if left + k - 1 <= j:
+            return self.Q_select(nums, left, j, k)
+        # if k >= i:
+        if left + k - 1 >= i:
+            return self.Q_select(nums, i, right, k-(i-left))
+        return nums[j+1]
+```
+
+
+
+#### Median
+
+```python
+class Solution:
+    """
+    @param nums: A list of integers
+    @return: An integer denotes the middle number of the array
+    """
+    def median(self, nums):
+        # write your code here
+        n = len(nums)
+        k = 0
+        # if n % 2 == 1:
+        #     k = n//2 + 1
+        # else:
+        #     k = n//2 + 1
+        k = n//2 + 1    # Since I make it in DECENDING order
+        
+        return self.Q_select(nums, 0, n-1, k)
+    
+    def Q_select(self, nums, left, right, k):
+        pivot = nums[left]
+        i, j = left, right
+        while i <= j:
+            while i <= j and nums[i] > pivot:
+                i += 1
+            while j <= j and nums[j] < pivot:
+                j -= 1
+            if i <= j:
+                nums[i], nums[j] = nums[j], nums[i]
+                i += 1
+                j -= 1
+        
+        offset_id = left + k - 1
+        if offset_id <= j:
+            return self.Q_select(nums, left, j, k)
+        if offset_id >= i:
+            return self.Q_select(nums, i, right, k-(i-left))
+        return nums[j+1]
+        
+        
+```
+
+
+
 
 
 
@@ -387,6 +517,98 @@ def mergeSort(arr):
             arr[k] = R[j] 
             j+=1
             k+=1
+```
+
+
+
+#### Final Style, more record of mine on 464
+
+```python
+        """ M Sort """
+        temp = [0] * len(A)
+        self.M_Sort(A, 0, len(A)-1, temp)
+        return A
+        
+    def M_Sort(self, nums, left, right, temp):
+        if left >= right:
+            return
+        mid = left + (right - left)//2
+        self.M_Sort(nums, left, mid, temp)
+        self.M_Sort(nums, mid+1, right, temp)
+        
+        i, j = left, mid+1
+        # k = 0
+        k = left    # CRITICAL
+        while i <= mid and j <= right:
+            if nums[i] <= nums[j]:
+                temp[k] = nums[i]
+                i += 1
+            else:
+                temp[k] = nums[j]
+                j += 1
+            k += 1
+        
+        while i <= mid:
+            temp[k] = nums[i]
+            i += 1
+            k += 1
+        while j <= right:
+            temp[k] = nums[j]
+            j += 1
+            k += 1
+        
+        for idx in range(left, right+1):
+            nums[idx] = temp[idx]
+
+```
+
+
+
+#### Reverse Pairs
+
+```python
+    def reversePairs(self, A):
+        # Write your code here
+        if not A:
+            return 0
+        temp = [0] * len(A)
+        return self.M_Sort(A, 0, len(A)-1, temp)
+        
+    def M_Sort(self, nums, left, right, temp):
+        if left >= right:
+            return 0
+            
+        mid = left + (right - left)//2
+        count = 0
+        count += self.M_Sort(nums, left, mid, temp)
+        count += self.M_Sort(nums, mid+1, right, temp)
+        
+        i, j = left, mid + 1
+        k = left
+        
+        while i <= mid and j <= right:
+            if nums[i] <= nums[j]:
+            # if nums[i] < nums[j]:
+                temp[k] = nums[i]
+                i += 1
+            else:
+                temp[k] = nums[j]
+                j += 1
+                count += mid + 1 - i
+            k += 1
+            
+        while i <= mid:
+            temp[k] = nums[i]
+            i += 1
+            k += 1
+        while j <= right:
+            temp[k] = nums[j]
+            j += 1
+            k += 1
+        for i in range(left, right+1):
+            nums[i] = temp[i]    
+        
+        return count
 ```
 
 
