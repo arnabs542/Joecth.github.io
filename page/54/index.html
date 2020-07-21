@@ -1,0 +1,310 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content=""><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">273</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">40</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2017/06/07/DevOps/2017-06-07-Mac-Alg-and-Dev-Configuration/">DevOps/2017-06-07-Mac-Alg-and-Dev-Configuration</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-06-07</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/DevOps/">DevOps</a></span><div class="content"><p>#Alg &amp; Dev Configuration for a NEW Mac Pro</p>
+<!--![aaa](http://img2.3png.com/efa7ac2948c7148fb02c1cfc57afe5170de6.png)
+-->
+
+<p>##Z-shell</p>
+<p>##Homebrew</p>
+<ol>
+<li><a href="http://brew.sh" target="_blank" rel="noopener" title="install_HB">Install</a> homebrew </li>
+</ol>
+<p>##MacVim</p>
+<ol>
+<li>Add export PATH=/usr/local/bin:$PATH to .zshrc</li>
+<li>brew update</li>
+<li>brew install macvim </li>
+<li>Run brew link macvim<br><img src="https://i.imgur.com/mOqtUOD.png" alt="aaa"><br><a href="https://imgchr.com/i/A4e9Hg" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/04/07/A4e9Hg.md.png" alt="A4e9Hg.md.png"></a></li>
+</ol>
+<p>P.S. vim in the same way<br>We now have the latest versions of macvim managed by brew. Run brew update &amp;&amp; brew upgrade every once in a while to upgrade them.</p>
+<!--This includes the installation of the CLI mvim and the mac application (which both point to the same thing).-->
+
+
+<p>##.vimrc<br><a href="https://github.com/Joecth/gvim_Linux" target="_blank" rel="noopener">Joecth’s github</a>  setting<br>Just put .vimrc under $HOME dir (~/), all settings are done (font size, color, theme, etc. )</p>
+<p>##iterm2<br>![iterm2_zshell_done](<a href="https://i.imgur.com/iq3gCAu.png" target="_blank" rel="noopener">https://i.imgur.com/iq3gCAu.png</a> =30x) <!-- .element height="50%" width="50%" --></p>
+<p>##MacDown</p>
+<p>##tmux</p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2017/04/03/DevOps/2017-04-03-awk/">DevOps/2017-04-03-awk</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-04-03</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/DevOps/">DevOps</a></span><div class="content"><p>ref from: <a href="https://coolshell.cn/articles/9070.html" target="_blank" rel="noopener">https://coolshell.cn/articles/9070.html</a></p>
+<p>我从netstat命令中提取了如下信息作为用例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`$ ``cat` `netstat``.txt``Proto Recv-Q Send-Q Local-Address          Foreign-Address             State``tcp        0      0 0.0.0.0:3306           0.0.0.0:*                   LISTEN``tcp        0      0 0.0.0.0:80             0.0.0.0:*                   LISTEN``tcp        0      0 127.0.0.1:9000         0.0.0.0:*                   LISTEN``tcp        0      0 coolshell.cn:80        124.205.5.146:18245         TIME_WAIT``tcp        0      0 coolshell.cn:80        61.140.101.185:37538        FIN_WAIT2``tcp        0      0 coolshell.cn:80        110.194.134.189:1032        ESTABLISHED``tcp        0      0 coolshell.cn:80        123.169.124.111:49809       ESTABLISHED``tcp        0      0 coolshell.cn:80        116.234.127.77:11502        FIN_WAIT2``tcp        0      0 coolshell.cn:80        123.169.124.111:49829       ESTABLISHED``tcp        0      0 coolshell.cn:80        183.60.215.36:36970         TIME_WAIT``tcp        0   4166 coolshell.cn:80        61.148.242.38:30901         ESTABLISHED``tcp        0      1 coolshell.cn:80        124.152.181.209:26825       FIN_WAIT1``tcp        0      0 coolshell.cn:80        110.194.134.189:4796        ESTABLISHED``tcp        0      0 coolshell.cn:80        183.60.212.163:51082        TIME_WAIT``tcp        0      1 coolshell.cn:80        208.115.113.92:50601        LAST_ACK``tcp        0      0 coolshell.cn:80        123.169.124.111:49840       ESTABLISHED``tcp        0      0 coolshell.cn:80        117.136.20.85:50025         FIN_WAIT2``tcp        0      0 :::22                  :::*                        LISTEN`</span><br></pre></td></tr></table></figure>
+
+<p>下面是最简单最常用的awk示例，其输出第1列和第4例，</p>
+<ul>
+<li>其中单引号中的被大括号括着的就是awk的语句，注意，其只能被单引号包含。</li>
+<li>其中的$1..$n表示第几例。注：$0表示整个行。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`$ ``awk` `<span class="string">'&#123;print $1, $4&#125;'</span>` `netstat``.txt``Proto Local-Address``tcp 0.0.0.0:3306``tcp 0.0.0.0:80``tcp 127.0.0.1:9000``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp coolshell.cn:80``tcp :::22`</span><br></pre></td></tr></table></figure>
+
+<p>我们再来看看awk的格式化输出，和C语言的printf没什么两样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;&#123;printf &quot;%-8s %-8s %-8s %-18s %-22s %-15s\n&quot;,$1,$2,$3,$4,$5,$6&#125;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;Proto    Recv-Q   Send-Q   Local-Address      Foreign-Address        State&#96;&#96;tcp      0        0        0.0.0.0:3306       0.0.0.0:*              LISTEN&#96;&#96;tcp      0        0        0.0.0.0:80         0.0.0.0:*              LISTEN&#96;&#96;tcp      0        0        127.0.0.1:9000     0.0.0.0:*              LISTEN&#96;&#96;tcp      0        0        coolshell.cn:80    124.205.5.146:18245    TIME_WAIT&#96;&#96;tcp      0        0        coolshell.cn:80    61.140.101.185:37538   FIN_WAIT2&#96;&#96;tcp      0        0        coolshell.cn:80    110.194.134.189:1032   ESTABLISHED&#96;&#96;tcp      0        0        coolshell.cn:80    123.169.124.111:49809  ESTABLISHED&#96;&#96;tcp      0        0        coolshell.cn:80    116.234.127.77:11502   FIN_WAIT2&#96;&#96;tcp      0        0        coolshell.cn:80    123.169.124.111:49829  ESTABLISHED&#96;&#96;tcp      0        0        coolshell.cn:80    183.60.215.36:36970    TIME_WAIT&#96;&#96;tcp      0        4166     coolshell.cn:80    61.148.242.38:30901    ESTABLISHED&#96;&#96;tcp      0        1        coolshell.cn:80    124.152.181.209:26825  FIN_WAIT1&#96;&#96;tcp      0        0        coolshell.cn:80    110.194.134.189:4796   ESTABLISHED&#96;&#96;tcp      0        0        coolshell.cn:80    183.60.212.163:51082   TIME_WAIT&#96;&#96;tcp      0        1        coolshell.cn:80    208.115.113.92:50601   LAST_ACK&#96;&#96;tcp      0        0        coolshell.cn:80    123.169.124.111:49840  ESTABLISHED&#96;&#96;tcp      0        0        coolshell.cn:80    117.136.20.85:50025    FIN_WAIT2&#96;&#96;tcp      0        0        :::22              :::*                   LISTEN&#96;</span><br></pre></td></tr></table></figure>
+
+<h4 id="脱掉外套"><a href="#脱掉外套" class="headerlink" title="脱掉外套"></a>脱掉外套</h4><h5 id="过滤记录"><a href="#过滤记录" class="headerlink" title="过滤记录"></a>过滤记录</h5><p>我们再来看看如何过滤记录（下面过滤条件为：第三列的值为0 &amp;&amp; 第6列的值为LISTEN）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;$3&#x3D;&#x3D;0 &amp;&amp; $6&#x3D;&#x3D;&quot;LISTEN&quot; &#39;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;tcp        0      0 0.0.0.0:3306               0.0.0.0:*              LISTEN&#96;&#96;tcp        0      0 0.0.0.0:80                 0.0.0.0:*              LISTEN&#96;&#96;tcp        0      0 127.0.0.1:9000             0.0.0.0:*              LISTEN&#96;&#96;tcp        0      0 :::22                      :::*                   LISTEN&#96;</span><br></pre></td></tr></table></figure>
+
+<p>其中的“==”为比较运算符。其他比较运算符：!=, &gt;, &lt;, &gt;=, &lt;=</p>
+<p>我们来看看各种过滤记录的方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39; $3&gt;0 &#123;print $0&#125;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;Proto Recv-Q Send-Q Local-Address          Foreign-Address             State&#96;&#96;tcp        0   4166 coolshell.cn:80        61.148.242.38:30901         ESTABLISHED&#96;&#96;tcp        0      1 coolshell.cn:80        124.152.181.209:26825       FIN_WAIT1&#96;&#96;tcp        0      1 coolshell.cn:80        208.115.113.92:50601        LAST_ACK&#96;</span><br></pre></td></tr></table></figure>
+
+<p>如果我们需要表头的话，我们可以引入内建变量NR：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;$3&#x3D;&#x3D;0 &amp;&amp; $6&#x3D;&#x3D;&quot;LISTEN&quot; || NR&#x3D;&#x3D;1 &#39;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;Proto Recv-Q Send-Q Local-Address          Foreign-Address             State&#96;&#96;tcp        0      0 0.0.0.0:3306           0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 0.0.0.0:80             0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 127.0.0.1:9000         0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 :::22                  :::*                        LISTEN&#96;</span><br></pre></td></tr></table></figure>
+
+<p>再加上格式化输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;$3&#x3D;&#x3D;0 &amp;&amp; $6&#x3D;&#x3D;&quot;LISTEN&quot; || NR&#x3D;&#x3D;1 &#123;printf &quot;%-20s %-20s %s\n&quot;,$4,$5,$6&#125;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;Local-Address        Foreign-Address      State&#96;&#96;0.0.0.0:3306         0.0.0.0:*            LISTEN&#96;&#96;0.0.0.0:80           0.0.0.0:*            LISTEN&#96;&#96;127.0.0.1:9000       0.0.0.0:*            LISTEN&#96;&#96;:::22                :::*                 LISTEN&#96;</span><br></pre></td></tr></table></figure>
+
+<h5 id="内建变量"><a href="#内建变量" class="headerlink" title="内建变量"></a><strong>内建变量</strong></h5><p>说到了内建变量，我们可以来看看awk的一些内建变量：</p>
+<table>
+<thead>
+<tr>
+<th>$0</th>
+<th>当前记录（这个变量中存放着整个行的内容）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$1~$n</td>
+<td>当前记录的第n个字段，字段间由FS分隔</td>
+</tr>
+<tr>
+<td>FS</td>
+<td>输入字段分隔符 默认是空格或Tab</td>
+</tr>
+<tr>
+<td>NF</td>
+<td>当前记录中的字段个数，就是有多少列</td>
+</tr>
+<tr>
+<td>NR</td>
+<td>已经读出的记录数，就是行号，从1开始，如果有多个文件话，这个值也是不断累加中。</td>
+</tr>
+<tr>
+<td>FNR</td>
+<td>当前记录数，与NR不同的是，这个值会是各个文件自己的行号</td>
+</tr>
+<tr>
+<td>RS</td>
+<td>输入的记录分隔符， 默认为换行符</td>
+</tr>
+<tr>
+<td>OFS</td>
+<td>输出字段分隔符， 默认也是空格</td>
+</tr>
+<tr>
+<td>ORS</td>
+<td>输出的记录分隔符，默认为换行符</td>
+</tr>
+<tr>
+<td>FILENAME</td>
+<td>当前输入文件的名字</td>
+</tr>
+</tbody></table>
+<p>怎么使用呢，比如：我们如果要输出行号：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;$3&#x3D;&#x3D;0 &amp;&amp; $6&#x3D;&#x3D;&quot;ESTABLISHED&quot; || NR&#x3D;&#x3D;1 &#123;printf &quot;%02s %s %-20s %-20s %s\n&quot;,NR, FNR, $4,$5,$6&#125;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;01 1 Local-Address        Foreign-Address      State&#96;&#96;07 7 coolshell.cn:80      110.194.134.189:1032 ESTABLISHED&#96;&#96;08 8 coolshell.cn:80      123.169.124.111:49809 ESTABLISHED&#96;&#96;10 10 coolshell.cn:80      123.169.124.111:49829 ESTABLISHED&#96;&#96;14 14 coolshell.cn:80      110.194.134.189:4796 ESTABLISHED&#96;&#96;17 17 coolshell.cn:80      123.169.124.111:49840 ESTABLISHED&#96;</span><br></pre></td></tr></table></figure>
+
+<h5 id="指定分隔符"><a href="#指定分隔符" class="headerlink" title="指定分隔符"></a><strong>指定分隔符</strong></h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$  &#96;&#96;awk&#96;  &#96;&#39;BEGIN&#123;FS&#x3D;&quot;:&quot;&#125; &#123;print $1,$3,$6&#125;&#39;&#96; &#96;&#x2F;etc&#x2F;passwd&#96;&#96;root 0 &#96;&#96;&#x2F;root&#96;&#96;bin 1 &#96;&#96;&#x2F;bin&#96;&#96;daemon 2 &#96;&#96;&#x2F;sbin&#96;&#96;adm 3 &#96;&#96;&#x2F;var&#x2F;adm&#96;&#96;lp 4 &#96;&#96;&#x2F;var&#x2F;spool&#x2F;lpd&#96;&#96;sync&#96; &#96;5 &#96;&#96;&#x2F;sbin&#96;&#96;shutdown&#96; &#96;6 &#96;&#96;&#x2F;sbin&#96;&#96;halt 7 &#96;&#96;&#x2F;sbin&#96;</span><br></pre></td></tr></table></figure>
+
+<p>上面的命令也等价于：（-F的意思就是指定分隔符）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96;  &#96;-F: &#96;&#96;&#39;&#123;print $1,$3,$6&#125;&#39;&#96; &#96;&#x2F;etc&#x2F;passwd&#96;</span><br></pre></td></tr></table></figure>
+
+<p>注：如果你要指定多个分隔符，你可以这样来：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;awk&#96; &#96;-F &#96;&#96;&#39;[;:]&#39;&#96;</span><br></pre></td></tr></table></figure>
+
+<p>再来看一个以\t作为分隔符输出的例子（下面使用了/etc/passwd文件，这个文件是以:分隔的）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96;  &#96;-F: &#96;&#96;&#39;&#123;print $1,$3,$6&#125;&#39;&#96; &#96;OFS&#x3D;&#96;&#96;&quot;\t&quot;&#96; &#96;&#x2F;etc&#x2F;passwd&#96;&#96;root    0       &#96;&#96;&#x2F;root&#96;&#96;bin     1       &#96;&#96;&#x2F;bin&#96;&#96;daemon  2       &#96;&#96;&#x2F;sbin&#96;&#96;adm     3       &#96;&#96;&#x2F;var&#x2F;adm&#96;&#96;lp      4       &#96;&#96;&#x2F;var&#x2F;spool&#x2F;lpd&#96;&#96;sync&#96;    &#96;5       &#96;&#96;&#x2F;sbin&#96;</span><br></pre></td></tr></table></figure>
+
+<h4 id="脱掉衬衫"><a href="#脱掉衬衫" class="headerlink" title="脱掉衬衫"></a>脱掉衬衫</h4><h5 id="字符串匹配"><a href="#字符串匹配" class="headerlink" title="字符串匹配"></a>字符串匹配</h5><p>我们再来看几个字符串匹配的示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;$6 ~ &#x2F;FIN&#x2F; || NR&#x3D;&#x3D;1 &#123;print NR,$4,$5,$6&#125;&#39;&#96; &#96;OFS&#x3D;&#96;&#96;&quot;\t&quot;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;1       Local-Address   Foreign-Address State&#96;&#96;6       coolshell.cn:80 61.140.101.185:37538    FIN_WAIT2&#96;&#96;9       coolshell.cn:80 116.234.127.77:11502    FIN_WAIT2&#96;&#96;13      coolshell.cn:80 124.152.181.209:26825   FIN_WAIT1&#96;&#96;18      coolshell.cn:80 117.136.20.85:50025     FIN_WAIT2&#96; &#96;$ $ &#96;&#96;awk&#96; &#96;&#39;$6 ~ &#x2F;WAIT&#x2F; || NR&#x3D;&#x3D;1 &#123;print NR,$4,$5,$6&#125;&#39;&#96; &#96;OFS&#x3D;&#96;&#96;&quot;\t&quot;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;1       Local-Address   Foreign-Address State&#96;&#96;5       coolshell.cn:80 124.205.5.146:18245     TIME_WAIT&#96;&#96;6       coolshell.cn:80 61.140.101.185:37538    FIN_WAIT2&#96;&#96;9       coolshell.cn:80 116.234.127.77:11502    FIN_WAIT2&#96;&#96;11      coolshell.cn:80 183.60.215.36:36970     TIME_WAIT&#96;&#96;13      coolshell.cn:80 124.152.181.209:26825   FIN_WAIT1&#96;&#96;15      coolshell.cn:80 183.60.212.163:51082    TIME_WAIT&#96;&#96;18      coolshell.cn:80 117.136.20.85:50025     FIN_WAIT2&#96;</span><br></pre></td></tr></table></figure>
+
+<p>上面的第一个示例匹配FIN状态， 第二个示例匹配WAIT字样的状态。其实 ~ 表示模式开始。/ /中是模式。这就是一个正则表达式的匹配。</p>
+<p>其实awk可以像grep一样的去匹配第一行，就像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;&#x2F;LISTEN&#x2F;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;tcp        0      0 0.0.0.0:3306            0.0.0.0:*               LISTEN&#96;&#96;tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN&#96;&#96;tcp        0      0 127.0.0.1:9000          0.0.0.0:*               LISTEN&#96;&#96;tcp        0      0 :::22                   :::*                    LISTEN&#96;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以使用 “/FIN|TIME/” 来匹配 FIN 或者 TIME :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;$6 ~ &#x2F;FIN|TIME&#x2F; || NR&#x3D;&#x3D;1 &#123;print NR,$4,$5,$6&#125;&#39;&#96; &#96;OFS&#x3D;&#96;&#96;&quot;\t&quot;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;1       Local-Address   Foreign-Address State&#96;&#96;5       coolshell.cn:80 124.205.5.146:18245     TIME_WAIT&#96;&#96;6       coolshell.cn:80 61.140.101.185:37538    FIN_WAIT2&#96;&#96;9       coolshell.cn:80 116.234.127.77:11502    FIN_WAIT2&#96;&#96;11      coolshell.cn:80 183.60.215.36:36970     TIME_WAIT&#96;&#96;13      coolshell.cn:80 124.152.181.209:26825   FIN_WAIT1&#96;&#96;15      coolshell.cn:80 183.60.212.163:51082    TIME_WAIT&#96;&#96;18      coolshell.cn:80 117.136.20.85:50025     FIN_WAIT2&#96;</span><br></pre></td></tr></table></figure>
+
+<p>再来看看模式取反的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;$6 !~ &#x2F;WAIT&#x2F; || NR&#x3D;&#x3D;1 &#123;print NR,$4,$5,$6&#125;&#39;&#96; &#96;OFS&#x3D;&#96;&#96;&quot;\t&quot;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;1       Local-Address   Foreign-Address State&#96;&#96;2       0.0.0.0:3306    0.0.0.0:*       LISTEN&#96;&#96;3       0.0.0.0:80      0.0.0.0:*       LISTEN&#96;&#96;4       127.0.0.1:9000  0.0.0.0:*       LISTEN&#96;&#96;7       coolshell.cn:80 110.194.134.189:1032    ESTABLISHED&#96;&#96;8       coolshell.cn:80 123.169.124.111:49809   ESTABLISHED&#96;&#96;10      coolshell.cn:80 123.169.124.111:49829   ESTABLISHED&#96;&#96;12      coolshell.cn:80 61.148.242.38:30901     ESTABLISHED&#96;&#96;14      coolshell.cn:80 110.194.134.189:4796    ESTABLISHED&#96;&#96;16      coolshell.cn:80 208.115.113.92:50601    LAST_ACK&#96;&#96;17      coolshell.cn:80 123.169.124.111:49840   ESTABLISHED&#96;&#96;19      :::22   :::*    LISTEN&#96;</span><br></pre></td></tr></table></figure>
+
+<p>或是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;awk&#96; &#96;&#39;!&#x2F;WAIT&#x2F;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96;</span><br></pre></td></tr></table></figure>
+
+<p><strong>折分文件</strong></p>
+<p>awk拆分文件很简单，使用重定向就好了。下面这个例子，是按第6例分隔文件，相当的简单（其中的NR!=1表示不处理表头）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;NR!&#x3D;1&#123;print &gt; $6&#125;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96; &#96;$ &#96;&#96;ls&#96;&#96;ESTABLISHED  FIN_WAIT1  FIN_WAIT2  LAST_ACK  LISTEN  &#96;&#96;netstat&#96;&#96;.txt  TIME_WAIT&#96; &#96;$ &#96;&#96;cat&#96; &#96;ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        110.194.134.189:1032        ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        123.169.124.111:49809       ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        123.169.124.111:49829       ESTABLISHED&#96;&#96;tcp        0   4166 coolshell.cn:80        61.148.242.38:30901         ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        110.194.134.189:4796        ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        123.169.124.111:49840       ESTABLISHED&#96; &#96;$ &#96;&#96;cat&#96; &#96;FIN_WAIT1&#96;&#96;tcp        0      1 coolshell.cn:80        124.152.181.209:26825       FIN_WAIT1&#96; &#96;$ &#96;&#96;cat&#96; &#96;FIN_WAIT2&#96;&#96;tcp        0      0 coolshell.cn:80        61.140.101.185:37538        FIN_WAIT2&#96;&#96;tcp        0      0 coolshell.cn:80        116.234.127.77:11502        FIN_WAIT2&#96;&#96;tcp        0      0 coolshell.cn:80        117.136.20.85:50025         FIN_WAIT2&#96; &#96;$ &#96;&#96;cat&#96; &#96;LAST_ACK&#96;&#96;tcp        0      1 coolshell.cn:80        208.115.113.92:50601        LAST_ACK&#96; &#96;$ &#96;&#96;cat&#96; &#96;LISTEN&#96;&#96;tcp        0      0 0.0.0.0:3306           0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 0.0.0.0:80             0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 127.0.0.1:9000         0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 :::22                  :::*                        LISTEN&#96; &#96;$ &#96;&#96;cat&#96; &#96;TIME_WAIT&#96;&#96;tcp        0      0 coolshell.cn:80        124.205.5.146:18245         TIME_WAIT&#96;&#96;tcp        0      0 coolshell.cn:80        183.60.215.36:36970         TIME_WAIT&#96;&#96;tcp        0      0 coolshell.cn:80        183.60.212.163:51082        TIME_WAIT&#96;</span><br></pre></td></tr></table></figure>
+
+<p>你也可以把指定的列输出到文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;awk&#96; &#96;&#39;NR!&#x3D;1&#123;print $4,$5 &gt; $6&#125;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96;</span><br></pre></td></tr></table></figure>
+
+<p>再复杂一点：（注意其中的if-else-if语句，可见awk其实是个脚本解释器）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;NR!&#x3D;1&#123;&#96;&#96;if&#96;&#96;($6 ~ &#96;&#96;&#x2F;TIME&#96;&#96;|ESTABLISHED&#x2F;) print &gt; &#96;&#96;&quot;1.txt&quot;&#96;&#96;;&#96;&#96;else&#96; &#96;if&#96;&#96;($6 ~ &#96;&#96;&#x2F;LISTEN&#x2F;&#96;&#96;) print &gt; &#96;&#96;&quot;2.txt&quot;&#96;&#96;;&#96;&#96;else&#96; &#96;print &gt; &#96;&#96;&quot;3.txt&quot;&#96; &#96;&#125;&#39; &#96;&#96;netstat&#96;&#96;.txt&#96; &#96;$ &#96;&#96;ls&#96; &#96;?.txt&#96;&#96;1.txt  2.txt  3.txt&#96; &#96;$ &#96;&#96;cat&#96; &#96;1.txt&#96;&#96;tcp        0      0 coolshell.cn:80        124.205.5.146:18245         TIME_WAIT&#96;&#96;tcp        0      0 coolshell.cn:80        110.194.134.189:1032        ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        123.169.124.111:49809       ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        123.169.124.111:49829       ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        183.60.215.36:36970         TIME_WAIT&#96;&#96;tcp        0   4166 coolshell.cn:80        61.148.242.38:30901         ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        110.194.134.189:4796        ESTABLISHED&#96;&#96;tcp        0      0 coolshell.cn:80        183.60.212.163:51082        TIME_WAIT&#96;&#96;tcp        0      0 coolshell.cn:80        123.169.124.111:49840       ESTABLISHED&#96; &#96;$ &#96;&#96;cat&#96; &#96;2.txt&#96;&#96;tcp        0      0 0.0.0.0:3306           0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 0.0.0.0:80             0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 127.0.0.1:9000         0.0.0.0:*                   LISTEN&#96;&#96;tcp        0      0 :::22                  :::*                        LISTEN&#96; &#96;$ &#96;&#96;cat&#96; &#96;3.txt&#96;&#96;tcp        0      0 coolshell.cn:80        61.140.101.185:37538        FIN_WAIT2&#96;&#96;tcp        0      0 coolshell.cn:80        116.234.127.77:11502        FIN_WAIT2&#96;&#96;tcp        0      1 coolshell.cn:80        124.152.181.209:26825       FIN_WAIT1&#96;&#96;tcp        0      1 coolshell.cn:80        208.115.113.92:50601        LAST_ACK&#96;&#96;tcp        0      0 coolshell.cn:80        117.136.20.85:50025         FIN_WAIT2&#96;</span><br></pre></td></tr></table></figure>
+
+<h5 id="统计"><a href="#统计" class="headerlink" title="统计"></a>统计</h5><p>下面的命令计算所有的C文件，CPP文件和H文件的文件大小总和。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;ls&#96; &#96;-l  *.cpp *.c *.h | &#96;&#96;awk&#96; &#96;&#39;&#123;sum+&#x3D;$5&#125; END &#123;print sum&#125;&#39;&#96;&#96;2511401&#96;</span><br></pre></td></tr></table></figure>
+
+<p>我们再来看一个统计各个connection状态的用法：（我们可以看到一些编程的影子了，大家都是程序员我就不解释了。注意其中的数组的用法）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;awk&#96; &#96;&#39;NR!&#x3D;1&#123;a[$6]++;&#125; END &#123;for (i in a) print i &quot;, &quot; a[i];&#125;&#39;&#96; &#96;netstat&#96;&#96;.txt&#96;&#96;TIME_WAIT, 3&#96;&#96;FIN_WAIT1, 1&#96;&#96;ESTABLISHED, 6&#96;&#96;FIN_WAIT2, 3&#96;&#96;LAST_ACK, 1&#96;&#96;LISTEN, 4&#96;</span><br></pre></td></tr></table></figure>
+
+<p>再来看看统计每个用户的进程的占了多少内存（注：sum的RSS那一列）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;ps&#96; &#96;aux | &#96;&#96;awk&#96; &#96;&#39;NR!&#x3D;1&#123;a[$1]+&#x3D;$6;&#125; END &#123; for(i in a) print i &quot;, &quot; a[i]&quot;KB&quot;;&#125;&#39;&#96;&#96;dbus, 540KB&#96;&#96;mysql, 99928KB&#96;&#96;www, 3264924KB&#96;&#96;root, 63644KB&#96;&#96;hchen, 6020KB&#96;</span><br></pre></td></tr></table></figure>
+
+<h4 id="脱掉内衣"><a href="#脱掉内衣" class="headerlink" title="脱掉内衣"></a>脱掉内衣</h4><h5 id="awk脚本"><a href="#awk脚本" class="headerlink" title="awk脚本"></a>awk脚本</h5><p>在上面我们可以看到一个END关键字。END的意思是“处理完所有的行的标识”，即然说到了END就有必要介绍一下BEGIN，这两个关键字意味着执行前和执行后的意思，语法如下：</p>
+<ul>
+<li>BEGIN{ 这里面放的是执行前的语句 }</li>
+<li>END {这里面放的是处理完所有的行后要执行的语句 }</li>
+<li>{这里面放的是处理每一行时要执行的语句}</li>
+</ul>
+<p>为了说清楚这个事，我们来看看下面的示例：</p>
+<p>假设有这么一个文件（学生成绩表）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;cat&#96; &#96;score.txt&#96;&#96;Marry   2143 78 84 77&#96;&#96;Jack    2321 66 78 45&#96;&#96;Tom     2122 48 77 71&#96;&#96;Mike    2537 87 97 95&#96;&#96;Bob     2415 40 57 62&#96;</span><br></pre></td></tr></table></figure>
+
+<p>我们的awk脚本如下（我没有写有命令行上是因为命令行上不易读，另外也在介绍另一种用法）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;$ &#96;&#96;cat&#96; &#96;cal&#96;&#96;.&#96;&#96;awk&#96;&#96;#!&#x2F;bin&#x2F;awk -f&#96;&#96;#运行前&#96;&#96;BEGIN &#123;&#96;&#96;    &#96;&#96;math &#x3D; 0&#96;&#96;    &#96;&#96;english &#x3D; 0&#96;&#96;    &#96;&#96;computer &#x3D; 0&#96; &#96;    &#96;&#96;printf&#96; &#96;&quot;NAME    NO.   MATH  ENGLISH  COMPUTER   TOTAL\n&quot;&#96;&#96;    &#96;&#96;printf&#96; &#96;&quot;---------------------------------------------\n&quot;&#96;&#96;&#125;&#96;&#96;#运行中&#96;&#96;&#123;&#96;&#96;    &#96;&#96;math+&#x3D;$3&#96;&#96;    &#96;&#96;english+&#x3D;$4&#96;&#96;    &#96;&#96;computer+&#x3D;$5&#96;&#96;    &#96;&#96;printf&#96; &#96;&quot;%-6s %-6s %4d %8d %8d %8d\n&quot;&#96;&#96;, $1, $2, $3,$4,$5, $3+$4+$5&#96;&#96;&#125;&#96;&#96;#运行后&#96;&#96;END &#123;&#96;&#96;    &#96;&#96;printf&#96; &#96;&quot;---------------------------------------------\n&quot;&#96;&#96;    &#96;&#96;printf&#96; &#96;&quot;  TOTAL:%10d %8d %8d \n&quot;&#96;&#96;, math, english, computer&#96;&#96;    &#96;&#96;printf&#96; &#96;&quot;AVERAGE:%10.2f %8.2f %8.2f\n&quot;&#96;&#96;, math&#96;&#96;&#x2F;NR&#96;&#96;, english&#96;&#96;&#x2F;NR&#96;&#96;, computer&#96;&#96;&#x2F;NR&#96;&#96;&#125;&#96;</span><br></pre></td></tr></table></figure>
+
+<p>我们来看一下执行结果：（也可以这样运行 ./cal.awk score.txt）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`$ ``awk` `-f ``cal``.``awk` `score.txt``NAME    NO.   MATH  ENGLISH  COMPUTER   TOTAL``---------------------------------------------``Marry  2143     78       84       77      239``Jack   2321     66       78       45      189``Tom    2122     48       77       71      196``Mike   2537     87       97       95      279``Bob    2415     40       57       62      159``---------------------------------------------``  ``TOTAL:       319      393      350``AVERAGE:     63.80    78.60    70.00`</span><br></pre></td></tr></table></figure>
+
+<h5 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h5><p>即然说到了脚本，我们来看看怎么和环境变量交互：（使用-v参数和ENVIRON，使用ENVIRON的环境变量需要export）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`$ x=5` `$ y=10``$ ``<span class="built_in">export</span>` `y` `$ ``<span class="built_in">echo</span>` `<span class="variable">$x</span> <span class="variable">$y</span>``5 10` `$ ``awk` `-``v` `val=<span class="variable">$x</span> ``<span class="string">'&#123;print $1, $2, $3, $4+val, $5+ENVIRON["y"]&#125;'</span>` `OFS=``<span class="string">"\t"</span>` `score.txt``Marry   2143    78      89      87``Jack    2321    66      83      55``Tom     2122    48      82      81``Mike    2537    87      102     105``Bob     2415    40      62      72`</span><br></pre></td></tr></table></figure>
+
+<h4 id="几个花活"><a href="#几个花活" class="headerlink" title="几个花活"></a>几个花活</h4><p>最后，我们再来看几个小例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`<span class="comment">#从file文件中找出长度大于80的行``awk` `'length&gt;80'` `file` `#按连接数查看客户端IP``netstat` `-ntu | ``awk` `'&#123;print $5&#125;'` `| ``cut` `-d: -f1 | ``sort` `| ``uniq` `-c | ``sort` `-nr` `#打印99乘法表``seq` `9 | ``sed` `'H;g'` `| ``awk` `-``v` `RS=``''` `'&#123;for(i=1;i&lt;=NF;i++)printf("%dx%d=%d%s", i, NR, i*NR, i==NR?"\n":"\t")&#125;'`</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="自己撸吧"><a href="#自己撸吧" class="headerlink" title="自己撸吧"></a>自己撸吧</h4><p>关于其中的一些知识点可以参看<a href="http://www.gnu.org/software/gawk/manual/gawk.html" target="_blank" rel="noopener">gawk的手册</a>：</p>
+<ul>
+<li>内建变量，参看：<a href="http://www.gnu.org/software/gawk/manual/gawk.html#Built_002din-Variables" target="_blank" rel="noopener">http://www.gnu.org/software/gawk/manual/gawk.html#Built_002din-Variables</a></li>
+<li>流控方面，参看：<a href="http://www.gnu.org/software/gawk/manual/gawk.html#Statements" target="_blank" rel="noopener">http://www.gnu.org/software/gawk/manual/gawk.html#Statements</a></li>
+<li>内建函数，参看：<a href="http://www.gnu.org/software/gawk/manual/gawk.html#Built_002din" target="_blank" rel="noopener">http://www.gnu.org/software/gawk/manual/gawk.html#Built_002din</a></li>
+<li>正则表达式，参看：<a href="http://www.gnu.org/software/gawk/manual/gawk.html#Regexp" target="_blank" rel="noopener">http://www.gnu.org/software/gawk/manual/gawk.html#Regexp</a></li>
+</ul>
+<p>（全文完）</p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2017/03/22/LC/2017-03-22-LC-Shells/">LC/2017-03-22-LC-Shells</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-22</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/LC/">LC</a></span><div class="content"><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">head -n 10 file.txt | tail -n +10 <span class="comment"># 4ms</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 首先输入file文件从第十行开始的所有内容，然后将输出内容的第一行打印出来即为第十行：</span></span><br><span class="line">tail -n +10 file.txt | head -n 1 <span class="comment"># 0 ms</span></span><br><span class="line"></span><br><span class="line">awk <span class="string">'NR == 10'</span> file.txt <span class="comment"># 0 ms</span></span><br></pre></td></tr></table></figure>
+
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2017/02/28/Web/2017-02-28-cURL/">Web/2017-02-28-cURL</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2017-02-28</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Web/">Web</a></span><div class="content"><ul>
+<li>-I : only head</li>
+<li>-i head + body</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -I http://www.yahoo.com</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>-o output</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o page.html www.yahoo.com -o page2.html www.google.com</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>-L redirect</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L www.yahoo.com</span><br></pre></td></tr></table></figure>
+
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2016/12/10/ML/2016-12-10-ML-Regularization/">ML/2016-12-10-ML-Regularization</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2016-12-10</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/ML/">ML</a></span><div class="content"><h2 id="1-The-Problem-of-Overfitting"><a href="#1-The-Problem-of-Overfitting" class="headerlink" title="1. The Problem of Overfitting"></a>1. The Problem of Overfitting</h2><p><a href="https://images0.cnblogs.com/blog/663864/201411/081949249876584.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081949392689088.png" alt="image"></a></p>
+<h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><p>还是来看预测房价的这个例子，我们先对该数据做线性回归，也就是左边第一张图。</p>
+<p>如果这么做，我们可以获得拟合数据的这样一条直线，但是，实际上这并不是一个很好的模型。我们看看这些数据，很明显，随着房子面积增大，住房价格的变化趋于稳定或者说越往右越平缓。因此线性回归并没有很好拟合训练数据。</p>
+<blockquote>
+<p><strong>我们把此类情况称为欠拟合(underfitting)，或者叫作叫做高偏差(bias)。</strong></p>
+</blockquote>
+<p>这两种说法大致相似，都表示没有很好地拟合训练数据。高偏差这个词是 machine learning 的研究初期传下来的一个专业名词，具体到这个问题，意思就是说如果用线性回归这个算法去拟合训练数据，那么该算法实际上会产生一个非常大的偏差或者说存在一个很强的偏见。</p>
+<p>第二幅图，我们在中间加入一个二次项，也就是说对于这幅数据我们用二次函数去拟合。自然，可以拟合出一条曲线，事实也证明这个拟合效果很好。</p>
+<p>另一个极端情况是，如果在第三幅图中对于该数据集用一个四次多项式来拟合。因此在这里我们有五个参数θ0到θ4，这样我们同样可以拟合一条曲线，通过我们的五个训练样本，我们可以得到如右图的一条曲线。</p>
+<p>一方面，我们似乎对训练数据做了一个很好的拟合，因为这条曲线通过了所有的训练实例。但是，这实际上是一条很扭曲的曲线，它不停上下波动。因此，事实上我们并不认为它是一个预测房价的好模型。</p>
+<blockquote>
+<p><strong>所以，我们把这类情况叫做过拟合(overfitting)，也叫高方差(variance)。</strong></p>
+</blockquote>
+<p>与高偏差一样，高方差同样也是一个历史上的叫法。从第一印象上来说，如果我们拟合一个高阶多项式，那么这个函数能很好的拟合训练集（能拟合几乎所有的训练数据），但这也就面临函数可能太过庞大的问题，变量太多。</p>
+<p><strong>同时如果我们没有足够的数据集（训练集）去约束这个变量过多的模型，那么就会发生过拟合。</strong></p>
+<h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><p>过度拟合的问题通常发生在变量（特征）过多的时候。这种情况下训练出的方程总是能很好的拟合训练数据，也就是说，我们的代价函数可能非常接近于 0 或者就为 0。</p>
+<p>但是，这样的曲线千方百计的去拟合训练数据，这样会导致它无法泛化到新的数据样本中，以至于无法预测新样本价格。在这里，<strong>术语”泛化”指的是一个假设模型能够应用到新样本的能力。</strong>新样本数据是指没有出现在训练集中的数据。</p>
+<p><a href="https://images0.cnblogs.com/blog/663864/201411/081950012995058.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081950152375432.png" alt="image"></a><br>之前，我们看到了线性回归情况下的过拟合。类似的情况也适用于逻辑回归。</p>
+<h3 id="3"><a href="#3" class="headerlink" title="3"></a>3</h3><p>那么，如果发生了过拟合问题，我们应该如何处理？</p>
+<p>过多的变量（特征），同时只有非常少的训练数据，会导致出现过度拟合的问题。因此为了解决过度拟合，有以下两个办法。</p>
+<p><a href="https://images0.cnblogs.com/blog/663864/201411/081950204873029.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081950339879703.png" alt="image"></a></p>
+<blockquote>
+<p>*<em>方法一：尽量减少选取变量的数量<br>*</em></p>
+</blockquote>
+<p>具体而言，我们可以人工检查每一项变量，并以此来确定哪些变量更为重要，然后，保留那些更为重要的特征变量。至于，哪些变量应该舍弃，我们以后在讨论，这会涉及到模型选择算法，这种算法是可以自动选择采用哪些特征变量，自动舍弃不需要的变量。这类做法非常有效，但是其缺点是当你舍弃一部分特征变量时，你也舍弃了问题中的一些信息。例如，也许所有的特征变量对于预测房价都是有用的，我们实际上并不想舍弃一些信息或者说舍弃这些特征变量。</p>
+<blockquote>
+<p><strong>方法二：正则化</strong></p>
+</blockquote>
+<p>正则化中我们将保留所有的特征变量，但是会减小特征变量的数量级（参数数值的大小θ(j)）。</p>
+<p>这个方法非常有效，当我们有很多特征变量时，其中每一个变量都能对预测产生一点影响。正如我们在房价预测的例子中看到的那样，我们可以有很多特征变量，其中每一个变量都是有用的，因此我们不希望把它们删掉，这就导致了正则化概念的发生。</p>
+<p>接下来我们会讨论怎样应用正则化和什么叫做正则化均值，然后将开始讨论怎样使用正则化来使学习算法正常工作，并避免过拟合。</p>
+<h2 id="2-Cost-Function"><a href="#2-Cost-Function" class="headerlink" title="2. Cost Function"></a>2. Cost Function</h2><p><a href="https://images0.cnblogs.com/blog/663864/201411/081950392065543.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081950460499853.png" alt="image"></a></p>
+<h3 id="1-1"><a href="#1-1" class="headerlink" title="1"></a>1</h3><p>在前面的介绍中，我们看到了如果用一个二次函数来拟合这些数据，那么它给了我们一个对数据很好的拟合。然而，如果我们用一个更高次的多项式去拟合，最终我们可能会得到一个曲线，它能很好地拟合训练集，但却并不是一个好的结果，因为它过度拟合了数据，因此，一般性并不是很好。</p>
+<p>让我们考虑下面的假设，我们想要加上<strong>惩罚项</strong>，从而使参数 θ3 和 θ4 足够的小。</p>
+<p><a href="https://images0.cnblogs.com/blog/663864/201411/081950493939765.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081950538152248.png" alt="image"></a></p>
+<p>这里我的意思就是，上图的式子是我们的优化目标，也就是说我们需要尽量减少代价函数的均方误差。</p>
+<p>对于这个函数我们对它添加一些项，加上 1000 乘以 θ3 的平方，再加上 1000 乘以 θ4 的平方，</p>
+<p><a href="https://images0.cnblogs.com/blog/663864/201411/081950595497528.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081951047539138.png" alt="image"></a></p>
+<p>1000 只是我随便写的某个较大的数字而已。现在，如果我们要最小化这个函数，那么为了最小化这个新的代价函数，我们要让 θ3 和 θ4 尽可能小。因为，如果你在原有代价函数的基础上加上 1000 乘以 θ3 这一项 ，那么这个新的代价函数将变得很大，所以，当我们最小化这个新的代价函数时， 我们将使 θ3 的值接近于 0，同样 θ4 的值也接近于 0，就像我们忽略了这两个值一样。如果我们做到这一点（ θ3 和 θ4 接近 0 ），那么我们将得到一个近似的二次函数。</p>
+<p><a href="https://images0.cnblogs.com/blog/663864/201411/081951193621142.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081951300032292.png" alt="image"></a></p>
+<p>因此，我们最终恰当地拟合了数据，我们所使用的正是二次函数加上一些非常小，贡献很小项（因为这些项的 θ3、 θ4 非常接近于0）。显然，这是一个更好的假设。</p>
+<h3 id="2-1"><a href="#2-1" class="headerlink" title="2"></a>2</h3><p><a href="https://images0.cnblogs.com/blog/663864/201411/081951469871136.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081951588935799.png" alt="image"></a></p>
+<p>更一般地，这里给出了正规化背后的思路。这种思路就是，如果我们的参数值对应一个较小值的话（参数值比较小），那么往往我们会得到一个形式更简单的假设。</p>
+<p>在我们上面的例子中，我们惩罚的只是 θ3 和 θ4 ，使这两个值均接近于零，从而我们得到了一个更简单的假设，实际上这个假设大抵上是一个二次函数。</p>
+<p>但更一般地说，如果我们像惩罚 θ3 和 θ4 这样惩罚其它参数，那么我们往往可以得到一个相对较为简单的假设。</p>
+<blockquote>
+<p>*<em>实际上，这些参数的值越小，通常对应于越光滑的函数，也就是更加简单的函数。因此 就不易发生过拟合的问题。<br>*</em></p>
+</blockquote>
+<p>我知道，为什么越小的参数对应于一个相对较为简单的假设，对你来说现在不一定完全理解，但是在上面的例子中使 θ3 和 θ4 很小，并且这样做能给我们一个更加简单的假设，这个例子至少给了我们一些直观感受。</p>
+<p>来让我们看看具体的例子，对于房屋价格预测我们可能有上百种特征，与刚刚所讲的多项式例子不同，我们并不知道 θ3 和 θ4 是高阶多项式的项。所以，如果我们有一百个特征，我们并不知道如何选择关联度更好的参数，如何缩小参数的数目等等。</p>
+<p>因此在正则化里，我们要做的事情，就是把减小我们的代价函数（例子中是线性回归的代价函数）所有的参数值，因为我们并不知道是哪一个或哪几个要去缩小。</p>
+<p>因此，我们需要修改代价函数，在这后面添加一项，就像我们在方括号里的这项。当我们添加一个额外的正则化项的时候，我们收缩了每个参数。</p>
+<p><a href="https://images0.cnblogs.com/blog/663864/201411/081952091127076.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081952152064015.png" alt="image"></a></p>
+<p>顺便说一下，按照惯例，我们没有去惩罚 θ0，因此 θ0 的值是大的。这就是一个约定从 1 到 n 的求和，而不是从 0 到 n 的求和。但其实在实践中<br>这只会有非常小的差异，无论你是否包括这 θ0 这项。但是按照惯例，通常情况下我们还是只从 θ1 到 θn 进行正则化。</p>
+<p><a href="https://images0.cnblogs.com/blog/663864/201411/081952259717893.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081952330495431.png" alt="image"></a></p>
+<p>下面的这项就是一个正则化项</p>
+<p><a href="https://images0.cnblogs.com/blog/663864/201411/081952338934773.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081952345967158.png" alt="image"></a><br>并且 λ 在这里我们称做正则化参数。</p>
+<blockquote>
+<p><strong>λ 要做的就是控制在两个不同的目标中的平衡关系。</strong></p>
+</blockquote>
+<p><strong>第一个目标就是我们想要训练，使假设更好地拟合训练数据。</strong>我们希望假设能够很好的适应训练集。</p>
+<p><strong>而第二个目标是我们想要保持参数值较小。（通过正则化项）</strong></p>
+<p>而 λ 这个正则化参数需要控制的是这两者之间的平衡，即平衡拟合训练的目标和保持参数值较小的目标。从而来保持假设的形式相对简单，来避免过度的拟合。</p>
+<p>对于我们的房屋价格预测来说，我们之前所用的非常高的高阶多项式来拟合，我们将会得到一个非常弯曲和复杂的曲线函数，现在我们只需要使用正则化目标的方法，那么你就可以得到一个更加合适的曲线，但这个曲线不是一个真正的二次函数，而是更加的流畅和简单的一个曲线。这样就得到了对于这个数据更好的假设。</p>
+<p>再一次说明下，这部分内容的确有些难以明白，为什么加上参数的影响可以具有这种效果？但如果你亲自实现了正规化，你将能够看到这种影响的最直观的感受。</p>
+<h3 id="3-1"><a href="#3-1" class="headerlink" title="3"></a>3</h3><p><a href="https://images0.cnblogs.com/blog/663864/201411/081952576123726.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081953140499371.png" alt="image"></a></p>
+<p>在正则化线性回归中，如果正则化参数值 λ 被设定为非常大，那么将会发生什么呢？</p>
+<p>我们将会非常大地惩罚参数θ1 θ2 θ3 θ4 … 也就是说，我们最终惩罚θ1 θ2 θ3 θ4 … 在一个非常大的程度，那么我们会使所有这些参数接近于零。</p>
+<p><a href="https://images0.cnblogs.com/blog/663864/201411/081953329569128.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081953465963762.png" alt="image"></a></p>
+<p>如果我们这么做，那么就是我们的假设中相当于去掉了这些项，并且使我们只是留下了一个简单的假设，这个假设只能表明房屋价格等于 θ0 的值，那就是类似于拟合了一条水平直线，对于数据来说这就是一个欠拟合 (underfitting)。这种情况下这一假设它是条失败的直线，对于训练集来说这只是一条平滑直线，它没有任何趋势，它不会去趋向大部分训练样本的任何值。</p>
+<p>这句话的另一种方式来表达就是这种假设有过于强烈的”偏见” 或者过高的偏差 (bais)，认为预测的价格只是等于 θ0 。对于数据来说这只是一条水平线。</p>
+<p>因此，为了使正则化运作良好，我们应当注意一些方面，应该去选择一个不错的正则化参数 λ 。当我们以后讲到多重选择时我们将讨论一种方法来自动选择正则化参数 λ ，为了使用正则化，接下来我们将把这些概念应用到到线性回归和逻辑回归中去，那么我们就可以让他们避免过度拟合了。</p>
+<h2 id="3-Regularized-Linear-Regression"><a href="#3-Regularized-Linear-Regression" class="headerlink" title="3. Regularized Linear Regression"></a>3. Regularized Linear Regression</h2><p>之前我们已经介绍过，岭回归的代价函数如下：</p>
+<p><a href="https://images0.cnblogs.com/blog/663864/201411/081953500814930.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081953557536697.png" alt="image"></a><br>对于线性回归(的求解)，我们之前运用了两种学习算法，一种基于梯度下降，一种基于正规方程。</p>
+<h3 id="1-2"><a href="#1-2" class="headerlink" title="1"></a>1</h3><p>梯度下降，如下：</p>
+<p><a href="https://images0.cnblogs.com/blog/663864/201411/081954132218927.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081954274561745.png" alt="image"></a></p>
+<h3 id="2-2"><a href="#2-2" class="headerlink" title="2"></a>2</h3><p>正规方程，如下：</p>
+<p><a href="https://images0.cnblogs.com/blog/663864/201411/081954343629568.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081954443152563.png" alt="image"></a></p>
+<h3 id="3-2"><a href="#3-2" class="headerlink" title="3"></a>3</h3><p><a href="https://images0.cnblogs.com/blog/663864/201411/081954502994300.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081954592215008.png" alt="image"></a></p>
+<p>现在考虑 M（即样本量）， 比 N（即特征的数量）小或等于N。</p>
+<p>通过之前的博文，我们知道如果你只有较少的样本，导致特征数量大于样本数量，那么矩阵 XTX 将是不可逆矩阵或奇异（singluar）矩阵，或者用另一种说法是这个矩阵是退化（degenerate）的，那么我们就没有办法使用正规方程来求出 θ 。</p>
+<p>幸运的是，正规化也为我们解决了这个问题，具体的说只要正则参数是严格大于零，实际上，可以证明如下矩阵：</p>
+<p><a href="https://images0.cnblogs.com/blog/663864/201411/081955003621092.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081955014244135.png" alt="image"></a></p>
+<p>将是可逆的。因此，使用正则还可以照顾任何 XTX 不可逆的问题。</p>
+<p>所以，你现在知道如何实现岭回归，利用它，你就可以避免过度拟合，即使你在一个相对较小的训练集里有很多特征。这应该可以让你在很多问题上更好的运用线性回归。</p>
+<p>在接下来的视频中，我们将把这种正则化的想法应用到 Logistic 回归，这样我们就可以让 logistic 回归也避免过度拟合，从而表现的更好。</p>
+<h2 id="4-Regularized-Logistic-Regression"><a href="#4-Regularized-Logistic-Regression" class="headerlink" title="4. Regularized Logistic Regression"></a>4. Regularized Logistic Regression</h2><p>Regularized Logistic Regression 实际上与 Regularized Linear Regression 是十分相似的。</p>
+<p><a href="https://images0.cnblogs.com/blog/663864/201411/081955184567964.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081955311908741.png" alt="image"></a></p>
+<p>同样使用梯度下降：</p>
+<p><a href="https://images0.cnblogs.com/blog/663864/201411/081955407211863.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081955489245956.png" alt="image"></a></p>
+<p>如果在高级优化算法中，使用正则化技术的话，那么对于这类算法我们需要自己定义costFunction。</p>
+<blockquote>
+<p>For those methods what we needed to do was to define the function that’s called the cost function.</p>
+</blockquote>
+<p><a href="https://images0.cnblogs.com/blog/663864/201411/081956439096258.png" target="_blank" rel="noopener"><img src="https://images0.cnblogs.com/blog/663864/201411/081957037373100.png" alt="image"></a></p>
+<p>这个我们自定义的 costFunction 的输入为向量 θ ，返回值有两项，分别是代价函数 jVal 以及 梯度gradient。</p>
+<p>总之我们需要的就是这个自定义函数costFunction，针对Octave而言，我们可以将这个函数作为参数传入到 fminunc 系统函数中（fminunc 用来求函数的最小值，将@costFunction作为参数代进去，注意 @costFunction 类似于C语言中的函数指针），fminunc返回的是函数 costFunction 在无约束条件下的最小值，即我们提供的代价函数 jVal 的最小值，当然也会返回向量 θ 的解。</p>
+<p>上述方法显然对正则化逻辑回归是适用的。</p>
+<h2 id="5-尾声"><a href="#5-尾声" class="headerlink" title="5. 尾声"></a>5. 尾声</h2><p>通过最近的几篇文章，我们不难发现，无论是线性回归问题还是逻辑回归问题都可以通过构造多项式来解决。但是，你将逐渐发现其实还有更为强大的非线性分类器可以用来解决多项式回归问题。下篇文章中，我们将会讨论。</p>
+</div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/53/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/53/">53</a><span class="page-number current">54</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" href="/page/55/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>

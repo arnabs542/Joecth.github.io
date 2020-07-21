@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Algo. Ult./seminar_4&amp;5"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>Algo. Ult./seminar_4&amp;5 | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Seminar-4"><span class="toc-number">1.</span> <span class="toc-text">Seminar 4</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1849-Grumpy-Bookstore-Owner"><span class="toc-number">1.1.</span> <span class="toc-text">1849. Grumpy Bookstore Owner</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1850-撿蘋果"><span class="toc-number">1.2.</span> <span class="toc-text">1850. 撿蘋果</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1375-Substring-With-At-Least-K-Distinct-CharactersFollow"><span class="toc-number">1.3.</span> <span class="toc-text">1375. Substring With At Least K Distinct CharactersFollow</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#雙指針的變式-–-計數型雙指針"><span class="toc-number">1.3.1.</span> <span class="toc-text">雙指針的變式 – 計數型雙指針</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#雙指針的類型："><span class="toc-number">1.3.1.1.</span> <span class="toc-text">雙指針的類型：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#同向雙指針"><span class="toc-number">1.3.1.1.1.</span> <span class="toc-text">同向雙指針</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#相向雙指針"><span class="toc-number">1.3.1.1.2.</span> <span class="toc-text">相向雙指針</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#背向雙指針"><span class="toc-number">1.3.1.1.3.</span> <span class="toc-text">背向雙指針</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#計數型雙指針"><span class="toc-number">1.3.1.1.4.</span> <span class="toc-text">計數型雙指針</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#模擬型雙指針"><span class="toc-number">1.3.1.1.5.</span> <span class="toc-text">模擬型雙指針</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1219-加熱器"><span class="toc-number">1.4.</span> <span class="toc-text">1219. 加熱器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1879-twoSumVII"><span class="toc-number">1.5.</span> <span class="toc-text">1879.twoSumVII</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Seminar-5"><span class="toc-number">2.</span> <span class="toc-text">Seminar 5</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#677-大島的數量"><span class="toc-number">2.1.</span> <span class="toc-text">677.大島的數量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#598-僵屍矩陣"><span class="toc-number">2.2.</span> <span class="toc-text">598.僵屍矩陣</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#加now-day"><span class="toc-number">2.2.0.1.</span> <span class="toc-text">加now_day</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#也可以内嵌算human-number"><span class="toc-number">2.2.0.2.</span> <span class="toc-text">也可以内嵌算human number</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#573-郵局的建立II"><span class="toc-number">2.3.</span> <span class="toc-text">573.郵局的建立II</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#該怎麼從房子數來BFS"><span class="toc-number">2.3.0.1.</span> <span class="toc-text">該怎麼從房子數來BFS?</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#616-課程安排"><span class="toc-number">2.4.</span> <span class="toc-text">616.課程安排</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BAD-O-VE-or-O-n-m"><span class="toc-number">2.4.0.1.</span> <span class="toc-text">BAD, O(VE) or O(n*m)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Better↓，O-V-E-or-O-n-m"><span class="toc-number">2.4.0.2.</span> <span class="toc-text">Better↓，O(V+E) or O(n+m)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#434-島個數II"><span class="toc-number">2.5.</span> <span class="toc-text">434.島個數II</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BFS"><span class="toc-number">2.5.1.</span> <span class="toc-text">BFS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#並查集"><span class="toc-number">2.5.2.</span> <span class="toc-text">並查集</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">2.5.2.1.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#壓縮路徑"><span class="toc-number">2.5.2.2.</span> <span class="toc-text">壓縮路徑</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#雙指針的其它實現討論"><span class="toc-number">3.</span> <span class="toc-text">雙指針的其它實現討論</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Grumpy-bookstore"><span class="toc-number">3.0.1.</span> <span class="toc-text">Grumpy bookstore</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BFS-Discussion"><span class="toc-number">4.</span> <span class="toc-text">BFS Discussion</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1828-湖面逃跑-★★★"><span class="toc-number">4.0.1.</span> <span class="toc-text">1828.湖面逃跑 ★★★</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1070-Merge-Account-★★★"><span class="toc-number">4.0.2.</span> <span class="toc-text">1070.Merge Account ★★★</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">273</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">40</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">Algo. Ult./seminar_4&amp;5</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-06-09</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/AlgoUlt/">AlgoUlt.</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>思考何時用雙指針</p>
+<h1 id="Seminar-4"><a href="#Seminar-4" class="headerlink" title="Seminar 4"></a>Seminar 4</h1><h2 id="1849-Grumpy-Bookstore-Owner"><a href="#1849-Grumpy-Bookstore-Owner" class="headerlink" title="1849. Grumpy Bookstore Owner"></a>1849. Grumpy Bookstore Owner</h2><ol>
+<li><p>枚舉脾氣變好的開始日期，再計算所有好脾氣的顧客</p>
+</li>
+<li><p>用一個滑窗來處理當前sliding window內的情況</p>
+<ul>
+<li><input disabled="" type="checkbox"> <p>​    A. 紀錄sliding window 內customers 的個數</p>
+</li>
+<li><input disabled="" type="checkbox"> <p>​    B. 紀錄sliding window 內好評customers 的個數 </p>
+</li>
+<li><input checked="" disabled="" type="checkbox"> <p>​    C. <strong>紀錄sliding window 內差評customers 的個數. V</strong>    </p>
+</li>
+</ul>
+<p>​            答案怎麼打擂台？！</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DataType</span>:</span></span><br><span class="line">    GOOD = <span class="number">0</span></span><br><span class="line">    BAD = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param customers: the number of customers</span></span><br><span class="line"><span class="string">    @param grumpy: the owner's temper every day</span></span><br><span class="line"><span class="string">    @param X: X days</span></span><br><span class="line"><span class="string">    @return: calc the max satisfied customers</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSatisfied</span><span class="params">(self, customers, grumpy, X)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># 1. sliding window 紀錄區間內差評人數的個數</span></span><br><span class="line">        <span class="comment"># 2. 找所有天中原本就是好評人的個數</span></span><br><span class="line">        <span class="comment"># 3. 原本好評+區間內最好差評人數 = 答案</span></span><br><span class="line">        n = len(customers)</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">            </span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = X - <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        now_sum = <span class="number">0</span> <span class="comment"># 當前區間的差評人數</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(X):</span><br><span class="line">            <span class="keyword">if</span> grumpy[i] == DataType.BAD:</span><br><span class="line">                now_sum += customers[i]</span><br><span class="line">        </span><br><span class="line">        maximum_bad_number = now_sum</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> right + <span class="number">1</span> &lt; n:</span><br><span class="line">            right += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> grumpy[right] == DataType.BAD:</span><br><span class="line">                now_sum += customers[right]</span><br><span class="line">        </span><br><span class="line">            <span class="keyword">if</span> grumpy[left] == DataType.BAD:</span><br><span class="line">                now_sum -= customers[left]</span><br><span class="line">            </span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">            maximum_bad_number = max(maximum_bad_number, now_sum)</span><br><span class="line">            </span><br><span class="line">        satisfied_number = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> grumpy[i] == DataType.GOOD:</span><br><span class="line">                satisfied_number += customers[i]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> satisfied_number + maximum_bad_number</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="1850-撿蘋果"><a href="#1850-撿蘋果" class="headerlink" title="1850. 撿蘋果"></a>1850. 撿蘋果</h2><ul>
+<li>目的：枚舉兩個區間</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflt4ayfi1j30ys0gc44n.jpg" alt="image-20200609100156524"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflt8o6v50j30zm0huwlh.jpg" alt="image-20200609100606181"></p>
+<p>當已知隔板，可知左邊最大、右邊最大是多少，ref: penbox</p>
+<h2 id="1375-Substring-With-At-Least-K-Distinct-CharactersFollow"><a href="#1375-Substring-With-At-Least-K-Distinct-CharactersFollow" class="headerlink" title="1375. Substring With At Least K Distinct CharactersFollow"></a>1375. Substring With At Least K Distinct CharactersFollow</h2><ul>
+<li>Description</li>
+<li>Leaderboard</li>
+<li>Note</li>
+<li>Discuss</li>
+<li>Solution</li>
+<li></li>
+<li>My Submissions</li>
+<li>Open IDE</li>
+</ul>
+<h3 id="雙指針的變式-–-計數型雙指針"><a href="#雙指針的變式-–-計數型雙指針" class="headerlink" title="雙指針的變式 – 計數型雙指針"></a>雙指針的變式 – 計數型雙指針</h3><h4 id="雙指針的類型："><a href="#雙指針的類型：" class="headerlink" title="雙指針的類型："></a>雙指針的類型：</h4><h5 id="同向雙指針"><a href="#同向雙指針" class="headerlink" title="同向雙指針"></a>同向雙指針</h5><ul>
+<li>sliding window</li>
+</ul>
+<h5 id="相向雙指針"><a href="#相向雙指針" class="headerlink" title="相向雙指針"></a>相向雙指針</h5><ul>
+<li>Two sum 類型問題</li>
+</ul>
+<h5 id="背向雙指針"><a href="#背向雙指針" class="headerlink" title="背向雙指針"></a>背向雙指針</h5><ul>
+<li>最長回文子串</li>
+</ul>
+<h5 id="計數型雙指針"><a href="#計數型雙指針" class="headerlink" title="計數型雙指針"></a>計數型雙指針</h5><ul>
+<li>通過雙指針解決計數問題</li>
+<li>問法：滿足某條件的….有多少個</li>
+</ul>
+<h5 id="模擬型雙指針"><a href="#模擬型雙指針" class="headerlink" title="模擬型雙指針"></a>模擬型雙指針</h5><ul>
+<li>通過雙</li>
+</ul>
+<ul>
+<li>判斷是否為「好串」</li>
+<li>判斷以區間為前綴是否滿足條件</li>
+</ul>
+<h2 id="1219-加熱器"><a href="#1219-加熱器" class="headerlink" title="1219. 加熱器"></a>1219. 加熱器</h2><ol>
+<li>二分：對每個房屋的位置在加熱器數組中用二分，找到最后一个比你小的加热器一個半徑　nlogn</li>
+</ol>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200609105609685.png" alt="image-20200609105609685" style="zoom:67%;" />
+
+
+
+<ol start="2">
+<li><p>优化一：直接雙指針貪心</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflv0ebmj9j30vy0agdis.jpg" alt="image-20200609110723097"></p>
+</li>
+</ol>
+<ol start="3">
+<li>优化二：二分「加热器的半径」+ 双指针，有機會更好想</li>
+</ol>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflv4llibmj30pe0b2ju2.jpg" alt="image-20200609111124815"></p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200609111225705.png" alt="image-20200609111225705" style="zoom:67%;" />
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflv922yz9j30q60oqaiw.jpg" alt="image-20200609111539663"></p>
+<h2 id="1879-twoSumVII"><a href="#1879-twoSumVII" class="headerlink" title="1879.twoSumVII"></a>1879.twoSumVII</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflvki9wvxj30le09wtb1.jpg" alt="image-20200609112642341"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflvt4k12kj30qi0ooqb6.jpg" alt="image-20200609113454765"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflvu9fq9vj30u40fmq9m.jpg" alt="image-20200609113602841"></p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200609113733945.png" alt="image-20200609113733945" style="zoom:67%;" />
+
+
+
+
+
+<h1 id="Seminar-5"><a href="#Seminar-5" class="headerlink" title="Seminar 5"></a>Seminar 5</h1><h2 id="677-大島的數量"><a href="#677-大島的數量" class="headerlink" title="677.大島的數量"></a>677.大島的數量</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo3ph93a1j30he0buq5n.jpg" alt="image-20200611093923800"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo3zcfmkkj30u00ub165.jpg" alt="image-20200611094851670"></p>
+<h2 id="598-僵屍矩陣"><a href="#598-僵屍矩陣" class="headerlink" title="598.僵屍矩陣"></a>598.僵屍矩陣</h2><ul>
+<li>爛橘子感染</li>
+<li>程序員的病毒</li>
+<li>「感染的起點」，從僵屍開始 BFS</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo4692l8uj30r80ruwli.jpg" alt="image-20200611095527541"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo49emrm0j30t40vcamu.jpg" alt="image-20200611095832430"></p>
+<h4 id="加now-day"><a href="#加now-day" class="headerlink" title="加now_day"></a>加now_day</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo4idhzguj30ti0v2wpg.jpg" alt="image-20200611100705633"></p>
+<h4 id="也可以内嵌算human-number"><a href="#也可以内嵌算human-number" class="headerlink" title="也可以内嵌算human number"></a>也可以内嵌算human number</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo4m9fqsjj30x20qo7br.jpg" alt="image-20200611101052102"></p>
+<h2 id="573-郵局的建立II"><a href="#573-郵局的建立II" class="headerlink" title="573.郵局的建立II"></a>573.郵局的建立II</h2><p>visited 非共享的，</p>
+<p>每次的</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo4ttxr3rj30qk10utix.jpg" alt="image-20200611101757179"></p>
+<p>但這樣會是 O(n^4)的</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo4zjyz5bj30ta0su4co.jpg" alt="image-20200611102340291"></p>
+<p><strong>１１４line这样写的话，可能一个房子被经过多次</strong></p>
+<p>so, better as following</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo54r3786j30ug0k0jz5.jpg" alt="image-20200611102837431"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo57o772oj30vk0qwtht.jpg" alt="image-20200611103125603"></p>
+<p>倒過來！從房子找空地！</p>
+<h4 id="該怎麼從房子數來BFS"><a href="#該怎麼從房子數來BFS" class="headerlink" title="該怎麼從房子數來BFS?"></a>該怎麼從房子數來BFS?</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo5nhua62j30pu0l4436.jpg" alt="image-20200611104641237"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo5p6k3e0j30sm0vuaqb.jpg" alt="image-20200611104818468"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo5ttq9oqj30u00w07f1.jpg" alt="image-20200611105245274"></p>
+<h2 id="616-課程安排"><a href="#616-課程安排" class="headerlink" title="616.課程安排"></a>616.課程安排</h2><ul>
+<li><p>拓展較少，一般都就裸題</p>
+</li>
+<li><p>預處理所有課程的入度，將所有入度為０的點入隊，並逐漸出隊，並將出隊相連的節點的入度減１</p>
+</li>
+<li><p>若一節點入度變為０，則將其入隊</p>
+</li>
+<li><p>BFS 結束後，ans序列長度若與課程總數相等，則是一個拓撲序</p>
+</li>
+<li><p>否則不存在拓撲序</p>
+</li>
+</ul>
+<h4 id="BAD-O-VE-or-O-n-m"><a href="#BAD-O-VE-or-O-n-m" class="headerlink" title="BAD, O(VE) or O(n*m)"></a>BAD, O(VE) or O(n*m)</h4><p>一般要求 O(V+E) or O(n+m)</p>
+<p>所以</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo65sexw1j30mk0modme.jpg" alt="image-20200611110413633"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo68h2646j30fe01edg7.jpg" alt="image-20200611110653860"></p>
+<h4 id="Better↓，O-V-E-or-O-n-m"><a href="#Better↓，O-V-E-or-O-n-m" class="headerlink" title="Better↓，O(V+E) or O(n+m)"></a>Better↓，O(V+E) or O(n+m)</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo67rdcv6j30sm0vcn53.jpg" alt="image-20200611110609155"></p>
+<h2 id="434-島個數II"><a href="#434-島個數II" class="headerlink" title="434.島個數II"></a>434.島個數II</h2><h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><ul>
+<li>O(n^2) * len(queue)</li>
+</ul>
+<h3 id="並查集"><a href="#並查集" class="headerlink" title="並查集"></a>並查集</h3><ul>
+<li></li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo6gomjm4j31nk0k4zsl.jpg" alt="image-20200611111435222"></p>
+<h4 id=""><a href="#" class="headerlink" title=""></a><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo6mwtnb3j31nk0quan3.jpg" alt="image-20200611112039152"></h4><p>這寫法不具壓縮</p>
+<h4 id="壓縮路徑"><a href="#壓縮路徑" class="headerlink" title="壓縮路徑"></a>壓縮路徑</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo6nqyrutj31d20iwqbd.jpg" alt="image-20200611112128985"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo6qtvn7wj30gw0iwada.jpg" alt="image-20200611112428660"></p>
+<p>「之後找就都是O(1)的操作了」，是個均攤O(1)的操作</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo6u94fakj30n20dcalx.jpg" alt="image-20200611112740580"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo6vft814j30vf0u0n8i.jpg" alt="image-20200611112850990"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo6x56v7qj30re0qa0zj.jpg" alt="image-20200611113032781"></p>
+<p>把s改為is_ialand</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo6xlfmyvj30u00yu13v.jpg" alt="image-20200611113056937"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo72y8ny8j30pw0voqbt.jpg" alt="image-20200611113609070"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo75oajyfj30u00vgn6j.jpg" alt="image-20200611113842739"></p>
+<h1 id="雙指針的其它實現討論"><a href="#雙指針的其它實現討論" class="headerlink" title="雙指針的其它實現討論"></a>雙指針的其它實現討論</h1><h3 id="Grumpy-bookstore"><a href="#Grumpy-bookstore" class="headerlink" title="Grumpy bookstore"></a>Grumpy bookstore</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpqsr818cj30x60ien3w.jpg" alt="image-20200612194355441"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpqvauwoej30aw0323z6.jpg" alt="image-20200612194622939"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpqzk8vfnj30uo0g6dl4.jpg" alt="image-20200612195027886"></p>
+<h1 id="BFS-Discussion"><a href="#BFS-Discussion" class="headerlink" title="BFS Discussion"></a>BFS Discussion</h1><h3 id="1828-湖面逃跑-★★★"><a href="#1828-湖面逃跑-★★★" class="headerlink" title="1828.湖面逃跑 ★★★"></a>1828.湖面逃跑 ★★★</h3><p>from Akuna Capital</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfprwqg1euj30gs0gmakw.jpg" alt="image-20200612202220431" style="zoom:50%;" />
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfps0o2al5j30i407a407.jpg" alt="image-20200612202608173"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfps9p40caj30lk0ca0wk.jpg" alt="image-20200612203448516"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpsbhalxsj30da04kab2.jpg" alt="image-20200612203632013"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpsojt083j30gq0baq6i.jpg" alt="image-20200612204903384"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpskkym5vj30t20duaey.jpg" alt="image-20200612204516486"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpsla2e9oj30gu02c3z9.jpg" alt="image-20200612204556569"></p>
+<h3 id="1070-Merge-Account-★★★"><a href="#1070-Merge-Account-★★★" class="headerlink" title="1070.Merge Account ★★★"></a>1070.Merge Account ★★★</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfptxvu73bj30cq0bwq6x.jpg" alt="image-20200612213238736"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpucl36woj30dq08a416.jpg" alt="image-20200612214646335"></p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/06/09/Algo.%20Ult./seminar_4&amp;5/">http://yoursite.com/2019/06/09/Algo.%20Ult./seminar_4&amp;5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/06/16/Algo.%20Ult./seminar_6&amp;7&amp;8/"><i class="fa fa-chevron-left">  </i><span>Algo. Ult./seminar_6&amp;7&amp;8</span></a></div><div class="next-post pull-right"><a href="/2019/06/07/Web/2019-06-07-Requests'%20secret:%20pool_connections%20and%20pool_maxsize/"><span>Web/2019-06-07-Requests' secret: pool_connections and pool_maxsize</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>

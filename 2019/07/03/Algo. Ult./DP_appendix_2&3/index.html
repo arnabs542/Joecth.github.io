@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Algo. Ult./DP_appendix_2&amp;3"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>Algo. Ult./DP_appendix_2&amp;3 | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#DP-appendix-2"><span class="toc-number">1.</span> <span class="toc-text">DP appendix 2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1147-工作安排"><span class="toc-number">1.1.</span> <span class="toc-text">1147. 工作安排</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#77-LCS-最長公共子序列"><span class="toc-number">1.2.</span> <span class="toc-text">77.LCS 最長公共子序列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#76-最長上升子序列-LIS"><span class="toc-number">1.3.</span> <span class="toc-text">76.最長上升子序列 LIS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#91-最小調整代價"><span class="toc-number">1.4.</span> <span class="toc-text">91.最小調整代價</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#轉移方程"><span class="toc-number">1.5.</span> <span class="toc-text">轉移方程</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#DP-appendix-3"><span class="toc-number">2.</span> <span class="toc-text">DP  appendix 3</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1018-香檳塔"><span class="toc-number">2.1.</span> <span class="toc-text">1018.香檳塔</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#200-最長回文子串"><span class="toc-number">2.2.</span> <span class="toc-text">200.最長回文子串</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#119-編輯距離"><span class="toc-number">2.3.</span> <span class="toc-text">119.編輯距離</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1565-飛行棋"><span class="toc-number">2.4.</span> <span class="toc-text">1565.飛行棋</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">273</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">40</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">Algo. Ult./DP_appendix_2&amp;3</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-07-03</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/AlgoUlt/">AlgoUlt.</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><ol>
+<li>2^n ==&gt; n^2</li>
+<li>無循環依賴、無序應該不是；但無序的也可能是就是背包型</li>
+</ol>
+<h1 id="DP-appendix-2"><a href="#DP-appendix-2" class="headerlink" title="DP appendix 2"></a>DP appendix 2</h1><h2 id="1147-工作安排"><a href="#1147-工作安排" class="headerlink" title="1147. 工作安排"></a>1147. 工作安排</h2><ul>
+<li><p>求「價值最大」＝＝＞ 最優值</p>
+</li>
+<li><p>每天要決定是L or H or X</p>
+</li>
+<li><p>跟 house Robber 像, 但多了一個狀態「選擇難or易」</p>
+</li>
+<li><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>L</td>
+<td><strong>4</strong></td>
+<td>2</td>
+<td>3</td>
+<td><strong>7</strong></td>
+</tr>
+<tr>
+<td>R</td>
+<td>3</td>
+<td>5</td>
+<td><strong>6</strong></td>
+<td>9</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge244w23tj31100icwo7.jpg" alt="image-20200703202854308"></p>
+<ul>
+<li><p>坐標型DP</p>
+</li>
+<li><p>簡化後可以是「令dp[i] 表前i周可完成的最大價值」，狀態轉移方程：</p>
+<ul>
+<li>dp[i] = max(dp[i-1] + low[i], dp[i-2] + high[i])</li>
+</ul>
+</li>
+<li><p>初始化：</p>
+<ul>
+<li>dp[0] = low[0]</li>
+<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge29kbm7ej30o20gc7a0.jpg" alt="image-20200703203413184"></li>
+</ul>
+</li>
+<li><p>什麼情況不是返回 dp[n-1]? </p>
+<ul>
+<li>當價值有可能有負數的時候</li>
+<li>因為i已經假設第i天有做事</li>
+<li>可以透過進行拓維解決、加個「不做事」的維度</li>
+</ul>
+</li>
+<li><p>滾動優化，一起模 3</p>
+</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge37afck7j30o20fujyz.jpg" alt="image-20200703210638577"></p>
+<h2 id="77-LCS-最長公共子序列"><a href="#77-LCS-最長公共子序列" class="headerlink" title="77.LCS 最長公共子序列"></a>77.LCS 最長公共子序列</h2><ul>
+<li><p>LCS</p>
+</li>
+<li><p>LIS</p>
+</li>
+<li><p>LCA</p>
+</li>
+<li><p>TSP</p>
+</li>
+<li><p>2^N, N位，用DP降到 N^2</p>
+</li>
+<li><p>给两個字串的，為「匹配型動規」</p>
+<ul>
+<li>LCS</li>
+<li>Edit Distance</li>
+<li>Interleaving Substring</li>
+<li>Wildcard Matching</li>
+<li>Regular Expression Matching</li>
+</ul>
+</li>
+<li><p><strong>dp[i] [j] 表 A的前i元素與 B的前i元素的最長LCS長度</strong></p>
+</li>
+<li><p>N個字符，有N個不同前綴 X ==&gt; N+1才對</p>
+<ul>
+<li>還有空串！空串是任意串的前綴；如空arr是任何arr的前綴</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge2qhuja2j30uy0dcdlf.jpg" alt="image-20200703205030160"></p>
+<p>![image-20200703205331747](/Users/joe/Library/Application Support/typora-user-images/image-20200703205331747.png)</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge2upqxmhj30ug0dyn2t.jpg" alt="image-20200703205433751" style="zoom:67%;" />
+
+
+
+<ul>
+<li>初始的邊上是0</li>
+<li>如果是edit distance 的化 邊邊應該是 i或j的值</li>
+<li>大問題依賴小問題</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge2y33wrrj30zk0fun6b.jpg" alt="image-20200703205747834"></p>
+<p>​        ＆interleaving</p>
+<ul>
+<li><p>区间型是小依賴大</p>
+<ul>
+<li>i倒過來，j正過去</li>
+<li>Stone Game</li>
+</ul>
+</li>
+<li><p>滚動數組 一起模 2 即可，如下，依賴得少才好滾</p>
+</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge35k1lo6j30ue0k6n6u.jpg" alt="image-20200703210458738"></p>
+<h2 id="76-最長上升子序列-LIS"><a href="#76-最長上升子序列-LIS" class="headerlink" title="76.最長上升子序列 LIS"></a>76.最長上升子序列 LIS</h2><ul>
+<li><p>subsequcne </p>
+</li>
+<li><p>longest ==&gt; 動規</p>
+</li>
+<li><p><strong>不能交換順序，是有序的！</strong>；背包可以交換，只是一個集合，是可換序的特例DP解法</p>
+</li>
+<li><p>dp[i] 的定義？</p>
+</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge3e6f2hjj316k0noqd4.jpg" alt="image-20200703211312555"></p>
+<ul>
+<li>A為何錯？<ul>
+<li>下面這個５就拼不上了</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge3i4pr9tj30m00ee77s.jpg" alt="image-20200703211703227"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge3jg7ltkj30mk0daadf.jpg" alt="image-20200703211820236"></p>
+<ul>
+<li>初始狀態 dp[i] = 1<ul>
+<li>是说，「每個數就選它自己而已」，都以自己開始、結尾</li>
+<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge3nfsgvcj30pu0cmgnv.jpg" alt="image-20200703212210255" style="zoom:50%;" /></li>
+<li>只初始化dp[0] 是不夠的，這也是座標型，就是看怎麼跳</li>
+<li>這不一定要從0這個位置開始選，每個數都可能成為起點</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge3lszejnj30o60gin3h.jpg" alt="image-20200703212036165"></p>
+<ul>
+<li>O(N^2)</li>
+<li></li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge3q1olo0j30iu0ccgq6.jpg" alt="image-20200703212440013" style="zoom:50%;" />
+
+
+
+<h2 id="91-最小調整代價"><a href="#91-最小調整代價" class="headerlink" title="91.最小調整代價"></a>91.最小調整代價</h2><ul>
+<li><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge3wmh1s6j311e0gg7b5.jpg" alt="image-20200703213059015"></p>
+</li>
+<li><h2 id="轉移方程"><a href="#轉移方程" class="headerlink" title="轉移方程"></a>轉移方程</h2></li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge3z3x4h4j30qc0j2q62.jpg" alt="image-20200703213322963"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge41on9x5j30og0b878b.jpg" alt="image-20200703213551446"></p>
+<ul>
+<li><p>200^3 </p>
+</li>
+<li><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge42dgrt1j30sg0hiwjo.jpg" alt="image-20200703213631392"></p>
+</li>
+<li><p>滾動數組：第一維模2就完成</p>
+</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge4349ar1j30qe0o27gl.jpg" alt="image-20200703213714291"></p>
+<ul>
+<li>動規類型<ul>
+<li><strong>座標型</strong>: Triangle, Unique Path, Jump Game</li>
+<li><strong>前綴型</strong><ul>
+<li>匹配型: LIS, Wildcard Matching</li>
+<li>划分型: Word Break</li>
+</ul>
+</li>
+<li><strong>區間型</strong>: Stone Game</li>
+<li><strong>背包</strong>: Backpack 系列</li>
+<li>博奕型: Coins in a Line</li>
+<li>狀態壓縮型: TSP(Traveling Salesman Problem)</li>
+<li>樹型: Binary Tree Maximum Path Sum</li>
+<li>圖型: (面試基本沒考過) NOI</li>
+<li>on lintcode</li>
+</ul>
+</li>
+</ul>
+<h1 id="DP-appendix-3"><a href="#DP-appendix-3" class="headerlink" title="DP  appendix 3"></a>DP  appendix 3</h1><h2 id="1018-香檳塔"><a href="#1018-香檳塔" class="headerlink" title="1018.香檳塔"></a>1018.香檳塔</h2><ul>
+<li><p>類似題: 座標型動規，有座標的info在</p>
+</li>
+<li><p>similar to Triangle</p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200712201733032.png" alt="image-20200712201733032" style="zoom:33%;" />
+</li>
+<li></li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggogsiqo19j30zu0isna9.jpg" alt="image-20200712203228254"></p>
+<ul>
+<li>空間優化，模2</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggogt1pj5uj31020iqna9.jpg" alt="image-20200712203258726"></p>
+<h2 id="200-最長回文子串"><a href="#200-最長回文子串" class="headerlink" title="200.最長回文子串"></a>200.最長回文子串</h2><ul>
+<li>Manacher’s 馬拉車算法， O(N)</li>
+<li>背向雙針 O(Nx(2N-1))</li>
+<li>動規: 區間型動規，子串、子數組</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoh1mpbr3j30yu0a8tam.jpg" alt="image-20200712204113836"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoh39walhj30tw0cwgnx.jpg" alt="image-20200712204248042"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoh41ojf1j31ak0l0tlc.jpg" alt="image-20200712204333437"></p>
+<ul>
+<li><p>是否可用滾動優化？可</p>
+</li>
+<li><p>石子Stone Game合并不能滚動，因為最後還是模N</p>
+</li>
+</ul>
+<h2 id="119-編輯距離"><a href="#119-編輯距離" class="headerlink" title="119.編輯距離"></a>119.編輯距離</h2><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggohyaoonzj30ze0j2aen.jpg" alt="image-20200712211236545" style="zoom: 50%;" />
+
+<ul>
+<li>匹配型動規</li>
+<li>dp[i] [j] </li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggohzectnqj314w09gwgk.jpg" alt="image-20200712211341183" style="zoom:67%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoi0wqzwfj311w0bqq60.jpg" alt="image-20200712211508710" style="zoom:50%;" />
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoi5ch6tej312a0ho7an.jpg" alt="image-20200712211920952"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoi5ub3nxj31780lq7gi.jpg" alt="image-20200712211952831"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoi7241kbj30z80ky4c5.jpg" alt="image-20200712212103748"></p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200712212200733.png" alt="image-20200712212200733" style="zoom: 33%;" />
+
+<ul>
+<li>能滾嗎？<ul>
+<li>模2可滚，初始化不能放一开始了，得一邊dp一邊初始</li>
+</ul>
+</li>
+</ul>
+<h2 id="1565-飛行棋"><a href="#1565-飛行棋" class="headerlink" title="1565.飛行棋"></a>1565.飛行棋</h2><ul>
+<li>如果可以往前跳又可以往後跳，就沒有方向性了，就不能動規了</li>
+<li>不會往前飛，就是不能循環依賴 ==&gt; Topological Sort 檢測圖裡有沒有循環依賴的關係</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200712213048000.png" alt="image-20200712213048000" style="zoom:33%;" />
+
+<ul>
+<li>座標型，1D座標動規，用傳送門還有dice跳</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoijyw55aj30ti0aiq6i.jpg" alt="image-20200712213327557"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoimjyqkuj30uo0han4n.jpg" alt="image-20200712213554267"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoinaj186j30u00hewhe.jpg" alt="image-20200712213639171"></p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/07/03/Algo.%20Ult./DP_appendix_2&amp;3/">http://yoursite.com/2019/07/03/Algo.%20Ult./DP_appendix_2&amp;3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/07/04/Stat./Stat-MIT-1/"><i class="fa fa-chevron-left">  </i><span>Stat./Stat-MIT-1</span></a></div><div class="next-post pull-right"><a href="/2019/06/25/FFmpeg/2019-06-25-ffmpeg-cmds/"><span>ffmpeg_cmds!</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>

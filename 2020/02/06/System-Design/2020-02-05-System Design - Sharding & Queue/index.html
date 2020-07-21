@@ -7,11 +7,15 @@
     error: 'Copy error',
     noSupport: 'The browser does not support'
   }
-} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text"></span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分片"><span class="toc-number"></span> <span class="toc-text">分片</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Partition-Method"><span class="toc-number">1.</span> <span class="toc-text">Partition Method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Partitioning-Criteria"><span class="toc-number"></span> <span class="toc-text">Partitioning Criteria</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Consistent-Hashing"><span class="toc-number"></span> <span class="toc-text">Consistent Hashing</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#備份↓"><span class="toc-number">0.1.</span> <span class="toc-text">備份↓</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Common-problems-of-Sharding"><span class="toc-number"></span> <span class="toc-text">Common problems of Sharding</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LinkedIn-Prob"><span class="toc-number"></span> <span class="toc-text">LinkedIn Prob.</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Expression-Tree"><span class="toc-number">0.0.1.</span> <span class="toc-text">Expression Tree</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Queue"><span class="toc-number"></span> <span class="toc-text">Queue</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#message-queue"><span class="toc-number">0.1.</span> <span class="toc-text">message queue　</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#可以取出來在db-or-que寫-in-progress，-gt-high-availability-不丟消息"><span class="toc-number">0.1.1.</span> <span class="toc-text">可以取出來在db or que寫 in progress，&#x3D;&#x3D;&gt; high availability　不丟消息</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Async-缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity"><span class="toc-number">0.1.2.</span> <span class="toc-text">Async 缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">258</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">35</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">System-Design/2020-02-05-System Design - Sharding &amp; Queue</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-06</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/System/">System</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h3 id=""><a href="#" class="headerlink" title=""></a></h3><h1 id="分片"><a href="#分片" class="headerlink" title="分片"></a>分片</h1><p>partition  or  sharding</p>
-<p>每個機器分一部分就是要切小塊，LB就是在做pardition　sharding更指db的存儲</p>
-<p>日本放在日本的db，因為有 sharding　所以要routing去找數據</p>
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-number">1.</span> <span class="toc-text"></span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#分片-partition-or-sharding"><span class="toc-number"></span> <span class="toc-text">分片 partition  or  sharding</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Partition-Method"><span class="toc-number">1.</span> <span class="toc-text">Partition Method</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Partitioning-Criteria"><span class="toc-number"></span> <span class="toc-text">Partitioning Criteria</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Consistent-Hashing"><span class="toc-number"></span> <span class="toc-text">Consistent Hashing</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#備份↓"><span class="toc-number">0.1.</span> <span class="toc-text">備份↓</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Common-problems-of-Sharding"><span class="toc-number"></span> <span class="toc-text">Common problems of Sharding</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#LinkedIn-Prob"><span class="toc-number"></span> <span class="toc-text">LinkedIn Prob.</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Expression-Tree"><span class="toc-number">0.0.1.</span> <span class="toc-text">Expression Tree</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Queue"><span class="toc-number"></span> <span class="toc-text">Queue</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#message-queue"><span class="toc-number">0.1.</span> <span class="toc-text">message queue　</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#可以取出來在db-or-que寫-in-progress，-gt-high-availability-不丟消息"><span class="toc-number">0.1.1.</span> <span class="toc-text">可以取出來在db or que寫 in progress，&#x3D;&#x3D;&gt; high availability　不丟消息</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Async-缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity"><span class="toc-number">0.1.2.</span> <span class="toc-text">Async 缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">273</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">40</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">System-Design/2020-02-05-System Design - Sharding &amp; Queue</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-06</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/System/">System</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h3 id=""><a href="#" class="headerlink" title=""></a></h3><h1 id="分片-partition-or-sharding"><a href="#分片-partition-or-sharding" class="headerlink" title="分片 partition  or  sharding"></a>分片 partition  or  sharding</h1><p>廣告的話，不只在database，LB某種意義上分給機器們，也就是。</p>
+<p>每個機器分一部分就是要切小塊，LB就是在做pardition，當然sharding更指<strong>DB</strong>的存儲</p>
+<p>日本放在日本的db，因為有 sharding　所以要<strong>Routing</strong>去找數據</p>
+<p>可能數據在西部，但我去東西旅遊之類</p>
 <img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmy6i9wcvj30hu0k8781.jpg" alt="img" style="zoom:50%;" />
 
+
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggvb0fupt1j30y009mgui.jpg" alt="image-20200718183127240"></p>
 <p>sharding　一般來說指的是db　</p>
 <p>partition不一定是固定的，也可能增加了機器，每個就管得比較少了</p>
 <p>照地理位置去找</p>
@@ -23,47 +27,73 @@
 
 
 
+
+
 <h3 id="Partition-Method"><a href="#Partition-Method" class="headerlink" title="Partition Method"></a>Partition Method</h3><p>by ID, by letter, by Term</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggvb7hzfyaj30zk0kowqn.jpg" alt="image-20200718183813083"></p>
 <p>Horizontal partitioning : as by ID　風險：range分得不好，所以不平衡，怎麼evenly distributed?!</p>
 <p>Vertical Partitioning : 按業務去分　如下圖↓</p>
 <img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmyk67nx2j30kw0mwjyj.jpg" alt="image-20200206203421886" style="zoom:50%;" /> 
 
 <p>業務調整、或是中間加一層就更複雜了</p>
 <h2 id="Partitioning-Criteria"><a href="#Partitioning-Criteria" class="headerlink" title="Partitioning Criteria"></a>Partitioning Criteria</h2><ol>
-<li>key or hash-based partitioning<br>userid每次加１的id，對100取個mod去知道哪個機器，工業中一般不用　這個是distributed hashing，用consistent hashing比較好↓</li>
+<li>key or hash-based partitioning<br>userid每次加１的id，對100取個模去知道哪個機器，工業中一般不用　這個是<strong>distributed hashing</strong>，用<strong><em>consistent hashing</em></strong>比較好↓</li>
 <li>list partitionging 自己聲明rule 就像mongodb，自己定義</li>
 <li>round-robin</li>
 <li>composite</li>
 </ol>
+<p>3</p>
+<p>1 4 7 10</p>
+<p>2 5 8 11</p>
+<p>3 6 9 12</p>
+<p>4</p>
+<p>1 5 9  </p>
+<p>2 6 10</p>
+<p>3 7 11</p>
+<p>4 8 12</p>
 <h2 id="Consistent-Hashing"><a href="#Consistent-Hashing" class="headerlink" title="Consistent Hashing"></a>Consistent Hashing</h2><p>把所有可能的hash值分成圓五份 </p>
 <p>這樣可能不均勻</p>
 <p>所以就有個vnnode的概念 一個機器對應五個 vnnode</p>
 <img src="/Users/joe/Library/Application Support/typora-user-images/image-20200206204214506.png" alt="image-20200206204214506" style="zoom:50%;" />
 
-<p>可能一個對應256個vnnode</p>
+<p>如上右圖的話A, F, K, Q, V 對應到第一台機器，B, G, L, R, W對應到第二台機器</p>
+<p>像 Cassandra 可能一個配置可能對應256個vnnode</p>
 <h4 id="備份↓"><a href="#備份↓" class="headerlink" title="備份↓"></a>備份↓</h4><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200206204351704.png" alt="image-20200206204351704" style="zoom:50%;" />
 
-<p>如果４～５區段掛了，全給A承擔太不公平；如果有vnnode　一台機器掛了，後面的每個機器都可以均勻分擔這個量</p>
+<p>如果４～５區段的這台機器掛了，一般是自動歸到A這台機器去了；但全給A承擔太不公平；但如果有vnnode如上面的右圖，一台機器掛了就是A, F, K, Q, V沒了，後面的每個機器都可以均勻分擔這個量，這邊的B, G, L, R, W不見得是在每個區的第二台，上圖是只為了便於理解；或也可能是第一台機器對應的不是每個區的第一個node! 最想看到的是E掛了的話，其他四台數據可以均分他本來的量! 不然的話取模是大變動</p>
 <p>distributed hash是大挪移要全重算…　所以一致性哈希好</p>
-<h2 id="Common-problems-of-Sharding"><a href="#Common-problems-of-Sharding" class="headerlink" title="Common problems of Sharding"></a>Common problems of Sharding</h2><p>因為數據不是在一處，所以要去多個地方去取。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggvf9mfexmj30zm0hwk25.jpg" alt="image-20200718205839869"></p>
+<h2 id="Common-problems-of-Sharding"><a href="#Common-problems-of-Sharding" class="headerlink" title="Common problems of Sharding"></a>Common problems of Sharding</h2><p>就是在說機器掛了怎麼辦？</p>
+<p>因為數據不是在一處，就是因為sharding分開了，所以要去多個地方去取，數據分散在各個地方那怎辦？</p>
 <ol>
-<li>Join and Denormalization 去user table 去查 name ；<br>讀還ok寫就麻煩了</li>
-<li>Referential integrity </li>
-<li>Rebalancing 重弄分片；有某個zip數據量特大。</li>
+<li><p>Join and Denormalization 如user_id還得去user table 去查 name ；<br>就是說一個table要去refer另一個table, 跨個太平洋的數據難作join, </p>
+<ul>
+<li>Denormalize就是說數據有冗餘，一般為了不要hop很遠的地方去，所以讓數據有冗餘，讀還ok寫就麻煩了</li>
+</ul>
+</li>
+<li><p>Referential integrity ，如果有別的table的主鍵的話。。外鍵在sharding裡面會比較痛苦</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggvff8w0puj30ys02sgnd.jpg" alt="image-20200718210405029"></p>
+</li>
+<li><p>Rebalancing 重弄分片；有某個zip數據量特大。</p>
+</li>
 </ol>
-<h2 id="LinkedIn-Prob"><a href="#LinkedIn-Prob" class="headerlink" title="LinkedIn Prob."></a>LinkedIn Prob.</h2><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200206205226121.png" alt="image-20200206205226121" style="zoom:50%;" />
+<h1 id="LinkedIn-Prob"><a href="#LinkedIn-Prob" class="headerlink" title="LinkedIn Prob."></a>LinkedIn Prob.</h1><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200206205226121.png" alt="image-20200206205226121" style="zoom:50%;" />
 
 <img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmz3ewua8j30x40jqn9w.jpg" alt="image-20200206205246002" style="zoom:50%;" />
 
 <img src="/Users/joe/Library/Application Support/typora-user-images/image-20200206205350491.png" alt="image-20200206205350491" style="zoom:50%;" />
 
-
-
+<ul>
+<li>APPLE 跟 STORE對應的 Documents id 應該在這裡要是 交集!</li>
+</ul>
+<p>但如果documents太多，返回的量會很大呀!</p>
+<p>分開算，在Expression Tree</p>
 <h5 id="Expression-Tree"><a href="#Expression-Tree" class="headerlink" title="Expression Tree"></a>Expression Tree</h5><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200206205535354.png" alt="image-20200206205535354" style="zoom:50%;" />
 
-
-
-<h1 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h1><h4 id="message-queue"><a href="#message-queue" class="headerlink" title="message queue　"></a>message queue　</h4><p>不會丟，可以保證不會丟失</p>
+<p>下面這張圖沒講太細</p>
+<p>![image-20200718211447294](/Users/joe/Library/Application Support/typora-user-images/image-20200718211447294.png)</p>
+<h1 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h1><p>Ref: <a href="https://www.youtube.com/watch?v=P_JPdQfjXY4&amp;list=PLbhaS_83B97vSWVslD63vjIi5OTYmSVrk&amp;index=15" target="_blank" rel="noopener">https://www.youtube.com/watch?v=P_JPdQfjXY4&amp;list=PLbhaS_83B97vSWVslD63vjIi5OTYmSVrk&amp;index=15</a></p>
+<h4 id="message-queue"><a href="#message-queue" class="headerlink" title="message queue　"></a>message queue　</h4><p>不會丟，可以保證不會丟失</p>
 <p>往ｑ放東西，consumer拿東西，本身是個異步過程。 Hot-spot, burst，Q就是個buffer，</p>
 <p>系統可以不用等在那邊，可防止 burst</p>
 <ul>

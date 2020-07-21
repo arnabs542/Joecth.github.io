@@ -7,735 +7,919 @@
     error: 'Copy error',
     noSupport: 'The browser does not support'
   }
-} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">258</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">35</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/21/LC/2020-02-22-LC%20SQL%20Easy/">LC/2020-02-22-LC SQL Easy</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-21</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/LC/">LC</a></span><div class="content"><h4 id="175-Combine-Two-Tables"><a href="#175-Combine-Two-Tables" class="headerlink" title="175. Combine Two Tables"></a>175. Combine Two Tables</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+-------------+---------+</span><br><span class="line">| Column Name | Type    |</span><br><span class="line">+-------------+---------+</span><br><span class="line">| PersonId    | int     |</span><br><span class="line">| FirstName   | varchar |</span><br><span class="line">| LastName    | varchar |</span><br><span class="line">+-------------+---------+</span><br><span class="line">PersonId is the primary key column for this table.</span><br></pre></td></tr></table></figure>
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">273</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">40</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/27/jupyter-demo/2020-02-28-GeoPy_testing/">jupyter-demo/2020-02-28-GeoPy_testing</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-27</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Jupy-Demo/">Jupy-Demo</a></span><div class="content"><h3 id="with-https-nbviewer-jupyter-org"><a href="#with-https-nbviewer-jupyter-org" class="headerlink" title="with https://nbviewer.jupyter.org/"></a>with <a href="https://nbviewer.jupyter.org/" target="_blank" rel="noopener">https://nbviewer.jupyter.org/</a></h3><iframe src="https://nbviewer.jupyter.org/github/Joecth/Joecth.github.io/blob/hexo-melody/source/_posts/jupyter-demo/geopy_testing.ipynb" width="100%" height="1000"></iframe>
 
-<p>Table: <code>Address</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+-------------+---------+</span><br><span class="line">| Column Name | Type    |</span><br><span class="line">+-------------+---------+</span><br><span class="line">| AddressId   | int     |</span><br><span class="line">| PersonId    | int     |</span><br><span class="line">| City        | varchar |</span><br><span class="line">| State       | varchar |</span><br><span class="line">+-------------+---------+</span><br><span class="line">AddressId is the primary key column for this table.</span><br></pre></td></tr></table></figure>
-
-<p>Write a SQL query for a report that provides the following information for each person in the Person table, regardless if there is an address for each of those people:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> FirstName, LastName, City, State</span><br><span class="line"><span class="keyword">FROM</span> Person </span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Address</span><br><span class="line"><span class="keyword">ON</span> Person.PersonId = Address.PersonId</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="176-Second-Highest-Salary"><a href="#176-Second-Highest-Salary" class="headerlink" title="176. Second Highest Salary"></a>176. Second Highest Salary</h4><p>For example, given the above Employee table, the query should return <code>200</code> as the second highest salary. If there is no second highest salary, then the query should return <code>null</code>.</p>
-<p>Write a SQL query to get the second highest salary from the <code>Employee</code> table.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">+----+--------+</span><br><span class="line">| Id | Salary |</span><br><span class="line">+----+--------+</span><br><span class="line">| 1  | 100    |</span><br><span class="line">| 2  | 200    |</span><br><span class="line">| 3  | 300    |</span><br><span class="line">+----+--------+</span><br></pre></td></tr></table></figure>
-
-<p>For example, given the above Employee table, the query should return <code>200</code> as the second highest salary. If there is no second highest salary, then the query should return <code>null</code>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+---------------------+</span><br><span class="line">| SecondHighestSalary |</span><br><span class="line">+---------------------+</span><br><span class="line">| 200                 |</span><br><span class="line">+---------------------+</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MAX</span>(a.Salary) <span class="keyword">AS</span> SecondHighestSalary</span><br><span class="line"><span class="keyword">FROM</span> Employee <span class="keyword">AS</span> a</span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> Employee <span class="keyword">as</span> b</span><br><span class="line"><span class="keyword">ON</span> a.Salary &lt; b.Salary</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="181-Employees-Earning-More-Than-Their-Managers"><a href="#181-Employees-Earning-More-Than-Their-Managers" class="headerlink" title="181. Employees Earning More Than Their Managers"></a>181. Employees Earning More Than Their Managers</h4><p>The <code>Employee</code> table holds all employees including their managers. Every employee has an Id, and there is also a column for the manager Id.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+----+-------+--------+-----------+</span><br><span class="line">| Id | Name  | Salary | ManagerId |</span><br><span class="line">+----+-------+--------+-----------+</span><br><span class="line">| 1  | Joe   | 70000  | 3         |</span><br><span class="line">| 2  | Henry | 80000  | 4         |</span><br><span class="line">| 3  | Sam   | 60000  | NULL      |</span><br><span class="line">| 4  | Max   | 90000  | NULL      |</span><br><span class="line">+----+-------+--------+-----------+</span><br></pre></td></tr></table></figure>
-
-<p>Given the <code>Employee</code> table, write a SQL query that finds out employees who earn more than their managers. For the above table, Joe is the only employee who earns more than his manager.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+----------+</span><br><span class="line">| Employee |</span><br><span class="line">+----------+</span><br><span class="line">| Joe      |</span><br><span class="line">+----------+</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> tb1.Name <span class="keyword">AS</span> Employee</span><br><span class="line"><span class="keyword">FROM</span> Employee <span class="keyword">as</span> tb1</span><br><span class="line"><span class="keyword">inner</span> <span class="keyword">join</span> Employee <span class="keyword">as</span> tb2</span><br><span class="line"><span class="keyword">on</span> tb1.ManagerId = tb2.Id</span><br><span class="line"><span class="keyword">where</span> tb1.Salary &gt; tb2.Salary</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="182-Duplicate-Emails"><a href="#182-Duplicate-Emails" class="headerlink" title="182. Duplicate Emails"></a>182. Duplicate Emails</h4><p>Write a SQL query to find all duplicate emails in a table named <code>Person</code>.</p>
-<p>For example, your query should return the following for the above table:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+---------+</span><br><span class="line">| Email   |</span><br><span class="line">+---------+</span><br><span class="line">| a@b.com |</span><br><span class="line">+---------+</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> Email <span class="comment">#, COUNT(Email)</span></span><br><span class="line"><span class="keyword">FROM</span> Person</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> Email</span><br><span class="line"><span class="comment"># ORDER BY COUNT(Email)</span></span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">COUNT</span>(Email) &gt; <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="183-Customers-Who-Never-Order"><a href="#183-Customers-Who-Never-Order" class="headerlink" title="183. Customers Who Never Order"></a>183. Customers Who Never Order</h4><p>Suppose that a website contains two tables, the <code>Customers</code> table and the <code>Orders</code> table. Write a SQL query to find all customers who never order anything.</p>
-<p>Table: <code>Customers</code>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">+----+-------+</span><br><span class="line">| Id | Name  |</span><br><span class="line">+----+-------+</span><br><span class="line">| 1  | Joe   |</span><br><span class="line">| 2  | Henry |</span><br><span class="line">| 3  | Sam   |</span><br><span class="line">| 4  | Max   |</span><br><span class="line">+----+-------+</span><br></pre></td></tr></table></figure>
-
-<p>Table: <code>Orders</code>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+----+------------+</span><br><span class="line">| Id | CustomerId |</span><br><span class="line">+----+------------+</span><br><span class="line">| 1  | 3          |</span><br><span class="line">| 2  | 1          |</span><br><span class="line">+----+------------+</span><br></pre></td></tr></table></figure>
-
-<p>Using the above tables as example, return the following:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+-----------+</span><br><span class="line">| Customers |</span><br><span class="line">+-----------+</span><br><span class="line">| Henry     |</span><br><span class="line">| Max       |</span><br><span class="line">+-----------+</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> tb1.Name <span class="keyword">AS</span> Customers</span><br><span class="line"><span class="keyword">from</span> Customers <span class="keyword">as</span> tb1</span><br><span class="line"><span class="keyword">LEFT</span> <span class="keyword">JOIN</span> Orders </span><br><span class="line"><span class="keyword">ON</span> tb1.Id = Orders.CustomerId</span><br><span class="line"><span class="keyword">WHERE</span> Orders.CustomerId <span class="keyword">is</span> <span class="literal">NULL</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="196-Delete-Duplicate-Emails"><a href="#196-Delete-Duplicate-Emails" class="headerlink" title="196. Delete Duplicate Emails"></a>196. Delete Duplicate Emails</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> p1</span><br><span class="line"><span class="keyword">FROM</span> Person p1</span><br><span class="line"><span class="keyword">CROSS</span> <span class="keyword">JOIN</span> Person p2</span><br><span class="line"><span class="keyword">WHERE</span> p1.Email = p2.Email</span><br><span class="line">	<span class="keyword">AND</span> p1.Id &gt; p2.Id;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="197"><a href="#197" class="headerlink" title="197."></a>197.</h4><h4 id="511"><a href="#511" class="headerlink" title="511."></a>511.</h4><h4 id="512"><a href="#512" class="headerlink" title="512."></a>512.</h4></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/21/SQL/2020-02-21-SQL-Churn%20Rate%20with%20Case/">SQL/2020-02-21-SQL-Churn Rate with Case</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-21</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SQL/">SQL</a></span><div class="content"><blockquote>
-<p>Codeflix, a streaming video startup, is interested in measuring their user churn rate. In this project, you’ll be helping them answer these questions about their churn:</p>
-<p>\1. Get familiar with the company.</p>
-<ul>
-<li>How many months has the company been operating? Which months do you have enough information to calculate a churn rate?</li>
-<li>What segments of users exist?</li>
-</ul>
-<p>\2. What is the overall churn trend since the company started?</p>
-<p>\3. Compare the churn rates between user segments.</p>
-<ul>
-<li>Which segment of users should the company focus on expanding?</li>
-</ul>
+<h3 id="Binder"><a href="#Binder" class="headerlink" title="Binder:"></a>Binder:</h3><p><a href="https://hub.gke.mybinder.org/user/joecth-joecth.github.io-ua8tv4g1/notebooks/source/_posts/jupyter-demo/geopy_testing.ipynb" target="_blank" rel="noopener">https://hub.gke.mybinder.org/user/joecth-joecth.github.io-ua8tv4g1/notebooks/source/_posts/jupyter-demo/geopy_testing.ipynb</a></p>
 <hr>
-<p>Start the following project, which will guide you through the queries you need to answer the above questions. Make sure to save your queries and results — you’ll be using them as well.</p>
-<p>Then, create a set of slides using <a href="https://www.google.com/slides/about/" target="_blank" rel="noopener">Google Slides</a>, Microsoft Powerpoint, or some other presentation software. Your presentation should answer all of the questions listed above. Each answer should include a text explanation and data to support your claim. The queries used to find that data should be included in a separate <strong>.sql</strong> file.</p>
-<ul>
-<li><strong><a href="https://s3.amazonaws.com/codecademy-content/programs/learn-sql-from-scratch/SQL+Templates+ADwSQL.pptx" target="_blank" rel="noopener">Template:</a></strong> We recommend that you use the template linked here. This template contains examples of the types of slides you’ll want to use.</li>
-<li><strong><a href="https://s3.amazonaws.com/codecademy-content/programs/learn-sql-from-scratch/calc-churn-proj/churn-rubric-for-learners-ADwSQL.pdf" target="_blank" rel="noopener">Rubric:</a></strong> You can share your work with your peers on Codecademy, who can give you feedback based on this rubric. Make sure to check your work before submitting!</li>
-</ul>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- select * from subscriptions limit 20;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- select min(subscription_start), max(subscription_start)</span></span><br><span class="line"><span class="comment">-- from subscriptions;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">WITH</span> <span class="keyword">months</span> <span class="keyword">AS</span></span><br><span class="line">(<span class="keyword">SELECT</span></span><br><span class="line">   <span class="string">'2017-01-01'</span> <span class="keyword">as</span> first_day,</span><br><span class="line">   <span class="string">'2017-01-31'</span> <span class="keyword">as</span> <span class="keyword">last_day</span></span><br><span class="line"> <span class="keyword">UNION</span></span><br><span class="line"> <span class="keyword">SELECT</span></span><br><span class="line">   <span class="string">'2017-02-01'</span> <span class="keyword">as</span> first_day,</span><br><span class="line">   <span class="string">'2017-02-28'</span> <span class="keyword">as</span> <span class="keyword">last_day</span></span><br><span class="line"> <span class="keyword">UNION</span></span><br><span class="line"> <span class="keyword">SELECT</span></span><br><span class="line">   <span class="string">'2017-03-01'</span> <span class="keyword">as</span> first_day,</span><br><span class="line">   <span class="string">'2017-03-31'</span> <span class="keyword">as</span> <span class="keyword">last_day</span></span><br><span class="line">),</span><br><span class="line">cross_join <span class="keyword">AS</span></span><br><span class="line">(<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> subscriptions <span class="keyword">CROSS</span> <span class="keyword">JOIN</span> <span class="keyword">months</span></span><br><span class="line">),</span><br><span class="line"><span class="keyword">status</span> <span class="keyword">AS</span></span><br><span class="line">(<span class="keyword">SELECT</span> <span class="keyword">id</span>, first_day <span class="keyword">as</span> <span class="keyword">month</span>, </span><br><span class="line">  <span class="keyword">CASE</span></span><br><span class="line">   <span class="keyword">WHEN</span> <span class="keyword">segment</span> = <span class="number">87</span> <span class="keyword">AND</span> </span><br><span class="line">     (subscription_start &lt; first_day</span><br><span class="line">        <span class="keyword">AND</span></span><br><span class="line">        (</span><br><span class="line">          subscription_end &gt; first_day</span><br><span class="line">          <span class="keyword">OR</span></span><br><span class="line">          subscription_end <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line">        )</span><br><span class="line">     ) <span class="keyword">THEN</span> <span class="number">1</span></span><br><span class="line">   <span class="keyword">ELSE</span> <span class="number">0</span></span><br><span class="line"> <span class="keyword">END</span> <span class="keyword">AS</span> is_active_87</span><br><span class="line"> ,</span><br><span class="line"> <span class="keyword">CASE</span></span><br><span class="line">   <span class="keyword">WHEN</span> <span class="keyword">segment</span> = <span class="number">30</span> <span class="keyword">AND</span> </span><br><span class="line">     (subscription_start &lt; first_day</span><br><span class="line">        <span class="keyword">AND</span></span><br><span class="line">        (</span><br><span class="line">          subscription_end &gt; first_day</span><br><span class="line">          <span class="keyword">OR</span></span><br><span class="line">          subscription_end <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line">        )</span><br><span class="line">     ) <span class="keyword">THEN</span> <span class="number">1</span></span><br><span class="line">   <span class="keyword">ELSE</span> <span class="number">0</span></span><br><span class="line"> <span class="keyword">END</span> <span class="keyword">AS</span> is_active_30</span><br><span class="line"> ,</span><br><span class="line"> <span class="keyword">CASE</span> </span><br><span class="line">   <span class="keyword">WHEN</span> <span class="keyword">segment</span> = <span class="number">87</span> <span class="keyword">AND</span></span><br><span class="line">     (</span><br><span class="line">       subscription_end <span class="keyword">BETWEEN</span> first_day <span class="keyword">AND</span> <span class="keyword">last_day</span></span><br><span class="line">     ) <span class="keyword">THEN</span> <span class="number">1</span></span><br><span class="line">   <span class="keyword">ELSE</span> <span class="number">0</span></span><br><span class="line"> <span class="keyword">END</span> <span class="keyword">AS</span> is_canceled_87</span><br><span class="line"> ,</span><br><span class="line"> <span class="keyword">CASE</span> </span><br><span class="line">   <span class="keyword">WHEN</span> <span class="keyword">segment</span> = <span class="number">30</span> <span class="keyword">AND</span></span><br><span class="line">     (</span><br><span class="line">       subscription_end <span class="keyword">BETWEEN</span> first_day <span class="keyword">AND</span> <span class="keyword">last_day</span></span><br><span class="line">     ) <span class="keyword">THEN</span> <span class="number">1</span></span><br><span class="line">   <span class="keyword">ELSE</span> <span class="number">0</span></span><br><span class="line"> <span class="keyword">END</span> <span class="keyword">AS</span> is_canceled_30</span><br><span class="line"> <span class="keyword">FROM</span> cross_join </span><br><span class="line">),</span><br><span class="line">status_aggregate <span class="keyword">AS</span></span><br><span class="line">(</span><br><span class="line">  <span class="keyword">SELECT</span>  <span class="keyword">month</span>, </span><br><span class="line">          <span class="keyword">SUM</span>(is_active_87) <span class="keyword">AS</span> sum_active_87,</span><br><span class="line">          <span class="keyword">SUM</span>(is_active_30) <span class="keyword">AS</span> sum_active_30,       </span><br><span class="line">          <span class="keyword">SUM</span>(is_canceled_87) <span class="keyword">AS</span> sum_canceled_87, </span><br><span class="line">          <span class="keyword">SUM</span>(is_canceled_30) <span class="keyword">AS</span> sum_canceled_30</span><br><span class="line">  <span class="keyword">FROM</span> <span class="keyword">status</span></span><br><span class="line">  <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">month</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> status_aggregate <span class="keyword">limit</span> <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
+<p>ref: <a href="https://www.dazhuanlan.com/2020/01/06/5e12cba50f56b/" target="_blank" rel="noopener">https://www.dazhuanlan.com/2020/01/06/5e12cba50f56b/</a></p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/27/jupyter-demo/2020-02-28-POI/">jupyter-demo/2020-02-28-POI</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-27</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Jupy-Demo/">Jupy-Demo</a></span><div class="content"><iframe src="https://nbviewer.jupyter.org/github/Joecth/Joecth.github.io/blob/hexo-melody/source/_posts/jupyter-demo/poi.ipynb" width="100%" height="1000"></iframe>
 
-<h3 id="Query-Results-status-aggregate"><a href="#Query-Results-status-aggregate" class="headerlink" title="Query Results - status_aggregate"></a>Query Results - status_aggregate</h3><table>
+
+<h3 id="Binder"><a href="#Binder" class="headerlink" title="Binder:"></a>Binder:</h3><p><a href="https://hub.gke.mybinder.org/user/joecth-joecth.github.io-48awaq7m/notebooks/source/_posts/jupyter-demo/poi.ipynb" target="_blank" rel="noopener">https://hub.gke.mybinder.org/user/joecth-joecth.github.io-48awaq7m/notebooks/source/_posts/jupyter-demo/poi.ipynb</a></p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/25/LC/2020-02-25-Codility%20demo%20record/">LC/2020-02-25-Codility demo record</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-25</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/LC/">LC</a></span><div class="content"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Counter  X</span></span><br><span class="line"><span class="string">if not ass: return </span></span><br><span class="line"><span class="string">if arr[-1] &lt; 1:</span></span><br><span class="line"><span class="string">    return 1</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">if diff &gt; 1:</span></span><br><span class="line"><span class="string">    return arr[perv] + 1</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">if i end loops :</span></span><br><span class="line"><span class="string">    return arr[-1] + 1   or</span></span><br><span class="line"><span class="string">    return arr[prev] + 1</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">sort</span></span><br><span class="line"><span class="string">    -2 -1 0 1 2 3 4     5</span></span><br><span class="line"><span class="string">                      prev    i</span></span><br><span class="line"><span class="string">                 diff &gt; 1!  </span></span><br><span class="line"><span class="string">                bk</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">solution</span><span class="params">(A)</span>:</span></span><br><span class="line">    <span class="comment"># write your code in Python 3.6</span></span><br><span class="line">    <span class="comment"># pass</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> A:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> len(A) == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span> <span class="keyword">if</span> A[<span class="number">0</span>] &lt;= <span class="number">0</span> <span class="keyword">else</span> A[<span class="number">0</span>]+<span class="number">1</span></span><br><span class="line">        </span><br><span class="line">    arr = sorted(A, key=<span class="keyword">lambda</span> x: x)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> arr[<span class="number">-1</span>] &lt;= <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    prev = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(arr)):    <span class="comment"># at least 2 elems here</span></span><br><span class="line">        <span class="keyword">if</span> arr[i] &lt;= <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        diff = arr[i] - arr[prev]</span><br><span class="line">        <span class="keyword">if</span> diff &gt; <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> arr[prev] + <span class="number">1</span></span><br><span class="line">        prev = i</span><br><span class="line">    <span class="keyword">return</span> arr[prev] + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/24/Musics/2020-02-24-N_Beats_Examples_and_ByteDance/">Musics/2020-02-24-N_Beats_Examples_and_ByteDance</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-24</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Music/">Music</a></span><div class="content"><h2 id="N-Beats-amp-Examples"><a href="#N-Beats-amp-Examples" class="headerlink" title="N Beats &amp; Examples"></a>N Beats &amp; Examples</h2><table>
 <thead>
 <tr>
-<th align="center">month</th>
-<th align="center">sum_active_87</th>
-<th align="center">sum_active_30</th>
-<th align="center">sum_canceled_87</th>
-<th align="center">sum_canceled_30</th>
+<th>Beats</th>
+<th>♩= Speed</th>
+<th>Player</th>
+<th>Music</th>
+<th>Style</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">2017-01-01</td>
-<td align="center">278</td>
-<td align="center">291</td>
-<td align="center">70</td>
-<td align="center">22</td>
+<td><strong><a href="#8Beats">8 Beats</a></strong></td>
+<td>♩＝87</td>
+<td>Cold Play</td>
+<td>Yellow</td>
+<td>另类摇滚</td>
 </tr>
 <tr>
-<td align="center">2017-02-01</td>
-<td align="center">462</td>
-<td align="center">518</td>
-<td align="center">148</td>
-<td align="center">38</td>
+<td></td>
+<td>♩＝106</td>
+<td>Green Day</td>
+<td>Wake Me Up When September Ends</td>
+<td><a name="rock"><strong>摇滚</strong></a></td>
 </tr>
 <tr>
-<td align="center">2017-03-01</td>
-<td align="center">531</td>
-<td align="center">716</td>
-<td align="center">258</td>
-<td align="center">84</td>
+<td></td>
+<td>♩=128</td>
+<td>Muse</td>
+<td>Can’t Take My Eyes off You</td>
+<td>前卫摇滚 (此外，这首被不同 Player 改成过很多种不同曲风及不同Beats, 经典)</td>
+</tr>
+<tr>
+<td></td>
+<td>♩＝125</td>
+<td>Cranberry</td>
+<td>Dreams</td>
+<td>另类摇滚</td>
+</tr>
+<tr>
+<td></td>
+<td>♩＝82</td>
+<td>Cranberry</td>
+<td>Zombie</td>
+<td>摇滚 + 民谣</td>
+</tr>
+<tr>
+<td></td>
+<td>♩＝74</td>
+<td>MayDay</td>
+<td>温柔</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>♩＝97</td>
+<td>RHCP</td>
+<td>Dani California</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>♩=126</td>
+<td>Kylie Minoque</td>
+<td>Can’t Get You Out of My Head</td>
+<td>流行舞曲, Techno</td>
+</tr>
+<tr>
+<td>(8 Beats, 但16也OK)</td>
+<td>♩=100</td>
+<td>Sixpence None the Richer</td>
+<td>Kiss Me</td>
+<td></td>
+</tr>
+<tr>
+<td><strong><a href="#16Beats">16 Beats</a></strong></td>
+<td>♩=95</td>
+<td>Venessa Carlton</td>
+<td>A Thousand Miles</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>♩=96</td>
+<td>Natalie Imbruglia</td>
+<td>Torn</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>♩=94</td>
+<td>D’Sound</td>
+<td>Play Me The Song</td>
+<td>Fusion</td>
+</tr>
+<tr>
+<td></td>
+<td>♩=90</td>
+<td>The Black Eyed Peas</td>
+<td>Don’t Lie</td>
+<td>舞曲, Pop, Rap</td>
+</tr>
+<tr>
+<td></td>
+<td>♩=94</td>
+<td>Joss Stone</td>
+<td>Super Duper Love</td>
+<td></td>
+</tr>
+<tr>
+<td>12 Beats</td>
+<td>♩=120</td>
+<td></td>
+<td>小叮噹</td>
+<td>Swing</td>
+</tr>
+<tr>
+<td></td>
+<td>♩＝147</td>
+<td>西洋老歌</td>
+<td>You Are My Sunshine</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>♩=66</td>
+<td>Whitney Houston</td>
+<td>Saving All My Love For You</td>
+<td>Slow Rock; Jazz + Pop</td>
+</tr>
+<tr>
+<td></td>
+<td>♩=53</td>
+<td>Gary Moore</td>
+<td>Still Got The Blues</td>
+<td>抒情蓝调</td>
+</tr>
+<tr>
+<td>24 Beat</td>
+<td>♩=89</td>
+<td>Maroon5</td>
+<td>Sunday Morning</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>♩=70</td>
+<td>Westlife</td>
+<td>Easy</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>♩=77</td>
+<td>Macy Gary</td>
+<td>I Try</td>
+<td></td>
 </tr>
 </tbody></table>
-<p><strong>8.</strong></p>
-<p>Calculate the churn rates for the two segments over the three month period. Which segment has a lower churn rate?</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">-- select * from status_aggregate limit 10;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span>  a.month, </span><br><span class="line">        <span class="number">1.0</span> * a.sum_canceled_87 / a.sum_active_87 <span class="keyword">AS</span> churn_87, </span><br><span class="line">        <span class="number">1.0</span> * a.sum_canceled_30 / a.sum_active_30 <span class="keyword">AS</span> churn_30</span><br><span class="line"><span class="keyword">FROM</span> status_aggregate <span class="keyword">as</span> a;</span><br></pre></td></tr></table></figure>
-
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/21/SQL/2020-02-21-SQL-UTM%20with%20Case/">SQL/2020-02-21-SQL-UTM with Case</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-21</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SQL/">SQL</a></span><div class="content"><h2 id="The-Attribution-Query-II"><a href="#The-Attribution-Query-II" class="headerlink" title="The Attribution Query II"></a>The Attribution Query II</h2><p>To get the UTM parameters, we’ll need to <code>JOIN</code> these results back with the original table.</p>
-<p>We’ll join tables <code>first_touch</code>, aka<code>ft</code>, and <code>page_visits</code>, aka <code>pv</code>, on <code>user_id</code> and <code>timestamp</code>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ft.user_id &#x3D; pv.user_id</span><br><span class="line">AND ft.first_touch_at &#x3D; pv.timestamp</span><br></pre></td></tr></table></figure>
-
-<p>Remember that <code>first_touch_at</code> is the earliest timestamp for each user. Here’s the simplified query:</p>
-<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc4dkxtc5wj31640tgdjo.jpg" alt="image-20200221220840486" style="zoom:67%;" />
-
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">WITH</span> first_touch <span class="keyword">AS</span> (</span><br><span class="line">   <span class="keyword">SELECT</span> user_id,</span><br><span class="line">      <span class="keyword">MIN</span>(<span class="built_in">timestamp</span>) <span class="keyword">AS</span> <span class="string">'first_touch_at'</span></span><br><span class="line">   <span class="keyword">FROM</span> page_visits</span><br><span class="line">   <span class="keyword">GROUP</span> <span class="keyword">BY</span> user_id)</span><br><span class="line"><span class="keyword">SELECT</span> ft.user_id,</span><br><span class="line">  ft.first_touch_at,</span><br><span class="line">  pv.utm_source</span><br><span class="line"><span class="keyword">FROM</span> first_touch <span class="keyword">AS</span> <span class="string">'ft'</span></span><br><span class="line"><span class="keyword">JOIN</span> page_visits <span class="keyword">AS</span> <span class="string">'pv'</span></span><br><span class="line">  <span class="keyword">ON</span> ft.user_id = pv.user_id</span><br><span class="line">  <span class="keyword">AND</span> ft.first_touch_at = pv.timestamp;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="The-Attribution-Query-III"><a href="#The-Attribution-Query-III" class="headerlink" title="The Attribution Query III"></a>The Attribution Query III</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">WITH</span> last_touch <span class="keyword">AS</span></span><br><span class="line">(</span><br><span class="line">  <span class="keyword">SELECT</span> user_id,</span><br><span class="line">     <span class="keyword">MAX</span>(<span class="built_in">timestamp</span>) <span class="keyword">AS</span> <span class="string">'last_touch_at'</span></span><br><span class="line">  <span class="keyword">FROM</span> page_visits</span><br><span class="line">  <span class="comment">-- WHERE user_id = 10069</span></span><br><span class="line">  <span class="keyword">GROUP</span> <span class="keyword">BY</span> user_id</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">-- select * from last_touch limit 10;</span></span><br><span class="line"><span class="keyword">SELECT</span> lt.user_id, lt.last_touch_at, pv.utm_source</span><br><span class="line"><span class="keyword">FROM</span> last_touch <span class="keyword">as</span> <span class="string">'lt'</span></span><br><span class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> page_visits <span class="keyword">as</span> <span class="string">'pv'</span></span><br><span class="line">  <span class="keyword">ON</span> lt.user_id = pv.user_id </span><br><span class="line">  <span class="keyword">AND</span> lt.last_touch_at = pv.timestamp</span><br><span class="line"><span class="keyword">WHERE</span> lt.user_id = <span class="number">10069</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc4dypt1xnj30ps03aaa8.jpg" alt="image-20200221222149765" style="zoom:67%;" />
-
-<h1 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h1><p>You can now wield SQL to find where, when, and how users are visiting a website. Well done! Here’s a summary of what you learned:</p>
-<ul>
-<li><em>UTM parameters</em> are a way of tracking visits to a website. Developers, marketers, and analysts use them to capture information like the time, attribution source, and attribution medium for each user visit.</li>
-<li><em>First-touch attribution</em> only considers the first source for each customer. This is a good way of knowing how visitors initially discover a website.</li>
-<li><em>Last-touch attribution</em> only considers the last source for each customer. This is a good way of knowing how visitors are drawn back to a website, especially for making a final purchase.</li>
-<li>Find first and last touches by grouping <code>page_visits</code> by <code>user_id</code> and finding the <code>MIN</code> and <code>MAX</code> of <code>timestamp</code>.</li>
-<li>To find first- and last-touch attribution, join that table back with the original <code>page_visits</code> table on <code>user_id</code> and <code>timestamp</code>.</li>
-</ul>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/20/Codecademies/2020-02-22-SQL-Advanced_Aggregate_&amp;_Count_Metrics/">Codecademies/2020-02-22-SQL-Advanced_Aggregate_&amp;_Count_Metrics</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-20</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SQL/">SQL</a></span><div class="content"><h1 id="Advanced-Aggregate"><a href="#Advanced-Aggregate" class="headerlink" title="Advanced Aggregate"></a>Advanced Aggregate</h1><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcv26l5ilkj31bm0jcn1v.jpg" alt="image-20200316000428263" style="zoom:67%;" />
-
-
-
-<h2 id="Database-Schema"><a href="#Database-Schema" class="headerlink" title="Database Schema"></a>Database Schema</h2><table>
-<thead>
-<tr>
-<th align="center">orders4999 rows</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">id</td>
-<td>int</td>
-</tr>
-<tr>
-<td align="center">ordered_at</td>
-<td>text</td>
-</tr>
-<tr>
-<td align="center">delivered_at</td>
-<td>text</td>
-</tr>
-<tr>
-<td align="center">delivered_to</td>
-<td>int</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center">order_items20000 rows</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">id</td>
-<td>int</td>
-</tr>
-<tr>
-<td align="center">order_id</td>
-<td>int</td>
-</tr>
-<tr>
-<td align="center">name</td>
-<td>text</td>
-</tr>
-<tr>
-<td align="center">amount_paid</td>
-<td>real</td>
-</tr>
-</tbody></table>
-<h2 id="Percentage"><a href="#Percentage" class="headerlink" title="Percentage"></a>Percentage</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">name</span>, <span class="keyword">round</span>(<span class="keyword">sum</span>(amount_paid)/</span><br><span class="line">(</span><br><span class="line">  <span class="keyword">select</span> <span class="keyword">sum</span>(amount_paid) <span class="keyword">from</span> order_items</span><br><span class="line">) *<span class="number">100.0</span>, <span class="number">2</span>) <span class="keyword">as</span> pct</span><br><span class="line"><span class="keyword">from</span> order_items</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="keyword">name</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="number">2</span> <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Query-Results"><a href="#Query-Results" class="headerlink" title="Query Results"></a>Query Results</h3><table>
-<thead>
-<tr>
-<th align="center">name</th>
-<th align="center">%</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">tikka-masala</td>
-<td align="center">31.7</td>
-</tr>
-<tr>
-<td align="center">grilled-cheese</td>
-<td align="center">21.6</td>
-</tr>
-<tr>
-<td align="center">chicken-parm</td>
-<td align="center">19.95</td>
-</tr>
-<tr>
-<td align="center">blt</td>
-<td align="center">14.75</td>
-</tr>
-<tr>
-<td align="center">soda</td>
-<td align="center">5.48</td>
-</tr>
-<tr>
-<td align="center">orange-juice</td>
-<td align="center">2.94</td>
-</tr>
-<tr>
-<td align="center">cake</td>
-<td align="center">2.71</td>
-</tr>
-<tr>
-<td align="center">banana-smoothie</td>
-<td align="center">0.53</td>
-</tr>
-<tr>
-<td align="center">kale-smoothie</td>
-<td align="center">0.35</td>
-</tr>
-</tbody></table>
-<h2 id="Grouping-with-Case-Statements"><a href="#Grouping-with-Case-Statements" class="headerlink" title="Grouping with Case Statements"></a>Grouping with Case Statements</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">  <span class="comment">/**/</span></span><br><span class="line">  <span class="keyword">case</span> <span class="keyword">name</span></span><br><span class="line">    <span class="keyword">when</span> <span class="string">'kale-smoothie'</span>    <span class="keyword">then</span> <span class="string">'smoothie'</span></span><br><span class="line">    <span class="keyword">when</span> <span class="string">'banana-smoothie'</span>  <span class="keyword">then</span> <span class="string">'smoothie'</span></span><br><span class="line">    <span class="keyword">when</span> <span class="string">'orange-juice'</span>     <span class="keyword">then</span> <span class="string">'drink'</span></span><br><span class="line">    <span class="keyword">when</span> <span class="string">'soda'</span>             <span class="keyword">then</span> <span class="string">'drink'</span></span><br><span class="line">    <span class="keyword">when</span> <span class="string">'blt'</span>              <span class="keyword">then</span> <span class="string">'sandwich'</span></span><br><span class="line">    <span class="keyword">when</span> <span class="string">'grilled-cheese'</span>   <span class="keyword">then</span> <span class="string">'sandwich'</span></span><br><span class="line">    <span class="keyword">when</span> <span class="string">'tikka-masala'</span>     <span class="keyword">then</span> <span class="string">'dinner'</span></span><br><span class="line">    <span class="keyword">when</span> <span class="string">'chicken-parm'</span>     <span class="keyword">then</span> <span class="string">'dinner'</span></span><br><span class="line">     <span class="keyword">else</span> <span class="string">'other'</span></span><br><span class="line">  <span class="keyword">end</span> <span class="keyword">as</span> <span class="keyword">category</span>, </span><br><span class="line">  <span class="keyword">round</span>(<span class="number">1.0</span> * <span class="keyword">sum</span>(amount_paid) / </span><br><span class="line">          (</span><br><span class="line">            <span class="keyword">select</span> <span class="keyword">sum</span>(amount_paid) <span class="keyword">from</span> order_items</span><br><span class="line">          ) * <span class="number">100</span>, <span class="number">2</span></span><br><span class="line">       ) <span class="keyword">as</span> <span class="string">'%'</span></span><br><span class="line"><span class="keyword">from</span> order_items</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="number">2</span> <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Query-Results-1"><a href="#Query-Results-1" class="headerlink" title="Query Results"></a>Query Results</h3><table>
-<thead>
-<tr>
-<th align="center">category</th>
-<th align="center">round(1.0 * sum(amount_paid) / ( select sum(amount_paid) from order_items ) * 100, 2 )</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">dinner</td>
-<td align="center">51.64</td>
-</tr>
-<tr>
-<td align="center">sandwich</td>
-<td align="center">36.34</td>
-</tr>
-<tr>
-<td align="center">drink</td>
-<td align="center">8.42</td>
-</tr>
-<tr>
-<td align="center">other</td>
-<td align="center">2.71</td>
-</tr>
-<tr>
-<td align="center">smoothie</td>
-<td align="center">0.88</td>
-</tr>
-</tbody></table>
-<h2 id="Reorder-Rates"><a href="#Reorder-Rates" class="headerlink" title="Reorder Rates"></a>Reorder Rates</h2><p>“While we do know that kale smoothies (and drinks overall) are not driving a lot of revenue, we don’t know why. A big part of data analysis is implementing your own metrics to get information out of the piles of data in your database.</p>
-<p>In our case, the reason could be that no one likes kale, but it could be something else entirely. To find out, we’ll create a metric called <em>reorder rate</em> and see how that compares to the other products at SpeedySpoon.</p>
-<p>We’ll define <em>reorder rate</em> as the ratio of the total number of orders to the number of people making those orders. A higher ratio means most of the orders are reorders. A lower ratio means more of the orders are first purchases.”</p>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcvlv4b5ldj327o0s4wkh.jpg" alt="image-20200316112531249"></p>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcvm0mdyqsj324j0u0k30.jpg" alt="image-20200316113051990"></p>
-<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><h2 id="Conclusion-1"><a href="#Conclusion-1" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Wow! That’s unexpected. While smoothies aren’t making a lot of money for SpeedySpoon, they have a very high reorder rate. That means these smoothie customers are strong repeat customers.</p>
-<p>Instead of recommending smoothies be taken off the menu, we should talk to the smoothie customers and see what they like so much about these smoothies. There could be an opportunity here to expand the product line, or get other customers as excited as these kale fanatics. Nice work!</p>
-<p>Let’s generalize what we’ve learned so far:</p>
-<ul>
-<li><em>Data aggregation</em> is the grouping of data in summary form.</li>
-<li><em>Daily Count</em> is the count of orders in a day.</li>
-<li><em>Daily Revenue Count</em> is the revenue on orders per day.</li>
-<li><em>Product Sum</em> is the total revenue of a product.</li>
-<li><em>Subqueries</em> can be used to perform complicated calculations and create filtered or aggregate tables on the fly.</li>
-<li><em>Reorder Rate</em> is the ratio of the total number of orders to the number of people making orders.</li>
-</ul>
-<h1 id="Count-Metrics"><a href="#Count-Metrics" class="headerlink" title="Count Metrics"></a>Count Metrics</h1><h3 id="Query-Results-2"><a href="#Query-Results-2" class="headerlink" title="Query Results"></a>Query Results</h3><table>
-<thead>
-<tr>
-<th align="center">id</th>
-<th align="center">user_id</th>
-<th align="center">price</th>
-<th align="center">refunded_at</th>
-<th align="center">created_at</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">0</td>
-<td align="center">255</td>
-<td align="center">1.5</td>
-<td align="center"></td>
-<td align="center">2015-10-04 14:39:46</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">448</td>
-<td align="center">0.5</td>
-<td align="center"></td>
-<td align="center">2015-09-11 17:33:06</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td align="center">237</td>
-<td align="center">4.5</td>
-<td align="center"></td>
-<td align="center">2015-08-17 23:13:32</td>
-</tr>
-<tr>
-<td align="center">3</td>
-<td align="center">468</td>
-<td align="center">3.5</td>
-<td align="center"></td>
-<td align="center">2015-08-08 16:25:59</td>
-</tr>
-<tr>
-<td align="center">4</td>
-<td align="center">50</td>
-<td align="center">4.5</td>
-<td align="center"></td>
-<td align="center">2015-08-18 02:36:17</td>
-</tr>
-<tr>
-<td align="center">5</td>
-<td align="center">86</td>
-<td align="center">1.5</td>
-<td align="center">2015-11-19 10:02:31</td>
-<td align="center">2015-11-19 05:16:54</td>
-</tr>
-<tr>
-<td align="center">6</td>
-<td align="center">384</td>
-<td align="center">4.5</td>
-<td align="center"></td>
-<td align="center">2015-08-21 14:35:02</td>
-</tr>
-<tr>
-<td align="center">7</td>
-<td align="center">490</td>
-<td align="center">1.5</td>
-<td align="center"></td>
-<td align="center">2015-10-08 01:09:32</td>
-</tr>
-<tr>
-<td align="center">8</td>
-<td align="center">454</td>
-<td align="center">1.5</td>
-<td align="center"></td>
-<td align="center">2015-10-24 12:26:39</td>
-</tr>
-<tr>
-<td align="center">9</td>
-<td align="center">280</td>
-<td align="center">1.5</td>
-<td align="center"></td>
-<td align="center">2015-08-24 15:19:00</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center">id</th>
-<th align="center">user_id</th>
-<th align="center">created_at</th>
-<th align="center">platform</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">0</td>
-<td align="center">225</td>
-<td align="center">2015-11-25 20:06:36</td>
-<td align="center">Web</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">175</td>
-<td align="center">2015-08-08 12:39:30</td>
-<td align="center">iOS</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td align="center">453</td>
-<td align="center">2015-11-11 05:44:58</td>
-<td align="center">Web</td>
-</tr>
-<tr>
-<td align="center">3</td>
-<td align="center">438</td>
-<td align="center">2015-10-27 07:26:07</td>
-<td align="center">Android</td>
-</tr>
-<tr>
-<td align="center">4</td>
-<td align="center">413</td>
-<td align="center">2015-11-12 19:47:57</td>
-<td align="center">iOS</td>
-</tr>
-<tr>
-<td align="center">5</td>
-<td align="center">424</td>
-<td align="center">2015-11-10 23:23:49</td>
-<td align="center">Android</td>
-</tr>
-<tr>
-<td align="center">6</td>
-<td align="center">55</td>
-<td align="center">2015-09-13 14:49:09</td>
-<td align="center">iOS</td>
-</tr>
-<tr>
-<td align="center">7</td>
-<td align="center">285</td>
-<td align="center">2015-08-31 18:32:49</td>
-<td align="center">Web</td>
-</tr>
-<tr>
-<td align="center">8</td>
-<td align="center">28</td>
-<td align="center">2015-08-16 00:34:09</td>
-<td align="center">iOS</td>
-</tr>
-<tr>
-<td align="center">9</td>
-<td align="center">22</td>
-<td align="center">2015-08-11 23:53:11</td>
-<td align="center">iOS</td>
-</tr>
-</tbody></table>
-<h3 id="Database-Schema-1"><a href="#Database-Schema-1" class="headerlink" title="Database Schema"></a>Database Schema</h3><table>
-<thead>
-<tr>
-<th align="center">purchases2000 rows</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">id</td>
-<td>int</td>
-</tr>
-<tr>
-<td align="center">user_id</td>
-<td>int</td>
-</tr>
-<tr>
-<td align="center">price</td>
-<td>real</td>
-</tr>
-<tr>
-<td align="center">refunded_at</td>
-<td>text</td>
-</tr>
-<tr>
-<td align="center">created_at</td>
-<td>text</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="center">gameplays14000 rows</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">id</td>
-<td>int</td>
-</tr>
-<tr>
-<td align="center">user_id</td>
-<td>int</td>
-</tr>
-<tr>
-<td align="center">created_at</td>
-<td>text</td>
-</tr>
-<tr>
-<td align="center">platform</td>
-<td>text</td>
-</tr>
-</tbody></table>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcvmo5pnolj32660lugq8.jpg" alt="image-20200316115322516"></p>
-<h2 id="Daily-Active-Users"><a href="#Daily-Active-Users" class="headerlink" title="Daily Active Users"></a>Daily Active Users</h2><p>Mineblocks is a game, and one of the core metrics to any game is the number of people who play each day. That KPI is called <em>Daily Active Users</em>, or <em>DAU</em>.</p>
-<p><em>DAU</em> is defined as the number of unique players seen in-game each day. It’s important not to double count users who played multiple times, so we’ll use <code>distinct</code> in our <code>count</code> function.</p>
-<p>Likewise, Weekly Active Users (WAU) and Monthly Active Users (MAU) are in the same family.</p>
-<ol>
-<li><p>For Mineblocks, we’ll use the <code>gameplays</code> table to calculate DAU. Each time a user plays the game, their session is recorded in <code>gameplays</code>. Thus, a distinct count of users per day from gameplays will give us DAU.</p>
-<p>Calculate Daily Active Users for Mineblocks. Complete the query’s <code>count</code> function by passing in the <code>distinct</code> keyword and the <code>user_id</code> column name.</p>
+<h3 id="4-4-拍："><a href="#4-4-拍：" class="headerlink" title="4/4 拍："></a><strong>4/4 拍：</strong></h3><ul>
+<li><p><strong>4 Beats</strong> - 猪头,  1,     2,     3,     4</p>
 </li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">  <span class="built_in">date</span>(created_at), </span><br><span class="line">  <span class="keyword">count</span>(<span class="keyword">distinct</span> user_id<span class="comment">/**/</span>) <span class="keyword">as</span> dau</span><br><span class="line"><span class="keyword">from</span> gameplays</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="Daily-Active-Users-2"><a href="#Daily-Active-Users-2" class="headerlink" title="Daily Active Users 2"></a>Daily Active Users 2</h2><p><strong>1.</strong></p>
-<p>Previously we calculated DAU only per day, so the output we wanted was <code>[date, dau_count]</code>. Now we want DAU per platform, making the desired output <code>[date, platform, dau_count]</code>.</p>
-<p>Calculate DAU for Mineblocks per-platform. Complete the query below. You will need to select the <code>platform</code> column and add a <code>count</code> function by passing in the <code>distinct</code> keyword and the <code>user_id</code> column name.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">  <span class="built_in">date</span>(created_at), </span><br><span class="line">  platform,</span><br><span class="line">  <span class="keyword">count</span>(<span class="keyword">distinct</span> user_id<span class="comment">/**/</span>) <span class="keyword">as</span> dau</span><br><span class="line"><span class="keyword">from</span> gameplays</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="number">1</span>, <span class="number">2</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="number">1</span>, <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">P.S. IF NO 2nd group by , diff platforms collapse into the same day</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>date(created_at)</th>
-<th>platform</th>
-<th>dau</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>2015-08-08</td>
-<td>Android</td>
-<td>39</td>
-</tr>
-<tr>
-<td>2015-08-08</td>
-<td>Web</td>
-<td>43</td>
-</tr>
-<tr>
-<td>2015-08-08</td>
-<td>iOS</td>
-<td>25</td>
-</tr>
-<tr>
-<td>2015-08-09</td>
-<td>Android</td>
-<td>55</td>
-</tr>
-<tr>
-<td>2015-08-09</td>
-<td>Web</td>
-<td>44</td>
-</tr>
-<tr>
-<td>2015-08-09</td>
-<td>iOS</td>
-<td>37</td>
-</tr>
-<tr>
-<td>2015-08-10</td>
-<td>Android</td>
-<td>38</td>
-</tr>
-</tbody></table>
-<h2 id="Daily-Average-Revenue-Per-Purchasing-User"><a href="#Daily-Average-Revenue-Per-Purchasing-User" class="headerlink" title="Daily Average Revenue Per Purchasing User"></a>Daily Average Revenue Per Purchasing User</h2><p>We’ve looked at DAU and Daily Revenue in Mineblocks. Now we must understand the purchasing habits of our users.</p>
-<p>Mineblocks, like every freemium game, has two types of users:</p>
-<ul>
-<li>purchasers: users who have bought things in the game</li>
-<li>players: users who play the game but have not yet purchased</li>
+<li><p><strong><a name="8Beats">8 Beats</a></strong> - 舞者，1n,     2n,     3n,     4n</p>
+</li>
+<li><p><strong><a name="16Beats">16 Beats</a></strong> - 鼓手, <strong><u>1</u></strong>234,     <u><strong>2</strong></u>234,     <strong><u>3</u></strong>234,     <u><strong>4</strong></u>234</p>
+</li>
+<li><p><strong><a name="24Beats">24 Beats</a></strong> </p>
+</li>
 </ul>
-<p>The next KPI we’ll look at <em>Daily ARPPU</em> - Average Revenue Per Purchasing User. This metric shows if the average amount of money spent by purchasers is going up over time.</p>
-<p><em>Daily ARPPU</em> is defined as the sum of revenue divided by the number of purchasers per day.</p>
-<p><strong>1.</strong></p>
-<p>To get Daily ARPPU, modify the daily revenue query from earlier to divide by the number of purchasers.</p>
-<p>Complete the query by adding a numerator and a denominator. The numerator will display daily revenue, or <code>sum</code> the <code>price</code> columns. The denominator will display the number of purchasers by passing the <code>distinct</code> keyword and the <code>user_id</code> column name into the <code>count</code> function.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">  <span class="built_in">date</span>(created_at),</span><br><span class="line">  <span class="keyword">round</span>(<span class="comment">/**/</span><span class="keyword">sum</span>(price) / <span class="keyword">count</span>(<span class="keyword">distinct</span> user_id<span class="comment">/**/</span>), <span class="number">2</span>) <span class="keyword">as</span> arppu</span><br><span class="line"><span class="keyword">from</span> purchases</span><br><span class="line"><span class="keyword">where</span> refunded_at <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="12-8-拍"><a href="#12-8-拍" class="headerlink" title="12/8 拍:"></a><strong>12/8 拍:</strong></h3><ul>
+<li><strong>12 Beats</strong> - 像是 12/8 的音乐</li>
+</ul>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Speed 60</strong></td>
+<td>♩＝ 64</td>
+<td>LeAnn Rimes</td>
+<td>How Do I Live</td>
+</tr>
+<tr>
+<td><strong>Speed 140</strong></td>
+<td>♩＝ 135</td>
+<td>Roxette</td>
+<td>Sleeping In My Car</td>
+</tr>
+<tr>
+<td><strong>Speed 160</strong></td>
+<td>♩＝160</td>
+<td>Lindsay</td>
+<td>Ultimate</td>
+</tr>
+<tr>
+<td></td>
+<td>♩＝159</td>
+<td>金亚中</td>
+<td>Maria</td>
+</tr>
+<tr>
+<td></td>
+<td>♩＝154</td>
+<td>中岛美嘉</td>
+<td>Glamorous Sky</td>
+</tr>
+<tr>
+<td><a href="#rock"><strong>摇滚补充</strong></a></td>
+<td></td>
+<td>Avril Lavigne</td>
+<td>Complicated<br/>My happy ending, 8 beats, ♩= 85<br/>Take Me Away<br/>Together<br/>Nobodys home</td>
+</tr>
+</tbody></table>
+<h2 id="抖音"><a href="#抖音" class="headerlink" title="抖音"></a>抖音</h2><table>
+<thead>
+<tr>
+<th>Beats</th>
+<th>程式算出的Beats数</th>
+<th>♩= Speed</th>
+<th>Player</th>
+<th>Song</th>
+<th></th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>8 Beats</td>
+<td>4</td>
+<td>♩＝89</td>
+<td>阿冗</td>
+<td><strong>你的答案</strong></td>
+<td></td>
+<td>向着风，拥抱彩虹，勇敢的向前走</td>
+</tr>
+<tr>
+<td>8 Beats</td>
+<td>8</td>
+<td>♩＝66</td>
+<td>程响</td>
+<td>世界这么大还是遇见你</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>8 Beats or Single 16 Beats</td>
+<td>8</td>
+<td>♩＝66</td>
+<td>司南</td>
+<td>冬眠</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>8 Beats</td>
+<td>4</td>
+<td>♩＝128</td>
+<td>R3hab</td>
+<td>All Comes Back to You</td>
+<td>电子舞曲</td>
+<td></td>
+</tr>
+<tr>
+<td>8 Beats</td>
+<td>4</td>
+<td>♩＝110</td>
+<td>Zico</td>
+<td>Any Song (아무노래)</td>
+<td>舞曲吧… 这首很特别</td>
+<td></td>
+</tr>
+<tr>
+<td>8 Beats</td>
+<td>4</td>
+<td>♩＝100</td>
+<td>阿悠悠</td>
+<td>你若三冬</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>8 Beats</td>
+<td>4</td>
+<td>♩＝80</td>
+<td>要不要买菜</td>
+<td>下山</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>8 Beats</td>
+<td>8</td>
+<td>♩＝81</td>
+<td>锦零</td>
+<td>桃花笑</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>8 Beats</td>
+<td>这个我重听</td>
+<td>♩＝120</td>
+<td>罗隽永</td>
+<td>处处吻</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>8 Beats</td>
+<td>8</td>
+<td>♩＝66</td>
+<td>八三夭</td>
+<td><strong>想见你想见你想见你</strong></td>
+<td>抒情</td>
+<td></td>
+</tr>
+<tr>
+<td>8 Beats</td>
+<td>4</td>
+<td>♩＝90</td>
+<td>孫子涵</td>
+<td>是你啊</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>8 Beats</td>
+<td>8</td>
+<td>♩＝72</td>
+<td>棉子</td>
+<td>勇气</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>8 Beats</td>
+<td>未跑</td>
+<td>♩＝79</td>
+<td>张韶涵</td>
+<td>红红的太阳</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>8 Beats</td>
+<td>8</td>
+<td>♩＝66</td>
+<td>王二浪</td>
+<td><strong>往后余生</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>8 Beats</td>
+<td></td>
+<td>♩＝120</td>
+<td>卢鑫玉浩</td>
+<td>今天我要戴口罩</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>8 Beats</td>
+<td></td>
+<td>♩＝108</td>
+<td>Mesto</td>
+<td>Leyla (Official Music Video)</td>
+<td>舞曲/电子</td>
+<td></td>
+</tr>
+<tr>
+<td>8 Beats</td>
+<td></td>
+<td>♩＝83</td>
+<td>李昕融</td>
+<td>听我说谢谢你</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>8 Beats</td>
+<td></td>
+<td>♩＝81</td>
+<td>李超</td>
+<td>不放弃</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>More</td>
+<td></td>
+<td>More</td>
+<td>More</td>
+<td>More</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>我猜程式会跑出8Beats</td>
+<td>♩＝70</td>
+<td>柏松</td>
+<td>世界美好与你环环相扣</td>
+<td>抒情</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>我猜程式会跑出8Beats</td>
+<td>♩＝80</td>
+<td>林俊杰</td>
+<td>可惜没如果</td>
+<td>流行</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>我猜程式会跑出4Beats</td>
+<td>♩＝123</td>
+<td></td>
+<td>无中生有</td>
+<td>舞曲</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>我猜程式会跑出8Beats</td>
+<td>♩＝53</td>
+<td>张宇</td>
+<td>囚鸟</td>
+<td>流行</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>我猜程式会跑出4Beats</td>
+<td>♩＝68</td>
+<td>柏松</td>
+<td>器张</td>
+<td>抒情</td>
+<td></td>
+</tr>
+</tbody></table>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/21/LC/Pandas/2015-02-21-Pandas%20review/">LC/Pandas/2015-02-21-Pandas review</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-21</time><div class="content"><h4 id="layout-post"><a href="#layout-post" class="headerlink" title="layout: post"></a>layout: post</h4><p>categories: Pandas<br>tag: []<br>date: 2015-02-21</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">df1 = pd.DataFrame(&#123;</span><br><span class="line">  <span class="string">'Product ID'</span>: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">  <span class="comment"># add Product Name and Color here</span></span><br><span class="line">  <span class="string">'Product Name'</span>:[<span class="string">'t-shirt'</span>, <span class="string">'t-shirt'</span>, <span class="string">'skirt'</span>, <span class="string">'skirt'</span>], </span><br><span class="line">  <span class="string">'Color'</span>:[<span class="string">'blue'</span>, <span class="string">'green'</span>, <span class="string">'red'</span>, <span class="string">'black'</span>]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">print(df1)</span><br></pre></td></tr></table></figure>
+
+<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc4f7b94uej30py09qdg6.jpg" alt="image-20200221230441471" style="zoom:50%;" />
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">df2 = pd.DataFrame([</span><br><span class="line">  [<span class="number">1</span>, <span class="string">'San Diego'</span>, <span class="number">100</span>],</span><br><span class="line">  [<span class="number">2</span>, <span class="string">'Los Angeles'</span>, <span class="number">120</span>],</span><br><span class="line">  <span class="comment"># Fill in rows 3 and 4</span></span><br><span class="line">  [<span class="number">3</span>, <span class="string">'San Francisco'</span>, <span class="number">90</span>],</span><br><span class="line">  [<span class="number">4</span>, <span class="string">'Sacramento'</span>, <span class="number">115</span>],</span><br><span class="line">],</span><br><span class="line">  columns=[</span><br><span class="line">    <span class="comment">#add column names here</span></span><br><span class="line">    <span class="string">'Store ID'</span>, <span class="string">'Location'</span>, <span class="string">'Number of Employees'</span></span><br><span class="line">  ])</span><br><span class="line"></span><br><span class="line">print(df2)</span><br></pre></td></tr></table></figure>
+
+<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc4f7o819gj30pw0a8q3d.jpg" alt="image-20200221230502087" style="zoom: 50%;" />
+
+
+
+
+
+<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc4fgr9zz2j30xj0u0n2t.jpg" alt="image-20200221231348325" style="zoom:67%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc4flj5cvgj319q0ru44j.jpg" alt="image-20200221231823180" style="zoom:67%;" />
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">march = df.iloc[<span class="number">2</span>]	<span class="comment"># single row</span></span><br><span class="line">april_may_june = df.iloc[<span class="number">3</span>:<span class="number">6</span>]	<span class="comment"># multi row</span></span><br><span class="line">january = df[df.month == <span class="string">'January'</span>] <span class="comment"># condition, single row</span></span><br></pre></td></tr></table></figure>
 
 <table>
 <thead>
 <tr>
-<th align="center">date(created_at)</th>
-<th align="center">arppu</th>
+<th align="left"></th>
+<th align="left">month</th>
+<th align="left">clinic_east</th>
+<th align="left">clinic_north</th>
+<th align="left">clinic_south</th>
+<th>clinic_west</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">2015-08-04</td>
-<td align="center">3.46</td>
-</tr>
-<tr>
-<td align="center">2015-08-05</td>
-<td align="center">2.65</td>
-</tr>
-<tr>
-<td align="center">2015-08-06</td>
-<td align="center">1.44</td>
-</tr>
-<tr>
-<td align="center">2015-08-07</td>
-<td align="center">2.32</td>
-</tr>
-<tr>
-<td align="center">2015-08-08</td>
-<td align="center">2.53</td>
-</tr>
-<tr>
-<td align="center">2015-08-09</td>
-<td align="center">1.75</td>
-</tr>
-<tr>
-<td align="center">2015-08-10</td>
-<td align="center">3.0</td>
-</tr>
-<tr>
-<td align="center">2015-08-11</td>
-<td align="center">2.25</td>
-</tr>
-<tr>
-<td align="center">2015-08-12</td>
-<td align="center">2.78</td>
-</tr>
-<tr>
-<td align="center">2015-08-13</td>
-<td align="center">2.83</td>
-</tr>
-<tr>
-<td align="center">2015-08-14</td>
-<td align="center">2.7</td>
+<td align="left">0</td>
+<td align="left">January</td>
+<td align="left">100</td>
+<td align="left">100</td>
+<td align="left">23</td>
+<td>100</td>
 </tr>
 </tbody></table>
-<h2 id="Daily-Average-Revenue-Per-User"><a href="#Daily-Average-Revenue-Per-User" class="headerlink" title="Daily Average Revenue Per User"></a>Daily Average Revenue Per User</h2><p>The more popular (and difficult) cousin to Daily ARPPU is <em>Daily ARPU</em>, Average Revenue Per User. ARPU measures the average amount of money we’re getting across all players, <strong><em>whether or not they’ve purchased.</em></strong></p>
-<p>ARPPU increases if purchasers are spending more money. ARPU increases if more players are choosing to purchase, even if the purchase size stays consistent.</p>
-<p><strong><em>No one metric can tell the whole story.</em></strong> That’s why it’s so helpful to have many KPIs on the same dashboard.</p>
-<h2 id="ARPU-2"><a href="#ARPU-2" class="headerlink" title="ARPU 2"></a>ARPU 2</h2><p>Daily ARPU is defined as revenue divided by the number of players, per-day. To get that, we’ll need to calculate the daily revenue and daily active users separately, and then join them on their dates.</p>
-<p>One way to easily create and organize temporary results in a query is with <em>CTEs</em>, <em>Common Table Expressions</em>, also known as <code>with</code> clauses. The <code>with</code> clauses make it easy to define and use results in a more organized way than subqueries.</p>
-<p>These clauses usually look like this:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**/</span><span class="keyword">with</span>  daily_revenue <span class="keyword">as</span> (</span><br><span class="line">  <span class="keyword">select</span></span><br><span class="line">    <span class="built_in">date</span>(created_at) <span class="keyword">as</span> dt,</span><br><span class="line">    <span class="keyword">round</span>(<span class="keyword">sum</span>(price), <span class="number">2</span>) <span class="keyword">as</span> rev</span><br><span class="line">  <span class="keyword">from</span> purchases</span><br><span class="line">  <span class="keyword">where</span> refunded_at <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line">  <span class="keyword">group</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> daily_revenue <span class="keyword">order</span> <span class="keyword">by</span> dt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame([</span><br><span class="line">  [<span class="string">'January'</span>, <span class="number">100</span>, <span class="number">100</span>, <span class="number">23</span>, <span class="number">100</span>],</span><br><span class="line">  [<span class="string">'February'</span>, <span class="number">51</span>, <span class="number">45</span>, <span class="number">145</span>, <span class="number">45</span>],</span><br><span class="line">  [<span class="string">'March'</span>, <span class="number">81</span>, <span class="number">96</span>, <span class="number">65</span>, <span class="number">96</span>],</span><br><span class="line">  [<span class="string">'April'</span>, <span class="number">80</span>, <span class="number">80</span>, <span class="number">54</span>, <span class="number">180</span>],</span><br><span class="line">  [<span class="string">'May'</span>, <span class="number">51</span>, <span class="number">54</span>, <span class="number">54</span>, <span class="number">154</span>],</span><br><span class="line">  [<span class="string">'June'</span>, <span class="number">112</span>, <span class="number">109</span>, <span class="number">79</span>, <span class="number">129</span>]],</span><br><span class="line">  columns=[<span class="string">'month'</span>, <span class="string">'clinic_east'</span>,</span><br><span class="line">           <span class="string">'clinic_north'</span>, <span class="string">'clinic_south'</span>,</span><br><span class="line">           <span class="string">'clinic_west'</span>])</span><br><span class="line"></span><br><span class="line">march_april = df[(df.month == <span class="string">'March'</span>) | (df.month == <span class="string">'April'</span>)]</span><br></pre></td></tr></table></figure>
 
-<p><strong>2.</strong></p>
-<p>Now that we have the revenue and DAU, join them on their dates and calculate daily ARPU. Complete the query by adding the keyword <code>using</code> in the <code>join</code> clause.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**/</span> <span class="keyword">with</span>  daily_revenue <span class="keyword">as</span> (</span><br><span class="line">  <span class="keyword">select</span></span><br><span class="line">    <span class="built_in">date</span>(created_at) <span class="keyword">as</span> dt,</span><br><span class="line">    <span class="keyword">round</span>(<span class="keyword">sum</span>(price), <span class="number">2</span>) <span class="keyword">as</span> rev</span><br><span class="line">  <span class="keyword">from</span> purchases</span><br><span class="line">  <span class="keyword">where</span> refunded_at <span class="keyword">is</span> <span class="literal">null</span></span><br><span class="line">  <span class="keyword">group</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line">),</span><br><span class="line">daily_players <span class="keyword">as</span> (</span><br><span class="line">  <span class="keyword">select</span></span><br><span class="line">    <span class="comment">/**/</span><span class="built_in">date</span>(created_at) <span class="keyword">as</span> dt,</span><br><span class="line">    <span class="comment">/**/</span><span class="keyword">count</span>(<span class="keyword">distinct</span> user_id) <span class="keyword">as</span> players</span><br><span class="line">  <span class="keyword">from</span> gameplays</span><br><span class="line">  <span class="keyword">group</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">select</span></span><br><span class="line">  daily_revenue.dt, </span><br><span class="line">  daily_revenue.rev / daily_players.players</span><br><span class="line"><span class="keyword">from</span> daily_revenue</span><br><span class="line">  <span class="keyword">join</span> daily_players <span class="keyword">using</span> (dt);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">month</th>
+<th align="left">clinic_east</th>
+<th align="left">clinic_north</th>
+<th align="left">clinic_south</th>
+<th align="left">clinic_west</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">2</td>
+<td align="left">March</td>
+<td align="left">81</td>
+<td align="left">96</td>
+<td align="left">65</td>
+<td align="left">96</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">April</td>
+<td align="left">80</td>
+<td align="left">80</td>
+<td align="left">54</td>
+<td align="left">180</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">january_february_march = df[df.month.isin([<span class="string">'January'</span>, <span class="string">'February'</span>, <span class="string">'March'</span>])]</span><br><span class="line">print(january_february_march)</span><br></pre></td></tr></table></figure>
 
-<p>In the final <code>select</code> statement, <code>daily_revenue.dt</code> represents the date, while <code>daily_revenue.rev / daily_players.players</code> is the daily revenue divided by the number of players that day. In full, it represents how much the company is making per player, per day.</p>
-<p>When the columns to join have the same name in both tables you can use <code>using</code> instead of <code>on</code>. Our use of the <code>using</code> keyword is in this case equivalent to this clause:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from daily_revenue</span><br><span class="line">  join daily_players on</span><br><span class="line">    daily_revenue.dt = daily_players.dt;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">month</th>
+<th align="left">clinic_east</th>
+<th align="left">clinic_north</th>
+<th align="left">clinic_south</th>
+<th>clinic_west</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">January</td>
+<td align="left">100</td>
+<td align="left">100</td>
+<td align="left">23</td>
+<td>100</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">February</td>
+<td align="left">51</td>
+<td align="left">45</td>
+<td align="left">145</td>
+<td>45</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">March</td>
+<td align="left">81</td>
+<td align="left">96</td>
+<td align="left">65</td>
+<td>96</td>
+</tr>
+</tbody></table>
+<h3 id="setting-indices"><a href="#setting-indices" class="headerlink" title="setting indices"></a>setting indices</h3><table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">month</th>
+<th align="left">clinic_east</th>
+<th align="left">clinic_north</th>
+<th align="left">clinic_south</th>
+<th>clinic_west</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">February</td>
+<td align="left">51</td>
+<td align="left">45</td>
+<td align="left">145</td>
+<td>45</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">April</td>
+<td align="left">80</td>
+<td align="left">80</td>
+<td align="left">54</td>
+<td>180</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">June</td>
+<td align="left">112</td>
+<td align="left">109</td>
+<td align="left">79</td>
+<td>129</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">df2 = df.loc[[<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(df2)</span></span><br><span class="line"></span><br><span class="line">df3 = df2.reset_index()</span><br><span class="line"></span><br><span class="line">print(df3)</span><br><span class="line"></span><br><span class="line">df2.reset_index(inplace = <span class="literal">True</span>, drop = <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">print(df2)</span><br></pre></td></tr></table></figure>
 
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">index</th>
+<th align="left">month</th>
+<th align="left">clinic_east</th>
+<th align="left">clinic_north</th>
+<th align="left">clinic_south</th>
+<th align="left">clinic_west</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">February</td>
+<td align="left">51</td>
+<td align="left">45</td>
+<td align="left">145</td>
+<td align="left">45</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">3</td>
+<td align="left">April</td>
+<td align="left">80</td>
+<td align="left">80</td>
+<td align="left">54</td>
+<td align="left">180</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">5</td>
+<td align="left">June</td>
+<td align="left">112</td>
+<td align="left">109</td>
+<td align="left">79</td>
+<td align="left">129</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">month</th>
+<th align="left">clinic_east</th>
+<th align="left">clinic_north</th>
+<th align="left">clinic_south</th>
+<th align="left">clinic_west</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">February</td>
+<td align="left">51</td>
+<td align="left">45</td>
+<td align="left">145</td>
+<td align="left">45</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">April</td>
+<td align="left">80</td>
+<td align="left">80</td>
+<td align="left">54</td>
+<td align="left">180</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">June</td>
+<td align="left">112</td>
+<td align="left">109</td>
+<td align="left">79</td>
+<td align="left">129</td>
+</tr>
+</tbody></table>
+<h2 id="Case-ShoeFly-com"><a href="#Case-ShoeFly-com" class="headerlink" title="Case : ShoeFly.com"></a>Case : ShoeFly.com</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">orders = pd.read_csv(<span class="string">'shoefly.csv'</span>)</span><br><span class="line">print(orders.iloc([:<span class="number">5</span>]))  <span class="comment"># check first 5 lines</span></span><br></pre></td></tr></table></figure>
 
-
-<h2 id="1Day-Retention"><a href="#1Day-Retention" class="headerlink" title="1Day Retention"></a>1Day Retention</h2><h1 id="1-Day-Retention"><a href="#1-Day-Retention" class="headerlink" title="1 Day Retention"></a>1 Day Retention</h1><p>Now let’s find out what percent of Mineblock players are returning to play the next day. This KPI is called <em>1 Day Retention</em>.</p>
-<p><em>Retention</em> can be defined many different ways, but we’ll stick to the most basic definition. For all players on Day N, we’ll consider them retained if they came back to play again on Day N+1.</p>
-<p>This will let us track whether or not Mineblocks is getting “stickier” over time. The stickier our game, the more days players will spend in-game.</p>
-<p>And more time in-game means more opportunities to monetize and grow our business.</p>
-<h4 id="Cont"><a href="#Cont" class="headerlink" title="Cont."></a>Cont.</h4><p>Before we can calculate retention we need to get our data formatted in a way where we can determine if a user returned.</p>
-<p>Currently the <code>gameplays</code> table is a list of when the user played, and it’s not easy to see if any user came back.</p>
-<p>By using a <code>self-join</code>, we can make multiple gameplays available on the same row of results. This will enable us to calculate retention.</p>
-<p>The power of <code>self-join</code> comes from joining every row to every other row. This makes it possible to compare values from two different rows in the new result set. In our case, we’ll compare rows that are one date apart from each user.</p>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gcw6v3ohoqj30dj0a3q3j.jpg" alt="SQL join types"></p>
-<p>Now that we have our <code>gameplays</code> table joined to itself, we can start to calculate retention.</p>
-<p>1 Day Retention is defined as the number of players who returned the next day divided by the number of original players, per day. Suppose 10 players played Mineblocks on Dec 10th. If 4 of them play on Dec 11th, the 1 day retention for Dec 10th is 40%.</p>
+<table>
+<thead>
+<tr>
+<th align="left">id</th>
+<th align="left">first_name</th>
+<th align="left">last_name</th>
+<th align="left">email</th>
+<th align="left">shoe_type</th>
+<th align="left">shoe_material</th>
+<th align="left">shoe_color</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">54791</td>
+<td align="left">Rebecca</td>
+<td align="left">Lindsay</td>
+<td align="left"><a href="mailto:RebeccaLindsay57@hotmail.com">RebeccaLindsay57@hotmail.com</a></td>
+<td align="left">clogs</td>
+<td align="left">faux-leather</td>
+<td>black</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">53450</td>
+<td align="left">Emily</td>
+<td align="left">Joyce</td>
+<td align="left"><a href="mailto:EmilyJoyce25@gmail.com">EmilyJoyce25@gmail.com</a></td>
+<td align="left">ballet flats</td>
+<td align="left">faux-leather</td>
+<td>navy</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">91987</td>
+<td align="left">Joyce</td>
+<td align="left">Waller</td>
+<td align="left"><a href="mailto:Joyce.Waller@gmail.com">Joyce.Waller@gmail.com</a></td>
+<td align="left">sandals</td>
+<td align="left">fabric</td>
+<td>black</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">14437</td>
+<td align="left">Justin</td>
+<td align="left">Erickson</td>
+<td align="left"><a href="mailto:Justin.Erickson@outlook.com">Justin.Erickson@outlook.com</a></td>
+<td align="left">clogs</td>
+<td align="left">faux-leather</td>
+<td>red</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">79357</td>
+<td align="left">Andrew</td>
+<td align="left">Banks</td>
+<td align="left"><a href="mailto:AB4318@gmail.com">AB4318@gmail.com</a></td>
+<td align="left">boots</td>
+<td align="left">leather</td>
+<td>brown</td>
+</tr>
+</tbody></table>
+<h3 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h3><p>You’ve completed the lesson! You’ve just learned the basics of working with a single table in Pandas, including:</p>
+<ul>
+<li>Create a table from scratch</li>
+<li>Loading data from another file</li>
+<li>Selecting certain rows or columns of a table</li>
+</ul>
+<p>Let’s practice what you’ve learned.</p>
 <p>Instructions</p>
 <p><strong>1.</strong></p>
-<p>The previous query joined all rows in gameplays against all other rows for each user, making a massive result set that we don’t need.</p>
-<p>We’ll need to modify this query.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">  <span class="built_in">date</span>(g1.created_at) <span class="keyword">as</span> dt,</span><br><span class="line">  g1.user_id, </span><br><span class="line">  g2.user_id</span><br><span class="line"><span class="keyword">from</span> gameplays <span class="keyword">as</span> g1</span><br><span class="line">  <span class="comment">/**/</span> <span class="keyword">left</span> <span class="keyword">join</span> </span><br><span class="line">    gameplays <span class="keyword">as</span> g2 <span class="keyword">on</span></span><br><span class="line">    g1.user_id = g2.user_id</span><br><span class="line">    <span class="keyword">and</span> <span class="built_in">date</span>(g1.created_at) = <span class="built_in">date</span>(datetime(g2.created_at, <span class="string">'-1 day'</span>))</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">limit</span> <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
-
-
-
+<p>In this example, you’ll be the data analyst for ShoeFly.com, a fictional online shoe store. You’ve seen this data; now it’s your turn to work with it!</p>
+<p>Load the data from <code>shoefly.csv</code> into the variable <code>orders</code>.</p>
+<p>Hint</p>
+<p>You’ll need to use <code>pd.read_csv</code>.</p>
 <p><strong>2.</strong></p>
-<p>The query above won’t return meaningful results because we’re using an <code>inner join</code>. This type of join requires that the condition be met for all rows, effectively limiting our selection to only the users that have returned.</p>
-<p>Instead, we want to use a <code>left join</code>, this way all rows in <code>g1</code> are preserved, leaving nulls in the rows from <code>g2</code> where users did not return to play the next day.</p>
-<p>Change the <code>join</code> clause to use <code>left join</code> and count the distinct number of users from <code>g1</code> and <code>g2</code> per date.</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">  <span class="built_in">date</span>(g1.created_at) <span class="keyword">as</span> dt,</span><br><span class="line">  <span class="comment">-- g1.user_id, </span></span><br><span class="line">  <span class="comment">-- g2.user_id</span></span><br><span class="line">  <span class="keyword">count</span>(<span class="keyword">distinct</span> g1.user_id) <span class="keyword">as</span> total_users,</span><br><span class="line">  <span class="keyword">count</span>(<span class="keyword">distinct</span> g2.user_id) <span class="keyword">as</span> retained_users </span><br><span class="line"><span class="keyword">from</span> gameplays <span class="keyword">as</span> g1</span><br><span class="line">  <span class="comment">/**/</span> <span class="keyword">left</span> <span class="keyword">join</span> </span><br><span class="line">    gameplays <span class="keyword">as</span> g2 <span class="keyword">on</span></span><br><span class="line">    g1.user_id = g2.user_id</span><br><span class="line">    <span class="keyword">and</span> <span class="built_in">date</span>(g1.created_at) = <span class="built_in">date</span>(datetime(g2.created_at, <span class="string">'-1 day'</span>))</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">limit</span> <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+<p>Inspect the first 5 lines of the data.</p>
+<p>Stuck? Get a hint</p>
+<p><strong>3.</strong></p>
+<p>Your marketing department wants to send out an email blast to everyone who ordered shoes!</p>
+<p>Select all of the email addresses from the column <code>email</code> and save them to a variable called <code>emails</code>.</p>
+<p>Stuck? Get a hint</p>
+<p><strong>4.</strong></p>
+<p>Frances Palmer claims that her order was wrong. What did Frances Palmer order?</p>
+<p>Use logic to select that row of <code>orders</code> and save it to the variable <code>frances_palmer</code>.</p>
+<p>Stuck? Get a hint</p>
+<p><strong>5.</strong></p>
+<p>We need some customer reviews for our comfortable shoes. Select all orders for <code>shoe_type</code>: <code>clogs</code>, <code>boots</code>, and <code>ballet flats</code> and save them to the variable <code>comfy_shoes</code>.</p>
+<p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc4gjxbp5vj32380sin7i.jpg" alt="image-20200221235121135"></p>
+<h2 id="Case-2"><a href="#Case-2" class="headerlink" title="Case 2:"></a>Case 2:</h2><p>Use the lambda function <code>get_last_name</code> to create a new column <code>last_name</code> with only the employees’ last name.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Add columns here</span></span><br><span class="line">get_last_name = <span class="keyword">lambda</span> s: s.split()[<span class="number">-1</span>]</span><br><span class="line">df[<span class="string">'last_name'</span>] = df.name.apply(get_last_name)</span><br><span class="line">print(df)</span><br></pre></td></tr></table></figure>
 
 <table>
 <thead>
 <tr>
-<th>dt</th>
-<th>total_users</th>
-<th>retained_users</th>
+<th align="left"></th>
+<th align="left">id</th>
+<th align="left">name</th>
+<th align="left">hourly_wage</th>
+<th align="left">hours_worked</th>
+<th>last_name</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>2015-08-19</td>
-<td>111</td>
-<td>26</td>
+<td align="left">0</td>
+<td align="left">10310</td>
+<td align="left">Lauren Durham</td>
+<td align="left">19</td>
+<td align="left">43</td>
+<td>Durham</td>
 </tr>
 <tr>
-<td>2015-08-20</td>
-<td>117</td>
-<td>31</td>
+<td align="left">1</td>
+<td align="left">18656</td>
+<td align="left">Grace Sellers</td>
+<td align="left">17</td>
+<td align="left">40</td>
+<td>Sellers</td>
 </tr>
 <tr>
-<td>2015-08-21</td>
-<td>112</td>
-<td>27</td>
+<td align="left">2</td>
+<td align="left">61254</td>
+<td align="left">Shirley Rasmussen</td>
+<td align="left">16</td>
+<td align="left">30</td>
+<td>Rasmussen</td>
 </tr>
 <tr>
-<td>2015-08-22</td>
-<td>117</td>
-<td>24</td>
+<td align="left">3</td>
+<td align="left">16886</td>
+<td align="left">Brian Rojas</td>
+<td align="left">18</td>
+<td align="left">47</td>
+<td>Rojas</td>
 </tr>
 <tr>
-<td>2015-08-23</td>
-<td>94</td>
-<td>23</td>
+<td align="left">4</td>
+<td align="left">89010</td>
+<td align="left">Samantha Mosley</td>
+<td align="left">11</td>
+<td align="left">38</td>
+<td>Mosley</td>
 </tr>
 <tr>
-<td>2015-08-24</td>
-<td>108</td>
-<td>23</td>
-</tr>
-<tr>
-<td>2015-08-25</td>
-<td>120</td>
-<td>23</td>
+<td align="left">5</td>
+<td align="left">87246</td>
+<td align="left">Louis Guzman</td>
+<td align="left">14</td>
+<td align="left">39</td>
+<td>Guzman</td>
 </tr>
 </tbody></table>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">  <span class="built_in">date</span>(g1.created_at) <span class="keyword">as</span> dt,</span><br><span class="line">  <span class="comment">-- g1.user_id, </span></span><br><span class="line">  <span class="comment">-- g2.user_id</span></span><br><span class="line">  <span class="keyword">round</span>(<span class="number">100</span> * <span class="keyword">count</span>(<span class="keyword">distinct</span> g1.user_id) <span class="keyword">as</span> total_users /</span><br><span class="line">  <span class="keyword">count</span>(<span class="keyword">distinct</span> g2.user_id)) <span class="keyword">as</span> <span class="keyword">retention</span></span><br><span class="line"><span class="keyword">from</span> gameplays <span class="keyword">as</span> g1</span><br><span class="line">  <span class="comment">/**/</span> <span class="keyword">left</span> <span class="keyword">join</span> </span><br><span class="line">    gameplays <span class="keyword">as</span> g2 <span class="keyword">on</span></span><br><span class="line">    g1.user_id = g2.user_id</span><br><span class="line">    <span class="keyword">and</span> <span class="built_in">date</span>(g1.created_at) = <span class="built_in">date</span>(datetime(g2.created_at, <span class="string">'-1 day'</span>))</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">limit</span> <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+<p>花俏。。，但就熟悉下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">total_earned = <span class="keyword">lambda</span> row: (row.hourly_wage * <span class="number">40</span>) + ((row.hourly_wage * <span class="number">1.5</span>) * (row.hours_worked - <span class="number">40</span>)) \</span><br><span class="line">	<span class="keyword">if</span> row.hours_worked &gt; <span class="number">40</span> \</span><br><span class="line">  <span class="keyword">else</span> row.hourly_wage * row.hours_worked</span><br><span class="line">  </span><br><span class="line">df[<span class="string">'total_earned'</span>] = df.apply(total_earned, axis = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">print(df)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">id</th>
+<th align="left">name</th>
+<th align="left">hourly_wage</th>
+<th align="left">hours_worked</th>
+<th align="left">total_earned</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">10310</td>
+<td align="left">Lauren Durham</td>
+<td align="left">19</td>
+<td align="left">43</td>
+<td align="left">845.5</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">18656</td>
+<td align="left">Grace Sellers</td>
+<td align="left">17</td>
+<td align="left">40</td>
+<td align="left">680.0</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">61254</td>
+<td align="left">Shirley Rasmussen</td>
+<td align="left">16</td>
+<td align="left">30</td>
+<td align="left">480.0</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">16886</td>
+<td align="left">Brian Rojas</td>
+<td align="left">18</td>
+<td align="left">47</td>
+<td align="left">909.0</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">89010</td>
+<td align="left">Samantha Mosley</td>
+<td align="left">11</td>
+<td align="left">38</td>
+<td align="left">418.0</td>
+</tr>
+</tbody></table>
+<h3 id="rename-column"><a href="#rename-column" class="headerlink" title="rename column"></a>rename column</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df.rename(columns=&#123;</span><br><span class="line">  <span class="string">'name'</span>: <span class="string">'movie_title'</span></span><br><span class="line">  &#125;, </span><br><span class="line">  inplace=<span class="literal">True</span>)</span><br><span class="line">print(df)</span><br></pre></td></tr></table></figure>
 
 
 
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span></span><br><span class="line">  <span class="built_in">date</span>(g1.created_at) <span class="keyword">as</span> dt,</span><br><span class="line">  <span class="keyword">round</span>(<span class="number">100</span> * <span class="keyword">count</span>(<span class="keyword">distinct</span> g2.user_id) /</span><br><span class="line">    <span class="keyword">count</span>(<span class="keyword">distinct</span> g1.user_id)) <span class="keyword">as</span> <span class="keyword">retention</span></span><br><span class="line"><span class="keyword">from</span> gameplays <span class="keyword">as</span> g1</span><br><span class="line">  <span class="keyword">left</span> <span class="keyword">join</span> gameplays <span class="keyword">as</span> g2 <span class="keyword">on</span></span><br><span class="line">    g1.user_id = g2.user_id</span><br><span class="line">    <span class="keyword">and</span> <span class="built_in">date</span>(g1.created_at) = <span class="built_in">date</span>(datetime(g2.created_at, <span class="string">'-1 day'</span>))</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">limit</span> <span class="number">100</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Case-ShoeFly-com-1"><a href="#Case-ShoeFly-com-1" class="headerlink" title="Case ShoeFly.com"></a>Case ShoeFly.com</h2><h4 id="Add-Columns"><a href="#Add-Columns" class="headerlink" title="Add Columns"></a>Add Columns</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">orders[<span class="string">'shoe_source'</span>] = orders.shoe_material.apply(<span class="keyword">lambda</span> x: \</span><br><span class="line">                        	<span class="string">'animal'</span> <span class="keyword">if</span> x == <span class="string">'leather'</span><span class="keyword">else</span> <span class="string">'vegan'</span>)</span><br><span class="line"></span><br><span class="line">orders[<span class="string">'salutation'</span>] = orders.apply(<span class="keyword">lambda</span> row: \</span><br><span class="line">                                    <span class="string">'Dear Mr. '</span> + row[<span class="string">'last_name'</span>]</span><br><span class="line">                                    <span class="keyword">if</span> row[<span class="string">'gender'</span>] == <span class="string">'male'</span></span><br><span class="line">                                    <span class="keyword">else</span> <span class="string">'Dear Ms. '</span> + row[<span class="string">'last_name'</span>],</span><br><span class="line">                                    axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="Common-Metrics-Conclusion"><a href="#Common-Metrics-Conclusion" class="headerlink" title="Common Metrics Conclusion"></a>Common Metrics Conclusion</h2><p>While every business has different metrics to track their success, most are based on revenue and usage.</p>
-<p>The metrics in this lesson are merely a starting point, and from here you’ll be able to create and customize metrics to track whatever is most important to your company.</p>
-<p>And remember, data science is exploratory! The current set of metrics can always be improved and there’s usually more to any spike or dip than what immediately meets the eye.</p>
-<p>Let’s generalize what we’ve learned so far:</p>
-<ul>
-<li><em>Key Performance Indicators</em> are high level health metrics for a business.</li>
-<li><em>Daily Revenue</em> is the sum of money made per day.</li>
-<li><em>Daily Active Users</em> are the number of unique users seen each day</li>
-<li><em>Daily Average Revenue Per Purchasing User (ARPPU)</em> is the average amount of money spent by purchasers each day.</li>
-<li><em>Daily Average Revenue Per User (ARPU)</em> is the average amount of money across all users.</li>
-<li><em>1 Day Retention</em> is defined as the number of players from Day N who came back to play again on Day N+1.</li>
-</ul>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/20/SQL/2020-02-20-SQL-Create%20Table/">SQL/2020-02-20-SQL-Create Table</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-20</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SQL/">SQL</a></span><div class="content"><p><a href="https://www.codecademy.com/courses/learn-sql/projects/learn_sql_create_table" target="_blank" rel="noopener">https://www.codecademy.com/courses/learn-sql/projects/learn_sql_create_table</a></p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> friends(</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">INTEGER</span>,</span><br><span class="line">  <span class="keyword">name</span> <span class="built_in">TEXT</span>,</span><br><span class="line">  birthday <span class="built_in">DATE</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">-- alter table friends</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> friends (<span class="keyword">id</span>, <span class="keyword">name</span>, birthday)</span><br><span class="line"><span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="string">'Jane Doe'</span>, <span class="string">'1990-05-30'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> friends;</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> friends (<span class="keyword">id</span>, <span class="keyword">name</span>, birthday)</span><br><span class="line"><span class="keyword">values</span> (<span class="number">2</span>, <span class="string">'Alex'</span>, <span class="string">'1986-06-06'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> friends (<span class="keyword">id</span>, <span class="keyword">name</span>, birthday)</span><br><span class="line"><span class="keyword">values</span> (<span class="number">3</span>, <span class="string">'Tina'</span>, <span class="string">'1984-12-12'</span>);</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> friends;</span><br><span class="line"></span><br><span class="line"><span class="keyword">update</span> friends</span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">name</span> = <span class="string">'Jane Smith'</span></span><br><span class="line"><span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> friends;</span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLe</span> friends</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">COLUMN</span> email <span class="built_in">TEXT</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">update</span> friends</span><br><span class="line"><span class="keyword">set</span> email = <span class="string">'jane@codecademy.com'</span></span><br><span class="line"><span class="keyword">where</span> <span class="keyword">id</span> = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> friends;</span><br><span class="line"></span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> friends</span><br><span class="line"><span class="keyword">where</span> <span class="keyword">id</span>  = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> friends;</span><br><span class="line"><span class="comment">-- alter table friends (name)</span></span><br><span class="line"><span class="comment">-- values (1, )</span></span><br></pre></td></tr></table></figure>
+<h4 id="Pedal-Inventory"><a href="#Pedal-Inventory" class="headerlink" title="Pedal Inventory"></a>Pedal Inventory</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> codecademylib</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">inventory = pd.read_csv(<span class="string">'inventory.csv'</span>)</span><br><span class="line">print(inventory.head(<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">staten_island = inventory[inventory[<span class="string">'location'</span>] == <span class="string">'Staten Island'</span>]</span><br><span class="line">print(staten_island.head(<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">product_request = staten_island[<span class="string">'product_description'</span>]</span><br><span class="line">print(product_request.head(<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">seed_request = inventory[(inventory.location == <span class="string">'Brooklyn'</span>) &amp; (inventory.product_type == <span class="string">'seeds'</span>)]</span><br><span class="line">print(seed_request.head(<span class="number">4</span>))</span><br><span class="line"><span class="comment"># print(inventory[inventory['location'] == 'Brooklyn' and inventory.product_type == 'seeds'])</span></span><br><span class="line"></span><br><span class="line">inventory[<span class="string">'in_stock'</span>] = inventory.quantity.apply(<span class="keyword">lambda</span> val: <span class="literal">True</span> <span class="keyword">if</span> val &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="literal">False</span>)</span><br><span class="line">print(inventory.head(<span class="number">4</span>))</span><br><span class="line"></span><br><span class="line">inventory[<span class="string">'total_value'</span>] = inventory.apply(<span class="keyword">lambda</span> row: row.price * row.quantity, axis=<span class="number">1</span>)</span><br><span class="line">print(inventory.head(<span class="number">7</span>))</span><br><span class="line"></span><br><span class="line">combine_lambda = <span class="keyword">lambda</span> row: \</span><br><span class="line">    <span class="string">'&#123;&#125; - &#123;&#125;'</span>.format(row.product_type,</span><br><span class="line">                     row.product_description)</span><br><span class="line"></span><br><span class="line">inventory[<span class="string">'full_description'</span>] = inventory.apply(combine_lambda,</span><br><span class="line">                                               axis=<span class="number">1</span>)</span><br><span class="line">print(inventory.head(<span class="number">9</span>))</span><br></pre></td></tr></table></figure>
 
 
 
-<img src="https://tva1.sinaimg.cn/large/0082zybpgy1gc2ud71ragj30oe0vwtbb.jpg" alt="image-20200220141807884" style="zoom:50%;" /></div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/52/">52</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+</div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
   $('#nav').addClass('is-mobile')
   $('footer').addClass('is-mobile')
   $('#top-container').addClass('is-mobile')

@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="OOD/2019-05-03-OOD_basics_review &amp; Design_Elevator"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>OOD/2019-05-03-OOD_basics_review &amp; Design_Elevator | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SOLID"><span class="toc-number">1.</span> <span class="toc-text">SOLID</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Single-Responsibility"><span class="toc-number">1.0.1.</span> <span class="toc-text">Single Responsibility</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Open-Close"><span class="toc-number">1.0.2.</span> <span class="toc-text">Open Close</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Liskov-substitution-amp-Interface-Segregation"><span class="toc-number">1.0.3.</span> <span class="toc-text">Liskov substitution &amp; Interface Segregation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Interface-Segregation"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">Interface Segregation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dependency-Inversion"><span class="toc-number">1.0.4.</span> <span class="toc-text">Dependency Inversion</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5C-Analyzation"><span class="toc-number">2.</span> <span class="toc-text">5C Analyzation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Clarify"><span class="toc-number">2.1.</span> <span class="toc-text">Clarify</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Core-Objects"><span class="toc-number">2.2.</span> <span class="toc-text">Core Objects</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Visibility"><span class="toc-number">2.2.0.1.</span> <span class="toc-text">Visibility</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#多选题-在设计电梯系统的Core-Object时，需要考虑哪些Object之间的对应关系？"><span class="toc-number">2.2.0.1.1.</span> <span class="toc-text">[多选题]在设计电梯系统的Core Object时，需要考虑哪些Object之间的对应关系？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cases"><span class="toc-number">2.3.</span> <span class="toc-text">Cases</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class"><span class="toc-number">2.4.</span> <span class="toc-text">Class</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Strategy-Design-Pattern"><span class="toc-number">2.5.</span> <span class="toc-text">Strategy Design Pattern</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#QA"><span class="toc-number">3.</span> <span class="toc-text">QA</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">273</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">40</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">OOD/2019-05-03-OOD_basics_review &amp; Design_Elevator</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-05-03</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/OOD/">OOD</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="SOLID"><a href="#SOLID" class="headerlink" title="SOLID"></a>SOLID</h1><h3 id="Single-Responsibility"><a href="#Single-Responsibility" class="headerlink" title="Single Responsibility"></a>Single Responsibility</h3><blockquote>
+<p>SOLID当中的S， 代表的是Single Responsibility Principle (SRP), 指的是设计当中的每个类，应该都有自己明确的职责，从而使得每个类，都应该有且只有一个改变它的理由。SRP也是实现高内聚(high cohesion)的一个重要原则。</p>
+</blockquote>
+<h3 id="Open-Close"><a href="#Open-Close" class="headerlink" title="Open Close"></a>Open Close</h3><ul>
+<li><p>open to extension, close to modification</p>
+</li>
+<li><p>一個對象或實體應該對擴展開放，修改是封閉</p>
+</li>
+<li><p>如AreaCalculator 不該視不同的形狀在加不同的API，而是該傳入抽象Shape Interface實做 getArea()</p>
+</li>
+</ul>
+<h3 id="Liskov-substitution-amp-Interface-Segregation"><a href="#Liskov-substitution-amp-Interface-Segregation" class="headerlink" title="Liskov substitution &amp; Interface Segregation"></a>Liskov substitution &amp; Interface Segregation</h3><ul>
+<li>子類應該要可以替換父類</li>
+<li>如機器人繼承人類就不好，不能吃喝拉撒</li>
+<li>如 Shape裡要是有計算體積跟面積的abstract method, 就不該直接讓Rectangle繼承，不然不合理，最好是中間再插一層2D Shape後再給Rectangle繼承，就是可以分為平面跟立體的Shape做</li>
+</ul>
+<h4 id="Interface-Segregation"><a href="#Interface-Segregation" class="headerlink" title="Interface Segregation"></a>Interface Segregation</h4><ul>
+<li>機器人用不上人的吃喝拉撒 interface，就不該讓它實踐人的這些功能</li>
+</ul>
+<blockquote>
+<ul>
+<li>可以这样理解吗： SingleResponsibility 是为了解决后续维护中class过于臃肿的原则，InterfaceSegragation 是为了解决面向外部调用者让其他开发人员更容易明白不同接口的功能区别而总结的原则。<ul>
+<li>Yes</li>
+</ul>
+</li>
+<li>接口分离是什么？<ul>
+<li>假设现在我们有一个interface提供给用户，但是里面有<strong>太多用户不需要的功能，显得我们的interface过于臃肿</strong>；那么这时候我们就要把这个大的接口根据功能再次细分，然后提供给<strong><em>不同的用户</em></strong>。这就叫接口分离。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="Dependency-Inversion"><a href="#Dependency-Inversion" class="headerlink" title="Dependency Inversion"></a>Dependency Inversion</h3><ul>
+<li>high level不該依賴於 low level實體這類的具體的實現<ul>
+<li>如AreaCalculator裡不該依賴「三角形」，而是該依賴「Shape」這個抽象的東西，而別依賴「具體」的low level實體。</li>
+<li>讓大家的設計的dependency</li>
+</ul>
+</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gehjmjbxptj30vq0ao10p.jpg" alt="image-20200505141044760" style="zoom:67%;" />
+
+
+
+
+
+<h1 id="5C-Analyzation"><a href="#5C-Analyzation" class="headerlink" title="5C Analyzation"></a>5C Analyzation</h1><ul>
+<li>Clarify<ul>
+<li>What, how</li>
+<li>Elevator <ul>
+<li>Scheduler</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Core Object<ul>
+<li>Input, output, mapping </li>
+</ul>
+</li>
+<li>Cases<ul>
+<li>需要支持哪些功能？</li>
+</ul>
+</li>
+</ul>
+<h2 id="Clarify"><a href="#Clarify" class="headerlink" title="Clarify"></a>Clarify</h2><p>what, how</p>
+<h2 id="Core-Objects"><a href="#Core-Objects" class="headerlink" title="Core Objects"></a>Core Objects</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">	A[Request] --&gt;	B[ElevatorSystem] --&gt; |1toN|C[OneElevator] --&gt; D[ElevatorButton]</span><br></pre></td></tr></table></figure>
+
+<p>​                                    ↓</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">classDiagram</span><br><span class="line">	class Request</span><br><span class="line">  class ElevatorSystem&#123;</span><br><span class="line">  	-List&lt;Elevator&gt; elevators</span><br><span class="line">  &#125;</span><br><span class="line">  class Elevator&#123;</span><br><span class="line">  	-List&lt;ElevatorButton&gt; buttons</span><br><span class="line">  &#125;</span><br><span class="line">  class ElevatorButton</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<h4 id="Visibility"><a href="#Visibility" class="headerlink" title="Visibility"></a><a href="https://mermaid-js.github.io/mermaid/#/classDiagram?id=visibility" target="_blank" rel="noopener">Visibility</a></h4><p>To specify the visibility of a class member (i.e. any attribute or method), these notations may be placed before the member’s name, but it is optional:</p>
+<ul>
+<li><code>+</code> Public</li>
+<li><code>-</code> Private</li>
+<li><code>#</code> Protected</li>
+<li><code>~</code> Package/Internal</li>
+</ul>
+</blockquote>
+<blockquote>
+<h5 id="多选题-在设计电梯系统的Core-Object时，需要考虑哪些Object之间的对应关系？"><a href="#多选题-在设计电梯系统的Core-Object时，需要考虑哪些Object之间的对应关系？" class="headerlink" title="[多选题]在设计电梯系统的Core Object时，需要考虑哪些Object之间的对应关系？"></a>[多选题]在设计电梯系统的Core Object时，需要考虑哪些Object之间的对应关系？</h5><p>A.Request 和 Elevator System 之间的关系34.18% 选择</p>
+<p>B.Elevator System 和 Elevator 之间的关系34.72% 选择</p>
+<p>C.Elevator 和 Elevator Button 之间的关系31.10% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是ABC</p>
+<p><strong>正确答案:</strong>ABC</p>
+<p><strong>解析:</strong></p>
+<p>在考虑电梯问题时，把Request可以看成是输入</p>
+<p>可以把Elevator看成Elevator System的输出</p>
+<p>一个电梯会有很多的按钮，所以Elevator 和 Elevator Button 之间存在联系v</p>
+</blockquote>
+<h2 id="Cases"><a href="#Cases" class="headerlink" title="Cases"></a>Cases</h2><blockquote>
+<ul>
+<li>所以为啥不建一个elevator gate 和一个weight sensor 然后和这个elevator 来11对应呢<ul>
+<li>如果过分的追求单一功能原则反而会让各种class看上去shi’fen’yong’zhong</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>在UML类图当中，每个方法和属性都会用前缀修饰符来表示其访问级别。若没有前缀修饰符则代表此方法或属性属于Package内都可访问，在不同Package内不能直接访问。若有修饰符：’+’表示Public，代表此方法或属性公开，能在任何地方都能直接访问；’-‘表示Private，代表此方法或属性私有 ，只能通过类内部访问；’#’表示Protected，代表此方法或属性为保护，在同一个Package内可以访问，在另一个Package内需要通过子类继承才能进行访问。</p>
+</blockquote>
+<h2 id="Class"><a href="#Class" class="headerlink" title="Class"></a>Class</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">classDiagram</span><br><span class="line">	class ExternalRequest</span><br><span class="line">  class ElevatorSystem&#123;</span><br><span class="line">  	-List&lt;Elevator&gt; elevators</span><br><span class="line">  	+void handleRequest(ExternalRequest r)</span><br><span class="line">  &#125;</span><br><span class="line">  class Elevator&#123;</span><br><span class="line">  	-List&lt;ElevatorButton&gt; buttons</span><br><span class="line">  &#125;</span><br><span class="line">  class ElevatorButton</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">Use cases</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Handle request</td>
+</tr>
+<tr>
+<td align="center">Take external request</td>
+</tr>
+<tr>
+<td align="center">Take internal request</td>
+</tr>
+<tr>
+<td align="center">Open gate</td>
+</tr>
+<tr>
+<td align="center">Close gate</td>
+</tr>
+<tr>
+<td align="center">Check weight</td>
+</tr>
+<tr>
+<td align="center">Press button</td>
+</tr>
+</tbody></table>
+<blockquote>
+<ul>
+<li>所以为什么handle 这个function是public? 什么叫use case是外部的？use case 莫非还有内部的？<ul>
+<li>外部的就是指别的class调用当前的class，内部的就是指自己class内部进行调用。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">classDiagram</span><br><span class="line">	class InvalidExternalRequestException</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>但是我们也知道，一部电梯，不一样时段人流量是不同的；比如上下班高峰期会有很多人使用，而晚上下班后可能使用频率就没有那么高。对于这种情况，我们又可以如何去改进我们的设计呢？这里给大家介绍这个课程里我们要学的第一个Design Pattern ——— Strategy Design Pattern。</p>
+</blockquote>
+<h2 id="Strategy-Design-Pattern"><a href="#Strategy-Design-Pattern" class="headerlink" title="Strategy Design Pattern"></a>Strategy Design Pattern</h2><ul>
+<li>封装了多種算法、策略</li>
+<li>使得算法/策略之間能互相替換，也方便擴展</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">classDiagram</span><br><span class="line">	Context *-- Strategy</span><br><span class="line">	Strategy &lt;|-- ConcreteStrategyA</span><br><span class="line">  Strategy &lt;|-- ConcreteStrategyB</span><br><span class="line">	Strategy : &lt;&lt;interface&gt;&gt;</span><br><span class="line">	Strategy : +execute()</span><br><span class="line">  ConcreteStrategyA : +execute()</span><br><span class="line">  ConcreteStrategyB : +execute()</span><br></pre></td></tr></table></figure>
+
+<p>%    class ConcreteStrategyA{+execute()}<br>%    class ConcreteStrategyB{+execute()}</p>
+<h1 id="QA"><a href="#QA" class="headerlink" title="QA"></a>QA</h1><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gehh3at4owj30kc0x0wip.jpg" alt="image-20200505124305507" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gehh5ez7r4j30kg0qatbo.jpg" alt="image-20200505124515467" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gehkq0lsiaj30hc0v60wm.jpg" alt="image-20200505144843469" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gehksimowgj30h80ouq51.jpg" alt="image-20200505145108218" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gehktcr3whj30iy0t6tda.jpg" alt="image-20200505145156636" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gehkvd81ovj30ho0r4diz.jpg" alt="image-20200505145359955" style="zoom:50%;" /></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/05/03/OOD/2019-05-03-OOD_basics_review%20&amp;%20Design_Elevator/">http://yoursite.com/2019/05/03/OOD/2019-05-03-OOD_basics_review%20&amp;%20Design_Elevator/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/05/03/LC/2019-05-03-Remove-Element/"><i class="fa fa-chevron-left">  </i><span>LC/2019-05-03-Remove-Element</span></a></div><div class="next-post pull-right"><a href="/2019/05/03/Python/2019-05-03-cls/"><span>Python/2019-05-03-cls</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>

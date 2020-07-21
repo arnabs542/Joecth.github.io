@@ -7,50 +7,1644 @@
     error: 'Copy error',
     noSupport: 'The browser does not support'
   }
-} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">258</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">35</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2018/12/20/DevOps/2018-12-20-Faster%20RCNN%20(Caffe)/">DevOps/2018-12-20-Faster RCNN (Caffe)</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-20</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/AI/">AI</a></span><div class="content"><h3 id="Faster-RCNN"><a href="#Faster-RCNN" class="headerlink" title="Faster RCNN"></a>Faster RCNN</h3><p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g98751x2waj30u0114juk.jpg" alt="image-20191123192705661"></p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g9875mkolxj30u00z70x2.jpg" alt="image-20191123192741508"></p>
-<h4 id="prototxt"><a href="#prototxt" class="headerlink" title=".prototxt"></a>.prototxt</h4><p>(<a href="https://raw.githubusercontent.com/rbgirshick/py-faster-rcnn/master/models/pascal_voc/VGG16/faster_rcnn_end2end/test.prototxt" target="_blank" rel="noopener">https://raw.githubusercontent.com/rbgirshick/py-faster-rcnn/master/models/pascal_voc/VGG16/faster_rcnn_end2end/test.prototxt</a>) </p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6gy1g9898kj283j31m00k6jw4.jpg" alt="image-20191123203941972"></p>
-<h5 id="netscope"><a href="#netscope" class="headerlink" title="netscope:"></a>netscope:</h5><p><a href="https://ethereon.github.io/netscope/#/editor" target="_blank" rel="noopener">https://ethereon.github.io/netscope/#/editor</a></p>
-<figure class="highlight protobuf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br><span class="line">421</span><br><span class="line">422</span><br><span class="line">423</span><br><span class="line">424</span><br><span class="line">425</span><br><span class="line">426</span><br><span class="line">427</span><br><span class="line">428</span><br><span class="line">429</span><br><span class="line">430</span><br><span class="line">431</span><br><span class="line">432</span><br><span class="line">433</span><br><span class="line">434</span><br><span class="line">435</span><br><span class="line">436</span><br><span class="line">437</span><br><span class="line">438</span><br><span class="line">439</span><br><span class="line">440</span><br><span class="line">441</span><br><span class="line">442</span><br><span class="line">443</span><br><span class="line">444</span><br><span class="line">445</span><br><span class="line">446</span><br><span class="line">447</span><br><span class="line">448</span><br><span class="line">449</span><br><span class="line">450</span><br><span class="line">451</span><br><span class="line">452</span><br><span class="line">453</span><br><span class="line">454</span><br><span class="line">455</span><br><span class="line">456</span><br><span class="line">457</span><br><span class="line">458</span><br><span class="line">459</span><br><span class="line">460</span><br><span class="line">461</span><br><span class="line">462</span><br><span class="line">463</span><br><span class="line">464</span><br><span class="line">465</span><br><span class="line">466</span><br><span class="line">467</span><br><span class="line">468</span><br><span class="line">469</span><br><span class="line">470</span><br><span class="line">471</span><br><span class="line">472</span><br><span class="line">473</span><br><span class="line">474</span><br><span class="line">475</span><br><span class="line">476</span><br><span class="line">477</span><br><span class="line">478</span><br><span class="line">479</span><br><span class="line">480</span><br><span class="line">481</span><br><span class="line">482</span><br><span class="line">483</span><br><span class="line">484</span><br><span class="line">485</span><br><span class="line">486</span><br><span class="line">487</span><br><span class="line">488</span><br><span class="line">489</span><br><span class="line">490</span><br><span class="line">491</span><br><span class="line">492</span><br><span class="line">493</span><br><span class="line">494</span><br><span class="line">495</span><br><span class="line">496</span><br><span class="line">497</span><br><span class="line">498</span><br><span class="line">499</span><br><span class="line">500</span><br><span class="line">501</span><br><span class="line">502</span><br><span class="line">503</span><br><span class="line">504</span><br><span class="line">505</span><br><span class="line">506</span><br><span class="line">507</span><br><span class="line">508</span><br><span class="line">509</span><br><span class="line">510</span><br><span class="line">511</span><br><span class="line">512</span><br><span class="line">513</span><br><span class="line">514</span><br><span class="line">515</span><br><span class="line">516</span><br><span class="line">517</span><br><span class="line">518</span><br><span class="line">519</span><br><span class="line">520</span><br><span class="line">521</span><br><span class="line">522</span><br><span class="line">523</span><br><span class="line">524</span><br><span class="line">525</span><br><span class="line">526</span><br><span class="line">527</span><br><span class="line">528</span><br><span class="line">529</span><br><span class="line">530</span><br><span class="line">531</span><br><span class="line">532</span><br><span class="line">533</span><br><span class="line">534</span><br><span class="line">535</span><br><span class="line">536</span><br><span class="line">537</span><br><span class="line">538</span><br><span class="line">539</span><br><span class="line">540</span><br><span class="line">541</span><br><span class="line">542</span><br><span class="line">543</span><br><span class="line">544</span><br><span class="line">545</span><br><span class="line">546</span><br><span class="line">547</span><br><span class="line">548</span><br><span class="line">549</span><br><span class="line">550</span><br><span class="line">551</span><br><span class="line">552</span><br><span class="line">553</span><br><span class="line">554</span><br><span class="line">555</span><br><span class="line">556</span><br><span class="line">557</span><br><span class="line">558</span><br><span class="line">559</span><br><span class="line">560</span><br><span class="line">561</span><br><span class="line">562</span><br><span class="line">563</span><br><span class="line">564</span><br><span class="line">565</span><br><span class="line">566</span><br><span class="line">567</span><br><span class="line">568</span><br><span class="line">569</span><br><span class="line">570</span><br><span class="line">571</span><br><span class="line">572</span><br><span class="line">573</span><br><span class="line">574</span><br><span class="line">575</span><br><span class="line">576</span><br><span class="line">577</span><br><span class="line">578</span><br><span class="line">579</span><br><span class="line">580</span><br><span class="line">581</span><br><span class="line">582</span><br><span class="line">583</span><br><span class="line">584</span><br><span class="line">585</span><br><span class="line">586</span><br><span class="line">587</span><br><span class="line">588</span><br><span class="line">589</span><br><span class="line">590</span><br><span class="line">591</span><br><span class="line">592</span><br><span class="line">593</span><br><span class="line">594</span><br><span class="line">595</span><br><span class="line">596</span><br><span class="line">597</span><br><span class="line">598</span><br><span class="line">599</span><br><span class="line">600</span><br><span class="line">601</span><br><span class="line">602</span><br><span class="line">603</span><br><span class="line">604</span><br><span class="line">605</span><br><span class="line">606</span><br><span class="line">607</span><br><span class="line">608</span><br></pre></td><td class="code"><pre><span class="line">name: <span class="string">"VGG_ILSVRC_16_layers"</span></span><br><span class="line"></span><br><span class="line">input: <span class="string">"data"</span></span><br><span class="line">input_shape &#123;</span><br><span class="line">  dim: <span class="number">1</span></span><br><span class="line">  dim: <span class="number">3</span></span><br><span class="line">  dim: <span class="number">224</span></span><br><span class="line">  dim: <span class="number">224</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">input: <span class="string">"im_info"</span></span><br><span class="line">input_shape &#123;</span><br><span class="line">  dim: <span class="number">1</span></span><br><span class="line">  dim: <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"conv1_1"</span></span><br><span class="line">  type: <span class="string">"Convolution"</span></span><br><span class="line">  bottom: <span class="string">"data"</span></span><br><span class="line">  top: <span class="string">"conv1_1"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">0</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">0</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  convolution_param &#123;</span><br><span class="line">    num_output: <span class="number">64</span></span><br><span class="line">    pad: <span class="number">1</span></span><br><span class="line">    kernel_size: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"relu1_1"</span></span><br><span class="line">  type: <span class="string">"ReLU"</span></span><br><span class="line">  bottom: <span class="string">"conv1_1"</span></span><br><span class="line">  top: <span class="string">"conv1_1"</span></span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"conv1_2"</span></span><br><span class="line">  type: <span class="string">"Convolution"</span></span><br><span class="line">  bottom: <span class="string">"conv1_1"</span></span><br><span class="line">  top: <span class="string">"conv1_2"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">0</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">0</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  convolution_param &#123;</span><br><span class="line">    num_output: <span class="number">64</span></span><br><span class="line">    pad: <span class="number">1</span></span><br><span class="line">    kernel_size: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"relu1_2"</span></span><br><span class="line">  type: <span class="string">"ReLU"</span></span><br><span class="line">  bottom: <span class="string">"conv1_2"</span></span><br><span class="line">  top: <span class="string">"conv1_2"</span></span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"pool1"</span></span><br><span class="line">  type: <span class="string">"Pooling"</span></span><br><span class="line">  bottom: <span class="string">"conv1_2"</span></span><br><span class="line">  top: <span class="string">"pool1"</span></span><br><span class="line">  pooling_param &#123;</span><br><span class="line">    pool: MAX</span><br><span class="line">    kernel_size: <span class="number">2</span></span><br><span class="line">    stride: <span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"conv2_1"</span></span><br><span class="line">  type: <span class="string">"Convolution"</span></span><br><span class="line">  bottom: <span class="string">"pool1"</span></span><br><span class="line">  top: <span class="string">"conv2_1"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">0</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">0</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  convolution_param &#123;</span><br><span class="line">    num_output: <span class="number">128</span></span><br><span class="line">    pad: <span class="number">1</span></span><br><span class="line">    kernel_size: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"relu2_1"</span></span><br><span class="line">  type: <span class="string">"ReLU"</span></span><br><span class="line">  bottom: <span class="string">"conv2_1"</span></span><br><span class="line">  top: <span class="string">"conv2_1"</span></span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"conv2_2"</span></span><br><span class="line">  type: <span class="string">"Convolution"</span></span><br><span class="line">  bottom: <span class="string">"conv2_1"</span></span><br><span class="line">  top: <span class="string">"conv2_2"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">0</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">0</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  convolution_param &#123;</span><br><span class="line">    num_output: <span class="number">128</span></span><br><span class="line">    pad: <span class="number">1</span></span><br><span class="line">    kernel_size: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"relu2_2"</span></span><br><span class="line">  type: <span class="string">"ReLU"</span></span><br><span class="line">  bottom: <span class="string">"conv2_2"</span></span><br><span class="line">  top: <span class="string">"conv2_2"</span></span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"pool2"</span></span><br><span class="line">  type: <span class="string">"Pooling"</span></span><br><span class="line">  bottom: <span class="string">"conv2_2"</span></span><br><span class="line">  top: <span class="string">"pool2"</span></span><br><span class="line">  pooling_param &#123;</span><br><span class="line">    pool: MAX</span><br><span class="line">    kernel_size: <span class="number">2</span></span><br><span class="line">    stride: <span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"conv3_1"</span></span><br><span class="line">  type: <span class="string">"Convolution"</span></span><br><span class="line">  bottom: <span class="string">"pool2"</span></span><br><span class="line">  top: <span class="string">"conv3_1"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">1</span></span><br><span class="line">    decay_mult: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">2</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  convolution_param &#123;</span><br><span class="line">    num_output: <span class="number">256</span></span><br><span class="line">    pad: <span class="number">1</span></span><br><span class="line">    kernel_size: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"relu3_1"</span></span><br><span class="line">  type: <span class="string">"ReLU"</span></span><br><span class="line">  bottom: <span class="string">"conv3_1"</span></span><br><span class="line">  top: <span class="string">"conv3_1"</span></span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"conv3_2"</span></span><br><span class="line">  type: <span class="string">"Convolution"</span></span><br><span class="line">  bottom: <span class="string">"conv3_1"</span></span><br><span class="line">  top: <span class="string">"conv3_2"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">1</span></span><br><span class="line">    decay_mult: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">2</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  convolution_param &#123;</span><br><span class="line">    num_output: <span class="number">256</span></span><br><span class="line">    pad: <span class="number">1</span></span><br><span class="line">    kernel_size: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"relu3_2"</span></span><br><span class="line">  type: <span class="string">"ReLU"</span></span><br><span class="line">  bottom: <span class="string">"conv3_2"</span></span><br><span class="line">  top: <span class="string">"conv3_2"</span></span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"conv3_3"</span></span><br><span class="line">  type: <span class="string">"Convolution"</span></span><br><span class="line">  bottom: <span class="string">"conv3_2"</span></span><br><span class="line">  top: <span class="string">"conv3_3"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">1</span></span><br><span class="line">    decay_mult: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">2</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  convolution_param &#123;</span><br><span class="line">    num_output: <span class="number">256</span></span><br><span class="line">    pad: <span class="number">1</span></span><br><span class="line">    kernel_size: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"relu3_3"</span></span><br><span class="line">  type: <span class="string">"ReLU"</span></span><br><span class="line">  bottom: <span class="string">"conv3_3"</span></span><br><span class="line">  top: <span class="string">"conv3_3"</span></span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"pool3"</span></span><br><span class="line">  type: <span class="string">"Pooling"</span></span><br><span class="line">  bottom: <span class="string">"conv3_3"</span></span><br><span class="line">  top: <span class="string">"pool3"</span></span><br><span class="line">  pooling_param &#123;</span><br><span class="line">    pool: MAX</span><br><span class="line">    kernel_size: <span class="number">2</span></span><br><span class="line">    stride: <span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"conv4_1"</span></span><br><span class="line">  type: <span class="string">"Convolution"</span></span><br><span class="line">  bottom: <span class="string">"pool3"</span></span><br><span class="line">  top: <span class="string">"conv4_1"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">1</span></span><br><span class="line">    decay_mult: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">2</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  convolution_param &#123;</span><br><span class="line">    num_output: <span class="number">512</span></span><br><span class="line">    pad: <span class="number">1</span></span><br><span class="line">    kernel_size: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"relu4_1"</span></span><br><span class="line">  type: <span class="string">"ReLU"</span></span><br><span class="line">  bottom: <span class="string">"conv4_1"</span></span><br><span class="line">  top: <span class="string">"conv4_1"</span></span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"conv4_2"</span></span><br><span class="line">  type: <span class="string">"Convolution"</span></span><br><span class="line">  bottom: <span class="string">"conv4_1"</span></span><br><span class="line">  top: <span class="string">"conv4_2"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">1</span></span><br><span class="line">    decay_mult: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">2</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  convolution_param &#123;</span><br><span class="line">    num_output: <span class="number">512</span></span><br><span class="line">    pad: <span class="number">1</span></span><br><span class="line">    kernel_size: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"relu4_2"</span></span><br><span class="line">  type: <span class="string">"ReLU"</span></span><br><span class="line">  bottom: <span class="string">"conv4_2"</span></span><br><span class="line">  top: <span class="string">"conv4_2"</span></span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"conv4_3"</span></span><br><span class="line">  type: <span class="string">"Convolution"</span></span><br><span class="line">  bottom: <span class="string">"conv4_2"</span></span><br><span class="line">  top: <span class="string">"conv4_3"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">1</span></span><br><span class="line">    decay_mult: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">2</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  convolution_param &#123;</span><br><span class="line">    num_output: <span class="number">512</span></span><br><span class="line">    pad: <span class="number">1</span></span><br><span class="line">    kernel_size: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"relu4_3"</span></span><br><span class="line">  type: <span class="string">"ReLU"</span></span><br><span class="line">  bottom: <span class="string">"conv4_3"</span></span><br><span class="line">  top: <span class="string">"conv4_3"</span></span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"pool4"</span></span><br><span class="line">  type: <span class="string">"Pooling"</span></span><br><span class="line">  bottom: <span class="string">"conv4_3"</span></span><br><span class="line">  top: <span class="string">"pool4"</span></span><br><span class="line">  pooling_param &#123;</span><br><span class="line">    pool: MAX</span><br><span class="line">    kernel_size: <span class="number">2</span></span><br><span class="line">    stride: <span class="number">2</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"conv5_1"</span></span><br><span class="line">  type: <span class="string">"Convolution"</span></span><br><span class="line">  bottom: <span class="string">"pool4"</span></span><br><span class="line">  top: <span class="string">"conv5_1"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">1</span></span><br><span class="line">    decay_mult: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">2</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  convolution_param &#123;</span><br><span class="line">    num_output: <span class="number">512</span></span><br><span class="line">    pad: <span class="number">1</span></span><br><span class="line">    kernel_size: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"relu5_1"</span></span><br><span class="line">  type: <span class="string">"ReLU"</span></span><br><span class="line">  bottom: <span class="string">"conv5_1"</span></span><br><span class="line">  top: <span class="string">"conv5_1"</span></span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"conv5_2"</span></span><br><span class="line">  type: <span class="string">"Convolution"</span></span><br><span class="line">  bottom: <span class="string">"conv5_1"</span></span><br><span class="line">  top: <span class="string">"conv5_2"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">1</span></span><br><span class="line">    decay_mult: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">2</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  convolution_param &#123;</span><br><span class="line">    num_output: <span class="number">512</span></span><br><span class="line">    pad: <span class="number">1</span></span><br><span class="line">    kernel_size: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"relu5_2"</span></span><br><span class="line">  type: <span class="string">"ReLU"</span></span><br><span class="line">  bottom: <span class="string">"conv5_2"</span></span><br><span class="line">  top: <span class="string">"conv5_2"</span></span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"conv5_3"</span></span><br><span class="line">  type: <span class="string">"Convolution"</span></span><br><span class="line">  bottom: <span class="string">"conv5_2"</span></span><br><span class="line">  top: <span class="string">"conv5_3"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">1</span></span><br><span class="line">    decay_mult: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">2</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  convolution_param &#123;</span><br><span class="line">    num_output: <span class="number">512</span></span><br><span class="line">    pad: <span class="number">1</span></span><br><span class="line">    kernel_size: <span class="number">3</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"relu5_3"</span></span><br><span class="line">  type: <span class="string">"ReLU"</span></span><br><span class="line">  bottom: <span class="string">"conv5_3"</span></span><br><span class="line">  top: <span class="string">"conv5_3"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#========= RPN ============</span><br><span class="line"></span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"rpn_conv/3x3"</span></span><br><span class="line">  type: <span class="string">"Convolution"</span></span><br><span class="line">  bottom: <span class="string">"conv5_3"</span></span><br><span class="line">  top: <span class="string">"rpn/output"</span></span><br><span class="line">  param &#123; lr_mult: <span class="number">1.0</span> decay_mult: <span class="number">1.0</span> &#125;</span><br><span class="line">  param &#123; lr_mult: <span class="number">2.0</span> decay_mult: <span class="number">0</span> &#125;</span><br><span class="line">  convolution_param &#123;</span><br><span class="line">    num_output: <span class="number">512</span></span><br><span class="line">    kernel_size: <span class="number">3</span> pad: <span class="number">1</span> stride: <span class="number">1</span></span><br><span class="line">    weight_filler &#123; type: <span class="string">"gaussian"</span> std: <span class="number">0.01</span> &#125;</span><br><span class="line">    bias_filler &#123; type: <span class="string">"constant"</span> value: <span class="number">0</span> &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"rpn_relu/3x3"</span></span><br><span class="line">  type: <span class="string">"ReLU"</span></span><br><span class="line">  bottom: <span class="string">"rpn/output"</span></span><br><span class="line">  top: <span class="string">"rpn/output"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"rpn_cls_score"</span></span><br><span class="line">  type: <span class="string">"Convolution"</span></span><br><span class="line">  bottom: <span class="string">"rpn/output"</span></span><br><span class="line">  top: <span class="string">"rpn_cls_score"</span></span><br><span class="line">  param &#123; lr_mult: <span class="number">1.0</span> decay_mult: <span class="number">1.0</span> &#125;</span><br><span class="line">  param &#123; lr_mult: <span class="number">2.0</span> decay_mult: <span class="number">0</span> &#125;</span><br><span class="line">  convolution_param &#123;</span><br><span class="line">    num_output: <span class="number">18</span>   # <span class="number">2</span>(bg/fg) * <span class="number">9</span>(anchors)</span><br><span class="line">    kernel_size: <span class="number">1</span> pad: <span class="number">0</span> stride: <span class="number">1</span></span><br><span class="line">    weight_filler &#123; type: <span class="string">"gaussian"</span> std: <span class="number">0.01</span> &#125;</span><br><span class="line">    bias_filler &#123; type: <span class="string">"constant"</span> value: <span class="number">0</span> &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"rpn_bbox_pred"</span></span><br><span class="line">  type: <span class="string">"Convolution"</span></span><br><span class="line">  bottom: <span class="string">"rpn/output"</span></span><br><span class="line">  top: <span class="string">"rpn_bbox_pred"</span></span><br><span class="line">  param &#123; lr_mult: <span class="number">1.0</span> decay_mult: <span class="number">1.0</span> &#125;</span><br><span class="line">  param &#123; lr_mult: <span class="number">2.0</span> decay_mult: <span class="number">0</span> &#125;</span><br><span class="line">  convolution_param &#123;</span><br><span class="line">    num_output: <span class="number">36</span>   # <span class="number">4</span> * <span class="number">9</span>(anchors)</span><br><span class="line">    kernel_size: <span class="number">1</span> pad: <span class="number">0</span> stride: <span class="number">1</span></span><br><span class="line">    weight_filler &#123; type: <span class="string">"gaussian"</span> std: <span class="number">0.01</span> &#125;</span><br><span class="line">    bias_filler &#123; type: <span class="string">"constant"</span> value: <span class="number">0</span> &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">   bottom: <span class="string">"rpn_cls_score"</span></span><br><span class="line">   top: <span class="string">"rpn_cls_score_reshape"</span></span><br><span class="line">   name: <span class="string">"rpn_cls_score_reshape"</span></span><br><span class="line">   type: <span class="string">"Reshape"</span></span><br><span class="line">   reshape_param &#123; shape &#123; dim: <span class="number">0</span> dim: <span class="number">2</span> dim: -<span class="number">1</span> dim: <span class="number">0</span> &#125; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#========= RoI Proposal ============</span><br><span class="line"></span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"rpn_cls_prob"</span></span><br><span class="line">  type: <span class="string">"Softmax"</span></span><br><span class="line">  bottom: <span class="string">"rpn_cls_score_reshape"</span></span><br><span class="line">  top: <span class="string">"rpn_cls_prob"</span></span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: 'rpn_cls_prob_reshape'</span><br><span class="line">  type: 'Reshape'</span><br><span class="line">  bottom: 'rpn_cls_prob'</span><br><span class="line">  top: 'rpn_cls_prob_reshape'</span><br><span class="line">  reshape_param &#123; shape &#123; dim: <span class="number">0</span> dim: <span class="number">18</span> dim: -<span class="number">1</span> dim: <span class="number">0</span> &#125; &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: 'proposal'</span><br><span class="line">  type: 'Python'</span><br><span class="line">  bottom: 'rpn_cls_prob_reshape'</span><br><span class="line">  bottom: 'rpn_bbox_pred'</span><br><span class="line">  bottom: 'im_info'</span><br><span class="line">  top: 'rois'</span><br><span class="line">  python_param &#123;</span><br><span class="line">    module: 'rpn.proposal_layer'</span><br><span class="line">    layer: 'ProposalLayer'</span><br><span class="line">    param_str: <span class="string">"'feat_stride': 16"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#========= RCNN ============</span><br><span class="line"></span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"roi_pool5"</span></span><br><span class="line">  type: <span class="string">"ROIPooling"</span></span><br><span class="line">  bottom: <span class="string">"conv5_3"</span></span><br><span class="line">  bottom: <span class="string">"rois"</span></span><br><span class="line">  top: <span class="string">"pool5"</span></span><br><span class="line">  roi_pooling_param &#123;</span><br><span class="line">    pooled_w: <span class="number">7</span></span><br><span class="line">    pooled_h: <span class="number">7</span></span><br><span class="line">    spatial_scale: <span class="number">0.0625</span> # <span class="number">1</span>/<span class="number">16</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"fc6"</span></span><br><span class="line">  type: <span class="string">"InnerProduct"</span></span><br><span class="line">  bottom: <span class="string">"pool5"</span></span><br><span class="line">  top: <span class="string">"fc6"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">1</span></span><br><span class="line">    decay_mult: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">2</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  inner_product_param &#123;</span><br><span class="line">    num_output: <span class="number">4096</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"relu6"</span></span><br><span class="line">  type: <span class="string">"ReLU"</span></span><br><span class="line">  bottom: <span class="string">"fc6"</span></span><br><span class="line">  top: <span class="string">"fc6"</span></span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"drop6"</span></span><br><span class="line">  type: <span class="string">"Dropout"</span></span><br><span class="line">  bottom: <span class="string">"fc6"</span></span><br><span class="line">  top: <span class="string">"fc6"</span></span><br><span class="line">  dropout_param &#123;</span><br><span class="line">    dropout_ratio: <span class="number">0.5</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"fc7"</span></span><br><span class="line">  type: <span class="string">"InnerProduct"</span></span><br><span class="line">  bottom: <span class="string">"fc6"</span></span><br><span class="line">  top: <span class="string">"fc7"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">1</span></span><br><span class="line">    decay_mult: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">2</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  inner_product_param &#123;</span><br><span class="line">    num_output: <span class="number">4096</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"relu7"</span></span><br><span class="line">  type: <span class="string">"ReLU"</span></span><br><span class="line">  bottom: <span class="string">"fc7"</span></span><br><span class="line">  top: <span class="string">"fc7"</span></span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"drop7"</span></span><br><span class="line">  type: <span class="string">"Dropout"</span></span><br><span class="line">  bottom: <span class="string">"fc7"</span></span><br><span class="line">  top: <span class="string">"fc7"</span></span><br><span class="line">  dropout_param &#123;</span><br><span class="line">    dropout_ratio: <span class="number">0.5</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"cls_score"</span></span><br><span class="line">  type: <span class="string">"InnerProduct"</span></span><br><span class="line">  bottom: <span class="string">"fc7"</span></span><br><span class="line">  top: <span class="string">"cls_score"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">1</span></span><br><span class="line">    decay_mult: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">2</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  inner_product_param &#123;</span><br><span class="line">    num_output: <span class="number">21</span></span><br><span class="line">    weight_filler &#123;</span><br><span class="line">      type: <span class="string">"gaussian"</span></span><br><span class="line">      std: <span class="number">0.01</span></span><br><span class="line">    &#125;</span><br><span class="line">    bias_filler &#123;</span><br><span class="line">      type: <span class="string">"constant"</span></span><br><span class="line">      value: <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"bbox_pred"</span></span><br><span class="line">  type: <span class="string">"InnerProduct"</span></span><br><span class="line">  bottom: <span class="string">"fc7"</span></span><br><span class="line">  top: <span class="string">"bbox_pred"</span></span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">1</span></span><br><span class="line">    decay_mult: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">  param &#123;</span><br><span class="line">    lr_mult: <span class="number">2</span></span><br><span class="line">    decay_mult: <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  inner_product_param &#123;</span><br><span class="line">    num_output: <span class="number">84</span></span><br><span class="line">    weight_filler &#123;</span><br><span class="line">      type: <span class="string">"gaussian"</span></span><br><span class="line">      std: <span class="number">0.001</span></span><br><span class="line">    &#125;</span><br><span class="line">    bias_filler &#123;</span><br><span class="line">      type: <span class="string">"constant"</span></span><br><span class="line">      value: <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">layer &#123;</span><br><span class="line">  name: <span class="string">"cls_prob"</span></span><br><span class="line">  type: <span class="string">"Softmax"</span></span><br><span class="line">  bottom: <span class="string">"cls_score"</span></span><br><span class="line">  top: <span class="string">"cls_prob"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/12/12/Web/2018-12-12-MongoDB%20MapReduce/">Web/2018-12-12-MongoDB MapReduce</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-12</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Web/">Web</a></span><div class="content"><p>Ref: <a href="https://www.runoob.com/mongodb/mongodb-map-reduce.html" target="_blank" rel="noopener">https://www.runoob.com/mongodb/mongodb-map-reduce.html</a></p>
-<p>Map-Reduce是一种计算模型，简单的说就是将大批量的工作（数据）分解（MAP）执行，然后再将结果合并成最终结果（REDUCE）。</p>
-<p>MongoDB提供的Map-Reduce非常灵活，对于大规模数据分析也相当实用。</p>
-<h3 id="MapReduce-命令"><a href="#MapReduce-命令" class="headerlink" title="MapReduce 命令"></a>MapReduce 命令</h3><p>以下是MapReduce的基本语法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;db.collection.mapReduce(</span><br><span class="line">   function() &#123;emit(key,value);&#125;,  &#x2F;&#x2F;map 函数</span><br><span class="line">   function(key,values) &#123;return reduceFunction&#125;,   &#x2F;&#x2F;reduce 函数</span><br><span class="line">   &#123;</span><br><span class="line">      out: collection,</span><br><span class="line">      query: document,</span><br><span class="line">      sort: document,</span><br><span class="line">      limit: number</span><br><span class="line">   &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>使用 MapReduce 要实现两个函数 Map 函数和 Reduce 函数,Map 函数调用 emit(key, value), 遍历 collection 中所有的记录, 将 key 与 value 传递给 Reduce 函数进行处理。</p>
-<p>Map 函数必须调用 emit(key, value) 返回键值对。</p>
-<p>参数说明:</p>
-<ul>
-<li><strong>map</strong> ：映射函数 (生成键值对序列,作为 reduce 函数参数)。</li>
-<li><strong>reduce</strong> 统计函数，reduce函数的任务就是将key-values变成key-value，也就是把values数组变成一个单一的值value。。</li>
-<li><strong>out</strong> 统计结果存放集合 (不指定则使用临时集合,在客户端断开后自动删除)。</li>
-<li><strong>query</strong> 一个筛选条件，只有满足条件的文档才会调用map函数。（query。limit，sort可以随意组合）</li>
-<li><strong>sort</strong> 和limit结合的sort排序参数（也是在发往map函数前给文档排序），可以优化分组机制</li>
-<li><strong>limit</strong> 发往map函数的文档数量的上限（要是没有limit，单独使用sort的用处不大）</li>
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">273</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">40</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2019/04/11/System-Design/9p/2019-04-11-Distributed%20System%20GFS/">System-Design/9p/2019-04-11-Distributed System GFS</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-11</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></span><div class="content"><h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ul>
+<li>GFS Client</li>
+<li>Heart Beat</li>
 </ul>
-<p>以下实例在集合 orders 中查找 status:”A” 的数据，并根据 cust_id 来分组，并计算 amount 的总和。</p>
-<p><img src="https://static.runoob.com/images/map-reduce.bakedsvg.svg" alt="map-reduce.bakedsvg"></p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/12/12/Web/2018-12-12-ODM%20&amp;%20ORM/">Web/2018-12-12-ODM &amp; ORM</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-12</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Web/">Web</a></span><div class="content"><p>Ref All: <a href="https://medium.com/@julianam.tyler/what-is-the-difference-between-odm-and-orm-267bbb7778b0" target="_blank" rel="noopener">https://medium.com/@julianam.tyler/what-is-the-difference-between-odm-and-orm-267bbb7778b0</a></p>
-<p>“</p>
-<p>When you first learn how to work with database, it all comes down to two types of database set ups which are ORM (object Relation Mapping) and ODM (Object Document Mapping)</p>
-<p>ORM which is to map an object with a relational world, it basically converts data between incompatible types in object oriented programming languages. ORM wraps the implementation specific details of storage drivers in an API (application program interface), and maps the relational fields to an object members. For example if I have a table of employees, it is mapped to a single object for all employees, with various methods associated with it.</p>
-<p>ODM on the other hand is an Object Document Mapper, which maps objects with a Document Database like MongoDB.</p>
-<p>The main difference is that ORM is for MySQL databases, while ODM does the mapping for document representation of data.<br>best way to remember what ORM does would be to think of it as an excel spread sheet, with rows and columns. When using this set up, you want to be sure you have a great plan on how you want to tackle the current application, it does not allow as many modifications like ODM does. With ODM we can add new fields and properties easily but with ORM when adding a new field you need to keep in mind that nothing stays empty so it needs a value to be as default unless you want to go into each and modify.</p>
-<p>“”</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/12/11/CVs/2018-12-11-Baysian%20&amp;%20Conditional%20Prob/">CVs/2018-12-11-Baysian &amp; Conditional Prob</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-11</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Probability/">Probability</a></span><div class="content"><h3 id="Baysian"><a href="#Baysian" class="headerlink" title="Baysian"></a>Baysian</h3><p>$$<br>P(A|C) = \frac{P(A\cap C)}{P(C)},<br>P(C|A) = \frac{P(A\cap C)}{P(A)}   \<br>Thus, P(A|C) = \frac{P(C|A) * P(A)}{P(C)}<br>$$</p>
-<h3 id="Independent"><a href="#Independent" class="headerlink" title="Independent"></a>Independent</h3><p>$$<br>P(A|C) = \frac{P(A\cap C)}{P(C)}=\frac{P(A)<em>P(C)}{P(C)}=P(A) \<br>P(C|A) = \frac{P(A\cap C)}{P(A)}=\frac{P(A)</em>P(C)}{P(A)}=P(C)   \<br>%Thus, P(A|C) = \frac{P(C|A) * P(A)}{P(C)}<br>$$</p>
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1g9s1bgefz3j30hs0ffabh.jpg" alt="v2-d331a465a66032ebc14b6f24feae2457_b"></p>
-<ul>
-<li>posterior probability</li>
-<li>priori probability</li>
+<blockquote>
+<p>GFS 采用的是 Master-slave 的架构。他的一些基本设计原理，如 chunk 的设计（对应文件系统中的 block）和普通文件系统是相通的。整套系统的设计是基于一些合理假设的（这些假设都是Google从大量工程实践中总结出来的），其中一条假设就是：“We expect a few million files, each typically 100MB or larger in size”。如果实在需要存很多小文件的话， 其实可以将这些小文件打包成一个大文件然后再存储，只要记录下每个小文件在文件内部的起始字节和大小就行了。</p>
+</blockquote>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="要解決的問題"><a href="#要解決的問題" class="headerlink" title="要解決的問題"></a>要解決的問題</h2><p>Storage不够、QPS太大的問題</p>
+<p>Google 很多小計算機建DFS</p>
+<p>ＶＳ</p>
+<p>SUN大型、貴的（大家買不起），09年被Oracle收了</p>
+<p>GFS、BigTable、MapReduce</p>
+<h1 id="GFS"><a href="#GFS" class="headerlink" title="GFS"></a>GFS</h1><h2 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h2><ul>
+<li>作為一個文件系統，一定要提供兩種常用的操作：寫跟讀<ul>
+<li>寫：要文件名、內容</li>
+<li>讀：文件名，返回文件內容</li>
 </ul>
-<hr>
-<p><strong>为什么朴素贝叶斯如此“朴素”？</strong></p>
-<p>因为它假定所有的特征在数据集中的作用是同样重要和独立的。正如我们所知，这个假设在现实世界中是很不真实的，因此，说朴素贝叶斯真的很“朴素”。</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/12/03/ML/2018-12-03-File%20Size%20Limitation/">ML/2018-12-03-File Size Limitation</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-03</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/DevOps/">DevOps</a></span><div class="content"><h3 id="File-size-limitation"><a href="#File-size-limitation" class="headerlink" title="File size limitation"></a>File size limitation</h3><h1 id=""><a href="#" class="headerlink" title=""></a></h1></div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/45/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><span class="page-number current">46</span><a class="page-number" href="/page/47/">47</a><span class="space">&hellip;</span><a class="page-number" href="/page/52/">52</a><a class="extend next" rel="next" href="/page/47/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+</li>
+<li>總量，比如1000T，才會上分布式；機器數也是越大越好</li>
+</ul>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><ul>
+<li><p>如圖書館要有Server、Client。</p>
+<p>GFS提供的一個就是讀取，另一個是寫入的服務</p>
+</li>
+<li><p>Server由多台構建。多台機器間怎麼溝通？</p>
+<ol>
+<li><p>p2p, 平級溝通</p>
+<ul>
+<li>一台掛了還可以工作，沒有單點故障問題</li>
+<li>缺點：但，大家平級，要常通信保持一致性。</li>
+<li>p2p的通信一般是比較難寫的，直覺就是。</li>
+</ul>
+</li>
+<li><p>Master vs Slaves, 老大一致對外，對內分配幹活</p>
+<ul>
+<li><p>數據易保持一致性。就老大分配</p>
+</li>
+<li><p>缺點：有單點大哥master掛了，整個系統不work的問題</p>
+</li>
+<li><p>這是GFS最終的選擇，他是後端的服務，不是前端的，所以掛個一分鐘不會怎樣，就如果master掛了，把master重啟就好了。</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<h5 id="单选题-大家猜猜GFS会用哪种设计模式？"><a href="#单选题-大家猜猜GFS会用哪种设计模式？" class="headerlink" title="单选题]大家猜猜GFS会用哪种设计模式？"></a>单选题]大家猜猜GFS会用哪种设计模式？</h5><p>A.社会主义 P2P23.06% 选择</p>
+<p>B.资本主义 Master Slave76.94% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>Master Slave的优势是：<br>设计简单<br>数据很容易保持一致</p>
+</blockquote>
+<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><ul>
+<li>大文件存在哪？<ul>
+<li>當然是disk，10PB只有disk可以，內存不可能啦</li>
+</ul>
+</li>
+<li>如何存到這個文件系統裡？<ul>
+<li>怎麼設計GFS?</li>
+<li>怎麼存？如果總量 &lt; 100G？</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h5 id="单选题-在-GFS-中，大文件存在哪儿？"><a href="#单选题-在-GFS-中，大文件存在哪儿？" class="headerlink" title="[单选题]在 GFS 中，大文件存在哪儿？"></a>[单选题]在 GFS 中，大文件存在哪儿？</h5><p>A.内存中，读写快！5.03% 选择</p>
+<p>B.硬盘中，超大空间！94.97% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+</blockquote>
+<ul>
+<li>metadata元數據常常被無意識訪問到, 怎麼存好？一般打開文件夾就被動看到了</li>
+</ul>
+<blockquote>
+<h5 id="单选题-Meta-Data应该怎样储存？"><a href="#单选题-Meta-Data应该怎样储存？" class="headerlink" title="[单选题]Meta Data应该怎样储存？"></a>[单选题]Meta Data应该怎样储存？</h5><p>A.所有文件的Meta Data 全放磁盘开头83.51% 选择</p>
+<p>B.每个文件的Meta Data都和它的内容放在一起16.49% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>A</p>
+<p><strong>解析:</strong></p>
+<p>全放磁盘开头可以减少磁盘的寻轨时间</p>
+</blockquote>
+<p>理由跟硬盤的結構有關，機械硬盤的磁頭到軌道有尋軌時間的，一般磁頭跳到要找的位置要10ms</p>
+<p>如果是選B，磁頭就要一直跳，100個文件就要10ms*100就一秒了。</p>
+<p>A可以一次全讀出去。</p>
+<ul>
+<li>文件內容怎麼放呢？在磁盤中也有兩種方式：就是要不要把每個文件拆成各小塊交錯放呢？</li>
+</ul>
+<blockquote>
+<h5 id="单选题-文件内容应怎样储存？"><a href="#单选题-文件内容应怎样储存？" class="headerlink" title="[单选题]文件内容应怎样储存？"></a>[单选题]文件内容应怎样储存？</h5><p>A.文件整体存储，所有文件连在一起21.44% 选择</p>
+<p>B.将每个文件等分成很多小块后再存78.56% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>等分成很多小块后存储可以方便文件的修改操作</p>
+</blockquote>
+<p>如果選A的話，當2號文件是10KB這麼大，寫入後變100KB了，怎麼寫？還得把2號先砍了，再往後找一個夠100KB大小的空間寫進去。</p>
+<p>選B的話，文件本來就是一小塊一小塊了，<strong>後面要增加90KB的文件就順勢往後寫就OK了</strong>。</p>
+<p>一個硬盤就是一個非常大的array；</p>
+<p>一般NTFS(win)、XFS(linux)的文件系統裡的默認Block是　<strong><em>4KB</em></strong></p>
+<ul>
+<li><p>本來的100G如果變成了100TB會遇到什麼問題？</p>
+<ul>
+<li><p>Block的數量會超多。要拿來儲存block的空間就已經非常大了！</p>
+<ul>
+<li>100x1024G = 100x 1024x1024M = 100x1024x1024x1024KB = 25x1024x1024x1024 <strong>blocks</strong></li>
+</ul>
+</li>
+<li><p>怎麼改進？ ==&gt; 增加Block的大小。可能就是變成64MB，然後把這個改名叫<strong>Chunk</strong></p>
+<ul>
+<li><p>優：Reduce size of Metadata，就是筆數變少了</p>
+</li>
+<li><p>劣：浪費了些小空間，如果我要存的就是個小文章４MB，那也要拿64MB去存，60MB就變成了磁盤碎片浪費了。但就這樣吧。。</p>
+<p> 結論：Z &gt; B . </p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>对于这个trade off，我感觉十分牵强啊。增加chunk size是为了减少meta data 的数量，但是试想，如果存的文件全是非常非常小，都是几百kb或者几mb的，那这样岂不是更浪费空间，造成大量碎片？<ul>
+<li>这个在GFS的paper里面有解释，<strong><em>GFS的设计是基于一些假设的（这些假设都是Google从大量工程实践中总结出来的</em></strong>），其中一条假设就是：“We expect a few million files, each typically 100MB or larger in size”。这是其一。另外，如果实在需要存很多小文件的话， 其实可以将这些小文件打包成一个大文件然后再存储，只要记录下每个小文件在文件内部的起始字节和大小就行了。</li>
+</ul>
+</li>
+<li>如果在写新文件时发现之前预先留给metadata的空间被用完了怎么办呢？<ul>
+<li>这时候应该就写不进去了 生产环境应该及时关注磁盘容量告警</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="Really-Heavy-Storage"><a href="#Really-Heavy-Storage" class="headerlink" title="Really Heavy Storage"></a>Really Heavy Storage</h3><p>e.g. 10PB存得下嗎？需要多台電腦 Master-Slave工作模式。</p>
+<ul>
+<li>現在一台服務器現在最多插10個硬盤，一個硬盤撐死就100TB，這樣也就才0.1P，這樣如此的電腦至少要來100台共同工作才能做得了10PB的事</li>
+</ul>
+<blockquote>
+<h5 id="单选题-在-GFS-中-Master-和-Slave-分别存什么数据？"><a href="#单选题-在-GFS-中-Master-和-Slave-分别存什么数据？" class="headerlink" title="[单选题]在 GFS 中 Master 和 Slave 分别存什么数据？"></a>[单选题]在 GFS 中 Master 和 Slave 分别存什么数据？</h5><p>A.Master 存 Metadata，Slave 存实际的文件内容96.81% 选择</p>
+<p>B.Master 存实际的文件内容，Slave 存 Metadata3.19% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是A</p>
+</blockquote>
+<p>Master存了所有的chunk該在哪台小弟的info</p>
+<p><strong><em>所以就是slave就是chunk server</em></strong></p>
+<blockquote>
+<p>[单选题]GFS Master 是否有必要存储每个 chunk 在 Slave Server 上的 Offset?</p>
+<p>你的选择:B</p>
+<p>A:有必要</p>
+<p>B:没有必要</p>
+<p>答对了，您选择的答案是B</p>
+</blockquote>
+<p>這樣可減輕master壓力；而且slave裡面可以自己調整位置不用通跟master通信。</p>
+<p><em>１chunk = <strong>64MB need 64B的metadata(經驗值)</strong>, 10PB needs 10G metadata, 存內存都可以！</em></p>
+<blockquote>
+<ul>
+<li>如果master 挂了 只能恢复master ？ 不能promote slave server 变成master？<ul>
+<li>GFS 里的 Master 的概念和 MySQL 里的 MasterSlave 的概念不同。GFS 里的 Master 只负责管理，不负责数据存储。MySQL 里的 Master Slave 都只负责数据存储不负责管理。要注意区分。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="寫入怎麼寫好？"><a href="#寫入怎麼寫好？" class="headerlink" title="寫入怎麼寫好？"></a>寫入怎麼寫好？</h4><blockquote>
+<h5 id="单选题-怎么将文件写入GFS"><a href="#单选题-怎么将文件写入GFS" class="headerlink" title="[单选题]怎么将文件写入GFS?"></a>[单选题]怎么将文件写入GFS?</h5><p>A.将文件整体一次性写入3.39% 选择</p>
+<p>B.将文件拆分成块多次写入96.61% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>不同的块有可能放到不同的Chunk Server，并且分块后方便重传</p>
+</blockquote>
+<p>如果斷開了，可以從哪斷開的從哪續傳。</p>
+<blockquote>
+<h5 id="单选题-GFS-Client-将文件拆分为多大进行传输比较合适？"><a href="#单选题-GFS-Client-将文件拆分为多大进行传输比较合适？" class="headerlink" title="[单选题]GFS Client 将文件拆分为多大进行传输比较合适？"></a>[单选题]GFS Client 将文件拆分为多大进行传输比较合适？</h5><p>A.64k6.92% 选择</p>
+<p>B.1M5.73% 选择</p>
+<p>C.64M83.89% 选择</p>
+<p>D.1G3.46% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是C</p>
+<p><strong>正确答案:</strong>C</p>
+<p><strong>解析:</strong></p>
+<p>64M 是一个 chunk 的大小。GFS 是按照 chunk 为单位进行存储的，所以 64M 为一组比较合适。</p>
+</blockquote>
+<p>傳輸單位也就是chunk。</p>
+<blockquote>
+<h5 id="单选题-GFS中每一个Chunk怎么写入Server？"><a href="#单选题-GFS中每一个Chunk怎么写入Server？" class="headerlink" title="[单选题]GFS中每一个Chunk怎么写入Server？"></a>[单选题]GFS中每一个Chunk怎么写入Server？</h5><p>A.把文件传给master，让Master处理所有的事情6.81% 选择</p>
+<p>B.仅让Master分配Chunk Server，然后直接把Chunk传给相应的Chunk Server93.19% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p><strong><em>避免Master成为瓶颈</em></strong></p>
+</blockquote>
+<p>master的硬盤有限，網路也是有限的，自己會卡死，分下去給小弟們，讓client間也不會排隊</p>
+<ul>
+<li>總結：Master要存所有的metadata,  chunkserver存真正的大data 讀要找到對應的chunkserver，寫時要找到空閒的chunkserver；<ul>
+<li>寫入是每次找老大問，老大分配空間，自己去找小弟寫</li>
+<li>讀出是問老大拿到chunklist，然後去問小弟拿到chunk就ok</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>請問gfs讀取file的話, client會從master得到一個chunk list, 那我並行讀取每個chunk,還是一個一個循序讀取chunk? 有什麼比較快的讀取方法嗎?<ul>
+<li>GFS中，Chunk分散储存在若干个Chunk Server中，读取的时候Client可以从不同的Chunk Server同时读取Chunk，相当于有一个并行的效果</li>
+</ul>
+</li>
+<li>The client is the end user side, or another proxy? I don’t think the end user client should worry about which chunk server to write in.<ul>
+<li>The “client” mentioned here is a library that is linked to the end user’s application, serving as an <strong><em>abstraction layer between the application and the underlying GFS</em></strong>.</li>
+</ul>
+</li>
+<li>client读取档案时，master server是给他一个chunk list，那client写入档案时，master是给他一个chunk list让他依次写入，还是一个写完master再告知下一个chunk该分配到那个chunk server?<ul>
+<li>给一个 chunk list 让他依次写入。否则 master 和 client 之间通信太多很负累，也没啥意义。</li>
+</ul>
+</li>
+<li>client 定义是什么 ？是end user吗？ 还是只是gfs 跟外界的一个interface？<ul>
+<li>gfs 和外界的一个 interface。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Scale0"><a href="#Scale0" class="headerlink" title="Scale0"></a>Scale0</h2><blockquote>
+<ul>
+<li>master down了重启， 是通过读log来恢复吗<ul>
+<li>是的，但是一般会定期制作一个checkpoint，挂掉之后只需要从上一个checkpoint开始重放log就行了，不需要每次都从头开始。</li>
+</ul>
+</li>
+<li>master down了之后怎么恢复？<ul>
+<li>master down了之后重启就好</li>
+</ul>
+</li>
+<li>老师请问还有其他的加密算法么？还是只能用这个MD5<ul>
+<li>有啊，网上搜一大堆。比如 sha1 sha2, sha256.</li>
+</ul>
+</li>
+<li>Check Sum 检查一位错误的例子，如果刚好有两个数据发生改变，是有可能导致xor结果不变的吧。这种情况我们就不知道有文件损坏了？<ul>
+<li>是的。check sum 本来就是 false positive 的。你说的这种情况出现概率是很低的。系统设计的领域里面有很多允许 false postive 或者 false negative 的情况，如 BloomFilter 就是一个例子。这些场景下，我们都不能保证 100% work，但是高概率是有效的。这个系统设计区别于算法设计的很大的不同，要注意体会这个地方。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li><p>單master夠嗎？</p>
+<ul>
+<li>一般都是這樣，大不了就是 Paxos Alg. 的多Master，再多也受不了會有延遲</li>
+</ul>
+</li>
+<li><p>怎麼看資料有掛了</p>
+<ul>
+<li><p>checksum, md5  哈希，原串發生變化，哈希值就巨大變化，一旦不同，就是原數據必毀</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gdtqklpedij31260tun45.jpg" alt="image-20200414235740148" style="zoom: 25%;" />
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>也可以用 XOR作checksum, </p>
+</li>
+<li><p>也可以用SHA1, SHA256, SHA512</p>
+</li>
+<li><p>也就 4Bytes</p>
+</li>
+</ul>
+<blockquote>
+<h5 id="单选题-什么时候写入-checksum"><a href="#单选题-什么时候写入-checksum" class="headerlink" title="[单选题]什么时候写入 checksum?"></a>[单选题]什么时候写入 checksum?</h5><p>A.每个一段时间遍历所有数据计算 checksum 并写入3.32% 选择</p>
+<p>B.每个 chunk 在写入的时候计算 checksum 并记录在 chunk 的末尾39.40% 选择</p>
+<p>C.每个 chunk 在写入的时候计算 checksum 并集中记录在当前的 Slave 上36.58% 选择</p>
+<p>D.每个 chunk 在写入的时候计算 checksum 并集中记录在 Master 上20.70% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+</blockquote>
+<blockquote>
+<h5 id="单选题-一般来说什么时候检查-checksum？"><a href="#单选题-一般来说什么时候检查-checksum？" class="headerlink" title="[单选题]一般来说什么时候检查 checksum？"></a>[单选题]一般来说什么时候检查 checksum？</h5><p>A.每次读取 chunk 的时候重新计算并对比以前的 checksum90.56% 选择</p>
+<p>B.周期性的遍历所有数据检查 checksum9.44% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>A</p>
+</blockquote>
+<p>而且還可以再週期性地檢查；是根據業務調整。</p>
+<h4 id="How-to-avoid-data-loss-when-a-Chunk-Server-is-down-fail"><a href="#How-to-avoid-data-loss-when-a-Chunk-Server-is-down-fail" class="headerlink" title="How to avoid data loss when a Chunk Server is down/fail?"></a>How to avoid data loss when a Chunk Server is down/fail?</h4><p>​    Ans: replica 作備份</p>
+<blockquote>
+<p>​    [单选题]GFS的Replica怎么存放？</p>
+<p>1.三个备份都放在一个地方（加州）0.97% 选择</p>
+<p>2.三个备份放在三个相隔较远的地方（加州，滨州，纽约州）9.99% 选择</p>
+<p>3.两个备份相对比较近，另一个放在较远的地方（2个加州，1个滨州）89.04% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是3</p>
+<p><strong>正确答案:</strong>3</p>
+<p><strong>解析:</strong></p>
+<p>两个备份较近，保证出错时快速恢复，一个较远，保证安全性</p>
+</blockquote>
+<h4 id="How-to-recover-when-a-chunk-is-broken"><a href="#How-to-recover-when-a-chunk-is-broken" class="headerlink" title="How to recover when a chunk is broken?"></a>How to recover when a chunk is broken?</h4><p>讓Master 幫, Master知道他所有的小弟在哪，</p>
+<h4 id="-1"><a href="#-1" class="headerlink" title=""></a></h4><h4 id="如何知道有個小弟完全掛了？-gt-心跳"><a href="#如何知道有個小弟完全掛了？-gt-心跳" class="headerlink" title="如何知道有個小弟完全掛了？==&gt; 心跳"></a>如何知道有個小弟完全掛了？==&gt; 心跳</h4><blockquote>
+<h5 id="单选题-心跳（Heartbeat）机制怎么设计？"><a href="#单选题-心跳（Heartbeat）机制怎么设计？" class="headerlink" title="[单选题]心跳（Heartbeat）机制怎么设计？"></a>[单选题]心跳（Heartbeat）机制怎么设计？</h5><p>A.Master 轮询 Chunk Server13.62% 选择</p>
+<p>B.Chunk Server 主动向 Master 汇报86.38% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>主动汇报可以减少通信次数，就一次，不然要兩次。</p>
+</blockquote>
+<h2 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h2><p>寫怎麼寫？client 把chunk一次傳給三個小弟作replica後，client會變成瓶頸…</p>
+<blockquote>
+<h5 id="单选题-如何解决-client-传输-replica-chunk-的问题？"><a href="#单选题-如何解决-client-传输-replica-chunk-的问题？" class="headerlink" title="[单选题]如何解决 client 传输 replica chunk 的问题？"></a>[单选题]如何解决 client 传输 replica chunk 的问题？</h5><p>A.client 将 chunk 传给 master，由 master 去纷发到 3 台 chunk server6.24% 选择</p>
+<p>B.client 将 chunk 传给其中一台 chunk server，然后由这台 chunk server 再传给另外的 2 台63.29% 选择</p>
+<p>C.client 将 chunk 传给其中一台 chunk server，另外的两个 chunk server 空了再慢慢传30.47% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+</blockquote>
+<p>內網自己傳肯定快得多</p>
+<h4 id="怎麼選隊長？"><a href="#怎麼選隊長？" class="headerlink" title="怎麼選隊長？"></a>怎麼選隊長？</h4><blockquote>
+<h5 id="多选题-下列哪些因素是我们挑选-chunk-server-队长时所需要考虑的"><a href="#多选题-下列哪些因素是我们挑选-chunk-server-队长时所需要考虑的" class="headerlink" title="[多选题]下列哪些因素是我们挑选 chunk server 队长时所需要考虑的"></a>[多选题]下列哪些因素是我们挑选 chunk server 队长时所需要考虑的</h5><p>A.机器的繁忙程度38.48% 选择</p>
+<p>B.距离的远近36.78% 选择</p>
+<p>C.剩余存储空间的大小13.27% 选择</p>
+<p>D.CPU 的个数11.47% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>AB</p>
+</blockquote>
+<blockquote>
+<h5 id="单选题-每次找的-chunk-server-队长是一样的么？"><a href="#单选题-每次找的-chunk-server-队长是一样的么？" class="headerlink" title="[单选题]每次找的 chunk server 队长是一样的么？"></a>[单选题]每次找的 chunk server 队长是一样的么？</h5><p>A.是1.55% 选择</p>
+<p>B.不是20.48% 选择</p>
+<p>C.不一定77.97% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是C</p>
+<p><strong>正确答案:</strong>C</p>
+</blockquote>
+<h2 id="GFS-problem"><a href="#GFS-problem" class="headerlink" title="GFS problem"></a>GFS problem</h2><p><a href="https://www.jiuzhang.com/qa/627/" target="_blank" rel="noopener">https://www.jiuzhang.com/qa/627/</a></p>
+<blockquote>
+<ul>
+<li><p>设计一个只读的lookup service. 后台的数据是10 billion个key-value pair, 服务形式是接受用户输入的key，返回对应的value。已知每个key的size是0.1kB，每个value的size是1kB。要求系统qps &gt;= 5000，latency &lt; 200ms.</p>
+<p>server性能参数需要自己问，我当时只问了这些，可能有需要的但是没有问到的……<br>commodity server<br>8X CPU cores on each server<br>32G memory<br>6T disk</p>
+<p>使用任意数量的server，设计这个service。</p>
+<p>就不发我的解法了，真的很渣……=。=|||</p>
+<ul>
+<li><p>我总结了SG_SWE_GM以及其他同学的解答，在此基础上我的想法如下，有问题的地方还请老师同学指正，</p>
+<p>=&gt; total key size ~ 10 billion * 0.1kB = 1T<br>=&gt; total value size ~ 10 billion * 1kB = 10T<br>所以每台服务器用两块硬盘，共12T。数据结构用SSTable就好了。</p>
+<p>充分利用内存，本来我想用binary search tree做index，但是仔细想想这个服务是只读的，而且硬盘存储键值对用的是SSTable是有序的，key和value长度又是固定的，所以直接把key以有序的方式存在内存就好了，查询的时候对key进行binary search，然后用key在内存中的offset来计算键值对在硬盘中的offset。1T/32G = 31.25. 所以一共需要32台服务器的内存分担key index。前面加一个master负责管理consistent hasing。lg(32G) = 35, 平均查询一个key就算18次内存访问，大约才1800ns，在ms这个量级上可以忽略。</p>
+<p>每一次request，在硬盘上读取1kB value的时间：<strong><em>10ms(disk seek)</em></strong> + 4ms(rotation delay for 7200rpm) + 1kB/1MB * <strong><em>30ms(reading 1kB sequentially from disk)</em></strong> = 14ms. 目前一台server能处理的的QPS: 1000ms/14ms = 71, 总的QPS: 71 * 32 = 2272。距离要求还有两倍多的差距。所以我们可以给每台server装上6个6T硬盘，组成3套数据硬盘，3套硬盘可以并行处理3个请求，这样也算是稍微利用了一下8X的多核CPU。这时QPS即为2272 * 3=6816.</p>
+<p>延迟：</p>
+<ol>
+<li>master内存查找consistent hashing map的时间：忽略</li>
+<li>master与slave的round trip delay：1 round trip in the same data center is 1ms.</li>
+<li>slave内存index查询时间：忽略</li>
+<li>slave硬盘读取时间：14ms</li>
+</ol>
+<p>so total latency is 15ms。</p>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li><p><strong><em>30ms(reading 1kB sequentially from disk)</em></strong></p>
+<ul>
+<li>是因為硬盤估計每秒可讀30MB的數據，所以1MB就是30ms；這個讀了１kB的話就0.03 ms跟disk seek比起來可以不計。</li>
+</ul>
+</li>
+<li><p>QPS on 1 server : 1s/10ms 次（一秒一台可以100次。） * 2disk = 200次</p>
+</li>
+<li><p>5000個QPS/200就需要25台服務器</p>
+</li>
+</ul>
+<h4 id="Latency"><a href="#Latency" class="headerlink" title="Latency:"></a>Latency:</h4><ol>
+<li>找到key : 硬盤中作二分查找，每次的主要的是找的時間。</li>
+<li>讀到value很小，每次的可以忽略</li>
+</ol>
+<ul>
+<li>Sol1.</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200412220508731.png" alt="image-20200412220508731" style="zoom:50%;" />
+
+<ul>
+<li><input disabled="" type="checkbox"> 分析：log該以2為底，所以就變30 * 10ms(每動一次就要10ms) 就是 300ms, 超過題目規定的200ms，找到key的工作只能在硬盤上做，而且單個硬盤不能並行執行，所以一次query 至少要300ms了，一個硬盤１秒內只能做三次，兩個只能做六次，所以要5000QPS要至少約1000台服務器。這跟他給出的25台差很多！</li>
+<li><input disabled="" type="checkbox"> 我們最希望減少的就是300ms的查詢時間；而我們未用上他的內存，一台有32G，<strong><em>40</em></strong>台就有超1TB，就跟所有的數據key量一樣了，所以提示了可以在內存作操作，把所有key都存過去。如果內存中有個內存到硬盤位置的映射的話…！</li>
+<li><input disabled="" type="checkbox"> 一個key 0.1kB , 一個position 8Byte，所以一筆仍是0.1kB, 10個billion也是用1TB的內存。所以40台的內存並一起變一個大內存裡直接二分查找就快，每次的時間比硬盤的10ms少到幾乎可不計。</li>
+<li><input disabled="" type="checkbox"> 內存去對應硬盤的position。</li>
+<li><input disabled="" type="checkbox"> 硬盤二分查找每次要花10ms (disk seek)，但內存不用時間。雖一樣是花30次。所以300ms就省了。所以整體10ms + 0.5ms 就10.5ms。</li>
+<li><input disabled="" type="checkbox"> 現在已有40台機器，每台有兩個硬盤，而且每台機器的硬盤可以存下全量的數據 ( 就key啦，就 1T而已)，就是說整體的數據一共有40份拷貝，每個硬盤要花約10ms查找一次，一台可以200次操作(一台有兩顆disk)，40台可以並行作，所以就是8000QPS &gt; 5000QPS!</li>
+<li><input disabled="" type="checkbox"> 總結：一共４０台機器，內存就是４０台合併起來當一大塊用，內存大小是１TB；它存放的是key到硬盤中position的數據。每台兩個硬盤，硬盤中存的是全量的數據，一次查找的過程就是，首先通過整體的內存找到在硬盤上的某個位置，均衡負載到40台的某個機器上，讀它的key, value，因為在內存查的時間可以不計，所以最後的延遲就在disk seek時間10ms還有整體在網路上傳輸的0.5ms。</li>
+</ul>
+<blockquote>
+<ul>
+<li>key 1T value 10T 机器6T 为啥一台机器的硬盘可以存下全部的信息？<ul>
+<li>key 1T + value 10T = 11T<br>一块硬盘6T，一台机器两块硬盘即可存下</li>
+</ul>
+</li>
+<li>为什么一个硬盘能存全量数据？一个硬盘是6TB，key加value需要11TB。如果是两块硬盘存下所有数据，那应该就是100次，为什么是100*2？<ul>
+<li>是2块硬盘存下所有数据，每块存一半。100 * 2 的意思是，你有 2 块一瓶，一块硬盘能够提供 100 IOPS，两块就是 200 IOPS，因为你可以并发嘛。</li>
+</ul>
+</li>
+<li>请问，内存是在不同的40台机器上，如何垮机器二分查找呢？机器间通信延迟怎么可以忽略呢？<ul>
+<li>40台机器的内存合并起来看成一个大内存。打个比方，一次查找时可以先去编号20的机器上看，如果大了，再去10号机器上看，如果大了，再去5号机器上看。。。。依次类推。40台机器接在一个交换机（switch）上，通信延迟可以做到很低，如果再配合内核旁路，两台机器内存到内存的延迟最低可以做到接近纳秒级别</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="GFS-QA"><a href="#GFS-QA" class="headerlink" title="GFS QA"></a>GFS QA</h2><ul>
+<li>硬盤的一個block默認就4KB, as an array in disk</li>
+<li>Checksum ，也紀錄下和, 可用md5算hash<ul>
+<li>可能會有False Positive, 比如 1,4 两个数据，check sum = 5，但是 2 + 3 也是 5。所以 check sum 相同不能证明数据一定没有发生变化。但是 check sum 不同就表示原始数据肯定发生了变化。因此 check sum 是存在 False Positive 但不存在 False Negative 的。</li>
+</ul>
+</li>
+</ul>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/04/10/System-Design/9p/2019-04-09-Design%20Chat%20System/">System-Design/9p/2019-04-09-Design Chat System</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-10</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></span><div class="content"><h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><h1 id="Pre-requisite"><a href="#Pre-requisite" class="headerlink" title="Pre-requisite"></a>Pre-requisite</h1><h2 id="Serialization"><a href="#Serialization" class="headerlink" title="Serialization"></a>Serialization</h2><ul>
+<li>把RAM裡的數據存上disk或傳輸，如array ==&gt; “[1, 2, 3]”<ul>
+<li>不能讓別人來自己的RAM拿，重開機也都不同了</li>
+</ul>
+</li>
+<li>不同類可以定義不同。</li>
+<li>java 的 toString() 只是要打出來看，沒要反序列化，不見得算是</li>
+<li>如果序列化沒要給人看，還會考慮盡量小<ul>
+<li>FB有 thrift，是一個RPC的庫，可做序列化、反序列化，可壓縮數據，如定義一個class結構，只要我的obj是滿足那個類的，就可以丟進去，肉眼不可讀，壓縮率高。當我們加屬性，反序列化還要不出錯！</li>
+<li>Google有protobuf。類似的事。</li>
+</ul>
+</li>
+<li>JSON / XML (Web1.0、Android),<ul>
+<li>現在Web都是JSON，空間小，可讀</li>
+<li>如POST過來有各屬性及其對應的values </li>
+</ul>
+</li>
+</ul>
+<h2 id="Cookie-amp-Session"><a href="#Cookie-amp-Session" class="headerlink" title="Cookie &amp; Session"></a>Cookie &amp; Session</h2><ul>
+<li>cookie 客戶端<ul>
+<li>把 Token放在Cookie裡，長度有限制的，一般跟身份認證有關。</li>
+<li>CSRF 偽造用戶的表單；當post來的時候必帶CSRF，當生成網頁時才會生成，有一定時間如５分鐘內。動態碼去避免攻擊</li>
+<li>可設有效期</li>
+</ul>
+</li>
+<li>Session 服務器<ul>
+<li>Authentication Token </li>
+<li>Session Table 存 Authentication Token，看哪個用戶登入了</li>
+<li>一般存在數據庫裡較多</li>
+</ul>
+</li>
+</ul>
+<h2 id="Message-Queue"><a href="#Message-Queue" class="headerlink" title="Message Queue"></a>Message Queue</h2><ul>
+<li><p>是個Queue, FIFO</p>
+</li>
+<li><ol>
+<li>任務慢. 2. 需要重試</li>
+</ol>
+</li>
+<li><p>消息隊列不放聊天的消息；一般是放任務ID之類的</p>
+</li>
+<li><p>生產者、消費者模型 – 多線程題</p>
+<ul>
+<li>兩邊速率不一致</li>
+<li>倉庫就是緩衝</li>
+</ul>
+</li>
+<li><p>Web 用 MQ緩衝，worker 去拿 MQ，好了後worker寫到DB，Web自己去刷新或時不時看下DB</p>
+<ul>
+<li>Cache, DB 都是最基本構成</li>
+</ul>
+</li>
+<li><p>評測機 - 生產消費者、MQ</p>
+</li>
+<li><p>發email - 要是發失敗的話，也是MQ可以幫忙的</p>
+</li>
+<li><p>一般常用的</p>
+<ul>
+<li>RabbitMQ, </li>
+<li>Redis 什麼都會一點，可當數據庫(比不過SQL, NoSQL)、緩存(比不過Memcached)、消息隊列(比不過RabbitMQ)；但速度比較快，內存級別速度，存取效率非常快</li>
+<li>AWS Simple Queue Service 消息隊列的雲服務；保證兩個worker拿不會有不同人重覆處理。浪費，也可能有問題如重覆扣錢。螞蟻是處理萬億級別的，用的消息隊列機制很牛。</li>
+</ul>
+</li>
+<li><p>鏡像機制，兩台MQ一直作鏡像，一台專門copy，雙Master, 同時分擔讀和寫</p>
+</li>
+<li><p>重試機制。</p>
+</li>
+<li><p>12306一定會有message queue，一堆的請求不會馬上被解決掉，看先來後到。</p>
+</li>
+<li><p>可設優先級</p>
+</li>
+<li><p>可有子queue。如登機時不同的排隊。隊列之間是可以併發的，但同一個隊列是FIFO的</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>消息队列 - AWS SQS 和GCP Cloud pub/sub</li>
+<li>kafka做message queue的场景也挺多的吧。<ul>
+<li>是的</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h1 id="Chat-System"><a href="#Chat-System" class="headerlink" title="Chat System"></a>Chat System</h1><blockquote>
+<p>[单选投票题]微信是点对点通信么？</p>
+<p>你的选择:B</p>
+<p>感谢您参与投票！</p>
+<p>A:是的(20.62% 选择)</p>
+<p>B:不是(79.38% 选择)</p>
+</blockquote>
+<h2 id="Message-Service-gt-Storage"><a href="#Message-Service-gt-Storage" class="headerlink" title="Message Service == &gt; Storage"></a>Message Service == &gt; Storage</h2><blockquote>
+<h5 id="多选投票题-我们需要在聊天软件的Message-Table里存储什么？"><a href="#多选投票题-我们需要在聊天软件的Message-Table里存储什么？" class="headerlink" title="[多选投票题]我们需要在聊天软件的Message Table里存储什么？"></a>[多选投票题]我们需要在聊天软件的Message Table里存储什么？</h5><p>您选择的答案是ABCDEG</p>
+<p>感谢您参与投票！</p>
+<p>A.消息的主键 id14.74% 选择</p>
+<p>B.发送人15.94% 选择</p>
+<p>C.收件人15.67% 选择</p>
+<p>D.ip 地址2.66% 选择</p>
+<p>E.发送时间16.09% 选择</p>
+<p>F.信息类型11.38% 选择</p>
+<p>G.信息内容14.84% 选择</p>
+<p>H.会话 id8.69% 选择</p>
+</blockquote>
+<p>表單的設計很重要，不然效率太差。</p>
+<h2 id="增加-Thread-Table"><a href="#增加-Thread-Table" class="headerlink" title="增加 Thread Table"></a>增加 Thread Table</h2><p>不用 Session這個字，而用Thread, 就是一個Conversation。</p>
+<blockquote>
+<h5 id="单选题-这样的Thread-Table有什么问题？"><a href="#单选题-这样的Thread-Table有什么问题？" class="headerlink" title="[单选题]这样的Thread Table有什么问题？"></a>[单选题]这样的Thread Table有什么问题？</h5><p>A.信息会有遗漏12.08% 选择</p>
+<p>B.信息查询比较慢50.14% 选择</p>
+<p>C.有些信息是私有的37.78% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>C　－－　如你讀了但我還沒讀但群裡對我而言就變已讀</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>假如需要知道A&amp;B之间的对话历史 怎么知道他们的thread ID呢<ul>
+<li>可以根据 participant_hash_code 去反向查询到 thread_id。课里有讲到。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="拆，加User-Thread-Table"><a href="#拆，加User-Thread-Table" class="headerlink" title="拆，加User Thread Table"></a>拆，加User Thread Table</h2><blockquote>
+<ul>
+<li>存last_message 是为了显示在界面上面吗？<ul>
+<li>yes</li>
+</ul>
+</li>
+<li>为什么用id做primary key做sharding会影响效率？<ul>
+<li>因为一般我们查询UserThread都是根据user_id去查的，因此要按照user_id来做sharding，这样当我们想获取某一个用户的所有thread_id的时候，就可以直接计算出数据所在的shard。如果用id来做sharding的话，就只能广播到每一台机器查询，然后再汇总结果。</li>
+</ul>
+</li>
+<li>为什么这里直接就用了SQL型数据库？noSQL完全不能用吗？<ul>
+<li>用 NoSQL 和 SQL 都可以的。这个课里的观点一直都是，你喜欢用哪个就用哪个。很少一定要用 SQL 或者一定要用 NoSQL。这里会讲解按照 SQL 是如何存储的，后面会讲解按照 NoSQL 是如何存储的，两种方法都可以。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<h5 id="单选题-这样的存储方式有什么弊端？"><a href="#单选题-这样的存储方式有什么弊端？" class="headerlink" title="[单选题]这样的存储方式有什么弊端？"></a>[单选题]这样的存储方式有什么弊端？</h5><p>A.需要跨表查询比较慢63.87% 选择</p>
+<p>B.信息会有遗漏5.72% 选择</p>
+<p>C.限制sharding效率30.41% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>A</p>
+</blockquote>
+<p><strong>跨表用到 JOIN就會慢，要解決掉…</strong></p>
+<h2 id="合，"><a href="#合，" class="headerlink" title="合，"></a>合，</h2><p>把公有復制到每個人裡去</p>
+<p>這樣做時，當要拿當前用戶資料時，就可以一張表出來，不用再做JOIN；但也有壞處</p>
+<blockquote>
+<h5 id="多选题-全部放在一个-UserThread-表单里有什么坏处？"><a href="#多选题-全部放在一个-UserThread-表单里有什么坏处？" class="headerlink" title="[多选题]全部放在一个 UserThread 表单里有什么坏处？"></a>[多选题]全部放在一个 UserThread 表单里有什么坏处？</h5><p>A.需要跨表查询比较慢3.02% 选择</p>
+<p>B.冗余存储50.89% 选择</p>
+<p>C.更新可能会造成的数据不一致问题41.56% 选择</p>
+<p>D.信息会有遗漏4.53% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是BC</p>
+<p><strong>正确答案:</strong>BC</p>
+</blockquote>
+<p>Updated_at 雖是共享，也是分在每個裡，因為要用他做排序</p>
+<p>更新操作是避不開的。</p>
+<blockquote>
+<ul>
+<li>这里合成一张表算denormalization吗？<ul>
+<li>Yes</li>
+</ul>
+</li>
+<li>能两全吗？<ul>
+<li>系统设计很多都是trade off，如果有完美的方法我们肯定会优先用完美的方法的，这里的话只能是选定一个方案然后再用一些手段(比如Cache)去减轻其缺点带来的影响。</li>
+</ul>
+</li>
+<li>这算不算在内存里做JOIN操作？<ul>
+<li>可以这么理解。</li>
+</ul>
+</li>
+<li>所以在面试中是不是用SQL数据库比较好分析这个题？面试官如果没有要求用noSQL就不要提？<ul>
+<li>看你更熟悉哪个。其实 Chat System 是更适合使用 NoSQL 的。你设计的时候用 SQL 问题也不大。面试官一般会根据需要向你针对性提问的。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p><strong>所以比較下來，拆還是比較清晰，Thread、用戶分開，比較 DECOUPLE，如果問到 JOIN 再用「合」放在一起，復制幾份，反正字節字不多，全拿出來不用再JOIN。實際工程去 Cache拿，避開 JOIN</strong></p>
+<h2 id="怎麼查-Thread-ID"><a href="#怎麼查-Thread-ID" class="headerlink" title="怎麼查 Thread ID?"></a>怎麼查 Thread ID?</h2><p>當用戶發信息時或建群聊時，所以要針對現有看是否他們有現有群</p>
+<ul>
+<li>用參與者查有沒有他們的Thread<ul>
+<li>可樣在 Tread Table 增加一個 participants_hash_code，這樣有以前的群就可以找到<ul>
+<li>user排好序後，大家串一起做個uuid，看有沒有以前的群</li>
+<li>可以把這個uuid作index查就很快</li>
+<li>為何要hash? 群聊太長啦</li>
+<li>uuid就不用去考慮相撞，概率不可能</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>群聊的话可以有新的用户加进来，这时候要更改这个hash code吧？<ul>
+<li>Yes</li>
+</ul>
+</li>
+<li>如果有些群聊有人加入有人退出怎么办？participant_hash_code也要改变吗？<ul>
+<li>Yes, 也要改變。</li>
+</ul>
+</li>
+<li>如果participant更新是不是要重新generate uuid？<ul>
+<li>是的，需要重新生成 participant_hash_code</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Message-Table-表單結構"><a href="#Message-Table-表單結構" class="headerlink" title="Message Table 表單結構"></a>Message Table 表單結構</h2><p>用戶就是一直聊一直聊</p>
+<p>要找寫快的，所以NoSQL, 有機會 1.5M QPS，檢索就是 kv。</p>
+<blockquote>
+<h5 id="单选题-需要查询thread里的message时sharding-key（row-key）是什么？"><a href="#单选题-需要查询thread里的message时sharding-key（row-key）是什么？" class="headerlink" title="[单选题]需要查询thread里的message时sharding key（row key）是什么？"></a>[单选题]需要查询thread里的message时sharding key（row key）是什么？</h5><p>A.user_id11.42% 选择</p>
+<p>B.created_at9.40% 选择</p>
+<p>C.thread_id56.81% 选择</p>
+<p>D.participant_hash_code22.36% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是D</p>
+<p><strong>正确答案:</strong>C</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>支持消息撤回(recall)的话，一条消息在还允许撤回的这个time window里，也是写在message table里吗？具体撤回是怎么实现的呢？<ul>
+<li>增加一个类型的 message，这种 message 就表示要撤回哪条信息。然后客户端拿到这样的信息以后在客户端把消息隐藏掉。这里可能有另外一种容易想到的但是是错的方法是给 message 增加一个是否被撤回了的标记。这种方法有问题的原因是，一般 mobile client 上的信息更新都是增量式的，也就是说，一旦一个消息被下载下来，会在 client 端里也存储一份，并且不会再去检测这条消息是否有被更新过（否则那 client和 server 负担就都大了）因此需要通过“增量式”的方式来更新这条数据的信息，那么自然就是通过一条新的 message 来撤回老的 message。</li>
+</ul>
+</li>
+<li>在cassandra里，可以理解为row key 就是等于 sharding key 吗？有任何反例吗？<ul>
+<li>row_key = sharding_key 没错，没有反例，就是一个东西的不同称呼。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="NoSQL-with-Thread-Table"><a href="#NoSQL-with-Thread-Table" class="headerlink" title="NoSQL with Thread Table"></a>NoSQL with Thread Table</h2><p>也可以用SQL，兩者都Ok。</p>
+<p>index by thread_id 以及 participant_hash_code</p>
+<blockquote>
+<h5 id="单选题-Thread-Table-如果使用-NoSQL-该如何存储？"><a href="#单选题-Thread-Table-如果使用-NoSQL-该如何存储？" class="headerlink" title="[单选题]Thread Table 如果使用 NoSQL 该如何存储？"></a>[单选题]Thread Table 如果使用 NoSQL 该如何存储？</h5><p>A.一张表单，row_key为 user_id3.44% 选择</p>
+<p>B.两张表单，row_key为 participant_hash_code 和 user_id7.07% 选择</p>
+<p>C.两张表单，row_key分别为 thread_id 和 user_id21.41% 选择</p>
+<p>D.两张表单，row_key分别为 thread_id 和 participant_hash_code68.07% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是D</p>
+<p><strong>正确答案:</strong>D</p>
+</blockquote>
+<p>用雙表去模擬SQL的單表雙index(背後也是幫建表加速)</p>
+<p>也不range query就不用 column, 所以可以就 RocksDB</p>
+<blockquote>
+<ul>
+<li>可以根据created_at来排序column_key 吗？这样可以找到最新20条消息？<ul>
+<li>这个其实可以在获取完thread列表之后再按照last_message的时间戳在客户端进行排序，这个排序工作量很小，不需要在服务端做。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="NoSQL-for-User-Table"><a href="#NoSQL-for-User-Table" class="headerlink" title="NoSQL for User Table"></a>NoSQL for User Table</h2><blockquote>
+<h5 id="单选题-UserThread-Table-用什么做sharding-key（row-key）？"><a href="#单选题-UserThread-Table-用什么做sharding-key（row-key）？" class="headerlink" title="[单选题]UserThread Table 用什么做sharding key（row key）？"></a>[单选题]UserThread Table 用什么做sharding key（row key）？</h5><p>A.user_id68.04% 选择</p>
+<p>B.created_at1.37% 选择</p>
+<p>C.thread_id24.24% 选择</p>
+<p>D.participant_hash_code6.35% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是C</p>
+<p><strong>正确答案:</strong>A</p>
+</blockquote>
+<p>怎麼取就怎麼sharding…</p>
+<blockquote>
+<ul>
+<li>当web server收到一条群聊的消息，他要怎么知道要往哪些用户发送呢？方法1的thread table已经没有participant_user_ids，只能靠user thread table来得知有谁是属于这个thread。但是user thread table的sharding row key是user id，所以如果要查询participant list，只能scan完所有的user 才能知道谁是属于这个thread。<ul>
+<li>需要增加一个 ThreadParticipant 的 Table。记录谁参与了哪些 Thread。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Flow"><a href="#Flow" class="headerlink" title="Flow"></a>Flow</h2><p>B polling</p>
+<p>每隔一段時間的PULL就是POLL</p>
+<h2 id="Scale-GCM-amp-APNS"><a href="#Scale-GCM-amp-APNS" class="headerlink" title="Scale, GCM &amp; APNS"></a>Scale, GCM &amp; APNS</h2><ul>
+<li>怎麼讓消息更實時？<ul>
+<li>PUSH NOTIFICATION</li>
+</ul>
+</li>
+<li>PUSH: 手機上<ul>
+<li>Android GCM (Google Cloud Messaging)</li>
+<li>Windows 也有它自己的推送系統</li>
+<li>iOS APNS (Apple Push Notification Service)<ul>
+<li>不同的手機有device token, app註冊完會有, APNS會發給手機, server 拿這個當 push token 去推送給 B，B再過去取 Web Server 取。局限性呢？</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h5 id="单选题-这样的方法有什么局限性？"><a href="#单选题-这样的方法有什么局限性？" class="headerlink" title="[单选题]这样的方法有什么局限性？"></a>[单选题]这样的方法有什么局限性？</h5><p>A.获取新消息时可能有延迟26.92% 选择</p>
+<p>B.数据库压力过大10.22% 选择</p>
+<p>C.消息丢失概率大12.08% 选择</p>
+<p>D.无法支持web端50.79% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是D</p>
+<p><strong>正确答案:</strong>D</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>这个push notification system在手机系统上是指的它实际运行过程中是在用户的手机上吗？（比如用户手机就是一个server）还是说apple有其他外的服务器来支持apns？<ul>
+<li>用户的手机是一个 client 不是一个 server，用户的手机不需要给其他人提供服务，他只问被人要服务。Push Notification System 是 Apple/ Google 单独搭建的一套服务器系统，专门用来提供 push 服务。</li>
+</ul>
+</li>
+<li>是不是现在也有些浏览器提供push notification？比如Chrome？<ul>
+<li>浏览器的push notification本质上就是一个弹出的对话框，本质上还是网页自己基于websocket一类的技术实现的，跟GCM/APNS原理不一样。</li>
+</ul>
+</li>
+<li>不太理解为什么server不直接和B通讯呢？通过GCM作为中介的好处是？<ul>
+<li>APNS/GCM都是专门用于移动端的消息推送的，为消息推送提供了一个与操作系统深度整合的、高度优化的框架，如果不用这个的话，就得自己重新造一套这样的消息推送框架，费时费力，而且标准不一。而且假设你有50个app, 如果每个app都需要链接各自的push服务器的话，会给手机带来很大的负担。具体的讨论可以看这里：<a href="https://stackoverflow.com/questions/31645010/why-it-is-preferred-to-use-gcm-for-push-notifications" target="_blank" rel="noopener">https://stackoverflow.com/questions/31645010/why-it-is-preferred-to-use-gcm-for-push-notifications</a></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>沒有提供給所有的browser推送系統的。該怎辦呢？</p>
+<h3 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h3><p>解決的辦法就是自己搭push的服務，不要依賴第三方的push 通知服務。實時性會更高。</p>
+<p>★ HTTP 只支持客戶端向服務器獲取數據，因為Server不知道客戶在哪； client to server 是有ip、域名的</p>
+<p>Socket是讓服務器可以主動向客戶端推數據。</p>
+<p>Socket, 跟 http一樣都是tcp/ip，本來就都可以雙向通信。http不能保持連接，socket可以。</p>
+<p>要是push server掛的話，就回到PULL，10秒拉一次，反正client是知道連接斷開了的</p>
+<blockquote>
+<ul>
+<li>为什么不用 long polling呢<ul>
+<li>当clients很多的时候，long polling会让server返回大量的空结果（没有新信息的时候），这样会给server带来很大的负担，比较浪费资源。</li>
+</ul>
+</li>
+<li>Push server needs to keep too many connections, would not this be a problem?<ul>
+<li>yes, so push server always push messsges async</li>
+</ul>
+</li>
+<li>push server是不是和message queue/kafka差不多？<ul>
+<li>不是的，push server 和 message queue 是完全不同的东西。push server 里就是通过 socket 连着用户，有消息就推一下而已。而 message queue 是把需要执行的任务信息存储在 queue 里，等着执行任务的进程来逐个领取的一个中间缓存机构。<strong>本质上来说 push server 是 stateless 的，是不存数据的。message queue 是 stateful 的，是存数据的</strong>。<em>就跟 web server 和 database 之间的本质区别一样。</em></li>
+</ul>
+</li>
+<li>如果A或者B离线呢，消息存在哪？<ul>
+<li>消息存在 Message Service 里（数据库里），socket 只是“提醒” 的作用，并不是说消息只从 socket 走。你可以认为 socket 里走的数据是“嘿你有消息了，去服务器拿一下”，然后用户去服务器拿到最新消息。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="Group-Chat"><a href="#Group-Chat" class="headerlink" title="Group Chat"></a>Group Chat</h3><p>大群裡，可能只有很少人在線，就是只有很少人需要被即時推送。</p>
+<p>這樣也不需要優化得那麼實時。</p>
+<blockquote>
+<ul>
+<li>相較於使用channel 篩選在線用戶的方式, 老師後面有說可以建一個 online status 的 table, 那我是不是可以直接從online status裡面檢查群聊還有在線的, 直接send message給在線的就好. 感覺好像比用channel還要subscribe的方式簡單?<ul>
+<li>不行。online status table 里在线不代表这个人已经连接上了 push socket（虽然大概率是连着的），但是这种反向调用关系是不好的架构设计，类似写代码的时候底层函数调用了上层函数，会导致系统之间的依赖关系出现循环依赖。</li>
+</ul>
+</li>
+<li>一般来说是多少人以上的群采用channel service呢？还是说哪怕两个人私聊也算一个两个人订阅的channel?<ul>
+<li>一般可能10+ 人才会走 public channel。如果是私聊，走的是 private channel，也就是说，比如你的 user_id 是 10，那么所有和你私聊的信息，都走到 “#user_10” 这个channel里去（这个channel名字的格式你自己可以随意定义）。你一上线也会自己订阅这个channel。这个channel 只属于你自己，不和别人共享。</li>
+</ul>
+</li>
+<li>这里的channel service可以换成message queue么？生产者也是只用发一次消息，然后订阅的消费者去取这些消息？这里channel service和massage queue有什么区别？谢谢<ul>
+<li>不可以。channel service 是 fanout，是广播。一条消息会被多个 subscriber 拿到。message queue 不是广播，一条任务消息必须保证只被一个 task worker 拿到。</li>
+</ul>
+</li>
+<li>channel service 可以用kafka么？<ul>
+<li>这样用不太对。kafka 是消息队列，channel 是一个 key-value 的存储 + 信息 fanout。</li>
+</ul>
+</li>
+<li>所以用户下线以后就自动取消订阅channel service吗？<ul>
+<li>用户下线的时候push server会知道用户下线了，然后push server会把这件事通知给channel service。</li>
+</ul>
+</li>
+<li>如果用户不在线的话，历史消息怎么办呢？是储存在channel service里面吗？<ul>
+<li>用户不在线的时候channel service就不会给相应用户推送，也不会保存这条消息，channel service只是为了给在线用户实时推送消息，至于历史消息是用户上上线的时候自己去Message Service里面pull的。</li>
+</ul>
+</li>
+<li>以前课提到的明星效应问题可以考虑用pull， 我们的大group 也有点类似明星效应问题，但是不用pull，是不是因为消息系统有实时性的要求？<ul>
+<li>大 Group 是 500 个人的 Group。这个和明星的 50m 的粉丝不是一个量级的。这里用 push 的原因最主要还是用户行为，人们阅读聊天信息通常都是被动的。而人们阅读 SNS 的信息通常都是主动的。</li>
+</ul>
+</li>
+<li>那么实际实现的时候，是针对大群才用 channel service？<ul>
+<li>不是。都会用到 channel，只是走 Public channel 还是 private channel 的区别。比如私信，或者小群，可以走每个人 private channel，这些 private channel 只有用户自己订阅，其他人不会订阅。而大群就放在 Public channel，里面会有好多人。</li>
+</ul>
+</li>
+<li>所以对于未上线用户，channel service最终还是会把历史消息存到数据库里，等待用户上线pull？<ul>
+<li>并不是 channel service 把历史消息存到数据库里。消息最开始就先经过 Message Service，先被存储在了数据库里，然后才通过 channel service 去提醒用户查看。通过 channel 和 push server / socket 走的信息都是提醒信息，你可以认为里面的内容是“嘿，你有新消息了，快去服务器取”，而不要把 channel service 当作了消息本身最开始被传递到的地方。</li>
+</ul>
+</li>
+<li>所以channel service 是fan out的，然后push server是点对点的给client推送的？<ul>
+<li>没错， channel server 是负责 fanout 的，push server 是点对点完成具体推送的。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="Channel-Service-QA"><a href="#Channel-Service-QA" class="headerlink" title="Channel Service QA"></a>Channel Service QA</h3><blockquote>
+<ul>
+<li>channel和Thread为什麽不是一一对应的关系？<ul>
+<li>channel是架构上的逻辑，thread是具体到代码实现层的，不是一个层面的概念</li>
+</ul>
+</li>
+<li>Channel service要自己写吗？还是说有什么线程的软件？<ul>
+<li>自己寫</li>
+</ul>
+</li>
+<li>系统怎么知道哪些消息已经被poll过，或者是从channel发送的？会不会有重复<ul>
+<li>client可以通过告诉server自己本地已有的最新一条信息是哪条，或者告诉server自己随后一次同步的时间戳，然后server就直接返回该时间戳之后的消息。另外每个message都是有id的，所以即使client收到了两条一样的消息client也能识别出来是同一条消息。</li>
+</ul>
+</li>
+<li>channel name也应该存在其他table里面吧？要不然web service收到一个讯息时怎么知道该送往哪个channel呢？是该加入在user thread table吗？<ul>
+<li>不需要有一个单独的 table。web service 收到 channel 信息的时候直接转给 channel service 去 push 即可。很多时候 web service 不是直接从 client 那里得到 channel name。而是直接构造。比如 thread 的channel 可以就叫 <code>#thread1</code> <code>#thread2</code> 这种。有一个规则可以构造即可。</li>
+</ul>
+</li>
+<li>为什么不对每个thread做channel, personal channel有什么message?对personal channel推送的时候前端怎么知道属于哪个thread?这是一种针对人数少的群的优化么？<ul>
+<li>如果对每个 thread 都做一个channel，是可以的。只是不够高效，因为很多用户的 threads 里很多是1对1的聊天，这种做到 channel 里不划算。所以通过一个统一的 personal channel，来推送某个用户1对1或者人数比较少的thread 里的信息提醒。personal channel 推送的时候，可以根据 channel 的名字来解析出属于哪个用户，比如 personal channel 的名字格式可以定义为：”personal#1234” 表示是 1234 这个用户的 channel。</li>
+</ul>
+</li>
+<li>所以channel是messaging service 创建的，对用户透明？<ul>
+<li>channel是由单独的channel service创建的，messaging service将推送群聊消息的任务委托给channel service，然后channel service再自己去把消息push给群里的在线用户。这整个过程对用户是透明的，用户眼中只有”群”的概念，没有channel的概念。</li>
+</ul>
+</li>
+<li>不太明白#personal::user_1的用法。即使是1对1私聊user_1也可以跟user_2,user_3同时进行，这时难道#personal::user_1里有user_2和user_3吗？消息串了怎么办？而且user_2,user_3不也有自己的personal channel吗？<ul>
+<li>#personal:user1是user1的私人频道，只有user1一个人订阅，所有发给user1的私信都会在这里推送。比如user2给user1发消息的时候，messaging service收到消息之后会让channel service向#personal:user1推送一条消息｛thread: user1#user2, from: user2, content: xxxx}，此时user1收到消息之后，识别出该消息是来自user2的私信，因此显示在跟user2的聊天框里，消息是不会串的。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>老师可不可以简单解释一下“对方正在打字”这个功能是怎么实现的？<ul>
+<li>问得好！这个叫做 TypyIndicator，有的公司专门拿来做面试题。实现方式其实很简单，首先 Storage 这个方面其实这个信息是不需要存储的，即便要存储（比如为了做数据分析）也就是存储最后一次 type 的时间就好了。 client A 检测到用户正在输入以后，发一个轻量级的消息给 server， server 通过 push service 发正在输入的信息给 client B，然后 client B 就显示用户正在输入。约定一个检测时间，比如当用户在输入框里输入的时候，大概每隔1-3s 就发送一次这种信息 push（具体取几秒钟看产品经理怎么拍脑袋了）。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>活躍時就poll先休息，所以會用推的比較快</p>
+<h2 id="多機登陸"><a href="#多機登陸" class="headerlink" title="多機登陸"></a>多機登陸</h2><p>session中紀錄用戶info</p>
+<h2 id="On-line-status"><a href="#On-line-status" class="headerlink" title="On-line status"></a>On-line status</h2><p>可用push的socket去看是否在線嗎？</p>
+<p>實時性要求不高，可以用PULL.　</p>
+<blockquote>
+<ul>
+<li>如果server发现用户在一定时间内没有pull请求，是不是可以标记为offline，然后对他的所有好友也告知此人offline？<ul>
+<li>可以，不过一般不是server主动去push通知其好友用户A已经offline，而是好友在自己发出heartbeat pull或者主动请求好友在线信息的时候服务器才告诉该好友用户A已经下线。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h1 id="QA"><a href="#QA" class="headerlink" title="QA"></a>QA</h1><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200410203715392.png" alt="image-20200410203715392" style="zoom:50%;" />
+
+
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200410210741607.png" alt="image-20200410210741607" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdoz6w1gbxj30i20ye0we.jpg" alt="image-20200410210804359" style="zoom:50%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200411222125219.png" alt="image-20200411222125219" style="zoom:50%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200411222144074.png" alt="image-20200411222144074" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gdq6ydxcquj30ii0mk40f.jpg" alt="image-20200411222215512" style="zoom:50%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200411222247062.png" alt="image-20200411222247062" style="zoom:50%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200411231451591.png" alt="image-20200411231451591" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gdq8ivyb8cj30n20w010o.jpg" alt="image-20200411231633812" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gdq8keeocxj30m20oq794.jpg" alt="image-20200411231800981" style="zoom:50%;" /></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/04/10/Web/Django/2019-04-10-Django%20note/">Web/Django/2019-04-10-Django note</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-10</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Web/">Web</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fa fa-tag article-meta__icon" aria-hidden="true"></i><a class="article-meta__tags" href="/tags/Django/">Django</a></span><div class="content"></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/04/05/System-Design/9p/2019-04-05-Location%20Based%20Service%20Design%20&amp;%20Uber/">System-Design/9p/2019-04-05-Location Based Service Design &amp; Uber</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-05</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></span><div class="content"><h3 id="Index"><a href="#Index" class="headerlink" title="Index"></a>Index</h3><p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdj89p8x7zj31140fqdpo.jpg" alt="image-20200405214845930"></p>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdj8bi4vkpj31180gw105.jpg" alt="image-20200405215030180"></p>
+<p>為了減少磁盤磁頭挪動找的次數，二叉的話樹會太高。</p>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdj8czu4cmj30tu0dyjxn.jpg" alt="image-20200405215156714"></p>
+<p>唯一：如user_name, email, phone_number</p>
+<p>聯合：關手到兩個col的需求要建聯合索合</p>
+<p>條件：去篩掉不付錢的，他們的index太大了，我不想查到他們</p>
+<p>★聯合索引不能解決分別查 A 的範圍和 B 的範圍然後再求交集這件事情，它是照第一鍵排序後，當第一鍵有相等值的話再照第二鍵去排。然後將查到的id再去原表裡查，也是座標排序法–x不等的照x排序，x相等的按照y排序。</p>
+<h1 id="LBS"><a href="#LBS" class="headerlink" title="LBS"></a>LBS</h1><p>Location Based Service</p>
+<h2 id="Uber-技術棧"><a href="#Uber-技術棧" class="headerlink" title="Uber 技術棧"></a>Uber 技術棧</h2><p>派單 vs 搶單</p>
+<h3 id="派單模式"><a href="#派單模式" class="headerlink" title="派單模式"></a>派單模式</h3><ul>
+<li>ringpop ，一種去中心化的架構</li>
+<li>Channel, 高效 RPC</li>
+<li>Google S2</li>
+<li>Riak</li>
+</ul>
+<h3 id="T-Channel"><a href="#T-Channel" class="headerlink" title="T Channel"></a>T Channel</h3><p>一種RPC(遠程函數調用)協議。怎麼把不同進程間內存作序列化傳輸及反序列化解析。</p>
+<p>RPC 服務器之間的，HTTPS話還要對資訊作加密，防用戶端的hacker之類。</p>
+<p>如果流量不大的話用 http 也ok, http 比較現成，比較好寫，如果要寫thrift還要定義結構，不如json方便。http相對rpc要慢一些，其實主要是設計為客戶端跟服務器之間的通信，而客戶端問題多，搗亂的人多，需要驗證，要提供放cookie裡的驗證，一下就好幾k到好幾10k，而服務器之間其實可能就只要幾百個字節。</p>
+<p>RPC還多了壓縮，讓效率高、延遲低。server2server就放LAN, 也不用加密。不用擔心不合理的傳來的數據。防驗證該是firewall該做的。</p>
+<blockquote>
+<h5 id="多选题-现有的比较成熟的、广泛使用的RPC协议有哪些？"><a href="#多选题-现有的比较成熟的、广泛使用的RPC协议有哪些？" class="headerlink" title="[多选题]现有的比较成熟的、广泛使用的RPC协议有哪些？"></a>[多选题]现有的比较成熟的、广泛使用的RPC协议有哪些？</h5><p>A.HTTP27.04% 选择</p>
+<p>B.Thrift38.66% 选择</p>
+<p>C.ProtoBuf34.30% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是AB</p>
+<p><strong>正确答案:</strong>ABC</p>
+<p><strong>解析:</strong></p>
+<p>Thrift 是 Facebook 的，ProtoBuf 是 Google 的。<br>Http 也可以认为是一个 RPC。</p>
+</blockquote>
+<blockquote>
+<h5 id="单选题-生活中运用地最广泛的RPC协议是？"><a href="#单选题-生活中运用地最广泛的RPC协议是？" class="headerlink" title="[单选题]生活中运用地最广泛的RPC协议是？"></a>[单选题]生活中运用地最广泛的RPC协议是？</h5><p>A.HTTP97.39% 选择</p>
+<p>B.Thrift1.21% 选择</p>
+<p>C.ProtoBuf1.40% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>A</p>
+<p><strong>解析:</strong></p>
+<p>HTTP 是 client （如 Browser) 与 server 通信的协议。是非常典型的 RPC。</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>RPC跟REST API有什么不一样<ul>
+<li>rest api一般指的是定义好的http 接口，rpc是一种通信协议</li>
+</ul>
+</li>
+<li>Thrift, ProtoBuf和HTTP协议差别在哪里呢？<ul>
+<li>差别可多了，比如最主要的差别是 thrift 和protobuf 的通信量相对 http 都很小，速度也就快很多。其他的差别，建议您可以去 Google 一下 thrift 和 protobuf，或者写一下 thrift 的调用代码和http 的调用代码来体会。</li>
+</ul>
+</li>
+<li>RPC跟RESTful API 有什么不同？<ul>
+<li>RPC 是一类协议的统称，Restful API 是一种编码规范。<br>Restful API 也是一种 RPC。我们说过 RPC 的时候通常说的意思是“远程调用”，我们说 Restful API 的时候通常指的是 “GET <a href="https://xxx/api/users/&quot;" target="_blank" rel="noopener">https://xxx/api/users/&quot;</a> 之类的 Web API 设计。Web API 当然也是一种“远程调用”</li>
+</ul>
+</li>
+<li>请问 用Flask写的API和用grpc写的API有什么区别？两者对比有什么好处呢<ul>
+<li><strong>Flask 之类的 Web Framework 写的 API就是一个 HTTP API。相比于 GRPC 或者 Thrift 之类写的 API 而言，最主要的区别是 HTTP 的 Request 整个数据传输一般比较大，因为要包含 HTTP Header, Cookie 之类的很多东西，其实很多时候用不上。所以 GRPC 之类的会高效不少</strong>。</li>
+</ul>
+</li>
+<li>client make a request to server 是都要用HTTP协议？<ul>
+<li>不一定的，也有用其他协议的。只是大部分都用 http，简单方便成熟。</li>
+</ul>
+</li>
+<li>server to server之间的通信的内容什么？不同伺服器上的数据？<ul>
+<li>server to server 当然也是有通信的需求的。<strong>比如在Uber设计中，GeoService 里的 server 就存储了地理位置信息，并提供了访问地理位置信息的接口。这个 GeoService 可以服务于 Uber 打车，还可以服务于 Uber 外卖。不同的其他的 server 都可以调用 GeoService 来存取数据，这就是服务器间通信。</strong></li>
+</ul>
+</li>
+<li>RESTful API 是基于http protocol的？<ul>
+<li>是的。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="Google-S2-amp-Riak"><a href="#Google-S2-amp-Riak" class="headerlink" title="Google S2 &amp; Riak"></a>Google S2 &amp; Riak</h3><h2 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h2><blockquote>
+<h5 id="多选题-对于一个打车软件来说，最核心的两个功能是什么？"><a href="#多选题-对于一个打车软件来说，最核心的两个功能是什么？" class="headerlink" title="[多选题]对于一个打车软件来说，最核心的两个功能是什么？"></a>[多选题]对于一个打车软件来说，最核心的两个功能是什么？</h5><p>A.支付功能10.34% 选择</p>
+<p>B.汇报位置34.47% 选择</p>
+<p>C.匹配乘客和车辆45.34% 选择</p>
+<p>D.评分系统0.31% 选择</p>
+<p>E.一键报警0.31% 选择</p>
+<p>F.路线导航9.22% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是BC</p>
+<p><strong>正确答案:</strong>BC</p>
+<p><strong>解析:</strong></p>
+<p>支付并不是最重要的，完全可以做一个免费的打车软件，但让司机汇报自己的位置和为乘客匹配一个合适的司机是构成一个打车软件的基本功能。</p>
+</blockquote>
+<ul>
+<li>該可以時不時更新司機位置</li>
+<li>為乘客匹配司機</li>
+<li>司機同意就繼續完成派單</li>
+<li>直接司機告訴服務器自己在哪</li>
+</ul>
+<p>會發現他一天會有幾單，會橫跨幾個城市，全市</p>
+<ul>
+<li>有集會時會有大量單，所以透過偷偷蒐集用戶地點，我們可以提前調度司機往那邊跑。</li>
+<li>但這理論上是蒐集隱私的行為哈</li>
+</ul>
+<h2 id="Service-Geo-amp-Dispatch"><a href="#Service-Geo-amp-Dispatch" class="headerlink" title="Service - Geo &amp; Dispatch"></a>Service - Geo &amp; Dispatch</h2><blockquote>
+<h5 id="单选题-图中漏了什么？"><a href="#单选题-图中漏了什么？" class="headerlink" title="[单选题]图中漏了什么？"></a>[单选题]图中漏了什么？</h5><p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdkglvyl64j30ky0c8ju9.jpg" alt="图片"></p>
+<p>A.司机和乘客的双向联系23.16% 选择</p>
+<p>B.司机获取到打车订单信息45.00% 选择</p>
+<p>C.司机当前接单与否的状态31.84% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是C</p>
+<p><strong>正确答案:</strong>B</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>Dispatch service 里面包含逻辑处理 + 数据存储。能否解释一下数据储存？这里的数据储存存的是什么数据？是否是司机的地理位置数据？<ul>
+<li>地理位置数据可以存在 GeoService 里。Dispatch Service 里存的是派单（Dispatch）信息的数据，比如我把哪个司机分配给了哪个乘客，这个在我们的课程中是存在 Trip Table 里。即用户点击打车就创建了一个 Trip，当分配了一个司机以后，就往里填进去被分配的司机。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Storage-Trip-amp-Location"><a href="#Storage-Trip-amp-Location" class="headerlink" title="Storage - Trip &amp; Location"></a>Storage - Trip &amp; Location</h2><blockquote>
+<h5 id="单选题-Trip-Table-的读写情况如何？"><a href="#单选题-Trip-Table-的读写情况如何？" class="headerlink" title="[单选题]Trip Table 的读写情况如何？"></a>[单选题]Trip Table 的读写情况如何？</h5><p>A.读多写少25.16% 选择</p>
+<p>B.读少写多36.25% 选择</p>
+<p>C.读写一样多38.58% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是C</p>
+<p><strong>正确答案:</strong>A</p>
+<p><strong>解析:</strong></p>
+<p>只有产生用户请求时才会产生写操作，查询操作比较多，因为每隔四秒司机都会需要查询是否有与之匹配的订单</p>
+</blockquote>
+<blockquote>
+<h5 id="单选题-Location-Table-的读写情况如何？"><a href="#单选题-Location-Table-的读写情况如何？" class="headerlink" title="[单选题]Location Table 的读写情况如何？"></a>[单选题]Location Table 的读写情况如何？</h5><p>A.读多写少8.05% 选择</p>
+<p>B.读少写多71.88% 选择</p>
+<p>C.读写一样多20.08% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>每隔四秒司机的位置都需要被更新，属于写操作；读取操作只有在查找乘客附近的司机时才会发生。</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>对这个流程有些疑惑，为什么不等到driver同意pick up之后再往trip里写一个新的record，这样不是可以避免driver反复查询吗<ul>
+<li>有很多原因。首先，对那么没有成单的打车请求，也有记录数据和分析数据的需求，不仅仅是记录那些匹配上的单子。其次，当一个打车请求产生一个，我们需要提供给打车的人一个查询主体去让他查询有没有匹配上，因此势必是要创建一个 Record 的。至于这个 Record 是一个 Trip 的 Record 还是一个 PendingRequest 的 Record，这个就看你自己愿意怎么设计了。我是觉得统一都是 Trip ，用 status 来标记不同时期的状态是比较好的做法。</li>
+</ul>
+</li>
+<li>如果app上要显示location的话是要读的吧，所以是不是应该是读写一样多呢<ul>
+<li>是的。<br>这是属于另外一个功能点的要实现的service-trip routing service。<br>其实这个系统中的Dispatch Service和Geo Web Server还可以分化出来一个专门复杂计算匹配功能的Matching Service 出来。</li>
+</ul>
+</li>
+<li>请问driver要怎么从trip table查询他有没有被assigned到某个trip? 是对driver_id做 index，让我们可以直接search吗？<ul>
+<li>是的，对 driver_id 有 index 就行了。</li>
+</ul>
+</li>
+<li>数据库定义 外键会不会影响性能呢？<ul>
+<li>定义外键就必须给该列建立索引，这样可以加快查询时的速度，但是相应地在数据更新的时候会花费一些时间来维护索引。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h1 id="LBS-難點"><a href="#LBS-難點" class="headerlink" title="LBS 難點"></a>LBS 難點</h1><ul>
+<li>數據庫不好查圓，改求正方形</li>
+</ul>
+<blockquote>
+<p>课中练习</p>
+<p>[单选题]分别对 latitude 和 longitude 建index是否可行？</p>
+<p>你的选择:B</p>
+<p>A:可行</p>
+<p><strong>B:不可行</strong></p>
+</blockquote>
+<p>那建複合索引ok嗎？就是二元組排序</p>
+<p>[单选题]复合索引是否能解决 查询效率低下的问题呢？</p>
+<p>A:可以</p>
+<p><strong>B:不可以</strong> 仍是不行</p>
+<p>要找兩個key都在某個範圍內的range query仍是無法做的，只能找到同lat下的log的範圍。</p>
+<p><strong><em>所以，將二維映射到一維做</em></strong></p>
+<h2 id="2D-Range-Query"><a href="#2D-Range-Query" class="headerlink" title="2D Range Query"></a>2D Range Query</h2><p>映射到一維的range query，相當於對二維作range query</p>
+<ul>
+<li>Google S2 –  Hilbert Curve, 一維上近的，二維上的也近；反之否。</li>
+<li>Geohash – Peano Curve<ul>
+<li>0-9, a-z 去掉 a, i, l, o 為 base32剛好2^5, 因為長相容易看錯，發明算法的人決定去掉這四個char的</li>
+<li>find longest-common-prefix</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>所以说Hilbert mapping如果两个点二维空间接近， 一维上不一定接近对吧（比如说最中间的四个点）<ul>
+<li>是的。但是反过来是对的，一维越接近，二维就越接近。</li>
+</ul>
+</li>
+<li>Google S2怎么解决障碍物的问题？比如河流，单行线等。<ul>
+<li>Google S2不能解决障碍物的问题，障碍物的问题是交给地图解决的。在或取到附近的司机之后，可以过一遍地图，查一下路径，如果不可达或者要绕远路的话可以排除掉。</li>
+</ul>
+</li>
+<li>为什么不直接按地域分，然后在这个地域里直接用for loop算出每个坐标和用户的距离？这个是O(n) 是不是因为 SQL查询是O(logn)所以更快？<ul>
+<li>这样就要对每个用户都算一遍距离，n个用户就要对所有坐标算n次，开销很大。而用Geohash就只需要做一个range query就行了，range query一般有索引支持，做起来很快。</li>
+</ul>
+</li>
+<li>对两个column都是range query的情况，如果用复合索引的话，虽然对第二个column是无序的，但是因为第一个的range已经选出来，这时如果delta比较小（range范围小），对于第二个column也只用遍历第一个选出来的部分，相较于加索引的log（n）会差别很大么？<ul>
+<li>你的这个假设 delta 比较小是不合理的，我们大部分的需求都是 delta 比较大的。如果你说数据小的话，那什么办法都可以，不加索引也可以。数据小是无敌的。</li>
+</ul>
+</li>
+<li>GoogleS2算法会将那些2D近，1D远的点漏掉对吧？所以它是不是精准度差？<ul>
+<li>Google S2会比Geohash精准一点，因为Geohash存在一些很大的突变点，比如两个相隔很近的点刚好分到两个不同的格子的话就会使它们的前缀完全不一样。但是Google S2用的是一种突变没有那么严重的Pieano Curve，因此精准度会高一点。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="GeoHash"><a href="#GeoHash" class="headerlink" title="GeoHash"></a>GeoHash</h2><p>把地球表面分成一個個大格子，並用各個char代表，多次畫分成32份下去，無限逼近所在的位置。</p>
+<p>公共長綴愈長，兩點愈來愈接近</p>
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdl1zh1cgbj30sg0f2ta2.jpg" alt="image-20200407114112281" style="zoom: 33%;" />
+
+<blockquote>
+<ul>
+<li>geohash算法中，如果两个点在分界两边，但其实离得很近，算法会分成两个不同的字母数字么？造成的误差怎么处理呢？<ul>
+<li>会很大。一般不处理。因为人会走动，走两步，这个误差就没有了。系统设计不需要保证 100% 正确性。后面的讲解中也会提到。</li>
+</ul>
+</li>
+<li>如何处理处在分界线两边很靠近的两点的情况？比如美国的两点很接近，但分属9和d?<ul>
+<li>这个是GeoHash的一个缺陷，即使两个点相隔很近，其字符串的前缀也有可能完全不一样。不过在实际应用中可以有一些方法来弥补，比如在数据库中找距离x点在一定范围内的所有点的时候，除了搜索跟ｘ在一个小格子内的点之外，还可以搜索出于ｘ所在的格子相零的八个格子内的点，然后再汇总结果，这样就不会漏掉答案了。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>為何是4x8? 而不是5x10、3x6這類的1:2?<ul>
+<li>因為GeoHash是一個二分法，實數可以無限往下二分除，得到很長的０１串</li>
+<li>base32 去遞歸地劃地圖 <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdl29586ydj30c808wjt0.jpg" alt="image-20200407115146360" style="zoom: 33%;" /></li>
+<li>靠得近有時候geohash還是差得大，但人剛好處於這個大分界上的機率很小，可能下一秒就不在這個分界線上了</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>Geohash为什么不直接比较二进制数，而是比较hash以后的string呢？<ul>
+<li>为了最终得出来的表示是整数位，base必须选取2的次方，因此可以将geohash存成2进制、4进制、8进制….等等。这里之所以选32进制是因为这样比较compact，而且最终生成出来的字符串可以被放在url里面，比如<a href="http://api.com/get_nearby_taxi/9q9hu3hhsjxx" target="_blank" rel="noopener">http://api.com/get_nearby_taxi/9q9hu3hhsjxx</a></li>
+</ul>
+</li>
+<li>Geohash为什么不直接比较二进制数，而是比较hash以后的string呢？<ul>
+<li>因为 GeoHash 如果存成二进制的话，肉眼不可读，不利于放在 url 里传播，也不利于别人复制粘贴。有方便“人”使用的考虑，如果只是给计算机看，二进制当然是可以的。</li>
+</ul>
+</li>
+<li>geo hash 为什么要比较string？ 不直接比较二进制数？<ul>
+<li>GeoHash 用字符串有如下一些好处：<ol>
+<li>可读性高，可以直接让人阅读和复制，类似登陆验证码你不能给人一个二进制让人输入吧</li>
+<li>可以放在 url 里，方便 url 的传播。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="Range-Query-in-GeoHash-in-DB"><a href="#Range-Query-in-GeoHash-in-DB" class="headerlink" title="Range Query in GeoHash in DB"></a>Range Query in GeoHash in DB</h3><p>視需求要在多少距離內去map找 longest-common-prefix</p>
+<p>e.g. 找附近20km的車</p>
+<blockquote>
+<ul>
+<li><p>这里cassandra的row key是什么呢？</p>
+<ul>
+<li>在 GeoHash 的例子中，row_key 可以是前 4 位的 GeoHash，后面的内容里有提到如何 sharding 的问题。</li>
+</ul>
+</li>
+<li><p>这种找共同prefix的问题是不是通过Trie来实现更高效啊。Redis那种方法其实就是通过hashtable的方式实现trie. 那SQL和Cassandra为什么不通过trie来实现呢，节省空间吗？</p>
+<ul>
+<li><p>Trie 和 Hash 的效率是一样的，查找一次时间复杂度都是 O(L)，L 是字符串长度（你需要去九章算法强化班补习一下这部分的内容哦）Trie 唯一优势是空间稍微省一些。像 SQL 和 Cassandra 这种数据库的结构是不支持 Trie 的。Trie 是算法和数据结构领域的东西，而不是数据库领域的东西。没有任何数据结构原生的支持 Trie，但是所有 key-value db 都可以认为是一个 hash table on disk。</p>
+<p>TODO: <em>多比較此概念, <a href="https://leetcode.com/problems/longest-common-prefix/solution/" target="_blank" rel="noopener">https://leetcode.com/problems/longest-common-prefix/solution/</a></em></p>
+</li>
+</ul>
+</li>
+<li><p><strong><em>Redis的情况是要建立32^6+32^5+32^4个key吗？按讲义，9qhhvt,9q9hv,9q9h都是key</em></strong></p>
+<ul>
+<li>是的，理论上最多会有那么多个key，不过考虑到有很多无人区（海洋，荒山，沙漠啥的），而且公司业务一般不会完全覆盖整个地球，所以实际的数量其实不会达到那么多。如果真的一台机器放不下的话还可以sharding。</li>
+</ul>
+</li>
+<li><p>cassandra的value没有null明白了，那么可不可以有“”(空字符串)呢?另外，cassandra是不是可以不设置columnkey从而只有rowkey和value呢？谢谢。</p>
+<ul>
+<li>不可以不设置 column key ，否则无法排序<code>&lt;row key, column key&gt;</code> 这个二元组。也无法对 column key 进行 range query。你的需求适合直接放在 RocksDb 这种只有 key-value 的结构里，不适合放在 row key column key value 的这种结构。</li>
+</ul>
+</li>
+<li><p>相当于一个driver的位置要放到三个key的set里面？然后会根据driver位置的变化，会动态地增删这三个set？</p>
+<ul>
+<li>是的，如果位置分三级的话就是要动态增删三个色它</li>
+</ul>
+</li>
+<li><p>cassandra 的 rowkey 和 column key 的差别是什么啊？ 可以简单说一下吗？</p>
+<ul>
+<li>Cassandra 中的 row key 就是 hash key 也叫做 partition key，是每次查询必须带上的（第二第三节课里有讲哦~），主要作用是当确定这个数据存在什么地方，你可以认为有一个函数叫做 <code>find_db_instance_by_row_key(row_key)</code> 能够根据 row_key 确定使用哪个 db instance，从而实现分布式存储。<br>很多 NoSQL 数据库没有 column key，比如 Redis。 Cassandra 有 Column key 的作用是，在一台数据库的机器上，所有数据是按照 row_key+column key 排好序的。所以当你确定了 row_key 是啥以后，就可以对 column key 进行范围查询，比如你可以查询 user_id（rowkey） 发的所有帖子里，在 昨天到今天这个范围内发的帖子（帖子的发表时间作为 column key），而 Redis 因为没有 column key 是做不到的。另外在后面的 Big Table 中，会详细介绍这类数据库的实现原理（BigTable 也是一个有 column key 的 db）</li>
+</ul>
+</li>
+<li><p>cassandra把geohash放在column key，那row key该存什么，可以全都存在同一个row key下吗？例如null？</p>
+<ul>
+<li>Row key 存 geohash 的前 4 位。</li>
+</ul>
+</li>
+<li><p>cassandra的row key是什么</p>
+<ul>
+<li>前 4 位 GeoHash</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="雙方角度思考業務跟儲存需求"><a href="#雙方角度思考業務跟儲存需求" class="headerlink" title="雙方角度思考業務跟儲存需求"></a>雙方角度思考業務跟儲存需求</h3><blockquote>
+<ul>
+<li>为什么不需要对driver按离rider距离远近排序？<ul>
+<li>要排也行，可以在match的时候将最近的区域内的司机按距离排个序，然后选最近的。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h3><p>用戶無遷移成本，所以用戶黏性太差，分分鐘用戶就換別的用。</p>
+<blockquote>
+<h5 id="单选题-司机的-Location-信息应该按照什么进行-Sharding？"><a href="#单选题-司机的-Location-信息应该按照什么进行-Sharding？" class="headerlink" title="[单选题]司机的 Location 信息应该按照什么进行 Sharding？"></a>[单选题]司机的 Location 信息应该按照什么进行 Sharding？</h5><p>A.按照 User Id6.23% 选择</p>
+<p>B.整个 GeoHash10.18% 选择</p>
+<p>C.GeoHash的前4位72.04% 选择</p>
+<p>D.GeoHash的前6位11.56% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是C</p>
+<p><strong>正确答案:</strong>C</p>
+<p><strong>解析:</strong></p>
+<p>按照 User Id 是显然不对的，因为乘客的 UserId 和他附近的司机的 UserId 可能会被 sharding 到不同的地方。<br>按照 GeoHash 进行 Sharding 的话，只需要按照前 4 位进行 sharding 即可。因为乘客的查询可能是按照前4，5，6位 GeoHash 进行查询，如果是按照前 6 位进行 sharding 的话，那么 BBBB22 和 BBBB33 就会被拆分开，而我们查询的时候其实希望如果用户在 BBBB22 的话，他能够查到位置在 BBBB33 的司机。</p>
+</blockquote>
+<p>城市不多，每個城市也是幾10個點圍出來的，可以在code裡直接寫死。</p>
+<blockquote>
+<ul>
+<li>redis内部有自己的sharding机制么？需要自己手动写sharding算法还是只需要给sharding的column就可以？<ul>
+<li>早期的版本没有。最近新出的版本里有 auto-sharding 的机制了，但是不是 consistent hashing 的算法，用的是另外一个，有兴趣的话，可以去网上搜一下相关的内容。</li>
+</ul>
+</li>
+<li>但是有的城市uber的用户比较多，比较频发，有的城市用户比较少，怎么样能sharding的均匀呢？<ul>
+<li>Uber 的做法是为用户多的城市多配置机器。用户少的城市少配置机器。</li>
+</ul>
+</li>
+<li>按照city sharding，如果这个城市里有很多driver，该如何判断哪一个driver离这个乘客比较近？<ul>
+<li>按照 city sharding 以后还是需要根据 geohash 去 filter 的。sharding 只是宏观上数据怎么拆分，geohash 是微观上具体每一条数据存储时的信息。我们根据 <strong>geohash</strong> 可以做范围查询来 filter 离乘客比较近的 driver。</li>
+</ul>
+</li>
+<li>找到乘客周围的2-3 个城市怎么就能避免乘客算a city driver 算b city 但是其实两个人离得很近的问题？<ul>
+<li>他俩隔得很近，那么说明 a city 和 b city 隔得很近。因此找到乘客周围 2-3 个城市的意思就是，既让乘客属于 a city ，也让他属于 b city，总共查2-3次。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="Riak"><a href="#Riak" class="headerlink" title="Riak"></a>Riak</h3><p>Redis 有 Master slave的機制，M掛了S可以頂上去。</p>
+<p>但其實可以用穩定性更強的DB, 更好處理掛掉後恢復的問題。</p>
+<p>Uber也是從Redis換成了Riak。</p>
+<blockquote>
+<ul>
+<li>master挂了的话，slave可以进行写操作吗<ul>
+<li>不行，必须起一个新的master。</li>
+</ul>
+</li>
+<li>之前课程不是说涉及transaction要用SQL吗？ 为何这边都是用NoSQL？<ul>
+<li>这里并不需要用到 transaction，所以用 NoSQL 没有问题。且有一些 NoSQL 也支持 Transaction 了。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdj8kcgjkzj30kc0m8gn8.jpg" alt="image-20200405215453781" style="zoom: 25%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdj8kg0owrj30kc0ws779.jpg" alt="image-20200405215851312" style="zoom:67%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200407165538615.png" alt="image-20200407165538615" style="zoom:67%;" />
+
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdlb1n83q9j30oc0j8tby.jpg" alt="image-20200407165557659" style="zoom:67%;" />
+
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdlb2i72zyj30ow0msn15.jpg" alt="image-20200407165647857" style="zoom:67%;" />
+
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdlb36wqt9j30pa0t00yp.jpg" alt="image-20200407165727152" style="zoom:67%;" /></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/04/01/System-Design/9p/2019-04-01-Web%20System%20API%20Design%20&amp;%20TinyURL/">System-Design/9p/2019-04-01-Web System API Design &amp; TinyURL</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-01</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></span><div class="content"><h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><h2 id="Web-Framework"><a href="#Web-Framework" class="headerlink" title="Web Framework"></a>Web Framework</h2><ul>
+<li><p>登錄, session, cookies</p>
+</li>
+<li><p>CSRF攻擊 - Cross-site Request Forgery 如果拿的link是建數據的post請求，現在也是server會給browser一個CSRF token，去防無效token。</p>
+<ul>
+<li>python - django，flask輕巧要裝一堆插件，把密碼md5哈希，現在是SHA256</li>
+<li>java - spring</li>
+<li>ruby - ruby on rail</li>
+</ul>
+</li>
+<li><p>ORM </p>
+</li>
+<li><p>登入登出</p>
+</li>
+<li><p><strong>http server</strong> is between user and web framwork, 管理多進程。</p>
+<ul>
+<li>Uwsgi 多進程啟多個Django的進程，服務如100個用戶就自己刪了重啟之類</li>
+<li>Apache</li>
+<li>Unicorn</li>
+<li>Gunicorn</li>
+<li>Nginx 不同網站去不同站口避免打架</li>
+</ul>
+</li>
+</ul>
+<h1 id="APIs"><a href="#APIs" class="headerlink" title="APIs"></a>APIs</h1><blockquote>
+<h5 id="单选题-www-net-cn-的根域名（不含后缀）是什么？"><a href="#单选题-www-net-cn-的根域名（不含后缀）是什么？" class="headerlink" title="[单选题]www.net.cn 的根域名（不含后缀）是什么？"></a>[单选题]<a href="http://www.net.cn" target="_blank" rel="noopener">www.net.cn</a> 的根域名（不含后缀）是什么？</h5><p>A.net72.88% 选择</p>
+<p>B.www27.12% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p><a href="http://www.net.cn" target="_blank" rel="noopener">www.net.cn</a> 是一个 .net.cn 为后缀的域名，而不是一个 .cn 为后缀的域名。意不意外，惊不惊喜！</p>
+</blockquote>
+<h2 id="Basics-amp-Flows"><a href="#Basics-amp-Flows" class="headerlink" title="Basics &amp; Flows"></a>Basics &amp; Flows</h2><p>網站開發：</p>
+<p>跑通流程</p>
+<p>申域名、綁ip地址、在AWS買server、在上面跑http server (Apache; Unicorn, Gunicorn; Uwsgi 都ok) 、用任一個框架 flask, django 搭起網站，搭個todo list就OK、message queue搭起來。</p>
+<blockquote>
+<ul>
+<li><p>可以认为web server 是由http server和web application组成吗？感觉当我们访问了google.com的时候，是这样的流程：浏览器URL-&gt;DNS服务器(http request)-&gt;Http Server(可以认为是SpringMVC里的DispatcherServlet吗) -&gt; Web App(可以认为是SpringMVC里的Controller吗？就是找到对应哪个action进行处理这个请求)。不好意思对于这些概念和spring mvc都不是很理解，希望助教能指正</p>
+<ul>
+<li>HTTP Server 不是 Spring 里的任何东西。Web App 才是 Spring。HTTP Server 一般是在 Web APP 的前面会配置起来用作控制 Web App 多进程并发的一个软件，一般典型代表是 UWSGI, Unicorn 这种。你所知道的 Spring 的任何概念，都属于一个 Web App 里的一部分。</li>
+</ul>
+</li>
+<li><p>我除了GET以外的操作（例如PUT和DELETE的操作）都使用POST Method是不是就可以了呢（操作类别通过url或parameter区分）？</p>
+<ul>
+<li>一般的Rest API设计规范是要求POST, DELETE, GET, PUT，分别对应增删查改，符合规范会让别人更容易理解你的接口。你说的方法虽然也可以，但是不符合Rest的规范。</li>
+</ul>
+</li>
+<li><p>web application在哪里运行的呢？听说用docker来deploy web application，这个是执行application的地方吗？</p>
+<ul>
+<li>web application 可以在 docker 里执行。 docker 的概念可以理解为在 Operating System 上包装出来的一个独立的小 operating system。其实 web application 就是跑在操作系统上的，可以是 linux，可以是 windows。因为 web application 就是一个程序，一个进程。代码该在什么地方执行就在什么地方执行。</li>
+</ul>
+</li>
+<li><p>请问，Async Server和Web Server在功能上的区别是什么？ 是否Web server一般用来接收用户的request和跑web application，而Async Server就是用来存储message queue的呢？</p>
+<ul>
+<li><p>在News Feed Push model的senario中，fanout本质上是一个写扩散的过程。<br>（1）Web Server主要是接受用户请求并dispatch到不同的wap app经controller直至具体某个处理特定businesslogic的service上。<br>（2）Async server的作用就是从这个人（明星）中frenship service中找到其相应的followers(粉丝)然后，对每一个follower用户对应的news_feed_table[id, owner_id, tweet_id, create]写入相关的记录，这样用户登录使用时就能看到news feeds。<br>如果存储的表(tweet_table, news_feed_table)都在都在同一个数据，那么这个写扩散的过程，其实就是在同一个数据库中创建相应的触发器(trigger)、存储过程(procedure)和定时执行作业，就能实现。<br>但是如果在不同的地理分布位置，而且follower数据量庞大，那么就要借助中间件(message queue)来完成, 利用中间件message queue是采用生产者与消费者的模式实现的publish/subscribe的技术，保证把每一个发布的（tweet）信息，准确返送到每一个subsrriptio端的consumer来完成消息的写扩散（fan out）过程。具体的messge queue的理解请阅读维基百科相关内容<a href="https://bit.ly/2kwnxNl" target="_blank" rel="noopener">https://bit.ly/2kwnxNl</a>, message queue具体实现场景，请阅《蚂蚁金服：消息队列事务型消息原理浅析》<a href="https://bit.ly/2lAJOKe" target="_blank" rel="noopener">https://bit.ly/2lAJOKe</a></p>
+<p>显示我</p>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="API-Design"><a href="#API-Design" class="headerlink" title="API Design"></a>API Design</h2><blockquote>
+<h5 id="单选题-以下API设计哪个是对的？"><a href="#单选题-以下API设计哪个是对的？" class="headerlink" title="[单选题]以下API设计哪个是对的？"></a>[单选题]以下API设计哪个是对的？</h5><p>API用于获取当前登录用户在题号1000这个题上的所有提交记录</p>
+<p>A./api/users/<current_user_id>/submissions/?problem_id=100017.61% 选择</p>
+<p>B./api/users/me/submissions/?problem_id=10006.82% 选择</p>
+<p>C./api/submissions/?problem_id=1000&amp;user_id=<current_user_id>33.28% 选择</p>
+<p>D./api/submissions/?problem_id=100032.01% 选择</p>
+<p>E./api/problems/1000/submissions/10.28% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是D</p>
+<p><strong>正确答案:</strong>D</p>
+</blockquote>
+<p>A、B、C不科學，別人可以查自己哦？</p>
+<p>E不對, D才符合REST API的約束、規範，一級目錄要是自己要獲取的東西</p>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdh1w428fgj30p419sq94.jpg" alt="image-20200404003659176"></p>
+<h2 id="REST-API"><a href="#REST-API" class="headerlink" title="REST API"></a>REST API</h2><blockquote>
+<ul>
+<li>post request 推荐 return 什么信息最好<ul>
+<li>it depends。创建一个 instance 一般就 return 这个 instance 的json。</li>
+</ul>
+</li>
+<li>get all accounts 呢？<ul>
+<li>get /api/accounts/?filter=xxx&amp;sort_by=xxx</li>
+</ul>
+</li>
+<li>请问加header 和 加parameter 的区别是什么<ul>
+<li>一般验证信息，身份信息会放在 header 里。其他的普通参数放在 parameter 里。</li>
+</ul>
+</li>
+<li>是否header里面的参数是加密的 而url parameter没有加密？<ul>
+<li>是可以的，比如在Post/Put/Del的Rest Method中就是在message header中存放加密的Authentication信息（即token内容），在url的参数则是具体操作对象的id值等path variable。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="News-Feed-API"><a href="#News-Feed-API" class="headerlink" title="News Feed API"></a>News Feed API</h2><h3 id="Req-amp-Res"><a href="#Req-amp-Res" class="headerlink" title="Req &amp; Res"></a>Req &amp; Res</h3><blockquote>
+<ul>
+<li>JSON 和XML 是两种格式。HTTP URL 里的路径不对应文件夹。URL和文件 path 是不同的概念。文件path的是对应有 folder 才行，url 可以随意指定，不一定要有真实的 folder 或者文件与之对应。同一份数据是不需要存两份的，一般都是存在数据库的表单里，如果你需要 JSON 的格式，就组织成 JSON 的格式返回，如果需要 XML 就组织成 XML 的格式返回。</li>
+</ul>
+</blockquote>
+<h3 id="Pagination"><a href="#Pagination" class="headerlink" title="Pagination"></a>Pagination</h3><blockquote>
+<ul>
+<li><h5 id="单选题-哪种分页方法更加适合-News-Feed？"><a href="#单选题-哪种分页方法更加适合-News-Feed？" class="headerlink" title="[单选题]哪种分页方法更加适合 News Feed？"></a>[单选题]哪种分页方法更加适合 News Feed？</h5><p>A.页码翻页（Page Number）14.95% 选择</p>
+<p>B.光标翻页（Cursor）85.05% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+</li>
+</ul>
+</blockquote>
+<p>要注意怎麼去避免空白頁的request</p>
+<p>秀出100個的話就拿101個！</p>
+<blockquote>
+<ul>
+<li><p>使用max_id的话，如果用户删除了之前的某一个item，这样不还是会出现第二页出现之前第一页的item吗</p>
+<ul>
+<li>不会有影响的。比如第一页的帖子是 <code>[10, 9, 8]</code> 第二页是 <code>[7, 6, 5]</code>，用户拿到第一页以后，同时得到的 next page max_id 是 7。即便此时用户删除了 10 这个帖子，依然不影响 通过 max_id = 7 拿到的是 7 6 5。如果用户删除了 7 这个帖子，那拿到的就是 <code>[6, 5, 4]</code> 也是没有问题的。</li>
+</ul>
+</li>
+<li><p>能不能更具体地讲讲光标翻页的实现。举个例子，一共3页，客户端需要传什么数据给后台，首页，中间和末页。</p>
+<ul>
+<li><p>问：<strong>是不是不管push还是pull模型，如果翻页的话都得pull?</strong><br>翻页是用户主动操作的过程，所以肯定是由client 发给 server，肯定是一个pull的过程。</p>
+<p>问：<strong>假设前100条中最早的timestamp是T，就分别请求follow的人在T之前的100条feed，然后再进行合并？</strong><br>答：对</p>
+<p>问：<strong>如果恰好有几条feed的timestamp一样该如何处理？</strong><br>答：首先不会有帖子的timestamp一样，timestamp的精度很高的（微秒级别）</p>
+<p>通常来说，翻页这个完全可以作为一道单独的系统设计面试题来问你。翻页并不是简单的1-100，101-200这样去翻页。因为当你在翻页的时候，你的news feed可能已经添加了新的 内容，这个时候你再去索引最新的101-200可能和你的1-100就有重叠了。</p>
+<p>通常的做法是，拿第101个帖子的timestamp作为下一页的起始位置，也就是说，当用户在看到第一页的前100个帖子的时候，他还有第101个帖子的timestamp信息（隐藏在你看不到的地方），然后你请求下一页的时候，会带上这个timestamp的信息，server端会去数据库里请求 &gt;= timestamp 的前101个帖子，然后也同样把第101个帖子作为下一页的timestamp。这个方法比直接用第100个帖子的timestamp好的地方是，你如果读不到第101个帖子，说明没有下一页了，如果你刚才只有100个帖子的话，用第100个帖子的timestamp的坏处是，你会有一次<code>空翻</code>。</p>
+<p>留给你一个思考题：怎么实现往上翻页（刷朋友圈，查看最新的帖子）</p>
+<ul>
+<li>可以利用和向下翻页类似的方法，用当前第一条feed的时间T去数据库取T之后的feeds。<br>如果是pull模型的话，就去所有follow的人的feed list去取然后merge<br>push的话，去直接去queue里面取时间大于T的就好了</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><h5 id="单选题-如果-Post-存储在-NoSQL-中，没有-Sequential-ID，还可以使用光标翻页法么？"><a href="#单选题-如果-Post-存储在-NoSQL-中，没有-Sequential-ID，还可以使用光标翻页法么？" class="headerlink" title="[单选题]如果 Post 存储在 NoSQL 中，没有 Sequential ID，还可以使用光标翻页法么？"></a>[单选题]如果 Post 存储在 NoSQL 中，没有 Sequential ID，还可以使用光标翻页法么？</h5><p>Sequential ID 是递增的，可以通过 max_id 和 min_id 来筛选。但是如果在 NoSQL 中，ID 是 UUID ，这个是完全无序的字符串，并不是后发的帖子 UUID 就会比先发的帖子 UUID 大。</p>
+<p>A.用不了5.06% 选择</p>
+<p>B.可以用，用 timestamp 之类的有序信息翻页即可94.94% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>timestamp 的精度是微妙级别的，是足够的，一个人的朋友圈里有两个人在同一个 timestamp 发了帖子的概率几乎为0。如果你还是担心 timestamp 的精度不够的话，一个简单的办法是 + 一个随机后缀，如 timestamp 取出来到微妙是 <code>1554553786168125</code> 的话，后面填 5 位随机整数如<code>13234</code>，凑成 <code>155455378616812513234</code>。当然存储的时候类型上得是 bigint 了，因为很大。不可以用 float / double 存储，精度不够。</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="Mentions"><a href="#Mentions" class="headerlink" title="Mentions"></a>Mentions</h3><p>讓前端拿到時候可以顯示成可以llink的樣式</p>
+<blockquote>
+<ul>
+<li><p>不是说返回的是Json么？这里为什么是HTML？</p>
+<ul>
+<li><p>总体的数据是 JSON 的，这里的 html 是其中的某个数据的值。比如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="attr">"title"</span>: <span class="string">"hello"</span>,</span><br><span class="line">	 <span class="attr">"content"</span>: <span class="string">"&lt;html&gt;hello world&lt;/html&gt;"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>mobile的格式是什么样子的？</p>
+<ul>
+<li><p>API 返回给 mobile 的格式通常就是 JSON 格式，直接只有具体的数据内容。如</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">   <span class="attr">"content"</span>: <span class="string">"Thanks to &lt;user username='someone'&gt;hello world&lt;/user&gt;"</span>,</span><br><span class="line">	 ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h1 id="TinyURL"><a href="#TinyURL" class="headerlink" title="TinyURL"></a>TinyURL</h1><p>eg. bitly.com/, goo.gl/</p>
+<h2 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h2><p>就是創一個post請求，建一個短網址</p>
+<p>給了一個301跳轉，讓browser去完成跳轉的動作。</p>
+<ul>
+<li>長跟短的URL要是一一對應嗎？</li>
+</ul>
+<blockquote>
+<h5 id="单选投票题-Long-Url-和-Short-Url-是否需要一一对应？"><a href="#单选投票题-Long-Url-和-Short-Url-是否需要一一对应？" class="headerlink" title="[单选投票题]Long Url 和 Short Url 是否需要一一对应？"></a>[单选投票题]Long Url 和 Short Url 是否需要一一对应？</h5><p>您选择的答案是B</p>
+<p>感谢您参与投票！</p>
+<p>A.需要41.63% 选择</p>
+<p>B.不需要58.37% 选择</p>
+</blockquote>
+<blockquote>
+<h5 id="单选投票题-Short-Url-长时间不用是否需要释放？"><a href="#单选投票题-Short-Url-长时间不用是否需要释放？" class="headerlink" title="[单选投票题]Short Url 长时间不用是否需要释放？"></a>[单选投票题]Short Url 长时间不用是否需要释放？</h5><p>您选择的答案是B</p>
+<p>感谢您参与投票！</p>
+<p>A.需要58.08% 选择</p>
+<p>B.不需要41.92% 选择</p>
+</blockquote>
+<p>這兩個是開放的問題</p>
+<p>不同的設計有不同的體驗。各有好壞處。</p>
+<p>沒釋放出去就存disk，又不占什麼空間，又便宜。</p>
+<h2 id="QPS"><a href="#QPS" class="headerlink" title="QPS"></a>QPS</h2><p>是否是真需要很多的機器？</p>
+<p>ave QPS = 日活跃*每个用户平均请求次数/一天多少秒</p>
+<p>系統一般不是特別頻繁</p>
+<p>QPS這問題跟Storage都還好。</p>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>就陽春一個而已</p>
+<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><blockquote>
+<h5 id="单选题-TinyUrl-用什么类型的数据库比较合适？"><a href="#单选题-TinyUrl-用什么类型的数据库比较合适？" class="headerlink" title="[单选题]TinyUrl 用什么类型的数据库比较合适？"></a>[单选题]TinyUrl 用什么类型的数据库比较合适？</h5><p>A.SQL / 关系型数据库10.37% 选择</p>
+<p>B.NoSQL / 非关系型数据库17.76% 选择</p>
+<p>C.都可以，取决于算法是什么71.88% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>C</p>
+<p><strong>解析:</strong></p>
+<p>如果你需要用 Auto-increment ID，就用关系型数据库，否则可以用非关系型数据库，操作更简单一些。</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>为什么sql比nosql要写的代码少呢？<ul>
+<li>因为很多的 web framework，调用 SQL 部分的接口什么的代码都帮你写得很丰富，很多事儿你也都不用管。很多 NoSQL 的调用，包括 Serialization 之类的事情程序员都需要额外的代码去做。所以会长一些。</li>
+</ul>
+</li>
+<li>除了seq id，还有什么方法确保两个不同的longUrl 得到不同的shorturl呢<ul>
+<li>还可以随机生成一个 shortUrl 然后用数据库来判断用过没有，用过就再生成一个。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Alg"><a href="#Alg" class="headerlink" title="Alg."></a>Alg.</h2><ul>
+<li>HASH –&gt; 再好的也會有conflict; md5本身就有，更不用說基於它再取６位</li>
+<li>隨機生成再去DB去重</li>
+</ul>
+<blockquote>
+<h5 id="多选题-下面哪些“码”可能是随机生成-数据库去重的？"><a href="#多选题-下面哪些“码”可能是随机生成-数据库去重的？" class="headerlink" title="[多选题]下面哪些“码”可能是随机生成+数据库去重的？"></a>[多选题]下面哪些“码”可能是随机生成+数据库去重的？</h5><p>A.短信验证码20.86% 选择</p>
+<p>B.邮箱激活码21.60% 选择</p>
+<p>C.酒店订单确认码28.84% 选择</p>
+<p>D.机票订单确认码28.70% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是ABCD</p>
+<p><strong>正确答案:</strong>CD</p>
+<p><strong>解析:</strong></p>
+<p>验证码和激活码没有去重的需求。订单确认码才有去重的需求。</p>
+</blockquote>
+<p>驗證碼一下就過期了。訂單本身碼很長，所以有確認碼跟客服比較好溝通。</p>
+<blockquote>
+<ul>
+<li><p>sequential id vs. non-sequential id 是怎么用的？ 为什么很重要？</p>
+<ul>
+<li>sequential id就是关系型数据库中每增加一行系统会自动给这一行数据分配一个自增id，这样可以保证每一行的id递增且不重复。如果id是随机生成的而不是有顺序的那就叫non sequenctial id，一般需要手动生成。</li>
+</ul>
+</li>
+<li><p>随机生成函数是什么？可以具体讲讲么</p>
+<ul>
+<li><p>比如这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#39;&#39;.join([for i in range(6) random.choice(&quot;ABCDEF&quot;)])</span><br></pre></td></tr></table></figure>
+
+<p>这段python 代码就是一个 for 循环，循环6次，每次从一个字符串里随机挑一个字符出来。这样就随机生成了一个 6位的code。</p>
+</li>
+</ul>
+</li>
+<li><p>不是说Hash的冲突概率很小吗?</p>
+<ul>
+<li>Hash冲突小的前提是，获得的 hashcode 的长度要足够长，一般生产的类似 UUID 这样的 hash 值，好几十位字符串，这样才不会冲突。只有6位字符很容易冲突。</li>
+</ul>
+</li>
+<li><p>算法二除了速度慢外，如要处理并发问题吗，如果需要，如何处理？加锁吗？谢谢</p>
+<ul>
+<li>不需要做任何代码的修改。不需要加锁。并发没有问题。首先就算并发，两个 process 调用了 Random 函数之后得到的也是不同的随机串，冲突的概率很小。第二，就算有冲突，数据库也会进行加锁保证不会出现2个重复的被插入。第三如果因为 Race Condition 的原因，刚好会向数据库里插入两次一样的 short_key 的话，那么可以设置 short_key 是 unique 的，然后其中一次 fail 掉，报错给用户，用户重试一次即可解决问题。</li>
+</ul>
+</li>
+<li><p>感觉可以随机生成10个candidate 然后batch query。这样就可以最大限度避免DDB read。</p>
+<ul>
+<li>这样是不对的。相当于你为了解决一个1%的case，降低了 99% 的case的运行效率。</li>
+</ul>
+</li>
+<li><p>database.filter(shortURL)不会很慢么？</p>
+<ul>
+<li>不会，shortUrl有index。</li>
+</ul>
+</li>
+<li><p>进制转换的方法是如何把longUrl 转换成 shortUrl的呢？</p>
+<ul>
+<li>将 long url 插入 database, 拿到 auto-increment id (sequential id)</li>
+<li>将 id 进制转换得到 shortUrl</li>
+</ul>
+</li>
+<li><p>sequential ID数据类型是整型啊？</p>
+<ul>
+<li>是的，整数。要不然做不到 sequential。sequential id 又叫做 auto-increment id</li>
+</ul>
+</li>
+<li><p>那如果有人用同样的longUrl要求做shortUrl, 是会每次返回不一样的shortUrl么？</p>
+<ul>
+<li>相同的 longUrl 可以先查一下是否有和这个 longUrl对应的 shortUrl。查询的办法一方面可以通过数据库对 longUrl 建立 Index 来加速查询。另外也可以再加上 cache，把 longUrl to ShortUrl 的映射 cache 起来。先查 cache，查不到再去 db 查，这样就更快了。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>[单选投票题]随机生成和进制转换两种算法你认为哪种更好？</p>
+<p>你的选择:A</p>
+<p>感谢您参与投票！</p>
+<p>A:随机生成(36.58% 选择)</p>
+<p>B:进制转换(63.42% 选择)</p>
+</blockquote>
+<h2 id="表單結構＆可行解"><a href="#表單結構＆可行解" class="headerlink" title="表單結構＆可行解"></a>表單結構＆可行解</h2><h3 id="隨機生成法"><a href="#隨機生成法" class="headerlink" title="隨機生成法"></a>隨機生成法</h3><p>​    不好</p>
+<blockquote>
+<ul>
+<li>short long，这2个存在sql，哪一个做pk呢？这个是一一对应的么？是说，建了index，就可以用其他column去查pk也是可以的么？<ul>
+<li>Primary Key 可以用 short，因为一个short 不能用两次，一个long 可以对应多个 short 所以可以存多次。用任意 column 做pk是可以的只要这个column 是 unique 的，不允许重复的。一一对应在课程中有讲到，short 到 long 是 1 short 对应 1 个 long。反过来一个 long 可以对应多个 short。</li>
+</ul>
+</li>
+<li>为了快速查找而对short-&gt;long, long-&gt;short都建立index，那么index也就要求long url之间不能重复，对吗？如果允许long url重复，也就不能建立log的index<ul>
+<li><strong><em>好问题！您对 index 的理解有误。 index 是可以有重复的，没有重复的 index 叫做 unique index。SQL 语句里如果你执行 <code>create index on long_url</code> 是可以重复的。如果你希望不重复，就<code>create unique index on long_url</code>。在 long url 建立 index 的情况下，您可以使用 index filter 出相同的 long_url 记录的第一条记录就可以了。</em></strong></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Scale-優化response-time"><a href="#Scale-優化response-time" class="headerlink" title="Scale 優化response time"></a>Scale 優化response time</h2><ul>
+<li><p>提速，讀多的用Cache 優化，可用Cache Aside，存兩個表long2short, and short2long。</p>
+</li>
+<li><p>提速：地理上server靠近訪問地點。或中心化的，靠兩邊都還ok中間的。</p>
+<ul>
+<li>DNS根據用戶地區給不同的IP去美國的web server找memcached裡的，找不到再去Shared DB。</li>
+<li>用戶一次的request等於Web Server對DB一次的請求。</li>
+<li>如果Web對DB請求是多次的，那最好吧DB放到跟Server一樣的地方，異地的SErver頂多再來訪問本地的Server，也就一次，這樣Server 對DB的延遲不會被放大。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li><h5 id="单选题-TinyUrl-是读多写少还是读少写多？"><a href="#单选题-TinyUrl-是读多写少还是读少写多？" class="headerlink" title="[单选题]TinyUrl 是读多写少还是读少写多？"></a>[单选题]TinyUrl 是读多写少还是读少写多？</h5><p>A.读多写少94.90% 选择</p>
+<p>B.读少写多5.10% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>A</p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>两个cache和DB之间的sync怎么解决<ul>
+<li>写入一般都是先写db再写cache的，允许cache写入失败，但是db要写入成功。两者之间可以允许不一致</li>
+</ul>
+</li>
+<li><strong>memcached 如何跟shared db sync</strong><ul>
+<li><strong>这个就是典型的cache aside。从shared db读取结果到之后将结果放在memchached，这样再次查询同样的数据就可以直接从cache取。当有数据发生变动的时候，先写数据库，然后delete缓存里面受影响的数据。</strong></li>
+</ul>
+</li>
+<li>为啥create short url 也需要 memcache？如果使用呢？<ul>
+<li>因为create short url要先查询一下当前的long url是否已经有对应的short url了，这个可以查缓存里的long2short信息，如果缓存里有的话就不用创建了，如果缓存里没有再查db里有没有，如果有就直接返回现有的shorturl，如果没有就创建一个新的。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="How-to-Scale"><a href="#How-to-Scale" class="headerlink" title="How to Scale"></a>How to Scale</h3><p>要是量翻了10倍，怎麼用多台數據庫怎麼去解決TinyURL的架構問題？</p>
+<ul>
+<li>什麼時候要多台DB Server<ul>
+<li>Cache hit rate小</li>
+<li>寫操作比較多 =&gt; 無法透過 Cache優化</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h5 id="单选题-TinyUrl-最主要要解决的是存不下还是忙不过来？"><a href="#单选题-TinyUrl-最主要要解决的是存不下还是忙不过来？" class="headerlink" title="[单选题]TinyUrl 最主要要解决的是存不下还是忙不过来？"></a>[单选题]TinyUrl 最主要要解决的是存不下还是忙不过来？</h5><p>A.存不下22.14% 选择    Storage</p>
+<p>B.忙不过来77.86% 选择　QPS issue</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+</blockquote>
+<blockquote>
+<h5 id="单选投票题-Tiny-Url-你会选择用什么做-Sharding-Key"><a href="#单选投票题-Tiny-Url-你会选择用什么做-Sharding-Key" class="headerlink" title="[单选投票题]Tiny Url 你会选择用什么做 Sharding Key?"></a>[单选投票题]Tiny Url 你会选择用什么做 Sharding Key?</h5><p>您选择的答案是A</p>
+<p>感谢您参与投票！</p>
+<p>A.Long Url17.21% 选择</p>
+<p>B.Short Url82.79% 选择</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>多机随机生成URL算法，如何处理并发问题呢？<ul>
+<li>并发没有问题。首先就算并发，两个 process 调用了 Random 函数之后得到的也是不同的随机串，冲突的概率很小。第二，就算有冲突，数据库也会进行加锁保证不会出现2个重复的被插入。第三如果因为 Race Condition 的原因，刚好会向数据库里插入两次一样的 short_key 的话，那么可以设置 short_key 是 unique 的，然后其中一次 fail 掉，报错给用户，用户重试一次即可解决问题。</li>
+</ul>
+</li>
+<li>专门一台db做seq id服务，请问下，db table的schema长什么样子？<ul>
+<li>schema 里就一个 column 一个数据，就是 last_seq_id，大整数。</li>
+</ul>
+</li>
+<li>有一点想确定一下 最后介绍的base62 sharding key方法是用来解决原本查询需要broadcast的情况 对吧？全局自增ID问题依旧需要有专项服务器处理吧<ul>
+<li>是的，你的理解是对的。</li>
+</ul>
+</li>
+<li>用base 62的方法做sharding key, 我们还需要存两份映射吗？<ul>
+<li>如果你用 SQL 数据库的话，都 long 和short 都建了 index 就不需要了。通过sharding key找到机器，通过这台机器上的 index 找到具体数据。</li>
+</ul>
+</li>
+<li>hash（long_url）就是得到的short url么？<ul>
+<li><code>hash(long_url) % 62</code>得到的是 short url 的第一位字符</li>
+</ul>
+</li>
+<li>这个并不解决全局自增ID的问题啊？？<ul>
+<li>这并没有解决自增id的问题，只是在查询的时候不用broadcast了。要做全局自增id还是需要使用前述方法。</li>
+</ul>
+</li>
+<li>能否在储存shorturl的表单里加入sharding_key，这样就没有62台机器的数量限制了<ul>
+<li>在存储shorturl的表单里加入sharding_key的话仍然没有解决查询short2long时需要广播的问题。这里说的方案是把sharding key给embed到shorturl中，因此需要占用一定的shorturl位数。当sharding key占shorturl中的一位的时候就是限定62台机器，占两位的时候就是62 * 62台，只能是在这个占的位数上做trade off。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="Multi-Region-Optimization"><a href="#Multi-Region-Optimization" class="headerlink" title="Multi Region Optimization"></a>Multi Region Optimization</h3><ul>
+<li>數據庫在美、台各地各放一份？<ul>
+<li>一致性問題難解決</li>
+</ul>
+</li>
+<li>可根據網站的地域信息作Sharding ，避免存多份的不一致<ul>
+<li>域名- 可根據長尾理論作白名單</li>
+<li>Short url的前置位</li>
+<li>大不了跨境需求讓它慢一點</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>db usa 和db cn 如果保持数据一致性？<ul>
+<li>不需要保持一致，两边存储的是不一样的数据。DB USA只存属于美国的long2short和short2long，而DB CN是只存中国的long2short和short2long。如果担心分配的shorturl有冲突的话可以给不同的区域分别分配不同的可用shorturl范围。</li>
+</ul>
+</li>
+<li>分布式DB的机器距离变远之后（一个在中国，一个在美国），进行操作所需要的时间会变慢吗？影响大不大？<ul>
+<li>会，但是你可以将美国那边近期的热点ur（中国用户最近访问得比较多得美国url)做一个中国本地的cache，这样可以很大程度上减轻这种影响。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>一般是各方法有自己的優缺、優劣</p>
+<ul>
+<li>TinyURL related <ul>
+<li>知乎 <a href="http://bit.ly/22FHP5o" target="_blank" rel="noopener">http://bit.ly/22FHP5o</a></li>
+<li>The System Design Process <a href="http://bit.ly/1B6HOEc" target="_blank" rel="noopener">http://bit.ly/1B6HOEc</a></li>
+</ul>
+</li>
+<li>用Django搭建一个网站 <a href="http://bit.ly/21LApIb" target="_blank" rel="noopener">http://bit.ly/21LApIb</a><ul>
+<li>搭建一个tiny url的网站</li>
+</ul>
+</li>
+<li>Emoji URL<ul>
+<li><a href="http://www.xn--vi8hiv.ws" target="_blank" rel="noopener">http://www.xn--vi8hiv.ws</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h2><h1 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h1><blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdi4zq7rxxj30r80tw783.jpg" alt="image-20200404230945535"></p>
+</blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdi53cccn3j30r80tugqk.jpg" alt="image-20200404231317707"></p>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdi548ss55j30qe0o8dil.jpg" alt="image-20200404231410186"></p>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdi54ljrx1j30qe0siwis.jpg" alt="image-20200404231430477"></p>
+</div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/45/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/45/">45</a><span class="page-number current">46</span><a class="page-number" href="/page/47/">47</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><a class="extend next" rel="next" href="/page/47/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
   $('#nav').addClass('is-mobile')
   $('footer').addClass('is-mobile')
   $('#top-container').addClass('is-mobile')
