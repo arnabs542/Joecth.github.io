@@ -7,16 +7,73 @@
     error: 'Copy error',
     noSupport: 'The browser does not support'
   }
-} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-Server"><span class="toc-number">1.</span> <span class="toc-text">Web Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DB"><span class="toc-number">2.</span> <span class="toc-text">DB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#File-System"><span class="toc-number">3.</span> <span class="toc-text">File System</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cache"><span class="toc-number">4.</span> <span class="toc-text">Cache</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">4.1.</span> <span class="toc-text"></span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Design-Twitter"><span class="toc-number"></span> <span class="toc-text">Design Twitter</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#General"><span class="toc-number"></span> <span class="toc-text">General</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scenario-場景"><span class="toc-number"></span> <span class="toc-text">Scenario 場景</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-下面说法中，”不”正确的是"><span class="toc-number">0.0.1.</span> <span class="toc-text">[单选题]下面说法中，”不”正确的是</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#需要設計哪些功能"><span class="toc-number">1.</span> <span class="toc-text">需要設計哪些功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Service"><span class="toc-number"></span> <span class="toc-text">Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storage"><span class="toc-number"></span> <span class="toc-text">Storage</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-关于文件系统和数据库系统之间的关系，下列说法“不正确”的是？"><span class="toc-number">0.0.1.</span> <span class="toc-text">[单选题]关于文件系统和数据库系统之间的关系，下列说法“不正确”的是？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-为什么-User-Table-里不用-username-email-作为-Primary-key"><span class="toc-number">0.0.2.</span> <span class="toc-text">[单选题]为什么 User Table 里不用 username &#x2F; email 作为 Primary key</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PULL"><span class="toc-number">1.</span> <span class="toc-text">PULL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#News-Feed-如何存取？-gt-Tradeoff"><span class="toc-number">1.1.</span> <span class="toc-text">News Feed 如何存取？&#x3D;&#x3D;&gt; Tradeoff!</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-关于为什么多路归并的时间可以被忽略，下列说法不正确的是"><span class="toc-number">1.1.1.</span> <span class="toc-text">[单选题]关于为什么多路归并的时间可以被忽略，下列说法不正确的是</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Push"><span class="toc-number">2.</span> <span class="toc-text">Push</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-NewsFeedTable的索引（index）该怎么建？"><span class="toc-number">2.0.1.</span> <span class="toc-text">[单选题]NewsFeedTable的索引（index）该怎么建？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#多选题-Push-模型有什么主要的缺陷？"><span class="toc-number">2.0.2.</span> <span class="toc-text">[多选题]Push 模型有什么主要的缺陷？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-广告的插入是-Push-还是-Pull-模型？"><span class="toc-number">2.0.3.</span> <span class="toc-text">[单选题]广告的插入是 Push 还是 Pull 模型？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#數據庫的索引"><span class="toc-number">3.</span> <span class="toc-text">數據庫的索引</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scale"><span class="toc-number"></span> <span class="toc-text">Scale</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-直接用粉丝数目判断是否是明星会不会有问题"><span class="toc-number">0.0.1.</span> <span class="toc-text">[单选题]直接用粉丝数目判断是否是明星会不会有问题</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-number"></span> <span class="toc-text">Summary</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Extension"><span class="toc-number"></span> <span class="toc-text">Extension</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#數據持久化與常見的數據庫"><span class="toc-number"></span> <span class="toc-text">數據持久化與常見的數據庫</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#消息隊列"><span class="toc-number"></span> <span class="toc-text">消息隊列</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Tradeoff"><span class="toc-number">0.0.1.</span> <span class="toc-text">Tradeoff</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#SOA"><span class="toc-number">0.0.2.</span> <span class="toc-text">SOA</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Pull-vs-Push-Model"><span class="toc-number">0.0.3.</span> <span class="toc-text">Pull vs Push Model</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#DB-Systems"><span class="toc-number">0.0.4.</span> <span class="toc-text">DB Systems</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Async-amp-Message-Queue"><span class="toc-number">0.0.5.</span> <span class="toc-text">Async &amp; Message Queue</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Persistent"><span class="toc-number">0.0.6.</span> <span class="toc-text">Persistent</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Denormalize"><span class="toc-number">0.0.7.</span> <span class="toc-text">Denormalize</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Thundering-Herd"><span class="toc-number">0.0.8.</span> <span class="toc-text">Thundering Herd</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#News-Feed-Design"><span class="toc-number">0.0.9.</span> <span class="toc-text">News Feed Design?!</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">274</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">40</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">System-Design/9p/2019-03-18-System Design &amp; Design Twitter</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-18</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><ul>
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-Server"><span class="toc-number">1.</span> <span class="toc-text">Web Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DB"><span class="toc-number">2.</span> <span class="toc-text">DB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#File-System"><span class="toc-number">3.</span> <span class="toc-text">File System</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cache"><span class="toc-number">4.</span> <span class="toc-text">Cache</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#知識補充"><span class="toc-number"></span> <span class="toc-text">知識補充</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Merge-K-Sorted-Lists"><span class="toc-number"></span> <span class="toc-text">Merge K Sorted Lists</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#名詞們"><span class="toc-number"></span> <span class="toc-text">名詞們</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-【系统设计2020】下面哪个”不是”常见的用做消息队列（Message-Queue）的软件"><span class="toc-number">0.0.1.</span> <span class="toc-text">[单选题]【系统设计2020】下面哪个”不是”常见的用做消息队列（Message Queue）的软件</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Design-Twitter"><span class="toc-number"></span> <span class="toc-text">Design Twitter</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#反應"><span class="toc-number"></span> <span class="toc-text">反應</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#General"><span class="toc-number"></span> <span class="toc-text">General</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scenario-場景"><span class="toc-number"></span> <span class="toc-text">Scenario 場景</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-下面说法中，”不”正确的是"><span class="toc-number">0.0.1.</span> <span class="toc-text">[单选题]下面说法中，”不”正确的是</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#需要設計哪些功能"><span class="toc-number">1.</span> <span class="toc-text">需要設計哪些功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Service"><span class="toc-number"></span> <span class="toc-text">Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storage"><span class="toc-number"></span> <span class="toc-text">Storage</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-系统设计2020-关于文件系统和数据库系统之间的关系，下列说法“不正确”的是？"><span class="toc-number">0.0.1.</span> <span class="toc-text">[单选题][系统设计2020]关于文件系统和数据库系统之间的关系，下列说法“不正确”的是？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-为什么-User-Table-里不用-username-email-作为-Primary-key"><span class="toc-number">0.0.2.</span> <span class="toc-text">[单选题]为什么 User Table 里不用 username &#x2F; email 作为 Primary key</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Design-Schema"><span class="toc-number">1.</span> <span class="toc-text">Design Schema</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-number">2.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#News-Feed-如何存取？"><span class="toc-number">3.</span> <span class="toc-text">News Feed 如何存取？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Pull"><span class="toc-number">3.1.</span> <span class="toc-text">Pull</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-关于为什么多路归并的时间可以被忽略，下列说法不正确的是"><span class="toc-number">3.1.1.</span> <span class="toc-text">[单选题]关于为什么多路归并的时间可以被忽略，下列说法不正确的是</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#缺點："><span class="toc-number">3.1.2.</span> <span class="toc-text">缺點：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#偽代碼"><span class="toc-number">3.1.3.</span> <span class="toc-text">偽代碼</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Push"><span class="toc-number">3.2.</span> <span class="toc-text">Push</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Fanout"><span class="toc-number">3.2.1.</span> <span class="toc-text">Fanout</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Denormalize"><span class="toc-number">3.2.2.</span> <span class="toc-text">Denormalize</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#例子"><span class="toc-number">3.2.3.</span> <span class="toc-text">例子</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-NewsFeedTable的索引（index）该怎么建？"><span class="toc-number">3.2.4.</span> <span class="toc-text">[单选题]NewsFeedTable的索引（index）该怎么建？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Push-流程圖"><span class="toc-number">3.2.5.</span> <span class="toc-text">Push 流程圖</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#缺陷"><span class="toc-number">3.2.6.</span> <span class="toc-text">缺陷</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#多选题-Push-模型有什么主要的缺陷？"><span class="toc-number">3.2.7.</span> <span class="toc-text">[多选题]Push 模型有什么主要的缺陷？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#現有社交software的模型分析"><span class="toc-number">3.3.</span> <span class="toc-text">現有社交software的模型分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-广告的插入是-Push-还是-Pull-模型？"><span class="toc-number">3.3.1.</span> <span class="toc-text">[单选题]广告的插入是 Push 还是 Pull 模型？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#數據庫的索引"><span class="toc-number">4.</span> <span class="toc-text">數據庫的索引</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scale"><span class="toc-number"></span> <span class="toc-text">Scale</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#解決設計缺陷如-Pull-vs-Push"><span class="toc-number">1.</span> <span class="toc-text">解決設計缺陷如 Pull vs Push</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PUSH-PULL"><span class="toc-number">2.</span> <span class="toc-text">PUSH + PULL</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-直接用粉丝数目判断是否是明星会不会有问题"><span class="toc-number">2.0.1.</span> <span class="toc-text">[单选题]直接用粉丝数目判断是否是明星会不会有问题</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-number"></span> <span class="toc-text">Summary</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Extension"><span class="toc-number"></span> <span class="toc-text">Extension</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#數據持久化與常見的數據庫"><span class="toc-number"></span> <span class="toc-text">數據持久化與常見的數據庫</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#消息隊列"><span class="toc-number"></span> <span class="toc-text">消息隊列</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Appendix"><span class="toc-number"></span> <span class="toc-text">Appendix</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-果取關"><span class="toc-number">1.</span> <span class="toc-text">1 果取關</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-如何存-Likes"><span class="toc-number">2.</span> <span class="toc-text">2 如何存 Likes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-驚群現象-Thundering-Herd"><span class="toc-number">3.</span> <span class="toc-text">3 驚群現象 Thundering Herd</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-【系统设计2020】数据库的分片机制是否对同一个数据的大量访问有用？"><span class="toc-number">3.0.1.</span> <span class="toc-text">[单选题]【系统设计2020】数据库的分片机制是否对同一个数据的大量访问有用？</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#四種姿勢"><span class="toc-number"></span> <span class="toc-text">四種姿勢</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Tradeoff"><span class="toc-number">0.0.1.</span> <span class="toc-text">Tradeoff</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#SOA"><span class="toc-number">0.0.2.</span> <span class="toc-text">SOA</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Pull-vs-Push-Model"><span class="toc-number">0.0.3.</span> <span class="toc-text">Pull vs Push Model</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#DB-Systems"><span class="toc-number">0.0.4.</span> <span class="toc-text">DB Systems</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Async-amp-Message-Queue"><span class="toc-number">0.0.5.</span> <span class="toc-text">Async &amp; Message Queue</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Persistent"><span class="toc-number">0.0.6.</span> <span class="toc-text">Persistent</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Denormalize-1"><span class="toc-number">0.0.7.</span> <span class="toc-text">Denormalize</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Thundering-Herd"><span class="toc-number">0.0.8.</span> <span class="toc-text">Thundering Herd</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#News-Feed-Design"><span class="toc-number">0.0.9.</span> <span class="toc-text">News Feed Design?!</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">276</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">39</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">System-Design/9p/2019-03-18-System Design &amp; Design Twitter</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-18</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><ul>
 <li><h3 id="Web-Server"><a href="#Web-Server" class="headerlink" title="Web Server"></a>Web Server</h3></li>
 <li><h3 id="DB"><a href="#DB" class="headerlink" title="DB"></a>DB</h3></li>
 <li><h3 id="File-System"><a href="#File-System" class="headerlink" title="File System"></a>File System</h3></li>
 <li><h3 id="Cache"><a href="#Cache" class="headerlink" title="Cache"></a>Cache</h3></li>
 </ul>
-<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h1 id="Design-Twitter"><a href="#Design-Twitter" class="headerlink" title="Design Twitter"></a>Design Twitter</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Definition of Tweet:</span></span><br><span class="line"><span class="string">class Tweet:</span></span><br><span class="line"><span class="string">    @classmethod</span></span><br><span class="line"><span class="string">    def create(cls, user_id, tweet_text):</span></span><br><span class="line"><span class="string">         # This will create a new tweet object,</span></span><br><span class="line"><span class="string">         # and auto fill id</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MiniTwitter</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># do intialization if necessary</span></span><br><span class="line">        self.users = defaultdict(list)  <span class="comment"># self's tweets</span></span><br><span class="line">        self.following = defaultdict(list)  <span class="comment"># as an Adjacent list </span></span><br><span class="line">        self.article_id = <span class="number">0</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: user_id: An integer</span></span><br><span class="line"><span class="string">    @param: tweet_text: a string</span></span><br><span class="line"><span class="string">    @return: a tweet</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">postTweet</span><span class="params">(self, user_id, tweet_text)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        tweet = Tweet.create(user_id, tweet_text)</span><br><span class="line"></span><br><span class="line">        self.article_id += <span class="number">1</span>    <span class="comment"># necessary for time info</span></span><br><span class="line">        self.users[user_id].append([self.article_id, tweet])   <span class="comment"># <span class="doctag">TODO:</span> WRONG, requires time info for</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> tweet</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># @param &#123;int&#125; user_id</span></span><br><span class="line">    <span class="comment"># return &#123;Tweet[]&#125; 10 new feeds recently</span></span><br><span class="line">    <span class="comment"># and sort by timeline</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getNewsFeed</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line">        <span class="comment"># Write your code here</span></span><br><span class="line">        rt = []</span><br><span class="line">        <span class="keyword">if</span> user_id <span class="keyword">in</span> self.users:</span><br><span class="line">            rt = self.users[user_id][<span class="number">-10</span>:]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> user_id <span class="keyword">in</span> self.following:</span><br><span class="line">            <span class="keyword">for</span> friend <span class="keyword">in</span> self.following[user_id]:</span><br><span class="line">                <span class="keyword">if</span> friend <span class="keyword">in</span> self.users:</span><br><span class="line">                    rt.extend(self.users[friend][<span class="number">-10</span>:])</span><br><span class="line"></span><br><span class="line">        rt.sort(key=<span class="keyword">lambda</span> x: x[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> [tweet[<span class="number">1</span>] <span class="keyword">for</span> tweet <span class="keyword">in</span> rt[<span class="number">-10</span>:][::<span class="number">-1</span>]]</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: user_id: An integer</span></span><br><span class="line"><span class="string">    @return: a list of 10 new feeds recently and sort by timeline</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getNewsFeed_mywrong</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># return []</span></span><br><span class="line">        <span class="comment"># if user_id not in self.users:</span></span><br><span class="line">            <span class="comment"># return [] # 給沒建帳號也可以呼叫follow函數…</span></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">if</span> user_id <span class="keyword">in</span> self.users:</span><br><span class="line">            res = [mypost[<span class="number">1</span>] <span class="keyword">for</span> mypost <span class="keyword">in</span> self.users[user_id][<span class="number">-10</span>:][::<span class="number">-1</span>]]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># print('aaaaa', res)</span></span><br><span class="line">        <span class="keyword">if</span> user_id <span class="keyword">in</span> self.following:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> self.following[user_id]:   </span><br><span class="line">                <span class="comment"># res.append(self.users[guy_id])</span></span><br><span class="line">                <span class="comment"># res.append(self.users[i][-10:])</span></span><br><span class="line">                <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> self.users:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">            </span><br><span class="line">                this_user = []</span><br><span class="line">                this_user.append(like[<span class="number">1</span>] <span class="keyword">for</span> like <span class="keyword">in</span> self.users[i][<span class="number">-10</span>:][::<span class="number">-1</span>])</span><br><span class="line">                res.extend(this_user)</span><br><span class="line">        print(res)</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">        </span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: user_id: An integer</span></span><br><span class="line"><span class="string">    @return: a list of 10 new posts recently and sort by timeline</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getTimeline</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="keyword">if</span> user_id <span class="keyword">not</span> <span class="keyword">in</span> self.users:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> [like[<span class="number">1</span>] <span class="keyword">for</span> like <span class="keyword">in</span> self.users[user_id][<span class="number">-10</span>:][::<span class="number">-1</span>]]</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: from_user_id: An integer</span></span><br><span class="line"><span class="string">    @param: to_user_id: An integer</span></span><br><span class="line"><span class="string">    @return: nothing</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">follow</span><span class="params">(self, from_user_id, to_user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># if from_user_id not in self.following[from_user_id]:</span></span><br><span class="line">        self.following[from_user_id].append(to_user_id)</span><br><span class="line">        </span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: from_user_id: An integer</span></span><br><span class="line"><span class="string">    @param: to_user_id: An integer</span></span><br><span class="line"><span class="string">    @return: nothing</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">unfollow</span><span class="params">(self, from_user_id, to_user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        friends = self.following[from_user_id]</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            idx = friends.index(to_user_id)</span><br><span class="line">            self.following[from_user_id] = friends[:idx] + friends[idx+<span class="number">1</span>:]</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            print(<span class="string">'This guy has no this friend!'</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="知識補充"><a href="#知識補充" class="headerlink" title="知識補充"></a>知識補充</h1><h2 id="Merge-K-Sorted-Lists"><a href="#Merge-K-Sorted-Lists" class="headerlink" title="Merge K Sorted Lists"></a>Merge K Sorted Lists</h2><ul>
+<li><p>三種方式</p>
+<ol>
+<li><p>Heap, NxLg(K)</p>
+</li>
+<li><p>可說是 2A, NxK</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3ess84kjj30fu09edh7.jpg" alt="image-20200725184659925"></p>
+</li>
+<li><p>可說是 2B, NxLg(K)</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3eteo2k7j30k60bojts.jpg" alt="image-20200725184735971"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3etvcsy4j30ho0b277b.jpg" alt="image-20200725184803623"></p>
+</li>
+<li><p>★★ D&amp;C<br><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3eycvecfj30ue0getbh.jpg" alt="image-20200725185221462"></p>
+<p>猜到NxLog(K) 意謂著可知道每層、及stack的高度<br><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3f0a0t6lj30uk0eejvq.jpg" alt="image-20200725185411349"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3f115lfij30nu0ds0uw.jpg" alt="image-20200725185456319"></p>
+</li>
+</ol>
+</li>
+</ul>
+<p>​                    </p>
+<p>​                    <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3f1t38vkj30qu07k416.jpg" alt="image-20200725185540406"></p>
+<ul>
+<li>Compare to M-Sort</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3f1mt8x4j30ny086mzm.jpg" alt="image-20200725185531135"></p>
+<h2 id="名詞們"><a href="#名詞們" class="headerlink" title="名詞們"></a>名詞們</h2><ul>
+<li>Web Server, 比較好企業級的 1K/sec，自己搭的10/sec就不錯了</li>
+<li>DB based on File System</li>
+<li>File System 接口單一，非結構化適合直接就放在FS, 而不是DB</li>
+<li>Cache</li>
+</ul>
+<blockquote>
+<h5 id="单选题-【系统设计2020】下面哪个”不是”常见的用做消息队列（Message-Queue）的软件"><a href="#单选题-【系统设计2020】下面哪个”不是”常见的用做消息队列（Message-Queue）的软件" class="headerlink" title="[单选题]【系统设计2020】下面哪个”不是”常见的用做消息队列（Message Queue）的软件"></a>[单选题]【系统设计2020】下面哪个”不是”常见的用做消息队列（Message Queue）的软件</h5><p>A.RabbitMQ3.23% 选择</p>
+<p>B.Redis19.35% 选择</p>
+<p>C.Memcached64.52% 选择</p>
+<p>D.Amazon SQS12.90% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是D</p>
+<p><strong>正确答案:</strong>C</p>
+<p><strong>解析:</strong></p>
+<p>Memcached 是一款缓存（Cache）软件，是单纯的 key value 结构，不支持队列结构。</p>
+</blockquote>
+<h1 id="Design-Twitter"><a href="#Design-Twitter" class="headerlink" title="Design Twitter"></a>Design Twitter</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Definition of Tweet:</span></span><br><span class="line"><span class="string">class Tweet:</span></span><br><span class="line"><span class="string">    @classmethod</span></span><br><span class="line"><span class="string">    def create(cls, user_id, tweet_text):</span></span><br><span class="line"><span class="string">         # This will create a new tweet object,</span></span><br><span class="line"><span class="string">         # and auto fill id</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MiniTwitter</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># do intialization if necessary</span></span><br><span class="line">        self.users = defaultdict(list)  <span class="comment"># self's tweets</span></span><br><span class="line">        self.following = defaultdict(list)  <span class="comment"># as an Adjacent list </span></span><br><span class="line">        self.article_id = <span class="number">0</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: user_id: An integer</span></span><br><span class="line"><span class="string">    @param: tweet_text: a string</span></span><br><span class="line"><span class="string">    @return: a tweet</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">postTweet</span><span class="params">(self, user_id, tweet_text)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        tweet = Tweet.create(user_id, tweet_text)</span><br><span class="line"></span><br><span class="line">        self.article_id += <span class="number">1</span>    <span class="comment"># necessary for time info</span></span><br><span class="line">        self.users[user_id].append([self.article_id, tweet])   <span class="comment"># <span class="doctag">TODO:</span> WRONG, requires time info for</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> tweet</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># @param &#123;int&#125; user_id</span></span><br><span class="line">    <span class="comment"># return &#123;Tweet[]&#125; 10 new feeds recently</span></span><br><span class="line">    <span class="comment"># and sort by timeline</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getNewsFeed</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line">        <span class="comment"># Write your code here</span></span><br><span class="line">        rt = []</span><br><span class="line">        <span class="keyword">if</span> user_id <span class="keyword">in</span> self.users:</span><br><span class="line">            rt = self.users[user_id][<span class="number">-10</span>:]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> user_id <span class="keyword">in</span> self.following:</span><br><span class="line">            <span class="keyword">for</span> friend <span class="keyword">in</span> self.following[user_id]:</span><br><span class="line">                <span class="keyword">if</span> friend <span class="keyword">in</span> self.users:</span><br><span class="line">                    rt.extend(self.users[friend][<span class="number">-10</span>:])</span><br><span class="line"></span><br><span class="line">        rt.sort(key=<span class="keyword">lambda</span> x: x[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> [tweet[<span class="number">1</span>] <span class="keyword">for</span> tweet <span class="keyword">in</span> rt[<span class="number">-10</span>:][::<span class="number">-1</span>]]</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: user_id: An integer</span></span><br><span class="line"><span class="string">    @return: a list of 10 new feeds recently and sort by timeline</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getNewsFeed_mywrong</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># return []</span></span><br><span class="line">        <span class="comment"># if user_id not in self.users:</span></span><br><span class="line">            <span class="comment"># return [] # 給沒建帳號也可以呼叫follow函數…</span></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">if</span> user_id <span class="keyword">in</span> self.users:</span><br><span class="line">            res = [mypost[<span class="number">1</span>] <span class="keyword">for</span> mypost <span class="keyword">in</span> self.users[user_id][<span class="number">-10</span>:][::<span class="number">-1</span>]]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># print('aaaaa', res)</span></span><br><span class="line">        <span class="keyword">if</span> user_id <span class="keyword">in</span> self.following:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> self.following[user_id]:   </span><br><span class="line">                <span class="comment"># res.append(self.users[guy_id])</span></span><br><span class="line">                <span class="comment"># res.append(self.users[i][-10:])</span></span><br><span class="line">                <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> self.users:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">            </span><br><span class="line">                this_user = []</span><br><span class="line">                this_user.append(like[<span class="number">1</span>] <span class="keyword">for</span> like <span class="keyword">in</span> self.users[i][<span class="number">-10</span>:][::<span class="number">-1</span>])</span><br><span class="line">                res.extend(this_user)</span><br><span class="line">        print(res)</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">        </span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: user_id: An integer</span></span><br><span class="line"><span class="string">    @return: a list of 10 new posts recently and sort by timeline</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getTimeline</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="keyword">if</span> user_id <span class="keyword">not</span> <span class="keyword">in</span> self.users:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> [like[<span class="number">1</span>] <span class="keyword">for</span> like <span class="keyword">in</span> self.users[user_id][<span class="number">-10</span>:][::<span class="number">-1</span>]]</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: from_user_id: An integer</span></span><br><span class="line"><span class="string">    @param: to_user_id: An integer</span></span><br><span class="line"><span class="string">    @return: nothing</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">follow</span><span class="params">(self, from_user_id, to_user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># if from_user_id not in self.following[from_user_id]:</span></span><br><span class="line">        self.following[from_user_id].append(to_user_id)</span><br><span class="line">        </span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: from_user_id: An integer</span></span><br><span class="line"><span class="string">    @param: to_user_id: An integer</span></span><br><span class="line"><span class="string">    @return: nothing</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">unfollow</span><span class="params">(self, from_user_id, to_user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        friends = self.following[from_user_id]</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            idx = friends.index(to_user_id)</span><br><span class="line">            self.following[from_user_id] = friends[:idx] + friends[idx+<span class="number">1</span>:]</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            print(<span class="string">'This guy has no this friend!'</span>)</span><br></pre></td></tr></table></figure>
 
 
 
+<h2 id="反應"><a href="#反應" class="headerlink" title="反應"></a>反應</h2><ul>
+<li>當收到題目時，該如何？<ul>
+<li>互動! 你想過沒有：或許現在只有2個用戶呢？</li>
+<li>所以：<ol>
+<li>可行解</li>
+<li>特定問題</li>
+<li>分析能力</li>
+<li>權衡</li>
+<li>知識儲備</li>
+</ol>
+</li>
+<li>4S</li>
+<li>↓↓</li>
+</ul>
+</li>
+</ul>
 <h2 id="General"><a href="#General" class="headerlink" title="General"></a>General</h2><ol>
 <li>注意事項：<ul>
 <li>這個問題要考慮的用戶規模有多大？</li>
@@ -52,10 +109,10 @@
 <li>Ask; 2. Analysis</li>
 </ol>
 <ul>
-<li>需要設計哪些功能？</li>
-<li>需要承受多大的訪問量？<ul>
+<li><strong>需要設計哪些功能？</strong></li>
+<li><strong>需要承受多大的訪問量？</strong><ul>
 <li>DAU</li>
-<li>Twitter: MAU 330M, DAU ~170+M</li>
+<li>Twitter: MAU 330M, DAU ~170M+</li>
 </ul>
 </li>
 </ul>
@@ -80,14 +137,35 @@
 <li>Timeline News Feed</li>
 <li>Follow Unfollow a User</li>
 </ul>
-<p>Step2. Sort - 選出核心功能</p>
+<p>Step2. Sort - 選出核心功能, 因为不可能這麼短時間什麼都設計</p>
 <ul>
-<li>Post a Tweet</li>
+<li><strong>Post a Tweet !</strong></li>
 <li>Timeline</li>
 <li>News Feed</li>
 <li>Follow / Unfollow a user</li>
 <li>Register / Login</li>
 </ul>
+<ul>
+<li>看估計：60代表每個用戶一天點60次</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3gt8wd00j30ro0de43l.jpg" alt="image-20200725195638005"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3gwuuj71j30x40f2k0r.jpg" alt="image-20200725200005606"></p>
+<blockquote>
+<ul>
+<li>感觉老师对于服务器qps不太对啊，我查了一下资料，一天4核8G的腾讯云主机TPS就能达到15k呢，qps就更多了，可以达到30w.这个是链接。<a href="https://www.youtube.com/watch?v=CX6wS5j7FWw&amp;t=237s。数据规模1千万。如果只是按照1k来估算的，最后结果会相差很大的。" target="_blank" rel="noopener">https://www.youtube.com/watch?v=CX6wS5j7FWw&amp;t=237s。数据规模1千万。如果只是按照1k来估算的，最后结果会相差很大的。</a><ul>
+<li>如果只是返回简单的静态文件，你说的这个配置都能达到千万级别的qps，但是如果每个请求需要处理的逻辑复杂的话qps就会很低的。</li>
+</ul>
+</li>
+<li>QPS 的 query 是指访问一次某个接口，还是访问一次数据库？<ul>
+<li>根据场景不定，衡量并发的性能就是说每秒能承受多少用户访问，衡量数据库读的性能就是说每秒能承受多少次读取数据。</li>
+</ul>
+</li>
+<li>在设计推特的时候，一个用户浏览新鲜事的qps和她浏览自己timeline的qps需要分开估计吗？<ul>
+<li>需要分开估计的，用户浏览新鲜事的qps 肯定 比 浏览自己timeline的qps 高一两个数量级的。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
 <blockquote>
 <ul>
 <li><p>Read QPS: 是对数据库的操作频率</p>
@@ -134,7 +212,7 @@
 </li>
 </ul>
 </blockquote>
-<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>將大系統拆分為小服務, 如 SOA, Service Oriented Architecture</p>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>將大系統拆分為小服務, 如 <strong>SOA, Service Oriented Architecture</strong></p>
 <p>合併需要設計的功能，相似的功能整合為一個Service - 邏輯處理的整合</p>
 <ol>
 <li>Replay 重放需求</li>
@@ -144,26 +222,35 @@
 
 
 
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3h5eovytj30bm06imyu.jpg" alt="image-20200725200820199" style="zoom: 67%;" />
 
 
 
-
-<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><ul>
+<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3h6wynfqj31160h046y.jpg" alt="image-20200725200946414"></p>
+<ul>
+<li><p><strong>我們會想根據一個人的電話或email或地址去查他，所以關聯型</strong></p>
+</li>
+<li><p>tweet 的查詢一般就是找id，所以nosql中比較合適，且天然自帶sharding</p>
+</li>
+</ul>
+<ul>
 <li>现在 id 一般要用 Bigint （64位）才不会担心溢出。</li>
 <li>細化數據表單</li>
 <li>畫圖展示數據存、讀過程</li>
 <li>為每個Service選合適的儲存</li>
 </ul>
 <blockquote>
-<h5 id="单选题-关于文件系统和数据库系统之间的关系，下列说法“不正确”的是？"><a href="#单选题-关于文件系统和数据库系统之间的关系，下列说法“不正确”的是？" class="headerlink" title="[单选题]关于文件系统和数据库系统之间的关系，下列说法“不正确”的是？"></a>[单选题]关于文件系统和数据库系统之间的关系，下列说法“不正确”的是？</h5><p>A.数据库系统是建立在文件系统之上的，也就是说数据库系统中存储的数据最终都是要存在文件系统上的18.45% 选择</p>
-<p>B.文件系统中可以支持丰富的数据查询接口，如在记录用户信息的文件中快速挑选出所有身高在 175 到 185 之间的男性68.39% 选择</p>
-<p>C.我们一般将结构化的数据（Structured Data）放在数据库系统中，把非结构化的数据放在文件系统中9.42% 选择</p>
-<p>D.文件系统和数据库系统都是可持久化的存储系统3.74% 选择</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是C</p>
+<h5 id="单选题-系统设计2020-关于文件系统和数据库系统之间的关系，下列说法“不正确”的是？"><a href="#单选题-系统设计2020-关于文件系统和数据库系统之间的关系，下列说法“不正确”的是？" class="headerlink" title="[单选题][系统设计2020]关于文件系统和数据库系统之间的关系，下列说法“不正确”的是？"></a>[单选题][系统设计2020]关于文件系统和数据库系统之间的关系，下列说法“不正确”的是？</h5><p>A.数据库系统是建立在文件系统之上的，也就是说数据库系统中存储的数据最终都是要存在文件系统上的23.96% 选择</p>
+<p>B.文件系统中可以支持丰富的数据查询接口，如在记录用户信息的文件中快速挑选出所有身高在 175 到 185 之间的男性53.13% 选择</p>
+<p>C.我们一般将结构化的数据（Structured Data）放在数据库系统中，把非结构化的数据放在文件系统中15.63% 选择</p>
+<p>D.文件系统和数据库系统都是可持久化的存储系统7.29% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
 <p><strong>正确答案:</strong>B</p>
 <p><strong>解析:</strong></p>
 <p>数据库系统是文件系统的一层“包装”，将数据结构化的存储起来，从而可以支持更丰富的数据查询方法。如筛选某个属性在某个范围内的所有数据。而文件系统一般就是支持最简单的查询方法：取出某个文件从第x个字节开始的长度为y的所有数据。</p>
 </blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3hfje89fj310c0cqqf0.jpg" alt="image-20200725201756110"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3hg34ifxj310y0h6wo6.jpg" alt="image-20200725201830146"></p>
 <p>NoSQL 有index吗？</p>
 <p>有的，MongoDB就支持索引<a href="http://www.runoob.com/mongodb/mongodb-indexing.html。" target="_blank" rel="noopener">http://www.runoob.com/mongodb/mongodb-indexing.html。</a><br>索引就是帮助快速定位数据的一组附加信息，可以用在NoSQL上。</p>
 <blockquote>
@@ -177,18 +264,22 @@
 <p><strong>解析:</strong></p>
 <p>如果用 username / email 作为 primary key，会因被其他 table 引用而存储在其他的 table 中，如果被修改，会引起一连串的修改，效率很低。另外一个重要的原因是，通常 primary key 会作为 url 中的一个部分被分享出去，如果 primary key 被修改，则可能导致原本被分享出去的 url 失效。</p>
 </blockquote>
-<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd5ektr01cj30v60do430.jpg" alt="image-20200324224901600" style="zoom:50%;" />
+<h3 id="Design-Schema"><a href="#Design-Schema" class="headerlink" title="Design Schema"></a>Design Schema</h3><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd5ektr01cj30v60do430.jpg" alt="image-20200324224901600" style="zoom:50%;" />
 
 <ul>
+<li>usernane, email是可以給修改，所以不會是primary key, 要是整數的話一般就是sql不是nosql，nosql一般生出來的是個字處串的uuid hash。</li>
+<li><strong>如果username當 user table的主鍵的話，那friendship table因為用了它當外鍵就都要全改!! 所以不好</strong></li>
 <li>varchar 是数据库里的 string。</li>
 <li>用来作foreign key 的不希望它經常變化</li>
+<li>Tweet table的 id如果是存在nosql裡的話就是個字串當id了</li>
 <li>Tweet可以放在SQL也可以放在NoSQL。这里的Schema只是为了确定每条Tweet需要有哪些字段，这些字段可以存在SQL数据库中也可以存在NoSQL中。如果用SQL存的话，那么就是一行是一个tweet，如果是key-value型的NoSQL，那可能就是id =&gt; {user_id, content, created_at}这样的结构。</li>
 <li>media service 就不需要有任何結構啦</li>
 </ul>
-<h3 id="PULL"><a href="#PULL" class="headerlink" title="PULL"></a>PULL</h3><h4 id="News-Feed-如何存取？-gt-Tradeoff"><a href="#News-Feed-如何存取？-gt-Tradeoff" class="headerlink" title="News Feed 如何存取？==&gt; Tradeoff!"></a>News Feed 如何存取？==&gt; Tradeoff!</h4><ul>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="News-Feed-如何存取？"><a href="#News-Feed-如何存取？" class="headerlink" title="News Feed 如何存取？"></a>News Feed 如何存取？</h3><p>==&gt; Tradeoff!</p>
+<ul>
 <li>登入後看到的info的整合</li>
 <li>典型例子<ul>
-<li>FB, Twitter, 朋友圈，RSS Reader(關啦)</li>
+<li>FB, Twitter, 朋友圈，RSS Reader(關啦! 死了! 因為tweeter出現了)</li>
 </ul>
 </li>
 <li>新鮮事系統的核心因素？<ul>
@@ -197,12 +288,13 @@
 </ul>
 </li>
 </ul>
+<h4 id="Pull"><a href="#Pull" class="headerlink" title="Pull"></a>Pull</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3hndbagej30ye09saf9.jpg" alt="image-20200725202536234"></p>
 <p>主動要，拉自己關注的10個好友的前100 tweets，再合成一個給自己看的前100條 ==&gt; </p>
 <ul>
 <li>Merge K Sorted Lists</li>
 <li>複雜度：<ul>
 <li>如果關注了N個人，那麼就N次DB REA時間 + N路merge時間(這個可忽略)</li>
-<li>disk 慢 memory 1000倍。</li>
+<li>disk 慢 memory 1000倍; 所以k路歸併可以忽略，主要是在讀N次disk的時間</li>
 <li>Post a tweet =&gt; 1 次 DB Write 的時間</li>
 </ul>
 </li>
@@ -220,15 +312,16 @@
 
 <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd6g3t4bkvj30v20c8teh.jpg" alt="image-20200325202727234" style="zoom:50%;" />
 
-<ul>
-<li><p>缺點：</p>
-<ul>
+<h5 id="缺點："><a href="#缺點：" class="headerlink" title="缺點："></a>缺點：</h5><ul>
 <li>現算，就是慢，算好才能展示，卡住，用戶可感知的慢</li>
 </ul>
-</li>
-</ul>
-<h3 id="Push"><a href="#Push" class="headerlink" title="Push"></a>Push</h3><p>別人在發帖時，就把他的推到了我的News Feed List裡 – <strong><em>Fanout</em></strong></p>
+<h5 id="偽代碼"><a href="#偽代碼" class="headerlink" title="偽代碼"></a>偽代碼</h5><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3hpsswu0j30w40dg7bo.jpg" alt="image-20200725202756299"></p>
+<h4 id="Push"><a href="#Push" class="headerlink" title="Push"></a>Push</h4><p>寫擴散模型</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3hqvcvdnj31140h4171.jpg" alt="image-20200725202857797"></p>
+<p>N次的DB write，它不需要知道有沒有fanout成功，不用去等這個過程結束，我可以丟給async做，在MQ裡處理，我發出去後就沒我事了。</p>
+<h5 id="Fanout"><a href="#Fanout" class="headerlink" title="Fanout"></a>Fanout</h5><p>別人在發帖時，就把他的推到了我的News Feed List裡 – <strong><em>Fanout</em></strong></p>
 <p>需要一個<strong>News Feed Table</strong>。</p>
+<h5 id="Denormalize"><a href="#Denormalize" class="headerlink" title="Denormalize"></a>Denormalize</h5><p><strong>這邊的 created_at 其實對於這個table來講是個冗餘訊息，就是denormalized，這邊也可以把tweet的更多info都存過來方便用，這樣在這個table找跟我有關時，就可以不用再去另外拿內容，不用再多一次數據庫的查詢，把所有的tweet放到cache去查詢就是快</strong></p>
 <ul>
 <li>用戶需要查看News Feed時，只要從該News Feed Lists中讀取最新的100條就可</li>
 </ul>
@@ -269,10 +362,11 @@
 </ul>
 </li>
 </ul>
-<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd6f979oduj30ya0foaos.jpg" alt="image-20200325195759690" style="zoom:50%;" />
-
+<h5 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h5><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3i0k1a4hj311e0gwnec.jpg" alt="image-20200725203809234"></p>
 <ul>
-<li>如果想讓這次的query很快的話，數據庫的index 該怎麼建？</li>
+<li><p><strong>如果想讓這次的query很快的話，數據庫的index 該怎麼建？</strong></p>
+<p>==&gt; <strong>根據owner_id 以及 created_at 建複合索引 (composite index)</strong></p>
+</li>
 </ul>
 <blockquote>
 <h5 id="单选题-NewsFeedTable的索引（index）该怎么建？"><a href="#单选题-NewsFeedTable的索引（index）该怎么建？" class="headerlink" title="[单选题]NewsFeedTable的索引（index）该怎么建？"></a>[单选题]NewsFeedTable的索引（index）该怎么建？</h5><p>A.为 owner_id 建索引即可17.32% 选择</p>
@@ -286,15 +380,15 @@
 <p>解析见视频</p>
 </blockquote>
 <ul>
-<li><p>單獨給兩個feature作排序沒用，應該是要建一個複合索引 (composite index)，</p>
+<li><p>單獨給兩個feature作排序沒用，應該是要建一個<strong>複合索引 (composite index)</strong>，</p>
 </li>
 <li><p>新增好友，会创建一个异步任务，去把这个好友发的帖子查询到，然后插入到当前用户的 news feed 里。删除好友的时候也是类似的。看起来似乎很土，但是确实实际工程里就是这么做的。系统设计很多东西都不是大家想象的那种需要什么牛逼的技巧的，只要能用不费力就可以了。这个方法看着土，但是用异步任务可以很好的解决，也不是特别慢。十分行之有效。</p>
 </li>
 </ul>
+<h5 id="Push-流程圖"><a href="#Push-流程圖" class="headerlink" title="Push 流程圖"></a>Push 流程圖</h5><p>web server要創建任務放在async task MQ裡，然後去做 <strong>fanouts</strong></p>
 <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd6fm9su6zj30xu0fa0ub.jpg" alt="image-20200325201034815" style="zoom:50%;" />
 
-<ul>
-<li><p>缺陷</p>
+<h5 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h5><p>一般自己關注不會關注太多人，就是PULL模型；但，關注自己的粉絲會有<strong>明星問題</strong>，如要建1億條record</p>
 <blockquote>
 <h5 id="多选题-Push-模型有什么主要的缺陷？"><a href="#多选题-Push-模型有什么主要的缺陷？" class="headerlink" title="[多选题]Push 模型有什么主要的缺陷？"></a>[多选题]Push 模型有什么主要的缺陷？</h5><p>A.数据库中创建太多记录，浪费磁盘20.49% 选择</p>
 <p>B.粉丝数目可能很大，导致 Fanout 过程很长，从而导致用户刷到新鲜事有延迟26.92% 选择</p>
@@ -306,13 +400,16 @@
 <p>记住一句话 “Disk is cheap”，不要怕浪费数据库存储，为了加速查询，多存一些东西是没关系的。</p>
 </blockquote>
 <p>Pull - 自己關注的人不會很多一般來講，但明星的粉絲很多！一億之類，要為所有粉絲都建紀錄，超大。</p>
-</li>
+<ul>
+<li>Code:  下面的async 任務自己慢慢執行</li>
 </ul>
 <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd6fsjx9npj30qw0eogn0.jpg" alt="image-20200325201633121" style="zoom:50%;" />
 
+<h4 id="現有社交software的模型分析"><a href="#現有社交software的模型分析" class="headerlink" title="現有社交software的模型分析"></a>現有社交software的模型分析</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3jzgsth7j311a0egaix.jpg" alt="image-20200725214622556"></p>
 <ul>
 <li><p>FB - Pull; Ins - Push + Pull; Twitter - Pull; Friends Circle - 最多就是有廣告，沒排序或找你沒看過的，Pull</p>
 <p>總是要作Tradeoff的。勇擇一個</p>
+<p>廣告是pull模型，會編輯，要是看到廣告太多次，就不看了，所以不能在廣告商投放時放，所以比較好是pull</p>
 <blockquote>
 <h5 id="单选题-广告的插入是-Push-还是-Pull-模型？"><a href="#单选题-广告的插入是-Push-还是-Pull-模型？" class="headerlink" title="[单选题]广告的插入是 Push 还是 Pull 模型？"></a>[单选题]广告的插入是 Push 还是 Pull 模型？</h5><p>A.Push54.32% 选择</p>
 <p>B.Pull43.45% 选择</p>
@@ -327,6 +424,7 @@
 <ul>
 <li>可以在 push 的时候筛选没错，但是消息一旦push 出去以后，你再想要改动就很难了。广告主的需求很可能是 push 出去之后发现钱烧得太快要缩小投放访问，这个时候 push 模式就不太方便了。</li>
 </ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3k1fm8o8j30x80fiti7.jpg" alt="image-20200725214817750"></p>
 <h3 id="數據庫的索引"><a href="#數據庫的索引" class="headerlink" title="數據庫的索引"></a>數據庫的索引</h3><p>查字典時，先找頭、找到全身、去翻頁碼，要有序啦</p>
 <p>相當於一張專門存index的表</p>
 <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd6j1mdm73j30xy0ewgu3.jpg" alt="image-20200325212010964" style="zoom:67%;" />
@@ -347,7 +445,10 @@
 <li>聯合索引：涉及多個col需求，就是建聯合索引</li>
 <li><strong><em>條件索引</em></strong>：如要去filter已經付費的用戶中，的聯合索引；我們不去care沒付錢的</li>
 </ul>
-<h2 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h2><p>擴展 - 如何優化？</p>
+<h2 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h2><p>Optimize!</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3k2mm3ioj30oa0dqq8y.jpg" alt="image-20200725214926676" style="zoom:50%;" />
+
+<p>如何擴展 - 如何優化？</p>
 <blockquote>
 <ul>
 <li>Newsfeed 是朋友圈（你和你朋友发的帖子的汇总），timeline是你发的帖子的汇总。有的网站也把这两个概念反过来。我们课上用的是我刚才说的方式。</li>
@@ -366,36 +467,38 @@
 </ul>
 </blockquote>
 <ol>
-<li><p>優化</p>
-<ul>
-<li><p>解決設計缺陷如 Pull vs Push</p>
-<ul>
+<li>優化</li>
+</ol>
+<h3 id="解決設計缺陷如-Pull-vs-Push"><a href="#解決設計缺陷如-Pull-vs-Push" class="headerlink" title="解決設計缺陷如 Pull vs Push"></a>解決設計缺陷如 Pull vs Push</h3><ul>
 <li><p>PULL - 登入時才去組織內容，他要是關注了1000個用戶，就要有這麼多次的SQL query，效率就是還低。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3k6sj0xdj30rg0dg0zi.jpg" alt="image-20200725215327168"></p>
 <ul>
-<li>所以可以在DB訪問前加入 Cache</li>
-<li>Cache每個用戶的 Timeline<ul>
-<li>N次DB請求 =》 N次Cache請求</li>
-<li>Tradeoff: Cache幾條？最近的1000條？其實也就100、200就差不多啦</li>
+<li><strong>所以可以在DB訪問前加入 Cache</strong></li>
+<li><strong>Cache每個用戶的 Timeline</strong><ul>
+<li>N次DB請求 =》 N次Cache read請求 ，差了100、1000倍!</li>
+<li><strong><em>Tradeoff</em></strong>: Cache幾條？最近的1000條？其實也就100、200就差不多啦，畢竟內存不是disk，沒那麼便宜啦</li>
 </ul>
 </li>
-<li>Cache 每個用戶的 News Feed – 可能30秒我就刷一下，刷跟刷之間我所關注的人沒有更新，每次都做merge太浪費計算時間啦。<ul>
+<li><strong>Cache 每個用戶的 News Feed</strong> – 可能30秒我就刷一下，刷跟刷之間我所關注的人沒有更新，每次都做歸併merge太浪費計算時間啦，所以直接把它的cache下來<ul>
 <li>沒有 Cache News Feeds 的用戶: Merge N用戶的最近100條 Tweets，然後取出前100條，除非這個是第一次。</li>
-<li>有Cache News Feeds的用戶：Merge N 用戶在某個<strong>時間戳</strong>之後的所有 Tweets</li>
+<li>有Cache News Feeds的用戶：歸併merge N 用戶在某個<strong>時間戳</strong>之後的所有 Tweets</li>
 </ul>
 </li>
-<li>對比 MySQL vs Memcached 的 QPS<ul>
-<li>約 1000 ~100</li>
+<li><strong>對比 MySQL vs Memcached 的 QPS</strong><ul>
+<li><strong>約 1000 ~100</strong></li>
 </ul>
 </li>
 </ul>
 </li>
 <li><p>PUSH - 浪費了更多的 Disk</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3k9bseplj30nw0bmq9h.jpg" alt="image-20200725215553093" style="zoom: 50%;" />
+
 <ul>
-<li><p>PULL 是存在Mem中</p>
+<li><p>PULL 是存在Mem中，相較起來disk上便宜啦!</p>
 </li>
-<li><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd6iuzhttdj30ma0b4t9v.jpg" alt="image-20200325220243909" style="zoom:67%;" />
+<li><p>讓常登入的優先收到，但機器人也是問題。。。</p>
 </li>
-<li><p>Fanout的時過程要幾個小時啊！資源該多為大多數人服務</p>
+<li><p><strong>Fanout</strong> 的時過程要幾個小時啊！資源該多為大多數人服務，但都為lady gaga服務了</p>
 <ul>
 <li>嘗試在現有的模型作最小改動優化之，多加幾台用於作Push任務的機器, Problem solved! </li>
 <li>對長期的增長進行估計，並評估是否值得轉換整個模型成PULL或混合的，PULL還可以方便插入廣告、內容排序、幹掉zombie粉不給他發帖了</li>
@@ -403,12 +506,17 @@
 </li>
 </ul>
 </li>
-<li><p>PUSH + PULL </p>
-<ul>
-<li>普通用戶一樣是PUSH</li>
-<li>明星就標上去，不PUSH到用戶的News Feed中</li>
-<li>當用戶需要的時候，來明星用戶的Timeline拿，然後合併到News Feed裡</li>
 </ul>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3kcm6rdgj311a0eak7f.jpg" alt="image-20200725215902414" style="zoom:67%;" />
+
+<p>10 M還可以push，1B就不可能push啦! pull還是方便，什麼插內容廣告、僵屍粉、都解決</p>
+<h3 id="PUSH-PULL"><a href="#PUSH-PULL" class="headerlink" title="PUSH + PULL"></a><strong>PUSH + PULL</strong></h3><ul>
+<li><ul>
+<li><p><strong>普通用戶一樣是PUSH</strong></p>
+</li>
+<li><p><strong>明星就標上去，不PUSH到用戶的News Feed中</strong></p>
+</li>
+<li><p>當用戶需要的時候，來明星用戶的Timeline拿，然後合併到News Feed裡</p>
 </li>
 <li><p>怎麼定義明星？</p>
 <ul>
@@ -423,17 +531,25 @@
 </blockquote>
 </li>
 </ul>
+</li>
+</ul>
 <p>如果大明星掉了粉好幾10萬，</p>
 <p>最初因為他是大明星，所以系統不push他的文章，當他掉了一堆粉，我刷新News Feed, 因為這時大明星不是明星了，所以系統就不去Pull他的文章，我就丟失了他的動態啦。。</p>
-<ul>
-<li>所以不要動態計算他是不是明星，要離線計算，可以在User Table加一個字段 : is_superstar。</li>
-</ul>
 </li>
+</ul>
+  <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3kfvm6tqj31080gwwnc.jpg" alt="image-20200725220211743" style="zoom:67%;" />
+
+<ul>
+<li><p>所以不要動態計算他是不是明星，要離線計算，可以在User Table加一個字段 : is_superstar。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3kgg4ssmj30l00e4jv7.jpg" alt="image-20200725220243478"></p>
+</li>
+</ul>
+<ul>
 <li><p>為什麼大家都用PULL, 幹嘛還要學PUSH?</p>
 <ul>
 <li><p>設計本就不是找唯一方案，而是最合適</p>
 </li>
-<li><p>流量小時，Push是最經濟跟省力方式</p>
+<li><p><strong>流量小時，Push是最經濟跟省力方式</strong></p>
 <table>
 <thead>
 <tr>
@@ -443,29 +559,27 @@
 </thead>
 <tbody><tr>
 <td>資源少</td>
-<td>資源多</td>
+<td>資源多、內存高</td>
 </tr>
 <tr>
-<td>想少寫code</td>
+<td>想偷懶、想少寫code</td>
 <td></td>
 </tr>
 <tr>
 <td><strong>實時性不高</strong></td>
-<td>****</td>
+<td><strong>實時性要求高</strong></td>
 </tr>
 <tr>
-<td>用戶帖少</td>
-<td>用戶帖多</td>
+<td>用戶發帖比較少 如 ins</td>
+<td>用戶帖多 如twitter</td>
 </tr>
 <tr>
-<td>雙向好友關係，沒有明★問題，如朋友圈</td>
-<td>單向好友關係，有明★問題</td>
+<td>雙向好友關係，沒有明☆問題，如朋友圈</td>
+<td>單向好友關係，有明☆問題</td>
 </tr>
 </tbody></table>
 <p>twitter就發得多，隨便噴；ins就比較慢</p>
 <p>FB PULL，又作群組又排序又插廣告就PULL</p>
-</li>
-</ul>
 </li>
 </ul>
 </li>
@@ -476,14 +590,15 @@
 </li>
 <li><p>特殊情況時，如僵屍粉、大新聞搞掛了服務</p>
 <ul>
-<li>掛了怎辦？</li>
+<li>數據庫掛了怎辦？</li>
 <li>用戶逐漸</li>
 <li>服務器頂不住壓力怎辦？</li>
 <li>數據庫頂不住怎辦？</li>
+<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3kk5cg34j30l407i787.jpg" alt="image-20200725220559196"></li>
 </ul>
 </li>
 </ul>
-</li>
+<ol>
 <li><p>Maintenance</p>
 <ul>
 <li>魯棒性，要是掛了怎辦</li>
@@ -492,6 +607,7 @@
 </li>
 </ol>
 <h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
+<li>4S 在心裡的思想</li>
 <li>Ask before Design – 先問清楚再設計</li>
 </ul>
 <ul>
@@ -499,7 +615,7 @@
 </ul>
 <ul>
 <li>Work solution first – 先設計一個基本能工作的，再逐本優化</li>
-<li>Analysis is important than solution – 分析過程展示知識儲備；權衡各種設計方式的利弊</li>
+<li>Analysis is important than solution – 沒有標準答案，分析過程展示知識儲備；權衡各種設計方式的利弊</li>
 </ul>
 <h1 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h1><h2 id="數據持久化與常見的數據庫"><a href="#數據持久化與常見的數據庫" class="headerlink" title="數據持久化與常見的數據庫"></a>數據持久化與常見的數據庫</h2><ul>
 <li>MySQL, PostgreSQL</li>
@@ -547,12 +663,56 @@
 <p>關注一個最主要是把好友關係存下來</p>
 <p>RabbitMQ, Redis(Cache比不過Memcached, MQ比不上RabbitMQ, DB比不上SQL…)</p>
 <p>Amazon Simple Queue Service</p>
+<h1 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h1><h3 id="1-果取關"><a href="#1-果取關" class="headerlink" title="1 果取關"></a>1 果取關</h3><ul>
+<li>Push model 下的討論<br><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3lx48mupj30oy0cwacj.jpg" alt="image-20200725225321376"></li>
+</ul>
+<p>就是取關了後還是看得到他的訊息，要再刷一次才不見，就是典型的還在計算</p>
+<h3 id="2-如何存-Likes"><a href="#2-如何存-Likes" class="headerlink" title="2 如何存 Likes"></a>2 如何存 Likes</h3><p>Denormalize: 原本可以在別的表單裡計算下的東西，我直接存在這個表單裡</p>
+<p>直接把點讚的數目一股腦存下去</p>
 <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd7r1stfcrj30ta0g475i.jpg" alt="image-20200326233130851" style="zoom:67%;" />
 
-
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3m1s1qinj30xa0e0tft.jpg" alt="image-20200725225749071" style="zoom:67%;" />
 
 <hr>
-<h5 id="Tradeoff"><a href="#Tradeoff" class="headerlink" title="Tradeoff"></a>Tradeoff</h5><h5 id="SOA"><a href="#SOA" class="headerlink" title="SOA"></a>SOA</h5><h5 id="Pull-vs-Push-Model"><a href="#Pull-vs-Push-Model" class="headerlink" title="Pull vs Push Model"></a>Pull vs Push Model</h5><h5 id="DB-Systems"><a href="#DB-Systems" class="headerlink" title="DB Systems"></a>DB Systems</h5><h5 id="Async-amp-Message-Queue"><a href="#Async-amp-Message-Queue" class="headerlink" title="Async &amp; Message Queue"></a>Async &amp; Message Queue</h5><h5 id="Persistent"><a href="#Persistent" class="headerlink" title="Persistent"></a>Persistent</h5><h5 id="Denormalize"><a href="#Denormalize" class="headerlink" title="Denormalize"></a>Denormalize</h5><h5 id="Thundering-Herd"><a href="#Thundering-Herd" class="headerlink" title="Thundering Herd"></a>Thundering Herd</h5><h5 id="News-Feed-Design"><a href="#News-Feed-Design" class="headerlink" title="News Feed Design?!"></a>News Feed Design?!</h5></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/03/18/System-Design/9p/2019-03-18-System%20Design%20&amp;%20Design%20Twitter/">http://yoursite.com/2019/03/18/System-Design/9p/2019-03-18-System%20Design%20&amp;%20Design%20Twitter/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/03/18/System-Design/9p/2019-03-18-Design%20User%20System%20DB%20&amp;%20Cache/"><i class="fa fa-chevron-left">  </i><span>System-Design/9p/2019-03-18-Design User System DB &amp; Cache</span></a></div><div class="next-post pull-right"><a href="/2019/02/28/Python/2019-02-28-Abstract%20in%20Python/"><span>Python/2019-02-28-Abstract in Python</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+<h3 id="3-驚群現象-Thundering-Herd"><a href="#3-驚群現象-Thundering-Herd" class="headerlink" title="3 驚群現象 Thundering Herd"></a>3 驚群現象 Thundering Herd</h3><p>大家都在這時間都去關注這八卦</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3m3fvrv1j30km0bkn0y.jpg" alt="image-20200725225925974"></p>
+<blockquote>
+<h5 id="单选题-【系统设计2020】数据库的分片机制是否对同一个数据的大量访问有用？"><a href="#单选题-【系统设计2020】数据库的分片机制是否对同一个数据的大量访问有用？" class="headerlink" title="[单选题]【系统设计2020】数据库的分片机制是否对同一个数据的大量访问有用？"></a>[单选题]【系统设计2020】数据库的分片机制是否对同一个数据的大量访问有用？</h5><p>数据库分片，英文叫做 Sharding 或者 Partition</p>
+<p>A.有用26.53% 选择</p>
+<p>B.没用73.47% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>因为访问的是同一个数据，sharding 机制无论如何都会 sharding 到同一个机器上。此时 sharding 不能做到分摊流量的作用。</p>
+</blockquote>
+<ul>
+<li>sharding 不會管用</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3m516nyzj30x00dswoi.jpg" alt="image-20200725230057674"></p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3m7c3zs6j30v40jwaie.jpg" alt="image-20200725230310804" style="zoom:50%;" />
+
+
+
+<ul>
+<li><p>解決方式</p>
+<ul>
+<li><p>Memcache lease Get: 讓memcached 等一會，好多個人找同個key，讓大家排個隊，只放第一個lease get回去後面的就等著一會，取了後回填；只讓第一個拿不到，去通知，然後去跟老闆說，然後回填</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3mdyyq3vj30nc0ggdjl.jpg" alt="image-20200725230932282" style="zoom: 33%;" />
+</li>
+<li><p>FB 也有寫了個博文，有視頻，待看!</p>
+</li>
+<li><p>Redis 防雪崩架構設計</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="四種姿勢"><a href="#四種姿勢" class="headerlink" title="四種姿勢"></a>四種姿勢</h1><ul>
+<li>白紙 + 攝像頭</li>
+<li>白板 + cam ==&gt; 不清楚</li>
+<li>錄屏、畫圖軟件、鼠標好</li>
+<li>錄屏+手寫: iPad + apple pencil + airServer</li>
+</ul>
+<h5 id="Tradeoff"><a href="#Tradeoff" class="headerlink" title="Tradeoff"></a>Tradeoff</h5><h5 id="SOA"><a href="#SOA" class="headerlink" title="SOA"></a>SOA</h5><h5 id="Pull-vs-Push-Model"><a href="#Pull-vs-Push-Model" class="headerlink" title="Pull vs Push Model"></a>Pull vs Push Model</h5><h5 id="DB-Systems"><a href="#DB-Systems" class="headerlink" title="DB Systems"></a>DB Systems</h5><h5 id="Async-amp-Message-Queue"><a href="#Async-amp-Message-Queue" class="headerlink" title="Async &amp; Message Queue"></a>Async &amp; Message Queue</h5><h5 id="Persistent"><a href="#Persistent" class="headerlink" title="Persistent"></a>Persistent</h5><h5 id="Denormalize-1"><a href="#Denormalize-1" class="headerlink" title="Denormalize"></a>Denormalize</h5><h5 id="Thundering-Herd"><a href="#Thundering-Herd" class="headerlink" title="Thundering Herd"></a>Thundering Herd</h5><h5 id="News-Feed-Design"><a href="#News-Feed-Design" class="headerlink" title="News Feed Design?!"></a>News Feed Design?!</h5></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/03/18/System-Design/9p/2019-03-18-System%20Design%20&amp;%20Design%20Twitter/">http://yoursite.com/2019/03/18/System-Design/9p/2019-03-18-System%20Design%20&amp;%20Design%20Twitter/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/03/28/System-Design/9p/2019-03-28-Design%20Data%20Augmentation%20&amp;%20Consistent%20Hash%20&amp;%20Rate%20Limiter/"><i class="fa fa-chevron-left">  </i><span>System-Design/9p/2019-03-28-Design Data Augmentation &amp; Consistent Hash &amp; Rate Limiter</span></a></div><div class="next-post pull-right"><a href="/2019/03/18/System-Design/9p/2019-03-18-Design%20User%20System%20DB%20&amp;%20Cache/"><span>System-Design/9p/2019-03-18-Design User System DB &amp; Cache</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
   $('#nav').addClass('is-mobile')
   $('footer').addClass('is-mobile')
   $('#top-container').addClass('is-mobile')
