@@ -31,6 +31,8 @@ Cache kv對，很快，repeated Query可這樣做，當一個fn被多次調用�
 
 DB會受益；同個URL來，他不的
 
+本地的缓存就自己本地拿了，不会再去 server端。
+
 
 
 #### Cacheing service : Memcache, Redis
@@ -65,7 +67,7 @@ DB會受益；同個URL來，他不的
 
 分布式cache
 
-如果用redis他有很多模式，最好的就是如果有三台機器，希望每台都分擔些
+redis是個緩存服務，如果用redis他有很多模式，最好的就是如果有三台機器，希望每台都分擔些
 
 traffic用一致性哈希　不同key知道要去哪台找，每個node 就是 1/n
 
@@ -99,9 +101,11 @@ CDN　content distributed network，也是緩存，更像file system。縣到市
 
 把client做的邏輯給cache做
 
+
+
 <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd3rl5r877j30ea0k8go4.jpg" alt="img" style="zoom:67%;" />
 
-
+![image-20200722112920219](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzlagwgjvj30yi0e8qai.jpg)
 
 ##### Disadvantage(s): write through
 
@@ -110,6 +114,8 @@ CDN　content distributed network，也是緩存，更像file system。縣到市
 - Most data written might never be read, which can be minimized with a TTL.　給個死掉的時間
 
   <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd3rl9vcz3j30s60k0dty.jpg" alt="image-20200206195432938" style="zoom:50%;" />
+
+
 
 
 

@@ -2,7 +2,7 @@
 layout: post
 categories: AlgoUlt.
 tag: [] 
-
+date: 2019-07-26
 ---
 
 
@@ -140,4 +140,31 @@ Greedy!
 ![image-20200715230409210](/Users/joe/Library/Application Support/typora-user-images/image-20200715230409210.png)
 
 ![image-20200715230645534](/Users/joe/Library/Application Support/typora-user-images/image-20200715230645534.png)
+
+
+
+# Union Find
+
+
+
+![image-20200722100950385](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggziztev1mj30tu0fktew.jpg)
+
+
+
+![image-20200722101052300](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzj0tmac1j30pw0hitdb.jpg)
+
+- path compression是從 find 出發的，平攤下來是反阿卡曼近乎O(1)
+
+
+
+![image-20200722101240864](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzj2pqk5dj30zo0gg7at.jpg)
+
+- 把low rank tree 合併到high rank tree上去, rank是平均長度的概念，這樣在做path compression時的over head比較少
+- merge by rank 也就是 link by rank
+
+
+
+![image-20200722102700630](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzjhmrcp4j30l00ie79r.jpg)
+
+![image-20200722102725831](https://tva1.sinaimg.cn/large/007S8ZIlgy1ggzji4hnntj30oc0hkq8o.jpg)
 

@@ -9,7 +9,7 @@ tag: []
 
 # Long-Polling vs WebSockets vs Server-Sent Events
 
-### push vs pull
+## push vs pull
 
 一般經常用到的service architecture 有 queuing, REST, RPC(Remote Procedure Call) 是服務之間怎麼交流
 
@@ -29,7 +29,7 @@ S 不一定要知道 C 的 ip, 上網看用戶的就是 C。
 
 
 
-## Long-Polling
+### Long-Polling
 
 什麼是HTTP 
 
@@ -51,7 +51,7 @@ S 不一定要知道 C 的 ip, 上網看用戶的就是 C。
 
 
 
-### HTTP Long Polling - 對應的也是 PUSH
+#### HTTP Long Polling - 對應的也是 PUSH
 
 不是馬上response回來，connection一直hold，等在那邊直到好了被通知再發一個真正的請求過去
 
@@ -63,7 +63,15 @@ S 不一定要知道 C 的 ip, 上網看用戶的就是 C。
 
 ### WebSockets - PULL
 
-#### Full-duplex bidirectional
+#### Full-duplex
+
+bidirectional
+
+
+
+![image-20200725122407012](/Users/joe/Library/Application Support/typora-user-images/image-20200725122407012.png)
+
+
 
 **C、S兩邊都可以發請求，同時的**。half-duplex 是只有一邊發。
 
@@ -76,6 +84,10 @@ Server可以PUSH, 發請求，即時拿到。
 一般C對S發的Socket是收到response後就關掉了
 
 是「不斷的」所以S可以找到C。
+
+#### SSE
+
+用的是長連結
 
 ![image-20200206232544827](https://tva1.sinaimg.cn/large/0082zybpgy1gbn4dvvbxfj310e0fqgu4.jpg)
 
