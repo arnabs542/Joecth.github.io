@@ -7,293 +7,7 @@
     error: 'Copy error',
     noSupport: 'The browser does not support'
   }
-} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">276</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">39</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2019/07/04/Stat./Stat-MIT-1/">Stat./Stat-MIT-1</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-07-04</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Stat/">Stat.</a></span><div class="content"><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggf86b3wa1j30fa08qadz.jpg" alt="image-20200704204407394"></p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/07/03/Algo.%20Ult./DP_appendix_2&amp;3/">Algo. Ult./DP_appendix_2&amp;3</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-07-03</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/AlgoUlt/">AlgoUlt.</a></span><div class="content"><ol>
-<li>2^n ==&gt; n^2</li>
-<li>無循環依賴、無序應該不是；但無序的也可能是就是背包型</li>
-</ol>
-<h1 id="DP-appendix-2"><a href="#DP-appendix-2" class="headerlink" title="DP appendix 2"></a>DP appendix 2</h1><h2 id="1147-工作安排"><a href="#1147-工作安排" class="headerlink" title="1147. 工作安排"></a>1147. 工作安排</h2><ul>
-<li><p>求「價值最大」＝＝＞ 最優值</p>
-</li>
-<li><p>每天要決定是L or H or X</p>
-</li>
-<li><p>跟 house Robber 像, 但多了一個狀態「選擇難or易」</p>
-</li>
-<li><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>L</td>
-<td><strong>4</strong></td>
-<td>2</td>
-<td>3</td>
-<td><strong>7</strong></td>
-</tr>
-<tr>
-<td>R</td>
-<td>3</td>
-<td>5</td>
-<td><strong>6</strong></td>
-<td>9</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge244w23tj31100icwo7.jpg" alt="image-20200703202854308"></p>
-<ul>
-<li><p>坐標型DP</p>
-</li>
-<li><p>簡化後可以是「令dp[i] 表前i周可完成的最大價值」，狀態轉移方程：</p>
-<ul>
-<li>dp[i] = max(dp[i-1] + low[i], dp[i-2] + high[i])</li>
-</ul>
-</li>
-<li><p>初始化：</p>
-<ul>
-<li>dp[0] = low[0]</li>
-<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge29kbm7ej30o20gc7a0.jpg" alt="image-20200703203413184"></li>
-</ul>
-</li>
-<li><p>什麼情況不是返回 dp[n-1]? </p>
-<ul>
-<li>當價值有可能有負數的時候</li>
-<li>因為i已經假設第i天有做事</li>
-<li>可以透過進行拓維解決、加個「不做事」的維度</li>
-</ul>
-</li>
-<li><p>滾動優化，一起模 3</p>
-</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge37afck7j30o20fujyz.jpg" alt="image-20200703210638577"></p>
-<h2 id="77-LCS-最長公共子序列"><a href="#77-LCS-最長公共子序列" class="headerlink" title="77.LCS 最長公共子序列"></a>77.LCS 最長公共子序列</h2><ul>
-<li><p>LCS</p>
-</li>
-<li><p>LIS</p>
-</li>
-<li><p>LCA</p>
-</li>
-<li><p>TSP</p>
-</li>
-<li><p>2^N, N位，用DP降到 N^2</p>
-</li>
-<li><p>给两個字串的，為「匹配型動規」</p>
-<ul>
-<li>LCS</li>
-<li>Edit Distance</li>
-<li>Interleaving Substring</li>
-<li>Wildcard Matching</li>
-<li>Regular Expression Matching</li>
-</ul>
-</li>
-<li><p><strong>dp[i] [j] 表 A的前i元素與 B的前i元素的最長LCS長度</strong></p>
-</li>
-<li><p>N個字符，有N個不同前綴 X ==&gt; N+1才對</p>
-<ul>
-<li>還有空串！空串是任意串的前綴；如空arr是任何arr的前綴</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge2qhuja2j30uy0dcdlf.jpg" alt="image-20200703205030160"></p>
-<p>![image-20200703205331747](/Users/joe/Library/Application Support/typora-user-images/image-20200703205331747.png)</p>
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge2upqxmhj30ug0dyn2t.jpg" alt="image-20200703205433751" style="zoom:67%;" />
-
-
-
-<ul>
-<li>初始的邊上是0</li>
-<li>如果是edit distance 的化 邊邊應該是 i或j的值</li>
-<li>大問題依賴小問題</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge2y33wrrj30zk0fun6b.jpg" alt="image-20200703205747834"></p>
-<p>​        ＆interleaving</p>
-<ul>
-<li><p>区间型是小依賴大</p>
-<ul>
-<li>i倒過來，j正過去</li>
-<li>Stone Game</li>
-</ul>
-</li>
-<li><p>滚動數組 一起模 2 即可，如下，依賴得少才好滾</p>
-</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge35k1lo6j30ue0k6n6u.jpg" alt="image-20200703210458738"></p>
-<h2 id="76-最長上升子序列-LIS"><a href="#76-最長上升子序列-LIS" class="headerlink" title="76.最長上升子序列 LIS"></a>76.最長上升子序列 LIS</h2><ul>
-<li><p>subsequcne </p>
-</li>
-<li><p>longest ==&gt; 動規</p>
-</li>
-<li><p><strong>不能交換順序，是有序的！</strong>；背包可以交換，只是一個集合，是可換序的特例DP解法</p>
-</li>
-<li><p>dp[i] 的定義？</p>
-</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge3e6f2hjj316k0noqd4.jpg" alt="image-20200703211312555"></p>
-<ul>
-<li>A為何錯？<ul>
-<li>下面這個５就拼不上了</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge3i4pr9tj30m00ee77s.jpg" alt="image-20200703211703227"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge3jg7ltkj30mk0daadf.jpg" alt="image-20200703211820236"></p>
-<ul>
-<li>初始狀態 dp[i] = 1<ul>
-<li>是说，「每個數就選它自己而已」，都以自己開始、結尾</li>
-<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge3nfsgvcj30pu0cmgnv.jpg" alt="image-20200703212210255" style="zoom:50%;" /></li>
-<li>只初始化dp[0] 是不夠的，這也是座標型，就是看怎麼跳</li>
-<li>這不一定要從0這個位置開始選，每個數都可能成為起點</li>
-</ul>
-</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge3lszejnj30o60gin3h.jpg" alt="image-20200703212036165"></p>
-<ul>
-<li>O(N^2)</li>
-<li></li>
-</ul>
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge3q1olo0j30iu0ccgq6.jpg" alt="image-20200703212440013" style="zoom:50%;" />
-
-
-
-<h2 id="91-最小調整代價"><a href="#91-最小調整代價" class="headerlink" title="91.最小調整代價"></a>91.最小調整代價</h2><ul>
-<li><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge3wmh1s6j311e0gg7b5.jpg" alt="image-20200703213059015"></p>
-</li>
-<li><h2 id="轉移方程"><a href="#轉移方程" class="headerlink" title="轉移方程"></a>轉移方程</h2></li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge3z3x4h4j30qc0j2q62.jpg" alt="image-20200703213322963"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge41on9x5j30og0b878b.jpg" alt="image-20200703213551446"></p>
-<ul>
-<li><p>200^3 </p>
-</li>
-<li><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge42dgrt1j30sg0hiwjo.jpg" alt="image-20200703213631392"></p>
-</li>
-<li><p>滾動數組：第一維模2就完成</p>
-</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gge4349ar1j30qe0o27gl.jpg" alt="image-20200703213714291"></p>
-<ul>
-<li>動規類型<ul>
-<li><strong>座標型</strong>: Triangle, Unique Path, Jump Game</li>
-<li><strong>前綴型</strong><ul>
-<li>匹配型: LIS, Wildcard Matching</li>
-<li>划分型: Word Break</li>
-</ul>
-</li>
-<li><strong>區間型</strong>: Stone Game</li>
-<li><strong>背包</strong>: Backpack 系列</li>
-<li>博奕型: Coins in a Line</li>
-<li>狀態壓縮型: TSP(Traveling Salesman Problem)</li>
-<li>樹型: Binary Tree Maximum Path Sum</li>
-<li>圖型: (面試基本沒考過) NOI</li>
-<li>on lintcode</li>
-</ul>
-</li>
-</ul>
-<h1 id="DP-appendix-3"><a href="#DP-appendix-3" class="headerlink" title="DP  appendix 3"></a>DP  appendix 3</h1><h2 id="1018-香檳塔"><a href="#1018-香檳塔" class="headerlink" title="1018.香檳塔"></a>1018.香檳塔</h2><ul>
-<li><p>類似題: 座標型動規，有座標的info在</p>
-</li>
-<li><p>similar to Triangle</p>
-<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200712201733032.png" alt="image-20200712201733032" style="zoom:33%;" />
-</li>
-<li></li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggogsiqo19j30zu0isna9.jpg" alt="image-20200712203228254"></p>
-<ul>
-<li>空間優化，模2</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggogt1pj5uj31020iqna9.jpg" alt="image-20200712203258726"></p>
-<h2 id="200-最長回文子串"><a href="#200-最長回文子串" class="headerlink" title="200.最長回文子串"></a>200.最長回文子串</h2><ul>
-<li>Manacher’s 馬拉車算法， O(N)</li>
-<li>背向雙針 O(Nx(2N-1))</li>
-<li>動規: 區間型動規，子串、子數組</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoh1mpbr3j30yu0a8tam.jpg" alt="image-20200712204113836"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoh39walhj30tw0cwgnx.jpg" alt="image-20200712204248042"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoh41ojf1j31ak0l0tlc.jpg" alt="image-20200712204333437"></p>
-<ul>
-<li><p>是否可用滾動優化？可</p>
-</li>
-<li><p>石子Stone Game合并不能滚動，因為最後還是模N</p>
-</li>
-</ul>
-<h2 id="119-編輯距離"><a href="#119-編輯距離" class="headerlink" title="119.編輯距離"></a>119.編輯距離</h2><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggohyaoonzj30ze0j2aen.jpg" alt="image-20200712211236545" style="zoom: 50%;" />
-
-<ul>
-<li>匹配型動規</li>
-<li>dp[i] [j] </li>
-</ul>
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggohzectnqj314w09gwgk.jpg" alt="image-20200712211341183" style="zoom:67%;" />
-
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoi0wqzwfj311w0bqq60.jpg" alt="image-20200712211508710" style="zoom:50%;" />
-
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoi5ch6tej312a0ho7an.jpg" alt="image-20200712211920952"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoi5ub3nxj31780lq7gi.jpg" alt="image-20200712211952831"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoi7241kbj30z80ky4c5.jpg" alt="image-20200712212103748"></p>
-<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200712212200733.png" alt="image-20200712212200733" style="zoom: 33%;" />
-
-<ul>
-<li>能滾嗎？<ul>
-<li>模2可滚，初始化不能放一开始了，得一邊dp一邊初始</li>
-</ul>
-</li>
-</ul>
-<h2 id="1565-飛行棋"><a href="#1565-飛行棋" class="headerlink" title="1565.飛行棋"></a>1565.飛行棋</h2><ul>
-<li>如果可以往前跳又可以往後跳，就沒有方向性了，就不能動規了</li>
-<li>不會往前飛，就是不能循環依賴 ==&gt; Topological Sort 檢測圖裡有沒有循環依賴的關係</li>
-</ul>
-<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200712213048000.png" alt="image-20200712213048000" style="zoom:33%;" />
-
-<ul>
-<li>座標型，1D座標動規，用傳送門還有dice跳</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoijyw55aj30ti0aiq6i.jpg" alt="image-20200712213327557"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoimjyqkuj30uo0han4n.jpg" alt="image-20200712213554267"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggoinaj186j30u00hewhe.jpg" alt="image-20200712213639171"></p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/06/25/FFmpeg/2019-06-25-ffmpeg-cmds/">ffmpeg_cmds!</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-06-25</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/ffmpeg/">ffmpeg</a></span><div class="content"><h2 id="rm-black-sides"><a href="#rm-black-sides" class="headerlink" title="rm black sides"></a>rm black sides</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">╰─○ ffplay -i vn_hflip.mp4 -t 5 -vf cropdetect</span><br><span class="line">╰─○ ffplay -i vn_hflip.mp4 -t 5 -vf crop=1280:528:0:96</span><br></pre></td></tr></table></figure>
-
-<h2 id="save-to-json"><a href="#save-to-json" class="headerlink" title="save to json"></a>save to json</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffprobe -hide_banner -print_format json -show_streams -i vn_hflip.mp4 &gt; vn_json_streams.log</span><br></pre></td></tr></table></figure>
-
-<h2 id="check-error"><a href="#check-error" class="headerlink" title="check error"></a>check error</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffprobe -show_frames vn_hflip.mp4 &gt; vn_show_frames.log</span><br></pre></td></tr></table></figure>
-
-<h2 id="video-to-pics"><a href="#video-to-pics" class="headerlink" title="video to pics"></a>video to pics</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i vn_hflip.mp4 -r 40 -f image2         -t 1 my%d.jpg        <span class="comment">## 跟下一行比會多了幾張重覆的，因為比來的video就25fps而已</span></span><br><span class="line"><span class="string">""</span><span class="string">"2938"</span><span class="string">""</span>  ffmpeg -i vn_hflip.mp4 -r 25 -f image2 -t 1 my25_%d.jpg <span class="comment">## 跟上一行几乎一样，就是正常的25 rate</span></span><br><span class="line">ffmpeg -i vn_hflip.mp4 -vcodec mjpeg -ss 0:0:2 -t 0:0:1 0m%04d.jpg  <span class="comment">## 跟上面比主要就是从第二秒开始</span></span><br><span class="line"></span><br><span class="line">2937  ffmpeg -i vn_hflip.mp4 -r 40 -f image2 -t 1 my25_%d.jpg</span><br><span class="line">★★★ -r, -ss, -t  本来的video要变成的rate，开始、抓多久</span><br><span class="line"></span><br><span class="line">ffmpeg -i vn_hflip.mp4 -ss 00:00:14.435 -vframes 1 out.png</span><br><span class="line">★★★ -vframes 抓几张</span><br></pre></td></tr></table></figure>
-
-<h2 id="pics-to-video"><a href="#pics-to-video" class="headerlink" title="pics to video"></a>pics to video</h2><p>把多个图像文件使用h264编码封装成avi文件，如有my0.jpg, my1.jpg … my99.jpg</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i my%d.jpg  -vcodec h264 my.avi</span><br></pre></td></tr></table></figure>
-
-
-
-<p>-r 选项的用法：</p>
-<p>预设是</p>
-<p>以25FPS读入所有图片，所以len(Images[])会是输出的video的duration. </p>
-<p>作出25FPS的video, 所以如果 -r加在 output前面，会进行插帧、删帧。</p>
-<p>如果-r加在 input前面，就是每秒读进来几张图片</p>
-<p>如果　ffmpeg -r 10 -i z-%5d.jpeg -vcodec h264 -r 60 out10in60out.mp4</p>
-<p>那么因为每秒读进来10张而已，硬做成60fps的video，也是没用，因为中间只是内插成了60fps</p>
-<h2 id="video-to-gif"><a href="#video-to-gif" class="headerlink" title="video to gif"></a>video to gif</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i vn_hflip.mp4 -ss 0 -r 1 -vframes 6 vn.gif</span><br><span class="line">ffmpeg -i vn_hflip.mp4 -ss 0 -vf fps=1 -vframes 6 vn_fps.gif <span class="comment"># 这个似乎比上面的好一些</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<p>##EXTRACTION !!!</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> 2999  ffmpeg -i ../vn_hflip.mp4 -ss 00:00:00 -t 10 -vf fps=1 fps1_%d.png</span><br><span class="line">(joe_py36) ┌─[joe@JoeMBP2] - [~/Movies/exp/tmp] - [3003]</span><br><span class="line">└─[$] <span class="built_in">history</span> | grep r1                                                                                                                                                                           [22:06:04]</span><br><span class="line"> 2975  ffmpeg -i ../vn_hflip.mp4 -r 1 r1_%d.png</span><br><span class="line"> 2977  ffmpeg -i ../vn_hflip.mp4 -r 1 -vframes 6 r1_vframes_%d.png</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<h2 id="add-logo"><a href="#add-logo" class="headerlink" title="add logo"></a>add logo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i vn_hflip.mp4 -i ~/Pictures/Sackboy_0.jpeg -filter_complex overlay=W-w:H-h vn_logo.avi</span><br><span class="line">    如右下角: ffmpeg -i God.rm -i logo.png -filter_complex overlay=W-w:H-h my.avi</span><br><span class="line">    如居中:  ffmpeg -i God.rm -i logo.png -filter_complex overlay=W/2-w/2:H/2-h/2 my.avi</span><br></pre></td></tr></table></figure>
-
-
-
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/06/24/Algo.%20Ult./seminar_9/">Algo. Ult./seminar_9</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-06-24</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/AlgoUlt/">AlgoUlt.</a></span><div class="content"><h1 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h1><ul>
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">276</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">39</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2019/06/24/Algo.%20Ult./seminar_9/">Algo. Ult./seminar_9</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-06-24</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/AlgoUlt/">AlgoUlt.</a></span><div class="content"><h1 id="DP"><a href="#DP" class="headerlink" title="DP"></a>DP</h1><ul>
 <li>子問題們</li>
 </ul>
 <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gg34on0q2bj30ny0h8jy8.jpg" alt="image-20200624093637867" style="zoom:50%;" />
@@ -754,6 +468,466 @@
 
 <ul>
 <li>若二分答案還得再多一個 logN</li>
+</ul>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/06/09/Algo.%20Ult./seminar_4&amp;5/">Algo. Ult./seminar_4&amp;5</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-06-09</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/AlgoUlt/">AlgoUlt.</a></span><div class="content"><p>思考何時用雙指針</p>
+<h1 id="Seminar-4"><a href="#Seminar-4" class="headerlink" title="Seminar 4"></a>Seminar 4</h1><h2 id="1849-Grumpy-Bookstore-Owner"><a href="#1849-Grumpy-Bookstore-Owner" class="headerlink" title="1849. Grumpy Bookstore Owner"></a>1849. Grumpy Bookstore Owner</h2><ol>
+<li><p>枚舉脾氣變好的開始日期，再計算所有好脾氣的顧客</p>
+</li>
+<li><p>用一個滑窗來處理當前sliding window內的情況</p>
+<ul>
+<li><input disabled="" type="checkbox"> <p>​    A. 紀錄sliding window 內customers 的個數</p>
+</li>
+<li><input disabled="" type="checkbox"> <p>​    B. 紀錄sliding window 內好評customers 的個數 </p>
+</li>
+<li><input checked="" disabled="" type="checkbox"> <p>​    C. <strong>紀錄sliding window 內差評customers 的個數. V</strong>    </p>
+</li>
+</ul>
+<p>​            答案怎麼打擂台？！</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DataType</span>:</span></span><br><span class="line">    GOOD = <span class="number">0</span></span><br><span class="line">    BAD = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param customers: the number of customers</span></span><br><span class="line"><span class="string">    @param grumpy: the owner's temper every day</span></span><br><span class="line"><span class="string">    @param X: X days</span></span><br><span class="line"><span class="string">    @return: calc the max satisfied customers</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">maxSatisfied</span><span class="params">(self, customers, grumpy, X)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># 1. sliding window 紀錄區間內差評人數的個數</span></span><br><span class="line">        <span class="comment"># 2. 找所有天中原本就是好評人的個數</span></span><br><span class="line">        <span class="comment"># 3. 原本好評+區間內最好差評人數 = 答案</span></span><br><span class="line">        n = len(customers)</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">            </span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        right = X - <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        now_sum = <span class="number">0</span> <span class="comment"># 當前區間的差評人數</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(X):</span><br><span class="line">            <span class="keyword">if</span> grumpy[i] == DataType.BAD:</span><br><span class="line">                now_sum += customers[i]</span><br><span class="line">        </span><br><span class="line">        maximum_bad_number = now_sum</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> right + <span class="number">1</span> &lt; n:</span><br><span class="line">            right += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> grumpy[right] == DataType.BAD:</span><br><span class="line">                now_sum += customers[right]</span><br><span class="line">        </span><br><span class="line">            <span class="keyword">if</span> grumpy[left] == DataType.BAD:</span><br><span class="line">                now_sum -= customers[left]</span><br><span class="line">            </span><br><span class="line">            left += <span class="number">1</span></span><br><span class="line">            maximum_bad_number = max(maximum_bad_number, now_sum)</span><br><span class="line">            </span><br><span class="line">        satisfied_number = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> grumpy[i] == DataType.GOOD:</span><br><span class="line">                satisfied_number += customers[i]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> satisfied_number + maximum_bad_number</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="1850-撿蘋果"><a href="#1850-撿蘋果" class="headerlink" title="1850. 撿蘋果"></a>1850. 撿蘋果</h2><ul>
+<li>目的：枚舉兩個區間</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflt4ayfi1j30ys0gc44n.jpg" alt="image-20200609100156524"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflt8o6v50j30zm0huwlh.jpg" alt="image-20200609100606181"></p>
+<p>當已知隔板，可知左邊最大、右邊最大是多少，ref: penbox</p>
+<h2 id="1375-Substring-With-At-Least-K-Distinct-CharactersFollow"><a href="#1375-Substring-With-At-Least-K-Distinct-CharactersFollow" class="headerlink" title="1375. Substring With At Least K Distinct CharactersFollow"></a>1375. Substring With At Least K Distinct CharactersFollow</h2><ul>
+<li>Description</li>
+<li>Leaderboard</li>
+<li>Note</li>
+<li>Discuss</li>
+<li>Solution</li>
+<li></li>
+<li>My Submissions</li>
+<li>Open IDE</li>
+</ul>
+<h3 id="雙指針的變式-–-計數型雙指針"><a href="#雙指針的變式-–-計數型雙指針" class="headerlink" title="雙指針的變式 – 計數型雙指針"></a>雙指針的變式 – 計數型雙指針</h3><h4 id="雙指針的類型："><a href="#雙指針的類型：" class="headerlink" title="雙指針的類型："></a>雙指針的類型：</h4><h5 id="同向雙指針"><a href="#同向雙指針" class="headerlink" title="同向雙指針"></a>同向雙指針</h5><ul>
+<li>sliding window</li>
+</ul>
+<h5 id="相向雙指針"><a href="#相向雙指針" class="headerlink" title="相向雙指針"></a>相向雙指針</h5><ul>
+<li>Two sum 類型問題</li>
+</ul>
+<h5 id="背向雙指針"><a href="#背向雙指針" class="headerlink" title="背向雙指針"></a>背向雙指針</h5><ul>
+<li>最長回文子串</li>
+</ul>
+<h5 id="計數型雙指針"><a href="#計數型雙指針" class="headerlink" title="計數型雙指針"></a>計數型雙指針</h5><ul>
+<li>通過雙指針解決計數問題</li>
+<li>問法：滿足某條件的….有多少個</li>
+</ul>
+<h5 id="模擬型雙指針"><a href="#模擬型雙指針" class="headerlink" title="模擬型雙指針"></a>模擬型雙指針</h5><ul>
+<li>通過雙</li>
+</ul>
+<ul>
+<li>判斷是否為「好串」</li>
+<li>判斷以區間為前綴是否滿足條件</li>
+</ul>
+<h2 id="1219-加熱器"><a href="#1219-加熱器" class="headerlink" title="1219. 加熱器"></a>1219. 加熱器</h2><ol>
+<li>二分：對每個房屋的位置在加熱器數組中用二分，找到最后一个比你小的加热器一個半徑　nlogn</li>
+</ol>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200609105609685.png" alt="image-20200609105609685" style="zoom:67%;" />
+
+
+
+<ol start="2">
+<li><p>优化一：直接雙指針貪心</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflv0ebmj9j30vy0agdis.jpg" alt="image-20200609110723097"></p>
+</li>
+</ol>
+<ol start="3">
+<li>优化二：二分「加热器的半径」+ 双指针，有機會更好想</li>
+</ol>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflv4llibmj30pe0b2ju2.jpg" alt="image-20200609111124815"></p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200609111225705.png" alt="image-20200609111225705" style="zoom:67%;" />
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflv922yz9j30q60oqaiw.jpg" alt="image-20200609111539663"></p>
+<h2 id="1879-twoSumVII"><a href="#1879-twoSumVII" class="headerlink" title="1879.twoSumVII"></a>1879.twoSumVII</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflvki9wvxj30le09wtb1.jpg" alt="image-20200609112642341"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflvt4k12kj30qi0ooqb6.jpg" alt="image-20200609113454765"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gflvu9fq9vj30u40fmq9m.jpg" alt="image-20200609113602841"></p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200609113733945.png" alt="image-20200609113733945" style="zoom:67%;" />
+
+
+
+
+
+<h1 id="Seminar-5"><a href="#Seminar-5" class="headerlink" title="Seminar 5"></a>Seminar 5</h1><h2 id="677-大島的數量"><a href="#677-大島的數量" class="headerlink" title="677.大島的數量"></a>677.大島的數量</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo3ph93a1j30he0buq5n.jpg" alt="image-20200611093923800"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo3zcfmkkj30u00ub165.jpg" alt="image-20200611094851670"></p>
+<h2 id="598-僵屍矩陣"><a href="#598-僵屍矩陣" class="headerlink" title="598.僵屍矩陣"></a>598.僵屍矩陣</h2><ul>
+<li>爛橘子感染</li>
+<li>程序員的病毒</li>
+<li>「感染的起點」，從僵屍開始 BFS</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo4692l8uj30r80ruwli.jpg" alt="image-20200611095527541"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo49emrm0j30t40vcamu.jpg" alt="image-20200611095832430"></p>
+<h4 id="加now-day"><a href="#加now-day" class="headerlink" title="加now_day"></a>加now_day</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo4idhzguj30ti0v2wpg.jpg" alt="image-20200611100705633"></p>
+<h4 id="也可以内嵌算human-number"><a href="#也可以内嵌算human-number" class="headerlink" title="也可以内嵌算human number"></a>也可以内嵌算human number</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo4m9fqsjj30x20qo7br.jpg" alt="image-20200611101052102"></p>
+<h2 id="573-郵局的建立II"><a href="#573-郵局的建立II" class="headerlink" title="573.郵局的建立II"></a>573.郵局的建立II</h2><p>visited 非共享的，</p>
+<p>每次的</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo4ttxr3rj30qk10utix.jpg" alt="image-20200611101757179"></p>
+<p>但這樣會是 O(n^4)的</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo4zjyz5bj30ta0su4co.jpg" alt="image-20200611102340291"></p>
+<p><strong>１１４line这样写的话，可能一个房子被经过多次</strong></p>
+<p>so, better as following</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo54r3786j30ug0k0jz5.jpg" alt="image-20200611102837431"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo57o772oj30vk0qwtht.jpg" alt="image-20200611103125603"></p>
+<p>倒過來！從房子找空地！</p>
+<h4 id="該怎麼從房子數來BFS"><a href="#該怎麼從房子數來BFS" class="headerlink" title="該怎麼從房子數來BFS?"></a>該怎麼從房子數來BFS?</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo5nhua62j30pu0l4436.jpg" alt="image-20200611104641237"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo5p6k3e0j30sm0vuaqb.jpg" alt="image-20200611104818468"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo5ttq9oqj30u00w07f1.jpg" alt="image-20200611105245274"></p>
+<h2 id="616-課程安排"><a href="#616-課程安排" class="headerlink" title="616.課程安排"></a>616.課程安排</h2><ul>
+<li><p>拓展較少，一般都就裸題</p>
+</li>
+<li><p>預處理所有課程的入度，將所有入度為０的點入隊，並逐漸出隊，並將出隊相連的節點的入度減１</p>
+</li>
+<li><p>若一節點入度變為０，則將其入隊</p>
+</li>
+<li><p>BFS 結束後，ans序列長度若與課程總數相等，則是一個拓撲序</p>
+</li>
+<li><p>否則不存在拓撲序</p>
+</li>
+</ul>
+<h4 id="BAD-O-VE-or-O-n-m"><a href="#BAD-O-VE-or-O-n-m" class="headerlink" title="BAD, O(VE) or O(n*m)"></a>BAD, O(VE) or O(n*m)</h4><p>一般要求 O(V+E) or O(n+m)</p>
+<p>所以</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo65sexw1j30mk0modme.jpg" alt="image-20200611110413633"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo68h2646j30fe01edg7.jpg" alt="image-20200611110653860"></p>
+<h4 id="Better↓，O-V-E-or-O-n-m"><a href="#Better↓，O-V-E-or-O-n-m" class="headerlink" title="Better↓，O(V+E) or O(n+m)"></a>Better↓，O(V+E) or O(n+m)</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo67rdcv6j30sm0vcn53.jpg" alt="image-20200611110609155"></p>
+<h2 id="434-島個數II"><a href="#434-島個數II" class="headerlink" title="434.島個數II"></a>434.島個數II</h2><h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><ul>
+<li>O(n^2) * len(queue)</li>
+</ul>
+<h3 id="並查集"><a href="#並查集" class="headerlink" title="並查集"></a>並查集</h3><ul>
+<li></li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo6gomjm4j31nk0k4zsl.jpg" alt="image-20200611111435222"></p>
+<h4 id=""><a href="#" class="headerlink" title=""></a><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo6mwtnb3j31nk0quan3.jpg" alt="image-20200611112039152"></h4><p>這寫法不具壓縮</p>
+<h4 id="壓縮路徑"><a href="#壓縮路徑" class="headerlink" title="壓縮路徑"></a>壓縮路徑</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo6nqyrutj31d20iwqbd.jpg" alt="image-20200611112128985"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo6qtvn7wj30gw0iwada.jpg" alt="image-20200611112428660"></p>
+<p>「之後找就都是O(1)的操作了」，是個均攤O(1)的操作</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo6u94fakj30n20dcalx.jpg" alt="image-20200611112740580"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo6vft814j30vf0u0n8i.jpg" alt="image-20200611112850990"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo6x56v7qj30re0qa0zj.jpg" alt="image-20200611113032781"></p>
+<p>把s改為is_ialand</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo6xlfmyvj30u00yu13v.jpg" alt="image-20200611113056937"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo72y8ny8j30pw0voqbt.jpg" alt="image-20200611113609070"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfo75oajyfj30u00vgn6j.jpg" alt="image-20200611113842739"></p>
+<h1 id="雙指針的其它實現討論"><a href="#雙指針的其它實現討論" class="headerlink" title="雙指針的其它實現討論"></a>雙指針的其它實現討論</h1><h3 id="Grumpy-bookstore"><a href="#Grumpy-bookstore" class="headerlink" title="Grumpy bookstore"></a>Grumpy bookstore</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpqsr818cj30x60ien3w.jpg" alt="image-20200612194355441"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpqvauwoej30aw0323z6.jpg" alt="image-20200612194622939"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpqzk8vfnj30uo0g6dl4.jpg" alt="image-20200612195027886"></p>
+<h1 id="BFS-Discussion"><a href="#BFS-Discussion" class="headerlink" title="BFS Discussion"></a>BFS Discussion</h1><h3 id="1828-湖面逃跑-★★★"><a href="#1828-湖面逃跑-★★★" class="headerlink" title="1828.湖面逃跑 ★★★"></a>1828.湖面逃跑 ★★★</h3><p>from Akuna Capital</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfprwqg1euj30gs0gmakw.jpg" alt="image-20200612202220431" style="zoom:50%;" />
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfps0o2al5j30i407a407.jpg" alt="image-20200612202608173"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfps9p40caj30lk0ca0wk.jpg" alt="image-20200612203448516"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpsbhalxsj30da04kab2.jpg" alt="image-20200612203632013"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpsojt083j30gq0baq6i.jpg" alt="image-20200612204903384"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpskkym5vj30t20duaey.jpg" alt="image-20200612204516486"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpsla2e9oj30gu02c3z9.jpg" alt="image-20200612204556569"></p>
+<h3 id="1070-Merge-Account-★★★"><a href="#1070-Merge-Account-★★★" class="headerlink" title="1070.Merge Account ★★★"></a>1070.Merge Account ★★★</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfptxvu73bj30cq0bwq6x.jpg" alt="image-20200612213238736"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpucl36woj30dq08a416.jpg" alt="image-20200612214646335"></p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/06/07/Web/2019-06-07-Requests'%20secret:%20pool_connections%20and%20pool_maxsize/">Web/2019-06-07-Requests' secret: pool_connections and pool_maxsize</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-06-07</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Web/">Web</a></span><div class="content"><p>from: <a href="https://www.cnblogs.com/pengyusong/p/5802929.html" target="_blank" rel="noopener">https://www.cnblogs.com/pengyusong/p/5802929.html</a></p>
+<p>and <a href="https://laike9m.com/blog/requests-secret-pool_connections-and-pool_maxsize,89/" target="_blank" rel="noopener">https://laike9m.com/blog/requests-secret-pool_connections-and-pool_maxsize,89/</a></p>
+<h1 id="Requests’-secret-pool-connections-and-pool-maxsize"><a href="#Requests’-secret-pool-connections-and-pool-maxsize" class="headerlink" title="Requests’ secret: pool_connections and pool_maxsize"></a><strong>Requests’ secret: pool_connections and pool_maxsize</strong></h1><p><a href="http://docs.python-requests.org/en/latest/" target="_blank" rel="noopener">Requests</a> 是一个python开发者众所周知的第三方库。因其简单的API和高性能，大多数人倾向于使用requests而不是urllib2作为访问http的标准库。然而很多使用requests库的人可能不知道内部原因，今天我就来解释以下俩个概念: <code>pool_connections</code> 和<code>pool_maxsize</code>.</p>
+<p>从 <code>Session 开始</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">s = requests.Session()</span><br><span class="line">s.get(<span class="string">'https://www.google.com'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这很简单，你可能知道requests’ <code>Session</code> 持有cookie. 但你知道 <code>Session</code> 有一个 <a href="http://docs.python-requests.org/en/latest/api/#requests.Session.mount" target="_blank" rel="noopener"><code>mount</code></a> 方法吗?</p>
+<blockquote>
+<p><code>mount(prefix, adapter)</code><br>Registers a connection adapter to a prefix.<br>Adapters are sorted in descending order by key length.</p>
+</blockquote>
+<p>不知道？很好，实际上你已经使用了这个方法当你初始化一个session对象时:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Session</span><span class="params">(SessionRedirectMixin)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        ...</span><br><span class="line">        <span class="comment"># Default connection adapters.</span></span><br><span class="line">        self.adapters = OrderedDict()</span><br><span class="line">        self.mount(<span class="string">'https://'</span>, HTTPAdapter())</span><br><span class="line">        self.mount(<span class="string">'http://'</span>, HTTPAdapter())</span><br></pre></td></tr></table></figure>
+
+<p>现在，到了有趣的部分。如果你阅读过 Ian Cordasco’s 文章 <a href="http://www.coglib.com/~icordasc/blog/2014/12/retries-in-requests.html" target="_blank" rel="noopener">Retries in Requests</a>, 你应该知道 <code>HTTPAdapter</code> 可以提供重试功能. 但一个 <code>HTTPAdapter</code> 真实是什么? Quoted from <a href="http://docs.python-requests.org/en/latest/api/#requests.adapters.HTTPAdapter" target="_blank" rel="noopener">doc</a>:</p>
+<blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">requests</span>.<span class="title">adapters</span>.<span class="title">HTTPAdapter</span><span class="params">(pool_connections=<span class="number">10</span>, pool_maxsize=<span class="number">10</span>, max_retries=<span class="number">0</span>, pool_block=False)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>The built-in HTTP Adapter for urllib3.</p>
+<p>Provides a general-case interface for Requests sessions to contact HTTP and HTTPS urls by implementing the Transport Adapter interface. This class will usually be created by the Session class under the covers.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>pool_connections</code> – The number of urllib3 connection pools to cache.</li>
+<li><code>pool_maxsize</code> – The maximum number of connections to save in the pool.</li>
+<li><code>max_retries(int)</code> – The maximum number of retries each connection should attempt. Note, this applies only to failed DNS lookups, socket connections and connection timeouts, never to requests where data has made it to the server. By default, Requests does not retry failed connections. If you need granular control over the conditions under which we retry a request, import urllib3’s Retry class and pass that instead.</li>
+<li><code>pool_block</code> – Whether the connection pool should block for connections. Usage:</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; <span class="keyword">import</span> requests</span><br><span class="line">&gt;&gt; s = requests.Session()</span><br><span class="line">&gt;&gt; a = requests.adapters.HTTPAdapter(max_retries=<span class="number">3</span>)</span><br><span class="line">&gt;&gt; s.mount(<span class="string">'http://'</span>, a)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>如果上面的文档使你迷惑，这里是我的解释: HTTP Adapter 所做的就是：根据不同的目标url，对每个不同的请求提供不同的配置，还记得上面的代码吗？</p>
+<p>　　　　what HTTP Adapter does is simply <strong>providing different configurations for different requests according to target url</strong>. Remember the code above?</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">self.mount(<span class="string">'https://'</span>, HTTPAdapter())</span><br><span class="line">self.mount(<span class="string">'http://'</span>, HTTPAdapter())</span><br></pre></td></tr></table></figure>
+
+<p>它创建了俩个 <code>HTTPAdapter</code> 对象使用默认的参数：<code>pool_connections=10, pool_maxsize=10, max_retries=0, pool_block=False</code>, 并且挂载到 <code>https://</code> 和 <code>http:// 相对路径</code>, 意思是第一个配置在你访问 <code>http://xxx 会使用到， 第二个会在你访问 ``https://xxx</code>. 尽管上面俩个配置是相同的，请求http和https仍然是隔离的。我们会在下面看到说明。</p>
+<p>就像我说的，这篇文章的目的主要是解释 <code>pool_connections</code> and <code>pool_maxsize</code>.</p>
+<p>首先，让我们看看 <code>pool_connections</code>. 昨天我在stackoverflow提出了一个问题：<a href="http://stackoverflow.com/questions/34837026/whats-the-meaning-of-pool-connections-in-requests-adapters-httpadapter" target="_blank" rel="noopener">question</a> ，因为我不确定我是否理解正确，这个问题的回答消除了我的不确定性。HTTP，众所周知，是基于TCP协议，一个HTTP连接也是一个TCP连接，它是由一个五元组唯一标识:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(&lt;protocol&gt;, &lt;src addr&gt;, &lt;src port&gt;, &lt;dest addr&gt;, &lt;dest port&gt;)</span><br></pre></td></tr></table></figure>
+
+<p>就是说，你针对 <code>www.example.com 建立了一个HTTP/TCP连接</code>, 假设服务器支持 <code>Keep-Alive</code>, 下一次你发送请求到 <code>www.example.com/a</code> or <code>www.example.com/b</code>, 你可以使用相同的连接，因为五元组没有改变. 实际上, <a href="http://docs.python-requests.org/en/latest/user/advanced/#keep-alive" target="_blank" rel="noopener">requests’ Session 自动会帮你处理</a> 并且重用连接，只要它能.</p>
+<p>这个问题是，什么决定了你是否可以重用老的连接？是的，就是 <code>pool_connections</code>!</p>
+<blockquote>
+<p>pool_connections – The number of urllib3 connection pools to cache.</p>
+</blockquote>
+<p>我知道，我知道，我也不想引入很多术语, 这是最后一个，我发誓. 简单的理解它， 一个host对应的一个连接池：<strong>one connection pool corresponds to one host</strong>, 嗯，就是这个意思.</p>
+<p>这是一个例子，无关的行已被忽略:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">s = requests.Session()</span><br><span class="line">s.mount(<span class="string">'https://'</span>, HTTPAdapter(pool_connections=1))</span><br><span class="line">s.get(<span class="string">'https://www.baidu.com'</span>)</span><br><span class="line">s.get(<span class="string">'https://www.zhihu.com'</span>)</span><br><span class="line">s.get(<span class="string">'https://www.baidu.com'</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">""</span><span class="string">"output</span></span><br><span class="line"><span class="string">INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): www.baidu.com</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET / HTTP/1.1<span class="string">" 200 None</span></span><br><span class="line"><span class="string">INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): www.zhihu.com</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET / HTTP/1.1<span class="string">" 200 2621</span></span><br><span class="line"><span class="string">INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): www.baidu.com</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET / HTTP/1.1<span class="string">" 200 None</span></span><br><span class="line"><span class="string">"</span><span class="string">""</span></span><br></pre></td></tr></table></figure>
+
+<p><code>HTTPAdapter(pool_connections=1)</code> 被映射到 <code>https://</code>, 他意思是在同一时间仅有一个连接池. 在调用 <code>s.get(&#39;https://www.baidu.com&#39;)</code>, 缓存的连接池是 <code>connectionpool(&#39;https://www.baidu.com&#39;)</code>. 现在 <code>s.get(&#39;https://www.zhihu.com&#39;)</code> 来了，这个session发现他不能使用缓存的连接，因为他不是相同的host(one connection pool corresponds to one host, remember?). 因此session不得不创建一个新的连接池. 因为 <code>pool_connections=1</code>, session不能在同一时间持有俩个连接池, 因此他丢弃了旧的连接池： <code>connectionpool(&#39;https://www.baidu.com&#39;)</code> 并且保存了新的：<code>connectionpool(&#39;https://www.zhihu.com&#39;)</code>. 下一次get同样如此Next <code>get</code> is the same. 这就是我们看见三个 <code>Starting new HTTPS connection</code> 日志行的原因</p>
+<p>如果我们设置 <code>pool_connections</code> 为 2:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">s = requests.Session()</span><br><span class="line">s.mount(<span class="string">'https://'</span>, HTTPAdapter(pool_connections=2))</span><br><span class="line">s.get(<span class="string">'https://www.baidu.com'</span>)</span><br><span class="line">s.get(<span class="string">'https://www.zhihu.com'</span>)</span><br><span class="line">s.get(<span class="string">'https://www.baidu.com'</span>)</span><br><span class="line"><span class="string">""</span><span class="string">"output</span></span><br><span class="line"><span class="string">INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): www.baidu.com</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET / HTTP/1.1<span class="string">" 200 None</span></span><br><span class="line"><span class="string">INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): www.zhihu.com</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET / HTTP/1.1<span class="string">" 200 2623</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET / HTTP/1.1<span class="string">" 200 None</span></span><br><span class="line"><span class="string">"</span><span class="string">""</span></span><br></pre></td></tr></table></figure>
+
+<p>很好，现在我们可以创建连接俩次了并且保持连接活跃</p>
+<p>最后, <code>pool_maxsize</code>.</p>
+<p>首先, 仅当你在多线程环境下使用session，你才应该关心 <code>pool_maxsize</code> , 例如，从多个线程使用同一个session发出并发请求.</p>
+<p>实际上，<code>pool_maxsize</code> 是一个用来初始化urllib3’s <code>HTTPConnectionPool的参数</code>, 它才是真正含义上的连接池. <code>HTTPConnectionPool</code> 是一个容器，针对于特定的host保存连接的集合, 且 <code>pool_maxsize</code> 是这个集合的最大值. 如果你运行你的代码在同一个线程，它是不可能针对多个主机创建多个连接的，因为 requests library 是阻塞的, 因此HTTP请求总是一个接着一个发送.</p>
+<p>如果使用多线程就会不一样.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">def thread_get(url):</span><br><span class="line">    s.get(url)</span><br><span class="line"></span><br><span class="line">s = requests.Session()</span><br><span class="line">s.mount(<span class="string">'https://'</span>, HTTPAdapter(pool_connections=1, pool_maxsize=2))</span><br><span class="line">t1 = Thread(target=thread_get, args=(<span class="string">'https://www.zhihu.com'</span>,))</span><br><span class="line">t2 = Thread(target=thread_get, args=(<span class="string">'https://www.zhihu.com/question/36612174'</span>,))</span><br><span class="line">t1.start();t2.start()</span><br><span class="line">t1.join();t2.join()</span><br><span class="line">t3 = Thread(target=thread_get, args=(<span class="string">'https://www.zhihu.com/question/39420364'</span>,))</span><br><span class="line">t4 = Thread(target=thread_get, args=(<span class="string">'https://www.zhihu.com/question/21362402'</span>,))</span><br><span class="line">t3.start();t4.start()</span><br><span class="line"><span class="string">""</span><span class="string">"output</span></span><br><span class="line"><span class="string">INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): www.zhihu.com</span></span><br><span class="line"><span class="string">INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (2): www.zhihu.com</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET /question/36612174 HTTP/1.1<span class="string">" 200 21906</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET / HTTP/1.1<span class="string">" 200 2606</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET /question/21362402 HTTP/1.1<span class="string">" 200 57556</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET /question/39420364 HTTP/1.1<span class="string">" 200 28739</span></span><br><span class="line"><span class="string">"</span><span class="string">""</span></span><br></pre></td></tr></table></figure>
+
+<p>看见了吗? 它为相同的host建立了俩个连接： <code>www.zhihu.com</code>, 就像我说的, 这个仅发生在多线程环境下. 在这个例子中，我们创建了一个连接池，使用了参数 <code>pool_maxsize=2</code>, 发现同一时间不会超过俩个连接，因此这是足够的，我们看到<code>t3</code> 和 <code>t4</code> 没有创建新的连接，他们重用了就的连接.</p>
+<p>如果没有足够的大小呢?</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">s = requests.Session()</span><br><span class="line">s.mount(<span class="string">'https://'</span>, HTTPAdapter(pool_connections=1, pool_maxsize=1))</span><br><span class="line">t1 = Thread(target=thread_get, args=(<span class="string">'https://www.zhihu.com'</span>,))</span><br><span class="line">t2 = Thread(target=thread_get, args=(<span class="string">'https://www.zhihu.com/question/36612174'</span>,))</span><br><span class="line">t1.start()</span><br><span class="line">t2.start()</span><br><span class="line">t1.join();t2.join()</span><br><span class="line">t3 = Thread(target=thread_get, args=(<span class="string">'https://www.zhihu.com/question/39420364'</span>,))</span><br><span class="line">t4 = Thread(target=thread_get, args=(<span class="string">'https://www.zhihu.com/question/21362402'</span>,))</span><br><span class="line">t3.start();t4.start()</span><br><span class="line">t3.join();t4.join()</span><br><span class="line"><span class="string">""</span><span class="string">"output</span></span><br><span class="line"><span class="string">INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): www.zhihu.com</span></span><br><span class="line"><span class="string">INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (2): www.zhihu.com</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET /question/36612174 HTTP/1.1<span class="string">" 200 21906</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET / HTTP/1.1<span class="string">" 200 2606</span></span><br><span class="line"><span class="string">WARNING:requests.packages.urllib3.connectionpool:Connection pool is full, discarding connection: www.zhihu.com</span></span><br><span class="line"><span class="string">INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (3): www.zhihu.com</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET /question/39420364 HTTP/1.1<span class="string">" 200 28739</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET /question/21362402 HTTP/1.1<span class="string">" 200 57556</span></span><br><span class="line"><span class="string">WARNING:requests.packages.urllib3.connectionpool:Connection pool is full, discarding connection: www.zhihu.com</span></span><br><span class="line"><span class="string">"</span><span class="string">""</span></span><br></pre></td></tr></table></figure>
+
+<p>现在, <code>pool_maxsize=1</code>，会打印警告日志如下，就像下面的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Connection pool is full, discarding connection: www.zhihu.com</span><br></pre></td></tr></table></figure>
+
+<p>可以注意到仅有一个连接被保存在连接池中, 为t3或者t4创建一个新的连接. 很明显这是不够的. 这就是为什么在 urllib3’s 文档中说明如下:</p>
+<blockquote>
+<p>如果你计划在连接池环境下使用一个连接池, 你应该设置连接池最大数量为一个比较高的值，例如和线程的数量相同.</p>
+</blockquote>
+<p>最后, <code>HTTPAdapter</code> 实例映射到不同的前缀是相互独立的.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">s = requests.Session()</span><br><span class="line">s.mount(<span class="string">'https://'</span>, HTTPAdapter(pool_connections=1, pool_maxsize=2))</span><br><span class="line">s.mount(<span class="string">'https://baidu.com'</span>, HTTPAdapter(pool_connections=1, pool_maxsize=1))</span><br><span class="line">t1 = Thread(target=thread_get, args=(<span class="string">'https://www.zhihu.com'</span>,))</span><br><span class="line">t2 =Thread(target=thread_get, args=(<span class="string">'https://www.zhihu.com/question/36612174'</span>,))</span><br><span class="line">t1.start();t2.start()</span><br><span class="line">t1.join();t2.join()</span><br><span class="line">t3 = Thread(target=thread_get, args=(<span class="string">'https://www.zhihu.com/question/39420364'</span>,))</span><br><span class="line">t4 = Thread(target=thread_get, args=(<span class="string">'https://www.zhihu.com/question/21362402'</span>,))</span><br><span class="line">t3.start();t4.start()</span><br><span class="line">t3.join();t4.join()</span><br><span class="line"><span class="string">""</span><span class="string">"output</span></span><br><span class="line"><span class="string">INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): www.zhihu.com</span></span><br><span class="line"><span class="string">INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (2): www.zhihu.com</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET /question/36612174 HTTP/1.1<span class="string">" 200 21906</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET / HTTP/1.1<span class="string">" 200 2623</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET /question/39420364 HTTP/1.1<span class="string">" 200 28739</span></span><br><span class="line"><span class="string">DEBUG:requests.packages.urllib3.connectionpool:"</span>GET /question/21362402 HTTP/1.1<span class="string">" 200 57669</span></span><br><span class="line"><span class="string">"</span><span class="string">""</span></span><br></pre></td></tr></table></figure>
+
+<p>上面的代码很容易，不需要再次解释了.</p>
+<p>就这样了，希望这篇文章帮助你更好的理解requests库. 顺便说一下，我创建了一个gist <a href="https://gist.github.com/laike9m/ead19c65a416c7022c00" target="_blank" rel="noopener">here</a> 这里包含这篇文章的测试代码. 随便下载并尝试吧</p>
+<h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><ol>
+<li><p>For https, requests uses urllib3’s <a href="http://urllib3.readthedocs.org/en/latest/pools.html#urllib3.connectionpool.HTTPSConnectionPool" target="_blank" rel="noopener">HTTPSConnectionPool</a>, but it’s pretty much the same as HTTPConnectionPool so I didn’t differeniate them in this article.</p>
+</li>
+<li><p><code>Session</code>‘s <code>mount</code> method ensures the longest prefix gets matched first. Its implementation is pretty interesting so I posted it here.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mount</span><span class="params">(self, prefix, adapter)</span>:</span></span><br><span class="line">    <span class="string">"""Registers a connection adapter to a prefix.</span></span><br><span class="line"><span class="string">    Adapters are sorted in descending order by key length."""</span></span><br><span class="line">    self.adapters[prefix] = adapter</span><br><span class="line">    keys_to_move = [k <span class="keyword">for</span> k <span class="keyword">in</span> self.adapters <span class="keyword">if</span> len(k) &lt; len(prefix)]</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> keys_to_move:</span><br><span class="line">        self.adapters[key] = self.adapters.pop(key)</span><br></pre></td></tr></table></figure>
+
+<p>Note that <code>self.adapters</code> is an <code>OrderedDict</code>.</p>
+</li>
+</ol>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/05/30/Algo.%20Ult./seminar_2%20&amp;%203/">Algo. Ult./seminar_2 &amp; 3</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-05-30</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/AlgoUlt/">AlgoUlt.</a></span><div class="content"><h2 id="645-識別名人"><a href="#645-識別名人" class="headerlink" title="645. 識別名人"></a>645. 識別名人</h2><ul>
+<li><p>其他人他都不認識的，他就是名人</p>
+</li>
+<li><p>最多只會有一個名人，或「不存在」，不會有兩個名人</p>
+</li>
+<li><p>降低兩兩比較的時間！Trick! ==&gt; </p>
+</li>
+<li><p>as 892 Alien Dictionary, as 1836 Reaching Point</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">The knows API is already defined for you.</span></span><br><span class="line"><span class="string">@param a, person a</span></span><br><span class="line"><span class="string">@param b, person b</span></span><br><span class="line"><span class="string">@return a boolean, whether a knows b</span></span><br><span class="line"><span class="string">you can call Celebrity.knows(a, b)</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; n a party with n people</span></span><br><span class="line">    <span class="comment"># @return &#123;int&#125; the celebrity's label or -1</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findCelebrity</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="comment"># return self.bf_NxN(n)</span></span><br><span class="line">        <span class="keyword">return</span> self.O_N(n)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">O_N</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="comment"># 候選人＝ 0 </span></span><br><span class="line">        <span class="comment"># for 循環遍歷其他的人 (1~n-1): i</span></span><br><span class="line">        <span class="comment">#     if i 認識候選人：</span></span><br><span class="line">        <span class="comment">#         i　不可能是名人</span></span><br><span class="line">        <span class="comment">#     if i 不認識至選人：</span></span><br><span class="line">        <span class="comment">#         候選人不可能是名人</span></span><br><span class="line">        <span class="comment">#         i　可能是名人</span></span><br><span class="line">        <span class="comment">#         ==&gt; 讓 i 成為最後的候選人</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># for 所有人判斷該候選人是否是名人</span></span><br><span class="line">        cand = <span class="number">0</span>    <span class="comment"># candidate</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n):</span><br><span class="line">            <span class="comment"># if Celebrity.knows(i, cand):</span></span><br><span class="line">            <span class="comment">#     cand = cand</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> Celebrity.knows(i, cand):</span><br><span class="line">                cand = i</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> i == cand:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> Celebrity.knows(cand, i) <span class="keyword">or</span> <span class="keyword">not</span> Celebrity.knows(i, cand):</span><br><span class="line">                <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        <span class="keyword">return</span> cand    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">bf_NxN</span><span class="params">(self, n)</span>:</span></span><br><span class="line">        <span class="comment"># Write your code here</span></span><br><span class="line">        <span class="comment"># for  所有人</span></span><br><span class="line">        <span class="comment">#   判斷這個人是否是名人 ==&gt; for其他所有人看是否其他人認識ｉ、ｉ是否認識其他人 </span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            is_celebrity = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(n):</span><br><span class="line">                <span class="keyword">if</span> i == j:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                    </span><br><span class="line">                <span class="keyword">if</span> Celebrity.knows(i, j) <span class="keyword">or</span> <span class="keyword">not</span> Celebrity.knows(j, i):</span><br><span class="line">                    is_celebrity = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">if</span> is_celebrity:</span><br><span class="line">                <span class="keyword">return</span> i</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="654-稀疏矩陣乘法"><a href="#654-稀疏矩陣乘法" class="headerlink" title="654. 稀疏矩陣乘法"></a>654. 稀疏矩陣乘法</h2><ul>
+<li>將兩個Matrix 相乘，</li>
+</ul>
+<ol>
+<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfdpp1hf9gj30qa0c4q4t.jpg" alt="image-20200602095856594" style="zoom:50%;" />
+
+<p>As Merge 2 sorted array, 雙指針讓兩條的值相等時再相乘</p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200602100301997.png" alt="image-20200602100301997" style="zoom:67%;" />
+
+
+
+</li>
+</ol>
+<p>   Further:</p>
+<ul>
+<li><p>現在有兩個向量，非常稀疏，其中假設非0個數為n, 如何 O(n) 時間得到這兩個向量的乘積？</p>
+<ul>
+<li><p>如果是用arr存的話，再怎樣也要O(N)</p>
+</li>
+<li><p><strong>(Index, val)</strong>; LinkedList存才行  Arraylist<Node> or LinkedList<Node></p>
+<ul>
+<li>Two pointer method!</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfdqlv9hfrj308g08gt9m.jpg" alt="image-20200602103032402" style="zoom:50%;" />
+</li>
+<li><p>　給過來的要是Node才有意義，如果是Array的話就沒意義了</p>
+</li>
+</ul>
+<ol start="2">
+<li>PUSH method</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param A: a sparse matrix</span></span><br><span class="line"><span class="string">    @param B: a sparse matrix</span></span><br><span class="line"><span class="string">    @return: the result of A * B</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># </span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">multiply</span><span class="params">(self, A, B)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># return self.BF(A, B)</span></span><br><span class="line">        <span class="keyword">return</span> self.two_pointers(A, B)  <span class="comment"># optimization 1</span></span><br><span class="line">        <span class="keyword">return</span> self.push_model(A, B)    <span class="comment"># optimization 2</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment"># PUSH model: 通過原料加到結果裡面</span></span><br><span class="line">    <span class="comment"># 不是對於每個C裡的每個值拿A、B裡的每一個東西，而是看A裡面的每個值會對C裡的</span></span><br><span class="line">    <span class="comment"># 哪些值產生影響</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push_model</span><span class="params">(self, A, B)</span>:</span></span><br><span class="line">        n = len(A)</span><br><span class="line">        m = len(A[<span class="number">0</span>])</span><br><span class="line">        k = len(B[<span class="number">0</span>])</span><br><span class="line">        </span><br><span class="line">        C = [[<span class="number">0</span>] * k <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 如果A中非0元素為常數級別 ==&gt; O(N^2)</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                <span class="string">""" 以下兩行為PUSH model的優化 """</span></span><br><span class="line">                <span class="keyword">if</span> A[i][j] == <span class="number">0</span>:    <span class="comment"># 但B裡面還是沒有優化到</span></span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">for</span> t <span class="keyword">in</span> range(k):</span><br><span class="line">                    C[i][t] += A[i][j] * B[j][t]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> C        </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">two_pointers_new</span><span class="params">(self, A, B)</span>:</span></span><br><span class="line">        n = len(A)</span><br><span class="line">        m = len(A[<span class="number">0</span>])</span><br><span class="line">        k = len(B[<span class="number">0</span>])</span><br><span class="line">        </span><br><span class="line">        row_vec = []</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">two_pointers</span><span class="params">(self, A, B)</span>:</span></span><br><span class="line">        n = len(A)</span><br><span class="line">        m = len(A[<span class="number">0</span>])</span><br><span class="line">        k = len(B[<span class="number">0</span>])</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 假設 n, m, k 是相同數量級</span></span><br><span class="line">        <span class="comment"># O(n^2)</span></span><br><span class="line">        row_vector = [</span><br><span class="line">            [</span><br><span class="line">                (j, A[i][j])</span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> range(m)</span><br><span class="line">                <span class="keyword">if</span> A[i][j] != <span class="number">0</span></span><br><span class="line">            ]    </span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(n)</span><br><span class="line">        ]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># O(n^2)</span></span><br><span class="line">        col_vector = [</span><br><span class="line">            [</span><br><span class="line">                (i, B[i][j])</span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> range(m)</span><br><span class="line">                <span class="keyword">if</span> B[i][j] != <span class="number">0</span></span><br><span class="line">            ]    </span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(k)</span><br><span class="line">        ]</span><br><span class="line">        <span class="comment"># Java C++ 只能Hashmap套ArrayList</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># O(n^2 * O(self.multi()))</span></span><br><span class="line">        C = [</span><br><span class="line">                [</span><br><span class="line">                    self.multi(row, col)</span><br><span class="line">                    <span class="keyword">for</span> col <span class="keyword">in</span> col_vector</span><br><span class="line">                ]</span><br><span class="line">                <span class="keyword">for</span> row <span class="keyword">in</span> row_vector</span><br><span class="line">            ]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># C = [[0] * k for i in range(n)]</span></span><br><span class="line">        <span class="keyword">return</span> C</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># row = [(0,1), (2,3), (3,5)]</span></span><br><span class="line">        <span class="comment"># col = [(1,2), (3,5)]</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment"># O(len(row) + len(col)) ==&gt;  行向量與列向量中非0元素的個數</span></span><br><span class="line">    <span class="comment"># ==&gt; 假設非0元素個數是常數級  ==&gt;  O(1), 如 1000x1000，但只有10、20個有值</span></span><br><span class="line">    <span class="comment"># As Merge Two sorted array</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    A = [</span></span><br><span class="line"><span class="string">            [1,0,0],</span></span><br><span class="line"><span class="string">            [-1,0,3]</span></span><br><span class="line"><span class="string">        ]</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">    B = [</span></span><br><span class="line"><span class="string">            [7,0,0]</span></span><br><span class="line"><span class="string">            [0,0,0]</span></span><br><span class="line"><span class="string">            [0,0,1]</span></span><br><span class="line"><span class="string">        ]</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">    mapping_A:</span></span><br><span class="line"><span class="string">        0: [0]</span></span><br><span class="line"><span class="string">        1: [0,2]</span></span><br><span class="line"><span class="string">            　↑</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    mapping_B:</span></span><br><span class="line"><span class="string">        0:[0]</span></span><br><span class="line"><span class="string">        1:[]</span></span><br><span class="line"><span class="string">        2:[2]</span></span><br><span class="line"><span class="string">        　 ↑</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">multi</span><span class="params">(self, row, col)</span>:</span></span><br><span class="line">        <span class="comment"># 雙指針</span></span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        j = <span class="number">0</span></span><br><span class="line">        ans = <span class="number">0</span> <span class="comment"># 向量相乘後的結果</span></span><br><span class="line">        <span class="keyword">while</span> i &lt; len(row) <span class="keyword">and</span> j &lt; len(col):</span><br><span class="line">            index1, val1 = row[i]</span><br><span class="line">            index2, val2 = col[j]</span><br><span class="line">            <span class="keyword">if</span> index1 &lt; index2:</span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> index1 &gt; index2:</span><br><span class="line">                j += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ans += val1 * val2</span><br><span class="line">                i += <span class="number">1</span></span><br><span class="line">                j += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line">                </span><br><span class="line">    <span class="comment"># PULL model</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">BF</span><span class="params">(self, A, B)</span>:</span></span><br><span class="line">        m, n, k = len(A), len(A[<span class="number">0</span>]), len(B[<span class="number">0</span>])</span><br><span class="line">        C = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(k)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(m)]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(k):</span><br><span class="line">                <span class="keyword">for</span> t <span class="keyword">in</span> range(n):</span><br><span class="line">                    C[i][j] += A[i][t] * B[t][j]</span><br><span class="line">        <span class="keyword">return</span> C</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">BF_old</span><span class="params">(self, A, B)</span>:</span></span><br><span class="line">        n = len(A)</span><br><span class="line">        m = len(A[<span class="number">0</span>])</span><br><span class="line">        k = len(B[<span class="number">0</span>])</span><br><span class="line">        </span><br><span class="line">        C = [[<span class="number">0</span>]*k <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(k):</span><br><span class="line">                <span class="comment"># C[i][j] = A[i][t] * B[t][j]</span></span><br><span class="line">                <span class="keyword">for</span> t <span class="keyword">in</span> range(m):</span><br><span class="line">                    C[i][j] += A[i][t] * B[t][j]</span><br><span class="line">        <span class="keyword">return</span> C</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="140-快速冪"><a href="#140-快速冪" class="headerlink" title="140. 快速冪"></a>140. 快速冪</h2><ul>
+<li>求 a**n%b</li>
+<li>其中 n非常大 (n &lt;= 10**9)</li>
+<li>如何獲得logn的複雜度？</li>
+<li>思想：a*^1000 &lt;== (a^500)^2</li>
+<li>a ^ 10000000000 &lt;== a ^ 5000000000 &lt;== </li>
+<li>問題規模: n -&gt; n/2 -&gt; n/4 -&gt; n/8 -&gt; n/16</li>
+<li>討論平方關係：<ul>
+<li>x^(n/2) * x(^n/2): O(N)，只是divide &amp; conquer，但每個還是重複算了</li>
+<li>x^(n/2) ** 2: O(logN)   思想不同上面的！是真正的切半</li>
+</ul>
+</li>
+<li>related to 949 fibII、65</li>
+</ul>
+<h2 id="Freq"><a href="#Freq" class="headerlink" title="Freq:"></a>Freq:</h2><p>—————– 很常見 </p>
+<ol>
+<li>BFS</li>
+<li>模擬(interger -&gt; roman OA)、隱式圖老題 (數獨、word ladder (X)，word break Ⅱ 必須要最優化, dfs暴力指數級，dp(O(N)))、K largest … (Amazon)</li>
+</ol>
+<p>—————– 比較常見</p>
+<ol start="3">
+<li><p>DFS、二叉樹、基礎DP(背包、序列型dp、坐標型dp、雙序列型dp(LCS)、常見的問題(LIS、LPS))、二分答案、前缀和</p>
+</li>
+<li><p>LRU、LFU、雙指針 (Sliding Window), LInkedList (老題、快慢、環、相交點)、Copy Linked List with random pointer、掃描線、單調棧</p>
+</li>
+</ol>
+<p>—————– 基本不怎麼出現</p>
+<ol start="5">
+<li>二分搜索、數據結構(heap, quick select)、比較難的DP(區間DP、概率DP、狀態壓縮DP (TSP)), Union find, sort, trie (quantcast(OA)), segment tree，紅黑樹(G)，dfs非遞歸實現 (樹的非遞歸遍歷)、矩陣快速冪</li>
+<li>Floyd, dij, spfa</li>
+</ol>
+<p>Graph ==&gt; BFS, DFS, targan(Amazon), Union find, dij, Floyd (最小生成樹)</p>
+<ul>
+<li>Find Critical connection (Amazon!) V</li>
+</ul>
+<p>A onsite: Stone Game</p>
+<p>Word Ladder 2</p>
+<h1 id="Seminar-3"><a href="#Seminar-3" class="headerlink" title="Seminar 3"></a>Seminar 3</h1><ul>
+<li></li>
+</ul>
+<h2 id="1310-數組除了自身的乘積"><a href="#1310-數組除了自身的乘積" class="headerlink" title="1310. 數組除了自身的乘積"></a>1310. 數組除了自身的乘積</h2><ol>
+<li>左往右，前綴積: prefix[i] = nums[0] * … * nums[i]</li>
+<li>右往左，後綴積: suffix[i] = nums[i] * … * nums[n-1</li>
+<li>遍歷所有位置 outpus[i] = prefix[i-1] * suffix[i+1]</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param nums: an array of integers</span></span><br><span class="line"><span class="string">    @return: the product of all the elements of nums except nums[i].</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">productExceptSelf</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># return self.O_N(nums)</span></span><br><span class="line">        <span class="keyword">return</span> self.O_1(nums)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">O_1</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="comment"># 從前往後掃，把當前的前綴積放到output中</span></span><br><span class="line">        <span class="comment"># 從後往前掃，把當前的後綴積乘上output[i]</span></span><br><span class="line">        n = len(nums)</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">            </span><br><span class="line">        output = [<span class="number">1</span>] * n</span><br><span class="line"></span><br><span class="line">        prefix = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            output[i] = prefix</span><br><span class="line">            prefix *= nums[i]</span><br><span class="line">        </span><br><span class="line">        suffix = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-1</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">            output[i] *= suffix</span><br><span class="line">            suffix *= nums[i]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> output</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">O_N</span><span class="params">(self, nums)</span>:</span></span><br><span class="line">        <span class="comment"># 1. 左往右，前綴積: prefix[i] = nums[0] * ... * nums[i]</span></span><br><span class="line">        <span class="comment"># 2. 右往左，後綴積: suffix[i] = nums[i] * ... * nums[n-1</span></span><br><span class="line">        <span class="comment"># 3. 遍歷所有位置 outpus[i] = prefix[i-1] * suffix[i+1]</span></span><br><span class="line">        n = len(nums)</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">            </span><br><span class="line">        output = [<span class="number">0</span>] * n</span><br><span class="line">        prefix = [<span class="number">0</span>] * n</span><br><span class="line">        suffix = [<span class="number">0</span>] * n</span><br><span class="line">        </span><br><span class="line">        prefix[<span class="number">0</span>] = nums[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n):</span><br><span class="line">            prefix[i] = prefix[i<span class="number">-1</span>] * nums[i]</span><br><span class="line">        </span><br><span class="line">        suffix[n<span class="number">-1</span>] = nums[n<span class="number">-1</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n<span class="number">-2</span>, <span class="number">-1</span>, <span class="number">-1</span>):</span><br><span class="line">            suffix[i] = suffix[i+<span class="number">1</span>] * nums[i]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">                output[i] = suffix[i+<span class="number">1</span>]</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> i == n - <span class="number">1</span>:</span><br><span class="line">                output[i] = prefix[i<span class="number">-1</span>]</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            </span><br><span class="line">            output[i] = prefix[i<span class="number">-1</span>] * suffix[i+<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1844-子數組和為K-II"><a href="#1844-子數組和為K-II" class="headerlink" title="1844. 子數組和為K II"></a>1844. 子數組和為K II</h2><ul>
+<li>為何不能用雙指針？<ul>
+<li>因為有負數的。。。太慘。。</li>
+</ul>
+</li>
+<li>基础版：838子数组和为K</li>
+<li>Follow up: 1507.和至少為K的最短長度</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfg232v0fqj30wg0eqadb.jpg" alt="image-20200604103838917"></p>
+<h2 id="1507-和至少为K的最短长度"><a href="#1507-和至少为K的最短长度" class="headerlink" title="1507. 和至少为K的最短长度"></a>1507. 和至少为K的最短长度</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfg2ia573fj30y80jcn3e.jpg" alt="image-20200604105311696"></p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfg2oc4xwbj30im0ictc7.jpg" alt="image-20200604105910757" style="zoom:67%;" />
+
+
+
+<h2 id="391-數飛機"><a href="#391-數飛機" class="headerlink" title="391. 數飛機"></a>391. 數飛機</h2><ul>
+<li>差分前綴和</li>
+<li>根據原數組獲得差分數組 ==&gt; 求前綴和</li>
+<li>什麼是差分數組？</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200604112647832.png" alt="image-20200604112647832" style="zoom:67%;" />
+
+
+
+<h2 id="194-寻找单词"><a href="#194-寻找单词" class="headerlink" title="194. 寻找单词"></a>194. 寻找单词</h2><ol>
+<li>BF 雙指針</li>
+</ol>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200604113217218.png" alt="image-20200604113217218" style="zoom:67%;" />
+
+<ol start="2">
+<li><p>大暴力 2^N 空間</p>
+</li>
+<li><p>hashmap 存所有字母出現的位置</p>
+<ul>
+<li>o:[2,4,9,15]</li>
+<li>index = 5</li>
+<li>去找下一個o<ul>
+<li>二分</li>
+</ul>
+</li>
+<li>aaaaaaaaaaa<ul>
+<li>a: [1,2,3,4,5,6,7,8,9,10]</li>
+<li>index = 4</li>
+</ul>
+</li>
+<li>O(m x logN x k)</li>
+</ul>
+</li>
+<li><p>當前字符串的後一個任意字符的位置 ★待學習　</p>
+</li>
+</ol>
+<h4 id="Sol"><a href="#Sol" class="headerlink" title="Sol"></a>Sol</h4><h5 id="O-N-2-的預處理，太慢"><a href="#O-N-2-的預處理，太慢" class="headerlink" title="O(N^2) 的預處理，太慢"></a>O(N^2) 的預處理，太慢</h5><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfppb5ahcjj30ry0dcaf6.jpg" alt="image-20200612185220046"></p>
+<h5 id="O-N-預處理-by-後往前遞推！"><a href="#O-N-預處理-by-後往前遞推！" class="headerlink" title="O(N) 預處理 by 後往前遞推！"></a>O(N) 預處理 by 後往前遞推！</h5><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpq0quxeuj30ia0kc7be.jpg" alt="image-20200612191700269"></p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfppn80qp6j308c03wgmj.jpg" alt="image-20200612190400078" style="zoom: 67%;" />
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfppol54aej30c600m74i.jpg" alt="image-20200612190519367"></p>
+<h2 id="946-233-Matrix"><a href="#946-233-Matrix" class="headerlink" title="946. 233 Matrix"></a>946. 233 Matrix</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">MOD = <span class="number">10000007</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Matrix</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, n, m)</span>:</span></span><br><span class="line">        self.mat = [[<span class="number">0</span> <span class="keyword">for</span> j <span class="keyword">in</span> range(m)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line">        self.n = n</span><br><span class="line">        self.m = m</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># A * B ==&gt; A.__mul__(B)    n*m (x) m*k</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__mul__</span><span class="params">(self, matrix)</span>:</span></span><br><span class="line">        k = len(matrix.mat[<span class="number">0</span>])</span><br><span class="line">        tmp = Matrix(self.n, k) <span class="comment"># <span class="doctag">TODO:</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param X: a list of integers</span></span><br><span class="line"><span class="string">    @param m: an integer</span></span><br><span class="line"><span class="string">    @return: return an integer</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">calcTheValueOfAnm</span><span class="params">(self, X, m)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> X <span class="keyword">and</span> m == <span class="number">0</span>:    <span class="comment"># 特判</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="comment"># return self.O_NxM_MLE(X, m)</span></span><br><span class="line">        <span class="comment"># return self.O_N_TLE(X, m)</span></span><br><span class="line">        <span class="comment"># return self.O_lgN(X, m)   # TODO ... not OK now</span></span><br><span class="line">        <span class="keyword">return</span> self.sol(X, m)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sol</span><span class="params">(self, X, m)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        n = len(X)</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span> <span class="keyword">and</span> m == <span class="number">0</span>):</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">if</span>(m == <span class="number">0</span>):</span><br><span class="line">            <span class="keyword">return</span> X[n - <span class="number">1</span>]</span><br><span class="line">        self.n, self.mod = n + <span class="number">2</span>, <span class="number">10000007</span></span><br><span class="line">        A = [[<span class="number">0</span> <span class="keyword">for</span> j <span class="keyword">in</span> range(n + <span class="number">2</span>)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n + <span class="number">2</span>)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n + <span class="number">1</span>):</span><br><span class="line">            A[i][<span class="number">0</span>] = <span class="number">10</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n + <span class="number">2</span>):</span><br><span class="line">            A[i][n + <span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n + <span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, i + <span class="number">1</span>):</span><br><span class="line">                A[i][j] = <span class="number">1</span></span><br><span class="line">        tmp = self.power(A, m);</span><br><span class="line">        ans = tmp[n][<span class="number">0</span>] * <span class="number">23</span> + tmp[n][n + <span class="number">1</span>] * <span class="number">3</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n + <span class="number">1</span>):</span><br><span class="line">            ans += tmp[n][i] * X[i - <span class="number">1</span>]</span><br><span class="line">        <span class="keyword">return</span> ans % <span class="number">10000007</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mul</span><span class="params">(self, A, B)</span>:</span></span><br><span class="line">        tmp = [[<span class="number">0</span> <span class="keyword">for</span> j <span class="keyword">in</span> range(self.n)] <span class="keyword">for</span> i <span class="keyword">in</span> range(self.n)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.n):</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> range(self.n):</span><br><span class="line">                <span class="keyword">if</span> (A[i][k] == <span class="number">0</span>):</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> range(self.n):</span><br><span class="line">                    tmp[i][j] = (tmp[i][j] + A[i][k] * B[k][j]) % self.mod</span><br><span class="line">        <span class="keyword">return</span> tmp</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">power</span><span class="params">(self, A, a)</span>:</span></span><br><span class="line">        B = [[<span class="number">0</span> <span class="keyword">for</span> j <span class="keyword">in</span> range(self.n)] <span class="keyword">for</span> i <span class="keyword">in</span> range(self.n)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(self.n):</span><br><span class="line">            B[i][i] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> a &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">if</span> (a % <span class="number">2</span> == <span class="number">1</span>):</span><br><span class="line">                B = self.mul(B, A)</span><br><span class="line">            A = self.mul(A, A)</span><br><span class="line">            a //= <span class="number">2</span></span><br><span class="line">        <span class="keyword">return</span> B</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">O_lgN_tmpl</span><span class="params">(self, X, m)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span>    <span class="comment"># <span class="doctag">TODO:</span></span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    23      10*A[0][0]+3        10*A[0][1]+3        10*A[0][2]+3</span></span><br><span class="line"><span class="string">    a1      a1+↑</span></span><br><span class="line"><span class="string">    a2      a2+↑</span></span><br><span class="line"><span class="string">    a3      a3+↑</span></span><br><span class="line"><span class="string">    a4      a4+↑</span></span><br><span class="line"><span class="string">    """</span>    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">O_lgN</span><span class="params">(self, X, m)</span>:</span>  <span class="comment"># FastPow, Buggy... for m, n and DIM</span></span><br><span class="line">        n = len(X)</span><br><span class="line">        col = [<span class="number">0</span>] * (n+<span class="number">2</span>)</span><br><span class="line">        col[<span class="number">0</span>] = <span class="number">23</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n+<span class="number">2</span><span class="number">-1</span>): <span class="comment">#  23</span></span><br><span class="line">            <span class="comment"># print(col)</span></span><br><span class="line">            col[i] = X[i<span class="number">-1</span>]       <span class="comment">#  a1</span></span><br><span class="line">                                  <span class="comment">#  a2</span></span><br><span class="line">                                  <span class="comment">#  a3</span></span><br><span class="line">                                  <span class="comment">#  3</span></span><br><span class="line">        col[<span class="number">-1</span>] = <span class="number">3</span></span><br><span class="line">        print(<span class="string">"col: &#123;&#125;"</span>.format(col))</span><br><span class="line">        <span class="comment"># T : (n+2) x (m+2)</span></span><br><span class="line">        <span class="string">"""""</span></span><br><span class="line"><span class="string">        doc WRONG!!! ↓  n should be equal to len(vec)</span></span><br><span class="line"><span class="string">        [   </span></span><br><span class="line"><span class="string">            [10, 0, 0, 0, 1],</span></span><br><span class="line"><span class="string">            [10, 1, 0, 0, 1],</span></span><br><span class="line"><span class="string">            [10, 1, 1, 0, 1],</span></span><br><span class="line"><span class="string">        ]</span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">            CORRECT　↓  for [0,0,3], 2</span></span><br><span class="line"><span class="string">        [   </span></span><br><span class="line"><span class="string">            [10, 0, 0, 0, 1],</span></span><br><span class="line"><span class="string">            [10, 1, 0, 0, 1],</span></span><br><span class="line"><span class="string">            [10, 1, 1, 0, 1],</span></span><br><span class="line"><span class="string">            [10, 1, 1, 1, 1],</span></span><br><span class="line"><span class="string">            [10, 1, 1, 1, 1],            </span></span><br><span class="line"><span class="string">        ]            </span></span><br><span class="line"><span class="string">        </span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        <span class="comment"># T = [[0] * (m+2) for _ in range(n+2)]   # WRONG!!!</span></span><br><span class="line">        T = [[<span class="number">0</span>] * (n+<span class="number">2</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(n+<span class="number">2</span>)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n+<span class="number">2</span>):</span><br><span class="line">            T[i][<span class="number">0</span>] = <span class="number">10</span></span><br><span class="line">            T[i][<span class="number">-1</span>] = <span class="number">1</span></span><br><span class="line">        <span class="comment"># print("T: \n&#123;&#125;".format(T))</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n+<span class="number">2</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, n+<span class="number">2</span>):</span><br><span class="line">                <span class="keyword">if</span> i &gt;= j:</span><br><span class="line">                    T[i][j] = <span class="number">1</span></span><br><span class="line">        print(<span class="string">"T OK: \n&#123;&#125;"</span>.format(T))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">            col = self.transform(T, col)</span><br><span class="line">            col[<span class="number">-1</span>] = <span class="number">3</span></span><br><span class="line">            print(col)</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> col[<span class="number">-2</span>]</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">transform</span><span class="params">(self, A, vec)</span>:</span>    <span class="comment"># diff frome general __mul__ 'cause of DIM issue, so better use class template...</span></span><br><span class="line">        n, m = len(A), len(A[<span class="number">0</span>])</span><br><span class="line">        print(n, m, len(vec))</span><br><span class="line">        k = <span class="number">1</span></span><br><span class="line">        C = [<span class="number">0</span> <span class="keyword">for</span> j <span class="keyword">in</span> range(n+<span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                C[i] += A[i][j] * vec[j]</span><br><span class="line">        <span class="keyword">return</span> C</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># def mul(self, A, B):</span></span><br><span class="line">    <span class="comment">#     n, m, k = len(A), len(A[0]), len(B[0])</span></span><br><span class="line">    <span class="comment">#     print(n, m, len(B), k)</span></span><br><span class="line">    <span class="comment">#     C = [[0 for _ in range(k)] for _ in range(n)]</span></span><br><span class="line">    <span class="comment">#     for i in range(n):</span></span><br><span class="line">    <span class="comment">#         for t in range(k):</span></span><br><span class="line">    <span class="comment">#             for j in range(m):</span></span><br><span class="line">    <span class="comment">#                 C[i][t] = A[i][j] * B[j][t]</span></span><br><span class="line">    <span class="comment">#     return C</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">O_N_TLE</span><span class="params">(self, X, m)</span>:</span></span><br><span class="line">        n = len(X)</span><br><span class="line">        <span class="comment"># T = [[0] * (m+1) for _ in range(n+1)]</span></span><br><span class="line">        col = [<span class="number">0</span>] * (n+<span class="number">1</span>)</span><br><span class="line">        col[<span class="number">0</span>] = <span class="number">23</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># for j in range(1, m+1):</span></span><br><span class="line">        <span class="comment">#     T[0][j] = 10*T[0][j-1] +  3</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">            col[i] = X[i<span class="number">-1</span>]</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, m+<span class="number">1</span>):</span><br><span class="line">            <span class="comment"># print(T)</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, n+<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">                    col[i] = <span class="number">10</span> * col[i] + <span class="number">3</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    col[i] = col[i] + col[i<span class="number">-1</span>]</span><br><span class="line">            </span><br><span class="line">        <span class="comment"># print(T)</span></span><br><span class="line">        <span class="keyword">return</span> col[n] % MOD</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">O_NxM_MLE</span><span class="params">(self, X, m)</span>:</span></span><br><span class="line">        n = len(X)</span><br><span class="line">        T = [[<span class="number">0</span>] * (m+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> range(n+<span class="number">1</span>)]</span><br><span class="line">        T[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">23</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, m+<span class="number">1</span>):</span><br><span class="line">            T[<span class="number">0</span>][j] = <span class="number">10</span>*T[<span class="number">0</span>][j<span class="number">-1</span>] +  <span class="number">3</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">            T[i][<span class="number">0</span>] = X[i<span class="number">-1</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># print(T)</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">1</span>, m+<span class="number">1</span>):</span><br><span class="line">                T[i][j] = T[i<span class="number">-1</span>][j] + T[j][i<span class="number">-1</span>]</span><br><span class="line">        <span class="comment"># print(T)</span></span><br><span class="line">        <span class="keyword">return</span> T[n][m] % MOD</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="前綴和的定義和實現"><a href="#前綴和的定義和實現" class="headerlink" title="前綴和的定義和實現"></a>前綴和的定義和實現</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfnnqe58rzj30qg0cg77y.jpg" alt="image-20200611002631135"></p>
+<p>![image-20200611002923263](/Users/joe/Library/Application Support/typora-user-images/image-20200611002923263.png)</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfnnwnq0x7j30ue0eg79y.jpg" alt="image-20200611003241851"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfnny2cwesj30ts0cmzmq.jpg" alt="image-20200611003404254"></p>
+<h4 id="2D"><a href="#2D" class="headerlink" title="2D"></a>2D</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpably4w2j30ue0em44a.jpg" alt="image-20200612101348111"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpaj7hx6oj30tu0emqde.jpg" alt="image-20200612102108325"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gfpajm0uz8j30tu0dw0xw.jpg" alt="image-20200612102132182"></p>
+<h4 id="動規V-S-前綴和"><a href="#動規V-S-前綴和" class="headerlink" title="動規V.S.前綴和"></a>動規V.S.前綴和</h4><ul>
+<li><p>前綴和是一種特殊的動規</p>
+</li>
+<li><p>e.g.</p>
+<ul>
+<li><p>打劫房屋</p>
+</li>
+<li><p>不同路徑2D DP, 也是一種前綴和、DP、</p>
+</li>
+<li><p>爬樓梯</p>
+<ul>
+<li>dp = dp[i-1] + dp[i-2]</li>
+</ul>
+</li>
+<li><p>股票</p>
+<ul>
+<li><p>DP思維: dp[i] profit</p>
+<ul>
+<li>dp[i] = max(dp[i-1], a[i] - min_cost)</li>
+</ul>
+</li>
+<li><p>前綴思想：</p>
+<ul>
+<li><p>前綴最小值</p>
+<p>Min_price, max_profit</p>
+</li>
+</ul>
+</li>
+<li><p>思維路徑：</p>
+<ul>
+<li>先想簡單的方法試起<ol>
+<li>前綴<ol>
+<li>前綴最小、最大</li>
+<li>前綴和</li>
+</ol>
+</li>
+<li>雙指針</li>
+</ol>
+</li>
+<li>再想進階的辦法<ol>
+<li>動規</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>簡單法做起</p>
+</li>
+</ul>
+</li>
 </ul>
 </div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/42/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/42/">42</a><span class="page-number current">43</span><a class="page-number" href="/page/44/">44</a><span class="space">&hellip;</span><a class="page-number" href="/page/56/">56</a><a class="extend next" rel="next" href="/page/44/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
   $('#nav').addClass('is-mobile')
