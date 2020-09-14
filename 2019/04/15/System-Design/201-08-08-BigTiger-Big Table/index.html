@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="System-Design/201-08-08-BigTiger-Big Table"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>System-Design/201-08-08-BigTiger-Big Table | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#BigTiger"><span class="toc-number">1.</span> <span class="toc-text">BigTiger</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#讀"><span class="toc-number">1.0.1.</span> <span class="toc-text">讀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#寫"><span class="toc-number">1.0.2.</span> <span class="toc-text">寫</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">286</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">41</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">System-Design/201-08-08-BigTiger-Big Table</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-15</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p>存 : sharidng、写、failure</p>
+<p>查:</p>
+<h1 id="BigTiger"><a href="#BigTiger" class="headerlink" title="BigTiger"></a>BigTiger</h1><p>★ 應該先關注「寫」再來才是「讀」</p>
+<h3 id="讀"><a href="#讀" class="headerlink" title="讀"></a>讀</h3><ul>
+<li><p>如何在文件作快速查詢？</p>
+<ul>
+<li><p>對於文件很多數據找到key排序</p>
+</li>
+<li><p>也是 NoSQL常用的概念</p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200804230436057.png" alt="image-20200804230436057" style="zoom:50%;" />
+</li>
+</ul>
+</li>
+<li><p>大表時怎辦？</p>
+<ul>
+<li><p>拆成很多個小表，這樣每個小表內部是個排過序的kv串，在底下用元數據保存小表位置</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghfubji1asj315g0kc761.jpg" alt="image-20200804230659530"></p>
+</li>
+</ul>
+</li>
+<li><p>超大表呢？</p>
+<ul>
+<li><p>小表再拆出小小表</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghfubobrjkj316s0nywh0.jpg" alt="image-20200804230812457"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="寫"><a href="#寫" class="headerlink" title="寫"></a>寫</h3><p>DB只是負責查詢跟組織的，存是存到FS裡去的。</p>
+<ul>
+<li>怎麼寫數據？<ul>
+<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghfubmnyhdj316g0imwfz.jpg" alt="image-20200804231646400"></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>內存表過大怎辦？</p>
+<ul>
+<li><p>要是內存寫到64MB就打入DISK</p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200804231815438.png" alt="image-20200804231815438" style="zoom:50%;" />
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>如何避免丟失數據</p>
+<ul>
+<li><p>Log</p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200804231938213.png" alt="image-20200804231938213" style="zoom:50%;" />
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>所以現在下面三者構成了一個「小表的數據」<ol>
+<li>內存表</li>
+<li>一些小小表</li>
+<li>Log</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>如何讀數據？<ul>
+<li>比方要找B了，因為小小表內有序，內存外無序，所以找的時候要找所有的小小表還有內存表，而且disk還要遍歷或二叉找都是很慢的</li>
+<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghfubnip3yj313i0mwdi9.jpg" alt="image-20200804232415145"></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>怎加速呢？<ul>
+<li>最好的方式就是建立索引</li>
+<li>我們在寫入小小表時，可以固化個索引並預加載到內存</li>
+<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghfubj6z2sj315g0kc761.jpg" alt="image-20200804233037481"></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>继续加速?<ul>
+<li>用 Bloom Filter, 有可能在的塊才去找</li>
+<li>所以小小表就變成了數據塊、索引、Bloom Filter</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>如何將表存入 GFS?<ul>
+<li>兩者都是64MB的chunk，可映射上，好管理</li>
+<li><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200804233433530.png" alt="image-20200804233433530" style="zoom:50%;" />
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>表的邏輯視圖是什麼？<ul>
+<li>身高體重可以變column family</li>
+<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghfubl4n0ij316m0nyq5x.jpg" alt="image-20200804233540415"></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>怎麼映射為物理存儲？</p>
+<ul>
+<li><p>找到key的規則，將行、列、時間戳作為key</p>
+</li>
+<li><p>都存一起有什麼好處呢？</p>
+<ul>
+<li><p>可以將相同的key聚合在一起，是NoSQL的經典更有效的作法，所以天然不支援join操作，</p>
+<p>也說明了為什麼MySQL在scale天然會出各種問題</p>
+</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghfubizt4wj316i0g0abv.jpg" alt="image-20200804233835009"></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>架構是什麼呢？</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghfubk1hk9j31440mkwh9.jpg" alt="image-20200804234021399"></p>
+<ul>
+<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghf8mst00qj30v003smze.jpg" alt="image-20200805002026433" style="zoom: 33%;" />
+
+</li>
+</ul>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/04/15/System-Design/201-08-08-BigTiger-Big%20Table/">http://yoursite.com/2019/04/15/System-Design/201-08-08-BigTiger-Big%20Table/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/04/18/System-Design/9p/2019-04-18-MapReuce/"><i class="fa fa-chevron-left">  </i><span>System-Design/9p/2019-04-18-MapReuce</span></a></div><div class="next-post pull-right"><a href="/2019/04/15/System-Design/9p/2019-04-15-BigTable/"><span>System-Design/9p/2019-04-15-BigTable</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>

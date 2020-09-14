@@ -7,50 +7,51 @@
     error: 'Copy error',
     noSupport: 'The browser does not support'
   }
-} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#General"><span class="toc-number">1.</span> <span class="toc-text">General</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-number">1.0.1.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#要解決的問題"><span class="toc-number">1.1.</span> <span class="toc-text">要解決的問題</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GFS"><span class="toc-number">2.</span> <span class="toc-text">GFS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Scenario"><span class="toc-number">2.1.</span> <span class="toc-text">Scenario</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Service"><span class="toc-number">2.2.</span> <span class="toc-text">Service</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-大家猜猜GFS会用哪种设计模式？"><span class="toc-number">2.2.0.0.1.</span> <span class="toc-text">单选题]大家猜猜GFS会用哪种设计模式？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storage"><span class="toc-number">2.3.</span> <span class="toc-text">Storage</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-在-GFS-中，大文件存在哪儿？"><span class="toc-number">2.3.0.0.1.</span> <span class="toc-text">[单选题]在 GFS 中，大文件存在哪儿？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-Meta-Data应该怎样储存？"><span class="toc-number">2.3.0.0.2.</span> <span class="toc-text">[单选题]Meta Data应该怎样储存？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-文件内容应怎样储存？"><span class="toc-number">2.3.0.0.3.</span> <span class="toc-text">[单选题]文件内容应怎样储存？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Really-Heavy-Storage"><span class="toc-number">2.3.1.</span> <span class="toc-text">Really Heavy Storage</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-在-GFS-中-Master-和-Slave-分别存什么数据？"><span class="toc-number">2.3.1.0.1.</span> <span class="toc-text">[单选题]在 GFS 中 Master 和 Slave 分别存什么数据？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#寫入怎麼寫好？"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">寫入怎麼寫好？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-怎么将文件写入GFS"><span class="toc-number">2.3.1.1.1.</span> <span class="toc-text">[单选题]怎么将文件写入GFS?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-GFS-Client-将文件拆分为多大进行传输比较合适？"><span class="toc-number">2.3.1.1.2.</span> <span class="toc-text">[单选题]GFS Client 将文件拆分为多大进行传输比较合适？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-GFS中每一个Chunk怎么写入Server？"><span class="toc-number">2.3.1.1.3.</span> <span class="toc-text">[单选题]GFS中每一个Chunk怎么写入Server？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scale0"><span class="toc-number">2.4.</span> <span class="toc-text">Scale0</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-什么时候写入-checksum"><span class="toc-number">2.4.0.0.1.</span> <span class="toc-text">[单选题]什么时候写入 checksum?</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-一般来说什么时候检查-checksum？"><span class="toc-number">2.4.0.0.2.</span> <span class="toc-text">[单选题]一般来说什么时候检查 checksum？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-avoid-data-loss-when-a-Chunk-Server-is-down-fail"><span class="toc-number">2.4.0.1.</span> <span class="toc-text">How to avoid data loss when a Chunk Server is down&#x2F;fail?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-recover-when-a-chunk-is-broken"><span class="toc-number">2.4.0.2.</span> <span class="toc-text">How to recover when a chunk is broken?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#-1"><span class="toc-number">2.4.0.3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如何知道有個小弟完全掛了？-gt-心跳"><span class="toc-number">2.4.0.4.</span> <span class="toc-text">如何知道有個小弟完全掛了？&#x3D;&#x3D;&gt; 心跳</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-心跳（Heartbeat）机制怎么设计？"><span class="toc-number">2.4.0.4.1.</span> <span class="toc-text">[单选题]心跳（Heartbeat）机制怎么设计？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scale"><span class="toc-number">2.5.</span> <span class="toc-text">Scale</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-如何解决-client-传输-replica-chunk-的问题？"><span class="toc-number">2.5.0.0.1.</span> <span class="toc-text">[单选题]如何解决 client 传输 replica chunk 的问题？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#怎麼選隊長？"><span class="toc-number">2.5.0.1.</span> <span class="toc-text">怎麼選隊長？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#多选题-下列哪些因素是我们挑选-chunk-server-队长时所需要考虑的"><span class="toc-number">2.5.0.1.1.</span> <span class="toc-text">[多选题]下列哪些因素是我们挑选 chunk server 队长时所需要考虑的</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-每次找的-chunk-server-队长是一样的么？"><span class="toc-number">2.5.0.1.2.</span> <span class="toc-text">[单选题]每次找的 chunk server 队长是一样的么？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GFS-problem"><span class="toc-number">2.6.</span> <span class="toc-text">GFS problem</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Latency"><span class="toc-number">2.6.0.1.</span> <span class="toc-text">Latency:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GFS-QA"><span class="toc-number">2.7.</span> <span class="toc-text">GFS QA</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">276</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">39</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">System-Design/9p/2019-04-11-Distributed System GFS</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-11</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ul>
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#General"><span class="toc-number">1.</span> <span class="toc-text">General</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-number">1.0.1.</span> <span class="toc-text"></span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#要解決的問題"><span class="toc-number">1.1.</span> <span class="toc-text">要解決的問題</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GFS"><span class="toc-number">2.</span> <span class="toc-text">GFS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Scenario"><span class="toc-number">2.1.</span> <span class="toc-text">Scenario</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#需求1-總存储量有多大"><span class="toc-number">2.1.1.</span> <span class="toc-text">需求1: 總存储量有多大?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#需求2-多台機器，越多越好"><span class="toc-number">2.1.2.</span> <span class="toc-text">需求2: 多台機器，越多越好</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Service"><span class="toc-number">2.2.</span> <span class="toc-text">Service</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-多台Server間怎溝通？"><span class="toc-number">2.2.1.</span> <span class="toc-text">Q: 多台Server間怎溝通？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#P2P"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">P2P</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#V-Master-vs-Slaves"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">(V) Master vs Slaves</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-大家猜猜GFS会用哪种设计模式？"><span class="toc-number">2.2.1.2.1.</span> <span class="toc-text">单选题]大家猜猜GFS会用哪种设计模式？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storage"><span class="toc-number">2.3.</span> <span class="toc-text">Storage</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-大文件存在哪？"><span class="toc-number">2.3.1.</span> <span class="toc-text">Q: 大文件存在哪？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-在-GFS-中，大文件存在哪儿？"><span class="toc-number">2.3.1.0.1.</span> <span class="toc-text">[单选题]在 GFS 中，大文件存在哪儿？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-Metadata存哪？"><span class="toc-number">2.3.2.</span> <span class="toc-text">Q: Metadata存哪？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-Meta-Data应该怎样储存？"><span class="toc-number">2.3.2.0.1.</span> <span class="toc-text">[单选题]Meta Data应该怎样储存？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-文件内容应怎样储存？"><span class="toc-number">2.3.2.0.2.</span> <span class="toc-text">[单选题]文件内容应怎样储存？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-100G-on-普通的OS怎存"><span class="toc-number">2.3.3.</span> <span class="toc-text">Q: 100G on 普通的OS怎存?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-100P-真的很大怎存？"><span class="toc-number">2.3.4.</span> <span class="toc-text">Q: 100P, 真的很大怎存？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scale"><span class="toc-number">2.4.</span> <span class="toc-text">Scale</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-10PB存得下嗎？需要多台電腦-Master-Slave工作模式。"><span class="toc-number">2.4.1.</span> <span class="toc-text">Q: 10PB存得下嗎？需要多台電腦 Master-Slave工作模式。</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-在-GFS-中-Master-和-Slave-分别存什么数据？"><span class="toc-number">2.4.1.0.1.</span> <span class="toc-text">[单选题]在 GFS 中 Master 和 Slave 分别存什么数据？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-每台-chunk-的Offset偏移量可否不在Master上？"><span class="toc-number">2.4.2.</span> <span class="toc-text">Q: 每台 chunk 的Offset偏移量可否不在Master上？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-Master-存10P文件的metadata要多少容量？"><span class="toc-number">2.4.3.</span> <span class="toc-text">Q: Master 存10P文件的metadata要多少容量？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#One-Workable-Sol"><span class="toc-number">3.</span> <span class="toc-text">One Workable Sol!</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#寫"><span class="toc-number">3.1.</span> <span class="toc-text">寫</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#架構-amp-Q-一個chunk怎麼寫入server的"><span class="toc-number">3.1.1.</span> <span class="toc-text">架構 &amp; Q: 一個chunk怎麼寫入server的?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-寫入怎麼寫好？一次vs多次"><span class="toc-number">3.1.1.1.</span> <span class="toc-text">Q: 寫入怎麼寫好？一次vs多次</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-怎么将文件写入GFS"><span class="toc-number">3.1.1.1.1.</span> <span class="toc-text">[单选题]怎么将文件写入GFS?</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-從哪續傳好-當多次寫時每份大小？就Chunk，也是傳輸size"><span class="toc-number">3.1.1.2.</span> <span class="toc-text">Q: 從哪續傳好? 當多次寫時每份大小？就Chunk，也是傳輸size</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-GFS-Client-将文件拆分为多大进行传输比较合适？"><span class="toc-number">3.1.1.2.1.</span> <span class="toc-text">[单选题]GFS Client 将文件拆分为多大进行传输比较合适？</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-GFS中每一个Chunk怎么写入Server？"><span class="toc-number">3.1.1.2.2.</span> <span class="toc-text">[单选题]GFS中每一个Chunk怎么写入Server？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-要修改一個-mp4-怎辦？"><span class="toc-number">3.1.1.3.</span> <span class="toc-text">Q: 要修改一個 .mp4 怎辦？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#結論就-別update"><span class="toc-number">3.1.1.3.1.</span> <span class="toc-text">結論就: 別update!</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#總結"><span class="toc-number">3.1.2.</span> <span class="toc-text">總結:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#讀"><span class="toc-number">3.2.</span> <span class="toc-text">讀</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-一次-or-多次？"><span class="toc-number">3.2.0.1.</span> <span class="toc-text">Q: 一次 or 多次？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-Client-怎知-xxx-mp4-被切成了多少塊？"><span class="toc-number">3.2.0.2.</span> <span class="toc-text">Q: Client 怎知 xxx.mp4 被切成了多少塊？</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#架構"><span class="toc-number">3.2.1.</span> <span class="toc-text">架構</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SCALE-–-in-One-Workable-Sol"><span class="toc-number">3.3.</span> <span class="toc-text">SCALE –  in One Workable Sol</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Master-做的事"><span class="toc-number">3.3.1.</span> <span class="toc-text">Master 做的事</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-Master-Task"><span class="toc-number">3.3.1.1.</span> <span class="toc-text">Q: Master Task:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-單master夠嗎？"><span class="toc-number">3.3.1.2.</span> <span class="toc-text">Q: 單master夠嗎？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Double-Master"><span class="toc-number">3.3.1.2.1.</span> <span class="toc-text">Double Master</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Multi-Master"><span class="toc-number">3.3.1.2.2.</span> <span class="toc-text">Multi Master</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-怎麼看資料有掛了"><span class="toc-number">3.3.1.3.</span> <span class="toc-text">Q: 怎麼看資料有掛了</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Checksum"><span class="toc-number">3.3.1.3.1.</span> <span class="toc-text">Checksum</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-什么时候写入-checksum-如上圖"><span class="toc-number">3.3.1.3.2.</span> <span class="toc-text">[单选题]什么时候写入 checksum? 如上圖</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-一般来说什么时候检查-checksum？"><span class="toc-number">3.3.1.3.3.</span> <span class="toc-text">[单选题]一般来说什么时候检查 checksum？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#問題集"><span class="toc-number">3.3.1.4.</span> <span class="toc-text">問題集</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#更多-Q-amp-A"><span class="toc-number">3.4.</span> <span class="toc-text">更多 Q&amp;A</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-avoid-data-loss-when-a-Chunk-Server-is-down-fail"><span class="toc-number">3.4.0.1.</span> <span class="toc-text">How to avoid data loss when a Chunk Server is down&#x2F;fail?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#How-to-recover-when-a-chunk-is-broken"><span class="toc-number">3.4.0.2.</span> <span class="toc-text">How to recover when a chunk is broken?</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#架構-1"><span class="toc-number">3.4.0.2.1.</span> <span class="toc-text">架構</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#-1"><span class="toc-number">3.4.0.3.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如何知道有個小弟完全掛了？-gt-心跳，小弟自報"><span class="toc-number">3.4.0.4.</span> <span class="toc-text">如何知道有個小弟完全掛了？&#x3D;&#x3D;&gt; 心跳，小弟自報</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-心跳（Heartbeat）机制怎么设计？"><span class="toc-number">3.4.0.4.1.</span> <span class="toc-text">[单选题]心跳（Heartbeat）机制怎么设计？</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scale-再更多-Q-amp-A"><span class="toc-number">3.5.</span> <span class="toc-text">Scale 再更多 Q&amp;A</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-寫到一台server安全嗎？"><span class="toc-number">3.5.0.1.</span> <span class="toc-text">Q: 寫到一台server安全嗎？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-解決客戶端瓶頸，不然client分別去寫他太累了"><span class="toc-number">3.5.0.2.</span> <span class="toc-text">Q: 解決客戶端瓶頸，不然client分別去寫他太累了</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#讓隊長去-寫怎麼寫？client-把chunk一次傳給三個小弟作replica後，client會變成瓶頸…"><span class="toc-number">3.5.0.2.1.</span> <span class="toc-text">讓隊長去! 寫怎麼寫？client 把chunk一次傳給三個小弟作replica後，client會變成瓶頸…</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-如何解决-client-传输-replica-chunk-的问题？"><span class="toc-number">3.5.0.2.2.</span> <span class="toc-text">[单选题]如何解决 client 传输 replica chunk 的问题？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-怎麼選隊長？"><span class="toc-number">3.5.0.3.</span> <span class="toc-text">Q: 怎麼選隊長？</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#多选题-下列哪些因素是我们挑选-chunk-server-队长时所需要考虑的"><span class="toc-number">3.5.0.3.1.</span> <span class="toc-text">[多选题]下列哪些因素是我们挑选 chunk server 队长时所需要考虑的</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#单选题-每次找的-chunk-server-队长是一样的么？"><span class="toc-number">3.5.0.3.2.</span> <span class="toc-text">[单选题]每次找的 chunk server 队长是一样的么？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-解決-Chunk-Server-Failure"><span class="toc-number">3.5.0.4.</span> <span class="toc-text">Q: 解決 Chunk Server Failure</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#總結-1"><span class="toc-number">3.6.</span> <span class="toc-text">總結</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GFS-Problem"><span class="toc-number">3.7.</span> <span class="toc-text">GFS Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Latency"><span class="toc-number">3.7.0.1.</span> <span class="toc-text">Latency:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GFS-QA"><span class="toc-number">3.8.</span> <span class="toc-text">GFS QA</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">286</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">41</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">System-Design/9p/2019-04-11-Distributed System GFS</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-11</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="General"><a href="#General" class="headerlink" title="General"></a>General</h1><ul>
 <li>GFS Client</li>
 <li>Heart Beat</li>
 </ul>
 <blockquote>
 <p>GFS 采用的是 Master-slave 的架构。他的一些基本设计原理，如 chunk 的设计（对应文件系统中的 block）和普通文件系统是相通的。整套系统的设计是基于一些合理假设的（这些假设都是Google从大量工程实践中总结出来的），其中一条假设就是：“We expect a few million files, each typically 100MB or larger in size”。如果实在需要存很多小文件的话， 其实可以将这些小文件打包成一个大文件然后再存储，只要记录下每个小文件在文件内部的起始字节和大小就行了。</p>
 </blockquote>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="要解決的問題"><a href="#要解決的問題" class="headerlink" title="要解決的問題"></a>要解決的問題</h2><p>Storage不够、QPS太大的問題</p>
-<p>Google 很多小計算機建DFS</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h2 id="要解決的問題"><a href="#要解決的問題" class="headerlink" title="要解決的問題"></a>要解決的問題</h2><ul>
+<li><p>Storage不够、QPS太大的問題</p>
+</li>
+<li><p>Google 很多小計算機建DFS</p>
 <p>ＶＳ</p>
 <p>SUN大型、貴的（大家買不起），09年被Oracle收了</p>
-<p>GFS、BigTable、MapReduce</p>
+</li>
+<li><p>GFS、BigTable、MapReduce</p>
+</li>
+</ul>
 <h1 id="GFS"><a href="#GFS" class="headerlink" title="GFS"></a>GFS</h1><h2 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h2><ul>
 <li>作為一個文件系統，一定要提供兩種常用的操作：寫跟讀<ul>
 <li>寫：要文件名、內容</li>
 <li>讀：文件名，返回文件內容</li>
 </ul>
 </li>
-<li>總量，比如1000T，才會上分布式；機器數也是越大越好</li>
 </ul>
-<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><ul>
+<h3 id="需求1-總存储量有多大"><a href="#需求1-總存储量有多大" class="headerlink" title="需求1: 總存储量有多大?"></a>需求1: 總存储量有多大?</h3><ul>
+<li>比如 &gt; 1000T，才會上分布式；機器數也是越大越好</li>
+</ul>
+<h3 id="需求2-多台機器，越多越好"><a href="#需求2-多台機器，越多越好" class="headerlink" title="需求2: 多台機器，越多越好"></a>需求2: 多台機器，越多越好</h3><h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><ul>
 <li><p>如圖書館要有Server、Client。</p>
 <p>GFS提供的一個就是讀取，另一個是寫入的服務</p>
 </li>
-<li><p>Server由多台構建。多台機器間怎麼溝通？</p>
-<ol>
-<li><p>p2p, 平級溝通</p>
+</ul>
+<h3 id="Q-多台Server間怎溝通？"><a href="#Q-多台Server間怎溝通？" class="headerlink" title="Q: 多台Server間怎溝通？"></a>Q: 多台Server間怎溝通？</h3><h4 id="P2P"><a href="#P2P" class="headerlink" title="P2P"></a>P2P</h4><p>平級溝通</p>
 <ul>
-<li>一台掛了還可以工作，沒有單點故障問題</li>
-<li>缺點：但，大家平級，要常通信保持一致性。</li>
+<li>優：一台掛了還可以工作，沒有單點故障問題</li>
+<li>缺：但，大家平級，要常通信保持一致性。</li>
 <li>p2p的通信一般是比較難寫的，直覺就是。</li>
 </ul>
-</li>
-<li><p>Master vs Slaves, 老大一致對外，對內分配幹活</p>
+<h4 id="V-Master-vs-Slaves"><a href="#V-Master-vs-Slaves" class="headerlink" title="(V) Master vs Slaves"></a>(V) Master vs Slaves</h4><p>老大一致對外，對內分配幹活</p>
 <ul>
-<li><p>數據易保持一致性。就老大分配</p>
+<li><p>優: 數據易<strong>保持一致性</strong>。就老大分配</p>
 </li>
-<li><p>缺點：有單點大哥master掛了，整個系統不work的問題</p>
+<li><p>缺：有單點大哥master掛了，整個系統不work的問題</p>
 </li>
 <li><p>這是GFS最終的選擇，他是後端的服務，不是前端的，所以掛個一分鐘不會怎樣，就如果master掛了，把master重啟就好了。</p>
-</li>
-</ul>
-</li>
-</ol>
 </li>
 </ul>
 <blockquote>
@@ -61,12 +62,11 @@
 <p><strong>解析:</strong></p>
 <p>Master Slave的优势是：<br>设计简单<br>数据很容易保持一致</p>
 </blockquote>
-<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><ul>
-<li>大文件存在哪？<ul>
-<li>當然是disk，10PB只有disk可以，內存不可能啦</li>
-</ul>
+<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><h3 id="Q-大文件存在哪？"><a href="#Q-大文件存在哪？" class="headerlink" title="Q: 大文件存在哪？"></a>Q: 大文件存在哪？</h3><ul>
+<li><p>當然是disk，10PB只有disk可以，內存不可能啦</p>
 </li>
-<li>如何存到這個文件系統裡？<ul>
+<li><p>如何存到這個文件系統裡？</p>
+<ul>
 <li>怎麼設計GFS?</li>
 <li>怎麼存？如果總量 &lt; 100G？</li>
 </ul>
@@ -78,11 +78,11 @@
 <p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
 <p><strong>正确答案:</strong>B</p>
 </blockquote>
-<ul>
+<h3 id="Q-Metadata存哪？"><a href="#Q-Metadata存哪？" class="headerlink" title="Q: Metadata存哪？"></a>Q: Metadata存哪？</h3><ul>
 <li>metadata元數據常常被無意識訪問到, 怎麼存好？一般打開文件夾就被動看到了</li>
 </ul>
 <blockquote>
-<h5 id="单选题-Meta-Data应该怎样储存？"><a href="#单选题-Meta-Data应该怎样储存？" class="headerlink" title="[单选题]Meta Data应该怎样储存？"></a>[单选题]Meta Data应该怎样储存？</h5><p>A.所有文件的Meta Data 全放磁盘开头83.51% 选择</p>
+<h5 id="单选题-Meta-Data应该怎样储存？"><a href="#单选题-Meta-Data应该怎样储存？" class="headerlink" title="[单选题]Meta Data应该怎样储存？"></a>[单选题]Meta Data应该怎样储存？</h5><p><strong>A.所有文件的Meta Data 全放磁盘开头83.51% 选择</strong></p>
 <p>B.每个文件的Meta Data都和它的内容放在一起16.49% 选择</p>
 <p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是A</p>
 <p><strong>正确答案:</strong>A</p>
@@ -139,8 +139,21 @@
 </li>
 </ul>
 </blockquote>
-<h3 id="Really-Heavy-Storage"><a href="#Really-Heavy-Storage" class="headerlink" title="Really Heavy Storage"></a>Really Heavy Storage</h3><p>e.g. 10PB存得下嗎？需要多台電腦 Master-Slave工作模式。</p>
-<ul>
+<h3 id="Q-100G-on-普通的OS怎存"><a href="#Q-100G-on-普通的OS怎存" class="headerlink" title="Q: 100G on 普通的OS怎存?"></a>Q: 100G on 普通的OS怎存?</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzvx48y5vj30vc0g6dhp.jpg" alt="image-20200822205723260"></p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzvxy7io1j30c607edgd.jpg" alt="image-20200822205814035" style="zoom: 33%;" />
+
+
+
+<ol>
+<li>因为比较小，預設就是4KB，一般就是照block傳就好了</li>
+<li>如果再大一點怎辦？如果再按block算，就會有很多很多個block，去尋執很麻煩，不然我們就by chunk</li>
+<li>如果100P就要上多台機子了，P = 1000T</li>
+</ol>
+<p>當然指的不是一個，而是很多個文件啦</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzvz8ufr8j31160hwtb8.jpg" alt="image-20200822205929382"></p>
+<h3 id="Q-100P-真的很大怎存？"><a href="#Q-100P-真的很大怎存？" class="headerlink" title="Q: 100P, 真的很大怎存？"></a>Q: 100P, 真的很大怎存？</h3><p>上分布式</p>
+<h2 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzw5mlv1rj317o0l441y.jpg" alt="image-20200822210535805"></p>
+<h3 id="Q-10PB存得下嗎？需要多台電腦-Master-Slave工作模式。"><a href="#Q-10PB存得下嗎？需要多台電腦-Master-Slave工作模式。" class="headerlink" title="Q: 10PB存得下嗎？需要多台電腦 Master-Slave工作模式。"></a>Q: 10PB存得下嗎？需要多台電腦 Master-Slave工作模式。</h3><ul>
 <li>現在一台服務器現在最多插10個硬盤，一個硬盤撐死就100TB，這樣也就才0.1P，這樣如此的電腦至少要來100台共同工作才能做得了10PB的事</li>
 </ul>
 <blockquote>
@@ -167,7 +180,11 @@
 </li>
 </ul>
 </blockquote>
-<h4 id="寫入怎麼寫好？"><a href="#寫入怎麼寫好？" class="headerlink" title="寫入怎麼寫好？"></a>寫入怎麼寫好？</h4><blockquote>
+<h3 id="Q-每台-chunk-的Offset偏移量可否不在Master上？"><a href="#Q-每台-chunk-的Offset偏移量可否不在Master上？" class="headerlink" title="Q: 每台 chunk 的Offset偏移量可否不在Master上？"></a>Q: 每台 chunk 的Offset偏移量可否不在Master上？</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzw87abomj31660k07ei.jpg" alt="image-20200822210804854"></p>
+<h3 id="Q-Master-存10P文件的metadata要多少容量？"><a href="#Q-Master-存10P文件的metadata要多少容量？" class="headerlink" title="Q: Master 存10P文件的metadata要多少容量？"></a>Q: Master 存10P文件的metadata要多少容量？</h3><p>1 chunk = 64MB needs 64B. (经验值) 10P needs 10G</p>
+<h1 id="One-Workable-Sol"><a href="#One-Workable-Sol" class="headerlink" title="One Workable Sol!"></a>One Workable Sol!</h1><h2 id="寫"><a href="#寫" class="headerlink" title="寫"></a>寫</h2><h3 id="架構-amp-Q-一個chunk怎麼寫入server的"><a href="#架構-amp-Q-一個chunk怎麼寫入server的" class="headerlink" title="架構 &amp; Q: 一個chunk怎麼寫入server的?"></a>架構 &amp; Q: 一個chunk怎麼寫入server的?</h3><p>這個還沒有做scale</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzwhdnk3dj312y0is11s.jpg" alt="image-20200822211653883"></p>
+<h4 id="Q-寫入怎麼寫好？一次vs多次"><a href="#Q-寫入怎麼寫好？一次vs多次" class="headerlink" title="Q: 寫入怎麼寫好？一次vs多次"></a>Q: 寫入怎麼寫好？一次vs多次</h4><blockquote>
 <h5 id="单选题-怎么将文件写入GFS"><a href="#单选题-怎么将文件写入GFS" class="headerlink" title="[单选题]怎么将文件写入GFS?"></a>[单选题]怎么将文件写入GFS?</h5><p>A.将文件整体一次性写入3.39% 选择</p>
 <p>B.将文件拆分成块多次写入96.61% 选择</p>
 <p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
@@ -175,11 +192,11 @@
 <p><strong>解析:</strong></p>
 <p>不同的块有可能放到不同的Chunk Server，并且分块后方便重传</p>
 </blockquote>
-<p>如果斷開了，可以從哪斷開的從哪續傳。</p>
+<h4 id="Q-從哪續傳好-當多次寫時每份大小？就Chunk，也是傳輸size"><a href="#Q-從哪續傳好-當多次寫時每份大小？就Chunk，也是傳輸size" class="headerlink" title="Q: 從哪續傳好? 當多次寫時每份大小？就Chunk，也是傳輸size"></a>Q: 從哪續傳好? 當多次寫時每份大小？就Chunk，也是傳輸size</h4><p>如果斷開了，可以從哪斷開的從哪續傳</p>
 <blockquote>
 <h5 id="单选题-GFS-Client-将文件拆分为多大进行传输比较合适？"><a href="#单选题-GFS-Client-将文件拆分为多大进行传输比较合适？" class="headerlink" title="[单选题]GFS Client 将文件拆分为多大进行传输比较合适？"></a>[单选题]GFS Client 将文件拆分为多大进行传输比较合适？</h5><p>A.64k6.92% 选择</p>
 <p>B.1M5.73% 选择</p>
-<p>C.64M83.89% 选择</p>
+<p><strong>C.64M83.89% 选择</strong></p>
 <p>D.1G3.46% 选择</p>
 <p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是C</p>
 <p><strong>正确答案:</strong>C</p>
@@ -196,12 +213,14 @@
 <p><strong><em>避免Master成为瓶颈</em></strong></p>
 </blockquote>
 <p>master的硬盤有限，網路也是有限的，自己會卡死，分下去給小弟們，讓client間也不會排隊</p>
+<h4 id="Q-要修改一個-mp4-怎辦？"><a href="#Q-要修改一個-mp4-怎辦？" class="headerlink" title="Q: 要修改一個 .mp4 怎辦？"></a>Q: 要修改一個 .mp4 怎辦？</h4><ol>
+<li>先刪掉 /gfs/home/xxx.mp4</li>
+<li>重把整個文件寫一份</li>
+</ol>
+<h5 id="結論就-別update"><a href="#結論就-別update" class="headerlink" title="結論就: 別update!"></a>結論就: 別update!</h5><h3 id="總結"><a href="#總結" class="headerlink" title="總結:"></a>總結:</h3><p><strong><em>Master要存所有的metadata,  chunkserver存真正的大data 讀要找到對應的chunkserver，寫時要找到空閒的chunkserver；</em></strong></p>
 <ul>
-<li>總結：Master要存所有的metadata,  chunkserver存真正的大data 讀要找到對應的chunkserver，寫時要找到空閒的chunkserver；<ul>
-<li>寫入是每次找老大問，老大分配空間，自己去找小弟寫</li>
-<li>讀出是問老大拿到chunklist，然後去問小弟拿到chunk就ok</li>
-</ul>
-</li>
+<li><strong>寫入是每次找老大問，老大分配空間，自己去找小弟寫</strong></li>
+<li><strong>讀出是問老大拿到chunklist，然後去問小弟拿到chunk就ok</strong></li>
 </ul>
 <blockquote>
 <ul>
@@ -223,7 +242,63 @@
 </li>
 </ul>
 </blockquote>
-<h2 id="Scale0"><a href="#Scale0" class="headerlink" title="Scale0"></a>Scale0</h2><blockquote>
+<h2 id="讀"><a href="#讀" class="headerlink" title="讀"></a>讀</h2><h4 id="Q-一次-or-多次？"><a href="#Q-一次-or-多次？" class="headerlink" title="Q: 一次 or 多次？"></a>Q: 一次 or 多次？</h4><h4 id="Q-Client-怎知-xxx-mp4-被切成了多少塊？"><a href="#Q-Client-怎知-xxx-mp4-被切成了多少塊？" class="headerlink" title="Q: Client 怎知 xxx.mp4 被切成了多少塊？"></a>Q: Client 怎知 xxx.mp4 被切成了多少塊？</h4><p>每個chunk知道在哪個server，所以一個file知道分別位在哪些server</p>
+<h3 id="架構"><a href="#架構" class="headerlink" title="架構"></a>架構</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzwmbpejsj314w0k6424.jpg" alt="image-20200822212139023"></p>
+<h2 id="SCALE-–-in-One-Workable-Sol"><a href="#SCALE-–-in-One-Workable-Sol" class="headerlink" title="SCALE –  in One Workable Sol"></a>SCALE –  in One Workable Sol</h2><h3 id="Master-做的事"><a href="#Master-做的事" class="headerlink" title="Master 做的事"></a>Master 做的事</h3><h4 id="Q-Master-Task"><a href="#Q-Master-Task" class="headerlink" title="Q: Master Task:"></a>Q: Master Task:</h4><ul>
+<li>存儲各個文件數據的 metadata</li>
+<li>存儲 Map<ul>
+<li>讀取時找到對應的 Chunk Server, </li>
+<li>寫入時分配空閒三 Chunk Server</li>
+</ul>
+</li>
+</ul>
+<h4 id="Q-單master夠嗎？"><a href="#Q-單master夠嗎？" class="headerlink" title="Q: 單master夠嗎？"></a>Q: 單master夠嗎？</h4><ul>
+<li>90%很好了一般都是這樣；大不了就是 Paxos Alg. 的多Master，再多也受不了會有延遲</li>
+</ul>
+<h5 id="Double-Master"><a href="#Double-Master" class="headerlink" title="Double Master"></a>Double Master</h5><ul>
+<li>Paper: Apache Hadoop Goes Realtime at Facebook</li>
+</ul>
+<h5 id="Multi-Master"><a href="#Multi-Master" class="headerlink" title="Multi Master"></a>Multi Master</h5><ul>
+<li>Paper: Paxos Algorithm</li>
+</ul>
+<h4 id="Q-怎麼看資料有掛了"><a href="#Q-怎麼看資料有掛了" class="headerlink" title="Q: 怎麼看資料有掛了"></a>Q: 怎麼看資料有掛了</h4><ul>
+<li><p>CHECKSUM, md5  哈希，原串發生變化，哈希值就巨大變化，一旦不同，就是原數據必毀</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gdtqklpedij31260tun45.jpg" alt="image-20200414235740148" style="zoom: 25%;" />
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>也可以用 XOR作checksum, </p>
+</li>
+<li><p>也可以用SHA1, SHA256, SHA512</p>
+</li>
+<li><p>Read More: <a href="https://en.wikipedia.org/wiki/Checksum" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Checksum</a></p>
+</li>
+</ul>
+<h5 id="Checksum"><a href="#Checksum" class="headerlink" title="Checksum"></a>Checksum</h5><ul>
+<li>size: 也就 4Bytes</li>
+<li>時機</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200822213411583.png" alt="image-20200822213411583" style="zoom: 50%;" />
+
+<blockquote>
+<h5 id="单选题-什么时候写入-checksum-如上圖"><a href="#单选题-什么时候写入-checksum-如上圖" class="headerlink" title="[单选题]什么时候写入 checksum? 如上圖"></a>[单选题]什么时候写入 checksum? 如上圖</h5><p>A.每个一段时间遍历所有数据计算 checksum 并写入3.32% 选择</p>
+<p>B.每个 chunk 在写入的时候计算 checksum 并记录在 chunk 的末尾39.40% 选择</p>
+<p>C.每个 chunk 在写入的时候计算 checksum 并集中记录在当前的 Slave 上36.58% 选择</p>
+<p>D.每个 chunk 在写入的时候计算 checksum 并集中记录在 Master 上20.70% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+</blockquote>
+<blockquote>
+<h5 id="单选题-一般来说什么时候检查-checksum？"><a href="#单选题-一般来说什么时候检查-checksum？" class="headerlink" title="[单选题]一般来说什么时候检查 checksum？"></a>[单选题]一般来说什么时候检查 checksum？</h5><p>A.每次读取 chunk 的时候重新计算并对比以前的 checksum90.56% 选择</p>
+<p>B.周期性的遍历所有数据检查 checksum9.44% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>A</p>
+</blockquote>
+<p>而且還可以再週期性地檢查；是根據業務調整。</p>
+<h4 id="問題集"><a href="#問題集" class="headerlink" title="問題集"></a>問題集</h4><blockquote>
 <ul>
 <li>master down了重启， 是通过读log来恢复吗<ul>
 <li>是的，但是一般会定期制作一个checkpoint，挂掉之后只需要从上一个checkpoint开始重放log就行了，不需要每次都从头开始。</li>
@@ -243,47 +318,7 @@
 </li>
 </ul>
 </blockquote>
-<ul>
-<li><p>單master夠嗎？</p>
-<ul>
-<li>一般都是這樣，大不了就是 Paxos Alg. 的多Master，再多也受不了會有延遲</li>
-</ul>
-</li>
-<li><p>怎麼看資料有掛了</p>
-<ul>
-<li><p>checksum, md5  哈希，原串發生變化，哈希值就巨大變化，一旦不同，就是原數據必毀</p>
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gdtqklpedij31260tun45.jpg" alt="image-20200414235740148" style="zoom: 25%;" />
-
-
-
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>也可以用 XOR作checksum, </p>
-</li>
-<li><p>也可以用SHA1, SHA256, SHA512</p>
-</li>
-<li><p>也就 4Bytes</p>
-</li>
-</ul>
-<blockquote>
-<h5 id="单选题-什么时候写入-checksum"><a href="#单选题-什么时候写入-checksum" class="headerlink" title="[单选题]什么时候写入 checksum?"></a>[单选题]什么时候写入 checksum?</h5><p>A.每个一段时间遍历所有数据计算 checksum 并写入3.32% 选择</p>
-<p>B.每个 chunk 在写入的时候计算 checksum 并记录在 chunk 的末尾39.40% 选择</p>
-<p>C.每个 chunk 在写入的时候计算 checksum 并集中记录在当前的 Slave 上36.58% 选择</p>
-<p>D.每个 chunk 在写入的时候计算 checksum 并集中记录在 Master 上20.70% 选择</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
-<p><strong>正确答案:</strong>B</p>
-</blockquote>
-<blockquote>
-<h5 id="单选题-一般来说什么时候检查-checksum？"><a href="#单选题-一般来说什么时候检查-checksum？" class="headerlink" title="[单选题]一般来说什么时候检查 checksum？"></a>[单选题]一般来说什么时候检查 checksum？</h5><p>A.每次读取 chunk 的时候重新计算并对比以前的 checksum90.56% 选择</p>
-<p>B.周期性的遍历所有数据检查 checksum9.44% 选择</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是A</p>
-<p><strong>正确答案:</strong>A</p>
-</blockquote>
-<p>而且還可以再週期性地檢查；是根據業務調整。</p>
-<h4 id="How-to-avoid-data-loss-when-a-Chunk-Server-is-down-fail"><a href="#How-to-avoid-data-loss-when-a-Chunk-Server-is-down-fail" class="headerlink" title="How to avoid data loss when a Chunk Server is down/fail?"></a>How to avoid data loss when a Chunk Server is down/fail?</h4><p>​    Ans: replica 作備份</p>
+<h2 id="更多-Q-amp-A"><a href="#更多-Q-amp-A" class="headerlink" title="更多 Q&amp;A"></a>更多 Q&amp;A</h2><h4 id="How-to-avoid-data-loss-when-a-Chunk-Server-is-down-fail"><a href="#How-to-avoid-data-loss-when-a-Chunk-Server-is-down-fail" class="headerlink" title="How to avoid data loss when a Chunk Server is down/fail?"></a>How to avoid data loss when a Chunk Server is down/fail?</h4><p>​    Ans: replica 作備份</p>
 <blockquote>
 <p>​    [单选题]GFS的Replica怎么存放？</p>
 <p>1.三个备份都放在一个地方（加州）0.97% 选择</p>
@@ -295,7 +330,11 @@
 <p>两个备份较近，保证出错时快速恢复，一个较远，保证安全性</p>
 </blockquote>
 <h4 id="How-to-recover-when-a-chunk-is-broken"><a href="#How-to-recover-when-a-chunk-is-broken" class="headerlink" title="How to recover when a chunk is broken?"></a>How to recover when a chunk is broken?</h4><p>讓Master 幫, Master知道他所有的小弟在哪，</p>
-<h4 id="-1"><a href="#-1" class="headerlink" title=""></a></h4><h4 id="如何知道有個小弟完全掛了？-gt-心跳"><a href="#如何知道有個小弟完全掛了？-gt-心跳" class="headerlink" title="如何知道有個小弟完全掛了？==&gt; 心跳"></a>如何知道有個小弟完全掛了？==&gt; 心跳</h4><blockquote>
+<ol>
+<li><h5 id="架構-1"><a href="#架構-1" class="headerlink" title="架構"></a>架構</h5></li>
+</ol>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzx20e5tfj31120nwgor.jpg" alt="image-20200822213644383"></p>
+<h4 id="-1"><a href="#-1" class="headerlink" title=""></a></h4><h4 id="如何知道有個小弟完全掛了？-gt-心跳，小弟自報"><a href="#如何知道有個小弟完全掛了？-gt-心跳，小弟自報" class="headerlink" title="如何知道有個小弟完全掛了？==&gt; 心跳，小弟自報"></a>如何知道有個小弟完全掛了？==&gt; 心跳，小弟自報</h4><blockquote>
 <h5 id="单选题-心跳（Heartbeat）机制怎么设计？"><a href="#单选题-心跳（Heartbeat）机制怎么设计？" class="headerlink" title="[单选题]心跳（Heartbeat）机制怎么设计？"></a>[单选题]心跳（Heartbeat）机制怎么设计？</h5><p>A.Master 轮询 Chunk Server13.62% 选择</p>
 <p>B.Chunk Server 主动向 Master 汇报86.38% 选择</p>
 <p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
@@ -303,7 +342,8 @@
 <p><strong>解析:</strong></p>
 <p>主动汇报可以减少通信次数，就一次，不然要兩次。</p>
 </blockquote>
-<h2 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h2><p>寫怎麼寫？client 把chunk一次傳給三個小弟作replica後，client會變成瓶頸…</p>
+<h2 id="Scale-再更多-Q-amp-A"><a href="#Scale-再更多-Q-amp-A" class="headerlink" title="Scale 再更多 Q&amp;A"></a>Scale 再更多 Q&amp;A</h2><h4 id="Q-寫到一台server安全嗎？"><a href="#Q-寫到一台server安全嗎？" class="headerlink" title="Q: 寫到一台server安全嗎？"></a>Q: 寫到一台server安全嗎？</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzx6c0e7bj31180i8n17.jpg" alt="image-20200822214053264"></p>
+<h4 id="Q-解決客戶端瓶頸，不然client分別去寫他太累了"><a href="#Q-解決客戶端瓶頸，不然client分別去寫他太累了" class="headerlink" title="Q: 解決客戶端瓶頸，不然client分別去寫他太累了"></a>Q: 解決客戶端瓶頸，不然client分別去寫他太累了</h4><h5 id="讓隊長去-寫怎麼寫？client-把chunk一次傳給三個小弟作replica後，client會變成瓶頸…"><a href="#讓隊長去-寫怎麼寫？client-把chunk一次傳給三個小弟作replica後，client會變成瓶頸…" class="headerlink" title="讓隊長去! 寫怎麼寫？client 把chunk一次傳給三個小弟作replica後，client會變成瓶頸…"></a>讓隊長去! 寫怎麼寫？client 把chunk一次傳給三個小弟作replica後，client會變成瓶頸…</h5><p>隊長再去寫給另兩個人</p>
 <blockquote>
 <h5 id="单选题-如何解决-client-传输-replica-chunk-的问题？"><a href="#单选题-如何解决-client-传输-replica-chunk-的问题？" class="headerlink" title="[单选题]如何解决 client 传输 replica chunk 的问题？"></a>[单选题]如何解决 client 传输 replica chunk 的问题？</h5><p>A.client 将 chunk 传给 master，由 master 去纷发到 3 台 chunk server6.24% 选择</p>
 <p>B.client 将 chunk 传给其中一台 chunk server，然后由这台 chunk server 再传给另外的 2 台63.29% 选择</p>
@@ -312,7 +352,12 @@
 <p><strong>正确答案:</strong>B</p>
 </blockquote>
 <p>內網自己傳肯定快得多</p>
-<h4 id="怎麼選隊長？"><a href="#怎麼選隊長？" class="headerlink" title="怎麼選隊長？"></a>怎麼選隊長？</h4><blockquote>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzx9qdmg2j311a0isadu.jpg" alt="image-20200822214408981"></p>
+<h4 id="Q-怎麼選隊長？"><a href="#Q-怎麼選隊長？" class="headerlink" title="Q: 怎麼選隊長？"></a>Q: 怎麼選隊長？</h4><ol>
+<li>可找最近的 (快)</li>
+<li>找現在沒在幹活的 (平衡)</li>
+</ol>
+<blockquote>
 <h5 id="多选题-下列哪些因素是我们挑选-chunk-server-队长时所需要考虑的"><a href="#多选题-下列哪些因素是我们挑选-chunk-server-队长时所需要考虑的" class="headerlink" title="[多选题]下列哪些因素是我们挑选 chunk server 队长时所需要考虑的"></a>[多选题]下列哪些因素是我们挑选 chunk server 队长时所需要考虑的</h5><p>A.机器的繁忙程度38.48% 选择</p>
 <p>B.距离的远近36.78% 选择</p>
 <p>C.剩余存储空间的大小13.27% 选择</p>
@@ -327,41 +372,60 @@
 <p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是C</p>
 <p><strong>正确答案:</strong>C</p>
 </blockquote>
-<h2 id="GFS-problem"><a href="#GFS-problem" class="headerlink" title="GFS problem"></a>GFS problem</h2><p><a href="https://www.jiuzhang.com/qa/627/" target="_blank" rel="noopener">https://www.jiuzhang.com/qa/627/</a></p>
+<h4 id="Q-解決-Chunk-Server-Failure"><a href="#Q-解決-Chunk-Server-Failure" class="headerlink" title="Q: 解決 Chunk Server Failure"></a>Q: 解決 Chunk Server Failure</h4><p>如果有人掛了，隊長知道了，它會跟master說不要再讓哪台能「被」分配東西了</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzxbqyp6oj313q0kmq6f.jpg" alt="image-20200822214605591"></p>
+<ul>
+<li>如果沒寫上就一直試，如果太多次，就算了吧大家都完了，都掛了也不大可能</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzxbzzrrhj31320jyac9.jpg" alt="image-20200822214620405"></p>
+<h2 id="總結-1"><a href="#總結-1" class="headerlink" title="總結"></a>總結</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzxdft2fmj30yy0u079h.jpg" alt="image-20200822214743151"></p>
+<h2 id="GFS-Problem"><a href="#GFS-Problem" class="headerlink" title="GFS Problem"></a>GFS Problem</h2><p><a href="https://www.jiuzhang.com/qa/627/" target="_blank" rel="noopener">https://www.jiuzhang.com/qa/627/</a></p>
 <blockquote>
 <ul>
-<li><p>设计一个只读的lookup service. 后台的数据是10 billion个key-value pair, 服务形式是接受用户输入的key，返回对应的value。已知每个key的size是0.1kB，每个value的size是1kB。要求系统qps &gt;= 5000，latency &lt; 200ms.</p>
-<p>server性能参数需要自己问，我当时只问了这些，可能有需要的但是没有问到的……<br>commodity server<br>8X CPU cores on each server<br>32G memory<br>6T disk</p>
+<li><strong>设计一个只读的lookup service. 后台的数据是10 billion个key-value pair, 服务形式是接受用户输入的key，返回对应的value。</strong></li>
+</ul>
+<p><strong>已知每个key的size是0.1kB，每个value的size是1kB。要求系统qps &gt;= 5000，latency &lt; 200ms.</strong></p>
+<ul>
+<li><p>key: 100; value: 1000個ascii字</p>
+</li>
+<li><p>server性能参数需要自己问，我当时只问了这些，可能有需要的但是没有问到的……<br>commodity server<br>8X CPU cores on each server<br>32G memory<br>6T disk</p>
 <p>使用任意数量的server，设计这个service。</p>
 <p>就不发我的解法了，真的很渣……=。=|||</p>
-<ul>
+</li>
 <li><p>我总结了SG_SWE_GM以及其他同学的解答，在此基础上我的想法如下，有问题的地方还请老师同学指正，</p>
-<p>=&gt; total key size ~ 10 billion * 0.1kB = 1T<br>=&gt; total value size ~ 10 billion * 1kB = 10T<br>所以每台服务器用两块硬盘，共12T。数据结构用SSTable就好了。</p>
+<p>=&gt; total key size ~ 10 billion * 0.1kB = 1T        ==&gt; 40台*32G 查起來就是很快<br>=&gt; total value size ~ 10 billion * 1kB = 10T<br>所以每台服务器用两块硬盘，共12T。数据结构用SSTable就好了。</p>
 <p>充分利用内存，本来我想用binary search tree做index，但是仔细想想这个服务是只读的，而且硬盘存储键值对用的是SSTable是有序的，key和value长度又是固定的，所以直接把key以有序的方式存在内存就好了，查询的时候对key进行binary search，然后用key在内存中的offset来计算键值对在硬盘中的offset。1T/32G = 31.25. 所以一共需要32台服务器的内存分担key index。前面加一个master负责管理consistent hasing。lg(32G) = 35, 平均查询一个key就算18次内存访问，大约才1800ns，在ms这个量级上可以忽略。</p>
 <p>每一次request，在硬盘上读取1kB value的时间：<strong><em>10ms(disk seek)</em></strong> + 4ms(rotation delay for 7200rpm) + 1kB/1MB * <strong><em>30ms(reading 1kB sequentially from disk)</em></strong> = 14ms. 目前一台server能处理的的QPS: 1000ms/14ms = 71, 总的QPS: 71 * 32 = 2272。距离要求还有两倍多的差距。所以我们可以给每台server装上6个6T硬盘，组成3套数据硬盘，3套硬盘可以并行处理3个请求，这样也算是稍微利用了一下8X的多核CPU。这时QPS即为2272 * 3=6816.</p>
 <p>延迟：</p>
 <ol>
 <li>master内存查找consistent hashing map的时间：忽略</li>
 <li>master与slave的round trip delay：1 round trip in the same data center is 1ms.</li>
-<li>slave内存index查询时间：忽略</li>
+</ol>
+</li>
+</ul>
+<ol start="3">
+<li><p>slave内存index查询时间：忽略</p>
+<ol start="4">
 <li>slave硬盘读取时间：14ms</li>
 </ol>
 <p>so total latency is 15ms。</p>
 </li>
-</ul>
-</li>
-</ul>
+</ol>
 </blockquote>
 <ul>
-<li><p><strong><em>30ms(reading 1kB sequentially from disk)</em></strong></p>
-<ul>
+<li>企業現在一般怎麼配server?<ul>
+<li>16G、32G、64G、256G、1T、3T，一般不會直接用</li>
+<li>Disk: </li>
+</ul>
+</li>
+<li>300ms是在尋道</li>
+<li>0.5 m 是round trip在同個data center間，比在硬盤上找還是快多了</li>
+<li><strong><em>30ms(reading 1kB sequentially from disk)</em></strong><ul>
 <li>是因為硬盤估計每秒可讀30MB的數據，所以1MB就是30ms；這個讀了１kB的話就0.03 ms跟disk seek比起來可以不計。</li>
 </ul>
 </li>
-<li><p>QPS on 1 server : 1s/10ms 次（一秒一台可以100次。） * 2disk = 200次</p>
-</li>
-<li><p>5000個QPS/200就需要25台服務器</p>
-</li>
+<li>QPS on 1 server : 1s/10ms 次（一秒一台可以100次。） * 2disk = 200次</li>
+<li>5000個QPS/200就需要25台服務器</li>
 </ul>
 <h4 id="Latency"><a href="#Latency" class="headerlink" title="Latency:"></a>Latency:</h4><ol>
 <li>找到key : 硬盤中作二分查找，每次的主要的是找的時間。</li>
@@ -374,11 +438,11 @@
 
 <ul>
 <li><input disabled="" type="checkbox"> 分析：log該以2為底，所以就變30 * 10ms(每動一次就要10ms) 就是 300ms, 超過題目規定的200ms，找到key的工作只能在硬盤上做，而且單個硬盤不能並行執行，所以一次query 至少要300ms了，一個硬盤１秒內只能做三次，兩個只能做六次，所以要5000QPS要至少約1000台服務器。這跟他給出的25台差很多！</li>
-<li><input disabled="" type="checkbox"> 我們最希望減少的就是300ms的查詢時間；而我們未用上他的內存，一台有32G，<strong><em>40</em></strong>台就有超1TB，就跟所有的數據key量一樣了，所以提示了可以在內存作操作，把所有key都存過去。如果內存中有個內存到硬盤位置的映射的話…！</li>
+<li><input disabled="" type="checkbox"> 我們最希望減少的就是300ms的<strong><em>查詢時間</em></strong>；<strong><em>而我們未用上他的內存</em></strong>，一台有32G，<strong><em>40</em></strong>台就有超1TB，就跟所有的數據key量一樣了，所以提示了可以在內存作操作，把所有key都存過去。如果內存中有個內存到硬盤位置的映射的話…！</li>
 <li><input disabled="" type="checkbox"> 一個key 0.1kB , 一個position 8Byte，所以一筆仍是0.1kB, 10個billion也是用1TB的內存。所以40台的內存並一起變一個大內存裡直接二分查找就快，每次的時間比硬盤的10ms少到幾乎可不計。</li>
 <li><input disabled="" type="checkbox"> 內存去對應硬盤的position。</li>
 <li><input disabled="" type="checkbox"> 硬盤二分查找每次要花10ms (disk seek)，但內存不用時間。雖一樣是花30次。所以300ms就省了。所以整體10ms + 0.5ms 就10.5ms。</li>
-<li><input disabled="" type="checkbox"> 現在已有40台機器，每台有兩個硬盤，而且每台機器的硬盤可以存下全量的數據 ( 就key啦，就 1T而已)，就是說整體的數據一共有40份拷貝，每個硬盤要花約10ms查找一次，一台可以200次操作(一台有兩顆disk)，40台可以並行作，所以就是8000QPS &gt; 5000QPS!</li>
+<li><input disabled="" type="checkbox"> 現在已有40台機器，每台有兩個硬盤，而且每台機器的硬盤可以存下全量的數據 ( 就key啦，就 1T而已)，就是說整體的數據一共有40份拷貝，每個硬盤要花約10ms查找一次，一台可以200次操作(一台有兩顆disk)，40台可以並行作，所以就是<strong>8000QPS &gt; 5000QPS!</strong></li>
 <li><input disabled="" type="checkbox"> 總結：一共４０台機器，內存就是４０台合併起來當一大塊用，內存大小是１TB；它存放的是key到硬盤中position的數據。每台兩個硬盤，硬盤中存的是全量的數據，一次查找的過程就是，首先通過整體的內存找到在硬盤上的某個位置，均衡負載到40台的某個機器上，讀它的key, value，因為在內存查的時間可以不計，所以最後的延遲就在disk seek時間10ms還有整體在網路上傳輸的0.5ms。</li>
 </ul>
 <blockquote>

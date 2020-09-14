@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="System-Design/9p/2020-03-15-System Design - Seckill &amp; Booling System"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>System-Design/9p/2020-03-15-System Design - Seckill &amp; Booling System | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#秒殺"><span class="toc-number">1.</span> <span class="toc-text">秒殺</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#QPS分析"><span class="toc-number">1.0.1.</span> <span class="toc-text">QPS分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Scenario"><span class="toc-number">1.1.</span> <span class="toc-text">Scenario</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#商品購買和下單流程"><span class="toc-number">1.1.1.</span> <span class="toc-text">商品購買和下單流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#需要解決的問題們"><span class="toc-number">1.1.2.</span> <span class="toc-text">需要解決的問題們</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#瞬間大流量高併發"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">瞬間大流量高併發</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#有限庫存，不能超賣"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">有限庫存，不能超賣</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#黃牛惡意請求"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">黃牛惡意請求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#固定時間開啟"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">固定時間開啟</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#嚴格限購"><span class="toc-number">1.1.2.5.</span> <span class="toc-text">嚴格限購</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#需求拆解"><span class="toc-number">1.1.3.</span> <span class="toc-text">需求拆解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Service"><span class="toc-number">1.2.</span> <span class="toc-text">Service</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#服務結構設計"><span class="toc-number">1.2.1.</span> <span class="toc-text">服務結構設計</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#單體"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">單體</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#微服務"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">微服務</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storage"><span class="toc-number">1.3.</span> <span class="toc-text">Storage</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#寫"><span class="toc-number">1.3.1.</span> <span class="toc-text">寫</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-如何添加索引"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">Q: 如何添加索引?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#數據流"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">數據流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-解決超賣-秒殺操作-扣減庫存"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">Q: 解決超賣: 秒殺操作 - 扣減庫存</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#解法一-X-事務-FOR-UPDATE-但效率低"><span class="toc-number">1.3.1.3.1.</span> <span class="toc-text">解法一(X) : 事務, FOR UPDATE, 但效率低</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#解法二-V-用-UPDATE-語句自帶的行鎖"><span class="toc-number">1.3.1.3.2.</span> <span class="toc-text">解法二(V): 用 UPDATE 語句自帶的行鎖</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-大量請求都訪問-MySQL-導致-MySQL-崩潰。"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">Q: 大量請求都訪問 MySQL, 導致 MySQL 崩潰。</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#解法一-庫存預熱-by-Redis"><span class="toc-number">1.3.1.4.1.</span> <span class="toc-text">解法一: 庫存預熱 by Redis</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Redis"><span class="toc-number">1.3.1.4.2.</span> <span class="toc-text">Redis:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-何時預熱"><span class="toc-number">1.3.1.5.</span> <span class="toc-text">Q: 何時預熱?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-使用Redis-的問題-–-仍有超賣問題，超賣在redis也要解決"><span class="toc-number">1.3.1.6.</span> <span class="toc-text">Q: 使用Redis 的問題 – 仍有超賣問題，超賣在redis也要解決</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#方案一-–-仍有放行的問題"><span class="toc-number">1.3.1.6.1.</span> <span class="toc-text">方案一 – 仍有放行的問題:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#方案二-通過-Lua-腳本執行原子操作，redis-2-6版後"><span class="toc-number">1.3.1.6.2.</span> <span class="toc-text">方案二: 通過 Lua 腳本執行原子操作，redis 2.6版後</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q-如果秒殺量是1萬台、10萬台呢？-gt-MySQL仍撐不了"><span class="toc-number">1.3.1.7.</span> <span class="toc-text">Q: 如果秒殺量是1萬台、10萬台呢？&#x3D;&#x3D;&gt; MySQL仍撐不了</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#MQ"><span class="toc-number">1.3.1.7.1.</span> <span class="toc-text">MQ</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#q-如果極端之下MQ出現部份投遞失敗怎辦？"><span class="toc-number">1.3.1.7.2.</span> <span class="toc-text">q: 如果極端之下MQ出現部份投遞失敗怎辦？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#讀"><span class="toc-number">1.3.2.</span> <span class="toc-text">讀</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">286</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">41</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">System-Design/9p/2020-03-15-System Design - Seckill &amp; Booling System</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-03-15</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/System/">System</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="秒殺"><a href="#秒殺" class="headerlink" title="秒殺"></a>秒殺</h1><ul>
+<li>0點開始</li>
+<li>限量100台</li>
+<li>一人限購一台</li>
+<li>如：搶紅包、搶火車票、搶手機</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200824202003669.png" alt="image-20200824202003669" style="zoom: 50%;" />
+
+
+
+<h3 id="QPS分析"><a href="#QPS分析" class="headerlink" title="QPS分析"></a>QPS分析</h3><ul>
+<li>平日每秒1000人訪問這頁面。秒殺時每秒數十萬人訪問該頁面，QPS增加100倍以上。</li>
+</ul>
+<h2 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h2><h3 id="商品購買和下單流程"><a href="#商品購買和下單流程" class="headerlink" title="商品購買和下單流程"></a>商品購買和下單流程</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi26516fedj30xi0g6gp6.jpg" alt="image-20200824202207414"></p>
+<ul>
+<li>付完錢才是完成，如果沒有按時付錢，庫存是會被放開的</li>
+</ul>
+<h3 id="需要解決的問題們"><a href="#需要解決的問題們" class="headerlink" title="需要解決的問題們"></a>需要解決的問題們</h3><h4 id="瞬間大流量高併發"><a href="#瞬間大流量高併發" class="headerlink" title="瞬間大流量高併發"></a>瞬間大流量高併發</h4><p>server、db能承載的QPS有限，如db一般是單機 1000 QPS，需要根據業務預估併發量</p>
+<h4 id="有限庫存，不能超賣"><a href="#有限庫存，不能超賣" class="headerlink" title="有限庫存，不能超賣"></a>有限庫存，不能超賣</h4><p>庫存是有限的，需要精準地保證，就是賣掉了N個商品。不能超賣，當然也不能少賣</p>
+<h4 id="黃牛惡意請求"><a href="#黃牛惡意請求" class="headerlink" title="黃牛惡意請求"></a>黃牛惡意請求</h4><p>使用腳本模擬用戶購買，模擬出10幾萬個請求去搶購</p>
+<h4 id="固定時間開啟"><a href="#固定時間開啟" class="headerlink" title="固定時間開啟"></a>固定時間開啟</h4><p>時間到了才能購買，提前一秒都不可以 (以商家的時間為準)</p>
+<h4 id="嚴格限購"><a href="#嚴格限購" class="headerlink" title="嚴格限購"></a>嚴格限購</h4><p>一個商家只能買固定數量個</p>
+<h3 id="需求拆解"><a href="#需求拆解" class="headerlink" title="需求拆解"></a>需求拆解</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi26c7mxc1j30sq0ck40q.jpg" alt="image-20200824202903828"></p>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><h3 id="服務結構設計"><a href="#服務結構設計" class="headerlink" title="服務結構設計"></a>服務結構設計</h3><h4 id="單體"><a href="#單體" class="headerlink" title="單體"></a>單體</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi26fynt3uj30zo0gk11x.jpg" alt="image-20200824203239695" style="zoom:67%;" />
+
+
+
+<h4 id="微服務"><a href="#微服務" class="headerlink" title="微服務"></a>微服務</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi26i5p40mj30zs0e211l.jpg" alt="image-20200824203446425" style="zoom:67%;" />
+
+
+
+<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><h3 id="寫"><a href="#寫" class="headerlink" title="寫"></a>寫</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi26m08ptzj30y00e8wil.jpg" alt="image-20200824203827977"></p>
+<h4 id="Q-如何添加索引"><a href="#Q-如何添加索引" class="headerlink" title="Q: 如何添加索引?"></a>Q: 如何添加索引?</h4><ul>
+<li><p>商品表: 沒有關聯其他表，所以就主鍵就ok了</p>
+</li>
+<li><p>秒殺表: 綁定了商品，所以 commodity_id 可以作索引查起來快</p>
+</li>
+<li><p>庫存表: 綁了商品、以及活動 id，要保證同一個商品跟活動 id 要綁定作唯一鍵</p>
+</li>
+<li><p>訂單表: 商品、活動以及用戶可以綁一起作唯一鍵</p>
+</li>
+</ul>
+<h4 id="數據流"><a href="#數據流" class="headerlink" title="數據流"></a>數據流</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi26tz811sj31460fa77r.jpg" alt="image-20200824204607333"></p>
+<ul>
+<li>紅框那個很重要，因為最重要的就是去搶庫存，所以那個要更新</li>
+<li>一般不作外鍵，慢</li>
+<li>建立索引有原則的</li>
+</ul>
+<h4 id="Q-解決超賣-秒殺操作-扣減庫存"><a href="#Q-解決超賣-秒殺操作-扣減庫存" class="headerlink" title="Q: 解決超賣: 秒殺操作 - 扣減庫存"></a>Q: 解決超賣: 秒殺操作 - 扣減庫存</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi26z4b2plj30ja0eaq7l.jpg" alt="image-20200824205104211" style="zoom: 33%;" />
+
+
+
+<h5 id="解法一-X-事務-FOR-UPDATE-但效率低"><a href="#解法一-X-事務-FOR-UPDATE-但效率低" class="headerlink" title="解法一(X) : 事務, FOR UPDATE, 但效率低"></a>解法一(X) : 事務, FOR UPDATE, 但效率低</h5><p>就是說我要去更新它，所以告訴SQL鎖住</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi270rmakwj30p00fgn23.jpg" alt="image-20200824205239608" style="zoom: 33%;" />
+
+
+
+<h5 id="解法二-V-用-UPDATE-語句自帶的行鎖"><a href="#解法二-V-用-UPDATE-語句自帶的行鎖" class="headerlink" title="解法二(V): 用 UPDATE 語句自帶的行鎖"></a>解法二(V): 用 UPDATE 語句自帶的行鎖</h5><p>這個是透過MySQL本身的機制來保證的</p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200824205433454.png" alt="image-20200824205433454" style="zoom:33%;" />
+
+<h4 id="Q-大量請求都訪問-MySQL-導致-MySQL-崩潰。"><a href="#Q-大量請求都訪問-MySQL-導致-MySQL-崩潰。" class="headerlink" title="Q: 大量請求都訪問 MySQL, 導致 MySQL 崩潰。"></a>Q: 大量請求都訪問 MySQL, 導致 MySQL 崩潰。</h4><ul>
+<li>對於搶購活動來說，可能幾十萬人搶100台iphone, 實際大部分請求都是無效的，不需要下沉到MySQL</li>
+</ul>
+<h5 id="解法一-庫存預熱-by-Redis"><a href="#解法一-庫存預熱-by-Redis" class="headerlink" title="解法一: 庫存預熱 by Redis"></a>解法一: 庫存預熱 by Redis</h5><ul>
+<li><p>秒殺的本質，就是對庫存的搶奪。</p>
+</li>
+<li><p>每個秒殺的用戶來都去DFB校驗庫存，然後扣減庫存，會導致DB崩潰</p>
+</li>
+<li><p>MySQL DB單點能支撐 1000 QPS, 但 Redis 單點能支撐 10萬 QPS，可以考慮將庫存信息加載到 Redis中。</p>
+</li>
+<li><p><strong>直接通過 Redis 來判斷並扣減庫存。</strong></p>
+<h5 id="Redis"><a href="#Redis" class="headerlink" title="Redis:"></a>Redis:</h5><ul>
+<li>kv pair, 也可持久化</li>
+<li>支持<ul>
+<li>string</li>
+<li>hash</li>
+<li>list</li>
+<li>set</li>
+<li>zset</li>
+</ul>
+</li>
+<li>單線程的數據庫，沒有併發的問題。通過IO多路復用實現併發，大家進來就是一個個排隊</li>
+<li>主持主備容災 (Disaster Tolerance) 存儲，主掛了，小弟會趕緊頂上去</li>
+<li>所有單個指令操作都是原子的，要麼完全ok或失敗。</li>
+<li>多個指令可以通過 Lua 腳本實現原子性</li>
+<li>因為所有操作都在 內存中，所以性能極高，單機一般可以到10萬數量級</li>
+<li>可作為Cache、DB、MQ</li>
+</ul>
+</li>
+<li><p>提前放到Redis預熱，它來判斷庫存</p>
+</li>
+</ul>
+<h4 id="Q-何時預熱"><a href="#Q-何時預熱" class="headerlink" title="Q: 何時預熱?"></a>Q: 何時預熱?</h4><ul>
+<li>活動前呀!</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200824210846277.png" alt="image-20200824210846277" style="zoom:50%;" />
+
+<ul>
+<li><strong>開始通過redis 減庫存</strong></li>
+</ul>
+<p>現在直接去讀redis庫存，如果庫存小於0就結束；一個redis是單線程的，不會有併發的問題。創了訂單才會去DB扣庫存；</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi27khniyyj312k0feaia.jpg" alt="image-20200824211136832" style="zoom:50%;" />
+
+<h4 id="Q-使用Redis-的問題-–-仍有超賣問題，超賣在redis也要解決"><a href="#Q-使用Redis-的問題-–-仍有超賣問題，超賣在redis也要解決" class="headerlink" title="Q: 使用Redis 的問題 – 仍有超賣問題，超賣在redis也要解決"></a>Q: 使用Redis 的問題 – 仍有超賣問題，超賣在redis也要解決</h4><h5 id="方案一-–-仍有放行的問題"><a href="#方案一-–-仍有放行的問題" class="headerlink" title="方案一 – 仍有放行的問題:"></a>方案一 – 仍有放行的問題:</h5><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200824211410268.png" alt="image-20200824211410268" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi27o0eo75j311c0ek42p.jpg" alt="image-20200824211500506" style="zoom:50%;" />
+
+
+
+<h5 id="方案二-通過-Lua-腳本執行原子操作，redis-2-6版後"><a href="#方案二-通過-Lua-腳本執行原子操作，redis-2-6版後" class="headerlink" title="方案二: 通過 Lua 腳本執行原子操作，redis 2.6版後"></a>方案二: 通過 Lua 腳本執行原子操作，redis 2.6版後</h5><p>就是把剛剛redis的 GET 跟 DECR 合而為一了，在一個事務裡去操作</p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200824211654764.png" alt="image-20200824211654764" style="zoom:50%;" />
+
+<p>現在redis對於DB就只放給它100而已，性能也夠了。但現在會有的問題是：</p>
+<h4 id="Q-如果秒殺量是1萬台、10萬台呢？-gt-MySQL仍撐不了"><a href="#Q-如果秒殺量是1萬台、10萬台呢？-gt-MySQL仍撐不了" class="headerlink" title="Q: 如果秒殺量是1萬台、10萬台呢？==&gt; MySQL仍撐不了"></a>Q: 如果秒殺量是1萬台、10萬台呢？==&gt; MySQL仍撐不了</h4><p>可通過MQ去削峰，讓量慢慢地放過去</p>
+<ul>
+<li><p>點了商品，他會讓我等一、兩秒，讓redis(一秒十萬個)慢慢去找MySQL(集群，所以也是可以一秒一萬個)</p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200824212243509.png" alt="image-20200824212243509" style="zoom:50%;" />
+
+
+
+</li>
+</ul>
+<h5 id="MQ"><a href="#MQ" class="headerlink" title="MQ"></a>MQ</h5><ul>
+<li>如去星巴克取餐這類，步調不一致的問題解決</li>
+<li>解耦和async的操作</li>
+<li>mq一般是帶有重試能力</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200824212727568.png" alt="image-20200824212727568" style="zoom: 33%;" />
+
+<h5 id="q-如果極端之下MQ出現部份投遞失敗怎辦？"><a href="#q-如果極端之下MQ出現部份投遞失敗怎辦？" class="headerlink" title="q: 如果極端之下MQ出現部份投遞失敗怎辦？"></a>q: 如果極端之下MQ出現部份投遞失敗怎辦？</h5><p>RabbitMQ, Kafka, RocketMQ</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi283k35tvj314o0g8tdo.jpg" alt="image-20200824212957025" style="zoom: 50%;" />
+
+<ul>
+<li>沒長度限制的</li>
+<li>redis是集群的；剛剛講的10萬是單機的</li>
+<li>失敗可能是網路原因</li>
+</ul>
+<h3 id="讀"><a href="#讀" class="headerlink" title="讀"></a>讀</h3></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/03/15/System-Design/9p/2020-03-15-System%20Design%20-%20Seckill%20&amp;%20Booling%20System/">http://yoursite.com/2020/03/15/System-Design/9p/2020-03-15-System%20Design%20-%20Seckill%20&amp;%20Booling%20System/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2020/03/18/Books/2020-03-23-Lifes%20in%20English/"><i class="fa fa-chevron-left">  </i><span>Books/2020-03-23-Lifes in English</span></a></div><div class="next-post pull-right"><a href="/2020/03/03/SQL/T/"><span>SQL/T</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>

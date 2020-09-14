@@ -1,0 +1,327 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="Algo. Ult./note"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>Algo. Ult./note | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Hard-to-solve"><span class="toc-number">1.</span> <span class="toc-text">Hard, to solve:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Special-issues"><span class="toc-number"></span> <span class="toc-text">Special issues:</span></a></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">286</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">41</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">Algo. Ult./note</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-22</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Languages/">Languages</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h4 id="Hard-to-solve"><a href="#Hard-to-solve" class="headerlink" title="Hard, to solve:"></a>Hard, to solve:</h4><pre><code>- 301.remove-invalidparantheses TLE for enumeration w/ backtracking, 
+- 140.word-break-ii a)MLE w/ case &quot;a&quot;*n &amp; b)Trie method (Trie not faster for single query, but for multi query in 472.)
+- SegmentTree
+- BinaryIndexedTree
+- Letter Combinatino of A Phone Number</code></pre><table>
+<thead>
+<tr>
+<th></th>
+<th>Python3</th>
+<th>Cpp</th>
+<th>JS</th>
+<th>Java</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>dict</strong></td>
+<td></td>
+<td>include <unordered_map>, //Similar to defaultdict() in python3</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>d = {}</td>
+<td>unordered_map&lt;Node*&gt; d;</td>
+<td>d = {}; new Map();</td>
+<td>Map&lt;Node, Node&gt; visited = new HashMap();</td>
+</tr>
+<tr>
+<td></td>
+<td>d[k] = v;</td>
+<td>d[k] = v;</td>
+<td>d[k]=v; map.<strong>set</strong>(0,1)</td>
+<td>visited.<strong>put</strong>(k, v)</td>
+</tr>
+<tr>
+<td></td>
+<td>d[k]; d.get(k,0)</td>
+<td>d[k];</td>
+<td>d[k]; map.get(k)</td>
+<td>visited.get(cur_O)</td>
+</tr>
+<tr>
+<td></td>
+<td>k not in d</td>
+<td>(d.find(k)==d.end())</td>
+<td>!(nbr_O.val in visited)</td>
+<td>!visited.containsKey(nbr_O)</td>
+</tr>
+<tr>
+<td></td>
+<td>k in d</td>
+<td>(d.find(k)!=d.end())</td>
+<td>nbr_O.val in visited; (map.<strong>has</strong>(sum-k))</td>
+<td>visited.<strong>containsKey</strong>(nbr_O)</td>
+</tr>
+<tr>
+<td></td>
+<td>del d[k]</td>
+<td>d.<strong>erase</strong>(key)</td>
+<td>this.d.<strong>delete</strong>(key);</td>
+<td>this.d.<strong>remove</strong>(key);</td>
+</tr>
+<tr>
+<td></td>
+<td>len(d)</td>
+<td>size()</td>
+<td>d.<strong>size</strong></td>
+<td>d.size()</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>d.empty()  //true; false</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>NotOK</td>
+<td></td>
+<td></td>
+<td>{k:v} in Initialization</td>
+<td></td>
+</tr>
+<tr>
+<td>Special APIs</td>
+<td></td>
+<td>reserve(capacity)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Iterate</td>
+<td>for k in d.keys():</td>
+<td>for (auto k: d)</td>
+<td>for (var key in dict){}</td>
+<td>for(char c:  ransomNote.toCharArray()) {</td>
+</tr>
+<tr>
+<td><strong>Ordered_dict</strong></td>
+<td>self.od.popitem(last=False)<br /><a href="https://www.pythonf.cn/read/89970" target="_blank" rel="noopener">https://www.pythonf.cn/read/89970</a><br /><a href="https://gist.github.com/joequery/12332f410a05e6c7c949" target="_blank" rel="noopener">https://gist.github.com/joequery/12332f410a05e6c7c949</a></td>
+<td></td>
+<td>d = new Map(); APIs↑↑ //ref: <a href="https://stackoverflow.com/questions/2798893/ordered-hash-in-javascript" target="_blank" rel="noopener">https://stackoverflow.com/questions/2798893/ordered-hash-in-javascript</a></td>
+<td>LinkedHashMap&lt;Integer, Integer&gt; d;<br />this.d = new LinkedHashMap&lt;&gt;();</td>
+</tr>
+<tr>
+<td></td>
+<td>first = next(iter(self.od))</td>
+<td></td>
+<td></td>
+<td>Integer first = this.d.keySet().iterator().next();</td>
+</tr>
+<tr>
+<td><strong>queue</strong></td>
+<td>from collections import deque</td>
+<td>include  <deque></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>deque();</td>
+<td>deque&lt;Node*&gt;</td>
+<td>let Q = [];</td>
+<td>Queue<Node> Q = new LinkedList(); //LinkedList<Node> Q = new LinkedList<Node>(); //雙向</td>
+</tr>
+<tr>
+<td></td>
+<td>Q.append(cur); v=Q.popleft()</td>
+<td>Q.push_back(cur); v=Q.front(),Q.pop_front()</td>
+<td>Q.push(cur); v=Q.shift(); // O(n)</td>
+<td>Q.add(nbr_O);//Q.push(nbr_O); Q.poll();</td>
+</tr>
+<tr>
+<td></td>
+<td>while d</td>
+<td>while (!Q.empty())</td>
+<td>while (Q.length != 0)</td>
+<td>while (!Q.isEmpty())</td>
+</tr>
+<tr>
+<td><strong>deque</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>ArrayDeque雙向實現了DEque的interface</td>
+</tr>
+<tr>
+<td><strong>vector</strong></td>
+<td></td>
+<td>include <vector></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>self.res = []</td>
+<td>vector&lt;vector<int>&gt; result;</td>
+<td>res = [];</td>
+<td>List&lt;List<Integer>&gt; res = new ArrayList&lt;List<Integer>&gt;();</td>
+</tr>
+<tr>
+<td></td>
+<td>item.append(nums[idx])</td>
+<td>item.push_back(nums[idx]);</td>
+<td>item.push(nums[idx]);</td>
+<td>item.add(nums[idx]);</td>
+</tr>
+<tr>
+<td></td>
+<td>item.pop()</td>
+<td>item.pop_back();</td>
+<td>item.pop();</td>
+<td>item.remove(item.size()-1);</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>l.length; // 注意！跟dict不同，這邊是 length</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>for</td>
+<td>for (<strong><em>let</em></strong> i=0; i&lt;l.length; i++)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>l = [False] * 3</td>
+<td>vector<bool> dp(3, false);</td>
+<td>const dp = new Array(3).fill(false);</td>
+<td>List<Boolean> dp = new ArrayList(Collections.nCopies(s.length(), false));</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>int[] nums;, nums.length</td>
+</tr>
+<tr>
+<td><strong>Doublely LinkedList</strong></td>
+<td></td>
+<td><strong>std::list</strong><br /><strong>List</strong> stores elements at non contiguous memory location i.e. it internally uses a doubly linked list i.e.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>back(); front();</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>pop_back(); pop_front();</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>db_ll.erase(d[key])</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>APIs</strong></td>
+<td>from collections import Counter<br />Counter(l)</td>
+<td>X</td>
+<td>_.countBy(l)</td>
+<td>X</td>
+</tr>
+<tr>
+<td></td>
+<td>max</td>
+<td>max</td>
+<td>Math.max</td>
+<td>Math.max</td>
+</tr>
+<tr>
+<td><strong>String</strong></td>
+<td>len(s)</td>
+<td>s.length()</td>
+<td>s.length</td>
+<td>s.length()</td>
+</tr>
+<tr>
+<td></td>
+<td>s[i]</td>
+<td>s[i]</td>
+<td>s[i]</td>
+<td>s.charAt(i)</td>
+</tr>
+<tr>
+<td></td>
+<td>s[3:5]</td>
+<td>token = s.substr(start, i-start+1);</td>
+<td>s.slice(3, 5);</td>
+<td>s.substring(start, i+1);</td>
+</tr>
+<tr>
+<td><strong>Set</strong></td>
+<td>ws = set(wD)</td>
+<td>unordered_set<string> ws;<br/>        <br/>        for (auto s: wordDict){<br/>            ws.insert(s);<br/>        }</td>
+<td>let ws = new Set(wD)</td>
+<td>HashSet<String> ws = new HashSet(wordDict);</td>
+</tr>
+<tr>
+<td></td>
+<td>token in ws</td>
+<td>ws.find(token) != ws.end()</td>
+<td>ws.has(token)</td>
+<td>ws.contains(token)</td>
+</tr>
+<tr>
+<td><strong>MAX</strong></td>
+<td>float(‘-inf’)</td>
+<td>INT_MIN;</td>
+<td>-Number.MAX_VALUE;</td>
+<td>Integer.MIN_VALUE;</td>
+</tr>
+<tr>
+<td><strong>2D Init</strong></td>
+<td>[[0 for j in range(n)] for i in range(m)]</td>
+<td></td>
+<td></td>
+<td>[…Array(3)].map(x=&gt;Array(5).fill(0))</td>
+</tr>
+<tr>
+<td><strong>1D sort</strong></td>
+<td>l.sort(reverse=True)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Node</strong></td>
+<td>if not head</td>
+<td>if (!head); if (nullputr == head)</td>
+<td>if (!root); if (head == null)</td>
+<td>if (head == null)</td>
+</tr>
+</tbody></table>
+<h2 id="Special-issues"><a href="#Special-issues" class="headerlink" title="Special issues:"></a>Special issues:</h2><ul>
+<li>Java &amp; js</li>
+<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gegmwb46qaj312a0u0qb1.jpg" alt="image-20200504191823941" style="zoom:67%;" /></li>
+</ul>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/04/22/Algo.%20Ult./note/">http://yoursite.com/2019/04/22/Algo.%20Ult./note/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/04/23/System-Design/9p/2019-04-23-Crawler%20&amp;%20Typeahead%20Design/"><i class="fa fa-chevron-left">  </i><span>System-Design/9p/2019-04-23-Crawler &amp; Typeahead Design</span></a></div><div class="next-post pull-right"><a href="/2019/04/18/System-Design/9p/2019-04-18-MapReuce/"><span>System-Design/9p/2019-04-18-MapReuce</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>

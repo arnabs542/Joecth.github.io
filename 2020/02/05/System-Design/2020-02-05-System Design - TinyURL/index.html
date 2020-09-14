@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="System-Design/2020-02-05-System Design - TinyURL"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>System-Design/2020-02-05-System Design - TinyURL | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#TinyURL"><span class="toc-number">1.</span> <span class="toc-text">TinyURL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Read-Heavy"><span class="toc-number">1.1.</span> <span class="toc-text">Read Heavy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Constraints"><span class="toc-number">1.2.</span> <span class="toc-text">Constraints</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#REST-APIs"><span class="toc-number">1.3.</span> <span class="toc-text">REST APIs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#長做短"><span class="toc-number">1.3.1.</span> <span class="toc-text">長做短</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Goo"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">Goo</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Bitly"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">Bitly</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#短回長"><span class="toc-number">1.3.2.</span> <span class="toc-text">短回長</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Service"><span class="toc-number">1.4.</span> <span class="toc-text">Service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Storage"><span class="toc-number">1.5.</span> <span class="toc-text">Storage</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">286</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">41</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">System-Design/2020-02-05-System Design - TinyURL</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-05</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/System/">System</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="TinyURL"><a href="#TinyURL" class="headerlink" title="TinyURL"></a>TinyURL</h1><ul>
+<li>[0-9, a-z, A-Z] 一共62個，62^6 ~= 56.8 Billions unique Strings 應是夠用的</li>
+<li>要考慮到其他國家的string 這邊當然主要只是英文字母</li>
+<li>Similar: bit.ly, goo.gl </li>
+<li>簡答的通常是這個系統的一個功能</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmqzsggoj30q00fqq51.jpg" alt="image-20200801212636104"></p>
+<h2 id="Read-Heavy"><a href="#Read-Heavy" class="headerlink" title="Read Heavy"></a>Read Heavy</h2><h2 id="Constraints"><a href="#Constraints" class="headerlink" title="Constraints"></a>Constraints</h2><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmt7b338j30pa0batf5.jpg" alt="image-20200801212843299" style="zoom: 50%;" />
+
+
+
+<h2 id="REST-APIs"><a href="#REST-APIs" class="headerlink" title="REST APIs"></a>REST APIs</h2><h3 id="長做短"><a href="#長做短" class="headerlink" title="長做短"></a>長做短</h3><h4 id="Goo"><a href="#Goo" class="headerlink" title="Goo"></a>Goo</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmuaiyitj30q60e2wjr.jpg" alt="image-20200801212946459" style="zoom:50%;" />
+
+<ul>
+<li>201 - created</li>
+<li>content-typ是告訴你body是什麼</li>
+<li>怎麼去客製化url?<ul>
+<li>body可以加個參數像是defaul none</li>
+</ul>
+</li>
+<li>Response e.g.</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmw80drzj30l20oodq6.jpg" alt="image-20200801213136358"></p>
+<h4 id="Bitly"><a href="#Bitly" class="headerlink" title="Bitly"></a>Bitly</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmx33xswj30um0f0agv.jpg" alt="image-20200801213226710"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmxkp980j30xk0c0teo.jpg" alt="image-20200801213255365"></p>
+<h3 id="短回長"><a href="#短回長" class="headerlink" title="短回長"></a>短回長</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmyfkjlpj30lu07odis.jpg" alt="image-20200801213345334"></p>
+<ul>
+<li>3XX redirection</li>
+<li><strong>301 moved Permanently</strong></li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmyvowbyj30z60rm18f.jpg" alt="image-20200801213408593"></p>
+<ul>
+<li>Header 裡會有個key 就是location知道要redirect到哪裡</li>
+<li>我收到301跟它的loc後，會再發一個網址去我要去的地方</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbn1qu2i5j30am04ogm8.jpg" alt="image-20200801213656344" style="zoom:33%;" />
+
+
+
+
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmzm8bsfj30jw0ciwin.jpg" alt="image-20200801213452950" style="zoom: 33%;" />
+
+
+
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbn05k9ynj30i407k0vl.jpg" alt="image-20200801213523160" style="zoom: 50%;" />
+
+
+
+<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbn4qhmtyj30t00f0wpp.jpg" alt="image-20200801213946574"></p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbpxnpwgzj30hs0amaca.jpg" alt="image-20200801231648267" style="zoom:50%;" />
+
+<ul>
+<li>2 跟3要綁事務了</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200801225936514.png" alt="image-20200801225936514" style="zoom: 33%;" />
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbpjz88wfj30yq0lyn1c.jpg" alt="image-20200801230337236"></p>
+<p>ref: <a href="https://www.educative.io/courses/grokking-the-system-design-interview/m2ygV4E81AR" target="_blank" rel="noopener">https://www.educative.io/courses/grokking-the-system-design-interview/m2ygV4E81AR</a></p>
+<ul>
+<li>黃色那塊是就是lazy cleanup</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbptwfkwdj30s00hk46g.jpg" alt="image-20200801231309317"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbpu1y125j30ws0kg129.jpg" alt="image-20200801231319438"></p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/02/05/System-Design/2020-02-05-System%20Design%20-%20TinyURL/">http://yoursite.com/2020/02/05/System-Design/2020-02-05-System%20Design%20-%20TinyURL/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2020/02/05/System-Design/2020-02-05-System%20Design%20xcode-%20%E6%89%BE%E6%9C%88%E7%90%83%E4%B8%8A%E7%AC%ACk%E5%A4%A7%E7%9A%84%E6%95%B8/"><i class="fa fa-chevron-left">  </i><span>System-Design/2020-02-05-System Design xcode- 找月球上第k大的數</span></a></div><div class="next-post pull-right"><a href="/2020/02/05/System-Design/2020-02-05-System%20Design%20-%20Sharding%20&amp;%20Queue/"><span>System-Design/2020-02-05-System Design - Sharding &amp; Queue</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
