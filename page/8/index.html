@@ -263,7 +263,30 @@
 <p> server取完後再去把task刪了，至少這個task還是在queue裡的 </p>
 <h5 id="可以取出來在db-or-que寫-in-progress，-gt-high-availability-不丟消息"><a href="#可以取出來在db-or-que寫-in-progress，-gt-high-availability-不丟消息" class="headerlink" title="可以取出來在db or que寫 in progress，==&gt; high availability　不丟消息"></a>可以取出來在db or que寫 in progress，==&gt; high availability　不丟消息</h5><p>可以retry</p>
 <p>![image-20200206211146919](/Users/joe/Library/Application Support/typora-user-images/image-20200206211146919.png)</p>
-<h5 id="Async-缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity"><a href="#Async-缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity" class="headerlink" title="Async 缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity"></a>Async 缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity</h5></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/05/System-Design/2020-02-05-System%20Design%20-%20TinyURL/">System-Design/2020-02-05-System Design - TinyURL</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-05</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/System/">System</a></span><div class="content"><h1 id="TinyURL"><a href="#TinyURL" class="headerlink" title="TinyURL"></a>TinyURL</h1><ul>
+<h5 id="Async-缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity"><a href="#Async-缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity" class="headerlink" title="Async 缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity"></a>Async 缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity</h5></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/05/System-Design/2020-02-05-System%20Design%20xcode-%20%E6%89%BE%E6%9C%88%E7%90%83%E4%B8%8A%E7%AC%ACk%E5%A4%A7%E7%9A%84%E6%95%B8/">System-Design/2020-02-05-System Design xcode- 找月球上第k大的數</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-05</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></span><div class="content"><h1 id="找月球上第k大的數據"><a href="#找月球上第k大的數據" class="headerlink" title="找月球上第k大的數據"></a>找月球上第k大的數據</h1><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi80ysv6phj312w07kagl.jpg" alt="image-20200829215631253" style="zoom:67%;" />
+
+
+
+<p>一台台扁長的機器</p>
+<p>一萬就是說這機器上有很多數字，別揪結，就是大</p>
+<p>有n台機器，怎麼找全部起來第</p>
+<p>壓縮扯遠了</p>
+<p>Kth biggest number</p>
+<p>我人在地球，這批機器是在月球，主要是說傳輸我到機器的距離很長，帶寬對我是個很大的問題，一般最終的問題就是在帶寬。sql去查，上億條就是map reduce之類的優化，找到了index，還是有上億個，至少上MB了，要一下返回，整個數據中心的網路都堵啦，網路傳不過去，太多啦。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi816q553hj311q0hyq6x.jpg" alt="image-20200829220410378"></p>
+<p>眼、嘴、手都用上。在扯XD。</p>
+<h3 id="解一-n台機器就是N-k-gt-然後再找出第k大"><a href="#解一-n台機器就是N-k-gt-然後再找出第k大" class="headerlink" title="解一: n台機器就是N*k =&gt; 然後再找出第k大"></a>解一: n台機器就是N*k =&gt; 然後再找出第k大</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi81aawsh8j31280i479b.jpg" alt="image-20200829220736573"></p>
+<p>最大的問題是：假如k是一萬呢？100台機器，不然返回了100萬個數？我要等半天！</p>
+<p>我在地球耶。</p>
+<h3 id="解法二："><a href="#解法二：" class="headerlink" title="解法二："></a>解法二：</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi81f2xwgyj313a0i4wlr.jpg" alt="image-20200829221211451"></p>
+<ol>
+<li>我把每台的第k個數返回，我用到的就是n</li>
+<li>我拿到每個機器的第k大的，我要找min數</li>
+</ol>
+<p>重點是要減少round trip</p>
+<h1 id="排序超大数"><a href="#排序超大数" class="headerlink" title="排序超大数"></a>排序超大数</h1><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi81jz5d2cj312g0m2wu1.jpg" alt="image-20200829221654279"></p>
+<h2 id="radix-sort，要都是等長的，如都是三位"><a href="#radix-sort，要都是等長的，如都是三位" class="headerlink" title="radix sort，要都是等長的，如都是三位"></a>radix sort，要都是等長的，如都是三位</h2><p>runtime是 n*k，k表digit數，bucket sort也是一樣幾乎 線性，比快排快</p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/05/System-Design/2020-02-05-System%20Design%20-%20TinyURL/">System-Design/2020-02-05-System Design - TinyURL</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-05</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/System/">System</a></span><div class="content"><h1 id="TinyURL"><a href="#TinyURL" class="headerlink" title="TinyURL"></a>TinyURL</h1><ul>
 <li>[0-9, a-z, A-Z] 一共62個，62^6 ~= 56.8 Billions unique Strings 應是夠用的</li>
 <li>要考慮到其他國家的string 這邊當然主要只是英文字母</li>
 <li>Similar: bit.ly, goo.gl </li>
@@ -329,29 +352,6 @@
 </ul>
 <p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbptwfkwdj30s00hk46g.jpg" alt="image-20200801231309317"></p>
 <p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbpu1y125j30ws0kg129.jpg" alt="image-20200801231319438"></p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/05/System-Design/2020-02-05-System%20Design%20xcode-%20%E6%89%BE%E6%9C%88%E7%90%83%E4%B8%8A%E7%AC%ACk%E5%A4%A7%E7%9A%84%E6%95%B8/">System-Design/2020-02-05-System Design xcode- 找月球上第k大的數</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-05</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></span><div class="content"><h1 id="找月球上第k大的數據"><a href="#找月球上第k大的數據" class="headerlink" title="找月球上第k大的數據"></a>找月球上第k大的數據</h1><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi80ysv6phj312w07kagl.jpg" alt="image-20200829215631253" style="zoom:67%;" />
-
-
-
-<p>一台台扁長的機器</p>
-<p>一萬就是說這機器上有很多數字，別揪結，就是大</p>
-<p>有n台機器，怎麼找全部起來第</p>
-<p>壓縮扯遠了</p>
-<p>Kth biggest number</p>
-<p>我人在地球，這批機器是在月球，主要是說傳輸我到機器的距離很長，帶寬對我是個很大的問題，一般最終的問題就是在帶寬。sql去查，上億條就是map reduce之類的優化，找到了index，還是有上億個，至少上MB了，要一下返回，整個數據中心的網路都堵啦，網路傳不過去，太多啦。</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi816q553hj311q0hyq6x.jpg" alt="image-20200829220410378"></p>
-<p>眼、嘴、手都用上。在扯XD。</p>
-<h3 id="解一-n台機器就是N-k-gt-然後再找出第k大"><a href="#解一-n台機器就是N-k-gt-然後再找出第k大" class="headerlink" title="解一: n台機器就是N*k =&gt; 然後再找出第k大"></a>解一: n台機器就是N*k =&gt; 然後再找出第k大</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi81aawsh8j31280i479b.jpg" alt="image-20200829220736573"></p>
-<p>最大的問題是：假如k是一萬呢？100台機器，不然返回了100萬個數？我要等半天！</p>
-<p>我在地球耶。</p>
-<h3 id="解法二："><a href="#解法二：" class="headerlink" title="解法二："></a>解法二：</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi81f2xwgyj313a0i4wlr.jpg" alt="image-20200829221211451"></p>
-<ol>
-<li>我把每台的第k個數返回，我用到的就是n</li>
-<li>我拿到每個機器的第k大的，我要找min數</li>
-</ol>
-<p>重點是要減少round trip</p>
-<h1 id="排序超大数"><a href="#排序超大数" class="headerlink" title="排序超大数"></a>排序超大数</h1><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gi81jz5d2cj312g0m2wu1.jpg" alt="image-20200829221654279"></p>
-<h2 id="radix-sort，要都是等長的，如都是三位"><a href="#radix-sort，要都是等長的，如都是三位" class="headerlink" title="radix sort，要都是等長的，如都是三位"></a>radix sort，要都是等長的，如都是三位</h2><p>runtime是 n*k，k表digit數，bucket sort也是一樣幾乎 線性，比快排快</p>
 </div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/01/15/Python/2020-01-15-bisect%20in%20python%20/">Python/2020-01-15-bisect in python </a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-01-15</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span><div class="content"><h3 id="Finding-Pos"><a href="#Finding-Pos" class="headerlink" title="Finding Pos"></a>Finding Pos</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> bisect</span><br><span class="line"> </span><br><span class="line">a = [<span class="number">1</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">8</span>,<span class="number">12</span>,<span class="number">15</span>,<span class="number">20</span>]</span><br><span class="line">position = bisect.bisect(a,<span class="number">13</span>)</span><br><span class="line">print(position)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 用可变序列内置的insert方法插入</span></span><br><span class="line">a.insert(position,<span class="number">13</span>)</span><br><span class="line">print(a)</span><br></pre></td></tr></table></figure>
 
 <p>输出：</p>
