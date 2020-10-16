@@ -7,67 +7,668 @@
     error: 'Copy error',
     noSupport: 'The browser does not support'
   }
-} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">286</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">41</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2018/12/03/ML/2018-12-03-File%20Size%20Limitation/">ML/2018-12-03-File Size Limitation</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-12-03</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/DevOps/">DevOps</a></span><div class="content"><h3 id="File-size-limitation"><a href="#File-size-limitation" class="headerlink" title="File size limitation"></a>File size limitation</h3><h1 id=""><a href="#" class="headerlink" title=""></a></h1></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/11/30/Math/2018-11-30-Conditional%20Probability/">Math/2018-11-30-Conditional Probability</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-30</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Probability/">Probability</a></span><div class="content"><p>Ref: <a href="https://zhuanlan.zhihu.com/p/35976057" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/35976057</a></p>
-<h2 id="事件的独立性"><a href="#事件的独立性" class="headerlink" title="事件的独立性"></a>事件的独立性</h2><p>根据定义，两个事件<em>A</em>和<em>B</em>是<em>独立的，</em>如果：</p>
-<p><img src="https://pic4.zhimg.com/80/v2-024ebd7be22be3792d0eb85ee51e8453_hd.jpg" alt="img"></p>
-<p>使用条件概率，我们可以提供一个稍微不同的定义。以来：</p>
-<p><img src="https://pic1.zhimg.com/80/v2-92899762e2fa58123284becb28237144_hd.jpg" alt="img"></p>
-<p>并且<em>P（A∩B）</em> = <em>P（A）P（B）</em>：</p>
-<p><img src="https://pic3.zhimg.com/80/v2-3ed71d1794cce026ac70140049e6813e_hd.jpg" alt="img"></p>
-<p>只要<em>P（B）</em> &gt; 0，对于独立的<em>A</em>和<em>B</em>，我们有<em>P（A | B）</em> = <em>P（A）</em> ; 换言之，<em>B</em> 不会以任何方式影响<em>A</em>的概率。同样，我们可以证明对于<em>P（A）</em> &gt; 0，我们有<em>P（B | A）</em> = <em>P（B）</em>。</p>
-<p>独立也延伸到事件的补充。回想一下，<em>P（B ^ C）</em> 是<em>B</em>没有发生的概率，或1 - <em>P（B）</em> ; 由于条件概率服从通常的概率公理，我们有<em>P（B ^ C | A）</em> = 1 - <em>P（B | A）</em>。那么，如果<em>A</em>和<em>B</em>是独立的：</p>
-<p><img src="https://pic4.zhimg.com/80/v2-b1171212d1b5d818d21fb9dda0a70a53_hd.jpg" alt="img"></p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/11/23/DevOps/2018-11-23-C++%20ReArrange/">DevOps/2018-11-23-C++ ReArrange</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-23</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/C/">C++</a></span><div class="content"><h3 id="1-cout-of-char"><a href="#1-cout-of-char" class="headerlink" title="1.  cout of char*"></a>1.  cout of <code>char*</code></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *str = <span class="string">"hellogogo"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *pstr = str;</span><br><span class="line">  <span class="built_in">cout</span> <span class="string">"The address of pstr is: "</span> &lt;&lt; pstr &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line">-------------------------</span><br><span class="line"> <span class="string">"The address of pstr is: hellogogo"</span></span><br></pre></td></tr></table></figure>
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">298</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">44</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2019/03/18/System-Design/9p/2019-03-18-Design%20User%20System%20DB%20&amp;%20Cache/">System-Design/9p/2019-03-18-Design User System DB &amp; Cache</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-18</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></span><div class="content"><h1 id="Design-User-System"><a href="#Design-User-System" class="headerlink" title="Design User System"></a>Design User System</h1><h2 id="Memcached"><a href="#Memcached" class="headerlink" title="Memcached"></a>Memcached</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">538. 内存缓存</span><br><span class="line">中文English</span><br><span class="line">实现下列几个方法：</span><br><span class="line">1.get(curtTime, key). 得到key的值，如果不存在返回2147483647</span><br><span class="line">2.set(curtTime, key, value, ttl). 设置一个pair(key,value)，有效期从curtTime到curtTime + ttl -1 , 如果ttl为0，则一直存在</span><br><span class="line">3.delete(curtTime, key). 删除这个key</span><br><span class="line">4.incr(curtTime, key, delta). 给key的value加上delta，并且返回 如果不存在返回 2147483647。</span><br><span class="line">5.decr(curtTime, key, delta). 给key的value减去delta，并且返回 如果不存在返回 2147483647。</span><br><span class="line"></span><br><span class="line">Example</span><br><span class="line">样例1</span><br><span class="line"></span><br><span class="line">get(1, 0)</span><br><span class="line">&gt;&gt; 2147483647</span><br><span class="line"><span class="built_in">set</span>(2, 1, 1, 2)</span><br><span class="line">get(3, 1)</span><br><span class="line">&gt;&gt; 1</span><br><span class="line">get(4, 1)</span><br><span class="line">&gt;&gt; 2147483647</span><br><span class="line">incr(5, 1, 1)</span><br><span class="line">&gt;&gt; 2147483647</span><br><span class="line"><span class="built_in">set</span>(6, 1, 3, 0)</span><br><span class="line">incr(7, 1, 1)</span><br><span class="line">&gt;&gt; 4</span><br><span class="line">decr(8, 1, 1)</span><br><span class="line">&gt;&gt; 3</span><br><span class="line">get(9, 1)</span><br><span class="line">&gt;&gt; 3</span><br><span class="line">delete(10, 1)</span><br><span class="line">get(11, 1)</span><br><span class="line">&gt;&gt; 2147483647</span><br><span class="line">incr(12, 1, 1)</span><br><span class="line">&gt;&gt; 2147483647</span><br><span class="line">```**样例1**</span><br><span class="line"></span><br><span class="line">get(1, 0)</span><br><span class="line"></span><br><span class="line">2147483647</span><br><span class="line"><span class="built_in">set</span>(2, 1, 1, 2)</span><br><span class="line">get(3, 1)</span><br><span class="line"></span><br><span class="line">1</span><br><span class="line">get(4, 1)</span><br><span class="line"></span><br><span class="line">2147483647</span><br><span class="line">incr(5, 1, 1)</span><br><span class="line"></span><br><span class="line">2147483647</span><br><span class="line"><span class="built_in">set</span>(6, 1, 3, 0)</span><br><span class="line">incr(7, 1, 1)</span><br><span class="line"></span><br><span class="line">4</span><br><span class="line">decr(8, 1, 1)</span><br><span class="line"></span><br><span class="line">3</span><br><span class="line">get(9, 1)</span><br><span class="line"></span><br><span class="line">3</span><br><span class="line">delete(10, 1)</span><br><span class="line">get(11, 1)</span><br><span class="line"></span><br><span class="line">2147483647</span><br><span class="line">incr(12, 1, 1)</span><br><span class="line"></span><br><span class="line">2147483647</span><br><span class="line"></span><br><span class="line">Clarification</span><br><span class="line">实际上，如果内存不足，存缓存服务器将驱逐key，并且它还支持各种值类型，如字符串和整数。 在我们的例子中我们将这个问题简化了，我们可以假设我们有足够的内存，所有的值都是整数。</span><br><span class="line"></span><br><span class="line">在谷歌上搜索“LRU”和“LFU”以获取有关memcache如何逐出数据的更多信息。</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="2-compiled-by-c-or-c"><a href="#2-compiled-by-c-or-c" class="headerlink" title="2. compiled by c or c++"></a>2. compiled by c or c++</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cpluscplu</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"cpp"</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">	print(<span class="string">"c"</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Resource</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, value, expired)</span>:</span></span><br><span class="line">        self.value = value</span><br><span class="line">        self.expired = expired</span><br><span class="line"></span><br><span class="line">INT_MAX = <span class="number">0x7fffffff</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Memcache</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># initialize your data structure here.</span></span><br><span class="line">        self.client = dict()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># @param &#123;int&#125; curtTime an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; key an integer</span></span><br><span class="line">    <span class="comment"># @return an integer</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, curtTime, key)</span>:</span></span><br><span class="line">        <span class="comment"># Write your code here</span></span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">not</span> <span class="keyword">in</span> self.client:</span><br><span class="line">            <span class="keyword">return</span> INT_MAX</span><br><span class="line">        res = self.client.get(key)</span><br><span class="line">        <span class="keyword">if</span> res.expired &gt;= curtTime <span class="keyword">or</span> res.expired == <span class="number">-1</span>:</span><br><span class="line">            <span class="keyword">return</span> res.value</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> INT_MAX</span><br><span class="line"></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; curtTime an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; key an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; value an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; ttl an integer</span></span><br><span class="line">    <span class="comment"># @return nothing</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set</span><span class="params">(self, curtTime, key, value, ttl)</span>:</span></span><br><span class="line">        <span class="comment"># Write your code here</span></span><br><span class="line">        <span class="keyword">if</span> ttl:</span><br><span class="line">            res = Resource(value, curtTime + ttl - <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res = Resource(value, <span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">        self.client[key] = res </span><br><span class="line">        </span><br><span class="line">    <span class="comment"># @param &#123;int&#125; curtTime an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; key an integer</span></span><br><span class="line">    <span class="comment"># @return nothing</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">delete</span><span class="params">(self, curtTime, key)</span>:</span></span><br><span class="line">        <span class="comment"># Write your code here</span></span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">not</span> <span class="keyword">in</span> self.client:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">del</span> self.client[key]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; curtTime an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; key an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; delta an integer</span></span><br><span class="line">    <span class="comment"># @return an integer</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">incr</span><span class="params">(self, curtTime, key, delta)</span>:</span></span><br><span class="line">        <span class="comment"># Write your code here</span></span><br><span class="line">        <span class="keyword">if</span> self.get(curtTime, key) == INT_MAX:</span><br><span class="line">            <span class="keyword">return</span> INT_MAX</span><br><span class="line">        self.client[key].value += delta</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.client[key].value</span><br><span class="line"></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; curtTime an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; key an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; delta an integer</span></span><br><span class="line">    <span class="comment"># @return an integer</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decr</span><span class="params">(self, curtTime, key, delta)</span>:</span></span><br><span class="line">        <span class="comment"># Write your code here</span></span><br><span class="line">        <span class="keyword">if</span> self.get(curtTime, key) == INT_MAX:</span><br><span class="line">            <span class="keyword">return</span> INT_MAX</span><br><span class="line">        self.client[key].value -= delta</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.client[key].value</span><br></pre></td></tr></table></figure>
 
 
 
-<h4 id="3-compiled-time-OP-symbol"><a href="#3-compiled-time-OP-symbol" class="headerlink" title="3. compiled time OP symbol"></a>3. compiled time OP symbol</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> id[<span class="keyword">sizeof</span>(<span class="keyword">unsigned</span> <span class="keyword">long</span>)];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Compiled OK, cuz sizeof is COMPILING time symbol, which is determined in compile, regarded as machine-dependent constant.</span></span><br></pre></td></tr></table></figure>
+<h2 id="Mini-Cassandra"><a href="#Mini-Cassandra" class="headerlink" title="Mini Cassandra"></a>Mini Cassandra</h2><p>Cassandra is a NoSQL database (a.k.a key-value storage). One individual data entry in cassandra constructed by 3 parts:</p>
+<ol>
+<li>row_key. (a.k.a hash_key, partition key or sharding_key.)</li>
+<li>column_key.</li>
+<li>value</li>
+</ol>
+<p>row_key is used to hash and can not support range query. Let’s simplify this to a string.<br>column_key is sorted and support range query. Let’s simplify this to integer.<br>value is a string. You can serialize any data into a string and store it in value.</p>
+<p>Implement the following methods:</p>
+<ol>
+<li><code>insert(row_key, column_key, value)</code></li>
+<li><code>query(row_key, column_start, column_end)</code> return a list of entries</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">502. Mini Cassandra</span><br><span class="line">中文English</span><br><span class="line">Cassandra is a NoSQL database (a.k.a key-value storage). One individual data entry <span class="keyword">in</span> cassandra constructed by 3 parts:</span><br><span class="line"></span><br><span class="line">row_key. (a.k.a hash_key, partition key or sharding_key.)</span><br><span class="line">column_key.</span><br><span class="line">value</span><br><span class="line">row_key is used to <span class="built_in">hash</span> and can not support range query. Let<span class="string">'s simplify this to a string.</span></span><br><span class="line"><span class="string">column_key is sorted and support range query. Let'</span>s simplify this to <span class="built_in">integer</span>.</span><br><span class="line">value is a string. You can serialize any data into a string and store it <span class="keyword">in</span> value.</span><br><span class="line"></span><br><span class="line">Implement the following methods:</span><br><span class="line"></span><br><span class="line">insert(row_key, column_key, value)</span><br><span class="line">query(row_key, column_start, column_end) <span class="built_in">return</span> a list of entries</span><br><span class="line">Example</span><br><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input:</span><br><span class="line">  insert(<span class="string">"google"</span>, 1, <span class="string">"haha"</span>)</span><br><span class="line">  query(<span class="string">"google"</span>, 0, 1)</span><br><span class="line">Output: [(1, <span class="string">"haha"</span>)]</span><br><span class="line">Example 2:</span><br><span class="line"></span><br><span class="line">Input:</span><br><span class="line">  insert(<span class="string">"google"</span>, 1, <span class="string">"haha"</span>)</span><br><span class="line">  insert(<span class="string">"lintcode"</span>, 1, <span class="string">"Good"</span>)</span><br><span class="line">  insert(<span class="string">"google"</span>, 2, <span class="string">"hehe"</span>)</span><br><span class="line">  query(<span class="string">"google"</span>, 0, 1)</span><br><span class="line">  query(<span class="string">"google"</span>, 0, 2)</span><br><span class="line">  query(<span class="string">"go"</span>, 0, 1)</span><br><span class="line">  query(<span class="string">"lintcode"</span>, 0, 10)</span><br><span class="line">Output:</span><br><span class="line">  [(1, <span class="string">"haha"</span>)]</span><br><span class="line">  [(1, <span class="string">"haha"</span>),(2, <span class="string">"hehe"</span>)]</span><br><span class="line">  []</span><br><span class="line">  [(1, <span class="string">"Good"</span>)]</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="4"><a href="#4" class="headerlink" title="4."></a>4.</h3></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/11/20/DevOps/2018-11-20-Source-Tree-Error/">DevOps/2018-11-20-Source-Tree-Error</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-20</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/DevOps/">DevOps</a></span><div class="content"><p>Error: The following untracked working tree files would be overwritten by checkout:</p>
-<p>Sol:</p>
-<p>​    開啟SourceTree通過命令列，進入本地版本倉庫目錄下，直接執行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clean -d -fx</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Definition of Column:</span></span><br><span class="line"><span class="string">class Column:</span></span><br><span class="line"><span class="string">    def __init__(self, key, value):</span></span><br><span class="line"><span class="string">        self.key = key</span></span><br><span class="line"><span class="string">        self.value = value</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> OrderedDict</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MiniCassandra</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># do intialization if necessary</span></span><br><span class="line">        self.hash = &#123;&#125;</span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: row_key: a string</span></span><br><span class="line"><span class="string">    @param: column_key: An integer</span></span><br><span class="line"><span class="string">    @param: value: a string</span></span><br><span class="line"><span class="string">    @return: nothing</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insert</span><span class="params">(self, row_key, column_key, value)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="keyword">if</span> row_key <span class="keyword">not</span> <span class="keyword">in</span> self.hash:</span><br><span class="line">            self.hash[row_key] = OrderedDict()</span><br><span class="line">        self.hash[row_key][column_key] = value</span><br><span class="line"></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: row_key: a string</span></span><br><span class="line"><span class="string">    @param: column_start: An integer</span></span><br><span class="line"><span class="string">    @param: column_end: An integer</span></span><br><span class="line"><span class="string">    @return: a list of Columns</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">query</span><span class="params">(self, row_key, column_start, column_end)</span>:</span></span><br><span class="line">        <span class="comment"># Write your code here</span></span><br><span class="line">        rt = []</span><br><span class="line">        <span class="keyword">if</span> row_key <span class="keyword">not</span> <span class="keyword">in</span> self.hash:</span><br><span class="line">            <span class="keyword">return</span> rt</span><br><span class="line"></span><br><span class="line">        self.hash[row_key] = OrderedDict(sorted(self.hash[row_key].items()))</span><br><span class="line">        <span class="keyword">for</span> key, value <span class="keyword">in</span> self.hash[row_key].items():</span><br><span class="line">            <span class="keyword">if</span> key &gt;= column_start <span class="keyword">and</span> key &lt;= column_end:</span><br><span class="line">                rt.append(Column(key, value))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> rt</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># def query(self, row_key, column_start, column_end):</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># return []</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># print(self.od[row_key])</span></span><br><span class="line">        <span class="comment"># return self.od[row_key]#[column_start:column_end]</span></span><br></pre></td></tr></table></figure>
 
-<p>即可。可能很多人都不明白-d，-fx到底是啥意思，其實git clean -d -fx表示：刪除 一些 沒有 git add 的 檔案；</p>
-<p>​    git clean 引數 </p>
-<p>​    -n 顯示將要刪除的檔案和目錄；</p>
-<p>​    -x —–刪除忽略檔案已經對git來說不識別的檔案</p>
-<p>​    -d —–刪除未被新增到git的路徑中的檔案</p>
-<p>​    -f —–強制執行</p>
-<p>​    git clean -n</p>
-<p>​    git clean -df</p>
-<p>​    git clean -f</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/11/20/ML/2018-11-20-ML%20Review-1/">ML/2018-11-20-ML Review-1</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-20</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Machine-Learning/">Machine-Learning</a></span><div class="content"><h3 id="1-SVM"><a href="#1-SVM" class="headerlink" title="1. SVM"></a>1. SVM</h3><p>Ref: <a href="https://blog.csdn.net/sinat_35512245/article/details/54984251" target="_blank" rel="noopener">https://blog.csdn.net/sinat_35512245/article/details/54984251</a><br>$$<br>d=|w^Tx+b|||w||　　　　　　　　　　　（１）<br>$$<br>其中，||w||为w的范数。</p>
-<p>当点A表示某一实例$x_i$，其类标记为yi=+1yi=+1。点A与超平面的距离记作didi，那么<br>$$<br>di=wTxi+b||w||　　　　　　　　　　（２）<br>$$<br>当点A表示某一实例xixi，其类标记为yi=−1yi=−1。点A与超平面的距离记作didi，那么<br>$$<br>di=−wTxi+b||w||　　　　　　　　　（３）<br>$$<br>一般地，点xixi与超平面的距离是<br>$$<br>di=yiwTxi+b||w||　　　　　　　　　（４）<br>$$<br>公式（４）也被称为超平面关于样本点xixi的几何间隔。</p>
-<h4 id="最大间隔分离超平面"><a href="#最大间隔分离超平面" class="headerlink" title="最大间隔分离超平面"></a>最大间隔分离超平面</h4><p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g9cwe8dihaj30c007cdgl.jpg" alt="这里写图片描述"></p>
-<p>如上图所示，距离超平面最近的这几个训练样本点被称为<strong>支持向量</strong>，两个异类支持向量（即分别位于超平面两侧的点）到超平面的距离之和为<br>$$<br>d=2/||w||　　　　　　　　　　　　　　　（５）<br>$$<br>上面（5）的d称为间隔（margin）。<br>要求得最大间隔（即最大化 $2/w$），就是要满足：</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g9cwamnyyij309h02sjrb.jpg" alt="这里写图片描述"></p>
-<p>显然，为了最大化间隔，仅需最大化$||w||^{−1}$，这等价于最小化$||w||^2$，于是上式可以重写为：</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g9cwaz5iy0j309u02mdfs.jpg" alt="这里写图片描述"></p>
-<p>这就是支持向量机的基本模型。</p>
-<p><strong>到目前为止，我们的 SVM 还比较弱，只能处理线性的情况，下面我们将引入核函数，进而推广到非线性分类问题。</strong></p>
-<p><strong>非线性支持向量机和核函数</strong></p>
-<p>非线性分类问题是指通过利用非线性模型才能很好地进行分类的问题。先看一个例子：</p>
-<hr>
-<h3 id="2-DeepLearning-Frameworks-Dynamic-vs-Static-Graphs"><a href="#2-DeepLearning-Frameworks-Dynamic-vs-Static-Graphs" class="headerlink" title="2. DeepLearning Frameworks: Dynamic vs Static Graphs"></a>2. DeepLearning Frameworks: Dynamic vs Static Graphs</h3><h1 id="动态图-vs-静态图"><a href="#动态图-vs-静态图" class="headerlink" title="动态图 vs. 静态图"></a>动态图 vs. 静态图</h1><p>ref: <a href="https://www.cnblogs.com/yifdu25/p/8763717.html" target="_blank" rel="noopener">https://www.cnblogs.com/yifdu25/p/8763717.html</a></p>
-<p>在 fast.ai，我们在选择框架时优先考虑程序员编程的便捷性（能更方便地进行调试和更直观地设计），而不是框架所能带来的模型加速能力。这也正是我们选择 PyTorch 的理由，因为它是一个<strong>具有动态图机制的灵活框架</strong>。</p>
-<p>依据采用动态计算或是静态计算的不同，可以将这些众多的深度学习框架划分成两大阵营，当然也有些框架同时具有动态计算和静态计算两种机制（比如 MxNet 和最新的 TensorFlow）。动态计算意味着程序将按照我们编写命令的顺序进行执行。这种机制将使得调试更加容易，并且也使得我们将大脑中的想法转化为实际代码变得更加容易。而静态计算则意味着程序在编译执行时将先生成神经网络的结构，然后再执行相应操作。从理论上讲，静态计算这样的机制允许编译器进行更大程度的优化，但是这也意味着你所期望的程序与编译器实际执行之间存在着更多的代沟。这也意味着，代码中的错误将更加难以发现（比如，如果计算图的结构出现问题，你可能只有在代码执行到相应操作的时候才能发现它）。<strong>尽管理论上而言，静态计算图比动态计算图具有更好的性能，但是在实践中我们经常发现并不是这样的。</strong></p>
-<p>谷歌的 TensorFlow 主要使用了静态计算图，而 Facebook 的 PyTorch 则使用了动态计算图机制。（注：TensorFlow 在两周前宣布了一个动态计算选项 Eager Execution（<a href="http://t.cn/RlZizQ2），不过该特性还比较新颖并且" target="_blank" rel="noopener">http://t.cn/RlZizQ2），不过该特性还比较新颖并且</a> TensorFlow 的文档和项目依然以静态计算为主）。在九月份，fast.ai 宣布将在今年的课程中采用 PyTorch 框架进行教学以及开发 fast.ai 自己的框架（实际上就是采用了更好的编码方式对 PyTorch 进行高级封装）。简而言之，以下是我们选择 PyTorch 的几个原因（更详细的原因请参见这里<a href="http://t.cn/Rpqj6pu）：" target="_blank" rel="noopener">http://t.cn/Rpqj6pu）：</a></p>
-<ul>
-<li>更加容易调试</li>
-<li>动态计算更适用于自然语言处理</li>
-<li>传统的面向对象编程风格（这对我们来说更加自然）</li>
-<li>TensorFlow 中采用的诸如 scope 和 sessions 等不寻常的机制容易使人感到疑惑不解，而且需要花费更多时间学习</li>
+
+
+<h2 id="Friendship-Service"><a href="#Friendship-Service" class="headerlink" title="Friendship Service"></a>Friendship Service</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FriendshipService</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># do intialization if necessary</span></span><br><span class="line">        self.fans = defaultdict(list)</span><br><span class="line">        self.followings = defaultdict(list)</span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: user_id: An integer</span></span><br><span class="line"><span class="string">    @return: all followers and sort by user_id</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getFollowers</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># return []</span></span><br><span class="line">        <span class="keyword">return</span> sorted(self.fans[user_id])</span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: user_id: An integer</span></span><br><span class="line"><span class="string">    @return: all followings and sort by user_id</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getFollowings</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># return []</span></span><br><span class="line">        <span class="keyword">return</span> sorted(self.followings[user_id])</span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: from_user_id: An integer</span></span><br><span class="line"><span class="string">    @param: to_user_id: An integer</span></span><br><span class="line"><span class="string">    @return: nothing</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">follow</span><span class="params">(self, to_user_id, from_user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="keyword">if</span> to_user_id <span class="keyword">not</span> <span class="keyword">in</span> self.followings[from_user_id]:</span><br><span class="line">            self.followings[from_user_id] += [to_user_id]</span><br><span class="line">            <span class="comment"># self.followings[from_user_id].sort()</span></span><br><span class="line">        <span class="keyword">if</span> from_user_id <span class="keyword">not</span> <span class="keyword">in</span> self.fans[to_user_id]:</span><br><span class="line">            self.fans[to_user_id] += [from_user_id]</span><br><span class="line">            <span class="comment"># self.followings[from_user_id].sort()</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: from_user_id: An integer</span></span><br><span class="line"><span class="string">    @param: to_user_id: An integer</span></span><br><span class="line"><span class="string">    @return: nothing</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">unfollow</span><span class="params">(self, to_user_id, from_user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># self.followings[from_user_id].pop(self.followings[from_user_id].index(to_user_id))</span></span><br><span class="line">        <span class="comment"># self.fans[to_user_id].pop(self.fans[to_user_id].index(from_user_id))</span></span><br><span class="line">        a = self.followings[from_user_id]</span><br><span class="line">        b = self.fans[to_user_id]</span><br><span class="line">        <span class="keyword">if</span> from_user_id <span class="keyword">in</span> self.followings:</span><br><span class="line">            <span class="keyword">if</span> to_user_id <span class="keyword">in</span> a:</span><br><span class="line">                a.pop(a.index(to_user_id))</span><br><span class="line">        <span class="keyword">if</span> to_user_id <span class="keyword">in</span> self.fans:</span><br><span class="line">            <span class="keyword">if</span> from_user_id <span class="keyword">in</span> b:</span><br><span class="line">                b.pop(b.index(from_user_id))</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="LRU"><a href="#LRU" class="headerlink" title="LRU"></a>LRU</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> OrderedDict</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: capacity: An integer</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, capacity)</span>:</span></span><br><span class="line">        <span class="comment"># do intialization if necessary</span></span><br><span class="line">        self.od = OrderedDict()</span><br><span class="line">        self.capacity = capacity</span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: key: An integer</span></span><br><span class="line"><span class="string">    @return: An integer</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, key)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">not</span> <span class="keyword">in</span> self.od:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        ret = self.od[key]</span><br><span class="line">        <span class="keyword">del</span> self.od[key]</span><br><span class="line">        self.od[key] = ret </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ret</span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: key: An integer</span></span><br><span class="line"><span class="string">    @param: value: An integer</span></span><br><span class="line"><span class="string">    @return: nothing</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set</span><span class="params">(self, key, value)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> self.od:</span><br><span class="line">            <span class="keyword">del</span> self.od[key]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> len(self.od) &gt;= self.capacity:</span><br><span class="line">                <span class="keyword">del</span> self.od[next(iter(self.od))]</span><br><span class="line">        self.od[key] = value</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>註冊、登錄、查詢 (看別的好友之類)、修改info</p>
+<blockquote>
+<h5 id="单选题-以下四个操作哪个最频繁？"><a href="#单选题-以下四个操作哪个最频繁？" class="headerlink" title="[单选题]以下四个操作哪个最频繁？"></a>[单选题]以下四个操作哪个最频繁？</h5><p>A.注册3.36% 选择</p>
+<p>B.登录44.02% 选择</p>
+<p>C.用户信息查询50.67% 选择</p>
+<p>D.用户信息修改1.94% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>C</p>
+</blockquote>
+<h3 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h3><h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><ul>
+<li>Authentication Service</li>
+<li>UserService</li>
+<li>FriendshipService</li>
 </ul>
-<p>谷歌在推广 TensorFlow 上已经花费了大量的资源，其投入要远远大于任何其它公司或者团队，并且我想这也是为什么 TensorFlow 会如此出名的原因之一（对于很多深度学习的门外汉，TensorFlow 是他们唯一听说过的框架）。正如之前所述，TensorFlow 在几周前发布了动态计算选项，这将解决了一些上述提到的问题。然后许多人就向 fast.ai 提问说我们是否考虑迁移回 TensorFlow 框架。<strong>但是目前 TensorFlow 提供的动态选项还比较新颖而且开发也不够完善，所以我们依然选择继续愉快地使用 PyTorch</strong>。但是 TensorFlow 团队非常乐意于接受我们的想法，我们也很高兴看到我们的 fastai 库（<a href="http://t.cn/RYyK6jC）被移植到" target="_blank" rel="noopener">http://t.cn/RYyK6jC）被移植到</a> TensorFlow 中。</p>
-<hr>
-</div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/51/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/51/">51</a><span class="page-number current">52</span><a class="page-number" href="/page/53/">53</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/53/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+<h3 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h3><p>check SQL &amp; NoSQL &amp; Redis 對 QPS數的支持</p>
+<blockquote>
+<h5 id="多选题-注册，登录，信息修改使用哪种数据库可以满足？"><a href="#多选题-注册，登录，信息修改使用哪种数据库可以满足？" class="headerlink" title="[多选题]注册，登录，信息修改使用哪种数据库可以满足？"></a>[多选题]注册，登录，信息修改使用哪种数据库可以满足？</h5><p>A.MySQL60.32% 选择</p>
+<p>B.Cassandra18.05% 选择</p>
+<p>C.Redis13.46% 选择</p>
+<p>D.Memcached8.18% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是ACD</p>
+<p><strong>正确答案:</strong>ABC</p>
+<p><strong>解析:</strong></p>
+<p>Memcached 不能持久化存储数据，不适合用来存储用户信息</p>
+</blockquote>
+<blockquote>
+<ul>
+<li><p>Q: 10k ~ 100k QPS?</p>
+<ul>
+<li>看需求。可以使用单台redis或者使用多台Cassandra的集群，又或者如果你的场景需要高可靠性的事务支持，但是读多写少，那就MySQL做持久化+memcached做cache优化。不同的数据库有不同的功能，这里列出的QPS只是为了告诉你各个数据库的承载能力，不是说xxxQPS就一定要用xxx数据库，QPS不是唯一决定因素，需要结合实际需求分析。</li>
+</ul>
+</li>
+<li><p>为什么Mysql只支持1k 的QPS,但facebook 依然会选择。 facebook的QPS应该远高于1k吧</p>
+<ul>
+<li>单机1k左右，但是facebook的是mysql集群，QPS肯定不是这个量级的</li>
+</ul>
+</li>
+<li><p>redis，memcached会比普通的存储贵吗</p>
+<ul>
+<li>redis memcached 用 memory 多，肯定比主要用 disk 的机器要贵的。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>讀多寫少，代表經常不會變！</p>
+<blockquote>
+<h5 id="多选题-文件系统可以用作缓存么？如果可以，可以做什么的缓存？"><a href="#多选题-文件系统可以用作缓存么？如果可以，可以做什么的缓存？" class="headerlink" title="[多选题]文件系统可以用作缓存么？如果可以，可以做什么的缓存？"></a>[多选题]文件系统可以用作缓存么？如果可以，可以做什么的缓存？</h5><p>A.不可以1.22% 选择</p>
+<p>B.用来做网络请求的缓存。30.30% 选择</p>
+<p>C.用来做计算结果的缓存34.45% 选择</p>
+<p>D.用来做数据库的缓存34.04% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是BD</p>
+<p><strong>正确答案:</strong>BC</p>
+<p><strong>解析:</strong></p>
+<p>缓存的目的是让访问变得更快。文件系统的访问比网络访问快，一些耗时很长的计算得到的结果也可以缓存在文件中，但是文件系统的访问速度和数据库的访问速度基本上是差不多，所以一般不会用文件系统来做数据库的缓存，意义不大。</p>
+</blockquote>
+<blockquote>
+<h5 id="多选题-下面哪些写法是“不对”的？"><a href="#多选题-下面哪些写法是“不对”的？" class="headerlink" title="[多选题]下面哪些写法是“不对”的？"></a>[多选题]下面哪些写法是“不对”的？</h5><p>哪些写法可能造成数据的不一致？也就是数据库和缓存中存储的数据不一样。</p>
+<p>A.db.set; cache.set29.67% 选择</p>
+<p>B.db.set; cache.delete29.48% 选择</p>
+<p>C.cache.set; db.set29.83% 选择</p>
+<p>D.cache.delete; db.set11.02% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是ABCD</p>
+<p><strong>正确答案:</strong>ABCD</p>
+</blockquote>
+<blockquote>
+<h5 id="单选题-有没有可能第一个执行失败，第二个执行成功？"><a href="#单选题-有没有可能第一个执行失败，第二个执行成功？" class="headerlink" title="[单选题]有没有可能第一个执行失败，第二个执行成功？"></a>[单选题]有没有可能第一个执行失败，第二个执行成功？</h5><p>A.可能，会造成数据不一致55.52% 选择</p>
+<p>B.可能，不会造成数据不一致12.52% 选择</p>
+<p>C.不可能，不会造成数据不一致31.96% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>C</p>
+<p><strong>解析:</strong></p>
+<p>不可能。程序的执行是顺序执行的，第一个语句执行出错以后，第二个语句就不会执行了，用户会收到整个 setUser 操作失败的信息。</p>
+</blockquote>
+<blockquote>
+<h5 id="多选题-cache-delete-db-set-什么情况下会造成数据不一致？"><a href="#多选题-cache-delete-db-set-什么情况下会造成数据不一致？" class="headerlink" title="[多选题]cache.delete + db.set 什么情况下会造成数据不一致？"></a>[多选题]cache.delete + db.set 什么情况下会造成数据不一致？</h5><p>A.多线程38.22% 选择</p>
+<p>B.多进程28.27% 选择</p>
+<p>C.多机器28.65% 选择</p>
+<p>D.cache.delete 成功但 db.set 失败4.87% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是D</p>
+<p><strong>正确答案:</strong>ABC</p>
+<p><strong>解析:</strong></p>
+<p>多机器的话自然而然也是多进程的。</p>
+</blockquote>
+<blockquote>
+<h5 id="单选题-能否给数据库和缓存的操作加锁来保证数据一致性？"><a href="#单选题-能否给数据库和缓存的操作加锁来保证数据一致性？" class="headerlink" title="[单选题]能否给数据库和缓存的操作加锁来保证数据一致性？"></a>[单选题]能否给数据库和缓存的操作加锁来保证数据一致性？</h5><p>A.可以加锁47.11% 选择</p>
+<p>B.加不了锁52.89% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>加锁以后只能保证在同一个数据上的操作顺序执行，但是无法执行“回滚”，也就是说如果第一个操作成功，第二个操作失败了，也会导致数据的不一致。<br>另外互斥锁（mutex）是多线程内共享的，多进程内无法共享。如果要加锁，只能使用分布式锁，比如 Zookeeper，但是这会导致读取效率急剧降低。得不偿失。</p>
+</blockquote>
+<blockquote>
+<h5 id="单选题-User-Table-的-Cache-Hit-Rate-一般有多少？"><a href="#单选题-User-Table-的-Cache-Hit-Rate-一般有多少？" class="headerlink" title="[单选题]User Table 的 Cache Hit Rate 一般有多少？"></a>[单选题]User Table 的 Cache Hit Rate 一般有多少？</h5><p>A.20%5.16% 选择</p>
+<p>B.50%8.32% 选择</p>
+<p>C.95%24.54% 选择</p>
+<p>D.98%61.98% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是D</p>
+<p><strong>正确答案:</strong>D</p>
+<p><strong>解析:</strong></p>
+<p>hit rate = cache hit / (cache hit + cache miss)</p>
+</blockquote>
+<ul>
+<li>我们允许数据库和缓存有“短时间”内的不一致，但最终会一致。</li>
+</ul>
+<blockquote>
+<ul>
+<li>database.set(key, user);cache.set(key)我觉得没有脏数据啊。当第一个线程1执行到15-16行之间的时候。假如有另一个线程2进入setUser这个函数。线程2的cache.set也会覆盖线程1的cache.set结果的啊，所以旧数据就被覆盖了啊。没有脏数据啊，求解释？</li>
+</ul>
+<p>假设执行顺序如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">thread 1 line 15: database.set(user) &#x2F;&#x2F; old data</span><br><span class="line">thread 2 line 15: database.set(user) &#x2F;&#x2F; new data</span><br><span class="line">thread 2 line 16: cache.set(user) &#x2F;&#x2F; new data</span><br><span class="line">thread 1 line 15: cache.set(user) &#x2F;&#x2F; old data</span><br></pre></td></tr></table></figure>
+
+<p>最后 cache 里是 old data, database 里是 new data</p>
+<p>线程2的cache.set也会覆盖线程1的cache.set结果的啊<br>在上面列举的情况中，是 thread 1 覆盖了 thread 2。要注意 user 是一个局部变量。thread 2 里的 user 和 thread 1 里的 user 的内容是不同的。</p>
+</blockquote>
+<p>如果寫真的太多太多了，在Cache Aside下，就是加DB啊。</p>
+<blockquote>
+<ul>
+<li>redis包含cache和一个db，是说redis里面包含了relational database management system , rdbms么？ 我记得redis只是缓存，没mysql的呢。<ul>
+<li>redis可以跟mysql配合使用，redis会完全接管mysql，自己从mysql里面load数据，所以在外界<strong>看起来</strong>就像是redis里面包了一个mysql一样。并不是说redis里面有一个mysql。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Authentication-Service"><a href="#Authentication-Service" class="headerlink" title="Authentication Service"></a>Authentication Service</h2><h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><p>可以用uuid()算這個hash值</p>
+<p>通常用UUID来作为Session Key(Session Token)，UUID(Universal Unique ID): UUID是由一组32位数的16进制数字所构成，所以UUID理论上的总数为16^32=2^128，约等于3.4 x 10^38。也就是说若每纳秒产生1兆个UUID，要花100亿年才会将所有UUID用完。所以通俗的称之为宇宙爆炸都不会出现重复的ID字段。</p>
+<blockquote>
+<ul>
+<li>cookie 存在browser 的哪里？<ul>
+<li>browser 就是一个 client 就是一个客户端软件，是一个 application 是一个 software，一个程序，一段代码。一个 software 要持久化的存储一个东西，最终都是存储在操作系统的文件系统上的。</li>
+</ul>
+</li>
+<li>session key一般有效期多久？<ul>
+<li>取决于网站的安全等级，比如银行类的一般浏览器关掉 session key就过期了。社交类的一般就三个月甚至更长。这个可以由网站开发人员自行定义。</li>
+</ul>
+</li>
+<li>any security problems regarding to session key?<ul>
+<li>如果你的 session key 被盗，比如你拿了你男朋友女朋友的电脑，悄悄的记录下了 session key，你就可以以你男朋友女朋友的身份登录了。所以通常一些安全性较高的网站，如银行，session key 几分钟就会失效。</li>
+</ul>
+</li>
+<li>session table 是存在数据库里， 还是存在In memory db 里面?<ul>
+<li>都是可以的。不过一般都是存在 数据库里，否则memory数据丢了所有用户都会被logout 这个体验并不好。</li>
+</ul>
+</li>
+<li>what if i never log in again? my session will live forever?<ul>
+<li>通常网站的逻辑都是最多3个月。session table 里有 expire_at 这个 field，记录了什么时候会过期。一般用户登陆以后，这一项设置为 3 个月。当然你可以根据你网站的安全性要求来设置不同的过期时间，安全性越高的网站过期时间越短。一般不会设置为永久不过期。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="Cookies"><a href="#Cookies" class="headerlink" title="Cookies"></a>Cookies</h3><ul>
+<li>用户 Login 以后，为他创建一个 session 对象</li>
+<li>并把 session_key 返回给浏览器，让浏览器存储起来</li>
+<li>浏览器将该值记录在浏览器的 cookie 中</li>
+<li>用户每次向服务器发送的访问，都会自动带上该网站所有的 cookie</li>
+<li>此时服务器拿到 cookie 中的 session_key，在 Session Table 中检测是否存在，是否过期</li>
+<li>Cookie:HTTP协议中浏览器和服务器的沟通机制，服务器把一些用于标记用户身份的信息，传递给 浏览器，浏览器每次访问任何网页链接的时候，都会在 HTTP 请求中带上所有的该网站相关的 Cookie 信息。Cookie 可以理解为一个 Client 端的 hash table。</li>
+</ul>
+<blockquote>
+<h5 id="单选题-Cookie-里存的东西是越多越好么？"><a href="#单选题-Cookie-里存的东西是越多越好么？" class="headerlink" title="[单选题]Cookie 里存的东西是越多越好么？"></a>[单选题]Cookie 里存的东西是越多越好么？</h5><p>A.是的3.13% 选择</p>
+<p>B.不是96.87% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>首先 Cookie 的大小 HTTP 协议是有限制的。其次因为每次 Request 都要带上 Cookie 里的内容，因此 Cookie 里存的东西是越少越好而不是越多越好。</p>
+</blockquote>
+<p>一般就是放個session key表明用戶身份，如掛在胸前的牌，代表授權訪問的用戶。然後去session table查是不是過期了，查uuid(就是session key), 然後知道 user_id，就是client端的hash table。</p>
+<blockquote>
+<h5 id="单选题-服务器需要主动删除掉过期的-Session-么？"><a href="#单选题-服务器需要主动删除掉过期的-Session-么？" class="headerlink" title="[单选题]服务器需要主动删除掉过期的 Session 么？"></a>[单选题]服务器需要主动删除掉过期的 Session 么？</h5><p>A.需要34.19% 选择</p>
+<p>B.不需要65.81% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>做 lazy loading 就好了。因为有 expire_at，无需主动删除，被动删除即可，即在用户登陆的时候发现过期了再删。</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>session table 是存在数据库里， 还是存在In memory db 里面?<ul>
+<li>都是可以的。不过一般都是存在 数据库里，否则memory数据丢了所有用户都会被logout 这个体验并不好。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>device token 也可紀錄在 session table, </p>
+<blockquote>
+<h5 id="单选题-Session-Table-适合存储在什么数据库里？"><a href="#单选题-Session-Table-适合存储在什么数据库里？" class="headerlink" title="[单选题]Session Table 适合存储在什么数据库里？"></a>[单选题]Session Table 适合存储在什么数据库里？</h5><p>A.Memcached21.64% 选择</p>
+<p>B.MySQL22.46% 选择</p>
+<p>C.Memcached + MySQL55.90% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>C</p>
+</blockquote>
+<p>如果自己建個網站，用戶不多，放在Memcache裡也Ok, 就算斷了，用戶就是再重登一次，不會怎樣，畢竟不是用戶信息的不能丟的。</p>
+<p>大網站就最好撐久點，讓體驗好，訪問效率高</p>
+<blockquote>
+<ul>
+<li>那个device id那一块，如何实现？有点模糊。<ul>
+<li>就是在每个device第一次登录的时候给他分配一个id，然后把这个id放到该设备的cookie中，每次访问网站的时候都要带上这个id，这样根据id就能知道当前活动的是哪台设备了。</li>
+</ul>
+</li>
+<li>db如何设计呢？如何判断这个session 是这个user，然后把之前的ipad的session logout，再让这个iphone的session建立？<ul>
+<li>如果用NoSQL，那么表中的每一行可以是{user_id, session, expire_at，其中user_id是foreign key并且建立了index方便快速查找，session在生成的时候可以encode进去user_id的信息，方便直接从session中识别出当前用户。如果是key-value NoSQL，那就直接把上述结构改为user_id ==&gt; {session, expire_at}就行了。<br>当用户登录的时候直接生成一个新的session替换掉原来的。<br>当旧设备的session再次尝试请求数据的时候，先从session中decode出user_id，然后去查表，然后会发现表中的session跟当前的session不是同一个，那就强制logout。</li>
+</ul>
+</li>
+<li>每个device 都会有一个 session key 吗？<ul>
+<li>session key 和 device 不是绑定的关系。 session key 是记录某次登录后所形成的客户端与服务器端的保持通话的记录的 key。同一台机器上的不同的浏览器登录以后的 session key一般就是不同的。像 Google Chrome 这种支持多用户的浏览器，切换用户以后，就相当于切换浏览器一样，session 记录也是不同的。</li>
+</ul>
+</li>
+<li>如果一个ipad来登陆来了，如何把iphone的session key给expire还是删除呢？如何判断，这2个device是一个user？如果问，如何回答。<ul>
+<li>用同一个账号登录肯定就是同一个user。如果登录之后发现在session table中该账号有一个active的session，就可以把这个session 给expire了然后写一个新的进去。</li>
+</ul>
+</li>
+<li>登陆之后，发现该账号已经有一个active user，就可以把这个session给expire了。这个“expire”操作具体是怎样进行的？<ul>
+<li>这种情况可以直接删除该行记录。</li>
+</ul>
+</li>
+<li>想问一下RESTful API里面比如POST一个新blog的请求会用session_key来验证user吗？<ul>
+<li>也会的，只要是需要authorization的操作都需要验证当前用户的session.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Friendship-Storage-amp-Query"><a href="#Friendship-Storage-amp-Query" class="headerlink" title="Friendship Storage &amp; Query"></a>Friendship Storage &amp; Query</h2><p>單向：Twitter, Ins, Weibo</p>
+<p>雙向：WeChat, FB, WhatsApp</p>
+<blockquote>
+<h5 id="单选题-为什么要区分-smaller-user-id-和-bigger-user-id？"><a href="#单选题-为什么要区分-smaller-user-id-和-bigger-user-id？" class="headerlink" title="[单选题]为什么要区分 smaller_user_id 和 bigger_user_id？"></a>[单选题]为什么要区分 smaller_user_id 和 bigger_user_id？</h5><p>A.否则查询 A 和 B 是否为好友的时候会变慢55.84% 选择</p>
+<p>B.否则查询 A 的所有好友的时候会变慢32.22% 选择</p>
+<p>C.猜不到11.94% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>A</p>
+<p><strong>解析:</strong></p>
+<p>查询 A 的所有好友不会变慢，因为依然是 select * from friendship where user_id1=A or user_id2=A。</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>smaller_user_id，bigger_user_id这里，没有太理解为什么有可能多存一份好友关系。如果已建立好友关系，在什么情况下会出现再次插入同样的好友关系呢？UI端不是应该不支持再次建立好友关系的操作了吗？还是说为了逻辑上更严谨，使A和B成为好友关系只有一种数据存储模式？<ul>
+<li>作为一个有经验的工程师，除了在前端要避免重复创建好友以外，后端也是需要相同逻辑的（比如预防一些别有用心的黑客）<br>当你要存 1 和 2 是好友的时候，你可能存为 &lt;1,2&gt; 也可能存为 &lt;2,1&gt;。我们只存成 &lt;1,2&gt; 的形式，原因有两个，第一是方便查询，否则你查询的时候得分别差 &lt;1,2&gt; 是否存在和 &lt;2,1&gt; 是否存在。第二个是节省一半的存储空间。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>雙向好友存成兩條還是比較好，雖然多一倍的量，但查詢時不需要 smaller_user_id = x or  bigger_uesr_id = x ，那個 or 的查詢操作很花時間。在線的服務需要簡單快速的查詢語句。可能明年hardware自己就快了一倍，會讓現在的速度優化沒意思。</p>
+<blockquote>
+<ul>
+<li>数据库存的数据越多，不会查询越慢吗？<ul>
+<li>会。但是由于据库或者有索引（索引就是用来加快数据查询速度的额外数据结构），又或者本身就是in-memory的hashtable，其查询时长随数据量的增加而增加的曲线其实非常平缓。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>transaction - 事务。代表一些列操作要打包在一起，同时成果或者同时失败。比如我转你 10 块钱，你的余额要 +10，我的余额要 -10。这是两条数据库操作，必须同时成功或者同时失败。不能只有一条操作成功。这种打包，就叫做 Transaction。    </p>
+<blockquote>
+<ul>
+<li>NoSQL支持transaction吗？<ul>
+<li>有一些支持，有一些不支持</li>
+</ul>
+</li>
+<li>保证一个数据库中同时成功或者同时失败的语句是什么？<ul>
+<li>这个要靠数据库的transaction机制</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Cassandra-as-NoSQL"><a href="#Cassandra-as-NoSQL" class="headerlink" title="Cassandra as NoSQL"></a>Cassandra as NoSQL</h2><blockquote>
+<h5 id="多选题-什么是序列化-Serialization，下列说法正确的是"><a href="#多选题-什么是序列化-Serialization，下列说法正确的是" class="headerlink" title="[多选题]什么是序列化 Serialization，下列说法正确的是"></a>[多选题]什么是序列化 Serialization，下列说法正确的是</h5><p>A.将内存中的数据（或者某个 class 的 object）变成一个字符串的过程36.89% 选择</p>
+<p>B.JSON 是一种序列化格式27.30% 选择</p>
+<p>C.序列化的作用是让数据可以进行传输和存储34.58% 选择</p>
+<p>D.我不懂什么是序列化，请多给我讲讲1.24% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是AC</p>
+<p><strong>正确答案:</strong>ABC</p>
+<p><strong>相关知识点:</strong>什么是序列化 Serialization</p>
+</blockquote>
+<ul>
+<li><p>Row key : hash key, partition key, 去算存在哪個機器上。NoSQL主要是要實現分布式，不同機器上，不能每台機器上存一份，需要一個sharding或partition的算法。Cassandra會根據row key去算一個hash。不支援範圍查詢。</p>
+</li>
+<li><p>col key : 是排序的，類似用B+樹作有序是叫LSM Tree。在同個row key之下。可以是多元組排序。</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>sql型数据库是只要建了index就可以支持范围查询的。— 那sql型数据库，是自动每一个列都建index么？因为貌似每一个列都是可以range 查询的吧<ul>
+<li>准确地说是sql型数据库是建立了index就可以支持<strong>快速的范围查询</strong>，即使没有index也是支持范围查询的，只不过会很慢。<br>你需要手动指定为哪些列创建index，因为index是有一定开销的，除了磁盘占用会多一点之外，你每增加删除一条记录的时候数据库也都要维护相应的index。换句话说，快速的范围查询是有一定代价的，所以需要用户自己去权衡应不应该给某一个列加index。</li>
+</ul>
+</li>
+<li>如果把user_id作为row_key, 那么在column_key里再把它放进去其实没什么意义吧？因为查的时候user_id肯定是一个确定的值、而非范围了。<ul>
+<li>对，不需要重复访进去。这里只是举个例子。因为有的时候 row_key 不是 user_id。这页 PPT 和上一页在分别讲两件事情。</li>
+</ul>
+</li>
+<li>类似JSON？<ul>
+<li>是的，可以通过 JSON Serialize 到 value 里</li>
+</ul>
+</li>
+<li>在NoSQL里有primary key的概念吗？应该如何避免同一个数据被存了两次<ul>
+<li>在NoSQL里有primary key的概念吗？应该如何避免同一个数据被存了两次</li>
+</ul>
+</li>
+<li>我通过row_key(user_id) 知道数据存在那一台机器上之后，该台机器上应该是存了很多user的信息的，那我还是在进行一个for循环找到所有该用户的rows吗？再通过friend_user_id 来查找。<ul>
+<li>不是的。同一台机器上的数据是按照 row_key + column_key 排好序的，你可以理解为你可以在一台机器上按照 index 去找到你要的 row_key 的那些数据。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>NoSQL是以格子為單位的，不是以行為一筆的。</p>
+<blockquote>
+<h5 id="单选题-查询最近一天之内关注的好友该怎么办？"><a href="#单选题-查询最近一天之内关注的好友该怎么办？" class="headerlink" title="[单选题]查询最近一天之内关注的好友该怎么办？"></a>[单选题]查询最近一天之内关注的好友该怎么办？</h5><p>A.将 timestamp 设置为 row_key7.75% 选择</p>
+<p>B.将 timestamp 设置为 column_key91.15% 选择</p>
+<p>C.不会1.10% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+</blockquote>
+<blockquote>
+<ul>
+<li><em>column key能放多个值吗? 同时放friendID和timestamp</em><ul>
+<li><em>yes</em></li>
+</ul>
+</li>
+<li><em>可以设多个Column Key吗？</em><ul>
+<li><em>可以的 列存储可以有很多column的</em></li>
+</ul>
+</li>
+<li><em>如果有的时候想sort by timestamp 有的时候想sort by id怎么办</em><ul>
+<li><em>建两张表，一张 sort by timestamp，一张 sort by id。插入或者修改数据的时候，两张表都操作一下。</em></li>
+</ul>
+</li>
+<li><em>想请问一下，当查询某个user的newsfeed的时候，我们只已知user_id和想查询的时间段，但是我们不知道会有哪些tweet id。Cassandra的查询不是需要提供row key &amp; column key，才能得知value吗？ 既然我不知道会有哪些tweet id，这样我就无法得知column key是什么</em><ul>
+<li><em>在newsfeed的column key里，第一项是 timestamp，第二项可以是 tweet id 也可以把 tweet id放在 value 里。 Cassandra的查询是不需要指定 column key 的第二项的。只要有 column key 的第一项的 timestamp 的 range 就可以了。</em></li>
+</ul>
+</li>
+<li><em>column_key都是cache的吗？那value是在disk上吗？</em><ul>
+<li><em>这里主要是想解释为什么把tweet_id放在column key里面好一点。原因是weet_id所对应的tweet data可能已经在cache里了，如果把tweet id放在value中的话，那么就必须要row_key, column_key和value都读出来，这样不能充分利用cache里面的数据。但如果是把tweet id放在column key里面的话，那么读到column key的时候如果发现tweet id对应的tweet data已经在cache中了那就不需要继续去读value了，这样可以节省一步NoSQL读操作。</em></li>
+</ul>
+</li>
+<li><em>复合型的column key是将几个column组合成一个key？还是将原本几个column合成一个column，然后将这单个的column当key (比如合成后的单column 里数据的格式为：timestamp_tweetID)?</em><ul>
+<li><em>前者。几个 column 组成一个 key。类似 SQL 里的 multi-column index （composite index）</em></li>
+</ul>
+</li>
+<li><em>这里的column_key,为什么是created_at1,tweet_id1, 这是一个复合的。第一个是按时间，第二个是按tweet id排序，是吗？</em><ul>
+<li><em>column_key 可以是一个复合 key。你可以认为是一个二元组，然后按照这个二元组进行排序。那么 column key 在排序的时候就会先按照 created_at 排序，如果created_at 相同的才按照 tweet_id 排序。这里其实不把 tweet_id 放在 column_key 里也没有关系，最主要是需要按照 created_at 排序。</em></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb5m0zj17j30re0i0n3l.jpg" alt="image-20200329221212550" style="zoom:67%;" />
+
+<blockquote>
+<ul>
+<li>SQL不支持分布式吗？<ul>
+<li>是支持的，但是一般需要你手动做sharding之类的工作，用起来没有NoSQL的分布式那么简单。而NoSQL大多支持“开箱即用”的分布式。</li>
+</ul>
+</li>
+<li><em>NoSQL 快是因为用的hash吗？SQL慢是因为不是hash吗？</em><ul>
+<li><em>NoSQL快是因为其相对SQL来说少了很多功能，更轻量级。比如NoSQL通常不支持ACID的transaction, 并且大多数据模型很简单（比如memcached就只是存储key-value)，大多不支持自建index，不支持compound index， 有些甚至不支持持久化。少了很多负担，自然就多了很多优化的余地。</em></li>
+</ul>
+</li>
+<li><em>cassandra可以有好几个column key，用起来和SQL的multi key有什么不同？</em><ul>
+<li><em>你说的这个是compound key吧？这个是两个不同的概念，compound key指的是在一个表中，可以用两个或多个column的组合来作为primary key，比如一个表中存了某个物体的：（x坐标，y坐标，z坐标，形状，其它信息），那么就可以以(x坐标，y坐标，z坐标）这三个column的组合来作为一个compound key，以此唯一索引一个物体。</em><br><em>而Cassandra可以被认为是一个巨大的二维数组，row key是第一维下标，column key是第二维下标，因此db[row key][column key]唯一决定了一个数组元素，比如db[user_name][email].</em></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb5ivnrq3j30lu0gqgms.jpg" alt="image-20200329220834459" style="zoom:67%;" />
+
+<blockquote>
+<ul>
+<li>cassandra 第二个表没有user_id 是怎么从user_name 找到 user_id 的？<ul>
+<li>第二个表里 username 是 key，user_id 是value，直接就查到了。</li>
+</ul>
+</li>
+<li>在同时创建多张表单时，Cassandra的row_key是email/phone/username,user_id是不是应该放在column_key里？要不怎么找到对应的user_id。<ul>
+<li>user_id 放在 column_key 或者放在 value 里都可以的。如果你放在 value 里，可以把 column_key 设置为一直是 null。也就是其实你用不上 Cassandra Column Key 排序的特性。另外一个替代的数据库是 RocksDB，这个就是纯 key-value 了。直接key=username, value=user_id 就可以。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb5kszh1nj30n60g4js8.jpg" alt="image-20200329221059107" style="zoom:67%;" />
+
+<blockquote>
+<ul>
+<li>如果A和B的好友比较多，这样耗时比较多吧？<ul>
+<li>一般共同好友的功能在双向好友关系的社交网络中才比较有有意义。单向的话，会是“共同关注”，或者你的好友里谁关注了他，一般不会有“共同粉丝”的功能。因此这个“关注” 或者好友的量级一般都在千人这个级别（FB和微信都差不多是5k的好友限制）因此并不慢。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb5sm2nyoj30vs0km3zp.jpg" alt="image-20200329221827305" style="zoom:67%;" />
+
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb5t57414j30wc0f676n.jpg" alt="image-20200329221858313" style="zoom:67%;" />
+
+<blockquote>
+<ul>
+<li>直接在A的二度里查B不可以吗？<ul>
+<li>在 A 的二度里查询 B 查到了是二度关系，查不到是 &gt;= 3度的关系。这里问题的需求3度也需要知道是不是3度，&gt;3度的标记为 3+。因此只在 A的二度里查B还不够。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><p>如果一个用户没有进行登录或者注册，如何识别两次 Request 来自同一个用户呢？</p>
+<ul>
+<li><p>IP Address 是不可以的，因为在同一个局域网下的不同用户会共享同一个对外的 IP Address。</p>
+<p>正确的做法，是为用户生成一个 uuid （Universal Unique ID）作为他的标识，有很多库函数可以生成这个 uuid，这是一个字符串，可以认为不同的用户一定会生成不同的 uuid。服务器端生成这个 uuid 之后返回给浏览器端，浏览器端存储在 cookie 里，之后每次请求都会带上。如果服务器发现 cookie 里没有这个 uuid 就说明可能是一个新用户，就为其分配新的 uuid，否则不改变这个 uuid。这样我们就可以用 uuid 来识别一个未登录的用户了。</p>
+<p>这样的方法如果你清空 cookie 或者换了浏览器以后，可能会被分配到一个新的 uuid，那么你之前的 requests 和之后的 requests 就可能会被服务器识别为两个不同的用户。这个是没有办法解决的了。因为神仙也无法知道你换了浏览器以后坐在电脑前的是不是还是你自己。</p>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/02/28/Python/2019-02-28-Abstract%20in%20Python/">Python/2019-02-28-Abstract in Python</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-02-28</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span><div class="content"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> abc <span class="keyword">import</span> ABCMeta, abstractmethod</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span><span class="params">(object, metaclass=ABCMeta)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,title,author)</span>:</span></span><br><span class="line">        self.title=title</span><br><span class="line">        self.author=author   </span><br><span class="line"><span class="meta">    @abstractmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">display</span><span class="params">()</span>:</span> <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Write MyBook class</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyBook</span><span class="params">(Book)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, title, author, price)</span>:</span></span><br><span class="line">        super(MyBook, self).__init__(title, author)</span><br><span class="line">        self.price = price</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">display</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Title: &#123;&#125;"</span>.format(self.title))</span><br><span class="line">        print(<span class="string">"Author: &#123;&#125;"</span>.format(self.author))</span><br><span class="line">        print(<span class="string">"Price: &#123;&#125;"</span>.format(self.price))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>BTW, 如果真的想要模擬Java中interface，可定義一個抽象類別，完全沒有實作的方法即可。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> abc <span class="keyword">import</span> ABCMeta, abstractmethod</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Flyer</span><span class="params">(metaclass=ABCMeta)</span>:</span> <span class="comment"># 就像是Java中的interface</span></span><br><span class="line"><span class="meta">    @abstractmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fly</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bird</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sparrow</span><span class="params">(Bird, Flyer)</span>:</span>  <span class="comment"># 就像Java中繼承Bird類別並實作Flyer介面</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fly</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">'麻雀飛'</span>)</span><br><span class="line"></span><br><span class="line">s = Sparrow()</span><br><span class="line">s.fly()</span><br></pre></td></tr></table></figure></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/02/18/SQL/2019-02-18-SQL/">SQL/2019-02-18-SQL</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-02-18</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SQL/">SQL</a></span><div class="content"><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> celebs </span><br><span class="line"><span class="keyword">WHERE</span> twitter_handle <span class="keyword">IS</span> <span class="literal">NULL</span>;</span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> celebs; </span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> awards (</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">INTEGER</span> PRIMARY <span class="keyword">KEY</span>,</span><br><span class="line">  recipient <span class="built_in">TEXT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  award_name <span class="built_in">TEXT</span> <span class="keyword">DEFAULT</span> <span class="string">'Grammy'</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- name	location	category	employees	raised	valuation	founded	stage	ceo	info</span></span><br><span class="line"><span class="comment">-- Pied Piper	Silicon Valley	Cloud Computing	6	5000000	50000000	2014	A	Richard Hendricks	A Middle-Out Compression Solution</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- select * from startups;</span></span><br><span class="line"><span class="comment">-- select count(*)  from startups;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- select sum(valuation)  from startups;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- select max(raised)  from startups;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- -- 5</span></span><br><span class="line"><span class="comment">-- select max(raised)  </span></span><br><span class="line"><span class="comment">-- from startups</span></span><br><span class="line"><span class="comment">-- where stage = 'Seed';</span></span><br><span class="line"><span class="comment">-- -- 6</span></span><br><span class="line"><span class="comment">-- select min(founded) </span></span><br><span class="line"><span class="comment">-- from startups;</span></span><br><span class="line"><span class="comment">-- -- 7</span></span><br><span class="line"><span class="comment">-- select avg(valuation) </span></span><br><span class="line"><span class="comment">-- from startups;</span></span><br><span class="line"><span class="comment">-- -- 8</span></span><br><span class="line"><span class="comment">-- select category, avg(valuation) </span></span><br><span class="line"><span class="comment">-- from startups</span></span><br><span class="line"><span class="comment">-- group by category;</span></span><br><span class="line"><span class="comment">-- -- 9</span></span><br><span class="line"><span class="comment">-- select category, round(avg(valuation), 2)</span></span><br><span class="line"><span class="comment">-- from startups</span></span><br><span class="line"><span class="comment">-- group by category;</span></span><br><span class="line"><span class="comment">-- -- 10</span></span><br><span class="line"><span class="comment">-- select category, round(avg(valuation), 2)</span></span><br><span class="line"><span class="comment">-- from startups</span></span><br><span class="line"><span class="comment">-- group by category</span></span><br><span class="line"><span class="comment">-- order by 2 desc;</span></span><br><span class="line"><span class="comment">-- -- 11</span></span><br><span class="line"><span class="comment">-- -- select category, count(company)</span></span><br><span class="line"><span class="comment">-- select category, count(*)</span></span><br><span class="line"><span class="comment">-- from startups</span></span><br><span class="line"><span class="comment">-- group by category;</span></span><br><span class="line"><span class="comment">-- -- 12</span></span><br><span class="line"><span class="comment">-- -- -- select category, count(company)</span></span><br><span class="line"><span class="comment">-- select category, count(*)</span></span><br><span class="line"><span class="comment">-- from startups</span></span><br><span class="line"><span class="comment">-- group by category</span></span><br><span class="line"><span class="comment">-- having count(*) &gt; 3</span></span><br><span class="line"><span class="comment">-- order by 2 desc;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- select * from startups;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 13</span></span><br><span class="line"><span class="comment">-- select location, avg(valuation)</span></span><br><span class="line"><span class="keyword">select</span> location, <span class="keyword">avg</span>(employees)</span><br><span class="line"><span class="keyword">from</span> startups</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> location</span><br><span class="line"><span class="keyword">having</span> <span class="keyword">avg</span>(employees) &gt; <span class="number">500</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- having avg(*)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Write-the-following-queries"><a href="#Write-the-following-queries" class="headerlink" title="Write the following queries:"></a>Write the following queries:</h3><p><strong>1.</strong></p>
+<p>Getting started, take a look at the <code>startups</code> table:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> *</span><br><span class="line"><span class="keyword">FROM</span> startups;</span><br></pre></td></tr></table></figure>
+
+<p>How many columns are there?</p>
+<p>Stuck? Get a hint</p>
+<p><strong>2.</strong></p>
+<p>Calculate the total number of companies in the table.</p>
+<p>Hint</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(*)</span><br><span class="line"><span class="keyword">FROM</span> startups;</span><br></pre></td></tr></table></figure>
+
+<p>There are 70 companies in the table.</p>
+<p><strong>3.</strong></p>
+<p>We want to know the total value of all companies in this table.</p>
+<p>Calculate this by getting the <code>SUM()</code> of the <code>valuation</code> column.</p>
+<p>Hint</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">SUM</span>(valuation)</span><br><span class="line"><span class="keyword">FROM</span> startups;</span><br></pre></td></tr></table></figure>
+
+<p>The sum is $974,455,790,000!</p>
+<p><strong>4.</strong></p>
+<p>What is the highest amount raised by a startup?</p>
+<p>Return the maximum amount of money <code>raised</code>.</p>
+<p>Hint</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MAX</span>(raised)</span><br><span class="line"><span class="keyword">FROM</span> startups;</span><br></pre></td></tr></table></figure>
+
+<p><strong>5.</strong></p>
+<p>Edit the query so that it returns the maximum amount of money <code>raised</code>, during ‘Seed’ stage.</p>
+<p>Hint</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MAX</span>(raised)</span><br><span class="line"><span class="keyword">FROM</span> startups</span><br><span class="line"><span class="keyword">WHERE</span> stage = <span class="string">'Seed'</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>6.</strong></p>
+<p>In what year was the oldest company on the list founded?</p>
+<p>Hint</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">MIN</span>(founded)</span><br><span class="line"><span class="keyword">FROM</span> startups;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Let’s-find-out-the-valuations-among-different-sectors"><a href="#Let’s-find-out-the-valuations-among-different-sectors" class="headerlink" title="Let’s find out the valuations among different sectors:"></a>Let’s find out the valuations among different sectors:</h3><p><strong>7.</strong></p>
+<p>Return the average <code>valuation</code>.</p>
+<p>Stuck? Get a hint</p>
+<p><strong>8.</strong></p>
+<p>Return the average <code>valuation</code>, in each <code>category</code>.</p>
+<p>Hint</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">category</span>, <span class="keyword">AVG</span>(valuation)</span><br><span class="line"><span class="keyword">FROM</span> startups</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">category</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>9.</strong></p>
+<p>Return the average <code>valuation</code>, in each <code>category</code>.</p>
+<p>Round the averages to two decimal places.</p>
+<p>Hint</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">category</span>, <span class="keyword">ROUND</span>(<span class="keyword">AVG</span>(valuation), <span class="number">2</span>)</span><br><span class="line"><span class="keyword">FROM</span> startups</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">category</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>10.</strong></p>
+<p>Return the average <code>valuation</code>, in each <code>category</code>.</p>
+<p>Round the averages to two decimal places.</p>
+<p>Lastly, order the list from highest averages to lowest.</p>
+<p>Hint</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">category</span>, <span class="keyword">ROUND</span>(<span class="keyword">AVG</span>(valuation), <span class="number">2</span>)</span><br><span class="line"><span class="keyword">FROM</span> startups</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">2</span> <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+
+<p>Health Care startups seem to have higher valuations than other categories.</p>
+<h3 id="What-are-the-most-competitive-markets"><a href="#What-are-the-most-competitive-markets" class="headerlink" title="What are the most competitive markets?"></a>What are the most competitive markets?</h3><p><strong>11.</strong></p>
+<p>First, return the name of each <code>category</code> with the total number of companies that belong to it.</p>
+<p>Hint</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">category</span>, <span class="keyword">COUNT</span>(*)</span><br><span class="line"><span class="keyword">FROM</span> startups</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">category</span>;</span><br></pre></td></tr></table></figure>
+
+<p><strong>12.</strong></p>
+<p>Next, filter the result to only include categories that have more than three companies in them.</p>
+<p>What are the most competitive markets?</p>
+<p>Hint</p>
+<p>Because you are filtering on a condition that has an aggregate function, you need to use <code>HAVING</code> instead of <code>WHERE</code>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">category</span>, <span class="keyword">COUNT</span>(*)</span><br><span class="line"><span class="keyword">FROM</span> startupss</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">category</span></span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">COUNT</span>(*) &gt; <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+
+<p>If you want to go a step further, sort the result using <code>ORDER BY</code>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="keyword">category</span>, <span class="keyword">COUNT</span>(*)</span><br><span class="line"><span class="keyword">FROM</span> startups</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">category</span></span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">COUNT</span>(*) &gt; <span class="number">3</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="number">2</span> <span class="keyword">DESC</span>;</span><br></pre></td></tr></table></figure>
+
+<p>The most competitive markets are:</p>
+<ol>
+<li>Social</li>
+<li>Mobile</li>
+<li>Education</li>
+</ol>
+<h3 id="Let’s-see-if-there’s-a-difference-in-startups-sizes-among-different-locations"><a href="#Let’s-see-if-there’s-a-difference-in-startups-sizes-among-different-locations" class="headerlink" title="Let’s see if there’s a difference in startups sizes among different locations:"></a>Let’s see if there’s a difference in startups sizes among different locations:</h3><p><strong>13.</strong></p>
+<p>What is the average size of a startup in each <code>location</code>?</p>
+<p>Hint</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> location, <span class="keyword">AVG</span>(employees)</span><br><span class="line"><span class="keyword">FROM</span> startups</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> location;</span><br></pre></td></tr></table></figure>
+
+<p><strong>14.</strong></p>
+<p>What is the average size of a startup in each <code>location</code>, with average sizes above 500?</p>
+<p>Hint</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> location, <span class="keyword">AVG</span>(employees)</span><br><span class="line"><span class="keyword">FROM</span> startups</span><br><span class="line"><span class="keyword">GROUP</span> <span class="keyword">BY</span> location</span><br><span class="line"><span class="keyword">HAVING</span> <span class="keyword">AVG</span>(employees) &gt; <span class="number">500</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Multiple-Tables-with-REBU"><a href="#Multiple-Tables-with-REBU" class="headerlink" title="Multiple Tables with REBU"></a>Multiple Tables with REBU</h2><p>LEARN SQL</p>
+<h1 id="Multiple-Tables-with-REBU-1"><a href="#Multiple-Tables-with-REBU-1" class="headerlink" title="Multiple Tables with REBU"></a>Multiple Tables with REBU</h1><p>Let’s practice what we learned about joins by combining rows from different tables.</p>
+<p>Suppose you are a data analyst at REBU, a ridesharing platform. For a project, you were given three tables:</p>
+<ul>
+<li><code>trips</code> - trips information</li>
+<li><code>riders</code> - users data</li>
+<li><code>cars</code> - autonomous cars</li>
+</ul>
+<p>Have fun!</p>
+<p>If you get stuck during this project or would like to see an experienced developer work through it, click “<strong>Get Help</strong>“ to see a <strong>project walkthrough video</strong>.</p>
+<p>Tasks</p>
+<p>10/10Complete</p>
+<p>Mark the tasks as complete by checking them off</p>
+<h3 id="Write-the-following-queries-1"><a href="#Write-the-following-queries-1" class="headerlink" title="Write the following queries:"></a>Write the following queries:</h3><p><strong>1.</strong></p>
+<p>Let’s examine the three tables.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM trips;</span><br><span class="line"></span><br><span class="line">SELECT * FROM riders;</span><br><span class="line"></span><br><span class="line">SELECT * FROM cars;</span><br></pre></td></tr></table></figure>
+
+<p>What are the column names?</p>
+<p>Stuck? Get a hint</p>
+<p><strong>2.</strong></p>
+<p>What’s the primary key of <code>trips</code>?</p>
+<p>What’s the primary key of <code>riders</code>?</p>
+<p>What’s the primary key of <code>cars</code>?</p>
+<p>Hint</p>
+<p>The primary key of <code>trips</code> is <code>id</code>.</p>
+<p>The primary key of <code>riders</code> is <code>id</code>.</p>
+<p>The primary key of <code>cars</code> is <code>id</code>.</p>
+<p>They have the same name, but they are very different.</p>
+<p><strong>3.</strong></p>
+<p>Try out a simple cross join between <code>riders</code> and <code>cars</code>.</p>
+<p>Is the result useful?</p>
+<p>Hint</p>
+<p>Suppose these are the three columns we select:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT riders.first,</span><br><span class="line">   riders.last,</span><br><span class="line">   cars.model</span><br><span class="line">FROM riders, cars;</span><br></pre></td></tr></table></figure>
+
+<p>The result combines each user with every car model. Not so useful.</p>
+<p><strong>4.</strong></p>
+<p>Suppose we want to create a Trip Log with the trips and its users.</p>
+<p>Find the columns to join between <code>trips</code> and <code>riders</code> and combine the two tables using a <code>LEFT JOIN</code>.</p>
+<p>Let <code>trips</code> be the left table.</p>
+<p>Hint</p>
+<p>If we <code>LEFT JOIN</code> on <code>trips.rider_id</code> and <code>riders.id</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM trips</span><br><span class="line">LEFT JOIN riders </span><br><span class="line">  ON trips.rider_id &#x3D; riders.id;</span><br></pre></td></tr></table></figure>
+
+<p>The result has a lot of columns.</p>
+<p>Suppose, we only want certain columns:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">SELECT trips.date, </span><br><span class="line">   trips.pickup, </span><br><span class="line">   trips.dropoff, </span><br><span class="line">   trips.type, </span><br><span class="line">   trips.cost,</span><br><span class="line">   riders.first, </span><br><span class="line">   riders.last,</span><br><span class="line">   riders.username</span><br><span class="line">FROM trips</span><br><span class="line">LEFT JOIN riders </span><br><span class="line">  ON trips.rider_id &#x3D; riders.id;</span><br></pre></td></tr></table></figure>
+
+<p><strong>5.</strong></p>
+<p>Suppose we want to create a link between the <code>trips</code> and the <code>cars</code> used during those trips.</p>
+<p>Find the columns to join on and combine the <code>trips</code> and <code>cars</code> table using an <code>INNER JOIN</code>.</p>
+<p>Hint</p>
+<p>For <code>INNER JOIN</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM trips</span><br><span class="line">JOIN cars</span><br><span class="line">  ON trips.car_id &#x3D; cars.id;</span><br></pre></td></tr></table></figure>
+
+<p>The <code>JOIN</code> keyword can also be <code>INNER JOIN</code>.</p>
+<p><strong>6.</strong></p>
+<p>The new riders data are in! There are three new users this month.</p>
+<p>Stack the <code>riders</code> table on top of the new table named <code>riders2</code>.</p>
+<p>Hint</p>
+<p>For stacking one dataset on top of another, we use <code>UNION</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM riders</span><br><span class="line">UNION</span><br><span class="line">SELECT *</span><br><span class="line">FROM riders2;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Bonus-Questions-Queries-and-Aggregates"><a href="#Bonus-Questions-Queries-and-Aggregates" class="headerlink" title="Bonus Questions! Queries and Aggregates:"></a>Bonus Questions! Queries and Aggregates:</h3><p><strong>7.</strong></p>
+<p>What is the average <code>cost</code> for a trip?</p>
+<p>Hint</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT AVG(cost)</span><br><span class="line">FROM trips;</span><br></pre></td></tr></table></figure>
+
+<p>The result is 31.915</p>
+<p>If we use the <code>ROUND()</code> function to round the result to 2 decimal places:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT ROUND(AVG(cost), 2)</span><br><span class="line">FROM trips;</span><br></pre></td></tr></table></figure>
+
+<p>The average <code>cost</code> is $31.92!</p>
+<p><strong>8.</strong></p>
+<p>REBU is looking to do an email campaign for all the irregular users.</p>
+<p>Find all the <code>riders</code> who have used REBU less than 500 times!</p>
+<p>Hint</p>
+<p>If we are only searching within the <code>riders</code> table:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM riders</span><br><span class="line">WHERE total_trips &lt; 500;</span><br></pre></td></tr></table></figure>
+
+
+<p>If we want to search in both <code>riders</code> and <code>riders2</code>, then we might have to do something like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM riders</span><br><span class="line">WHERE total_trips &lt; 500</span><br><span class="line">UNION</span><br><span class="line">SELECT *</span><br><span class="line">FROM riders2</span><br><span class="line">WHERE total_trips &lt; 500;</span><br></pre></td></tr></table></figure>
+
+<p><strong>9.</strong></p>
+<p>Calculate the number of cars that are <code>active</code>.</p>
+<p>Stuck? Get a hint</p>
+<p><strong>10.</strong></p>
+<p>It’s safety recall time for cars that have been on the road for a while.</p>
+<p>Write a query that finds the two cars that have the highest <code>trips_completed</code>.</p>
+<p>Hint</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT *</span><br><span class="line">FROM cars</span><br><span class="line">ORDER BY trips_completed DESC</span><br><span class="line">LIMIT 2;</span><br></pre></td></tr></table></figure></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/02/06/System-Design/2020-02-05-System%20Design%20xcode-%20Design%20Twitter/">System-Design/2020-02-05-System Design xcode- Design Twitter</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-02-06</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/System/">System</a></span><div class="content"><h1 id="Design-Twitter"><a href="#Design-Twitter" class="headerlink" title="Design Twitter"></a>Design Twitter</h1><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh33z4natnj31340jsqaz.jpg" alt="image-20200725123230192" style="zoom:67%;" />
+
+
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh33zrwk41j310e05yq6f.jpg" alt="image-20200725123309010"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh341c4hfcj30ug0m8gt5.jpg" alt="image-20200725123438693"></p>
+<h3 id="Earlybird-framework"><a href="#Earlybird-framework" class="headerlink" title="Earlybird framework"></a>Earlybird framework</h3><ul>
+<li>Lucene 用來作indexing的</li>
+</ul>
+<h2 id="System-API"><a href="#System-API" class="headerlink" title="System API"></a>System API</h2><h2 id="DB-Schema-amp-REST"><a href="#DB-Schema-amp-REST" class="headerlink" title="DB Schema &amp; REST"></a>DB Schema &amp; REST</h2><ul>
+<li>RPC – Verb</li>
+<li>REST –  Noun</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3ec8ono4j30ri0won1m.jpg" alt="image-20200725183102828"></p>
+<h2 id="Sharding"><a href="#Sharding" class="headerlink" title="Sharding"></a>Sharding</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3ee8ocvwj31060c0dk5.jpg" alt="image-20200725183302388"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3eesh4i6j30xc0hcq7i.jpg" alt="image-20200725183333696"></p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/01/15/Python/2019-01-15-property,%20setter%20&amp;%20getter/">Python/2019-01-15-property, setter &amp; getter</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-15</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span><div class="content"><p>ref: <a href="https://medium.com/bryanyang0528/python-setter-和-getter-6c08a9d37d46" target="_blank" rel="noopener">https://medium.com/bryanyang0528/python-setter-%E5%92%8C-getter-6c08a9d37d46</a></p>
+<p>简言之：</p>
+<p>obj.attribute_1 可以拿到 物件的 attribute；但也易被改掉。<br>為了不讓使用者輕易能改掉 attribute, 所以以下滑線開頭的私有屬性，但這樣就無法無法被obj直接使用，得透過oop的set&amp;get方法。<br>為了讓它可以用一樣的語法被拿出使用，所以用 <code>property</code>，將method變成屬性在作使用；同時，為了讓它可以用一樣的語法被設值，所以用<code>setter</code>，將關鍵字加在要變成屬性化的method上面，然後在method裡面去改私有屬性。</p>
+</div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/51/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/51/">51</a><span class="page-number current">52</span><a class="page-number" href="/page/53/">53</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><a class="extend next" rel="next" href="/page/53/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
   $('#nav').addClass('is-mobile')
   $('footer').addClass('is-mobile')
   $('#top-container').addClass('is-mobile')

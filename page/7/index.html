@@ -7,7 +7,68 @@
     error: 'Copy error',
     noSupport: 'The browser does not support'
   }
-} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">286</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">41</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/06/System-Design/2020-02-05-System%20Design%20-%20Push%20vs%20Pull/">System-Design/2020-02-05-System Design - Push vs Pull</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-06</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/System/">System</a></span><div class="content"><h1 id="Long-Polling-vs-WebSockets-vs-Server-Sent-Events"><a href="#Long-Polling-vs-WebSockets-vs-Server-Sent-Events" class="headerlink" title="Long-Polling vs WebSockets vs Server-Sent Events"></a>Long-Polling vs WebSockets vs Server-Sent Events</h1><h2 id="push-vs-pull"><a href="#push-vs-pull" class="headerlink" title="push vs pull"></a>push vs pull</h2><p>一般經常用到的service architecture 有 queuing, REST, RPC(Remote Procedure Call) 是服務之間怎麼交流</p>
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">298</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">44</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/07/System-Design/2020-02-07-System%20Design%20xcode%20-%20Design%20FB%20Messenger/">System-Design/2020-02-07-System Design xcode - Design FB Messenger</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-07</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></span><div class="content"><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghn80sqe3xj30pg0dadie.jpg" alt="image-20200811220346038"></p>
+<h3 id="Long-Polling-V-S-WebSocket"><a href="#Long-Polling-V-S-WebSocket" class="headerlink" title="Long-Polling V.S. WebSocket"></a>Long-Polling V.S. WebSocket</h3><p>去查要發給的user1是跟哪台server連結著的</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghn81z78ipj30na0eitan.jpg" alt="image-20200811220456942" style="zoom:33%;" />
+
+
+
+<h3 id="Storage-R-amp-W-heavy-and-Sequential"><a href="#Storage-R-amp-W-heavy-and-Sequential" class="headerlink" title="Storage R &amp; W heavy, and Sequential"></a>Storage R &amp; W heavy, and Sequential</h3><p>Both Write</p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/07/System-Design/2020-02-07-System%20Design%20xcode%20-%20CDN/">System-Design/2020-02-07-System Design xcode - CDN</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-07</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/System/">System</a></span><div class="content"><h3 id=""><a href="#" class="headerlink" title=""></a></h3><h1 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h1><p>CDN　content distributed network，也是緩存，更像file system。縣到市市到省</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghxfthrialj30rs0ff3zy.jpg" alt="img" style="zoom:67%;" />
+
+
+
+
+
+<ul>
+<li><p>一般是租用全球的，會把同個file replicate 到各個server，fewer hops</p>
+</li>
+<li><p>如果miss了會一層層往上要，最後到orig server</p>
+</li>
+</ul>
+<blockquote>
+<p>A content delivery network (CDN) is a globally distributed network of proxy servers, serving content from locations closer to the user. Generally, static files such as HTML/CSS/JS, photos, and videos are served from CDN, although some CDNs such as Amazon’s CloudFront support dynamic content. The site’s DNS resolution will tell clients which server to contact.</p>
+<p>Serving content from CDNs can significantly improve performance in two ways:</p>
+<ul>
+<li>Users receive content from data centers close to them</li>
+<li>Your servers do not have to serve requests that the CDN fulfills</li>
+</ul>
+</blockquote>
+<p>愈近愈快，網路傳輸很常是很大的bottleneck，netflix有個經典問題，話題帶到如算法優化時，跟disk的io、network的io不值一提哈。</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghxg0wj7fkj30y40gsnab.jpg" alt="image-20200820181620952" style="zoom:50%;" />
+
+
+
+<p>一般而言readability比runtime更重要！因為在實際工作中，網路、disk的latency遠超過算法的runtime。</p>
+<p>Q-select就剩個幾個nano seconds，在系統設計面前不值得一提…。</p>
+<h2 id="補充："><a href="#補充：" class="headerlink" title="補充："></a>補充：</h2><h3 id="秒殺"><a href="#秒殺" class="headerlink" title="秒殺"></a>秒殺</h3><p>系統忙不過來，所以商品介紹可以放靜態file在cdn好處理高併發</p>
+<h3 id="Youtube-Netflix"><a href="#Youtube-Netflix" class="headerlink" title="Youtube/Netflix"></a>Youtube/Netflix</h3><p>分佈在世界各地、按geolocation，把比較hot的放在cdn，用戶可以放在local cdn去取，會更好</p>
+<h2 id="Push-CDNs"><a href="#Push-CDNs" class="headerlink" title="Push CDNs"></a>Push CDNs</h2><blockquote>
+<p>Push CDNs receive new content whenever changes occur on your server. You take full responsibility for providing content, uploading directly to the CDN and rewriting URLs to point to the CDN. You can configure when content expires and when it is updated. Content is uploaded only when it is new or changed, <strong>minimizing traffic, but maximizing storage</strong>.</p>
+<p>Sites with a small amount of traffic or sites with content that isn’t often updated work well with push CDNs. Content is placed on the CDNs once, instead of being re-pulled at regular intervals.</p>
+</blockquote>
+<p>如果file 內容更新了，得要去告訴cdn server更新，或是就設expire，如cache miss時的情況，如沒找到或expire時沒找到</p>
+<p>更新會主動 Push Client，而不是不斷去拿；<strong>但一般是Pull比較多</strong>。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghxg1ie3myj30vi0jyn5m.jpg" alt="image-20200820181656677"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghxg03u9ggj30vu0k2alt.jpg" alt="image-20200820181534739"></p>
+<h2 id="PULL-CDNs"><a href="#PULL-CDNs" class="headerlink" title="PULL CDNs"></a>PULL CDNs</h2><blockquote>
+<p>Pull CDNs grab new content from your server when the first user requests the content. You leave the content on your server and rewrite URLs to point to the CDN. This results in a slower request until the content is cached on the CDN.</p>
+<p>A <a href="https://en.wikipedia.org/wiki/Time_to_live" target="_blank" rel="noopener">time-to-live (TTL)</a> determines how long content is cached. Pull CDNs minimize storage space on the CDN, but can create redundant traffic if files expire and are pulled before they have actually changed.</p>
+<p>Sites with heavy traffic work well with pull CDNs, as traffic is spread out more evenly with only recently-requested content remaining on the CDN.</p>
+</blockquote>
+<ul>
+<li>不斷地pull要是它沒有expire就白pull了。</li>
+</ul>
+<h2 id="Disadvantage-s-CDN"><a href="#Disadvantage-s-CDN" class="headerlink" title="Disadvantage(s): CDN"></a>Disadvantage(s): CDN</h2><p>一般不會那麼複雜</p>
+<p>一般就是第三方全球性的，自己小公司做不到。</p>
+<ul>
+<li>CDN <strong>costs</strong> could be significant depending on traffic, although this should be weighed with additional costs you would incur not using a CDN.  – 租別人要花錢；有時不一定要用，貴呀</li>
+<li>Content might be stale if it is updated before the TTL expires it.  – 我們一般操作會給file設TTLE，有可能TTL還沒有過期，但我更新了源頭的file了，但本地的CDN還沒有expire它，這時去讀到的CDN就是個stale的，不是最新的版本，因為我還沒讓它過期，我以為它是最新的，但它實際不是最新的。</li>
+<li>CDNs require changing URLs for static content to point to the CDN.  – 我拿CDN時每個file都會有個unique的URL，我要是新的話，我得去改URL，後綴什麼的，畢竟就是不同的FILE了呀。一般可能加個參數如timestamp或版本什麼的，browser會以為是不同的URL，讓cache失效，如在URL後面加  <strong>?v=1&amp;t=2</strong> 這類的，其實就是說URL我必須要改到，去point到新的CDN的file。</li>
+<li>dropbox就要跟file相關啦!</li>
+</ul>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/06/System-Design/2020-02-05-System%20Design%20-%20Push%20vs%20Pull/">System-Design/2020-02-05-System Design - Push vs Pull</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-06</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/System/">System</a></span><div class="content"><h1 id="Long-Polling-vs-WebSockets-vs-Server-Sent-Events"><a href="#Long-Polling-vs-WebSockets-vs-Server-Sent-Events" class="headerlink" title="Long-Polling vs WebSockets vs Server-Sent Events"></a>Long-Polling vs WebSockets vs Server-Sent Events</h1><h2 id="push-vs-pull"><a href="#push-vs-pull" class="headerlink" title="push vs pull"></a>push vs pull</h2><p>一般經常用到的service architecture 有 queuing, REST, RPC(Remote Procedure Call) 是服務之間怎麼交流</p>
 <p>![image-20200206230736407](/Users/joe/Library/Application Support/typora-user-images/image-20200206230736407.png)</p>
 <p>S 不一定要知道 C 的 ip, 上網看用戶的就是 C。 </p>
 <p>![image-20200206231014572](/Users/joe/Library/Application Support/typora-user-images/image-20200206231014572.png)</p>
@@ -246,186 +307,7 @@
 <p><img src="https://tva1.sinaimg.cn/large/0082zybpgy1gbn4cmhb4sj30lu0k8aao.jpg" alt="img"></p>
 <h5 id="Refresh-ahead…-↓"><a href="#Refresh-ahead…-↓" class="headerlink" title="Refresh ahead… ↓"></a>Refresh ahead… ↓</h5><h5 id=""><a href="#" class="headerlink" title=""></a></h5><p>简单的说就是在缓存数据过期前，能自动的刷新缓存数据。举个例子来说，某条数据在缓存中，过期时间是60秒。我们给他设置一个参数，比如是0.8，60x0.8=48秒，那么在前48秒访问该数据，就照正常的取法，直接返回缓存中的数据。当在48-60秒这个区间取数据时，缓存先将之前缓存的结果返回给外部应用程序，然后异步的再从数据库去更新缓存中的值，以尽可能的保证缓存的值是最新的。如果取数据的的时候超过了60秒，就安装read-through的方式。<br> Refresh-ahead是对未来数据的访问情形的估算，我们猜测这个数据在过期后，仍然可能被频繁的访问，那么这种设计的策略获得的优势会更明显。<br> 但是，如果有大量的数据是用refresh-ahead策略，但是这个数据被重新缓存后，又一次都没有被访问过，那这个策略就是很失算的了。<br> 那么，有人可能会问，既然如此，我把过期的时间延长不就好了，之前60秒过期，改成6000秒过期，这样就不会用Refresh-ahead策略来刷新数据了。<br> 然而，事实是缓存的数据越久，出现脏数据的可能性也就越大，更重要的是，如果你的估算也是失误的，大量的超期缓存数据没有被实际访问，那么你就浪费了很多的内存，做了无用的事情，这也是应该避免的。</p>
 <p>作者：周小春<br>链接：<a href="https://www.jianshu.com/p/6321d4f823c1" target="_blank" rel="noopener">https://www.jianshu.com/p/6321d4f823c1</a><br>来源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/05/System-Design/2019-02-04-System%20Design%20-%20LB/">System-Design/2019-02-04-System Design - LB</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-05</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/System/">System</a></span><div class="content"><h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>怎麼random選一個server，LB要保證</p>
-<p>NGINX 異步</p>
-<h2 id="SNAKE"><a href="#SNAKE" class="headerlink" title="SNAKE"></a>SNAKE</h2><ul>
-<li>Scenario: case/interface</li>
-<li>Necessary: constrain/hypothesis</li>
-<li>Application: service/algo</li>
-<li>Kilobit: data</li>
-<li>Evolve</li>
-</ul>
-<p>使用redis 緩存的地方</p>
-<ul>
-<li>獎品，數量少，更新頻率低，最佳的全量緩存對象</li>
-<li>優惠券，一次性導入，優惠券編碼緩存為set類型</li>
-<li>中獎紀錄，讀寫差不多，可以緩存部分統計數據</li>
-<li>黑名單</li>
-</ul>
-<h2 id="Loading-Balancing"><a href="#Loading-Balancing" class="headerlink" title="Loading Balancing"></a>Loading Balancing</h2><h3 id="Load-Balancer"><a href="#Load-Balancer" class="headerlink" title="Load Balancer"></a>Load Balancer</h3><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd3rkbx8ooj319y0acwkc.jpg" alt="image-20200205225415969" style="zoom:50%;" />
-
-<ol>
-<li><p>Smart Clients</p>
-<p>如果host recover了，就要能夠識別</p>
-<p>系統大了，LB可能是單獨的機器</p>
-<p>等著，占著一個線程，回來才release，上面的那條線是同步的假定，異步的效能會比較好</p>
-<ul>
-<li>nginx async</li>
-</ul>
-</li>
-</ol>
-<ol start="2">
-<li><p>Hardware LB</p>
-</li>
-<li><p>Software LB</p>
-<ul>
-<li><strong>HAProxy</strong> 是個比較popular 的software, 加了機器要自己再改配置</li>
-<li>Service Discovery 改配置文件</li>
-<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggnaa27ds3j314e0la474.jpg" alt="image-20200711200135289"></li>
-<li>9000會forward到其他的三個機上去</li>
-</ul>
-</li>
-</ol>
-<img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gblx1909c6j31c20i2h6v.jpg" alt="image-20200205225556197" style="zoom:50%;" />
-
-<p>​    </p>
-<h3 id="設計-Serverside-Load-Balancer-選server"><a href="#設計-Serverside-Load-Balancer-選server" class="headerlink" title="設計 Serverside Load Balancer 選server"></a>設計 Serverside Load Balancer 選server</h3><p>LB 不是個單獨的機器，只是在運行時在代碼裡的一個 client，如下↓</p>
-<p>![image-20200711200432006](/Users/joe/Library/Application Support/typora-user-images/image-20200711200432006.png)</p>
-<img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gblyao5twoj314a0jk7jx.jpg" alt="image-20200205233939163" style="zoom:50%;" />
-
-
-
-<h4 id="Clien-Side-LB"><a href="#Clien-Side-LB" class="headerlink" title="Clien-Side LB"></a>Clien-Side LB</h4><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gblyb6gizej314y0lik65.jpg" alt="image-20200205234009523" style="zoom:50%;" />
-
-<p>Load balancing 可以用一致性哈希的機制　key是一樣永遠會去一樣的機器</p>
-<p>希望對某一個key去固定的server取緩存</p>
-<h5 id="Smart-Consistent-Hash-選-Server"><a href="#Smart-Consistent-Hash-選-Server" class="headerlink" title="Smart Consistent Hash 選 Server"></a>Smart Consistent Hash 選 Server</h5><p>這個是Sticky</p>
-<p>也有上面三點可以根據去選</p>
-<ol>
-<li>Availability</li>
-<li>Performance 看誰閒</li>
-<li>地理，怎麼判斷route到哪個國家？</li>
-</ol>
-<h4 id="Spring-Cloud-Ribbon-Library"><a href="#Spring-Cloud-Ribbon-Library" class="headerlink" title="Spring Cloud - Ribbon Library"></a>Spring Cloud - Ribbon Library</h4><p>來了新的ABC Service，LB會知道，因為有Service Registration，LB會考慮第11個進來</p>
-<p>Smart LB, 到底該發給哪個Server? 需要SMART!</p>
-<img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gblyg6va34j30z20pqgw1.jpg" alt="image-20200205234458185" style="zoom:50%;" />
-
-<h5 id="１-AvailabilityFilteringRule"><a href="#１-AvailabilityFilteringRule" class="headerlink" title="１ AvailabilityFilteringRule"></a>１ AvailabilityFilteringRule</h5><p>​        10秒、100, 1000秒再試 exponential</p>
-<h5 id="２-WeightedResponseTimeRule"><a href="#２-WeightedResponseTimeRule" class="headerlink" title="２ WeightedResponseTimeRule"></a>２ WeightedResponseTimeRule</h5><p>​        要等愈長，權重給它愈小，我相對應該要發給response快的。</p>
-<p>​    <strong>但不知道是DB慢還是API自己慢</strong>，還可講更底層的 TLS(Transpor Layer Security)、握手等機制都是routing的因素，所以smart LB都要考慮</p>
-<h2 id="System-Design-Primer-GitHub"><a href="#System-Design-Primer-GitHub" class="headerlink" title="System Design Primer - GitHub"></a>System Design Primer - GitHub</h2><p><a href="https://github.com/kevingo/system-design-primer-zh-tw#how-to-approach-a-system-design-interview-question" target="_blank" rel="noopener">https://github.com/kevingo/system-design-primer-zh-tw#how-to-approach-a-system-design-interview-question</a>　</p>
-<p>而</p>
-<img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gblyxvhf3ij30sb0ixwfc.jpg" alt="img" style="zoom:48%;" />
-
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggnaryy7bhj312o0icqgf.jpg" alt="image-20200711201841909"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggnatffvd9j30xo09wae1.jpg" alt="image-20200711202012221"></p>
-<h4 id="SSL"><a href="#SSL" class="headerlink" title="SSL:"></a>SSL:</h4><p> 怕 man in the middle 監聽；但 SSL 到門口就可以停下來了，內部自己人不需要用SSL, SSL需要去裝Certification X.509 的認證，需要被 CA給授權，是頒發下來的</p>
-<h4 id="Session-persistent"><a href="#Session-persistent" class="headerlink" title="Session persistent:"></a>Session persistent:</h4><p> 可以根據cookie、一致性哈希去路由到某個固定的機器去維持一個session，每次都發到一個固定的 Worker上，這樣永遠在跟這個Worker打交道，session的數據放在memory，機器會直接記得你放的東西，就是Session Data，</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggnaw03p78j30ze0c6aga.jpg" alt="image-20200711202240110"></p>
-<ul>
-<li><p>Sticky session / cookies 指的就是之前提到的 constant hash</p>
-</li>
-<li><p>傳輸層安全性協定（英語：Transport Layer Security，縮寫：TLS）及其前身安全通訊協定（英語：Secure Sockets Layer，縮寫：SSL）是一種安全協定，目的是為網際網路通訊提供安全及資料完整性保障。</p>
-</li>
-<li><p>TLS與SSL協定可加密客戶端與伺服器端的網路通訊，它們利用憑證來建立身分鏈，以確保客戶端所通訊的對象是經過驗證的合法伺服器。而進行HTTPS監聽的方法則是在客戶端與伺服器端之間建立一個中間代理人，類似中間人攻擊（man-in-the-middle）的手法，這些可執行HTTPS監聽的安全產品會先攔截流量、檢查流量內容，再重建連結。</p>
-</li>
-<li><p>内部自己用RPC</p>
-</li>
-<li><p>Load balancers can be implemented with hardware (expensive) or with software such as HAProxy.</p>
-<p>Additional benefits include:</p>
-<ul>
-<li>SSL termination</li>
-</ul>
-</li>
-</ul>
-<pre><code>\- Decrypt incoming requests and encrypt server responses so backend servers do not have to perform these potentially expensive operations
-
-- Removes the need to install [X.509 certificates](https://en.wikipedia.org/wiki/X.509) on each server</code></pre><ul>
-<li><strong>Session persistence</strong> - Issue cookies and route a specific client’s requests to same instance if the web apps do not keep track of sessions === 如購物車時</li>
-</ul>
-<h4 id="Faile-Over"><a href="#Faile-Over" class="headerlink" title="Faile Over"></a>Faile Over</h4><ul>
-<li><ul>
-<li><h3 id="Fail-over"><a href="#Fail-over" class="headerlink" title="Fail-over"></a>Fail-over</h3><h4 id="Active-passive-failover-有替補的當主要的掛了時馬上補上去"><a href="#Active-passive-failover-有替補的當主要的掛了時馬上補上去" class="headerlink" title="Active-passive failover 有替補的當主要的掛了時馬上補上去"></a>Active-passive failover 有替補的當主要的掛了時馬上補上去</h4><p>不停發 心動，如果沒有了，就趕緊找候補代替他</p>
-<p>With active-passive fail-over, heartbeats are sent between the active and the passive server on standby. If the heartbeat is interrupted, the passive server takes over the active’s IP address and resumes service.</p>
-<p>The length of downtime is determined by whether the passive server is already running in ‘hot’ standby or whether it needs to start up from ‘cold’ standby. Only the active server handles traffic.</p>
-<p>Active-passive failover can also be referred to as master-slave failover.</p>
-<h4 id="Active-active"><a href="#Active-active" class="headerlink" title="Active-active"></a>Active-active</h4><p>In active-active, both servers are managing traffic, spreading the load between them.</p>
-<p>If the servers are public-facing, the DNS would need to know about the public IPs of both servers. If the servers are internal-facing, application logic would need to know about both servers.</p>
-<p>Active-active failover can also be referred to as master-master failover.</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="LB-Traffics"><a href="#LB-Traffics" class="headerlink" title="LB Traffics"></a>LB Traffics</h3><ul>
-<li><h3 id="Layer-4-load-balancing"><a href="#Layer-4-load-balancing" class="headerlink" title="Layer 4 load balancing"></a>Layer 4 load balancing</h3><p>第四層看不了 Session，只有下面粗字的能看</p>
-<p>Layer 4 load balancers look at info at the <a href="https://github.com/kevingo/system-design-primer-zh-tw#communication" target="_blank" rel="noopener">transport layer</a> to decide how to distribute requests. Generally, this involves the <strong>source, destination IP addresses, and ports</strong> in the header, but not the contents of the packet. Layer 4 load balancers forward network packets to and from the upstream server, performing <a href="https://www.nginx.com/resources/glossary/layer-4-load-balancing/" target="_blank" rel="noopener">Network Address Translation (NAT)</a>.</p>
-<h5 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h5><ul>
-<li><p><strong>NAT</strong> - Network Address Translation (NAT) </p>
-<p>就是 public IP 要 map進去內部的IP</p>
-<p>對外會把ip映射成一個對外的ip</p>
-<p>當在配置一個data center 時，內外ip的mapping</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggnb6o69t6j30ww0a60x6.jpg" alt="image-20200711203254172"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Layer-7-load-balancing"><a href="#Layer-7-load-balancing" class="headerlink" title="Layer 7 load balancing"></a>Layer 7 load balancing</h3><p>  能做的事比 L4更多，愈下面愈快，RPC就是快</p>
-<p>  Layer 7 load balancers look at the <a href="https://github.com/kevingo/system-design-primer-zh-tw#communication" target="_blank" rel="noopener">application layer</a> to decide how to distribute requests. This can involve contents of the <strong>header, message, and cookies</strong>. Layer 7 load balancers terminates network traffic, reads the message, makes a load-balancing decision, then opens a connection to the selected server. <strong>For example, a layer 7 load balancer can direct video traffic to servers that host videos while directing more sensitive user billing traffic to security-hardened servers.</strong><br>  比較好的網關，對於REST過來的URL, 會根據 URLroute 到不同的服務</p>
-<p>  E.g.: </p>
-<pre><code>- xxx.com/account/XXXX -&gt; billing/account service
-- xxx.com/video/YYY -&gt; video_service</code></pre><ul>
-<li><strong>spring cloud zuul</strong>裡就有得配置　将path ==&gt; serviceId </li>
-</ul>
-  <img src="https://camo.githubusercontent.com/1d761d5688d28ce1fb12a0f1c8191bca96eece4c/687474703a2f2f692e696d6775722e636f6d2f354b656f6351732e6a7067" alt="img"  />
-
-<p>  At the cost of flexibility, <strong><em>layer 4 load balancing requires less time and computing resources than Layer 7</em></strong>, although the performance impact can be minimal on modern commodity hardware.</p>
-<p>  ​        愈底下愈快啊　如Application Server用IPC　肯定比http快</p>
-<h3 id="Horizontal-scaling-加機器，而不是加单一台的性能"><a href="#Horizontal-scaling-加機器，而不是加单一台的性能" class="headerlink" title="Horizontal scaling     加機器，而不是加单一台的性能"></a>Horizontal scaling     加機器，而不是加单一台的性能</h3><p>Load balancers can also help with horizontal scaling, improving performance and availability. Scaling out using commodity machines is more cost efficient and results in higher availability than scaling up a single server on more expensive hardware, called <strong>Vertical Scaling　==&gt;　加CPU、RAM</strong>. It is also easier to hire for talent working on commodity hardware than it is for specialized enterprise systems.</p>
-<h4 id="Disadvantage-s-horizontal-scaling"><a href="#Disadvantage-s-horizontal-scaling" class="headerlink" title="Disadvantage(s): horizontal scaling"></a>Disadvantage(s): horizontal scaling</h4><ul>
-<li><p>Scaling horizontally introduces complexity and involves cloning servers</p>
-<ul>
-<li><p>Servers should be <strong>stateless</strong>: they should not contain any user-related data like sessions or profile pictures　<strong>不管去哪台web server機器都應該要是一樣的　不該有session這樣的東西</strong></p>
-<p><strong><em>↑ Server 是Stateless, ↓ Session是Stateful</em></strong></p>
-</li>
-<li><p><strong>Sessions</strong> can be stored in a centralized data store such as a <a href="https://github.com/kevingo/system-design-primer-zh-tw#database" target="_blank" rel="noopener">database</a> (SQL, NoSQL) or a persistent <a href="https://github.com/kevingo/system-design-primer-zh-tw#cache" target="_blank" rel="noopener">cache</a> (Redis, Memcached). <strong>Session 就是 Stateful</strong></p>
-</li>
-</ul>
-</li>
-<li><p>Downstream servers such as caches and databases need to handle more simultaneous connections as upstream servers scale out</p>
-</li>
-</ul>
-<p>​        </p>
-<h3 id="Disadvantage-s-load-balancer"><a href="#Disadvantage-s-load-balancer" class="headerlink" title="Disadvantage(s): load balancer"></a>Disadvantage(s): load balancer</h3><ul>
-<li><p>The load balancer can become a performance bottleneck if it does not have enough resources or if it is not configured properly.　掛了就沒</p>
-</li>
-<li><p>Introducing a load balancer to help eliminate single points of failure results in increased complexity. 系統複雜了，也是會有問題</p>
-</li>
-</ul>
-<ul>
-<li><p>A single load balancer is a single point of failure, configuring multiple load balancers further increases complexity.</p>
-</li>
-<li><h3 id="Source-s-and-further-reading"><a href="#Source-s-and-further-reading" class="headerlink" title="Source(s) and further reading"></a>Source(s) and further reading</h3><ul>
-<li><a href="https://www.nginx.com/blog/inside-nginx-how-we-designed-for-performance-scale/" target="_blank" rel="noopener">NGINX architecture</a></li>
-<li><a href="http://www.haproxy.org/download/1.2/doc/architecture.txt" target="_blank" rel="noopener">HAProxy architecture guide</a></li>
-<li><a href="http://www.lecloud.net/post/7295452622/scalability-for-dummies-part-1-clones" target="_blank" rel="noopener">Scalability</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Load_balancing_(computing)" target="_blank" rel="noopener">Wikipedia</a></li>
-<li><a href="https://www.nginx.com/resources/glossary/layer-4-load-balancing/" target="_blank" rel="noopener">Layer 4 load balancing</a></li>
-<li><a href="https://www.nginx.com/resources/glossary/layer-7-load-balancing/" target="_blank" rel="noopener">Layer 7 load balancing</a></li>
-<li><a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html" target="_blank" rel="noopener">ELB listener config</a>　　這個是亞馬遜自己開發的</li>
-</ul>
-</li>
-</ul>
-<h5 id="LB-某種意義上就是-reversed-proxy-Web-Server-了"><a href="#LB-某種意義上就是-reversed-proxy-Web-Server-了" class="headerlink" title="LB 某種意義上就是 reversed proxy (Web Server)了"></a>LB 某種意義上就是 reversed proxy (Web Server)了</h5><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ggnbfav77vj31200nunc2.jpg" alt="image-20200711204112504"></p>
-<p>ref : </p>
-<p><a href="https://www.youtube.com/watch?v=RlkA1NRoYJ8&amp;list=PLbhaS_83B97vSWVslD63vjIi5OTYmSVrk&amp;index=80" target="_blank" rel="noopener">https://www.youtube.com/watch?v=RlkA1NRoYJ8&amp;list=PLbhaS_83B97vSWVslD63vjIi5OTYmSVrk&amp;index=80</a></p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/05/Web/2020-02-03-Database/">Web/2020-02-03-Database</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-05</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Web/">Web</a></span><div class="content"><h3 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h3><p>用一條SQL 語句 查詢出每門課都大於80 分的學生姓名<br>name kecheng fenshu<br>張三 語文 81<br>張三 數學 75<br>李四 語文 76<br>李四 數學 90<br>王五 語文 81<br>王五 數學 100<br>王五 英語 90</p>
-<p>A: select distinct name from table where name not in (select distinct name from table where fenshu&lt;=80);<br>  select name from table group by name having min(fenshu)&gt;80;</p>
-<p> select name from table group by name having count(kecheng)&gt;=3 and min(fenshu)&gt;=80;</p>
-<h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> redis <span class="keyword">import</span> StrictRedis</span><br><span class="line">rds = StrictRedis(host=<span class="string">'127.0.0.1'</span>, port=<span class="number">6379</span>, db=<span class="number">4</span>, password=<span class="string">''</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">producer</span><span class="params">()</span>:</span></span><br><span class="line">	info = &#123;<span class="string">"job_id"</span>: job_id, <span class="string">"dir"</span>: E_dir, <span class="string">"paras"</span>: params&#125;</span><br><span class="line">	rds.rpush(task_que_name, json.dumps(info))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">status_checker</span><span class="params">()</span>:</span></span><br><span class="line">  result_check = rds.hmget(result_que_name, job_id)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">worker</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="comment"># job = q.get</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">1</span>:</span><br><span class="line">            <span class="comment"># running = True</span></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="string">""" Get job_id from task_que """</span></span><br><span class="line">                _, info = rds.blpop(task_que_name)</span><br><span class="line"></span><br><span class="line">                <span class="comment"># &#123;'job_id': '9c5c2780-32e0-11ea-805b-005056ab266c', 'dir': 'M_', 'paras': &#123;'_name': 'testxxxxx7373'&#125;&#125;</span></span><br><span class="line">                info = json.loads(info.decode())    <span class="comment"># info is byte from redis</span></span><br><span class="line">                result = foo(info[<span class="string">"dir"</span>], info[<span class="string">"paras"</span>])</span><br><span class="line">                <span class="comment"># time.sleep(500)</span></span><br><span class="line"></span><br><span class="line">                rds.hmset(result_que_name, &#123;info[<span class="string">"job_id"</span>]: json.dumps(result)&#125;)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                print(<span class="string">"Caught exception: &#123;&#125;"</span>.format(e))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3></div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+</div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
   $('#nav').addClass('is-mobile')
   $('footer').addClass('is-mobile')
   $('#top-container').addClass('is-mobile')

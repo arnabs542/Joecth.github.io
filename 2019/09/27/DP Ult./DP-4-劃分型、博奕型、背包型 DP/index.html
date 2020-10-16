@@ -1,0 +1,271 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="DP Ult./DP-4-劃分型、博奕型、背包型 DP"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>DP Ult./DP-4-劃分型、博奕型、背包型 DP | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Warm-up"><span class="toc-number">1.</span> <span class="toc-text">Warm up!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#劃分型-DP"><span class="toc-number">2.</span> <span class="toc-text">劃分型 DP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#513-Perfect-Squares"><span class="toc-number">2.1.</span> <span class="toc-text">513 Perfect Squares</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Time-Complexity推導"><span class="toc-number">2.1.1.</span> <span class="toc-text">Time Complexity推導</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Follow-Up"><span class="toc-number">2.2.</span> <span class="toc-text">Follow Up</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#108-Palindrome-Partitioning-II"><span class="toc-number">2.3.</span> <span class="toc-text">108 Palindrome Partitioning II</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-確定狀態-–-最後一步-amp-子問題"><span class="toc-number">2.3.1.</span> <span class="toc-text">1 確定狀態 – 最後一步&amp;子問題</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-轉移方程"><span class="toc-number">2.3.2.</span> <span class="toc-text">2 轉移方程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-初始條件和邊界情況"><span class="toc-number">2.3.3.</span> <span class="toc-text">3 初始條件和邊界情況</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#★★-用序列型，考慮「前i個」定義「空串」的好處！空串就是-0個-回文串"><span class="toc-number">2.3.3.1.</span> <span class="toc-text">★★ 用序列型，考慮「前i個」定義「空串」的好處！空串就是 0個 回文串</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#★★-回文串判斷-amp-降時間複雜度優化"><span class="toc-number">2.3.3.2.</span> <span class="toc-text">★★ 回文串判斷 &amp; 降時間複雜度優化</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Coding"><span class="toc-number">2.3.4.</span> <span class="toc-text">Coding</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#437-Copy-Books"><span class="toc-number">2.4.</span> <span class="toc-text">437 Copy Books</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#分析"><span class="toc-number">2.4.1.</span> <span class="toc-text">分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-確定狀態"><span class="toc-number">2.4.2.</span> <span class="toc-text">1 確定狀態</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#最後一步"><span class="toc-number">2.4.2.1.</span> <span class="toc-text">最後一步</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#子問題"><span class="toc-number">2.4.2.2.</span> <span class="toc-text">子問題</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-轉移方程-1"><span class="toc-number">2.4.3.</span> <span class="toc-text">2 轉移方程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-初始條件和邊界情況-1"><span class="toc-number">2.4.4.</span> <span class="toc-text">3 初始條件和邊界情況</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-計算順序"><span class="toc-number">2.4.5.</span> <span class="toc-text">4 計算順序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Coding-1"><span class="toc-number">2.4.6.</span> <span class="toc-text">Coding!</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#劃分小結"><span class="toc-number">2.5.</span> <span class="toc-text">劃分小結</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博奕型-DP"><span class="toc-number">3.</span> <span class="toc-text">博奕型 DP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#394-Coins-in-a-Line"><span class="toc-number">3.1.</span> <span class="toc-text">394 Coins in a Line</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-確定狀態-1"><span class="toc-number">3.1.1.</span> <span class="toc-text">1 確定狀態</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#必勝-vs-必敗"><span class="toc-number">3.1.1.1.</span> <span class="toc-text">必勝 vs 必敗</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-轉移方程-2"><span class="toc-number">3.1.2.</span> <span class="toc-text">2 轉移方程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-初始條件和邊界情況-2"><span class="toc-number">3.1.3.</span> <span class="toc-text">3 初始條件和邊界情況</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-計算順序-1"><span class="toc-number">3.1.4.</span> <span class="toc-text">4 計算順序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Coding-2"><span class="toc-number">3.1.5.</span> <span class="toc-text">Coding!</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#背包型-DP"><span class="toc-number">4.</span> <span class="toc-text">背包型 DP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#92-Backpack-–-可行性-0-1背包"><span class="toc-number">4.1.</span> <span class="toc-text">92 Backpack – 可行性 0&#x2F;1背包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#背包小结"><span class="toc-number">4.2.</span> <span class="toc-text">背包小结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#563-Backpack-V-–-計數型-0-1背包"><span class="toc-number">4.3.</span> <span class="toc-text">563 Backpack V – 計數型 0&#x2F;1背包</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-初始條件和邊界情況-3"><span class="toc-number">4.3.1.</span> <span class="toc-text">3 初始條件和邊界情況</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#終極優化"><span class="toc-number">4.3.2.</span> <span class="toc-text">終極優化!</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#564-Backpack-VI-–-計數型-Combination-Sum-IV"><span class="toc-number">4.4.</span> <span class="toc-text">564 Backpack VI – 計數型 (Combination Sum IV)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-確定狀態-2"><span class="toc-number">4.4.1.</span> <span class="toc-text">1 確定狀態</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#子問題-1"><span class="toc-number">4.4.1.1.</span> <span class="toc-text">子問題</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-轉移方程-3"><span class="toc-number">4.4.2.</span> <span class="toc-text">2 轉移方程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-初始和邊界情況"><span class="toc-number">4.4.3.</span> <span class="toc-text">3 初始和邊界情況</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-計算順序-2"><span class="toc-number">4.4.4.</span> <span class="toc-text">4 計算順序</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#空間-O-Target"><span class="toc-number">4.4.4.1.</span> <span class="toc-text">空間: O(Target)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#所有路徑打印"><span class="toc-number">4.5.</span> <span class="toc-text">所有路徑打印</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#背包小結"><span class="toc-number">4.6.</span> <span class="toc-text">背包小結</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#背包路徑打印"><span class="toc-number">5.</span> <span class="toc-text">背包路徑打印</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">298</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">44</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">DP Ult./DP-4-劃分型、博奕型、背包型 DP</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-09-27</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/DP-Ult/">DP Ult.</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="Warm-up"><a href="#Warm-up" class="headerlink" title="Warm up!"></a>Warm up!</h2><h2 id="劃分型-DP"><a href="#劃分型-DP" class="headerlink" title="劃分型 DP"></a>劃分型 DP</h2><ul>
+<li>给定長度為N的序列或字符串，要求劃分成若干段</li>
+<li>段數不限或指定K段</li>
+<li>每一段滿足一定的性質</li>
+</ul>
+<h3 id="513-Perfect-Squares"><a href="#513-Perfect-Squares" class="headerlink" title="513 Perfect Squares"></a>513 Perfect Squares</h3><h4 id="Time-Complexity推導"><a href="#Time-Complexity推導" class="headerlink" title="Time Complexity推導"></a>Time Complexity推導</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj5ojb32x7j313g0ec7cn.jpg" alt="image-20200928003538198" style="zoom:50%;" /><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj5omiotodj31420ekwna.jpg" alt="image-20200928003846192"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj5ojb32x7j313g0ec7cn.jpg" alt="image-20200928003538198" style="zoom:50%;" /><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj5omiotodj31420ekwna.jpg" alt="image-20200928003846192"></p>
+<p>![image-20200928004043752](/Users/joe/Library/Application Support/typora-user-images/image-20200928004043752.png)</p>
+<h3 id="Follow-Up"><a href="#Follow-Up" class="headerlink" title="Follow Up"></a>Follow Up</h3><ul>
+<li><p>問多少種方式</p>
+<p>剛剛是取min，現在是「方式數」就是「求和」–&gt; 肯定就不需要再 + 1了</p>
+</li>
+<li><p>能不能把N表示成恰好K個完全平方數之和<br>這是一個「可行性」的問題，就難了點， f_i_k = f[i - j^2] [k-1]</p>
+</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200929234459512.png" alt="image-20200929234459512" style="zoom:50%;" />
+
+<ul>
+<li>藍筆的地方是題目換成「能不能至多K個」時候要改成去看的範圍</li>
+</ul>
+<h3 id="108-Palindrome-Partitioning-II"><a href="#108-Palindrome-Partitioning-II" class="headerlink" title="108 Palindrome Partitioning II"></a>108 Palindrome Partitioning II</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj7z3z5xbhj31600huaf8.jpg" alt="image-20200930001239833" style="zoom:50%;" />
+
+
+
+<h4 id="1-確定狀態-–-最後一步-amp-子問題"><a href="#1-確定狀態-–-最後一步-amp-子問題" class="headerlink" title="1 確定狀態 – 最後一步&amp;子問題"></a>1 確定狀態 – 最後一步&amp;子問題</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj7z5tswwzj30ww0k47ao.jpg" alt="image-20200930001427031" style="zoom:50%;" />
+
+
+
+<h4 id="2-轉移方程"><a href="#2-轉移方程" class="headerlink" title="2 轉移方程"></a>2 轉移方程</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj7z6xdf54j312m0dg7bh.jpg" alt="image-20200930001530018" style="zoom:50%;" />
+
+
+
+<h4 id="3-初始條件和邊界情況"><a href="#3-初始條件和邊界情況" class="headerlink" title="3 初始條件和邊界情況"></a>3 初始條件和邊界情況</h4><h5 id="★★-用序列型，考慮「前i個」定義「空串」的好處！空串就是-0個-回文串"><a href="#★★-用序列型，考慮「前i個」定義「空串」的好處！空串就是-0個-回文串" class="headerlink" title="★★ 用序列型，考慮「前i個」定義「空串」的好處！空串就是 0個 回文串"></a>★★ 用序列型，考慮「前i個」定義「空串」的好處！空串就是 0個 回文串</h5><ul>
+<li><p>如下，f[-1] 未被定義</p>
+</li>
+<li><p>所以「前幾個」就有「前0個」；哪怕<strong>最後一段就是整個</strong>，也有0可以來幫助！</p>
+</li>
+<li><p>當然，空串其實也是個回文串</p>
+</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200930001928066.png" alt="image-20200930001928066" style="zoom:50%;" />
+
+
+
+
+
+<h5 id="★★-回文串判斷-amp-降時間複雜度優化"><a href="#★★-回文串判斷-amp-降時間複雜度優化" class="headerlink" title="★★ 回文串判斷 &amp; 降時間複雜度優化"></a>★★ 回文串判斷 &amp; 降時間複雜度優化</h5><ul>
+<li><p>最Naive是 N^3</p>
+</li>
+<li><p>用生成回文串作思考</p>
+</li>
+<li><p>思考中心擴展</p>
+</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj7zirtcnsj315o0gqdn3.jpg" alt="image-20200930002652597" style="zoom:50%;" />
+
+<ul>
+<li><p>所以枚舉所有char以及中線當對稱軸 ==&gt; N^2</p>
+<ul>
+<li>兩端相等，就擴展，不需要再從頭到尾看一遍</li>
+</ul>
+</li>
+<li><p>★☆ 所以可以記錄  isPalin ！用上 N^2</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj7znfjwwqj31500iw0z5.jpg" alt="image-20200930003122216" style="zoom:50%;" />
+
+</li>
+</ul>
+<p>因此，最後為：</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj7zoj07vdj30pe0f4af7.jpg" alt="image-20200930003225255" style="zoom: 33%;" />
+
+
+
+<h4 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj800ioolhj30f40iy0wy.jpg" alt="image-20200930004356144" style="zoom:67%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200930004555286.png" alt="image-20200930004555286" style="zoom:67%;" />
+
+
+
+
+
+<h3 id="437-Copy-Books"><a href="#437-Copy-Books" class="headerlink" title="437 Copy Books"></a>437 Copy Books</h3><h4 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj8vb33deoj315c0jgdqu.jpg" alt="image-20200930184637444" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj8vc8zks9j315k0i4aj4.jpg" alt="image-20200930184747901" style="zoom:50%;" />
+
+<h4 id="1-確定狀態"><a href="#1-確定狀態" class="headerlink" title="1 確定狀態"></a>1 確定狀態</h4><h5 id="最後一步"><a href="#最後一步" class="headerlink" title="最後一步"></a>最後一步</h5><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200930185014238.png" alt="image-20200930185014238" style="zoom:50%;" />
+
+<h5 id="子問題"><a href="#子問題" class="headerlink" title="子問題"></a>子問題</h5><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj8vhkm7d7j30yo0cgwj6.jpg" alt="image-20200930185254187" style="zoom: 33%;" />
+
+
+
+<h4 id="2-轉移方程-1"><a href="#2-轉移方程-1" class="headerlink" title="2 轉移方程"></a>2 轉移方程</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj8wr2itqpj317o0dak11.jpg" alt="image-20200930193638323" style="zoom:50%;" />
+
+<ul>
+<li>此處的概念為「反向」的木桶原理</li>
+</ul>
+<h4 id="3-初始條件和邊界情況-1"><a href="#3-初始條件和邊界情況-1" class="headerlink" title="3 初始條件和邊界情況"></a>3 初始條件和邊界情況</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj8wsswvznj30tk0dwgrf.jpg" alt="image-20200930193817794" style="zoom:50%;" />
+
+
+
+<h4 id="4-計算順序"><a href="#4-計算順序" class="headerlink" title="4 計算順序"></a>4 計算順序</h4><p>→</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj8wtu23u1j30za0gqq7d.jpg" alt="image-20200930193917914" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj8wvv5caoj30y80eidkk.jpg" alt="image-20200930194114603" style="zoom:50%;" />
+
+<ul>
+<li>和如果反向時可以讓A那串的相加，就是求min的過程裡的那個A的和變 O(1)</li>
+</ul>
+<h4 id="Coding-1"><a href="#Coding-1" class="headerlink" title="Coding!"></a>Coding!</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj8x2mdqshj30lo0jmjwc.jpg" alt="image-20200930194743914"></p>
+<h3 id="劃分小結"><a href="#劃分小結" class="headerlink" title="劃分小結"></a>劃分小結</h3><ul>
+<li>要求將一個序列或字符串劃分成若干滿足要求的片段</li>
+<li>解決方法: 最後一步 -&gt; <strong>最後一段</strong><ul>
+<li>就是看最後一段怎麼劃出來的</li>
+</ul>
+</li>
+<li>枚舉最後一段的起點!</li>
+</ul>
+<ul>
+<li>如果題目不指定段數<ul>
+<li>用 f[i] 表前i個元素分段後的最值、可行性、方式數: Perfect Squares、Palindrome Partition II</li>
+</ul>
+</li>
+<li>如果題目指定段數<ul>
+<li>用 f_i_j 表前i個元素分成 j 段後的最值、可行性、方式數: Copy Books</li>
+</ul>
+</li>
+</ul>
+<h2 id="博奕型-DP"><a href="#博奕型-DP" class="headerlink" title="博奕型 DP"></a>博奕型 DP</h2><ul>
+<li>先手 –&gt; 當前要走的人</li>
+<li>不要有後手的概念–&gt; 所以就是出招後先手換人，新的先手面對一個「新的局面」</li>
+</ul>
+<h3 id="394-Coins-in-a-Line"><a href="#394-Coins-in-a-Line" class="headerlink" title="394 Coins in a Line"></a>394 Coins in a Line</h3><ul>
+<li>博奕型，一定就是「存在型」==&gt;「先手有沒有存在一種<strong>贏的可能</strong>」</li>
+</ul>
+<h4 id="1-確定狀態-1"><a href="#1-確定狀態-1" class="headerlink" title="1 確定狀態"></a>1 確定狀態</h4><ul>
+<li><p>透過「第一步」分析，而不是最後一步</p>
+<ul>
+<li>因為局面越來越簡單，石子數越來越少</li>
+<li>如果是「加石頭」，反而是應該按「最後一步」去想，因為最後一步之前的「N」反而是「更小」</li>
+</ul>
+</li>
+<li><p>後手面對 N-1個或N-2 個</p>
+</li>
+<li><p>先手Alice一定選擇能讓自己贏的一步</p>
+<ul>
+<li>因為雙方都是採取最優策略</li>
+</ul>
+</li>
+<li><p>假設後手Bob面對 N-1個石頭，其貫和他是新局面的新手一樣</p>
+</li>
+</ul>
+<h5 id="必勝-vs-必敗"><a href="#必勝-vs-必敗" class="headerlink" title="必勝 vs 必敗"></a>必勝 vs 必敗</h5><ul>
+<li>必勝 – 在當下的局面，走出一步讓對手「必敗」</li>
+<li>必敗 – 自己無路可逃</li>
+</ul>
+<h4 id="2-轉移方程-2"><a href="#2-轉移方程-2" class="headerlink" title="2 轉移方程"></a>2 轉移方程</h4><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200930210237276.png" alt="image-20200930210237276" style="zoom: 50%;" />
+
+
+
+<h4 id="3-初始條件和邊界情況-2"><a href="#3-初始條件和邊界情況-2" class="headerlink" title="3 初始條件和邊界情況"></a>3 初始條件和邊界情況</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj8zawy7p9j30ni0bo0ve.jpg" alt="image-20200930210454393" style="zoom:50%;" />
+
+
+
+<h4 id="4-計算順序-1"><a href="#4-計算順序-1" class="headerlink" title="4 計算順序"></a>4 計算順序</h4><p>→，時間N，空間可滾動</p>
+<h4 id="Coding-2"><a href="#Coding-2" class="headerlink" title="Coding!"></a>Coding!</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj8zf23uluj31840i6dnd.jpg" alt="image-20200930210853241" style="zoom:67%;" />
+
+<ul>
+<li>其實就  return n%3 !=0 就ok，</li>
+<li>但觀察過程很重要！否則當題目被改了後，就不見得有這個規律了!</li>
+</ul>
+<h2 id="背包型-DP"><a href="#背包型-DP" class="headerlink" title="背包型 DP"></a>背包型 DP</h2><ul>
+<li>也可用dfs搜索，把所有可以放入背包的物品方案求一遍<ul>
+<li>但是直接的搜索需要指数复杂度时间。</li>
+</ul>
+</li>
+</ul>
+<h3 id="92-Backpack-–-可行性-0-1背包"><a href="#92-Backpack-–-可行性-0-1背包" class="headerlink" title="92 Backpack – 可行性 0/1背包"></a>92 Backpack – 可行性 0/1背包</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj8zqq4a2xj30q603mjtv.jpg" alt="image-20200930212005824" style="zoom:50%;" />
+
+<p>Easy for me.</p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200930212555292.png" alt="image-20200930212555292" style="zoom:67%;" />
+
+<ul>
+<li>★★ HWD code的思維總是可以把 if &amp; else 拆成「sequencial」的，好神奇。。</li>
+</ul>
+<h3 id="背包小结"><a href="#背包小结" class="headerlink" title="背包小结"></a>背包小结</h3><ul>
+<li>不能只開  f_i ，貪心不對！</li>
+<li>前 i 個物品能拼出的重量:<ul>
+<li>前 i-1個物品能拼出的重量</li>
+<li>前 i-1個物品能拼出的重量 + 第 i 個物品重量 A_i-1</li>
+</ul>
+</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200930213204703.png" alt="image-20200930213204703" style="zoom: 50%;" />
+
+
+
+<h3 id="563-Backpack-V-–-計數型-0-1背包"><a href="#563-Backpack-V-–-計數型-0-1背包" class="headerlink" title="563 Backpack V – 計數型 0/1背包"></a>563 Backpack V – 計數型 0/1背包</h3><ul>
+<li>問「有多少種組合加起來是Target？」</li>
+</ul>
+<h4 id="3-初始條件和邊界情況-3"><a href="#3-初始條件和邊界情況-3" class="headerlink" title="3 初始條件和邊界情況"></a>3 初始條件和邊界情況</h4><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200930215214560.png" alt="image-20200930215214560" style="zoom:33%;" />
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj90oylkn8j30fu0kutdl.jpg" alt="image-20200930215300707"></p>
+<h4 id="終極優化"><a href="#終極優化" class="headerlink" title="終極優化!"></a>終極優化!</h4><ul>
+<li>右往左讓空間變 N</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj90x63572j30f40gcwht.jpg" alt="image-20200930220053889" style="zoom:50%;" />
+
+<ul>
+<li>w的結尾也不用走到 0，不然就越界了</li>
+<li>仍是需要先二維的「說起」，就是因為我只需要正上跟左上，而右上的不再需要了，何不就「覆蓋掉」了呢! </li>
+</ul>
+<h3 id="564-Backpack-VI-–-計數型-Combination-Sum-IV"><a href="#564-Backpack-VI-–-計數型-Combination-Sum-IV" class="headerlink" title="564 Backpack VI – 計數型 (Combination Sum IV)"></a>564 Backpack VI – 計數型 (Combination Sum IV)</h3><p>每個Ai可以用多次</p>
+<p>很像 Coin Change! – 枚舉最後一個數，或最後一枚硬幣是幾</p>
+<h4 id="1-確定狀態-2"><a href="#1-確定狀態-2" class="headerlink" title="1 確定狀態"></a>1 確定狀態</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj92inq042j31360guqa7.jpg" alt="image-20200930225608696" style="zoom:50%;" />
+
+<h5 id="子問題-1"><a href="#子問題-1" class="headerlink" title="子問題"></a>子問題</h5><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200930225635900.png" alt="image-20200930225635900" style="zoom:33%;" />
+
+
+
+<h4 id="2-轉移方程-3"><a href="#2-轉移方程-3" class="headerlink" title="2 轉移方程"></a>2 轉移方程</h4><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200930225549579.png" alt="image-20200930225549579" style="zoom:50%;" />
+
+
+
+<h4 id="3-初始和邊界情況"><a href="#3-初始和邊界情況" class="headerlink" title="3 初始和邊界情況"></a>3 初始和邊界情況</h4><img src="/Users/joe/Library/Application Support/typora-user-images/image-20200930225806218.png" alt="image-20200930225806218" style="zoom: 33%;" />
+
+<h4 id="4-計算順序-2"><a href="#4-計算順序-2" class="headerlink" title="4 計算順序"></a>4 計算順序</h4><p>→</p>
+<h5 id="空間-O-Target"><a href="#空間-O-Target" class="headerlink" title="空間: O(Target)"></a>空間: O(Target)</h5><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj92vqfyh3j30kq0d8wi8.jpg" alt="image-20200930230842787" style="zoom:50%;" />
+
+
+
+<h3 id="所有路徑打印"><a href="#所有路徑打印" class="headerlink" title="所有路徑打印"></a>所有路徑打印</h3><ul>
+<li>Dfs</li>
+</ul>
+<h3 id="背包小結"><a href="#背包小結" class="headerlink" title="背包小結"></a>背包小結</h3><ul>
+<li>關鍵點: 最後一步!<ul>
+<li><strong><em>如果物品無序，就看最後一個背包裡的物品是誰</em></strong></li>
+<li>有序，最後一個看它有沒有進</li>
+</ul>
+</li>
+<li>最後一個物品有沒有進背包</li>
+<li>背包的總承重一定要放在arr裡!</li>
+<li>V、VI差別在 <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj92zm0ry5j30x00do453.jpg" alt="image-20200930231226207" style="zoom: 33%;" />
+
+
+
+
+
+</li>
+</ul>
+<h2 id="背包路徑打印"><a href="#背包路徑打印" class="headerlink" title="背包路徑打印"></a>背包路徑打印</h2><p>打印最多物品的那個方案 – 最優解的那一種路徑</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj96o5sdtzj312a0ko7de.jpg" alt="image-20201001011948590" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gj96p6vy55j30k40660uf.jpg" alt="image-20201001012049471" style="zoom: 50%;" />
+
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/09/27/DP%20Ult./DP-4-%E5%8A%83%E5%88%86%E5%9E%8B%E3%80%81%E5%8D%9A%E5%A5%95%E5%9E%8B%E3%80%81%E8%83%8C%E5%8C%85%E5%9E%8B%20DP/">http://yoursite.com/2019/09/27/DP%20Ult./DP-4-%E5%8A%83%E5%88%86%E5%9E%8B%E3%80%81%E5%8D%9A%E5%A5%95%E5%9E%8B%E3%80%81%E8%83%8C%E5%8C%85%E5%9E%8B%20DP/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/09/27/DP%20Ult./DP-2-%E5%BA%A7%E6%A8%99%E5%9E%8B%20&amp;%20%E4%BD%8D%E6%93%8D%E4%BD%9C%E5%9E%8B/"><i class="fa fa-chevron-left">  </i><span>DP Ult./DP-2-座標型 &amp; 位操作型</span></a></div><div class="next-post pull-right"><a href="/2019/09/27/DP%20Ult./DP-3-%E5%BA%8F%E5%88%97%E5%9E%8B%20DP/"><span>DP Ult./DP-3-序列型 DP</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
