@@ -88,7 +88,7 @@ fireworks: false
 # ---------------
 baidu_analytics:
 
-google_analytics:
+google_analytics: UA-180692466-1
 
 # Tencent_analytics ID
 tencent_analytics:

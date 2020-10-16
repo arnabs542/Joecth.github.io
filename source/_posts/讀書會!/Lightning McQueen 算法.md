@@ -1,3 +1,12 @@
+---
+layout: post
+categories: Study Notes
+tag: [] 
+date: 2015-03-15
+---
+
+
+
 ## 1) 一周第一天，每周讲座整理及规划
 
 - 请假制度？！

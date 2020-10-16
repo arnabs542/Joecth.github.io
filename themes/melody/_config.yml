@@ -15,10 +15,6 @@
 #   header_text_color: "#EEEEEE"
 #   footer_text_color: "#EEEEEE"
 
-# Google Analytics
-google_analytics:
-    tracking_id: UA-180692466-1
-    localhost_ignored: false
 # Main menu navigation
 menu:
   Home: /
