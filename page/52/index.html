@@ -7,749 +7,453 @@
     error: 'Copy error',
     noSupport: 'The browser does not support'
   }
-} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">298</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">44</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2019/03/18/System-Design/9p/2019-03-18-System%20Design%20&amp;%20Design%20Twitter/">System-Design/9p/2019-03-18-System Design &amp; Design Twitter</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-18</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></span><div class="content"><ul>
-<li><h3 id="Web-Server"><a href="#Web-Server" class="headerlink" title="Web Server"></a>Web Server</h3></li>
-<li><h3 id="DB"><a href="#DB" class="headerlink" title="DB"></a>DB</h3></li>
-<li><h3 id="File-System"><a href="#File-System" class="headerlink" title="File System"></a>File System</h3></li>
-<li><h3 id="Cache"><a href="#Cache" class="headerlink" title="Cache"></a>Cache</h3></li>
-</ul>
-<h1 id="知識補充"><a href="#知識補充" class="headerlink" title="知識補充"></a>知識補充</h1><h2 id="Merge-K-Sorted-Lists"><a href="#Merge-K-Sorted-Lists" class="headerlink" title="Merge K Sorted Lists"></a>Merge K Sorted Lists</h2><ul>
-<li><p>三種方式</p>
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">298</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">44</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2019/03/18/System-Design/9p/2019-03-18-Design%20User%20System%20DB%20&amp;%20Cache/">System-Design/9p/2019-03-18-Design User System DB &amp; Cache</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-18</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></span><div class="content"><h1 id="Design-User-System"><a href="#Design-User-System" class="headerlink" title="Design User System"></a>Design User System</h1><h2 id="Memcached"><a href="#Memcached" class="headerlink" title="Memcached"></a>Memcached</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">538. 内存缓存</span><br><span class="line">中文English</span><br><span class="line">实现下列几个方法：</span><br><span class="line">1.get(curtTime, key). 得到key的值，如果不存在返回2147483647</span><br><span class="line">2.set(curtTime, key, value, ttl). 设置一个pair(key,value)，有效期从curtTime到curtTime + ttl -1 , 如果ttl为0，则一直存在</span><br><span class="line">3.delete(curtTime, key). 删除这个key</span><br><span class="line">4.incr(curtTime, key, delta). 给key的value加上delta，并且返回 如果不存在返回 2147483647。</span><br><span class="line">5.decr(curtTime, key, delta). 给key的value减去delta，并且返回 如果不存在返回 2147483647。</span><br><span class="line"></span><br><span class="line">Example</span><br><span class="line">样例1</span><br><span class="line"></span><br><span class="line">get(1, 0)</span><br><span class="line">&gt;&gt; 2147483647</span><br><span class="line"><span class="built_in">set</span>(2, 1, 1, 2)</span><br><span class="line">get(3, 1)</span><br><span class="line">&gt;&gt; 1</span><br><span class="line">get(4, 1)</span><br><span class="line">&gt;&gt; 2147483647</span><br><span class="line">incr(5, 1, 1)</span><br><span class="line">&gt;&gt; 2147483647</span><br><span class="line"><span class="built_in">set</span>(6, 1, 3, 0)</span><br><span class="line">incr(7, 1, 1)</span><br><span class="line">&gt;&gt; 4</span><br><span class="line">decr(8, 1, 1)</span><br><span class="line">&gt;&gt; 3</span><br><span class="line">get(9, 1)</span><br><span class="line">&gt;&gt; 3</span><br><span class="line">delete(10, 1)</span><br><span class="line">get(11, 1)</span><br><span class="line">&gt;&gt; 2147483647</span><br><span class="line">incr(12, 1, 1)</span><br><span class="line">&gt;&gt; 2147483647</span><br><span class="line">```**样例1**</span><br><span class="line"></span><br><span class="line">get(1, 0)</span><br><span class="line"></span><br><span class="line">2147483647</span><br><span class="line"><span class="built_in">set</span>(2, 1, 1, 2)</span><br><span class="line">get(3, 1)</span><br><span class="line"></span><br><span class="line">1</span><br><span class="line">get(4, 1)</span><br><span class="line"></span><br><span class="line">2147483647</span><br><span class="line">incr(5, 1, 1)</span><br><span class="line"></span><br><span class="line">2147483647</span><br><span class="line"><span class="built_in">set</span>(6, 1, 3, 0)</span><br><span class="line">incr(7, 1, 1)</span><br><span class="line"></span><br><span class="line">4</span><br><span class="line">decr(8, 1, 1)</span><br><span class="line"></span><br><span class="line">3</span><br><span class="line">get(9, 1)</span><br><span class="line"></span><br><span class="line">3</span><br><span class="line">delete(10, 1)</span><br><span class="line">get(11, 1)</span><br><span class="line"></span><br><span class="line">2147483647</span><br><span class="line">incr(12, 1, 1)</span><br><span class="line"></span><br><span class="line">2147483647</span><br><span class="line"></span><br><span class="line">Clarification</span><br><span class="line">实际上，如果内存不足，存缓存服务器将驱逐key，并且它还支持各种值类型，如字符串和整数。 在我们的例子中我们将这个问题简化了，我们可以假设我们有足够的内存，所有的值都是整数。</span><br><span class="line"></span><br><span class="line">在谷歌上搜索“LRU”和“LFU”以获取有关memcache如何逐出数据的更多信息。</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Resource</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, value, expired)</span>:</span></span><br><span class="line">        self.value = value</span><br><span class="line">        self.expired = expired</span><br><span class="line"></span><br><span class="line">INT_MAX = <span class="number">0x7fffffff</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Memcache</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># initialize your data structure here.</span></span><br><span class="line">        self.client = dict()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># @param &#123;int&#125; curtTime an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; key an integer</span></span><br><span class="line">    <span class="comment"># @return an integer</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, curtTime, key)</span>:</span></span><br><span class="line">        <span class="comment"># Write your code here</span></span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">not</span> <span class="keyword">in</span> self.client:</span><br><span class="line">            <span class="keyword">return</span> INT_MAX</span><br><span class="line">        res = self.client.get(key)</span><br><span class="line">        <span class="keyword">if</span> res.expired &gt;= curtTime <span class="keyword">or</span> res.expired == <span class="number">-1</span>:</span><br><span class="line">            <span class="keyword">return</span> res.value</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> INT_MAX</span><br><span class="line"></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; curtTime an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; key an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; value an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; ttl an integer</span></span><br><span class="line">    <span class="comment"># @return nothing</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set</span><span class="params">(self, curtTime, key, value, ttl)</span>:</span></span><br><span class="line">        <span class="comment"># Write your code here</span></span><br><span class="line">        <span class="keyword">if</span> ttl:</span><br><span class="line">            res = Resource(value, curtTime + ttl - <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res = Resource(value, <span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">        self.client[key] = res </span><br><span class="line">        </span><br><span class="line">    <span class="comment"># @param &#123;int&#125; curtTime an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; key an integer</span></span><br><span class="line">    <span class="comment"># @return nothing</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">delete</span><span class="params">(self, curtTime, key)</span>:</span></span><br><span class="line">        <span class="comment"># Write your code here</span></span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">not</span> <span class="keyword">in</span> self.client:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">del</span> self.client[key]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; curtTime an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; key an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; delta an integer</span></span><br><span class="line">    <span class="comment"># @return an integer</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">incr</span><span class="params">(self, curtTime, key, delta)</span>:</span></span><br><span class="line">        <span class="comment"># Write your code here</span></span><br><span class="line">        <span class="keyword">if</span> self.get(curtTime, key) == INT_MAX:</span><br><span class="line">            <span class="keyword">return</span> INT_MAX</span><br><span class="line">        self.client[key].value += delta</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.client[key].value</span><br><span class="line"></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; curtTime an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; key an integer</span></span><br><span class="line">    <span class="comment"># @param &#123;int&#125; delta an integer</span></span><br><span class="line">    <span class="comment"># @return an integer</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decr</span><span class="params">(self, curtTime, key, delta)</span>:</span></span><br><span class="line">        <span class="comment"># Write your code here</span></span><br><span class="line">        <span class="keyword">if</span> self.get(curtTime, key) == INT_MAX:</span><br><span class="line">            <span class="keyword">return</span> INT_MAX</span><br><span class="line">        self.client[key].value -= delta</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> self.client[key].value</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Mini-Cassandra"><a href="#Mini-Cassandra" class="headerlink" title="Mini Cassandra"></a>Mini Cassandra</h2><p>Cassandra is a NoSQL database (a.k.a key-value storage). One individual data entry in cassandra constructed by 3 parts:</p>
 <ol>
-<li><p>Heap, NxLg(K)</p>
-</li>
-<li><p>可說是 2A, NxK</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3ess84kjj30fu09edh7.jpg" alt="image-20200725184659925"></p>
-</li>
-<li><p>可說是 2B, NxLg(K)</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3eteo2k7j30k60bojts.jpg" alt="image-20200725184735971"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3etvcsy4j30ho0b277b.jpg" alt="image-20200725184803623"></p>
-</li>
-<li><p>★★ D&amp;C<br><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3eycvecfj30ue0getbh.jpg" alt="image-20200725185221462"></p>
-<p>猜到NxLog(K) 意謂著可知道每層、及stack的高度<br><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3f0a0t6lj30uk0eejvq.jpg" alt="image-20200725185411349"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3f115lfij30nu0ds0uw.jpg" alt="image-20200725185456319"></p>
-</li>
+<li>row_key. (a.k.a hash_key, partition key or sharding_key.)</li>
+<li>column_key.</li>
+<li>value</li>
 </ol>
-</li>
-</ul>
-<p>​                    </p>
-<p>​                    <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3f1t38vkj30qu07k416.jpg" alt="image-20200725185540406"></p>
-<ul>
-<li>Compare to M-Sort</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3f1mt8x4j30ny086mzm.jpg" alt="image-20200725185531135"></p>
-<h2 id="名詞們"><a href="#名詞們" class="headerlink" title="名詞們"></a>名詞們</h2><ul>
-<li>Web Server, 比較好企業級的 1K/sec，自己搭的10/sec就不錯了</li>
-<li>DB based on File System</li>
-<li>File System 接口單一，非結構化適合直接就放在FS, 而不是DB</li>
-<li>Cache</li>
-</ul>
+<p>row_key is used to hash and can not support range query. Let’s simplify this to a string.<br>column_key is sorted and support range query. Let’s simplify this to integer.<br>value is a string. You can serialize any data into a string and store it in value.</p>
+<p>Implement the following methods:</p>
+<ol>
+<li><code>insert(row_key, column_key, value)</code></li>
+<li><code>query(row_key, column_start, column_end)</code> return a list of entries</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">502. Mini Cassandra</span><br><span class="line">中文English</span><br><span class="line">Cassandra is a NoSQL database (a.k.a key-value storage). One individual data entry <span class="keyword">in</span> cassandra constructed by 3 parts:</span><br><span class="line"></span><br><span class="line">row_key. (a.k.a hash_key, partition key or sharding_key.)</span><br><span class="line">column_key.</span><br><span class="line">value</span><br><span class="line">row_key is used to <span class="built_in">hash</span> and can not support range query. Let<span class="string">'s simplify this to a string.</span></span><br><span class="line"><span class="string">column_key is sorted and support range query. Let'</span>s simplify this to <span class="built_in">integer</span>.</span><br><span class="line">value is a string. You can serialize any data into a string and store it <span class="keyword">in</span> value.</span><br><span class="line"></span><br><span class="line">Implement the following methods:</span><br><span class="line"></span><br><span class="line">insert(row_key, column_key, value)</span><br><span class="line">query(row_key, column_start, column_end) <span class="built_in">return</span> a list of entries</span><br><span class="line">Example</span><br><span class="line">Example 1:</span><br><span class="line"></span><br><span class="line">Input:</span><br><span class="line">  insert(<span class="string">"google"</span>, 1, <span class="string">"haha"</span>)</span><br><span class="line">  query(<span class="string">"google"</span>, 0, 1)</span><br><span class="line">Output: [(1, <span class="string">"haha"</span>)]</span><br><span class="line">Example 2:</span><br><span class="line"></span><br><span class="line">Input:</span><br><span class="line">  insert(<span class="string">"google"</span>, 1, <span class="string">"haha"</span>)</span><br><span class="line">  insert(<span class="string">"lintcode"</span>, 1, <span class="string">"Good"</span>)</span><br><span class="line">  insert(<span class="string">"google"</span>, 2, <span class="string">"hehe"</span>)</span><br><span class="line">  query(<span class="string">"google"</span>, 0, 1)</span><br><span class="line">  query(<span class="string">"google"</span>, 0, 2)</span><br><span class="line">  query(<span class="string">"go"</span>, 0, 1)</span><br><span class="line">  query(<span class="string">"lintcode"</span>, 0, 10)</span><br><span class="line">Output:</span><br><span class="line">  [(1, <span class="string">"haha"</span>)]</span><br><span class="line">  [(1, <span class="string">"haha"</span>),(2, <span class="string">"hehe"</span>)]</span><br><span class="line">  []</span><br><span class="line">  [(1, <span class="string">"Good"</span>)]</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">Definition of Column:</span></span><br><span class="line"><span class="string">class Column:</span></span><br><span class="line"><span class="string">    def __init__(self, key, value):</span></span><br><span class="line"><span class="string">        self.key = key</span></span><br><span class="line"><span class="string">        self.value = value</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> OrderedDict</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MiniCassandra</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># do intialization if necessary</span></span><br><span class="line">        self.hash = &#123;&#125;</span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: row_key: a string</span></span><br><span class="line"><span class="string">    @param: column_key: An integer</span></span><br><span class="line"><span class="string">    @param: value: a string</span></span><br><span class="line"><span class="string">    @return: nothing</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insert</span><span class="params">(self, row_key, column_key, value)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="keyword">if</span> row_key <span class="keyword">not</span> <span class="keyword">in</span> self.hash:</span><br><span class="line">            self.hash[row_key] = OrderedDict()</span><br><span class="line">        self.hash[row_key][column_key] = value</span><br><span class="line"></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: row_key: a string</span></span><br><span class="line"><span class="string">    @param: column_start: An integer</span></span><br><span class="line"><span class="string">    @param: column_end: An integer</span></span><br><span class="line"><span class="string">    @return: a list of Columns</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">query</span><span class="params">(self, row_key, column_start, column_end)</span>:</span></span><br><span class="line">        <span class="comment"># Write your code here</span></span><br><span class="line">        rt = []</span><br><span class="line">        <span class="keyword">if</span> row_key <span class="keyword">not</span> <span class="keyword">in</span> self.hash:</span><br><span class="line">            <span class="keyword">return</span> rt</span><br><span class="line"></span><br><span class="line">        self.hash[row_key] = OrderedDict(sorted(self.hash[row_key].items()))</span><br><span class="line">        <span class="keyword">for</span> key, value <span class="keyword">in</span> self.hash[row_key].items():</span><br><span class="line">            <span class="keyword">if</span> key &gt;= column_start <span class="keyword">and</span> key &lt;= column_end:</span><br><span class="line">                rt.append(Column(key, value))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> rt</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># def query(self, row_key, column_start, column_end):</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># return []</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># print(self.od[row_key])</span></span><br><span class="line">        <span class="comment"># return self.od[row_key]#[column_start:column_end]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Friendship-Service"><a href="#Friendship-Service" class="headerlink" title="Friendship Service"></a>Friendship Service</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FriendshipService</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># do intialization if necessary</span></span><br><span class="line">        self.fans = defaultdict(list)</span><br><span class="line">        self.followings = defaultdict(list)</span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: user_id: An integer</span></span><br><span class="line"><span class="string">    @return: all followers and sort by user_id</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getFollowers</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># return []</span></span><br><span class="line">        <span class="keyword">return</span> sorted(self.fans[user_id])</span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: user_id: An integer</span></span><br><span class="line"><span class="string">    @return: all followings and sort by user_id</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getFollowings</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># return []</span></span><br><span class="line">        <span class="keyword">return</span> sorted(self.followings[user_id])</span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: from_user_id: An integer</span></span><br><span class="line"><span class="string">    @param: to_user_id: An integer</span></span><br><span class="line"><span class="string">    @return: nothing</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">follow</span><span class="params">(self, to_user_id, from_user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="keyword">if</span> to_user_id <span class="keyword">not</span> <span class="keyword">in</span> self.followings[from_user_id]:</span><br><span class="line">            self.followings[from_user_id] += [to_user_id]</span><br><span class="line">            <span class="comment"># self.followings[from_user_id].sort()</span></span><br><span class="line">        <span class="keyword">if</span> from_user_id <span class="keyword">not</span> <span class="keyword">in</span> self.fans[to_user_id]:</span><br><span class="line">            self.fans[to_user_id] += [from_user_id]</span><br><span class="line">            <span class="comment"># self.followings[from_user_id].sort()</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: from_user_id: An integer</span></span><br><span class="line"><span class="string">    @param: to_user_id: An integer</span></span><br><span class="line"><span class="string">    @return: nothing</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">unfollow</span><span class="params">(self, to_user_id, from_user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># self.followings[from_user_id].pop(self.followings[from_user_id].index(to_user_id))</span></span><br><span class="line">        <span class="comment"># self.fans[to_user_id].pop(self.fans[to_user_id].index(from_user_id))</span></span><br><span class="line">        a = self.followings[from_user_id]</span><br><span class="line">        b = self.fans[to_user_id]</span><br><span class="line">        <span class="keyword">if</span> from_user_id <span class="keyword">in</span> self.followings:</span><br><span class="line">            <span class="keyword">if</span> to_user_id <span class="keyword">in</span> a:</span><br><span class="line">                a.pop(a.index(to_user_id))</span><br><span class="line">        <span class="keyword">if</span> to_user_id <span class="keyword">in</span> self.fans:</span><br><span class="line">            <span class="keyword">if</span> from_user_id <span class="keyword">in</span> b:</span><br><span class="line">                b.pop(b.index(from_user_id))</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="LRU"><a href="#LRU" class="headerlink" title="LRU"></a>LRU</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> OrderedDict</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: capacity: An integer</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, capacity)</span>:</span></span><br><span class="line">        <span class="comment"># do intialization if necessary</span></span><br><span class="line">        self.od = OrderedDict()</span><br><span class="line">        self.capacity = capacity</span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: key: An integer</span></span><br><span class="line"><span class="string">    @return: An integer</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self, key)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">not</span> <span class="keyword">in</span> self.od:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line">        ret = self.od[key]</span><br><span class="line">        <span class="keyword">del</span> self.od[key]</span><br><span class="line">        self.od[key] = ret </span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> ret</span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: key: An integer</span></span><br><span class="line"><span class="string">    @param: value: An integer</span></span><br><span class="line"><span class="string">    @return: nothing</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set</span><span class="params">(self, key, value)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="keyword">if</span> key <span class="keyword">in</span> self.od:</span><br><span class="line">            <span class="keyword">del</span> self.od[key]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> len(self.od) &gt;= self.capacity:</span><br><span class="line">                <span class="keyword">del</span> self.od[next(iter(self.od))]</span><br><span class="line">        self.od[key] = value</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>註冊、登錄、查詢 (看別的好友之類)、修改info</p>
 <blockquote>
-<h5 id="单选题-【系统设计2020】下面哪个”不是”常见的用做消息队列（Message-Queue）的软件"><a href="#单选题-【系统设计2020】下面哪个”不是”常见的用做消息队列（Message-Queue）的软件" class="headerlink" title="[单选题]【系统设计2020】下面哪个”不是”常见的用做消息队列（Message Queue）的软件"></a>[单选题]【系统设计2020】下面哪个”不是”常见的用做消息队列（Message Queue）的软件</h5><p>A.RabbitMQ3.23% 选择</p>
-<p>B.Redis19.35% 选择</p>
-<p>C.Memcached64.52% 选择</p>
-<p>D.Amazon SQS12.90% 选择</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是D</p>
+<h5 id="单选题-以下四个操作哪个最频繁？"><a href="#单选题-以下四个操作哪个最频繁？" class="headerlink" title="[单选题]以下四个操作哪个最频繁？"></a>[单选题]以下四个操作哪个最频繁？</h5><p>A.注册3.36% 选择</p>
+<p>B.登录44.02% 选择</p>
+<p>C.用户信息查询50.67% 选择</p>
+<p>D.用户信息修改1.94% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是B</p>
 <p><strong>正确答案:</strong>C</p>
+</blockquote>
+<h3 id="Scenario"><a href="#Scenario" class="headerlink" title="Scenario"></a>Scenario</h3><h3 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h3><ul>
+<li>Authentication Service</li>
+<li>UserService</li>
+<li>FriendshipService</li>
+</ul>
+<h3 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h3><p>check SQL &amp; NoSQL &amp; Redis 對 QPS數的支持</p>
+<blockquote>
+<h5 id="多选题-注册，登录，信息修改使用哪种数据库可以满足？"><a href="#多选题-注册，登录，信息修改使用哪种数据库可以满足？" class="headerlink" title="[多选题]注册，登录，信息修改使用哪种数据库可以满足？"></a>[多选题]注册，登录，信息修改使用哪种数据库可以满足？</h5><p>A.MySQL60.32% 选择</p>
+<p>B.Cassandra18.05% 选择</p>
+<p>C.Redis13.46% 选择</p>
+<p>D.Memcached8.18% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是ACD</p>
+<p><strong>正确答案:</strong>ABC</p>
 <p><strong>解析:</strong></p>
-<p>Memcached 是一款缓存（Cache）软件，是单纯的 key value 结构，不支持队列结构。</p>
+<p>Memcached 不能持久化存储数据，不适合用来存储用户信息</p>
 </blockquote>
-<h1 id="Design-Twitter"><a href="#Design-Twitter" class="headerlink" title="Design Twitter"></a>Design Twitter</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">Definition of Tweet:</span></span><br><span class="line"><span class="string">class Tweet:</span></span><br><span class="line"><span class="string">    @classmethod</span></span><br><span class="line"><span class="string">    def create(cls, user_id, tweet_text):</span></span><br><span class="line"><span class="string">         # This will create a new tweet object,</span></span><br><span class="line"><span class="string">         # and auto fill id</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"><span class="keyword">import</span> heapq</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MiniTwitter</span>:</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># do intialization if necessary</span></span><br><span class="line">        self.users = defaultdict(list)  <span class="comment"># self's tweets</span></span><br><span class="line">        self.following = defaultdict(list)  <span class="comment"># as an Adjacent list </span></span><br><span class="line">        self.article_id = <span class="number">0</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: user_id: An integer</span></span><br><span class="line"><span class="string">    @param: tweet_text: a string</span></span><br><span class="line"><span class="string">    @return: a tweet</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">postTweet</span><span class="params">(self, user_id, tweet_text)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        tweet = Tweet.create(user_id, tweet_text)</span><br><span class="line"></span><br><span class="line">        self.article_id += <span class="number">1</span>    <span class="comment"># necessary for time info</span></span><br><span class="line">        self.users[user_id].append([self.article_id, tweet])   <span class="comment"># <span class="doctag">TODO:</span> WRONG, requires time info for</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> tweet</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># @param &#123;int&#125; user_id</span></span><br><span class="line">    <span class="comment"># return &#123;Tweet[]&#125; 10 new feeds recently</span></span><br><span class="line">    <span class="comment"># and sort by timeline</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getNewsFeed</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line">        <span class="comment"># Write your code here</span></span><br><span class="line">        rt = []</span><br><span class="line">        <span class="keyword">if</span> user_id <span class="keyword">in</span> self.users:</span><br><span class="line">            rt = self.users[user_id][<span class="number">-10</span>:]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> user_id <span class="keyword">in</span> self.following:</span><br><span class="line">            <span class="keyword">for</span> friend <span class="keyword">in</span> self.following[user_id]:</span><br><span class="line">                <span class="keyword">if</span> friend <span class="keyword">in</span> self.users:</span><br><span class="line">                    rt.extend(self.users[friend][<span class="number">-10</span>:])</span><br><span class="line"></span><br><span class="line">        rt.sort(key=<span class="keyword">lambda</span> x: x[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">return</span> [tweet[<span class="number">1</span>] <span class="keyword">for</span> tweet <span class="keyword">in</span> rt[<span class="number">-10</span>:][::<span class="number">-1</span>]]</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: user_id: An integer</span></span><br><span class="line"><span class="string">    @return: a list of 10 new feeds recently and sort by timeline</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getNewsFeed_mywrong</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># return []</span></span><br><span class="line">        <span class="comment"># if user_id not in self.users:</span></span><br><span class="line">            <span class="comment"># return [] # 給沒建帳號也可以呼叫follow函數…</span></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">if</span> user_id <span class="keyword">in</span> self.users:</span><br><span class="line">            res = [mypost[<span class="number">1</span>] <span class="keyword">for</span> mypost <span class="keyword">in</span> self.users[user_id][<span class="number">-10</span>:][::<span class="number">-1</span>]]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># print('aaaaa', res)</span></span><br><span class="line">        <span class="keyword">if</span> user_id <span class="keyword">in</span> self.following:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> self.following[user_id]:   </span><br><span class="line">                <span class="comment"># res.append(self.users[guy_id])</span></span><br><span class="line">                <span class="comment"># res.append(self.users[i][-10:])</span></span><br><span class="line">                <span class="keyword">if</span> i <span class="keyword">not</span> <span class="keyword">in</span> self.users:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">            </span><br><span class="line">                this_user = []</span><br><span class="line">                this_user.append(like[<span class="number">1</span>] <span class="keyword">for</span> like <span class="keyword">in</span> self.users[i][<span class="number">-10</span>:][::<span class="number">-1</span>])</span><br><span class="line">                res.extend(this_user)</span><br><span class="line">        print(res)</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">        </span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: user_id: An integer</span></span><br><span class="line"><span class="string">    @return: a list of 10 new posts recently and sort by timeline</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getTimeline</span><span class="params">(self, user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="keyword">if</span> user_id <span class="keyword">not</span> <span class="keyword">in</span> self.users:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> [like[<span class="number">1</span>] <span class="keyword">for</span> like <span class="keyword">in</span> self.users[user_id][<span class="number">-10</span>:][::<span class="number">-1</span>]]</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: from_user_id: An integer</span></span><br><span class="line"><span class="string">    @param: to_user_id: An integer</span></span><br><span class="line"><span class="string">    @return: nothing</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">follow</span><span class="params">(self, from_user_id, to_user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        <span class="comment"># if from_user_id not in self.following[from_user_id]:</span></span><br><span class="line">        self.following[from_user_id].append(to_user_id)</span><br><span class="line">        </span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    @param: from_user_id: An integer</span></span><br><span class="line"><span class="string">    @param: to_user_id: An integer</span></span><br><span class="line"><span class="string">    @return: nothing</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">unfollow</span><span class="params">(self, from_user_id, to_user_id)</span>:</span></span><br><span class="line">        <span class="comment"># write your code here</span></span><br><span class="line">        friends = self.following[from_user_id]</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            idx = friends.index(to_user_id)</span><br><span class="line">            self.following[from_user_id] = friends[:idx] + friends[idx+<span class="number">1</span>:]</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            print(<span class="string">'This guy has no this friend!'</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="反應"><a href="#反應" class="headerlink" title="反應"></a>反應</h2><ul>
-<li>當收到題目時，該如何？<ul>
-<li>互動! 你想過沒有：或許現在只有2個用戶呢？</li>
-<li>所以：<ol>
-<li>可行解</li>
-<li>特定問題</li>
-<li>分析能力</li>
-<li>權衡</li>
-<li>知識儲備</li>
-</ol>
-</li>
-<li>4S</li>
-<li>↓↓</li>
-</ul>
-</li>
-</ul>
-<h2 id="General"><a href="#General" class="headerlink" title="General"></a>General</h2><ol>
-<li>注意事項：<ul>
-<li>這個問題要考慮的用戶規模有多大？</li>
-<li>有哪些功能需要我設計的？</li>
-</ul>
-</li>
-<li>Key words: <ul>
-<li>Load Balancer, Memcache, NodeJS, MongoDB, MySQL, Sharding, Consistent Sharding, Master Slave, HDFS, Hadoop…<ul>
-<li>How if only 2 users?…  No need all above… So, <strong>ASK</strong> for clarification first!</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>側重：<ul>
-<li>Work solution</li>
-<li>Special Case</li>
-<li>Analysis</li>
-<li>Tradeoff, PlanA vs PlanB</li>
-<li>Knowledge Base, e.g. DB, FS, Memory, Info Queue</li>
-</ul>
-</li>
-</ol>
-<ol start="4">
-<li>4S analyzation<ul>
-<li>Scenario<br>需要設計哪些功能？功能要到多厲害？<br>Ask: Features, QPS, DAU, Interfaces</li>
-<li>Service<br>將大系統拆分為小服務<br>Split Application, Module</li>
-<li>Storage<br>數據如何存儲與訪問<br>Schema: Data, SQL, NoSQL, File System</li>
-<li>Scale<br>怎麼解決缺陷，處理可能遇到的問題<br>Sharding, Optimize, Special Case</li>
-</ul>
-</li>
-</ol>
-<h2 id="Scenario-場景"><a href="#Scenario-場景" class="headerlink" title="Scenario 場景"></a>Scenario 場景</h2><ol>
-<li>Ask; 2. Analysis</li>
-</ol>
-<ul>
-<li><strong>需要設計哪些功能？</strong></li>
-<li><strong>需要承受多大的訪問量？</strong><ul>
-<li>DAU</li>
-<li><strong>Twitter: MAU 330M, DAU ~170M+</strong> == &gt; 一萬台機器搞定?1</li>
-</ul>
-</li>
-</ul>
-<p>有些公司會用註冊用戶，但這不準。一般要看MAU。</p>
 <blockquote>
-<h5 id="单选题-下面说法中，”不”正确的是"><a href="#单选题-下面说法中，”不”正确的是" class="headerlink" title="[单选题]下面说法中，”不”正确的是"></a>[单选题]下面说法中，”不”正确的是</h5><p>A.MAU 会影响到 DAU，DAU 会影响到并发请求的用户数，从而影响到系统的承载力5.37% 选择</p>
-<p>B.一个用户一个月登陆了3次，会累加 3次 MAU77.78% 选择</p>
-<p>C.一个用户一天登陆了10次也只算一次 DAU9.55% 选择</p>
-<p>D.MAU 和 DAU 的比例通常是 2:1 左右7.30% 选择</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
-<p><strong>正确答案:</strong>B</p>
+<ul>
+<li><p>Q: 10k ~ 100k QPS?</p>
+<ul>
+<li>看需求。可以使用单台redis或者使用多台Cassandra的集群，又或者如果你的场景需要高可靠性的事务支持，但是读多写少，那就MySQL做持久化+memcached做cache优化。不同的数据库有不同的功能，这里列出的QPS只是为了告诉你各个数据库的承载能力，不是说xxxQPS就一定要用xxx数据库，QPS不是唯一决定因素，需要结合实际需求分析。</li>
+</ul>
+</li>
+<li><p>为什么Mysql只支持1k 的QPS,但facebook 依然会选择。 facebook的QPS应该远高于1k吧</p>
+<ul>
+<li>单机1k左右，但是facebook的是mysql集群，QPS肯定不是这个量级的</li>
+</ul>
+</li>
+<li><p>redis，memcached会比普通的存储贵吗</p>
+<ul>
+<li>redis memcached 用 memory 多，肯定比主要用 disk 的机器要贵的。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>讀多寫少，代表經常不會變！</p>
+<blockquote>
+<h5 id="多选题-文件系统可以用作缓存么？如果可以，可以做什么的缓存？"><a href="#多选题-文件系统可以用作缓存么？如果可以，可以做什么的缓存？" class="headerlink" title="[多选题]文件系统可以用作缓存么？如果可以，可以做什么的缓存？"></a>[多选题]文件系统可以用作缓存么？如果可以，可以做什么的缓存？</h5><p>A.不可以1.22% 选择</p>
+<p>B.用来做网络请求的缓存。30.30% 选择</p>
+<p>C.用来做计算结果的缓存34.45% 选择</p>
+<p>D.用来做数据库的缓存34.04% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是BD</p>
+<p><strong>正确答案:</strong>BC</p>
 <p><strong>解析:</strong></p>
-<p>B是错的，一个用户一个月登陆 100 次也只算作 1 次 MAU</p>
-</blockquote>
-<h3 id="需要設計哪些功能"><a href="#需要設計哪些功能" class="headerlink" title="需要設計哪些功能"></a>需要設計哪些功能</h3><p>Step1. Enumerate - 把 Twitter 的功能一個個羅列出來</p>
-<ul>
-<li>Register/ Login</li>
-<li>User Profile Display / Edit</li>
-<li>Upload Image / Video * </li>
-<li>Search *</li>
-<li>Post /Share a tweet</li>
-<li>Timeline News Feed</li>
-<li>Follow Unfollow a User</li>
-</ul>
-<p>Step2. Sort - 選出核心功能, 因为不可能這麼短時間什麼都設計</p>
-<ul>
-<li><strong>Post a Tweet !</strong></li>
-<li>Timeline</li>
-<li>News Feed</li>
-<li>Follow / Unfollow a user</li>
-<li>Register / Login</li>
-</ul>
-<ul>
-<li>看估計：60代表每個用戶一天點60次</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3gt8wd00j30ro0de43l.jpg" alt="image-20200725195638005"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3gwuuj71j30x40f2k0r.jpg" alt="image-20200725200005606"></p>
-<blockquote>
-<ul>
-<li>感觉老师对于服务器qps不太对啊，我查了一下资料，一天4核8G的腾讯云主机TPS就能达到15k呢，qps就更多了，可以达到30w.这个是链接。<a href="https://www.youtube.com/watch?v=CX6wS5j7FWw&amp;t=237s。数据规模1千万。如果只是按照1k来估算的，最后结果会相差很大的。" target="_blank" rel="noopener">https://www.youtube.com/watch?v=CX6wS5j7FWw&amp;t=237s。数据规模1千万。如果只是按照1k来估算的，最后结果会相差很大的。</a><ul>
-<li>如果只是返回简单的静态文件，你说的这个配置都能达到千万级别的qps，但是如果每个请求需要处理的逻辑复杂的话qps就会很低的。</li>
-</ul>
-</li>
-<li>QPS 的 query 是指访问一次某个接口，还是访问一次数据库？<ul>
-<li>根据场景不定，衡量并发的性能就是说每秒能承受多少用户访问，衡量数据库读的性能就是说每秒能承受多少次读取数据。</li>
-</ul>
-</li>
-<li>在设计推特的时候，一个用户浏览新鲜事的qps和她浏览自己timeline的qps需要分开估计吗？<ul>
-<li>需要分开估计的，用户浏览新鲜事的qps 肯定 比 浏览自己timeline的qps 高一两个数量级的。</li>
-</ul>
-</li>
-</ul>
+<p>缓存的目的是让访问变得更快。文件系统的访问比网络访问快，一些耗时很长的计算得到的结果也可以缓存在文件中，但是文件系统的访问速度和数据库的访问速度基本上是差不多，所以一般不会用文件系统来做数据库的缓存，意义不大。</p>
 </blockquote>
 <blockquote>
-<ul>
-<li><p>Read QPS: 是对数据库的操作频率</p>
-</li>
-<li><p>TPS = Transactions Per second<br>QPS = Queries Per second<br>一个 Transaction 里可能会有多个 Db Query。<br>一般来说我做这么细的区分，统一都用 QPS 就可以了。</p>
-</li>
-<li><p>mongodb, dynamodb 的QPS大概多少:</p>
-<ul>
-<li>根据机器配置不同，是不一样的。大概在 1w~10w 这个级别。</li>
-</ul>
-<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd6gby3ys1j30x40ewac9.jpg" alt="image-20200325203515823" style="zoom:50%;" />
-</li>
-<li><p>SQL vs NoSQL 大概有几个原则：</p>
-<ol>
-<li>大部分的情况，用SQL也好，用NoSQL也好，都是可以的</li>
-<li>需要支持 Transaction 的话不能选 NoSQL</li>
-<li>你想不想偷懒很大程度决定了选什么数据库，SQL更成熟帮你做了很多事儿，NoSQL很多事儿都要亲力亲为(Serialization, Secondary Index)</li>
-<li>如果想省点服务器获得更高的性能，NoSQL就更好硬盘型的NoSQL比SQL一般都要快10倍以上</li>
-</ol>
-<p>这个NoSQ跟SQL的选择没有一套万能的方法去告诉你应该怎么选，需要了解各种数据库的优缺点，根据场景需求灵活选择。</p>
-</li>
-<li><p>NoSQL 的数据结构比较简单，支持的查询操作也比较简单。结构简单的话，处理效率就高。SQL 为了支持一些很复杂的查询，所以处理效率较低。</p>
-</li>
-<li><p>Database 里index query是啥呀</p>
-<ul>
-<li>就是说查询的时候，database 通过 index 进行查询，会比一个一个数据查过去的方式更快</li>
-<li>select * from xxx table where yyy=1, 如果 yyy 有 index，就是一个 index query，否则就是一个 sequential query</li>
-</ul>
-</li>
-<li><p>join应该是变慢，index query是加快，为什么都会让qps变小呢？</p>
-</li>
-<li><p>index query 这里指的是相对于按照 primary key(id) 去 query。因为 index query 要先query index 的内部表，再去具体的表单里取数据，相比直接通过 id 去取数据要慢的。</p>
-</li>
-<li><p>为啥NOSQL承受量这么多， 跟SQL比起来</p>
-<ul>
-<li>因为 NoSQL 的数据结构比较简单，支持的查询操作也比较简单。结构简单的话，处理效率就高。SQL 为了支持一些很复杂的查询，所以处理效率较低。</li>
-</ul>
-</li>
-<li><p>join应该是变慢，index query是加快，为什么都会让qps变小呢？</p>
-<p>index query多所以查询速度快，所以每秒可处理的query更多，所以qps的值不是应该更大么？课件上说join和index query多的话，qps会小。。 ?</p>
-<ul>
-<li>index query 这里指的是相对于按照 primary key(id) 去 query。因为 index query 要先query index 的内部表，再去具体的表单里取数据，相比直接通过 id 去取数据要慢的。</li>
-</ul>
-</li>
-</ul>
+<h5 id="多选题-下面哪些写法是“不对”的？"><a href="#多选题-下面哪些写法是“不对”的？" class="headerlink" title="[多选题]下面哪些写法是“不对”的？"></a>[多选题]下面哪些写法是“不对”的？</h5><p>哪些写法可能造成数据的不一致？也就是数据库和缓存中存储的数据不一样。</p>
+<p>A.db.set; cache.set29.67% 选择</p>
+<p>B.db.set; cache.delete29.48% 选择</p>
+<p>C.cache.set; db.set29.83% 选择</p>
+<p>D.cache.delete; db.set11.02% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是ABCD</p>
+<p><strong>正确答案:</strong>ABCD</p>
 </blockquote>
-<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p>將大系統拆分為小服務, 如 <strong>SOA, Service Oriented Architecture</strong></p>
-<p>合併需要設計的功能，相似的功能整合為一個Service - 邏輯處理的整合</p>
-<ol>
-<li>Replay 重放需求</li>
-<li>Merge 歸併需求</li>
-</ol>
-<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd6gnly99kj30oc0bead6.jpg" alt="image-20200325204630511" style="zoom:50%;" />
-
-
-
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3h5eovytj30bm06imyu.jpg" alt="image-20200725200820199" style="zoom: 67%;" />
-
-
-
-<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3h6wynfqj31160h046y.jpg" alt="image-20200725200946414"></p>
-<ul>
-<li><p><strong>我們會想根據一個人的電話或email或地址去查他，所以關聯型</strong></p>
-</li>
-<li><p>tweet 的查詢一般就是找id，所以nosql中比較合適，且天然自帶sharding</p>
-</li>
-</ul>
-<ul>
-<li>现在 id 一般要用 Bigint （64位）才不会担心溢出。</li>
-<li>細化數據表單</li>
-<li>畫圖展示數據存、讀過程</li>
-<li>為每個Service選合適的儲存</li>
-</ul>
 <blockquote>
-<h5 id="单选题-系统设计2020-关于文件系统和数据库系统之间的关系，下列说法“不正确”的是？"><a href="#单选题-系统设计2020-关于文件系统和数据库系统之间的关系，下列说法“不正确”的是？" class="headerlink" title="[单选题][系统设计2020]关于文件系统和数据库系统之间的关系，下列说法“不正确”的是？"></a>[单选题][系统设计2020]关于文件系统和数据库系统之间的关系，下列说法“不正确”的是？</h5><p>A.数据库系统是建立在文件系统之上的，也就是说数据库系统中存储的数据最终都是要存在文件系统上的23.96% 选择</p>
-<p>B.文件系统中可以支持丰富的数据查询接口，如在记录用户信息的文件中快速挑选出所有身高在 175 到 185 之间的男性53.13% 选择</p>
-<p>C.我们一般将结构化的数据（Structured Data）放在数据库系统中，把非结构化的数据放在文件系统中15.63% 选择</p>
-<p>D.文件系统和数据库系统都是可持久化的存储系统7.29% 选择</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
-<p><strong>正确答案:</strong>B</p>
-<p><strong>解析:</strong></p>
-<p>数据库系统是文件系统的一层“包装”，将数据结构化的存储起来，从而可以支持更丰富的数据查询方法。如筛选某个属性在某个范围内的所有数据。而文件系统一般就是支持最简单的查询方法：取出某个文件从第x个字节开始的长度为y的所有数据。</p>
-</blockquote>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3hfje89fj310c0cqqf0.jpg" alt="image-20200725201756110"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3hg34ifxj310y0h6wo6.jpg" alt="image-20200725201830146"></p>
-<p>NoSQL 有index吗？</p>
-<p>有的，MongoDB就支持索引<a href="http://www.runoob.com/mongodb/mongodb-indexing.html。" target="_blank" rel="noopener">http://www.runoob.com/mongodb/mongodb-indexing.html。</a><br>索引就是帮助快速定位数据的一组附加信息，可以用在NoSQL上。</p>
-<blockquote>
-<h5 id="单选题-为什么-User-Table-里不用-username-email-作为-Primary-key"><a href="#单选题-为什么-User-Table-里不用-username-email-作为-Primary-key" class="headerlink" title="[单选题]为什么 User Table 里不用 username / email 作为 Primary key"></a>[单选题]为什么 User Table 里不用 username / email 作为 Primary key</h5><p>A.因为两个用户可能使用同一个 Username23.95% 选择</p>
-<p>B.因为数据库只支持整数作为 primary key6.02% 选择</p>
-<p>C.因为 email 要区分大小写，查询相对较慢4.06% 选择</p>
-<p>D.因为很多网站支持用户修改 email 和 username65.97% 选择</p>
+<h5 id="单选题-有没有可能第一个执行失败，第二个执行成功？"><a href="#单选题-有没有可能第一个执行失败，第二个执行成功？" class="headerlink" title="[单选题]有没有可能第一个执行失败，第二个执行成功？"></a>[单选题]有没有可能第一个执行失败，第二个执行成功？</h5><p>A.可能，会造成数据不一致55.52% 选择</p>
+<p>B.可能，不会造成数据不一致12.52% 选择</p>
+<p>C.不可能，不会造成数据不一致31.96% 选择</p>
 <p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是A</p>
-<p><strong>正确答案:</strong>D</p>
-<p><strong>相关知识点:</strong>主键和外键 Primary Key &amp; Foreign Key</p>
-<p><strong>解析:</strong></p>
-<p>如果用 username / email 作为 primary key，会因被其他 table 引用而存储在其他的 table 中，如果被修改，会引起一连串的修改，效率很低。另外一个重要的原因是，通常 primary key 会作为 url 中的一个部分被分享出去，如果 primary key 被修改，则可能导致原本被分享出去的 url 失效。</p>
-</blockquote>
-<h3 id="Design-Schema"><a href="#Design-Schema" class="headerlink" title="Design Schema"></a>Design Schema</h3><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd5ektr01cj30v60do430.jpg" alt="image-20200324224901600" style="zoom:50%;" />
-
-<ul>
-<li>usernane, email是可以給修改，所以不會是primary key, 要是整數的話一般就是sql不是nosql，nosql一般生出來的是個字處串的uuid hash。</li>
-<li><strong>如果username當 user table的主鍵的話，那friendship table因為用了它當外鍵就都要全改!! 所以不好</strong></li>
-<li>varchar 是数据库里的 string。</li>
-<li>用来作foreign key 的不希望它經常變化</li>
-<li>Tweet table的 id如果是存在nosql裡的話就是個字串當id了</li>
-<li>Tweet可以放在SQL也可以放在NoSQL。这里的Schema只是为了确定每条Tweet需要有哪些字段，这些字段可以存在SQL数据库中也可以存在NoSQL中。如果用SQL存的话，那么就是一行是一个tweet，如果是key-value型的NoSQL，那可能就是id =&gt; {user_id, content, created_at}这样的结构。</li>
-<li>media service 就不需要有任何結構啦</li>
-</ul>
-<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="News-Feed-如何存取？"><a href="#News-Feed-如何存取？" class="headerlink" title="News Feed 如何存取？"></a>News Feed 如何存取？</h3><p>==&gt; Tradeoff!</p>
-<ul>
-<li>登入後看到的info的整合</li>
-<li>典型例子<ul>
-<li>FB, Twitter, 朋友圈，RSS Reader(關啦! 死了! 因為tweeter出現了)</li>
-</ul>
-</li>
-<li>新鮮事系統的核心因素？<ul>
-<li>關注＆被關注</li>
-<li>每個人看到的新鮮都是不同的</li>
-</ul>
-</li>
-</ul>
-<h4 id="Pull"><a href="#Pull" class="headerlink" title="Pull"></a>Pull</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3hndbagej30ye09saf9.jpg" alt="image-20200725202536234"></p>
-<p>主動要，拉自己關注的10個好友的前100 tweets，再合成一個給自己看的前100條 ==&gt; </p>
-<ul>
-<li>Merge K Sorted Lists</li>
-<li>複雜度：<ul>
-<li>如果關注了N個人，那麼就N次DB REA時間 + N路merge時間(這個可忽略)</li>
-<li>disk 慢 memory 1000倍; 所以k路歸併可以忽略，主要是在讀N次disk的時間</li>
-<li>Post a tweet =&gt; 1 次 DB Write 的時間</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<h5 id="单选题-关于为什么多路归并的时间可以被忽略，下列说法不正确的是"><a href="#单选题-关于为什么多路归并的时间可以被忽略，下列说法不正确的是" class="headerlink" title="[单选题]关于为什么多路归并的时间可以被忽略，下列说法不正确的是"></a>[单选题]关于为什么多路归并的时间可以被忽略，下列说法不正确的是</h5><p>A.因为 DB Reads 的时间是瓶颈15.43% 选择</p>
-<p>B.因为多路归并的操作都是在内存和CPU中进行的，相对于在DB中读取数据是很快的43.05% 选择</p>
-<p>C.因为多路归并的时间复杂度相对磁盘读取更低41.53% 选择</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是C</p>
 <p><strong>正确答案:</strong>C</p>
 <p><strong>解析:</strong></p>
-<p>假设一共 N 个关注的好友，每个好友100条信息。多路归并的时间复杂度是 O(100NlogN)，这里使用了一个大小为 N 的堆。初始化这个堆需要 O(N) 的时间，归并出 100N 条信息，每一条需要 O(logN) 的时间。值得注意的是，读 DB 的时间是获取了 O(100N) 条数据，这个从时间复杂度上来说要更低，但是因为 DB 的操作事实上是在对文件进行操作，而文件的访问比内存访问慢几百上千倍。</p>
+<p>不可能。程序的执行是顺序执行的，第一个语句执行出错以后，第二个语句就不会执行了，用户会收到整个 setUser 操作失败的信息。</p>
 </blockquote>
-<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd5f4d7ckaj31ii0pawgp.jpg" alt="image-20200324230746737" style="zoom:67%;" />
-
-<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd6g3t4bkvj30v20c8teh.jpg" alt="image-20200325202727234" style="zoom:50%;" />
-
-<h5 id="缺點："><a href="#缺點：" class="headerlink" title="缺點："></a>缺點：</h5><ul>
-<li>現算，就是慢，算好才能展示，卡住，用戶可感知的慢</li>
-</ul>
-<h5 id="偽代碼"><a href="#偽代碼" class="headerlink" title="偽代碼"></a>偽代碼</h5><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3hpsswu0j30w40dg7bo.jpg" alt="image-20200725202756299"></p>
-<h4 id="Push"><a href="#Push" class="headerlink" title="Push"></a>Push</h4><p>寫擴散模型</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3hqvcvdnj31140h4171.jpg" alt="image-20200725202857797"></p>
-<p>N次的DB write，它不需要知道有沒有fanout成功，不用去等這個過程結束，我可以丟給async做，在MQ裡處理，我發出去後就沒我事了。</p>
-<h5 id="Fanout"><a href="#Fanout" class="headerlink" title="Fanout"></a>Fanout</h5><p>別人在發帖時，就把他的推到了我的News Feed List裡 – <strong><em>Fanout</em></strong></p>
-<p>需要一個<strong>News Feed Table</strong>。</p>
-<h5 id="Denormalize"><a href="#Denormalize" class="headerlink" title="Denormalize"></a>Denormalize</h5><p><strong>這邊的 created_at 其實對於這個table來講是個冗餘訊息，就是denormalized，這邊也可以把tweet的更多info都存過來方便用，這樣在這個table找跟我有關時，就可以不用再去另外拿內容，不用再多一次數據庫的查詢，把所有的tweet放到cache去查詢就是快</strong></p>
-<ul>
-<li>用戶需要查看News Feed時，只要從該News Feed Lists中讀取最新的100條就可</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>New Feed Table</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>id</td>
-<td>integer</td>
-</tr>
-<tr>
-<td>owner_id</td>
-<td>Foreign Key</td>
-</tr>
-<tr>
-<td>tweet_id</td>
-<td>Foreign Key</td>
-</tr>
-<tr>
-<td>created_at</td>
-<td>timestamp</td>
-</tr>
-</tbody></table>
 <blockquote>
-<p>Denormalized 叫去标准化。通俗的解释是，通过在不同的 Table 中存储同一份数据的（也就是说至少一份是冗余数据）的形式，来加速数据的查询。因为当数据只存储在一个固定的 Table A 的时候，其他 Table B访问时如果需要同时取得关联的 Table A 的数据，则需要进行 join 操作之类的，会比较慢。一个例子就是在，统计有多少人点赞了一个帖子，可以通过 <code>select count(*) from like_table where post_id=</code> 的方式来获取，但是也可以在 post table 中新增一个 like_count，每次点赞就 +1。这里 like_count 就是一个 denormalized field，因为是可以通过 <code>select count(*)</code> 在 like table 中获得的。</p>
-</blockquote>
-<ul>
-<li>複雜度分析<ul>
-<li>News Feed =&gt; 1次 DB Read</li>
-<li>Post a tweet =&gt; N 個粉絲，需要N次的DB Write, <ul>
-<li>可以用異步在後台執行，不需要用戶等待</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h5><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3i0k1a4hj311e0gwnec.jpg" alt="image-20200725203809234"></p>
-<ul>
-<li><p><strong>如果想讓這次的query很快的話，數據庫的index 該怎麼建？</strong></p>
-<p>==&gt; <strong>根據owner_id 以及 created_at 建複合索引 (composite index)</strong></p>
-</li>
-</ul>
-<blockquote>
-<h5 id="单选题-NewsFeedTable的索引（index）该怎么建？"><a href="#单选题-NewsFeedTable的索引（index）该怎么建？" class="headerlink" title="[单选题]NewsFeedTable的索引（index）该怎么建？"></a>[单选题]NewsFeedTable的索引（index）该怎么建？</h5><p>A.为 owner_id 建索引即可17.32% 选择</p>
-<p>B.为 created_at 建倒序索引即可4.96% 选择</p>
-<p>C.为 owner_id + created_at 建立联合索引（Composite Index）62.15% 选择</p>
-<p>D.为 owner_id 和 created_at 分别建索引15.57% 选择</p>
+<h5 id="多选题-cache-delete-db-set-什么情况下会造成数据不一致？"><a href="#多选题-cache-delete-db-set-什么情况下会造成数据不一致？" class="headerlink" title="[多选题]cache.delete + db.set 什么情况下会造成数据不一致？"></a>[多选题]cache.delete + db.set 什么情况下会造成数据不一致？</h5><p>A.多线程38.22% 选择</p>
+<p>B.多进程28.27% 选择</p>
+<p>C.多机器28.65% 选择</p>
+<p>D.cache.delete 成功但 db.set 失败4.87% 选择</p>
 <p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是D</p>
-<p><strong>正确答案:</strong>C</p>
-<p><strong>相关知识点:</strong>数据库索引 Index</p>
+<p><strong>正确答案:</strong>ABC</p>
 <p><strong>解析:</strong></p>
-<p>解析见视频</p>
+<p>多机器的话自然而然也是多进程的。</p>
 </blockquote>
-<ul>
-<li><p>單獨給兩個feature作排序沒用，應該是要建一個<strong>複合索引 (composite index)</strong>，</p>
-</li>
-<li><p>新增好友，会创建一个异步任务，去把这个好友发的帖子查询到，然后插入到当前用户的 news feed 里。删除好友的时候也是类似的。看起来似乎很土，但是确实实际工程里就是这么做的。系统设计很多东西都不是大家想象的那种需要什么牛逼的技巧的，只要能用不费力就可以了。这个方法看着土，但是用异步任务可以很好的解决，也不是特别慢。十分行之有效。</p>
-</li>
-</ul>
-<h5 id="Push-流程圖"><a href="#Push-流程圖" class="headerlink" title="Push 流程圖"></a>Push 流程圖</h5><p>web server要創建任務放在async task MQ裡，然後去做 <strong>fanouts</strong></p>
-<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd6fm9su6zj30xu0fa0ub.jpg" alt="image-20200325201034815" style="zoom:50%;" />
-
-<h5 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h5><p>一般自己關注不會關注太多人，就是PULL模型；但，關注自己的粉絲會有<strong>明星問題</strong>，如要建1億條record</p>
 <blockquote>
-<h5 id="多选题-Push-模型有什么主要的缺陷？"><a href="#多选题-Push-模型有什么主要的缺陷？" class="headerlink" title="[多选题]Push 模型有什么主要的缺陷？"></a>[多选题]Push 模型有什么主要的缺陷？</h5><p>A.数据库中创建太多记录，浪费磁盘20.49% 选择</p>
-<p>B.粉丝数目可能很大，导致 Fanout 过程很长，从而导致用户刷到新鲜事有延迟26.92% 选择</p>
-<p>C.浪费系统资源去为很多僵尸粉创建新鲜事记录25.38% 选择</p>
-<p>D.明星发帖会在短时间内为系统带来很大的处理压力27.21% 选择</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是ABCD</p>
-<p><strong>正确答案:</strong>BCD</p>
-<p><strong>解析:</strong></p>
-<p>记住一句话 “Disk is cheap”，不要怕浪费数据库存储，为了加速查询，多存一些东西是没关系的。</p>
-</blockquote>
-<p>Pull - 自己關注的人不會很多一般來講，但明星的粉絲很多！一億之類，要為所有粉絲都建紀錄，超大。</p>
-<ul>
-<li>Code:  下面的async 任務自己慢慢執行</li>
-</ul>
-<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd6fsjx9npj30qw0eogn0.jpg" alt="image-20200325201633121" style="zoom:50%;" />
-
-<h4 id="現有社交software的模型分析"><a href="#現有社交software的模型分析" class="headerlink" title="現有社交software的模型分析"></a>現有社交software的模型分析</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3jzgsth7j311a0egaix.jpg" alt="image-20200725214622556"></p>
-<ul>
-<li><p>FB - Pull; Ins - Push + Pull; Twitter - Pull; Friends Circle - 最多就是有廣告，沒排序或找你沒看過的，Pull</p>
-<p>總是要作Tradeoff的。勇擇一個</p>
-<p>廣告是pull模型，會編輯，要是看到廣告太多次，就不看了，所以不能在廣告商投放時放，所以比較好是pull</p>
-<blockquote>
-<h5 id="单选题-广告的插入是-Push-还是-Pull-模型？"><a href="#单选题-广告的插入是-Push-还是-Pull-模型？" class="headerlink" title="[单选题]广告的插入是 Push 还是 Pull 模型？"></a>[单选题]广告的插入是 Push 还是 Pull 模型？</h5><p>A.Push54.32% 选择</p>
-<p>B.Pull43.45% 选择</p>
-<p>C.猜不出来2.23% 选择</p>
+<h5 id="单选题-能否给数据库和缓存的操作加锁来保证数据一致性？"><a href="#单选题-能否给数据库和缓存的操作加锁来保证数据一致性？" class="headerlink" title="[单选题]能否给数据库和缓存的操作加锁来保证数据一致性？"></a>[单选题]能否给数据库和缓存的操作加锁来保证数据一致性？</h5><p>A.可以加锁47.11% 选择</p>
+<p>B.加不了锁52.89% 选择</p>
 <p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
 <p><strong>正确答案:</strong>B</p>
 <p><strong>解析:</strong></p>
-<p>广告的投放人群很多，Push 模式很费时间，无法实时生效。且广告主可以筛选和改变投放人群，因此 Push 模型并不能很好的支持这种动态的改动。</p>
+<p>加锁以后只能保证在同一个数据上的操作顺序执行，但是无法执行“回滚”，也就是说如果第一个操作成功，第二个操作失败了，也会导致数据的不一致。<br>另外互斥锁（mutex）是多线程内共享的，多进程内无法共享。如果要加锁，只能使用分布式锁，比如 Zookeeper，但是这会导致读取效率急剧降低。得不偿失。</p>
 </blockquote>
-</li>
-</ul>
+<blockquote>
+<h5 id="单选题-User-Table-的-Cache-Hit-Rate-一般有多少？"><a href="#单选题-User-Table-的-Cache-Hit-Rate-一般有多少？" class="headerlink" title="[单选题]User Table 的 Cache Hit Rate 一般有多少？"></a>[单选题]User Table 的 Cache Hit Rate 一般有多少？</h5><p>A.20%5.16% 选择</p>
+<p>B.50%8.32% 选择</p>
+<p>C.95%24.54% 选择</p>
+<p>D.98%61.98% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是D</p>
+<p><strong>正确答案:</strong>D</p>
+<p><strong>解析:</strong></p>
+<p>hit rate = cache hit / (cache hit + cache miss)</p>
+</blockquote>
 <ul>
-<li>可以在 push 的时候筛选没错，但是消息一旦push 出去以后，你再想要改动就很难了。广告主的需求很可能是 push 出去之后发现钱烧得太快要缩小投放访问，这个时候 push 模式就不太方便了。</li>
+<li>我们允许数据库和缓存有“短时间”内的不一致，但最终会一致。</li>
 </ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3k1fm8o8j30x80fiti7.jpg" alt="image-20200725214817750"></p>
-<h3 id="數據庫的索引"><a href="#數據庫的索引" class="headerlink" title="數據庫的索引"></a>數據庫的索引</h3><p>查字典時，先找頭、找到全身、去翻頁碼，要有序啦</p>
-<p>相當於一張專門存index的表</p>
-<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd6j1mdm73j30xy0ewgu3.jpg" alt="image-20200325212010964" style="zoom:67%;" />
-
-<ul>
-<li>這個暫存表告訴我們直接去原表的4、9 row找</li>
-<li>可加速 where時、還有range時的查詢</li>
-<li>原理就 B+ Tree, 關聯型主要都是它，通過多分叉減小樹的高度，以減小磁盤 seek 次數<ul>
-<li>1000 =&gt;lg1000為10了，還是多會有磁頭移動的物理過程，不像內存裡動很快。所以仍希望二分-&gt;三分-&gt;四分，就是二叉的樹高還是太高，所以才有B+樹叉開</li>
-</ul>
-</li>
-</ul>
-<p>怎麼建index. &amp; 常用的幾類 index</p>
-<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd6ia4xbojj30sa0c0wfy.jpg" alt="image-20200325214230561" style="zoom:67%;" />
-
-<ul>
-<li>唯一索引：如在email, phone_number, user_name</li>
-<li>聯合索引：涉及多個col需求，就是建聯合索引</li>
-<li><strong><em>條件索引</em></strong>：如要去filter已經付費的用戶中，的聯合索引；我們不去care沒付錢的</li>
-</ul>
-<h2 id="Scale"><a href="#Scale" class="headerlink" title="Scale"></a>Scale</h2><p>Optimize!</p>
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3k2mm3ioj30oa0dqq8y.jpg" alt="image-20200725214926676" style="zoom:50%;" />
-
-<p>如何擴展 - 如何優化？</p>
 <blockquote>
 <ul>
-<li>Newsfeed 是朋友圈（你和你朋友发的帖子的汇总），timeline是你发的帖子的汇总。有的网站也把这两个概念反过来。我们课上用的是我刚才说的方式。</li>
-<li>那这个cache什么时候更新呢？是在N个用户任意一个发了新推特时候既更新DB又更新cache吗 （异步任务）？<ul>
-<li>用户发新的 post 的时候，只更新这个用户发过了哪些帖子的 cache，不会去更新关注他的人的 cache。关注他的人要获得这个新的帖子，需要 pull 一下然后拿到新的 post 然后再更新自己的 news feed cache。</li>
+<li>database.set(key, user);cache.set(key)我觉得没有脏数据啊。当第一个线程1执行到15-16行之间的时候。假如有另一个线程2进入setUser这个函数。线程2的cache.set也会覆盖线程1的cache.set结果的啊，所以旧数据就被覆盖了啊。没有脏数据啊，求解释？</li>
 </ul>
-</li>
-<li>pull优化中每个人的cache如何更新呢？如果每发一个新的tweet都更新一次cache，本质上和push就一样了吧<ul>
-<li>pull的时候才更新cache，但是只更新上一次pull之后发的tweet。比如说你一分钟前pull过，pull的结果放在了cache里面，然后你现在再pull，就只会去db或者每个人的timeline cache里面取最近一分钟的tweets，从而优化了pull的速度。</li>
-</ul>
-</li>
-<li>刚才有个人问了这个问题：”请问pull优化中每个人的cache如何更新呢？如果每发一个新的tweet都更新一次cache，本质上和push就一样了吧“。 我想说就算是从某个时间戳之后去DB拉去 Follower的数据，从IO次数上讲没有本质的变化啊。<ul>
-<li>是有区别的。如果我需要拿这个人所有的 posts 和我拿这个人最近5分钟的 posts，前者数据多，取出来慢，后者很多时候都是没有数据，速度很快。时间效率不仅仅跟 query 次数有关，跟数据的传输量也有关系。你想一下如果一个 hash map 里，key1 里存了 1个数，key2 里存了 1m 个数，你是取1个数快呢，还是取 1m 个数快呢？找到 1个数和 1m 个数的内存首地址是一样的。但是这里因为是访问 cache，cache和访问者未必在同一台机器，所以虽然 key1和 Key2都很快找到数据了，但是 key2 传输 1m 个数据到 cache 的使用者，这个过程是要比传输1个数据要慢的。</li>
+<p>假设执行顺序如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">thread 1 line 15: database.set(user) &#x2F;&#x2F; old data</span><br><span class="line">thread 2 line 15: database.set(user) &#x2F;&#x2F; new data</span><br><span class="line">thread 2 line 16: cache.set(user) &#x2F;&#x2F; new data</span><br><span class="line">thread 1 line 15: cache.set(user) &#x2F;&#x2F; old data</span><br></pre></td></tr></table></figure>
+
+<p>最后 cache 里是 old data, database 里是 new data</p>
+<p>线程2的cache.set也会覆盖线程1的cache.set结果的啊<br>在上面列举的情况中，是 thread 1 覆盖了 thread 2。要注意 user 是一个局部变量。thread 2 里的 user 和 thread 1 里的 user 的内容是不同的。</p>
+</blockquote>
+<p>如果寫真的太多太多了，在Cache Aside下，就是加DB啊。</p>
+<blockquote>
+<ul>
+<li>redis包含cache和一个db，是说redis里面包含了relational database management system , rdbms么？ 我记得redis只是缓存，没mysql的呢。<ul>
+<li>redis可以跟mysql配合使用，redis会完全接管mysql，自己从mysql里面load数据，所以在外界<strong>看起来</strong>就像是redis里面包了一个mysql一样。并不是说redis里面有一个mysql。</li>
 </ul>
 </li>
 </ul>
 </blockquote>
-<ol>
-<li>優化</li>
-</ol>
-<h3 id="解決設計缺陷如-Pull-vs-Push"><a href="#解決設計缺陷如-Pull-vs-Push" class="headerlink" title="解決設計缺陷如 Pull vs Push"></a>解決設計缺陷如 Pull vs Push</h3><ul>
-<li><p>PULL - 登入時才去組織內容，他要是關注了1000個用戶，就要有這麼多次的SQL query，效率就是還低。</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3k6sj0xdj30rg0dg0zi.jpg" alt="image-20200725215327168"></p>
+<h2 id="Authentication-Service"><a href="#Authentication-Service" class="headerlink" title="Authentication Service"></a>Authentication Service</h2><h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><p>可以用uuid()算這個hash值</p>
+<p>通常用UUID来作为Session Key(Session Token)，UUID(Universal Unique ID): UUID是由一组32位数的16进制数字所构成，所以UUID理论上的总数为16^32=2^128，约等于3.4 x 10^38。也就是说若每纳秒产生1兆个UUID，要花100亿年才会将所有UUID用完。所以通俗的称之为宇宙爆炸都不会出现重复的ID字段。</p>
+<blockquote>
 <ul>
-<li><strong>所以可以在DB訪問前加入 Cache</strong></li>
-<li><strong>Cache每個用戶的 Timeline</strong><ul>
-<li>N次DB請求 =》 N次Cache read請求 ，差了100、1000倍!</li>
-<li><strong><em>Tradeoff</em></strong>: Cache幾條？最近的1000條？其實也就100、200就差不多啦，畢竟內存不是disk，沒那麼便宜啦</li>
+<li>cookie 存在browser 的哪里？<ul>
+<li>browser 就是一个 client 就是一个客户端软件，是一个 application 是一个 software，一个程序，一段代码。一个 software 要持久化的存储一个东西，最终都是存储在操作系统的文件系统上的。</li>
 </ul>
 </li>
-<li><strong>Cache 每個用戶的 News Feed</strong> – 可能30秒我就刷一下，刷跟刷之間我所關注的人沒有更新，每次都做歸併merge太浪費計算時間啦，所以直接把它的cache下來<ul>
-<li>沒有 Cache News Feeds 的用戶: Merge N用戶的最近100條 Tweets，然後取出前100條，除非這個是第一次。</li>
-<li>有Cache News Feeds的用戶：歸併merge N 用戶在某個<strong>時間戳</strong>之後的所有 Tweets</li>
+<li>session key一般有效期多久？<ul>
+<li>取决于网站的安全等级，比如银行类的一般浏览器关掉 session key就过期了。社交类的一般就三个月甚至更长。这个可以由网站开发人员自行定义。</li>
 </ul>
 </li>
-<li><strong>對比 MySQL vs Memcached 的 QPS</strong><ul>
-<li><strong>約 1000 ~100</strong></li>
+<li>any security problems regarding to session key?<ul>
+<li>如果你的 session key 被盗，比如你拿了你男朋友女朋友的电脑，悄悄的记录下了 session key，你就可以以你男朋友女朋友的身份登录了。所以通常一些安全性较高的网站，如银行，session key 几分钟就会失效。</li>
+</ul>
+</li>
+<li>session table 是存在数据库里， 还是存在In memory db 里面?<ul>
+<li>都是可以的。不过一般都是存在 数据库里，否则memory数据丢了所有用户都会被logout 这个体验并不好。</li>
+</ul>
+</li>
+<li>what if i never log in again? my session will live forever?<ul>
+<li>通常网站的逻辑都是最多3个月。session table 里有 expire_at 这个 field，记录了什么时候会过期。一般用户登陆以后，这一项设置为 3 个月。当然你可以根据你网站的安全性要求来设置不同的过期时间，安全性越高的网站过期时间越短。一般不会设置为永久不过期。</li>
 </ul>
 </li>
 </ul>
-</li>
-<li><p>PUSH - 浪費了更多的 Disk</p>
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3k9bseplj30nw0bmq9h.jpg" alt="image-20200725215553093" style="zoom: 50%;" />
-
+</blockquote>
+<h3 id="Cookies"><a href="#Cookies" class="headerlink" title="Cookies"></a>Cookies</h3><ul>
+<li>用户 Login 以后，为他创建一个 session 对象</li>
+<li>并把 session_key 返回给浏览器，让浏览器存储起来</li>
+<li>浏览器将该值记录在浏览器的 cookie 中</li>
+<li>用户每次向服务器发送的访问，都会自动带上该网站所有的 cookie</li>
+<li>此时服务器拿到 cookie 中的 session_key，在 Session Table 中检测是否存在，是否过期</li>
+<li>Cookie:HTTP协议中浏览器和服务器的沟通机制，服务器把一些用于标记用户身份的信息，传递给 浏览器，浏览器每次访问任何网页链接的时候，都会在 HTTP 请求中带上所有的该网站相关的 Cookie 信息。Cookie 可以理解为一个 Client 端的 hash table。</li>
+</ul>
+<blockquote>
+<h5 id="单选题-Cookie-里存的东西是越多越好么？"><a href="#单选题-Cookie-里存的东西是越多越好么？" class="headerlink" title="[单选题]Cookie 里存的东西是越多越好么？"></a>[单选题]Cookie 里存的东西是越多越好么？</h5><p>A.是的3.13% 选择</p>
+<p>B.不是96.87% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>首先 Cookie 的大小 HTTP 协议是有限制的。其次因为每次 Request 都要带上 Cookie 里的内容，因此 Cookie 里存的东西是越少越好而不是越多越好。</p>
+</blockquote>
+<p>一般就是放個session key表明用戶身份，如掛在胸前的牌，代表授權訪問的用戶。然後去session table查是不是過期了，查uuid(就是session key), 然後知道 user_id，就是client端的hash table。</p>
+<blockquote>
+<h5 id="单选题-服务器需要主动删除掉过期的-Session-么？"><a href="#单选题-服务器需要主动删除掉过期的-Session-么？" class="headerlink" title="[单选题]服务器需要主动删除掉过期的 Session 么？"></a>[单选题]服务器需要主动删除掉过期的 Session 么？</h5><p>A.需要34.19% 选择</p>
+<p>B.不需要65.81% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是A</p>
+<p><strong>正确答案:</strong>B</p>
+<p><strong>解析:</strong></p>
+<p>做 lazy loading 就好了。因为有 expire_at，无需主动删除，被动删除即可，即在用户登陆的时候发现过期了再删。</p>
+</blockquote>
+<blockquote>
 <ul>
-<li><p>PULL 是存在Mem中，相較起來disk上便宜啦!</p>
+<li>session table 是存在数据库里， 还是存在In memory db 里面?<ul>
+<li>都是可以的。不过一般都是存在 数据库里，否则memory数据丢了所有用户都会被logout 这个体验并不好。</li>
+</ul>
 </li>
-<li><p>讓常登入的優先收到，但機器人也是問題。。。</p>
-</li>
-<li><p><strong>Fanout</strong> 的時過程要幾個小時啊！資源該多為大多數人服務，但都為lady gaga服務了</p>
+</ul>
+</blockquote>
+<p>device token 也可紀錄在 session table, </p>
+<blockquote>
+<h5 id="单选题-Session-Table-适合存储在什么数据库里？"><a href="#单选题-Session-Table-适合存储在什么数据库里？" class="headerlink" title="[单选题]Session Table 适合存储在什么数据库里？"></a>[单选题]Session Table 适合存储在什么数据库里？</h5><p>A.Memcached21.64% 选择</p>
+<p>B.MySQL22.46% 选择</p>
+<p>C.Memcached + MySQL55.90% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是B</p>
+<p><strong>正确答案:</strong>C</p>
+</blockquote>
+<p>如果自己建個網站，用戶不多，放在Memcache裡也Ok, 就算斷了，用戶就是再重登一次，不會怎樣，畢竟不是用戶信息的不能丟的。</p>
+<p>大網站就最好撐久點，讓體驗好，訪問效率高</p>
+<blockquote>
 <ul>
-<li>嘗試在現有的模型作最小改動優化之，多加幾台用於作Push任務的機器, Problem solved! </li>
-<li>對長期的增長進行估計，並評估是否值得轉換整個模型成PULL或混合的，PULL還可以方便插入廣告、內容排序、幹掉zombie粉不給他發帖了</li>
+<li>那个device id那一块，如何实现？有点模糊。<ul>
+<li>就是在每个device第一次登录的时候给他分配一个id，然后把这个id放到该设备的cookie中，每次访问网站的时候都要带上这个id，这样根据id就能知道当前活动的是哪台设备了。</li>
+</ul>
+</li>
+<li>db如何设计呢？如何判断这个session 是这个user，然后把之前的ipad的session logout，再让这个iphone的session建立？<ul>
+<li>如果用NoSQL，那么表中的每一行可以是{user_id, session, expire_at，其中user_id是foreign key并且建立了index方便快速查找，session在生成的时候可以encode进去user_id的信息，方便直接从session中识别出当前用户。如果是key-value NoSQL，那就直接把上述结构改为user_id ==&gt; {session, expire_at}就行了。<br>当用户登录的时候直接生成一个新的session替换掉原来的。<br>当旧设备的session再次尝试请求数据的时候，先从session中decode出user_id，然后去查表，然后会发现表中的session跟当前的session不是同一个，那就强制logout。</li>
+</ul>
+</li>
+<li>每个device 都会有一个 session key 吗？<ul>
+<li>session key 和 device 不是绑定的关系。 session key 是记录某次登录后所形成的客户端与服务器端的保持通话的记录的 key。同一台机器上的不同的浏览器登录以后的 session key一般就是不同的。像 Google Chrome 这种支持多用户的浏览器，切换用户以后，就相当于切换浏览器一样，session 记录也是不同的。</li>
+</ul>
+</li>
+<li>如果一个ipad来登陆来了，如何把iphone的session key给expire还是删除呢？如何判断，这2个device是一个user？如果问，如何回答。<ul>
+<li>用同一个账号登录肯定就是同一个user。如果登录之后发现在session table中该账号有一个active的session，就可以把这个session 给expire了然后写一个新的进去。</li>
+</ul>
+</li>
+<li>登陆之后，发现该账号已经有一个active user，就可以把这个session给expire了。这个“expire”操作具体是怎样进行的？<ul>
+<li>这种情况可以直接删除该行记录。</li>
+</ul>
+</li>
+<li>想问一下RESTful API里面比如POST一个新blog的请求会用session_key来验证user吗？<ul>
+<li>也会的，只要是需要authorization的操作都需要验证当前用户的session.</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3kcm6rdgj311a0eak7f.jpg" alt="image-20200725215902414" style="zoom:67%;" />
-
-<p>10 M還可以push，1B就不可能push啦! pull還是方便，什麼插內容廣告、僵屍粉、都解決</p>
-<h3 id="PUSH-PULL"><a href="#PUSH-PULL" class="headerlink" title="PUSH + PULL"></a><strong>PUSH + PULL</strong></h3><ul>
-<li><ul>
-<li><p><strong>普通用戶一樣是PUSH</strong></p>
-</li>
-<li><p><strong>明星就標上去，不PUSH到用戶的News Feed中</strong></p>
-</li>
-<li><p>當用戶需要的時候，來明星用戶的Timeline拿，然後合併到News Feed裡</p>
-</li>
-<li><p>怎麼定義明星？</p>
-<ul>
-<li><blockquote>
-<h5 id="单选题-直接用粉丝数目判断是否是明星会不会有问题"><a href="#单选题-直接用粉丝数目判断是否是明星会不会有问题" class="headerlink" title="[单选题]直接用粉丝数目判断是否是明星会不会有问题"></a>[单选题]直接用粉丝数目判断是否是明星会不会有问题</h5><p>A.有问题80.95% 选择</p>
-<p>B.没有问题12.72% 选择</p>
-<p>C.猜不出6.33% 选择</p>
+</blockquote>
+<h2 id="Friendship-Storage-amp-Query"><a href="#Friendship-Storage-amp-Query" class="headerlink" title="Friendship Storage &amp; Query"></a>Friendship Storage &amp; Query</h2><p>單向：Twitter, Ins, Weibo</p>
+<p>雙向：WeChat, FB, WhatsApp</p>
+<blockquote>
+<h5 id="单选题-为什么要区分-smaller-user-id-和-bigger-user-id？"><a href="#单选题-为什么要区分-smaller-user-id-和-bigger-user-id？" class="headerlink" title="[单选题]为什么要区分 smaller_user_id 和 bigger_user_id？"></a>[单选题]为什么要区分 smaller_user_id 和 bigger_user_id？</h5><p>A.否则查询 A 和 B 是否为好友的时候会变慢55.84% 选择</p>
+<p>B.否则查询 A 的所有好友的时候会变慢32.22% 选择</p>
+<p>C.猜不到11.94% 选择</p>
 <p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是A</p>
 <p><strong>正确答案:</strong>A</p>
 <p><strong>解析:</strong></p>
-<p>明星可能会掉粉，会从 &gt;=1m 掉粉掉到 &lt;1m，导致一些用户丢失掉一些明星发的帖子</p>
+<p>查询 A 的所有好友不会变慢，因为依然是 select * from friendship where user_id1=A or user_id2=A。</p>
 </blockquote>
-</li>
-</ul>
-</li>
-</ul>
-<p>如果大明星掉了粉好幾10萬，</p>
-<p>最初因為他是大明星，所以系統不push他的文章，當他掉了一堆粉，我刷新News Feed, 因為這時大明星不是明星了，所以系統就不去Pull他的文章，我就丟失了他的動態啦。。</p>
-</li>
-</ul>
-  <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3kfvm6tqj31080gwwnc.jpg" alt="image-20200725220211743" style="zoom:67%;" />
-
-<ul>
-<li><p>所以不要動態計算他是不是明星，要離線計算，可以在User Table加一個字段 : is_superstar。</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3kgg4ssmj30l00e4jv7.jpg" alt="image-20200725220243478"></p>
-</li>
-</ul>
-<ul>
-<li><p>為什麼大家都用PULL, 幹嘛還要學PUSH?</p>
-<ul>
-<li><p>設計本就不是找唯一方案，而是最合適</p>
-</li>
-<li><p><strong>流量小時，Push是最經濟跟省力方式</strong></p>
-<table>
-<thead>
-<tr>
-<th>PUSH 使用時機</th>
-<th>PULL 使用時機</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>資源少</td>
-<td>資源多、內存高</td>
-</tr>
-<tr>
-<td>想偷懶、想少寫code</td>
-<td></td>
-</tr>
-<tr>
-<td><strong>實時性不高</strong></td>
-<td><strong>實時性要求高</strong></td>
-</tr>
-<tr>
-<td>用戶發帖比較少 如 ins</td>
-<td>用戶帖多 如twitter</td>
-</tr>
-<tr>
-<td>雙向好友關係，沒有明☆問題，如朋友圈</td>
-<td>單向好友關係，有明☆問題</td>
-</tr>
-</tbody></table>
-<p>twitter就發得多，隨便噴；ins就比較慢</p>
-<p>FB PULL，又作群組又排序又插廣告就PULL</p>
-</li>
-</ul>
-</li>
-<li><p>更多功能</p>
-<ul>
-<li>Like，Follow &amp; Unfollow, Ads</li>
-</ul>
-</li>
-<li><p>特殊情況時，如僵屍粉、大新聞搞掛了服務</p>
-<ul>
-<li>數據庫掛了怎辦？</li>
-<li>用戶逐漸</li>
-<li>服務器頂不住壓力怎辦？</li>
-<li>數據庫頂不住怎辦？</li>
-<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3kk5cg34j30l407i787.jpg" alt="image-20200725220559196"></li>
-</ul>
-</li>
-</ul>
-<ol>
-<li><p>Maintenance</p>
-<ul>
-<li>魯棒性，要是掛了怎辦</li>
-<li>擴展性，要是流量暴增怎辦</li>
-</ul>
-</li>
-</ol>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><ul>
-<li>4S 在心裡的思想</li>
-<li>Ask before Design – 先問清楚再設計</li>
-</ul>
-<ul>
-<li>no more no less – 要設計剛剛好夠用的就好</li>
-</ul>
-<ul>
-<li>Work solution first – 先設計一個基本能工作的，再逐本優化</li>
-<li>Analysis is important than solution – 沒有標準答案，分析過程展示知識儲備；權衡各種設計方式的利弊</li>
-</ul>
-<h1 id="Extension"><a href="#Extension" class="headerlink" title="Extension"></a>Extension</h1><h2 id="數據持久化與常見的數據庫"><a href="#數據持久化與常見的數據庫" class="headerlink" title="數據持久化與常見的數據庫"></a>數據持久化與常見的數據庫</h2><ul>
-<li>MySQL, PostgreSQL</li>
-<li>Memcached<ul>
-<li>k-v緩存系統</li>
-<li>value 不支持 set / list</li>
-<li>無法持久化</li>
-</ul>
-</li>
-<li>Redis<ul>
-<li>value 支持 set / list，O(1) add, append，</li>
-<li>數據可持久化同步上disk，數據都load進memory，</li>
-<li>後來可多台機器的內存</li>
-<li>可用作 Cache/ Message Queu/ Database，重開機還在</li>
-</ul>
-</li>
-<li>Cassandra, HBase<ul>
-<li>Column Family Base NoSQL 數據庫</li>
-<li>key分為 row-key, column-key</li>
-<li>適合放查詢請求簡單不複雜的data</li>
-</ul>
-</li>
-<li>MongoDB<ul>
-<li>適合寫多讀少的數據，寫快讀慢</li>
-</ul>
-</li>
-<li>Rocksdb<ul>
-<li>kv, value 不支持 set / list</li>
-<li>用於大公司的kv storage底層, 如FB、抖音</li>
-</ul>
-</li>
-</ul>
 <blockquote>
 <ul>
-<li>选择memcached 和cache 的区别？<ul>
-<li>cache单机的，单机的内存有限制，并且只能本机访问，memcache是一个cache db，可以由多台机器组成，并且可以多个server同时访问</li>
+<li>smaller_user_id，bigger_user_id这里，没有太理解为什么有可能多存一份好友关系。如果已建立好友关系，在什么情况下会出现再次插入同样的好友关系呢？UI端不是应该不支持再次建立好友关系的操作了吗？还是说为了逻辑上更严谨，使A和B成为好友关系只有一种数据存储模式？<ul>
+<li>作为一个有经验的工程师，除了在前端要避免重复创建好友以外，后端也是需要相同逻辑的（比如预防一些别有用心的黑客）<br>当你要存 1 和 2 是好友的时候，你可能存为 &lt;1,2&gt; 也可能存为 &lt;2,1&gt;。我们只存成 &lt;1,2&gt; 的形式，原因有两个，第一是方便查询，否则你查询的时候得分别差 &lt;1,2&gt; 是否存在和 &lt;2,1&gt; 是否存在。第二个是节省一半的存储空间。</li>
 </ul>
 </li>
 </ul>
 </blockquote>
+<p>雙向好友存成兩條還是比較好，雖然多一倍的量，但查詢時不需要 smaller_user_id = x or  bigger_uesr_id = x ，那個 or 的查詢操作很花時間。在線的服務需要簡單快速的查詢語句。可能明年hardware自己就快了一倍，會讓現在的速度優化沒意思。</p>
 <blockquote>
-<p>异步任务中适合放那些不着急响应结果给用户或者执行起来比较慢的任务。所以 LintCode 评测和发邮件都适合放在异步任务中执行。C和D中的两个操作只是简单的在数据库中创建一条记录，是很快的，不需要通过异步任务执行，且 D 选项必须马上反馈给用户是否注册成功，更加不能放在异步任务中。</p>
+<ul>
+<li>数据库存的数据越多，不会查询越慢吗？<ul>
+<li>会。但是由于据库或者有索引（索引就是用来加快数据查询速度的额外数据结构），又或者本身就是in-memory的hashtable，其查询时长随数据量的增加而增加的曲线其实非常平缓。</li>
+</ul>
+</li>
+</ul>
 </blockquote>
-<h2 id="消息隊列"><a href="#消息隊列" class="headerlink" title="消息隊列"></a>消息隊列</h2><ul>
-<li><p>IPC 進程間通信或同一進程的不同線程間的通信方式</p>
-</li>
-<li><p>時機：生產者、消費者</p>
-</li>
-<li><p>處理跟產生的速率不一致</p>
-<ul>
-<li><p>不可能一下單就有人來敲門到貨</p>
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh5z1y30rqj30q20i6451.jpg" alt="image-20200727235851008" style="zoom: 33%;" />
-</li>
-</ul>
-</li>
-<li><p>Lintcode 評測機</p>
-</li>
-<li><p>註冊後發email，一般是第三方發 mail的系統</p>
-<ul>
-<li>e.g. mailgun 幫發mail<ul>
-<li>第三方的api會慢一點</li>
-<li>只要跟用戶說「我有發了」就好，而不需要讓用戶等著</li>
-</ul>
-</li>
-<li>1 慢；2 需要重試機制; 3 訂閱用戶，慢慢出現沒差，重要的是「已訂閱」了<ul>
-<li>關注一個最主要是把好友關係存下來</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>RabbitMQ, Redis(Cache比不過Memcached, MQ比不上RabbitMQ, DB比不上SQL及NoSQL，但快…)</p>
-<p>Amazon Simple Queue Service (SQS)</p>
-</li>
-<li><p>一消息只被處理一次，金融級別會有更高的要求，萬億級別的如螞蟻</p>
-</li>
-<li><p>鏡像Queues ，一個掛了另一個馬上頂上</p>
-</li>
-<li><p>12360 一個一個把訂票的要求執行了</p>
-</li>
-</ul>
-<h1 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h1><h3 id="1-果取關"><a href="#1-果取關" class="headerlink" title="1 果取關"></a>1 果取關</h3><ul>
-<li>Push model 下的討論<br><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3lx48mupj30oy0cwacj.jpg" alt="image-20200725225321376"></li>
-</ul>
-<p>就是取關了後還是看得到他的訊息，要再刷一次才不見，就是典型的還在計算</p>
-<h3 id="2-如何存-Likes"><a href="#2-如何存-Likes" class="headerlink" title="2 如何存 Likes"></a>2 如何存 Likes</h3><p>Denormalize: 原本可以在別的表單裡計算下的東西，我直接存在這個表單裡</p>
-<p>直接把點讚的數目一股腦存下去</p>
-<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd7r1stfcrj30ta0g475i.jpg" alt="image-20200326233130851" style="zoom:67%;" />
-
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3m1s1qinj30xa0e0tft.jpg" alt="image-20200725225749071" style="zoom:67%;" />
-
-<hr>
-<h3 id="3-驚群現象-Thundering-Herd"><a href="#3-驚群現象-Thundering-Herd" class="headerlink" title="3 驚群現象 Thundering Herd"></a>3 驚群現象 Thundering Herd</h3><p>大家都在這時間都去關注這八卦</p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3m3fvrv1j30km0bkn0y.jpg" alt="image-20200725225925974"></p>
+<p>transaction - 事务。代表一些列操作要打包在一起，同时成果或者同时失败。比如我转你 10 块钱，你的余额要 +10，我的余额要 -10。这是两条数据库操作，必须同时成功或者同时失败。不能只有一条操作成功。这种打包，就叫做 Transaction。    </p>
 <blockquote>
-<h5 id="单选题-【系统设计2020】数据库的分片机制是否对同一个数据的大量访问有用？"><a href="#单选题-【系统设计2020】数据库的分片机制是否对同一个数据的大量访问有用？" class="headerlink" title="[单选题]【系统设计2020】数据库的分片机制是否对同一个数据的大量访问有用？"></a>[单选题]【系统设计2020】数据库的分片机制是否对同一个数据的大量访问有用？</h5><p>数据库分片，英文叫做 Sharding 或者 Partition</p>
-<p>A.有用26.53% 选择</p>
-<p>B.没用73.47% 选择</p>
-<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是A</p>
+<ul>
+<li>NoSQL支持transaction吗？<ul>
+<li>有一些支持，有一些不支持</li>
+</ul>
+</li>
+<li>保证一个数据库中同时成功或者同时失败的语句是什么？<ul>
+<li>这个要靠数据库的transaction机制</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="Cassandra-as-NoSQL"><a href="#Cassandra-as-NoSQL" class="headerlink" title="Cassandra as NoSQL"></a>Cassandra as NoSQL</h2><blockquote>
+<h5 id="多选题-什么是序列化-Serialization，下列说法正确的是"><a href="#多选题-什么是序列化-Serialization，下列说法正确的是" class="headerlink" title="[多选题]什么是序列化 Serialization，下列说法正确的是"></a>[多选题]什么是序列化 Serialization，下列说法正确的是</h5><p>A.将内存中的数据（或者某个 class 的 object）变成一个字符串的过程36.89% 选择</p>
+<p>B.JSON 是一种序列化格式27.30% 选择</p>
+<p>C.序列化的作用是让数据可以进行传输和存储34.58% 选择</p>
+<p>D.我不懂什么是序列化，请多给我讲讲1.24% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+" alt="img">答错了，您选择的答案是AC</p>
+<p><strong>正确答案:</strong>ABC</p>
+<p><strong>相关知识点:</strong>什么是序列化 Serialization</p>
+</blockquote>
+<ul>
+<li><p>Row key : hash key, partition key, 去算存在哪個機器上。NoSQL主要是要實現分布式，不同機器上，不能每台機器上存一份，需要一個sharding或partition的算法。Cassandra會根據row key去算一個hash。不支援範圍查詢。</p>
+</li>
+<li><p>col key : 是排序的，類似用B+樹作有序是叫LSM Tree。在同個row key之下。可以是多元組排序。</p>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>sql型数据库是只要建了index就可以支持范围查询的。— 那sql型数据库，是自动每一个列都建index么？因为貌似每一个列都是可以range 查询的吧<ul>
+<li>准确地说是sql型数据库是建立了index就可以支持<strong>快速的范围查询</strong>，即使没有index也是支持范围查询的，只不过会很慢。<br>你需要手动指定为哪些列创建index，因为index是有一定开销的，除了磁盘占用会多一点之外，你每增加删除一条记录的时候数据库也都要维护相应的index。换句话说，快速的范围查询是有一定代价的，所以需要用户自己去权衡应不应该给某一个列加index。</li>
+</ul>
+</li>
+<li>如果把user_id作为row_key, 那么在column_key里再把它放进去其实没什么意义吧？因为查的时候user_id肯定是一个确定的值、而非范围了。<ul>
+<li>对，不需要重复访进去。这里只是举个例子。因为有的时候 row_key 不是 user_id。这页 PPT 和上一页在分别讲两件事情。</li>
+</ul>
+</li>
+<li>类似JSON？<ul>
+<li>是的，可以通过 JSON Serialize 到 value 里</li>
+</ul>
+</li>
+<li>在NoSQL里有primary key的概念吗？应该如何避免同一个数据被存了两次<ul>
+<li>在NoSQL里有primary key的概念吗？应该如何避免同一个数据被存了两次</li>
+</ul>
+</li>
+<li>我通过row_key(user_id) 知道数据存在那一台机器上之后，该台机器上应该是存了很多user的信息的，那我还是在进行一个for循环找到所有该用户的rows吗？再通过friend_user_id 来查找。<ul>
+<li>不是的。同一台机器上的数据是按照 row_key + column_key 排好序的，你可以理解为你可以在一台机器上按照 index 去找到你要的 row_key 的那些数据。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>NoSQL是以格子為單位的，不是以行為一筆的。</p>
+<blockquote>
+<h5 id="单选题-查询最近一天之内关注的好友该怎么办？"><a href="#单选题-查询最近一天之内关注的好友该怎么办？" class="headerlink" title="[单选题]查询最近一天之内关注的好友该怎么办？"></a>[单选题]查询最近一天之内关注的好友该怎么办？</h5><p>A.将 timestamp 设置为 row_key7.75% 选择</p>
+<p>B.将 timestamp 设置为 column_key91.15% 选择</p>
+<p>C.不会1.10% 选择</p>
+<p><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+" alt="img">答对了，您选择的答案是B</p>
 <p><strong>正确答案:</strong>B</p>
-<p><strong>解析:</strong></p>
-<p>因为访问的是同一个数据，sharding 机制无论如何都会 sharding 到同一个机器上。此时 sharding 不能做到分摊流量的作用。</p>
 </blockquote>
+<blockquote>
 <ul>
-<li>sharding 不會管用</li>
+<li><em>column key能放多个值吗? 同时放friendID和timestamp</em><ul>
+<li><em>yes</em></li>
 </ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3m516nyzj30x00dswoi.jpg" alt="image-20200725230057674"></p>
-<ul>
-<li><a href="https://engineering.fb.com/networking-traffic/under-the-hood-broadcasting-live-video-to-millions/" target="_blank" rel="noopener">https://engineering.fb.com/networking-traffic/under-the-hood-broadcasting-live-video-to-millions/</a></li>
-<li></li>
+</li>
+<li><em>可以设多个Column Key吗？</em><ul>
+<li><em>可以的 列存储可以有很多column的</em></li>
 </ul>
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3m7c3zs6j30v40jwaie.jpg" alt="image-20200725230310804" style="zoom:50%;" />
+</li>
+<li><em>如果有的时候想sort by timestamp 有的时候想sort by id怎么办</em><ul>
+<li><em>建两张表，一张 sort by timestamp，一张 sort by id。插入或者修改数据的时候，两张表都操作一下。</em></li>
+</ul>
+</li>
+<li><em>想请问一下，当查询某个user的newsfeed的时候，我们只已知user_id和想查询的时间段，但是我们不知道会有哪些tweet id。Cassandra的查询不是需要提供row key &amp; column key，才能得知value吗？ 既然我不知道会有哪些tweet id，这样我就无法得知column key是什么</em><ul>
+<li><em>在newsfeed的column key里，第一项是 timestamp，第二项可以是 tweet id 也可以把 tweet id放在 value 里。 Cassandra的查询是不需要指定 column key 的第二项的。只要有 column key 的第一项的 timestamp 的 range 就可以了。</em></li>
+</ul>
+</li>
+<li><em>column_key都是cache的吗？那value是在disk上吗？</em><ul>
+<li><em>这里主要是想解释为什么把tweet_id放在column key里面好一点。原因是weet_id所对应的tweet data可能已经在cache里了，如果把tweet id放在value中的话，那么就必须要row_key, column_key和value都读出来，这样不能充分利用cache里面的数据。但如果是把tweet id放在column key里面的话，那么读到column key的时候如果发现tweet id对应的tweet data已经在cache中了那就不需要继续去读value了，这样可以节省一步NoSQL读操作。</em></li>
+</ul>
+</li>
+<li><em>复合型的column key是将几个column组合成一个key？还是将原本几个column合成一个column，然后将这单个的column当key (比如合成后的单column 里数据的格式为：timestamp_tweetID)?</em><ul>
+<li><em>前者。几个 column 组成一个 key。类似 SQL 里的 multi-column index （composite index）</em></li>
+</ul>
+</li>
+<li><em>这里的column_key,为什么是created_at1,tweet_id1, 这是一个复合的。第一个是按时间，第二个是按tweet id排序，是吗？</em><ul>
+<li><em>column_key 可以是一个复合 key。你可以认为是一个二元组，然后按照这个二元组进行排序。那么 column key 在排序的时候就会先按照 created_at 排序，如果created_at 相同的才按照 tweet_id 排序。这里其实不把 tweet_id 放在 column_key 里也没有关系，最主要是需要按照 created_at 排序。</em></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb5m0zj17j30re0i0n3l.jpg" alt="image-20200329221212550" style="zoom:67%;" />
 
-
-
+<blockquote>
 <ul>
-<li><p>解決方式</p>
+<li>SQL不支持分布式吗？<ul>
+<li>是支持的，但是一般需要你手动做sharding之类的工作，用起来没有NoSQL的分布式那么简单。而NoSQL大多支持“开箱即用”的分布式。</li>
+</ul>
+</li>
+<li><em>NoSQL 快是因为用的hash吗？SQL慢是因为不是hash吗？</em><ul>
+<li><em>NoSQL快是因为其相对SQL来说少了很多功能，更轻量级。比如NoSQL通常不支持ACID的transaction, 并且大多数据模型很简单（比如memcached就只是存储key-value)，大多不支持自建index，不支持compound index， 有些甚至不支持持久化。少了很多负担，自然就多了很多优化的余地。</em></li>
+</ul>
+</li>
+<li><em>cassandra可以有好几个column key，用起来和SQL的multi key有什么不同？</em><ul>
+<li><em>你说的这个是compound key吧？这个是两个不同的概念，compound key指的是在一个表中，可以用两个或多个column的组合来作为primary key，比如一个表中存了某个物体的：（x坐标，y坐标，z坐标，形状，其它信息），那么就可以以(x坐标，y坐标，z坐标）这三个column的组合来作为一个compound key，以此唯一索引一个物体。</em><br><em>而Cassandra可以被认为是一个巨大的二维数组，row key是第一维下标，column key是第二维下标，因此db[row key][column key]唯一决定了一个数组元素，比如db[user_name][email].</em></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb5ivnrq3j30lu0gqgms.jpg" alt="image-20200329220834459" style="zoom:67%;" />
+
+<blockquote>
 <ul>
-<li><p>Memcache lease Get: 讓memcached 等一會，好多個人找同個key，讓大家排個隊，只放第一個lease get回去後面的就等著一會，取了後回填；只讓第一個拿不到，去通知，然後去跟老闆說，然後回填</p>
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3mdyyq3vj30nc0ggdjl.jpg" alt="image-20200725230932282" style="zoom: 33%;" />
+<li>cassandra 第二个表没有user_id 是怎么从user_name 找到 user_id 的？<ul>
+<li>第二个表里 username 是 key，user_id 是value，直接就查到了。</li>
+</ul>
 </li>
-<li><p>FB 也有寫了個博文，有視頻，待看!</p>
+<li>在同时创建多张表单时，Cassandra的row_key是email/phone/username,user_id是不是应该放在column_key里？要不怎么找到对应的user_id。<ul>
+<li>user_id 放在 column_key 或者放在 value 里都可以的。如果你放在 value 里，可以把 column_key 设置为一直是 null。也就是其实你用不上 Cassandra Column Key 排序的特性。另外一个替代的数据库是 RocksDB，这个就是纯 key-value 了。直接key=username, value=user_id 就可以。</li>
+</ul>
 </li>
-<li><p>Redis 防雪崩架構設計</p>
+</ul>
+</blockquote>
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb5kszh1nj30n60g4js8.jpg" alt="image-20200329221059107" style="zoom:67%;" />
+
+<blockquote>
+<ul>
+<li>如果A和B的好友比较多，这样耗时比较多吧？<ul>
+<li>一般共同好友的功能在双向好友关系的社交网络中才比较有有意义。单向的话，会是“共同关注”，或者你的好友里谁关注了他，一般不会有“共同粉丝”的功能。因此这个“关注” 或者好友的量级一般都在千人这个级别（FB和微信都差不多是5k的好友限制）因此并不慢。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb5sm2nyoj30vs0km3zp.jpg" alt="image-20200329221827305" style="zoom:67%;" />
+
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdb5t57414j30wc0f676n.jpg" alt="image-20200329221858313" style="zoom:67%;" />
+
+<blockquote>
+<ul>
+<li>直接在A的二度里查B不可以吗？<ul>
+<li>在 A 的二度里查询 B 查到了是二度关系，查不到是 &gt;= 3度的关系。这里问题的需求3度也需要知道是不是3度，&gt;3度的标记为 3+。因此只在 A的二度里查B还不够。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><p>如果一个用户没有进行登录或者注册，如何识别两次 Request 来自同一个用户呢？</p>
+<ul>
+<li><p>IP Address 是不可以的，因为在同一个局域网下的不同用户会共享同一个对外的 IP Address。</p>
+<p>正确的做法，是为用户生成一个 uuid （Universal Unique ID）作为他的标识，有很多库函数可以生成这个 uuid，这是一个字符串，可以认为不同的用户一定会生成不同的 uuid。服务器端生成这个 uuid 之后返回给浏览器端，浏览器端存储在 cookie 里，之后每次请求都会带上。如果服务器发现 cookie 里没有这个 uuid 就说明可能是一个新用户，就为其分配新的 uuid，否则不改变这个 uuid。这样我们就可以用 uuid 来识别一个未登录的用户了。</p>
+<p>这样的方法如果你清空 cookie 或者换了浏览器以后，可能会被分配到一个新的 uuid，那么你之前的 requests 和之后的 requests 就可能会被服务器识别为两个不同的用户。这个是没有办法解决的了。因为神仙也无法知道你换了浏览器以后坐在电脑前的是不是还是你自己。</p>
 </li>
 </ul>
 </li>
 </ul>
-<h1 id="四種姿勢"><a href="#四種姿勢" class="headerlink" title="四種姿勢"></a>四種姿勢</h1><ul>
-<li>白紙 + 攝像頭</li>
-<li>白板 + cam ==&gt; 不清楚</li>
-<li>錄屏、畫圖軟件、鼠標好</li>
-<li>錄屏+手寫: iPad + apple pencil + airServer</li>
-</ul>
-<h5 id="Tradeoff"><a href="#Tradeoff" class="headerlink" title="Tradeoff"></a>Tradeoff</h5><h5 id="SOA"><a href="#SOA" class="headerlink" title="SOA"></a>SOA</h5><h5 id="Pull-vs-Push-Model"><a href="#Pull-vs-Push-Model" class="headerlink" title="Pull vs Push Model"></a>Pull vs Push Model</h5><h5 id="DB-Systems"><a href="#DB-Systems" class="headerlink" title="DB Systems"></a>DB Systems</h5><h5 id="Async-amp-Message-Queue"><a href="#Async-amp-Message-Queue" class="headerlink" title="Async &amp; Message Queue"></a>Async &amp; Message Queue</h5><h5 id="Persistent"><a href="#Persistent" class="headerlink" title="Persistent"></a>Persistent</h5><h5 id="Denormalize-1"><a href="#Denormalize-1" class="headerlink" title="Denormalize"></a>Denormalize</h5><h5 id="Thundering-Herd"><a href="#Thundering-Herd" class="headerlink" title="Thundering Herd"></a>Thundering Herd</h5><h5 id="News-Feed-Design"><a href="#News-Feed-Design" class="headerlink" title="News Feed Design?!"></a>News Feed Design?!</h5></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/02/28/Python/2019-02-28-Abstract%20in%20Python/">Python/2019-02-28-Abstract in Python</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-02-28</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span><div class="content"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> abc <span class="keyword">import</span> ABCMeta, abstractmethod</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span><span class="params">(object, metaclass=ABCMeta)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,title,author)</span>:</span></span><br><span class="line">        self.title=title</span><br><span class="line">        self.author=author   </span><br><span class="line"><span class="meta">    @abstractmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">display</span><span class="params">()</span>:</span> <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Write MyBook class</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyBook</span><span class="params">(Book)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, title, author, price)</span>:</span></span><br><span class="line">        super(MyBook, self).__init__(title, author)</span><br><span class="line">        self.price = price</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">display</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Title: &#123;&#125;"</span>.format(self.title))</span><br><span class="line">        print(<span class="string">"Author: &#123;&#125;"</span>.format(self.author))</span><br><span class="line">        print(<span class="string">"Price: &#123;&#125;"</span>.format(self.price))</span><br></pre></td></tr></table></figure>
+</blockquote>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2019/02/28/Python/2019-02-28-Abstract%20in%20Python/">Python/2019-02-28-Abstract in Python</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-02-28</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span><div class="content"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> abc <span class="keyword">import</span> ABCMeta, abstractmethod</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span><span class="params">(object, metaclass=ABCMeta)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,title,author)</span>:</span></span><br><span class="line">        self.title=title</span><br><span class="line">        self.author=author   </span><br><span class="line"><span class="meta">    @abstractmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">display</span><span class="params">()</span>:</span> <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Write MyBook class</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyBook</span><span class="params">(Book)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, title, author, price)</span>:</span></span><br><span class="line">        super(MyBook, self).__init__(title, author)</span><br><span class="line">        self.price = price</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">display</span><span class="params">(self)</span>:</span></span><br><span class="line">        print(<span class="string">"Title: &#123;&#125;"</span>.format(self.title))</span><br><span class="line">        print(<span class="string">"Author: &#123;&#125;"</span>.format(self.author))</span><br><span class="line">        print(<span class="string">"Price: &#123;&#125;"</span>.format(self.price))</span><br></pre></td></tr></table></figure>
 
 
 
