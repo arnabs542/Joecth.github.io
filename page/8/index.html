@@ -339,72 +339,6 @@
 <p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gblnwn98uhj30fq0gedgq.jpg" alt="三向交握 範例"></p>
 <p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gblnxhmf7cj30xs0mfwi6.jpg" alt="TCP-Header-Format"></p>
 <h3 id="HTTP-methods"><a href="#HTTP-methods" class="headerlink" title="HTTP methods"></a>HTTP methods</h3><p>Restfule API - GET POST PUT DELETE</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/05/System-Design/2020-02-05-System%20Design%20-%20TinyURL/">System-Design/2020-02-05-System Design - TinyURL</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-05</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/System/">System</a></span><div class="content"><h1 id="TinyURL"><a href="#TinyURL" class="headerlink" title="TinyURL"></a>TinyURL</h1><ul>
-<li>[0-9, a-z, A-Z] 一共62個，62^6 ~= 56.8 Billions unique Strings 應是夠用的</li>
-<li>要考慮到其他國家的string 這邊當然主要只是英文字母</li>
-<li>Similar: bit.ly, goo.gl </li>
-<li>簡答的通常是這個系統的一個功能</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmqzsggoj30q00fqq51.jpg" alt="image-20200801212636104"></p>
-<h2 id="Read-Heavy"><a href="#Read-Heavy" class="headerlink" title="Read Heavy"></a>Read Heavy</h2><h2 id="Constraints"><a href="#Constraints" class="headerlink" title="Constraints"></a>Constraints</h2><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmt7b338j30pa0batf5.jpg" alt="image-20200801212843299" style="zoom: 50%;" />
-
-
-
-<h2 id="REST-APIs"><a href="#REST-APIs" class="headerlink" title="REST APIs"></a>REST APIs</h2><h3 id="長做短"><a href="#長做短" class="headerlink" title="長做短"></a>長做短</h3><h4 id="Goo"><a href="#Goo" class="headerlink" title="Goo"></a>Goo</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmuaiyitj30q60e2wjr.jpg" alt="image-20200801212946459" style="zoom:50%;" />
-
-<ul>
-<li>201 - created</li>
-<li>content-typ是告訴你body是什麼</li>
-<li>怎麼去客製化url?<ul>
-<li>body可以加個參數像是defaul none</li>
-</ul>
-</li>
-<li>Response e.g.</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmw80drzj30l20oodq6.jpg" alt="image-20200801213136358"></p>
-<h4 id="Bitly"><a href="#Bitly" class="headerlink" title="Bitly"></a>Bitly</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmx33xswj30um0f0agv.jpg" alt="image-20200801213226710"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmxkp980j30xk0c0teo.jpg" alt="image-20200801213255365"></p>
-<h3 id="短回長"><a href="#短回長" class="headerlink" title="短回長"></a>短回長</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmyfkjlpj30lu07odis.jpg" alt="image-20200801213345334"></p>
-<ul>
-<li>3XX redirection</li>
-<li><strong>301 moved Permanently</strong></li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmyvowbyj30z60rm18f.jpg" alt="image-20200801213408593"></p>
-<ul>
-<li>Header 裡會有個key 就是location知道要redirect到哪裡</li>
-<li>我收到301跟它的loc後，會再發一個網址去我要去的地方</li>
-</ul>
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbn1qu2i5j30am04ogm8.jpg" alt="image-20200801213656344" style="zoom:33%;" />
-
-
-
-
-
-
-
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmzm8bsfj30jw0ciwin.jpg" alt="image-20200801213452950" style="zoom: 33%;" />
-
-
-
-<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbn05k9ynj30i407k0vl.jpg" alt="image-20200801213523160" style="zoom: 50%;" />
-
-
-
-<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbn4qhmtyj30t00f0wpp.jpg" alt="image-20200801213946574"></p>
-<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbpxnpwgzj30hs0amaca.jpg" alt="image-20200801231648267" style="zoom:50%;" />
-
-<ul>
-<li>2 跟3要綁事務了</li>
-</ul>
-<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200801225936514.png" alt="image-20200801225936514" style="zoom: 33%;" />
-
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbpjz88wfj30yq0lyn1c.jpg" alt="image-20200801230337236"></p>
-<p>ref: <a href="https://www.educative.io/courses/grokking-the-system-design-interview/m2ygV4E81AR" target="_blank" rel="noopener">https://www.educative.io/courses/grokking-the-system-design-interview/m2ygV4E81AR</a></p>
-<ul>
-<li>黃色那塊是就是lazy cleanup</li>
-</ul>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbptwfkwdj30s00hk46g.jpg" alt="image-20200801231309317"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbpu1y125j30ws0kg129.jpg" alt="image-20200801231319438"></p>
 </div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/05/System-Design/2020-02-05-System%20Design%20-%20Sharding%20&amp;%20Queue/">System-Design/2020-02-05-System Design - Sharding &amp; Queue</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-05</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/System/">System</a></span><div class="content"><h3 id=""><a href="#" class="headerlink" title=""></a></h3><h1 id="分片-partition-or-sharding"><a href="#分片-partition-or-sharding" class="headerlink" title="分片 partition  or  sharding"></a>分片 partition  or  sharding</h1><p>廣告的話，不只在database，LB某種意義上分給機器們，也就是。</p>
 <p>每個機器分一部分就是要切小塊，LB就是在做pardition，當然sharding更指<strong>DB</strong>的存儲</p>
 <p>日本放在日本的db，因為有 sharding　所以要<strong>Routing</strong>去找數據</p>
@@ -508,7 +442,73 @@
 <p> server取完後再去把task刪了，至少這個task還是在queue裡的 </p>
 <h5 id="可以取出來在db-or-que寫-in-progress，-gt-high-availability-不丟消息"><a href="#可以取出來在db-or-que寫-in-progress，-gt-high-availability-不丟消息" class="headerlink" title="可以取出來在db or que寫 in progress，==&gt; high availability　不丟消息"></a>可以取出來在db or que寫 in progress，==&gt; high availability　不丟消息</h5><p>可以retry</p>
 <p>![image-20200206211146919](/Users/joe/Library/Application Support/typora-user-images/image-20200206211146919.png)</p>
-<h5 id="Async-缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity"><a href="#Async-缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity" class="headerlink" title="Async 缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity"></a>Async 缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity</h5></div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+<h5 id="Async-缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity"><a href="#Async-缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity" class="headerlink" title="Async 缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity"></a>Async 缺點：當計算快時比較建議用同步就好，因為que會有delay跟complexity</h5></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/02/05/System-Design/2020-02-05-System%20Design%20-%20TinyURL/">System-Design/2020-02-05-System Design - TinyURL</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-02-05</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/System/">System</a></span><div class="content"><h1 id="TinyURL"><a href="#TinyURL" class="headerlink" title="TinyURL"></a>TinyURL</h1><ul>
+<li>[0-9, a-z, A-Z] 一共62個，62^6 ~= 56.8 Billions unique Strings 應是夠用的</li>
+<li>要考慮到其他國家的string 這邊當然主要只是英文字母</li>
+<li>Similar: bit.ly, goo.gl </li>
+<li>簡答的通常是這個系統的一個功能</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmqzsggoj30q00fqq51.jpg" alt="image-20200801212636104"></p>
+<h2 id="Read-Heavy"><a href="#Read-Heavy" class="headerlink" title="Read Heavy"></a>Read Heavy</h2><h2 id="Constraints"><a href="#Constraints" class="headerlink" title="Constraints"></a>Constraints</h2><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmt7b338j30pa0batf5.jpg" alt="image-20200801212843299" style="zoom: 50%;" />
+
+
+
+<h2 id="REST-APIs"><a href="#REST-APIs" class="headerlink" title="REST APIs"></a>REST APIs</h2><h3 id="長做短"><a href="#長做短" class="headerlink" title="長做短"></a>長做短</h3><h4 id="Goo"><a href="#Goo" class="headerlink" title="Goo"></a>Goo</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmuaiyitj30q60e2wjr.jpg" alt="image-20200801212946459" style="zoom:50%;" />
+
+<ul>
+<li>201 - created</li>
+<li>content-typ是告訴你body是什麼</li>
+<li>怎麼去客製化url?<ul>
+<li>body可以加個參數像是defaul none</li>
+</ul>
+</li>
+<li>Response e.g.</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmw80drzj30l20oodq6.jpg" alt="image-20200801213136358"></p>
+<h4 id="Bitly"><a href="#Bitly" class="headerlink" title="Bitly"></a>Bitly</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmx33xswj30um0f0agv.jpg" alt="image-20200801213226710"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmxkp980j30xk0c0teo.jpg" alt="image-20200801213255365"></p>
+<h3 id="短回長"><a href="#短回長" class="headerlink" title="短回長"></a>短回長</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmyfkjlpj30lu07odis.jpg" alt="image-20200801213345334"></p>
+<ul>
+<li>3XX redirection</li>
+<li><strong>301 moved Permanently</strong></li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmyvowbyj30z60rm18f.jpg" alt="image-20200801213408593"></p>
+<ul>
+<li>Header 裡會有個key 就是location知道要redirect到哪裡</li>
+<li>我收到301跟它的loc後，會再發一個網址去我要去的地方</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbn1qu2i5j30am04ogm8.jpg" alt="image-20200801213656344" style="zoom:33%;" />
+
+
+
+
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbmzm8bsfj30jw0ciwin.jpg" alt="image-20200801213452950" style="zoom: 33%;" />
+
+
+
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbn05k9ynj30i407k0vl.jpg" alt="image-20200801213523160" style="zoom: 50%;" />
+
+
+
+<h2 id="Storage"><a href="#Storage" class="headerlink" title="Storage"></a>Storage</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbn4qhmtyj30t00f0wpp.jpg" alt="image-20200801213946574"></p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbpxnpwgzj30hs0amaca.jpg" alt="image-20200801231648267" style="zoom:50%;" />
+
+<ul>
+<li>2 跟3要綁事務了</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200801225936514.png" alt="image-20200801225936514" style="zoom: 33%;" />
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbpjz88wfj30yq0lyn1c.jpg" alt="image-20200801230337236"></p>
+<p>ref: <a href="https://www.educative.io/courses/grokking-the-system-design-interview/m2ygV4E81AR" target="_blank" rel="noopener">https://www.educative.io/courses/grokking-the-system-design-interview/m2ygV4E81AR</a></p>
+<ul>
+<li>黃色那塊是就是lazy cleanup</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbptwfkwdj30s00hk46g.jpg" alt="image-20200801231309317"></p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghbpu1y125j30ws0kg129.jpg" alt="image-20200801231319438"></p>
+</div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
   $('#nav').addClass('is-mobile')
   $('footer').addClass('is-mobile')
   $('#top-container').addClass('is-mobile')
