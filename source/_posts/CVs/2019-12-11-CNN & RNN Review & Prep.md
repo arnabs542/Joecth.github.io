@@ -2,9 +2,7 @@
 layout: post
 categories: AI
 tag: [] 
-
-
-
+date: 2019-12-11
 ---
 
 
@@ -104,11 +102,15 @@ blob=[batch_size, channel，height，width]
 * soomth-L1
 * ROI pooliing 7x7
 
-<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdddgum6x0j31jk0esacq.jpg" alt="img" style="zoom:67%;" />
-
 #### *for `ZF` backbone *
 
 ==> ch-256 before RPN
+
+### ★ 比較 R-CNN v.s. Fast v.s. Faster
+
+<img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdddgum6x0j31jk0esacq.jpg" alt="img" style="zoom:67%;" />
+
+
 
 ---
 
@@ -124,12 +126,12 @@ blob=[batch_size, channel，height，width]
 
 * 2 predictor for each cell.
 
-* Q: If class prediction is not sharing, can one cell predict two obj?
+* **Q: If class prediction is not sharing, can one cell predict two obj?**
 
   * No. In this way,  how do the two predictor divide their works?
   * Faster RCNN OK because of anhchors and IOU w/ GT, which got introduced in YOLO v2
 
-* Why 2 bounding boxes?
+* **Why 2 bounding boxes?**
 
   * Predictor with bigger IOU with GT while training, is responsible for detecting the corresponding object.
 
@@ -275,9 +277,15 @@ ref: https://www.cnblogs.com/xuanyuyt/p/7222867.html
 
 
 
+### 梯度消失主角
+
+- Sigmoid邊緣區
+
+
+
 ### Why ReLU Better than Sigmoid?
 
-- 一方面，ReLU比sigmoid效果好的分析都是基于深度神经网络的前提，比如网络足够深时sigmoid会有明显的梯度消失问题，如果是浅层神经网络的话这些问题并不存在。另一方面，它们的用处不同，sigmoid输出范围是01之间，可以当作概率。深度神经网络中sigmoid可以用作门控单元（比如LSTM的三种门都是sigmoid）或attention（比如SENet中excitation部分），这些ReLU并不能取代。
+- 一方面，ReLU比sigmoid效果好的分析都是基于深度神经网络的前提，比如网络足够深时**sigmoid会有明显的梯度消失问题，如果是浅层神经网络的话这些问题并不存在**。另一方面，它们的用处不同，sigmoid输出范围是01之间，可以当作概率。深度神经网络中sigmoid可以用作门控单元（比如LSTM的三种门都是sigmoid）或attention（比如SENet中excitation部分），这些ReLU并不能取代。
 
 - 说白了还是具体问题具体分析。如果神经网络是进行二分类，你用relu做输出层激励函数，你的输出是不是很难控制？如果你的神经网络层数很深，你用sigmoid，反向传播过程是不是会有梯度消失？现在sigmoid更多的情况下，在小型神经网络和二分类型的输出层中出现的比较多，relu效果好不代表在任何应用条件下都好
 
@@ -302,7 +310,7 @@ ref: https://www.cnblogs.com/xuanyuyt/p/7222867.html
 * SGD => momentum, to make local minimum to global min
 * AdaGrad: 衰減 α,  
 
-Identify class imbalance as the primary obstacle preventing one-stage object detectors from surpassing top-performing, two-stage methods, such as Faster R-CNN variants. To address this, we propose the focal loss which applies a modulating term to the cross entropy loss in order to focus learning on hard examples and down-weight the numerous easy negatives.
+Identify class **imbalance** as the primary obstacle preventing one-stage object detectors from surpassing top-performing, two-stage methods, such as Faster R-CNN variants. To address this, we propose the focal loss which applies a modulating term to the cross entropy loss in order to focus learning on hard examples and down-weight the numerous easy negatives.
 
 
 ref:
@@ -400,6 +408,21 @@ ref:
 ### Gradient Explosion
 
 ROI Pooling vs ROI Align
+
+
+
+### BN 梯度消失解決原理
+
+- 藉由改為正態分布，把data拉回sigmoid中間區那區梯度才不會太平 (兩側都沒梯度了)
+  - 導數最大時是0.25, 在x==0時
+
+ref: https://blog.csdn.net/m0_37477175/article/details/80259773
+
+
+
+### NMS - for overlapping boxes 
+
+Non-Maximal Suppression
 
 
 
@@ -571,8 +594,8 @@ Male節點：20位男性，其中有13位打板球7位不打，Gini係數為
 
 * Undersampling
 * Oversampling
-
 * SMOTE
+* 圖像而言，有 Focal loss!
 
 ### Why Regularization ? example?
 
@@ -939,9 +962,19 @@ note: https://zhuanlan.zhihu.com/p/63974249
 
 ### Why Smooth-L1 in Faster & SSD?
 
+对于边框预测回归问题，通常也可以选择平方损失函数（L2损失），但L2范数的缺点是当存在离群点（outliers)的时候，这些点会占loss的主要组成部分。比如说真实值为1，预测10次，有一次预测值为1000，其余次的预测值为1左右，显然loss值主要由1000主宰。所以FastRCNN采用稍微缓和一点绝对损失函数（smooth L1损失），它是随着误差线性增长，而不是平方增长。
+
+注意：smooth L1和L1-loss函数的区别在于，L1-loss在0点处导数不唯一，可能影响收敛。smooth L1的解决办法是在0点附近使用平方函数使得它更加平滑。
+
+ref: https://zhuanlan.zhihu.com/p/48426076
+
+根据fast rcnn的说法，"...... L1 loss that is less sensitive to outliers than the L2 loss used in R-CNN and SPPnet." 也就是smooth L1 loss让loss对于离群点更加鲁棒，即：相比于L2损失函数，其对离群点、异常值（outlier）不敏感，梯度变化相对更小，训练时不容易跑飞。
 
 
-### RNN
+
+## RNN
+
+
 
 <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdc5yneca2j31400g6di2.jpg" alt="img" style="zoom:67%;" />
 

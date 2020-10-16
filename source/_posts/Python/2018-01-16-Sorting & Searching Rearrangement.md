@@ -896,6 +896,198 @@ fr: https://blog.csdn.net/Apeopl/article/details/88935422?depth_1-utm_source=dis
 
 
 
+## B-Search-left
+
+```python
+    def b_search_left(self, intervals, target):
+        start, end = 0, len(intervals) - 1
+        while start + 1 < end:
+            mid = start + (end - start) // 2
+            if intervals[mid].start <= target:
+                end = mid
+            else:
+                start = mid
+        # Cases assistance:
+        # 1 1 1 1 3, 2
+        #       s e     return e
+        # 2 2 2 2 3, 2
+        # s e           return s
+        # 1 3 3 3 3, 2  
+        # s e           return e
+        if intervals[start].start == target:
+            return start
+        else:
+            return end
+          
+   def helper3(self, intervals, newInterval):
+        """
+        1. 找到這個 newInterval 該插進去的位置
+        2. 然後做一般的 interval merge就ok啦!
+        """
+        # for i in range() 
+        n = len(intervals)
+        target = newInterval.start
+        pos = 0 # insert position
+        # pos = self.b_search()   # ==> pos to insert, also 
+            # means amount <= ME            ==> bisect_right()
+            # 用    amount <  ME 也可以啦   ==> bisect_left() ==> 這個比較好 implement
+        # pos = self.bisect_left(intervals, target) # 這是類，不能這樣塞! 
+        pos = self.b_search_left(intervals, target)
+        
+        # 重組一個新的 intervals, 叫 arr, O(N)
+        arr = []
+        for j in range(0, pos):
+            arr.append(intervals[j])    # 如果可block copy可更快
+        arr.append(newInterval)
+        # for j in range(pos+1, n):
+        for j in range(pos, n):
+            arr.append(intervals[j])
+        # print([(tmp.start, tmp.end) for tmp in arr])
+        
+        # intervals.sort(key=lambda x: x.start)   # O(NLogN) 這樣上面的就都不用做了
+        res = [arr[0]]
+        for idx in range(len(arr)):
+            prev, now = res[-1], arr[idx]
+            if res[-1].end < now.start:
+                res.append(now)
+            else:
+                res[-1].end = max(res[-1].end, now.end)
+        return res          
+```
+
+
+
+
+
+
+
+## B-Search-right
+
+```python
+    def b_search_right(self, intervals, target):
+        start, end = 0, len(intervals) - 1
+        while start + 1 < end:
+            mid = start + (end - start) // 2
+            if intervals[mid].start < target:
+                end = mid
+            else:
+                start = mid
+        # Cases assistance:
+        # 1 1 1 1 3, 2
+        #       s e     return e
+        # 2 2 2 2 3, 2
+        #       s e     return e
+        # 1 1 1 1 2, 2
+        #       s e     return e
+        # 1 1 1 1 1, 2
+        #       s e     return e + 1
+        # 1 3 3 3 3, 2  
+        # s e           return e
+        # 3 3 3 3 3, 2
+        # s e           return s
+        if intervals[end].start < target:
+            return end + 1
+        # else:     # WRONG!!!
+        #     return end
+        if intervals[start].start > target:
+            return start
+        return end
+```
+
+```python
+		def helper3(self, intervals, newInterval):
+        """
+        1. 找到這個 newInterval 該插進去的位置
+        2. 然後做一般的 interval merge就ok啦!
+        """
+        # for i in range() 
+        n = len(intervals)
+        target = newInterval.start
+        pos = 0 # insert position
+        # pos = self.b_search()   # ==> pos to insert, also 
+            # means amount <= ME            ==> bisect_right()
+            # 用    amount <  ME 也可以啦   ==> bisect_left() ==> 這個比較好 implement
+            
+        # pos = self.bisect_left(intervals, target) # 這是類，不能這樣塞! 
+        pos = self.b_search_right(intervals, target)
+        # pos = self.b_search_left(intervals, target)
+        
+        
+        # 重組一個新的 intervals, 叫 arr, O(N)
+        arr = []
+        for j in range(0, pos):
+            arr.append(intervals[j])    # 如果可block copy可更快
+        arr.append(newInterval)
+        # for j in range(pos+1, n):
+        for j in range(pos, n):
+            arr.append(intervals[j])
+        # print([(tmp.start, tmp.end) for tmp in arr])
+        
+        # intervals.sort(key=lambda x: x.start)   # O(NLogN) 這樣上面的就都不用做了        
+        res = [arr[0]]
+        for idx in range(len(arr)):
+            prev, now = res[-1], arr[idx]
+            if res[-1].end < now.start:
+                res.append(now)
+            else:
+                res[-1].end = max(res[-1].end, now.end)
+        return res
+```
+
+
+
+#### Lintcode 653, K closest elemenets near target
+
+```python
+	def lintcode653(self, A, k, target):
+		  # 找到 A[left] < target, A[right] >= target
+        # 也就是最接近 target 的两个数，他们肯定是相邻的
+        right = self.findUpperClosest(A, target)
+        left = right - 1
+    
+    	# 两根指针从中间往两边扩展，依次找到最接近的 k 个数
+        results = []
+        for _ in range(k):
+            if self.isLeftCloser(A, target, left, right):
+                results.append(A[left])
+                left -= 1
+            else:
+                results.append(A[right])
+                right += 1
+        
+        return results
+    
+    def findUpperClosest(self, A, target):
+        # find the first number >= target in A
+        start, end = 0, len(A) - 1
+        while start + 1 < end:
+            mid = (start + end) // 2
+            if A[mid] >= target:
+                end = mid
+            else:
+                start = mid
+        
+        if A[start] >= target:
+            return start
+        
+        if A[end] >= target:            
+            return end
+        
+        # 找不到的情况
+        return len(A)
+        
+    def isLeftCloser(self, A, target, left, right):
+        if left < 0:
+            return False
+        if right >= len(A):
+            return True
+        return target - A[left] <= A[right] - target
+```
+
+
+
+
+
 ## B Tree & B+ Tree
 
 ### ● B Tree - Balance Tree

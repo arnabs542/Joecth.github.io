@@ -291,7 +291,7 @@ QPS這問題跟Storage都還好。
 >
 > B.NoSQL / 非关系型数据库17.76% 选择
 >
-> C.都可以，取决于算法是什么71.88% 选择
+> C**.都可以，取决于算法是什么71.88% 选择**
 >
 > ![img](data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTQxNzAwNjYyNTQzIiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjEwODgiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxMiAwYTUxMiA1MTIgMCAxIDAgMCAxMDI0QTUxMiA1MTIgMCAwIDAgNTEyIDB6IG0xNjUuOTUyIDYzNy43NmwxNS4wNCAxNC45NzZhMjguNDE2IDI4LjQxNiAwIDEgMS00MC4yNTYgNDAuMjU2bC0xNC45NzYtMTUuMDRMNTA5LjUwNCA1NDkuNzYgMzcxLjIgNjg4YTI4LjQxNiAyOC40MTYgMCAxIDEtNDAuMjU2LTQwLjI1NmwxMzguMzA0LTEzOC4yNC0xMjMuMi0xMjMuMi0xNS4xMDQtMTUuMTA0YTI4LjU0NCAyOC41NDQgMCAwIDEgMC00MC4yNTYgMjguNTQ0IDI4LjU0NCAwIDAgMSA0MC4yNTYgMGwxNS4wNCAxNS4xMDRMNTA5LjQ0IDQ2OS4yNDhsMTQzLjIzMi0xNDMuMjk2YTI4LjQxNiAyOC40MTYgMCAxIDEgNDAuMjU2IDQwLjI1Nkw1NDkuNzYgNTA5LjUwNGwxMjguMTkyIDEyOC4yNTZ6IiBmaWxsPSIjRjY1RTVFIiBwLWlkPSIxMDg5Ij48L3BhdGg+PC9zdmc+)答错了，您选择的答案是B
 >
@@ -348,19 +348,25 @@ QPS這問題跟Storage都還好。
 >     这段python 代码就是一个 for 循环，循环6次，每次从一个字符串里随机挑一个字符出来。这样就随机生成了一个 6位的code。
 >
 > - 不是说Hash的冲突概率很小吗?
+>   
 >   - Hash冲突小的前提是，获得的 hashcode 的长度要足够长，一般生产的类似 UUID 这样的 hash 值，好几十位字符串，这样才不会冲突。只有6位字符很容易冲突。
 > - 算法二除了速度慢外，如要处理并发问题吗，如果需要，如何处理？加锁吗？谢谢
+>   
 >   - 不需要做任何代码的修改。不需要加锁。并发没有问题。首先就算并发，两个 process 调用了 Random 函数之后得到的也是不同的随机串，冲突的概率很小。第二，就算有冲突，数据库也会进行加锁保证不会出现2个重复的被插入。第三如果因为 Race Condition 的原因，刚好会向数据库里插入两次一样的 short_key 的话，那么可以设置 short_key 是 unique 的，然后其中一次 fail 掉，报错给用户，用户重试一次即可解决问题。
 > - 感觉可以随机生成10个candidate 然后batch query。这样就可以最大限度避免DDB read。
+>   
 >   - 这样是不对的。相当于你为了解决一个1%的case，降低了 99% 的case的运行效率。
 > - database.filter(shortURL)不会很慢么？
+>   
 >   - 不会，shortUrl有index。
 > - 进制转换的方法是如何把longUrl 转换成 shortUrl的呢？
 >   - 将 long url 插入 database, 拿到 auto-increment id (sequential id)
 >   - 将 id 进制转换得到 shortUrl
 > - sequential ID数据类型是整型啊？
+>   
 >   - 是的，整数。要不然做不到 sequential。sequential id 又叫做 auto-increment id
 > - 那如果有人用同样的longUrl要求做shortUrl, 是会每次返回不一样的shortUrl么？
+>   
 >   - 相同的 longUrl 可以先查一下是否有和这个 longUrl对应的 shortUrl。查询的办法一方面可以通过数据库对 longUrl 建立 Index 来加速查询。另外也可以再加上 cache，把 longUrl to ShortUrl 的映射 cache 起来。先查 cache，查不到再去 db 查，这样就更快了。
 
 > [单选投票题]随机生成和进制转换两种算法你认为哪种更好？

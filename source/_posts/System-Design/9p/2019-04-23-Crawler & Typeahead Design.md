@@ -390,7 +390,7 @@ Queue 裡可能對同一個站同時抓太多次。
 
 BFS裡會有HashSet看抓過沒。但會有更新，怎辦？
 
-可 Exponential Backoff去試，搭配邊界。
+可 **Exponential Backoff**去試，搭配邊界。
 
 > - 怎么处理不存在的老的链接呢？
 >   - 总是抓取失败的话，就在 UrlInfo 里标记抓取失败，且下次要抓取的时间通过 Exponential Backoff 会慢慢变得很长，比如30天抓一次这种。

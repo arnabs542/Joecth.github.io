@@ -31,6 +31,9 @@ date: 2019-02-06
 
 ## DB Schema & REST
 
+- RPC -- Verb
+- REST --  Noun
+
 ![image-20200725183102828](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3ec8ono4j30ri0won1m.jpg)
 
 

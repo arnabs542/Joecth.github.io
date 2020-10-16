@@ -20,15 +20,15 @@ date: 2019-04-11
 
 ## 要解決的問題
 
-Storage不够、QPS太大的問題
+- Storage不够、QPS太大的問題
 
-Google 很多小計算機建DFS
+- Google 很多小計算機建DFS
 
-ＶＳ
+  ＶＳ
 
-SUN大型、貴的（大家買不起），09年被Oracle收了
+  SUN大型、貴的（大家買不起），09年被Oracle收了
 
-GFS、BigTable、MapReduce
+- GFS、BigTable、MapReduce
 
 # GFS
 
@@ -37,7 +37,12 @@ GFS、BigTable、MapReduce
 - 作為一個文件系統，一定要提供兩種常用的操作：寫跟讀
   - 寫：要文件名、內容
   - 讀：文件名，返回文件內容
-- 總量，比如1000T，才會上分布式；機器數也是越大越好
+
+### 需求1: 總存储量有多大?
+
+- 比如 > 1000T，才會上分布式；機器數也是越大越好
+
+### 需求2: 多台機器，越多越好
 
 
 
@@ -47,20 +52,29 @@ GFS、BigTable、MapReduce
 
   GFS提供的一個就是讀取，另一個是寫入的服務
 
-- Server由多台構建。多台機器間怎麼溝通？
+### Q: 多台Server間怎溝通？
 
- 	1. p2p, 平級溝通
-      - 一台掛了還可以工作，沒有單點故障問題
-      - 缺點：但，大家平級，要常通信保持一致性。
-      - p2p的通信一般是比較難寫的，直覺就是。
- 	2. Master vs Slaves, 老大一致對外，對內分配幹活
-      - 數據易保持一致性。就老大分配
-      
-      - 缺點：有單點大哥master掛了，整個系統不work的問題
-      
-      - 這是GFS最終的選擇，他是後端的服務，不是前端的，所以掛個一分鐘不會怎樣，就如果master掛了，把master重啟就好了。
-      
-        
+#### 	P2P 
+
+平級溝通
+
+- 優：一台掛了還可以工作，沒有單點故障問題
+- 缺：但，大家平級，要常通信保持一致性。
+- p2p的通信一般是比較難寫的，直覺就是。
+
+
+
+#### (V) Master vs Slaves
+
+老大一致對外，對內分配幹活
+
+- 優: 數據易**保持一致性**。就老大分配
+
+- 缺：有單點大哥master掛了，整個系統不work的問題
+
+- 這是GFS最終的選擇，他是後端的服務，不是前端的，所以掛個一分鐘不會怎樣，就如果master掛了，把master重啟就好了。
+
+  
 
 > ##### 单选题]大家猜猜GFS会用哪种设计模式？
 >
@@ -82,8 +96,10 @@ GFS、BigTable、MapReduce
 
 ## Storage
 
-- 大文件存在哪？
-  - 當然是disk，10PB只有disk可以，內存不可能啦
+### Q: 大文件存在哪？
+
+- 當然是disk，10PB只有disk可以，內存不可能啦
+
 - 如何存到這個文件系統裡？
   - 怎麼設計GFS?
   - 怎麼存？如果總量 < 100G？
@@ -100,11 +116,13 @@ GFS、BigTable、MapReduce
 
 
 
+### Q: Metadata存哪？
+
 - metadata元數據常常被無意識訪問到, 怎麼存好？一般打開文件夾就被動看到了
 
 > ##### [单选题]Meta Data应该怎样储存？
 >
-> A.所有文件的Meta Data 全放磁盘开头83.51% 选择
+> **A.所有文件的Meta Data 全放磁盘开头83.51% 选择**
 >
 > B.每个文件的Meta Data都和它的内容放在一起16.49% 选择
 >
@@ -170,9 +188,39 @@ A可以一次全讀出去。
 
 
 
-### Really Heavy Storage
+### Q: 100G on 普通的OS怎存?
 
-e.g. 10PB存得下嗎？需要多台電腦 Master-Slave工作模式。
+![image-20200822205723260](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzvx48y5vj30vc0g6dhp.jpg)
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzvxy7io1j30c607edgd.jpg" alt="image-20200822205814035" style="zoom: 33%;" />
+
+
+
+1. 因为比较小，預設就是4KB，一般就是照block傳就好了
+2. 如果再大一點怎辦？如果再按block算，就會有很多很多個block，去尋執很麻煩，不然我們就by chunk
+3. 如果100P就要上多台機子了，P = 1000T
+
+
+
+當然指的不是一個，而是很多個文件啦
+
+![image-20200822205929382](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzvz8ufr8j31160hwtb8.jpg)
+
+
+
+### Q: 100P, 真的很大怎存？
+
+上分布式
+
+
+
+## Scale
+
+![image-20200822210535805](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzw5mlv1rj317o0l441y.jpg)
+
+
+
+### Q: 10PB存得下嗎？需要多台電腦 Master-Slave工作模式。
 
 - 現在一台服務器現在最多插10個硬盤，一個硬盤撐死就100TB，這樣也就才0.1P，這樣如此的電腦至少要來100台共同工作才能做得了10PB的事
 
@@ -183,8 +231,6 @@ e.g. 10PB存得下嗎？需要多台電腦 Master-Slave工作模式。
 > B.Master 存实际的文件内容，Slave 存 Metadata3.19% 选择
 >
 > ![img](data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+)答对了，您选择的答案是A
-
-
 
 Master存了所有的chunk該在哪台小弟的info
 
@@ -211,7 +257,31 @@ Master存了所有的chunk該在哪台小弟的info
 
 
 
-#### 寫入怎麼寫好？
+### Q: 每台 chunk 的Offset偏移量可否不在Master上？
+
+![image-20200822210804854](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzw87abomj31660k07ei.jpg)
+
+
+
+### Q: Master 存10P文件的metadata要多少容量？
+
+1 chunk = 64MB needs 64B. (经验值) 10P needs 10G
+
+
+
+
+
+# One Workable Sol!
+
+## 寫
+
+### 架構 & Q: 一個chunk怎麼寫入server的?
+
+這個還沒有做scale
+
+![image-20200822211653883](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzwhdnk3dj312y0is11s.jpg)
+
+#### Q: 寫入怎麼寫好？一次vs多次
 
 > ##### [单选题]怎么将文件写入GFS?
 >
@@ -227,7 +297,11 @@ Master存了所有的chunk該在哪台小弟的info
 >
 > 不同的块有可能放到不同的Chunk Server，并且分块后方便重传
 
-如果斷開了，可以從哪斷開的從哪續傳。
+
+
+#### Q: 從哪續傳好? 當多次寫時每份大小？就Chunk，也是傳輸size
+
+如果斷開了，可以從哪斷開的從哪續傳
 
 > ##### [单选题]GFS Client 将文件拆分为多大进行传输比较合适？
 >
@@ -235,7 +309,7 @@ Master存了所有的chunk該在哪台小弟的info
 >
 > B.1M5.73% 选择
 >
-> C.64M83.89% 选择
+> **C.64M83.89% 选择**
 >
 > D.1G3.46% 选择
 >
@@ -269,9 +343,21 @@ master的硬盤有限，網路也是有限的，自己會卡死，分下去給�
 
 
 
-- 總結：Master要存所有的metadata,  chunkserver存真正的大data 讀要找到對應的chunkserver，寫時要找到空閒的chunkserver；
-  - 寫入是每次找老大問，老大分配空間，自己去找小弟寫
-  - 讀出是問老大拿到chunklist，然後去問小弟拿到chunk就ok
+#### Q: 要修改一個 .mp4 怎辦？
+
+1. 先刪掉 /gfs/home/xxx.mp4
+2. 重把整個文件寫一份
+
+##### 結論就: 別update!
+
+
+
+### 總結: 
+
+***Master要存所有的metadata,  chunkserver存真正的大data 讀要找到對應的chunkserver，寫時要找到空閒的chunkserver；***
+
+- **寫入是每次找老大問，老大分配空間，自己去找小弟寫**
+- **讀出是問老大拿到chunklist，然後去問小弟拿到chunk就ok**
 
 > - 請問gfs讀取file的話, client會從master得到一個chunk list, 那我並行讀取每個chunk,還是一個一個循序讀取chunk? 有什麼比較快的讀取方法嗎?
 >   - GFS中，Chunk分散储存在若干个Chunk Server中，读取的时候Client可以从不同的Chunk Server同时读取Chunk，相当于有一个并行的效果
@@ -284,38 +370,65 @@ master的硬盤有限，網路也是有限的，自己會卡死，分下去給�
 
 
 
-## Scale0
+## 讀
 
-> - master down了重启， 是通过读log来恢复吗
->   - 是的，但是一般会定期制作一个checkpoint，挂掉之后只需要从上一个checkpoint开始重放log就行了，不需要每次都从头开始。
-> - master down了之后怎么恢复？
->   - master down了之后重启就好
-> - 老师请问还有其他的加密算法么？还是只能用这个MD5
->   - 有啊，网上搜一大堆。比如 sha1 sha2, sha256.
-> - Check Sum 检查一位错误的例子，如果刚好有两个数据发生改变，是有可能导致xor结果不变的吧。这种情况我们就不知道有文件损坏了？
->   - 是的。check sum 本来就是 false positive 的。你说的这种情况出现概率是很低的。系统设计的领域里面有很多允许 false postive 或者 false negative 的情况，如 BloomFilter 就是一个例子。这些场景下，我们都不能保证 100% work，但是高概率是有效的。这个系统设计区别于算法设计的很大的不同，要注意体会这个地方。
+#### Q: 一次 or 多次？
+
+#### Q: Client 怎知 xxx.mp4 被切成了多少塊？
+
+每個chunk知道在哪個server，所以一個file知道分別位在哪些server
+
+### 架構
+
+![image-20200822212139023](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzwmbpejsj314w0k6424.jpg)
+
+## SCALE --  in One Workable Sol
+
+### Master 做的事
+
+#### Q: Master Task:
+
+- 存儲各個文件數據的 metadata
+- 存儲 Map
+  - 讀取時找到對應的 Chunk Server, 
+  - 寫入時分配空閒三 Chunk Server
+
+#### Q: 單master夠嗎？
+
+- 90%很好了一般都是這樣；大不了就是 Paxos Alg. 的多Master，再多也受不了會有延遲
+
+##### Double Master
+
+- Paper: Apache Hadoop Goes Realtime at Facebook
+
+##### Multi Master
+
+- Paper: Paxos Algorithm
 
 
 
-- 單master夠嗎？
+#### Q: 怎麼看資料有掛了
 
-  - 一般都是這樣，大不了就是 Paxos Alg. 的多Master，再多也受不了會有延遲
+- CHECKSUM, md5  哈希，原串發生變化，哈希值就巨大變化，一旦不同，就是原數據必毀
 
-- 怎麼看資料有掛了
+  <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gdtqklpedij31260tun45.jpg" alt="image-20200414235740148" style="zoom: 25%;" />
 
-  - checksum, md5  哈希，原串發生變化，哈希值就巨大變化，一旦不同，就是原數據必毀
+  
 
-    <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gdtqklpedij31260tun45.jpg" alt="image-20200414235740148" style="zoom: 25%;" />
+- 也可以用 XOR作checksum, 
 
-    
+- 也可以用SHA1, SHA256, SHA512
 
-  - 也可以用 XOR作checksum, 
+- Read More: https://en.wikipedia.org/wiki/Checksum
 
-  - 也可以用SHA1, SHA256, SHA512
+##### Checksum 
 
-  - 也就 4Bytes
+- size: 也就 4Bytes
+- 時機
 
-> ##### [单选题]什么时候写入 checksum?
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200822213411583.png" alt="image-20200822213411583" style="zoom: 50%;" />
+
+> ##### [单选题]什么时候写入 checksum? 如上圖
 >
 > A.每个一段时间遍历所有数据计算 checksum 并写入3.32% 选择
 >
@@ -345,6 +458,23 @@ master的硬盤有限，網路也是有限的，自己會卡死，分下去給�
 
 
 
+#### 問題集
+
+> - master down了重启， 是通过读log来恢复吗
+>   - 是的，但是一般会定期制作一个checkpoint，挂掉之后只需要从上一个checkpoint开始重放log就行了，不需要每次都从头开始。
+> - master down了之后怎么恢复？
+>   - master down了之后重启就好
+> - 老师请问还有其他的加密算法么？还是只能用这个MD5
+>   - 有啊，网上搜一大堆。比如 sha1 sha2, sha256.
+> - Check Sum 检查一位错误的例子，如果刚好有两个数据发生改变，是有可能导致xor结果不变的吧。这种情况我们就不知道有文件损坏了？
+>   - 是的。check sum 本来就是 false positive 的。你说的这种情况出现概率是很低的。系统设计的领域里面有很多允许 false postive 或者 false negative 的情况，如 BloomFilter 就是一个例子。这些场景下，我们都不能保证 100% work，但是高概率是有效的。这个系统设计区别于算法设计的很大的不同，要注意体会这个地方。
+
+
+
+
+
+## 更多 Q&A
+
 #### How to avoid data loss when a Chunk Server is down/fail? 
 
 ​	Ans: replica 作備份
@@ -371,11 +501,17 @@ master的硬盤有限，網路也是有限的，自己會卡死，分下去給�
 
 讓Master 幫, Master知道他所有的小弟在哪，
 
+1. 
+
+##### 架構
+
+![image-20200822213644383](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzx20e5tfj31120nwgor.jpg)
+
 
 
 #### 
 
-#### 如何知道有個小弟完全掛了？==> 心跳
+#### 如何知道有個小弟完全掛了？==> 心跳，小弟自報
 
 > ##### [单选题]心跳（Heartbeat）机制怎么设计？
 >
@@ -393,9 +529,17 @@ master的硬盤有限，網路也是有限的，自己會卡死，分下去給�
 
 
 
-## Scale
+## Scale 再更多 Q&A
 
-寫怎麼寫？client 把chunk一次傳給三個小弟作replica後，client會變成瓶頸…
+#### Q: 寫到一台server安全嗎？
+
+![image-20200822214053264](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzx6c0e7bj31180i8n17.jpg)
+
+#### Q: 解決客戶端瓶頸，不然client分別去寫他太累了
+
+##### 讓隊長去! 寫怎麼寫？client 把chunk一次傳給三個小弟作replica後，client會變成瓶頸…
+
+隊長再去寫給另兩個人
 
 > ##### [单选题]如何解决 client 传输 replica chunk 的问题？
 >
@@ -411,9 +555,14 @@ master的硬盤有限，網路也是有限的，自己會卡死，分下去給�
 
 內網自己傳肯定快得多
 
+![image-20200822214408981](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzx9qdmg2j311a0isadu.jpg)
 
 
-#### 怎麼選隊長？
+
+#### Q: 怎麼選隊長？
+
+1. 可找最近的 (快)
+2. 找現在沒在幹活的 (平衡)
 
 > ##### [多选题]下列哪些因素是我们挑选 chunk server 队长时所需要考虑的
 >
@@ -443,26 +592,46 @@ master的硬盤有限，網路也是有限的，自己會卡死，分下去給�
 
 
 
-## GFS problem
+#### Q: 解決 Chunk Server Failure
+
+如果有人掛了，隊長知道了，它會跟master說不要再讓哪台能「被」分配東西了
+
+![image-20200822214605591](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzxbqyp6oj313q0kmq6f.jpg)
+
+
+
+- 如果沒寫上就一直試，如果太多次，就算了吧大家都完了，都掛了也不大可能
+
+![image-20200822214620405](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzxbzzrrhj31320jyac9.jpg)
+
+
+
+## 總結
+
+![image-20200822214743151](https://tva1.sinaimg.cn/large/007S8ZIlgy1ghzxdft2fmj30yy0u079h.jpg)
+
+## GFS Problem
 
 https://www.jiuzhang.com/qa/627/
 
-> - 设计一个只读的lookup service. 后台的数据是10 billion个key-value pair, 服务形式是接受用户输入的key，返回对应的value。已知每个key的size是0.1kB，每个value的size是1kB。要求系统qps >= 5000，latency < 200ms.
->
->   server性能参数需要自己问，我当时只问了这些，可能有需要的但是没有问到的……
->   commodity server
->   8X CPU cores on each server
+> - **设计一个只读的lookup service. 后台的数据是10 billion个key-value pair, 服务形式是接受用户输入的key，返回对应的value。**
+> **已知每个key的size是0.1kB，每个value的size是1kB。要求系统qps >= 5000，latency < 200ms.**
+>   
+>   - key: 100; value: 1000個ascii字
+>   - server性能参数需要自己问，我当时只问了这些，可能有需要的但是没有问到的……
+>     commodity server
+>     8X CPU cores on each server
 >   32G memory
->   6T disk
+>     6T disk
 >
 >   使用任意数量的server，设计这个service。
 >
 >   就不发我的解法了，真的很渣……=。=|||
 >
 >   - 我总结了SG_SWE_GM以及其他同学的解答，在此基础上我的想法如下，有问题的地方还请老师同学指正，
->
->     => total key size ~ 10 billion * 0.1kB = 1T
->     => total value size ~ 10 billion * 1kB = 10T
+>   
+>     => total key size ~ 10 billion * 0.1kB = 1T		==> 40台*32G 查起來就是很快
+>   => total value size ~ 10 billion * 1kB = 10T
 >     所以每台服务器用两块硬盘，共12T。数据结构用SSTable就好了。
 >
 >     充分利用内存，本来我想用binary search tree做index，但是仔细想想这个服务是只读的，而且硬盘存储键值对用的是SSTable是有序的，key和value长度又是固定的，所以直接把key以有序的方式存在内存就好了，查询的时候对key进行binary search，然后用key在内存中的offset来计算键值对在硬盘中的offset。1T/32G = 31.25. 所以一共需要32台服务器的内存分担key index。前面加一个master负责管理consistent hasing。lg(32G) = 35, 平均查询一个key就算18次内存访问，大约才1800ns，在ms这个量级上可以忽略。
@@ -470,19 +639,25 @@ https://www.jiuzhang.com/qa/627/
 >     每一次request，在硬盘上读取1kB value的时间：***10ms(disk seek)*** + 4ms(rotation delay for 7200rpm) + 1kB/1MB * ***30ms(reading 1kB sequentially from disk)*** = 14ms. 目前一台server能处理的的QPS: 1000ms/14ms = 71, 总的QPS: 71 * 32 = 2272。距离要求还有两倍多的差距。所以我们可以给每台server装上6个6T硬盘，组成3套数据硬盘，3套硬盘可以并行处理3个请求，这样也算是稍微利用了一下8X的多核CPU。这时QPS即为2272 * 3=6816.
 >
 >     延迟：
->
+>   
 >     1. master内存查找consistent hashing map的时间：忽略
 >     2. master与slave的round trip delay：1 round trip in the same data center is 1ms.
->     3. slave内存index查询时间：忽略
+>   3. slave内存index查询时间：忽略
 >     4. slave硬盘读取时间：14ms
->
+>   
 >     so total latency is 15ms。
 
+- 企業現在一般怎麼配server?
+  - 16G、32G、64G、256G、1T、3T，一般不會直接用
+  - Disk: 
+- 300ms是在尋道
+- 0.5 m 是round trip在同個data center間，比在硬盤上找還是快多了
 - ***30ms(reading 1kB sequentially from disk)***
   - 是因為硬盤估計每秒可讀30MB的數據，所以1MB就是30ms；這個讀了１kB的話就0.03 ms跟disk seek比起來可以不計。
-
 - QPS on 1 server : 1s/10ms 次（一秒一台可以100次。） * 2disk = 200次
 - 5000個QPS/200就需要25台服務器
+
+
 
 
 
@@ -496,11 +671,11 @@ https://www.jiuzhang.com/qa/627/
 <img src="/Users/joe/Library/Application Support/typora-user-images/image-20200412220508731.png" alt="image-20200412220508731" style="zoom:50%;" />
 
 - [ ] 分析：log該以2為底，所以就變30 * 10ms(每動一次就要10ms) 就是 300ms, 超過題目規定的200ms，找到key的工作只能在硬盤上做，而且單個硬盤不能並行執行，所以一次query 至少要300ms了，一個硬盤１秒內只能做三次，兩個只能做六次，所以要5000QPS要至少約1000台服務器。這跟他給出的25台差很多！
-- [ ] 我們最希望減少的就是300ms的查詢時間；而我們未用上他的內存，一台有32G，***40***台就有超1TB，就跟所有的數據key量一樣了，所以提示了可以在內存作操作，把所有key都存過去。如果內存中有個內存到硬盤位置的映射的話…！
+- [ ] 我們最希望減少的就是300ms的***查詢時間***；***而我們未用上他的內存***，一台有32G，***40***台就有超1TB，就跟所有的數據key量一樣了，所以提示了可以在內存作操作，把所有key都存過去。如果內存中有個內存到硬盤位置的映射的話…！
 - [ ] 一個key 0.1kB , 一個position 8Byte，所以一筆仍是0.1kB, 10個billion也是用1TB的內存。所以40台的內存並一起變一個大內存裡直接二分查找就快，每次的時間比硬盤的10ms少到幾乎可不計。
 - [ ] 內存去對應硬盤的position。
 - [ ] 硬盤二分查找每次要花10ms (disk seek)，但內存不用時間。雖一樣是花30次。所以300ms就省了。所以整體10ms + 0.5ms 就10.5ms。
-- [ ] 現在已有40台機器，每台有兩個硬盤，而且每台機器的硬盤可以存下全量的數據 ( 就key啦，就 1T而已)，就是說整體的數據一共有40份拷貝，每個硬盤要花約10ms查找一次，一台可以200次操作(一台有兩顆disk)，40台可以並行作，所以就是8000QPS > 5000QPS!
+- [ ] 現在已有40台機器，每台有兩個硬盤，而且每台機器的硬盤可以存下全量的數據 ( 就key啦，就 1T而已)，就是說整體的數據一共有40份拷貝，每個硬盤要花約10ms查找一次，一台可以200次操作(一台有兩顆disk)，40台可以並行作，所以就是**8000QPS > 5000QPS!**
 - [ ] 總結：一共４０台機器，內存就是４０台合併起來當一大塊用，內存大小是１TB；它存放的是key到硬盤中position的數據。每台兩個硬盤，硬盤中存的是全量的數據，一次查找的過程就是，首先通過整體的內存找到在硬盤上的某個位置，均衡負載到40台的某個機器上，讀它的key, value，因為在內存查的時間可以不計，所以最後的延遲就在disk seek時間10ms還有整體在網路上傳輸的0.5ms。
 
 > - key 1T value 10T 机器6T 为啥一台机器的硬盘可以存下全部的信息？

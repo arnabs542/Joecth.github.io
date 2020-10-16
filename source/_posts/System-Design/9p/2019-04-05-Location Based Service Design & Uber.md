@@ -329,13 +329,16 @@ e.g. 找附近20km的車
 >   - 不可以不设置 column key ，否则无法排序`<row key, column key>` 这个二元组。也无法对 column key 进行 range query。你的需求适合直接放在 RocksDb 这种只有 key-value 的结构里，不适合放在 row key column key value 的这种结构。
 >
 > - 相当于一个driver的位置要放到三个key的set里面？然后会根据driver位置的变化，会动态地增删这三个set？
+>   
 >   - 是的，如果位置分三级的话就是要动态增删三个色它
 > - cassandra 的 rowkey 和 column key 的差别是什么啊？ 可以简单说一下吗？
 >   - Cassandra 中的 row key 就是 hash key 也叫做 partition key，是每次查询必须带上的（第二第三节课里有讲哦~），主要作用是当确定这个数据存在什么地方，你可以认为有一个函数叫做 `find_db_instance_by_row_key(row_key)` 能够根据 row_key 确定使用哪个 db instance，从而实现分布式存储。
 >     很多 NoSQL 数据库没有 column key，比如 Redis。 Cassandra 有 Column key 的作用是，在一台数据库的机器上，所有数据是按照 row_key+column key 排好序的。所以当你确定了 row_key 是啥以后，就可以对 column key 进行范围查询，比如你可以查询 user_id（rowkey） 发的所有帖子里，在 昨天到今天这个范围内发的帖子（帖子的发表时间作为 column key），而 Redis 因为没有 column key 是做不到的。另外在后面的 Big Table 中，会详细介绍这类数据库的实现原理（BigTable 也是一个有 column key 的 db）
 > - cassandra把geohash放在column key，那row key该存什么，可以全都存在同一个row key下吗？例如null？
+>   
 >   - Row key 存 geohash 的前 4 位。
 > - cassandra的row key是什么
+>   
 >   - 前 4 位 GeoHash
 
 
@@ -415,3 +418,10 @@ Uber也是從Redis換成了Riak。
 <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdlb2i72zyj30ow0msn15.jpg" alt="image-20200407165647857" style="zoom:67%;" />
 
 <img src="https://tva1.sinaimg.cn/large/00831rSTgy1gdlb36wqt9j30pa0t00yp.jpg" alt="image-20200407165727152" style="zoom:67%;" />
+
+
+
+# Appendix
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1giblli29hij31gm0u07q8.jpg" alt="image-20200902000656510" style="zoom:67%;" />
+

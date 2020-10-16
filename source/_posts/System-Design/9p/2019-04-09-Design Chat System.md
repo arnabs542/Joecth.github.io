@@ -12,6 +12,10 @@ date: 2019-04-10
 
 
 
+信息
+
+
+
 # Pre-requisite
 
 ## Serialization
@@ -20,8 +24,8 @@ date: 2019-04-10
   - 不能讓別人來自己的RAM拿，重開機也都不同了
 - 不同類可以定義不同。
 - java 的 toString() 只是要打出來看，沒要反序列化，不見得算是
-- 如果序列化沒要給人看，還會考慮盡量小
-  - FB有 thrift，是一個RPC的庫，可做序列化、反序列化，可壓縮數據，如定義一個class結構，只要我的obj是滿足那個類的，就可以丟進去，肉眼不可讀，壓縮率高。當我們加屬性，反序列化還要不出錯！
+- **如果序列化沒要給人看，還會考慮盡量小**
+  - FB有 **thrift**，是一個RPC的庫，可做序列化、反序列化，可壓縮數據，如定義一個class結構，只要我的obj是滿足那個類的，就可以丟進去，肉眼不可讀，壓縮率高。當我們加屬性，反序列化還要不出錯！
   - Google有protobuf。類似的事。
 - JSON / XML (Web1.0、Android),
   - 現在Web都是JSON，空間小，可讀
@@ -52,9 +56,9 @@ date: 2019-04-10
   - 倉庫就是緩衝
 - Web 用 MQ緩衝，worker 去拿 MQ，好了後worker寫到DB，Web自己去刷新或時不時看下DB
   - Cache, DB 都是最基本構成
-- 評測機 - 生產消費者、MQ
-- 發email - 要是發失敗的話，也是MQ可以幫忙的
-
+- 任務例子：
+  1. 評測機 - 生產消費者、MQ
+  2. 發email - 要是發失敗的話，也是MQ可以幫忙的
 - 一般常用的
   - RabbitMQ, 
   - Redis 什麼都會一點，可當數據庫(比不過SQL, NoSQL)、緩存(比不過Memcached)、消息隊列(比不過RabbitMQ)；但速度比較快，內存級別速度，存取效率非常快
@@ -117,7 +121,19 @@ date: 2019-04-10
 
 
 
-## 增加 Thread Table 
+## Scenario
+
+## Service
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20200815211310570.png" alt="image-20200815211310570" style="zoom:50%;" />
+
+
+
+## Storage
+
+### Q: 查起來要查左、查右地遍歷，以及合併跟排序
+
+#### 增加 Thread Table -- 少了or語句，但還是要遍歷
 
 不用 Session這個字，而用Thread, 就是一個Conversation。
 
@@ -138,7 +154,7 @@ date: 2019-04-10
 
 
 
-## 拆，加User Thread Table
+#### 方法一：拆，加上User Thread Table
 
 > - 存last_message 是为了显示在界面上面吗？
 >   - yes
@@ -165,7 +181,7 @@ date: 2019-04-10
 
 
 
-## 合，
+#### 方法二：合，
 
 把公有復制到每個人裡去
 
@@ -204,18 +220,22 @@ Updated_at 雖是共享，也是分在每個裡，因為要用他做排序
 
 
 
-## 怎麼查 Thread ID? 
+### Q: THREAD Table 議題
 
-當用戶發信息時或建群聊時，所以要針對現有看是否他們有現有群
+#### participants_hash_code：
+
+##### 怎麼查 Thread ID? 因為發消息時可能沒帶著 --> 
+
+**當用戶發信息時或建群聊時，所以要針對現有看是否他們有現有群**
 
 - 用參與者查有沒有他們的Thread
-  - 可樣在 Tread Table 增加一個 participants_hash_code，這樣有以前的群就可以找到
+  - 可在 Tread Table 增加一個 participants_hash_code，這樣有以前的群就可以找到
     - user排好序後，大家串一起做個uuid，看有沒有以前的群
     - 可以把這個uuid作index查就很快
     - 為何要hash? 群聊太長啦
     - uuid就不用去考慮相撞，概率不可能
 
-> - 群聊的话可以有新的用户加进来，这时候要更改这个hash code吧？
+> - **群聊的话可以有新的用户加进来，这时候要更改这个hash code吧？**
 >   - Yes
 > - 如果有些群聊有人加入有人退出怎么办？participant_hash_code也要改变吗？
 >   - Yes, 也要改變。
@@ -224,7 +244,11 @@ Updated_at 雖是共享，也是分在每個裡，因為要用他做排序
 
 
 
-## Message Table 表單結構
+
+
+### Q: MESSAGE Table 怎存好？怎分片好？-- 
+
+#### Sharding
 
 用戶就是一直聊一直聊
 
@@ -236,7 +260,7 @@ Updated_at 雖是共享，也是分在每個裡，因為要用他做排序
 >
 > B.created_at9.40% 选择
 >
-> C.thread_id56.81% 选择
+> **C.thread_id56.81% 选择**
 >
 > D.participant_hash_code22.36% 选择
 >
@@ -251,7 +275,15 @@ Updated_at 雖是共享，也是分在每個裡，因為要用他做排序
 
 
 
-## NoSQL with Thread Table
+### Q: THREAD Table 怎存好？
+
+#### SQL : 需 thread_id & participant_hash_code 作 index
+
+#### NoSQL : 同，需 thread_id & participant_hash_code 兩張表都查
+
+
+
+##### NoSQL with Thread Table
 
 也可以用SQL，兩者都Ok。
 
@@ -280,9 +312,11 @@ index by thread_id 以及 participant_hash_code
 
 
 
-## NoSQL for User Table
+### Q: UserThread Table 怎存好？怎分片好？
 
-> ##### [单选题]UserThread Table 用什么做sharding key（row key）？
+#### NoSQL 存私有 Thread info，用user_id 分片
+
+> ##### **[单选题]UserThread Table 用什么做sharding key（row key）？**
 >
 > A.user_id68.04% 选择
 >
@@ -305,17 +339,27 @@ index by thread_id 以及 participant_hash_code
 
 ## Flow 
 
-B polling
+1. A 發給B
 
-每隔一段時間的PULL就是POLL
+2. message server 去查是否有A&B混在一起的  participant code, 沒有就建Thread
+
+3. 根據 thread_id 建 message
+
+4. B 定期每隔如10秒去 Poll
+
+   - B POLLing
+
+     每隔一段時間的PULL就是POLL
+
+5. B 拿到 message
 
 
 
-## Scale, GCM & APNS
+## Scale -- GCM & APNS
 
-- 怎麼讓消息更實時？
+- 怎麼讓消息更實時？每隔10秒收到消息體驗太差啦!
   - PUSH NOTIFICATION
-- PUSH: 手機上
+- PUSH 通知: 手機上
   - Android GCM (Google Cloud Messaging)
   - Windows 也有它自己的推送系統
   - iOS APNS (Apple Push Notification Service)
@@ -329,7 +373,7 @@ B polling
 >
 > C.消息丢失概率大12.08% 选择
 >
-> D.无法支持web端50.79% 选择
+> **D.无法支持web端50.79% 选择**
 >
 > ![img](data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/PjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+PHN2ZyB0PSIxNTM0MTgxMjgxODM5IiBjbGFzcz0iaWNvbiIgc3R5bGU9IiIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHAtaWQ9IjM3NjIiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMzIiIGhlaWdodD0iMzIiPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PC9zdHlsZT48L2RlZnM+PHBhdGggZD0iTTUxOC4xMiA1MTYuMTZtLTQ5MCAwYTQ5MCA0OTAgMCAxIDAgOTgwIDAgNDkwIDQ5MCAwIDEgMC05ODAgMFoiIGZpbGw9IiM1NkI0MzIiIHAtaWQ9IjM3NjMiPjwvcGF0aD48cGF0aCBkPSJNMzkzLjIxMzYxOSA2NjQuMzM1NDk1bTI4LjI4NDI3MS0yOC4yODQyNzFsMjk2Ljk4NDg0OS0yOTYuOTg0ODQ4cTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBsMCAwcTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDJsLTI5Ni45ODQ4NDggMjk2Ljk4NDg0OHEtMjguMjg0MjcxIDI4LjI4NDI3MS01Ni41Njg1NDMgMGwwIDBxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDJaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY0Ij48L3BhdGg+PHBhdGggZD0iTTI4OS40Njk4NCA0NTIuODQ3ODgzbTI4LjI4NDI3MSAyOC4yODQyNzFsMTU1LjU2MzQ5MiAxNTUuNTYzNDkycTI4LjI4NDI3MSAyOC4yODQyNzEgMCA1Ni41Njg1NDNsMCAwcS0yOC4yODQyNzEgMjguMjg0MjcxLTU2LjU2ODU0MyAwbC0xNTUuNTYzNDkxLTE1NS41NjM0OTJxLTI4LjI4NDI3MS0yOC4yODQyNzEgMC01Ni41Njg1NDNsMCAwcTI4LjI4NDI3MS0yOC4yODQyNzEgNTYuNTY4NTQyIDBaIiBmaWxsPSIjRkZGRkZGIiBwLWlkPSIzNzY1Ij48L3BhdGg+PC9zdmc+)答对了，您选择的答案是D
 >

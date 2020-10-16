@@ -258,7 +258,7 @@ class MiniTwitter:
 - **需要設計哪些功能？**
 - **需要承受多大的訪問量？**
   - DAU
-  - Twitter: MAU 330M, DAU ~170M+
+  - **Twitter: MAU 330M, DAU ~170M+** == > 一萬台機器搞定?1
 
 有些公司會用註冊用戶，但這不準。一般要看MAU。
 
@@ -851,8 +851,6 @@ Optimize!
 
 
 
-
-
 > - 选择memcached 和cache 的区别？
 >   - cache单机的，单机的内存有限制，并且只能本机访问，memcache是一个cache db，可以由多台机器组成，并且可以多个server同时访问
 
@@ -866,13 +864,35 @@ Optimize!
 
 ## 消息隊列
 
-IPC
+- IPC 進程間通信或同一進程的不同線程間的通信方式
 
-關注一個最主要是把好友關係存下來
+- 時機：生產者、消費者
 
-RabbitMQ, Redis(Cache比不過Memcached, MQ比不上RabbitMQ, DB比不上SQL…)
+- 處理跟產生的速率不一致
 
-Amazon Simple Queue Service
+  - 不可能一下單就有人來敲門到貨
+
+    <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh5z1y30rqj30q20i6451.jpg" alt="image-20200727235851008" style="zoom: 33%;" />
+
+- Lintcode 評測機
+
+- 註冊後發email，一般是第三方發 mail的系統
+
+  - e.g. mailgun 幫發mail
+    - 第三方的api會慢一點
+    - 只要跟用戶說「我有發了」就好，而不需要讓用戶等著
+  - 1 慢；2 需要重試機制; 3 訂閱用戶，慢慢出現沒差，重要的是「已訂閱」了
+    - 關注一個最主要是把好友關係存下來
+
+- RabbitMQ, Redis(Cache比不過Memcached, MQ比不上RabbitMQ, DB比不上SQL及NoSQL，但快…)
+
+  Amazon Simple Queue Service (SQS)
+
+- 一消息只被處理一次，金融級別會有更高的要求，萬億級別的如螞蟻
+
+- 鏡像Queues ，一個掛了另一個馬上頂上
+
+- 12360 一個一個把訂票的要求執行了
 
 
 
@@ -932,6 +952,11 @@ Denormalize: 原本可以在別的表單裡計算下的東西，我直接存在�
 
 
 ![image-20200725230057674](https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3m516nyzj30x00dswoi.jpg)
+
+- https://engineering.fb.com/networking-traffic/under-the-hood-broadcasting-live-video-to-millions/
+- 
+
+
 
 <img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gh3m7c3zs6j30v40jwaie.jpg" alt="image-20200725230310804" style="zoom:50%;" />
 
