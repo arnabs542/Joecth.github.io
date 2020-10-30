@@ -13,73 +13,819 @@ ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = {
     error: 'Copy error',
     noSupport: 'The browser does not support'
   }
-} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">298</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">45</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2020/04/09/jupyter-demo/2020-04-09-SNPS%20stock%20prediction/">jupyter-demo/2020-04-09-SNPS stock prediction</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-04-09</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Jupy-Demo/">Jupy-Demo</a></span><div class="content"><iframe
-src="https://nbviewer.jupyter.org/github/Joecth/Joecth.github.io/blob/hexo-melody/source/_posts/jupyter-demo/stock_pred_w_RNN/rnn_stock.ipynb" width="100%" height="1000">
-</iframe>
-
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/03/28/NLP/2020-03-28-NLP_nltk_0/">NLP/2020-03-28-NLP_nltk_0</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-03-28</time><div class="content"><h3 id="Text-Preprocessing"><a href="#Text-Preprocessing" class="headerlink" title="Text Preprocessing"></a>Text Preprocessing</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># regex for removing punctuation!</span></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="comment"># nltk preprocessing magic</span></span><br><span class="line"><span class="keyword">import</span> nltk</span><br><span class="line"><span class="keyword">from</span> nltk.tokenize <span class="keyword">import</span> word_tokenize</span><br><span class="line"><span class="keyword">from</span> nltk.stem <span class="keyword">import</span> PorterStemmer</span><br><span class="line"><span class="keyword">from</span> nltk.stem <span class="keyword">import</span> WordNetLemmatizer</span><br><span class="line"><span class="comment"># grabbing a part of speech function:</span></span><br><span class="line"><span class="keyword">from</span> part_of_speech <span class="keyword">import</span> get_part_of_speech</span><br><span class="line"></span><br><span class="line">text = <span class="string">"So many squids are jumping out of suitcases these days that you can barely go anywhere without seeing one burst forth from a tightly packed valise. I went to the dentist the other day, and sure enough I saw an angry one jump out of my dentist's bag within minutes of arriving. She hardly even noticed."</span></span><br><span class="line"></span><br><span class="line">cleaned = re.sub(<span class="string">'\W+'</span>, <span class="string">' '</span>, text)</span><br><span class="line">tokenized = word_tokenize(cleaned)</span><br><span class="line"></span><br><span class="line">stemmer = PorterStemmer()</span><br><span class="line">stemmed = [stemmer.stem(token) <span class="keyword">for</span> token <span class="keyword">in</span> tokenized]</span><br><span class="line"></span><br><span class="line"><span class="comment">## -- CHANGE these -- ##</span></span><br><span class="line">lemmatizer = WordNetLemmatizer()</span><br><span class="line">lemmatized = [lemmatizer.lemmatize(token, get_part_of_speech(token)) <span class="keyword">for</span> token <span class="keyword">in</span> tokenized]</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Stemmed text:"</span>)</span><br><span class="line">print(stemmed)</span><br><span class="line">print(<span class="string">"\nLemmatized text:"</span>)</span><br><span class="line">print(lemmatized)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Stemmed text:</span><br><span class="line">[<span class="string">'So'</span>, <span class="string">'mani'</span>, <span class="string">'squid'</span>, <span class="string">'are'</span>, <span class="string">'jump'</span>, <span class="string">'out'</span>, <span class="string">'of'</span>, <span class="string">'suitcas'</span>, <span class="string">'these'</span>, <span class="string">'day'</span>, <span class="string">'that'</span>, <span class="string">'you'</span>, <span class="string">'can'</span>, <span class="string">'bare'</span>, <span class="string">'go'</span>, <span class="string">'anywher'</span>, <span class="string">'without'</span>, <span class="string">'see'</span>, <span class="string">'one'</span>, <span class="string">'burst'</span>, <span class="string">'forth'</span>, <span class="string">'from'</span>, <span class="string">'a'</span>, <span class="string">'tightli'</span>, <span class="string">'pack'</span>, <span class="string">'valis'</span>, <span class="string">'I'</span>, <span class="string">'went'</span>, <span class="string">'to'</span>, <span class="string">'the'</span>, <span class="string">'dentist'</span>, <span class="string">'the'</span>, <span class="string">'other'</span>, <span class="string">'day'</span>, <span class="string">'and'</span>, <span class="string">'sure'</span>, <span class="string">'enough'</span>, <span class="string">'I'</span>, <span class="string">'saw'</span>, <span class="string">'an'</span>, <span class="string">'angri'</span>, <span class="string">'one'</span>, <span class="string">'jump'</span>, <span class="string">'out'</span>, <span class="string">'of'</span>, <span class="string">'my'</span>, <span class="string">'dentist'</span>, <span class="string">'s'</span>, <span class="string">'bag'</span>, <span class="string">'within'</span>, <span class="string">'minut'</span>, <span class="string">'of'</span>, <span class="string">'arriv'</span>, <span class="string">'she'</span>, <span class="string">'hardli'</span>, <span class="string">'even'</span>, <span class="string">'notic'</span>]</span><br><span class="line"></span><br><span class="line">Lemmatized text:</span><br><span class="line">[<span class="string">'So'</span>, <span class="string">'many'</span>, <span class="string">'squid'</span>, <span class="string">'be'</span>, <span class="string">'jump'</span>, <span class="string">'out'</span>, <span class="string">'of'</span>, <span class="string">'suitcase'</span>, <span class="string">'these'</span>, <span class="string">'day'</span>, <span class="string">'that'</span>, <span class="string">'you'</span>, <span class="string">'can'</span>, <span class="string">'barely'</span>, <span class="string">'go'</span>, <span class="string">'anywhere'</span>, <span class="string">'without'</span>, <span class="string">'see'</span>, <span class="string">'one'</span>, <span class="string">'burst'</span>, <span class="string">'forth'</span>, <span class="string">'from'</span>, <span class="string">'a'</span>, <span class="string">'tightly'</span>, <span class="string">'pack'</span>, <span class="string">'valise'</span>, <span class="string">'I'</span>, <span class="string">'go'</span>, <span class="string">'to'</span>, <span class="string">'the'</span>, <span class="string">'dentist'</span>, <span class="string">'the'</span>, <span class="string">'other'</span>, <span class="string">'day'</span>, <span class="string">'and'</span>, <span class="string">'sure'</span>, <span class="string">'enough'</span>, <span class="string">'I'</span>, <span class="string">'saw'</span>, <span class="string">'an'</span>, <span class="string">'angry'</span>, <span class="string">'one'</span>, <span class="string">'jump'</span>, <span class="string">'out'</span>, <span class="string">'of'</span>, <span class="string">'my'</span>, <span class="string">'dentist'</span>, <span class="string">'s'</span>, <span class="string">'bag'</span>, <span class="string">'within'</span>, <span class="string">'minute'</span>, <span class="string">'of'</span>, <span class="string">'arrive'</span>, <span class="string">'She'</span>, <span class="string">'hardly'</span>, <span class="string">'even'</span>, <span class="string">'notice'</span>]</span><br></pre></td></tr></table></figure>
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">306</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">47</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2020/10/23/BigData_java/2020-10-23%20BigData%20side-projects%20in%20Java/">BigData_java/2020-10-23 BigData side-projects in Java</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-10-23</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/BigData-java/">BigData_java</a></span><div class="content"><h2 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h2><p><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk04dmxpk5j3102032di4.jpg" alt="image-20201024083045739" style="zoom:50%;" /><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk04idtk1hj30zw0480vt.jpg" alt="image-20201024083519950"></p>
+<img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk04j5lnuhj30zg0b8k1x.jpg" alt="image-20201024083605168" style="zoom:50%;" />
 
 
 
-<h3 id="Parsing-Text"><a href="#Parsing-Text" class="headerlink" title="Parsing Text"></a>Parsing Text</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> spacy</span><br><span class="line"><span class="keyword">from</span> nltk <span class="keyword">import</span> Tree</span><br><span class="line"><span class="keyword">from</span> squids <span class="keyword">import</span> squids_text</span><br><span class="line"></span><br><span class="line">dependency_parser = spacy.load(<span class="string">'en'</span>)</span><br><span class="line"></span><br><span class="line">parsed_squids = dependency_parser(squids_text)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Assign my_sentence a new value:</span></span><br><span class="line">my_sentence = <span class="string">"Your sentence goes here!"</span></span><br><span class="line">my_parsed_sentence = dependency_parser(my_sentence)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">to_nltk_tree</span><span class="params">(node)</span>:</span></span><br><span class="line">  <span class="keyword">if</span> node.n_lefts + node.n_rights &gt; <span class="number">0</span>:</span><br><span class="line">    parsed_child_nodes = [to_nltk_tree(child) <span class="keyword">for</span> child <span class="keyword">in</span> node.children]</span><br><span class="line">    <span class="keyword">return</span> Tree(node.orth_, parsed_child_nodes)</span><br><span class="line">  <span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">return</span> node.orth_</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> sent <span class="keyword">in</span> parsed_squids.sents:</span><br><span class="line">  to_nltk_tree(sent.root).pretty_print()</span><br><span class="line">  </span><br><span class="line"><span class="keyword">for</span> sent <span class="keyword">in</span> my_parsed_sentence.sents:</span><br><span class="line"> to_nltk_tree(sent.root).pretty_print()</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">        jumping                       </span><br><span class="line">  _________|_______________________    </span><br><span class="line"> |   |     |      |       out      |  </span><br><span class="line"> |   |     |      |        |       |   </span><br><span class="line"> |   |     |    squids     of     days</span><br><span class="line"> |   |     |      |        |       |   </span><br><span class="line"> So are    .     many  suitcases these</span><br><span class="line"></span><br><span class="line">          go                       </span><br><span class="line">  ________|____________________     </span><br><span class="line"> |   |    |       |      |  without</span><br><span class="line"> |   |    |       |      |     |    </span><br><span class="line"> |   |    |       |      |   seeing</span><br><span class="line"> |   |    |       |      |     |    </span><br><span class="line">You can barely anywhere  .    one  </span><br><span class="line"></span><br><span class="line">          went               </span><br><span class="line">  _________|_________         </span><br><span class="line"> |   |     to        |       </span><br><span class="line"> |   |     |         |        </span><br><span class="line"> |   |  dentist     day      </span><br><span class="line"> |   |     |      ___|____    </span><br><span class="line"> I   .    the   the     other</span><br><span class="line"></span><br><span class="line">             saw                                     </span><br><span class="line">  ____________|___________________                    </span><br><span class="line"> |   |   |    |                  jump                </span><br><span class="line"> |   |   |    |          _________|__________         </span><br><span class="line"> |   |   |    |         |                   out      </span><br><span class="line"> |   |   |    |         |                    |        </span><br><span class="line"> |   |   |    |         |                    of      </span><br><span class="line"> |   |   |    |         |                    |        </span><br><span class="line"> |   |   |    |         |                   bag      </span><br><span class="line"> |   |   |    |         |                    |        </span><br><span class="line"> |   |   |  enough     one                dentist    </span><br><span class="line"> |   |   |    |      ___|____           _____|_____   </span><br><span class="line"> ,   I   .   Sure   an     angry       my          <span class="string">'s</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    noticed         </span></span><br><span class="line"><span class="string">  _____|__________   </span></span><br><span class="line"><span class="string">She  hardly even  . </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">     goes         </span></span><br><span class="line"><span class="string">  ____|______      </span></span><br><span class="line"><span class="string"> |    |   sentence</span></span><br><span class="line"><span class="string"> |    |      |     </span></span><br><span class="line"><span class="string">here  !     Your</span></span><br></pre></td></tr></table></figure>
+<img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk04jvx04vj30zm04wte3.jpg" alt="image-20201024083647240" style="zoom:50%;" />
 
 
 
-<h3 id="Language-Models-Bag-of-Words-Approach"><a href="#Language-Models-Bag-of-Words-Approach" class="headerlink" title="Language Models - Bag-of-Words Approach"></a>Language Models - Bag-of-Words Approach</h3><p>When grammar and word order are irrelevant, this is probably a good model to use.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># importing regex and nltk</span></span><br><span class="line"><span class="keyword">import</span> re, nltk</span><br><span class="line"><span class="keyword">from</span> nltk.corpus <span class="keyword">import</span> stopwords</span><br><span class="line"><span class="keyword">from</span> nltk.tokenize <span class="keyword">import</span> word_tokenize</span><br><span class="line"><span class="keyword">from</span> nltk.stem <span class="keyword">import</span> WordNetLemmatizer</span><br><span class="line"><span class="comment"># importing Counter to get word counts for bag of words</span></span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="comment"># importing a passage from Through the Looking Glass</span></span><br><span class="line"><span class="keyword">from</span> looking_glass <span class="keyword">import</span> looking_glass_text</span><br><span class="line"><span class="comment"># importing part-of-speech function for lemmatization</span></span><br><span class="line"><span class="keyword">from</span> part_of_speech <span class="keyword">import</span> get_part_of_speech</span><br><span class="line"></span><br><span class="line"><span class="comment"># Change text to another string:</span></span><br><span class="line"><span class="comment"># text = looking_glass_text</span></span><br><span class="line">text = <span class="string">"hello world i miss you"</span></span><br><span class="line"></span><br><span class="line">cleaned = re.sub(<span class="string">'\W+'</span>, <span class="string">' '</span>, text).lower()</span><br><span class="line">tokenized = word_tokenize(cleaned)</span><br><span class="line"></span><br><span class="line">stop_words = stopwords.words(<span class="string">'english'</span>)</span><br><span class="line">filtered = [word <span class="keyword">for</span> word <span class="keyword">in</span> tokenized <span class="keyword">if</span> word <span class="keyword">not</span> <span class="keyword">in</span> stop_words]</span><br><span class="line"></span><br><span class="line">normalizer = WordNetLemmatizer()</span><br><span class="line">normalized = [normalizer.lemmatize(token, get_part_of_speech(token)) <span class="keyword">for</span> token <span class="keyword">in</span> filtered]</span><br><span class="line"><span class="comment"># Comment out the print statement below</span></span><br><span class="line">print(normalized)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Define bag_of_looking_glass_words &amp; print:</span></span><br><span class="line">bag_of_looking_glass_words = Counter(normalized)</span><br><span class="line">print(bag_of_looking_glass_words)</span><br></pre></td></tr></table></figure>
+<h3 id="Demo-創建一個-Topic"><a href="#Demo-創建一個-Topic" class="headerlink" title="Demo: 創建一個 Topic"></a>Demo: 創建一個 Topic</h3><img src="/Users/joe/Library/Application Support/typora-user-images/image-20201024085524024.png" alt="image-20201024085524024" style="zoom: 50%;" />
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">'hello'</span>, <span class="string">'world'</span>, <span class="string">'miss'</span>]</span><br><span class="line">Counter(&#123;<span class="string">'hello'</span>: 1, <span class="string">'world'</span>: 1, <span class="string">'miss'</span>: 1&#125;)</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Language-Models-N-Grams-and-NLM"><a href="#Language-Models-N-Grams-and-NLM" class="headerlink" title="Language Models - N-Grams and NLM"></a>Language Models - N-Grams and NLM</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> nltk, re</span><br><span class="line"><span class="keyword">from</span> nltk.tokenize <span class="keyword">import</span> word_tokenize</span><br><span class="line"><span class="comment"># importing ngrams module from nltk</span></span><br><span class="line"><span class="keyword">from</span> nltk.util <span class="keyword">import</span> ngrams</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> Counter</span><br><span class="line"><span class="keyword">from</span> looking_glass <span class="keyword">import</span> looking_glass_full_text</span><br><span class="line"></span><br><span class="line">cleaned = re.sub(<span class="string">'\W+'</span>, <span class="string">' '</span>, looking_glass_full_text).lower()</span><br><span class="line">tokenized = word_tokenize(cleaned)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Change the n value to 2:</span></span><br><span class="line">looking_glass_bigrams = ngrams(tokenized, <span class="number">2</span>)</span><br><span class="line">looking_glass_bigrams_frequency = Counter(looking_glass_bigrams)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Change the n value to 3:</span></span><br><span class="line">looking_glass_trigrams = ngrams(tokenized, <span class="number">3</span>)</span><br><span class="line">looking_glass_trigrams_frequency = Counter(looking_glass_trigrams)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Change the n value to a number greater than 3:</span></span><br><span class="line">looking_glass_ngrams = ngrams(tokenized, <span class="number">4</span>)</span><br><span class="line">looking_glass_ngrams_frequency = Counter(looking_glass_ngrams)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Looking Glass Bigrams:"</span>)</span><br><span class="line">print(looking_glass_bigrams_frequency.most_common(<span class="number">10</span>), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"\nLooking Glass Trigrams:"</span>)</span><br><span class="line">print(looking_glass_trigrams_frequency.most_common(<span class="number">10</span>), <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">n = <span class="number">3</span></span><br><span class="line">print(<span class="string">"\nLooking Glass n-grams:"</span>)</span><br><span class="line">print(looking_glass_ngrams_frequency.most_common(<span class="number">10</span>), <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Looking Glass Bigrams:</span><br><span class="line">[((<span class="string">'of'</span>, <span class="string">'the'</span>), 101), ((<span class="string">'said'</span>, <span class="string">'the'</span>), 98), ((<span class="string">'in'</span>, <span class="string">'a'</span>), 97), ((<span class="string">'in'</span>, <span class="string">'the'</span>), 90), ((<span class="string">'as'</span>, <span class="string">'she'</span>), 82), ((<span class="string">'you'</span>, <span class="string">'know'</span>), 72), ((<span class="string">'a'</span>, <span class="string">'little'</span>), 68), ((<span class="string">'the'</span>, <span class="string">'queen'</span>), 67), ((<span class="string">'said'</span>, <span class="string">'alice'</span>), 67), ((<span class="string">'to'</span>, <span class="string">'the'</span>), 66)] 2</span><br><span class="line"></span><br><span class="line">Looking Glass Trigrams:</span><br><span class="line">[((<span class="string">'the'</span>, <span class="string">'red'</span>, <span class="string">'queen'</span>), 54), ((<span class="string">'the'</span>, <span class="string">'white'</span>, <span class="string">'queen'</span>), 31), ((<span class="string">'said'</span>, <span class="string">'in'</span>, <span class="string">'a'</span>), 21), ((<span class="string">'she'</span>, <span class="string">'went'</span>, <span class="string">'on'</span>), 18), ((<span class="string">'said'</span>, <span class="string">'the'</span>, <span class="string">'red'</span>), 17), ((<span class="string">'thought'</span>, <span class="string">'to'</span>, <span class="string">'herself'</span>), 16), ((<span class="string">'the'</span>, <span class="string">'queen'</span>, <span class="string">'said'</span>), 16), ((<span class="string">'said'</span>, <span class="string">'to'</span>, <span class="string">'herself'</span>), 14), ((<span class="string">'said'</span>, <span class="string">'humpty'</span>, <span class="string">'dumpty'</span>), 14), ((<span class="string">'the'</span>, <span class="string">'knight'</span>, <span class="string">'said'</span>), 14)] 3</span><br><span class="line"></span><br><span class="line">Looking Glass n-grams:</span><br><span class="line">[((<span class="string">'said'</span>, <span class="string">'the'</span>, <span class="string">'red'</span>, <span class="string">'queen'</span>), 15), ((<span class="string">'she'</span>, <span class="string">'said'</span>, <span class="string">'to'</span>, <span class="string">'herself'</span>), 11), ((<span class="string">'alice'</span>, <span class="string">'thought'</span>, <span class="string">'to'</span>, <span class="string">'herself'</span>), 9), ((<span class="string">'to'</span>, <span class="string">'herself'</span>, <span class="string">'as'</span>, <span class="string">'she'</span>), 9), ((<span class="string">'one'</span>, <span class="string">'and'</span>, <span class="string">'one'</span>, <span class="string">'and'</span>), 8), ((<span class="string">'and'</span>, <span class="string">'one'</span>, <span class="string">'and'</span>, <span class="string">'one'</span>), 8), ((<span class="string">'alice'</span>, <span class="string">'said'</span>, <span class="string">'in'</span>, <span class="string">'a'</span>), 6), ((<span class="string">'for'</span>, <span class="string">'a'</span>, <span class="string">'minute'</span>, <span class="string">'or'</span>), 6), ((<span class="string">'a'</span>, <span class="string">'minute'</span>, <span class="string">'or'</span>, <span class="string">'two'</span>), 6), ((<span class="string">'in'</span>, <span class="string">'a'</span>, <span class="string">'tone'</span>, <span class="string">'of'</span>), 6)] 5</span><br></pre></td></tr></table></figure>
+<ul>
+<li>未發送 key，按默認的 round-robin</li>
+<li>Offset 就是個 id，跟 訊息長短沒關</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk056hkxnkj30vu03gacf.jpg" alt="image-20201024085829960" style="zoom:50%;" />
 
 
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> nltk, re</span><br><span class="line"><span class="keyword">from</span> sherlock_holmes <span class="keyword">import</span> bohemia_ch1, bohemia_ch2, bohemia_ch3, boscombe_ch1, boscombe_ch2, boscombe_ch3</span><br><span class="line"><span class="keyword">from</span> preprocessing <span class="keyword">import</span> preprocess_text</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> CountVectorizer, TfidfVectorizer</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> LatentDirichletAllocation</span><br><span class="line"></span><br><span class="line"><span class="comment"># preparing the text</span></span><br><span class="line">corpus = [bohemia_ch1, bohemia_ch2, bohemia_ch3, boscombe_ch1, boscombe_ch2, boscombe_ch3]</span><br><span class="line">preprocessed_corpus = [preprocess_text(chapter) <span class="keyword">for</span> chapter <span class="keyword">in</span> corpus]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Update stop_list:</span></span><br><span class="line">stop_list = []</span><br><span class="line"><span class="comment"># filtering topics for stop words</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">filter_out_stop_words</span><span class="params">(corpus)</span>:</span></span><br><span class="line">  no_stops_corpus = []</span><br><span class="line">  <span class="keyword">for</span> chapter <span class="keyword">in</span> corpus:</span><br><span class="line">    no_stops_chapter = <span class="string">" "</span>.join([word <span class="keyword">for</span> word <span class="keyword">in</span> chapter.split(<span class="string">" "</span>) <span class="keyword">if</span> word <span class="keyword">not</span> <span class="keyword">in</span> stop_list])</span><br><span class="line">    no_stops_corpus.append(no_stops_chapter)</span><br><span class="line">  <span class="keyword">return</span> no_stops_corpus</span><br><span class="line">filtered_for_stops = filter_out_stop_words(preprocessed_corpus)</span><br><span class="line"></span><br><span class="line"><span class="comment"># creating the bag of words model</span></span><br><span class="line">bag_of_words_creator = CountVectorizer()</span><br><span class="line">bag_of_words = bag_of_words_creator.fit_transform(filtered_for_stops)</span><br><span class="line"></span><br><span class="line"><span class="comment"># creating the tf-idf model</span></span><br><span class="line">tfidf_creator = TfidfVectorizer(min_df = <span class="number">0.2</span>)</span><br><span class="line">tfidf = tfidf_creator.fit_transform(preprocessed_corpus)</span><br><span class="line"></span><br><span class="line"><span class="comment"># creating the bag of words LDA model</span></span><br><span class="line">lda_bag_of_words_creator = LatentDirichletAllocation(learning_method=<span class="string">'online'</span>, n_components=<span class="number">10</span>)</span><br><span class="line">lda_bag_of_words = lda_bag_of_words_creator.fit_transform(bag_of_words)</span><br><span class="line"></span><br><span class="line"><span class="comment"># creating the tf-idf LDA model</span></span><br><span class="line">lda_tfidf_creator = LatentDirichletAllocation(learning_method=<span class="string">'online'</span>, n_components=<span class="number">10</span>)</span><br><span class="line">lda_tfidf = lda_tfidf_creator.fit_transform(tfidf)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"~~~ Topics found by bag of words LDA ~~~"</span>)</span><br><span class="line"><span class="keyword">for</span> topic_id, topic <span class="keyword">in</span> enumerate(lda_bag_of_words_creator.components_):</span><br><span class="line">  message = <span class="string">"Topic #&#123;&#125;: "</span>.format(topic_id + <span class="number">1</span>)</span><br><span class="line">  message += <span class="string">" "</span>.join([bag_of_words_creator.get_feature_names()[i] <span class="keyword">for</span> i <span class="keyword">in</span> topic.argsort()[:<span class="number">-5</span> :<span class="number">-1</span>]])</span><br><span class="line">  print(message)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"\n\n~~~ Topics found by tf-idf LDA ~~~"</span>)</span><br><span class="line"><span class="keyword">for</span> topic_id, topic <span class="keyword">in</span> enumerate(lda_tfidf_creator.components_):</span><br><span class="line">  message = <span class="string">"Topic #&#123;&#125;: "</span>.format(topic_id + <span class="number">1</span>)</span><br><span class="line">  message += <span class="string">" "</span>.join([tfidf_creator.get_feature_names()[i] <span class="keyword">for</span> i <span class="keyword">in</span> topic.argsort()[:<span class="number">-5</span> :<span class="number">-1</span>]])</span><br><span class="line">  print(message)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">~~~ Topics found by bag of words LDA ~~~</span><br><span class="line">Topic <span class="comment">#1: holmes say little upon</span></span><br><span class="line">Topic <span class="comment">#2: house come could man</span></span><br><span class="line">Topic <span class="comment">#3: holmes say know come</span></span><br><span class="line">Topic <span class="comment">#4: holmes would say know</span></span><br><span class="line">Topic <span class="comment">#5: say holmes know see</span></span><br><span class="line">Topic <span class="comment">#6: say holmes man could</span></span><br><span class="line">Topic <span class="comment">#7: say upon mccarthy man</span></span><br><span class="line">Topic <span class="comment">#8: make holmes cry majesty</span></span><br><span class="line">Topic <span class="comment">#9: holmes say man upon</span></span><br><span class="line">Topic <span class="comment">#10: upon holmes see say</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">~~~ Topics found by tf-idf LDA ~~~</span><br><span class="line">Topic <span class="comment">#1: merely upon boot catch</span></span><br><span class="line">Topic <span class="comment">#2: boot save holmes mccarthy</span></span><br><span class="line">Topic <span class="comment">#3: norton resolve help refer</span></span><br><span class="line">Topic <span class="comment">#4: leave remove three lodge</span></span><br><span class="line">Topic <span class="comment">#5: say neck resolute stone</span></span><br><span class="line">Topic <span class="comment">#6: holmes king majesty photograph</span></span><br><span class="line">Topic <span class="comment">#7: fear together heavy upon</span></span><br><span class="line">Topic <span class="comment">#8: holmes say know man</span></span><br><span class="line">Topic <span class="comment">#9: figure surround definite heel</span></span><br><span class="line">Topic <span class="comment">#10: know many swiftly scotland</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Text-Similarity"><a href="#Text-Similarity" class="headerlink" title="Text Similarity"></a>Text Similarity</h3><p>Most of us have a good autocorrect story. Our phone’s messenger quietly swaps one letter for another as we type and suddenly the meaning of our message has changed (to our horror or pleasure). However, addressing <strong><em>text similarity\</em></strong> — including spelling correction — is a major challenge within natural language processing.</p>
-<p>Addressing word similarity and misspelling for spellcheck or autocorrect often involves considering the <strong><em>Levenshtein distance\</em></strong> or minimal edit distance between two words. The distance is calculated through the minimum number of insertions, deletions, and substitutions that would need to occur for one word to become another. For example, turning “bees” into “beans” would require one substitution (“a” for “e”) and one insertion (“n”), so the Levenshtein distance would be two.</p>
-<p>Phonetic similarity is also a major challenge within speech recognition. English-speaking humans can easily tell from context whether someone said “euthanasia” or “youth in Asia,” but it’s a far more challenging task for a machine! More advanced autocorrect and spelling correction technology additionally considers key distance on a keyboard and <strong><em>phonetic similarity\</em></strong> (how much two words or phrases sound the same).</p>
-<p>It’s also helpful to find out if texts are the same to guard against plagiarism, which we can identify through <strong><em>lexical similarity\</em></strong> (the degree to which texts use the same vocabulary and phrases). Meanwhile, <strong><em>semantic similarity\</em></strong> (the degree to which documents contain similar meaning or topics) is useful when you want to find (or recommend) an article or book similar to one you recently finished.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> nltk</span><br><span class="line"><span class="comment"># NLTK has a built-in function</span></span><br><span class="line"><span class="comment"># to check Levenshtein distance:</span></span><br><span class="line"><span class="keyword">from</span> nltk.metrics <span class="keyword">import</span> edit_distance</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_levenshtein</span><span class="params">(string1, string2)</span>:</span></span><br><span class="line">  print(<span class="string">"The Levenshtein distance from '&#123;0&#125;' to '&#123;1&#125;' is &#123;2&#125;!"</span>.format(string1, string2, edit_distance(string1, string2)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Check the distance between</span></span><br><span class="line"><span class="comment"># any two words here!</span></span><br><span class="line">print_levenshtein(<span class="string">"fart"</span>, <span class="string">"target"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Assign passing strings here:</span></span><br><span class="line">three_away_from_code = <span class="string">"cat"</span></span><br><span class="line"></span><br><span class="line">two_away_from_chunk = <span class="string">"cheek"</span></span><br><span class="line"></span><br><span class="line">print_levenshtein(<span class="string">"code"</span>, three_away_from_code)</span><br><span class="line">print_levenshtein(<span class="string">"chunk"</span>, two_away_from_chunk)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The Levenshtein distance from <span class="string">'fart'</span> to <span class="string">'target'</span> is 3!</span><br><span class="line">The Levenshtein distance from <span class="string">'code'</span> to <span class="string">'cat'</span> is 3!</span><br><span class="line">The Levenshtein distance from <span class="string">'chunk'</span> to <span class="string">'cheek'</span> is 2!</span><br></pre></td></tr></table></figure>
+<h3 id="Back-door-我可優化的"><a href="#Back-door-我可優化的" class="headerlink" title="Back-door 我可優化的"></a>Back-door 我可優化的</h3><p>Kafka 其中一台掛了怎辦？備份</p>
+<ul>
+<li>兩個放在同個機房(rack) –&gt; latency不會過大</li>
+<li>另一個在不同城市，我要replicate的時候比較慢，但ok</li>
+<li>所以在latency、reliability找了平衡</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk05k9xsnfj30vi0f8wpp.jpg" alt="image-20201024091144456" style="zoom:67%;" />
 
 
 
-<h3 id="Language-Prediction-amp-Text-Generation"><a href="#Language-Prediction-amp-Text-Generation" class="headerlink" title="Language Prediction &amp; Text Generation"></a>Language Prediction &amp; Text Generation</h3><p>How does your favorite search engine complete your search queries? How does your phone’s keyboard know what you want to type next? <strong><em>Language prediction\</em></strong> is an application of NLP concerned with predicting text given preceding text. Autosuggest, autocomplete, and suggested replies are common forms of language prediction.</p>
-<p>Your first step to language prediction is picking a language model. Bag of words alone is generally not a great model for language prediction; no matter what the preceding word was, you will just get one of the most commonly used words from your training corpus.</p>
-<p>If you go the <em>n</em>-gram route, you will most likely rely on <strong><em>Markov chains\</em></strong> to predict the statistical likelihood of each following word (or character) based on the training corpus. Markov chains are memory-less and make statistical predictions based entirely on the current <em>n</em>-gram on hand.</p>
-<p>For example, let’s take a sentence beginning, “I ate so many grilled cheese”. Using a trigram model (where <em>n</em> is 3), a Markov chain would predict the following word as “sandwiches” based on the number of times the sequence “grilled cheese sandwiches” has appeared in the training data out of all the times “grilled cheese” has appeared in the training data.</p>
-<p>A more advanced approach, using a neural language model, is the <strong><em>Long Short Term Memory (LSTM)\</em></strong> model. LSTM uses deep learning with a network of artificial “cells” that manage memory, making them better suited for text prediction than traditional neural networks.</p>
-<p><strong>1.</strong></p>
-<p>Add three short stories by your favorite author or the lyrics to three songs by your favorite artist to <strong>document1.py</strong>, <strong>document2.py</strong>, and <strong>document3.py</strong>. Then run <strong>script.py</strong> to see a short example of text prediction.</p>
-<p>Does it look like something by your favorite author or artist?</p>
-<p>If you accidentally close one of the files, just click the file folder in the top left corner of the code editor to find the file and re-open it.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> nltk, re, random</span><br><span class="line"><span class="keyword">from</span> nltk.tokenize <span class="keyword">import</span> word_tokenize</span><br><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict, deque</span><br><span class="line"><span class="keyword">from</span> document1 <span class="keyword">import</span> training_doc1</span><br><span class="line"><span class="keyword">from</span> document2 <span class="keyword">import</span> training_doc2</span><br><span class="line"><span class="keyword">from</span> document3 <span class="keyword">import</span> training_doc3</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MarkovChain</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">    self.lookup_dict = defaultdict(list)</span><br><span class="line">    self._seeded = <span class="literal">False</span></span><br><span class="line">    self.__seed_me()</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__seed_me</span><span class="params">(self, rand_seed=None)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> self._seeded <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">True</span>:</span><br><span class="line">      <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span> rand_seed <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">          random.seed(rand_seed)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">          random.seed()</span><br><span class="line">        self._seeded = <span class="literal">True</span></span><br><span class="line">      <span class="keyword">except</span> NotImplementedError:</span><br><span class="line">        self._seeded = <span class="literal">False</span></span><br><span class="line">    </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">add_document</span><span class="params">(self, str)</span>:</span></span><br><span class="line">    preprocessed_list = self._preprocess(str)</span><br><span class="line">    pairs = self.__generate_tuple_keys(preprocessed_list)</span><br><span class="line">    <span class="keyword">for</span> pair <span class="keyword">in</span> pairs:</span><br><span class="line">      self.lookup_dict[pair[<span class="number">0</span>]].append(pair[<span class="number">1</span>])</span><br><span class="line">  </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">_preprocess</span><span class="params">(self, str)</span>:</span></span><br><span class="line">    cleaned = re.sub(<span class="string">r'\W+'</span>, <span class="string">' '</span>, str).lower()</span><br><span class="line">    tokenized = word_tokenize(cleaned)</span><br><span class="line">    <span class="keyword">return</span> tokenized</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__generate_tuple_keys</span><span class="params">(self, data)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(data) &lt; <span class="number">1</span>:</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(data) - <span class="number">1</span>):</span><br><span class="line">      <span class="keyword">yield</span> [ data[i], data[i + <span class="number">1</span>] ]</span><br><span class="line">      </span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">generate_text</span><span class="params">(self, max_length=<span class="number">50</span>)</span>:</span></span><br><span class="line">    context = deque()</span><br><span class="line">    output = []</span><br><span class="line">    <span class="keyword">if</span> len(self.lookup_dict) &gt; <span class="number">0</span>:</span><br><span class="line">      self.__seed_me(rand_seed=len(self.lookup_dict))</span><br><span class="line">      chain_head = [list(self.lookup_dict)[<span class="number">0</span>]]</span><br><span class="line">      context.extend(chain_head)</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">while</span> len(output) &lt; (max_length - <span class="number">1</span>):</span><br><span class="line">        next_choices = self.lookup_dict[context[<span class="number">-1</span>]]</span><br><span class="line">        <span class="keyword">if</span> len(next_choices) &gt; <span class="number">0</span>:</span><br><span class="line">          next_word = random.choice(next_choices)</span><br><span class="line">          context.append(next_word)</span><br><span class="line">          output.append(context.popleft())</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">          <span class="keyword">break</span></span><br><span class="line">      output.extend(list(context))</span><br><span class="line">    <span class="keyword">return</span> <span class="string">" "</span>.join(output)</span><br><span class="line"></span><br><span class="line">my_markov = MarkovChain()</span><br><span class="line">my_markov.add_document(training_doc1)</span><br><span class="line">my_markov.add_document(training_doc2)</span><br><span class="line">my_markov.add_document(training_doc3)</span><br><span class="line">generated_text = my_markov.generate_text()</span><br><span class="line">print(generated_text)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>TERMs: ack、latency、Throughput</li>
+</ul>
+<h3 id="On-IntelliJ"><a href="#On-IntelliJ" class="headerlink" title="On IntelliJ"></a>On IntelliJ</h3><ul>
+<li>Zookeeper要先在背后起来</li>
+<li>機器之間一定是通過network，network時就只能序列化變一個個地byte，<ul>
+<li>int serializer</li>
+<li>string serializer.  –&gt; 大多數情況都是這傢伙</li>
+</ul>
+</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk0735ftpqj30xs06c79h.jpg" alt="image-20201024100429381" style="zoom:50%;" />
 
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/03/28/Web/2020-03-28-Full%20Stack%20review/">Web/2020-03-28-Full Stack review</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-03-28</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Web/">Web</a></span><div class="content"><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd8e8h8nvzj317g0g6n9s.jpg" alt="image-20200327125348804" style="zoom:67%;" /></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/03/23/System-Design/Abstraction/2020-03-15-System%20Design%20Abstraction%201/">System-Design/Abstraction/2020-03-15-System Design Abstraction 1</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-03-23</time><div class="content"><h2 id="1"><a href="#1" class="headerlink" title="1"></a>1</h2><p><a href="https://aojajena.wordpress.com/2012/04/19/abstraction-in-design/" target="_blank" rel="noopener">https://aojajena.wordpress.com/2012/04/19/abstraction-in-design/</a></p>
-<p><a href="http://web.stanford.edu/~ouster/CS349W/lectures/abstraction.html" target="_blank" rel="noopener">http://web.stanford.edu/~ouster/CS349W/lectures/abstraction.html</a></p>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTgy1gd3y9agjg2j30sc0iu0w9.jpg" alt="image-20200323163855008"></p>
-<h2 id="2-UI-amp-UX"><a href="#2-UI-amp-UX" class="headerlink" title="2 UI &amp; UX"></a>2 UI &amp; UX</h2><p><a href="https://99designs.com/blog/tips/7-unbreakable-laws-of-user-interface-design/" target="_blank" rel="noopener">https://99designs.com/blog/tips/7-unbreakable-laws-of-user-interface-design/</a></p>
-<h3 id="User-Experience"><a href="#User-Experience" class="headerlink" title="User Experience"></a>User Experience</h3></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/03/18/Books/2020-03-23-Lifes%20in%20English/">Books/2020-03-23-Lifes in English</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-03-18</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/English-Life/">English &amp; Life</a></span><div class="content"><blockquote>
-<p>Ross: Probably. But you know, I’ll tell you something. Passion is way overrated.</p>
-<p>Rachel: Yeah right.</p>
-<p>Ross: It is… eventually… kind of… <strong>burns out</strong>. But hopefully, what you’re left with is trust, and security, and… well, in the case of my ex-wife, lesbianism. So, you know, for all of those people who <strong>miss out</strong> on that passion… thing, there’s all that other good stuff.</p>
-</blockquote>
-<p>Ref: <a href="http://www.tingroom.com/print_35336.html" target="_blank" rel="noopener">http://www.tingroom.com/print_35336.html</a></p>
-</div><hr></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+<ul>
+<li>producer.flush() – 會幫把數據直接沖到kafka queue裡去<ul>
+<li>存在問題! </li>
+<li>只是個blocking call，但不是同步</li>
+<li>就跟你这个info绑定了，要是你没跟我说你成功，我就会有个线程，一是在盯你，我一直浪费</li>
+</ul>
+</li>
+<li>Producer.send(recordNoKey) 一定是 Async的</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201024101109235.png" alt="image-20201024101109235" style="zoom:50%;" />
+
+<ul>
+<li>Producer 自己就是個 client之一</li>
+<li>三次握手也不需我們實現不然太蝦</li>
+</ul>
+<ul>
+<li>那个是partition id，不是replica 的id</li>
+</ul>
+<h3 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h3><p>軟體管理工具 – FB、Uber都有用</p>
+<p>項目管理工具</p>
+<h3 id="Producer-Keyhash"><a href="#Producer-Keyhash" class="headerlink" title="Producer Keyhash"></a>Producer Keyhash</h3><ul>
+<li>key如果被detect到是有東西，就會有hash去hash 去決定把這個partition發送到哪個 broker上面去；否則就是 round-robin</li>
+</ul>
+<h3 id="Producer-onCompletion"><a href="#Producer-onCompletion" class="headerlink" title="Producer onCompletion"></a>Producer onCompletion</h3><img src="/Users/joe/Library/Application Support/typora-user-images/image-20201025230649208.png" alt="image-20201025230649208" style="zoom: 67%;" />
+
+<ul>
+<li>production 不要用! 會變單線程<ul>
+<li>難道因為一個人的login失敗了，我就要stop整個producer嗎？</li>
+<li>我要做的事應該是producer不傻</li>
+</ul>
+</li>
+<li>一般是async時也過陣子來查看</li>
+<li>一般在prod不需要知道發去了哪裡，在roundrobin裡不需要知道<ul>
+<li>如果想知道話，也不是好奇；而是假設consumer的處理性特殊 – groupby key – 要是roundrobin就會分到10台機器，現在的shuffle洗牌才能把它們放到一台機器上去；要是很常，我的處理就意味不高效! 為了高效，我就會不再roundrobin，而是hashbykey!<ul>
+<li>所有的bigdata key 都在一台機器上，就不再要洗牌，雖然是全局的groupby；一旦沒有全局的groupby，我就很快</li>
+<li>即然我指定了我的key，我就可以很有信心知道這條要去哪台機器，因為kafka會去handle</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Kafka-再論"><a href="#Kafka-再論" class="headerlink" title="Kafka 再論"></a>Kafka 再論</h3><ul>
+<li><p>Kafka 啟動時會設定這個cluster要幾台機器組成</p>
+</li>
+<li><p>Kafka 是個 Pull 模型，因為</p>
+<ul>
+<li><p>Scalibility : 它是個很好的decouple的作用，把 producer、consumer很好地分開了；各自壞了不會影響到對方。</p>
+<ul>
+<li>如果這個Topic很多下游在訂閱，kafka要是push的話，它會忙死，而且下游搞不好還沒要你這更新</li>
+<li>它忙壞了，根本無法 scale-up</li>
+</ul>
+</li>
+<li><p>Diversity : – LEVERAGE &amp; STALIBILITY</p>
+<ul>
+<li><p>每個consumer都有自己的配置、自己的處理方式和節奏，kafka應該把處理信息的能動性(Leverage) 給 consumer。</p>
+</li>
+<li><p>要是這個組比較窮，或他們的priority低，他們處理數據不來，而且也沒budget；或許可以48hr再生一個結果就好。</p>
+<p>consumer可更穩定 (STALIBILITY)</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>每次我的好友建tweet時，該pull or push？</p>
+</li>
+<li><p>consumer 跟 partition有綁定的關係！只會給一個consumer去讀</p>
+<ul>
+<li>consumer去監聽partition</li>
+<li>平行就一定會有race condition<ol>
+<li>第 0 條該誰去讀？consumer0還是consumer4?</li>
+<li>假設真的通過層層複雜的設計，各自讀一條<ul>
+<li>我讀完時我要是早處理完時？</li>
+<li>我讀0時你讀1，你又不去commit，一方面在race了，一台機器上是idempotency，跨機器時呢？consumer不知道1號partition有沒有被讀成，怎辦？那consumer0跟consumer4還要有一個交流的體系</li>
+<li>交替讀的時候還是會出現問題</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>所以沒必要多台consumer監聽一個partion的必要</li>
+<li>系統裡不是最快就是最好的，當數據小時沒差。要是平行時的overhead大時，開一台就ok啦</li>
+</ul>
+</li>
+<li><p>中轉，一週後刪了；它的作用就不是保持數據的，才能scalible<br>往上強堆機器又要花錢!</p>
+</li>
+<li><p>問題就是: 工程師寫consumer會處理錯</p>
+</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk1yqkmwomj30rq0agwks.jpg" alt="image-20201025224640508" style="zoom: 67%;" />
+
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/10/23/BigData_java/2020-10-23%20Kafka%20Infrastructure%20&amp;%20Details/">BigData_java/2020-10-23 Kafka Infrastructure &amp; Details</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-10-23</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/BigData-java/">BigData_java</a></span><div class="content"><h2 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h2><h3 id="My-Installation"><a href="#My-Installation" class="headerlink" title="My Installation"></a>My Installation</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">10882* brew cask install java</span><br><span class="line">10885* /bin/bash -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)</span>"</span>\n</span><br><span class="line">10886* <span class="built_in">echo</span> <span class="string">'PATH="/usr/local/bin:$PATH"'</span> &gt;&gt; ~/.bash_profile</span><br><span class="line">10896* brew cask install homebrew/cask-versions/adoptopenjdk8</span><br><span class="line">10897* brew install kafka</span><br><span class="line">10904* java -version</span><br><span class="line">10905* vim /usr/<span class="built_in">local</span>/etc/kafka/server.properties		↓ </span><br><span class="line">															uncomment <span class="string">"listeners=PLAINTEXT://:9092"</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Servers-of-Zookeeper-amp-Kafka"><a href="#Servers-of-Zookeeper-amp-Kafka" class="headerlink" title="Servers of Zookeeper &amp; Kafka"></a>Servers of Zookeeper &amp; Kafka</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10906* zookeeper-server-start /usr/<span class="built_in">local</span>/etc/kafka/zookeeper.properties</span><br><span class="line">10907* kafka-server-start /usr/<span class="built_in">local</span>/etc/kafka/server.properties</span><br></pre></td></tr></table></figure>
+
+<img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gjzkxdfcs3j31xk0ng7dc.jpg" alt="image-20201023211741754" style="zoom:67%;" />
+
+
+
+<h3 id="Topics"><a href="#Topics" class="headerlink" title="Topics"></a>Topics</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">10909* kafka-topics --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic <span class="built_in">test</span></span><br><span class="line">	&gt;&gt; Created topic <span class="built_in">test</span>.</span><br><span class="line">	</span><br><span class="line">10911* kafka-topics --list --bootstrap-server localhost:9092</span><br><span class="line">	&gt;&gt; <span class="built_in">test</span></span><br><span class="line">	</span><br><span class="line">10913* kafka-topics --describe --topic <span class="built_in">test</span> --bootstrap-server localhost:9092</span><br><span class="line">	&gt;&gt; Topic: <span class="built_in">test</span>	PartitionCount: 1	ReplicationFactor: 1	Configs: segment.bytes=1073741824</span><br><span class="line">					Topic: <span class="built_in">test</span>	Partition: 0	Leader: 0	Replicas: 0	Isr: 0</span><br><span class="line"></span><br><span class="line">10914* kafka-run-class kafka.tools.GetOffsetShell --broker-list localhost:9092 -topic <span class="built_in">test</span></span><br><span class="line">	&gt;&gt; <span class="built_in">test</span>:0:0</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Producer-amp-Consumer"><a href="#Producer-amp-Consumer" class="headerlink" title="Producer &amp; Consumer"></a>Producer &amp; Consumer</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">10915* kafka-console-producer --broker-list localhost:9092 --topic <span class="built_in">test</span></span><br><span class="line">10916* kafka-console-consumer --bootstrap-server localhost:9092 --topic <span class="built_in">test</span></span><br><span class="line">10917* kafka-console-consumer --bootstrap-server localhost:9092 --topic <span class="built_in">test</span> --frome-beginning</span><br><span class="line">10918* kafka-console-consumer --bootstrap-server localhost:9092 --topic <span class="built_in">test</span> --from-beginning</span><br></pre></td></tr></table></figure>
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201023212415260.png" alt="image-20201023212415260" style="zoom:67%;" />
+
+
+
+
+
+<h2 id="Maven-Proj"><a href="#Maven-Proj" class="headerlink" title="Maven Proj"></a>Maven Proj</h2><ul>
+<li>⌘ + N – Generate</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201024003840912.png" alt="image-20201024003840912" style="zoom:50%;" />
+
+
+
+
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/10/22/Algo.%20Ult./note/">Algo. Ult./note</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-10-22</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Languages/">Languages</a></span><div class="content"><h4 id="Hard-to-solve"><a href="#Hard-to-solve" class="headerlink" title="Hard, to solve:"></a>Hard, to solve:</h4><pre><code>- 301.remove-invalidparantheses TLE for enumeration w/ backtracking, 
+- 140.word-break-ii a)MLE w/ case &quot;a&quot;*n &amp; b)Trie method (Trie not faster for single query, but for multi query in 472.)
+- SegmentTree
+- BinaryIndexedTree
+- Letter Combinatino of A Phone Number</code></pre><table>
+<thead>
+<tr>
+<th></th>
+<th>Python3</th>
+<th>Cpp</th>
+<th>JS</th>
+<th>Java</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>dict</strong></td>
+<td></td>
+<td>include <unordered_map>, //Similar to defaultdict() in python3</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>d = {}</td>
+<td>unordered_map&lt;Node*&gt; d;</td>
+<td>d = {}; new Map();</td>
+<td>Map&lt;Node, Node&gt; visited = new HashMap();</td>
+</tr>
+<tr>
+<td></td>
+<td>d[k] = v;</td>
+<td>d[k] = v;</td>
+<td>d[k]=v; map.<strong>set</strong>(0,1)</td>
+<td>visited.<strong>put</strong>(k, v)</td>
+</tr>
+<tr>
+<td></td>
+<td>d[k]; d.get(k,0)</td>
+<td>d[k];</td>
+<td>d[k]; map.get(k)</td>
+<td>visited.get(cur_O)</td>
+</tr>
+<tr>
+<td></td>
+<td>k not in d</td>
+<td>(d.find(k)==d.end())</td>
+<td>!(nbr_O.val in visited)</td>
+<td>!visited.containsKey(nbr_O)</td>
+</tr>
+<tr>
+<td></td>
+<td>k in d</td>
+<td>(d.find(k)!=d.end())</td>
+<td>nbr_O.val in visited; (map.<strong>has</strong>(sum-k))</td>
+<td>visited.<strong>containsKey</strong>(nbr_O)</td>
+</tr>
+<tr>
+<td></td>
+<td>del d[k]</td>
+<td>d.<strong>erase</strong>(key)</td>
+<td>this.d.<strong>delete</strong>(key);</td>
+<td>this.d.<strong>remove</strong>(key);</td>
+</tr>
+<tr>
+<td></td>
+<td>len(d)</td>
+<td>size()</td>
+<td>d.<strong>size</strong></td>
+<td>d.size()</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>d.empty()  //true; false</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>NotOK</td>
+<td></td>
+<td></td>
+<td>{k:v} in Initialization</td>
+<td></td>
+</tr>
+<tr>
+<td>Special APIs</td>
+<td></td>
+<td>reserve(capacity)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Iterate</td>
+<td>for k in d.keys():</td>
+<td>for (auto k: d)</td>
+<td>for (var key in dict){}</td>
+<td>for(char c:  ransomNote.toCharArray()) {</td>
+</tr>
+<tr>
+<td><strong>Ordered_dict</strong></td>
+<td>self.od.popitem(last=False)<br /><a href="https://www.pythonf.cn/read/89970" target="_blank" rel="noopener">https://www.pythonf.cn/read/89970</a><br /><a href="https://gist.github.com/joequery/12332f410a05e6c7c949" target="_blank" rel="noopener">https://gist.github.com/joequery/12332f410a05e6c7c949</a></td>
+<td></td>
+<td>d = new Map(); APIs↑↑ //ref: <a href="https://stackoverflow.com/questions/2798893/ordered-hash-in-javascript" target="_blank" rel="noopener">https://stackoverflow.com/questions/2798893/ordered-hash-in-javascript</a></td>
+<td>LinkedHashMap&lt;Integer, Integer&gt; d;<br />this.d = new LinkedHashMap&lt;&gt;();</td>
+</tr>
+<tr>
+<td></td>
+<td>first = next(iter(self.od))</td>
+<td></td>
+<td></td>
+<td>Integer first = this.d.keySet().iterator().next();</td>
+</tr>
+<tr>
+<td><strong>queue</strong></td>
+<td>from collections import deque</td>
+<td>include  <deque></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>deque();</td>
+<td>deque&lt;Node*&gt;</td>
+<td>let Q = [];</td>
+<td>Queue<Node> Q = new LinkedList(); //LinkedList<Node> Q = new LinkedList<Node>(); //雙向</td>
+</tr>
+<tr>
+<td></td>
+<td>Q.append(cur); v=Q.popleft()</td>
+<td>Q.push_back(cur); v=Q.front(),Q.pop_front()</td>
+<td>Q.push(cur); v=Q.shift(); // O(n)</td>
+<td>Q.add(nbr_O);//Q.push(nbr_O); Q.poll();</td>
+</tr>
+<tr>
+<td></td>
+<td>while d</td>
+<td>while (!Q.empty())</td>
+<td>while (Q.length != 0)</td>
+<td>while (!Q.isEmpty())</td>
+</tr>
+<tr>
+<td><strong>deque</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td>ArrayDeque雙向實現了DEque的interface</td>
+</tr>
+<tr>
+<td><strong>vector</strong></td>
+<td></td>
+<td>include <vector></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>self.res = []</td>
+<td>vector&lt;vector<int>&gt; result;</td>
+<td>res = [];</td>
+<td>List&lt;List<Integer>&gt; res = new ArrayList&lt;List<Integer>&gt;();</td>
+</tr>
+<tr>
+<td></td>
+<td>item.append(nums[idx])</td>
+<td>item.push_back(nums[idx]);</td>
+<td>item.push(nums[idx]);</td>
+<td>item.add(nums[idx]);</td>
+</tr>
+<tr>
+<td></td>
+<td>item.pop()</td>
+<td>item.pop_back();</td>
+<td>item.pop();</td>
+<td>item.remove(item.size()-1);</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>l.length; // 注意！跟dict不同，這邊是 length</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>for</td>
+<td>for (<strong><em>let</em></strong> i=0; i&lt;l.length; i++)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>l = [False] * 3</td>
+<td>vector<bool> dp(3, false);</td>
+<td>const dp = new Array(3).fill(false);</td>
+<td>List<Boolean> dp = new ArrayList(Collections.nCopies(s.length(), false));</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>int[] nums;, nums.length</td>
+</tr>
+<tr>
+<td><strong>Doublely LinkedList</strong></td>
+<td></td>
+<td><strong>std::list</strong><br /><strong>List</strong> stores elements at non contiguous memory location i.e. it internally uses a doubly linked list i.e.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>back(); front();</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>pop_back(); pop_front();</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>db_ll.erase(d[key])</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>APIs</strong></td>
+<td>from collections import Counter<br />Counter(l)</td>
+<td>X</td>
+<td>_.countBy(l)</td>
+<td>X</td>
+</tr>
+<tr>
+<td></td>
+<td>max</td>
+<td>max</td>
+<td>Math.max</td>
+<td>Math.max</td>
+</tr>
+<tr>
+<td><strong>String</strong></td>
+<td>len(s)</td>
+<td>s.length()</td>
+<td>s.length</td>
+<td>s.length()</td>
+</tr>
+<tr>
+<td></td>
+<td>s[i]</td>
+<td>s[i]</td>
+<td>s[i]</td>
+<td>s.charAt(i)</td>
+</tr>
+<tr>
+<td></td>
+<td>s[3:5]</td>
+<td>token = s.substr(start, i-start+1);</td>
+<td>s.slice(3, 5);</td>
+<td>s.substring(start, i+1);</td>
+</tr>
+<tr>
+<td><strong>Set</strong></td>
+<td>ws = set(wD)</td>
+<td>unordered_set<string> ws;<br/>        <br/>        for (auto s: wordDict){<br/>            ws.insert(s);<br/>        }</td>
+<td>let ws = new Set(wD)</td>
+<td>HashSet<String> ws = new HashSet(wordDict);</td>
+</tr>
+<tr>
+<td></td>
+<td>token in ws</td>
+<td>ws.find(token) != ws.end()</td>
+<td>ws.has(token)</td>
+<td>ws.contains(token)</td>
+</tr>
+<tr>
+<td><strong>MAX</strong></td>
+<td>float(‘-inf’)</td>
+<td>INT_MIN;</td>
+<td>-Number.MAX_VALUE;</td>
+<td>Integer.MIN_VALUE;</td>
+</tr>
+<tr>
+<td><strong>2D Init</strong></td>
+<td>[[0 for j in range(n)] for i in range(m)]</td>
+<td></td>
+<td></td>
+<td>[…Array(3)].map(x=&gt;Array(5).fill(0))</td>
+</tr>
+<tr>
+<td><strong>1D sort</strong></td>
+<td>l.sort(reverse=True)</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Node</strong></td>
+<td>if not head</td>
+<td>if (!head); if (nullputr == head)</td>
+<td>if (!root); if (head == null)</td>
+<td>if (head == null)</td>
+</tr>
+</tbody></table>
+<h2 id="Special-issues"><a href="#Special-issues" class="headerlink" title="Special issues:"></a>Special issues:</h2><ul>
+<li>Java &amp; js</li>
+<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gegmwb46qaj312a0u0qb1.jpg" alt="image-20200504191823941" style="zoom:67%;" /></li>
+</ul>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/10/13/AB_Test/Bayesian_ML/MyArrangement_1022/">AB_Test/Bayesian_ML/MyArrangement_1022</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-10-13</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/RL/">RL</a></span><div class="content"><h2 id="Real-World-AB-Testing"><a href="#Real-World-AB-Testing" class="headerlink" title="Real World AB Testing"></a>Real World AB Testing</h2><h3 id="Pattern"><a href="#Pattern" class="headerlink" title="Pattern"></a>Pattern</h3><ul>
+<li>about cmp 2 or more items</li>
+<li>each group of itmes produces numbers</li>
+<li>Which group has a higher/lower number (stat speaks)?<ul>
+<li>We want a hard drive to last longer (higher #)</li>
+<li>We want blood pressure to go down (lower #)</li>
+<li>How do we detect these differeneces?</li>
+</ul>
+</li>
+</ul>
+<p><strong>Stat &amp; CS dept use diff programming and priorities and paradigms of thinking!</strong></p>
+<p>past of my exposure was probably isolated to one of the two sides. Bayesian for Stat and Bayesian for ML are very different!</p>
+<ul>
+<li><p>Route: </p>
+<p>have to understand the old then the <strong>new</strong> , side by side, So a complete picture fo all the techs available and then able to their merits appropriately</p>
+<ul>
+<li><p>Old: </p>
+<ul>
+<li><p>review of prob &amp; stats</p>
+</li>
+<li><p>Frequency Statistics &amp; hypothesis testing –&gt; Bayesian Stat </p>
+<p>​             ↓==AS==↓<br>Newton –&gt; Quantum Physics</p>
+</li>
+</ul>
+</li>
+<li><p>So, <strong>frequencies method (Maximum Likelihood)</strong>, then move onto <strong>adaptive methods</strong></p>
+<ul>
+<li>for Online platforms with millions of users</li>
+<li>Culminate in Bayesian Approach to AB testing! –&gt; for online advertising</li>
+</ul>
+</li>
+<li><p>adaptive:</p>
+<ul>
+<li>ε-greedy</li>
+<li>UCB</li>
+<li>thompson – related to Bayesian ML</li>
+</ul>
+</li>
+<li><p><strong>MLE VS MAP</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>click</th>
+<th>not click</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td></td>
+<td></td>
+<td>sumA</td>
+</tr>
+<tr>
+<td>B</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>sumclick</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="Conclusion-of-Experiments"><a href="#Conclusion-of-Experiments" class="headerlink" title="Conclusion of Experiments"></a>Conclusion of Experiments</h2><p>P-Value</p>
+<p><strong>t value</strong> </p>
+<p><strong>p value</strong> big –&gt; significance! –&gt; B is diff from A</p>
+<p>t-test</p>
+<p>Confidence Interval , 0.05 5%, 1%, 0.1%</p>
+<h2 id="Why-t-–-gt-Chi2"><a href="#Why-t-–-gt-Chi2" class="headerlink" title="Why t –&gt; Chi2?"></a>Why t –&gt; Chi2?</h2><ul>
+<li>“1% vs 2%” talks different stories under diff whole amount</li>
+</ul>
+<p>1 out of 10 VS 2 out of 10 </p>
+<p>10 out of 100 vs 20 out 200, </p>
+<h2 id="exp-on-CTR"><a href="#exp-on-CTR" class="headerlink" title="exp on CTR"></a>exp on CTR</h2><h2 id="Freq-approaches-vs-Bayesian-ML"><a href="#Freq-approaches-vs-Bayesian-ML" class="headerlink" title="Freq approaches vs Bayesian ML"></a>Freq approaches vs Bayesian ML</h2><h3 id=""><a href="#" class="headerlink" title=""></a></h3><ul>
+<li>Heights of <ol>
+<li>collect data</li>
+<li>likelihood</li>
+<li>max 2)</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>Diff: <ul>
+<li>Freq : mean &amp; var are numbers</li>
+<li>Bayesian : mean &amp; var are prob distributions, I have to <strong>find their prob distributions.</strong>, instead of a number.</li>
+</ul>
+</li>
+<li>Sampling is a domain. –&gt; Markov Chain Monte Carlo, Gibbs, <ul>
+<li>main: numerical approximate of an <strong>integral</strong></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>WHOLE other direction:</p>
+<ul>
+<li>ML &amp; “Bayesian” predictive models</li>
+<li>Weight is “distribution”, not merely number</li>
+</ul>
+</li>
+<li><p>Non-Bayesian Example</p>
+<ul>
+<li>as NN - <strong>no assumptions</strong> about how the inputs are related</li>
+</ul>
+</li>
+<li><p><strong>Bayesian Network:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">	studying --&gt; A[pass&#x2F;failed]</span><br><span class="line">	video_game --&gt; sleep --&gt; A[pass&#x2F;failed]</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ul>
+<li>We can model these dependencies explicitly, whereas with NN, we always use the same model and let the NN figure out what the weights should be</li>
+</ul>
+<ul>
+<li><p>Bayesian ML may even be <strong><em>more complex</em></strong> than DL</p>
+</li>
+<li><p>Bayesian Logistic Regression &gt; Logistic Regression</p>
+</li>
+</ul>
+<p>for stat. </p>
+<p>if in a summer school  –&gt; 3 weeks, twice 3hrs in a week</p>
+<p>biologists, psychologists, web developers</p>
+<h4 id="My-Appendix"><a href="#My-Appendix" class="headerlink" title="My Appendix"></a>My Appendix</h4><ul>
+<li>discipline myself<ul>
+<li>Appendix – How to code by yourself</li>
+<li>Should you code along? on youtube</li>
+<li>Theory –&gt; Code</li>
+</ul>
+</li>
+<li>How to suc?<ul>
+<li>answer to my Q might be a Q</li>
+<li><strong>ML is experimentation, not philosophy</strong></li>
+</ul>
+</li>
+</ul>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2020/10/13/AB_Test/Bayesian_ML/Sec4%20-%20Traditional%20AB%20Testing/">AB_Test/Bayesian_ML/Sec4 - Traditional AB Testing</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-10-13</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/RL/">RL</a></span><div class="content"><h2 id="Confidence-Interval"><a href="#Confidence-Interval" class="headerlink" title="Confidence Interval"></a>Confidence Interval</h2><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx390jkcxj30tu03owfq.jpg" alt="image-20201021173502064" style="zoom:50%;" />
+
+<p>★ 特別是針對 expectation的！</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjwx16ej9xj30vs0d2tf2.jpg" alt="image-20201021135953919" style="zoom:50%;" />
+
+
+
+<h2 id="AB-Testing"><a href="#AB-Testing" class="headerlink" title="AB Testing"></a>AB Testing</h2><h3 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjwyvowthyj30tw0f443o.jpg" alt="image-20201021150350153" style="zoom:50%;" />
+
+
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201021150437924.png" alt="image-20201021150437924" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjwz0gasqoj30qw0cggqm.jpg" alt="image-20201021150824783" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjwz16tu87j30ry0400ur.jpg" alt="image-20201021150907155" style="zoom:50%;" />
+
+
+
+<h3 id="Recipe-“Alg-”-to-det-diff-2-groups"><a href="#Recipe-“Alg-”-to-det-diff-2-groups" class="headerlink" title="Recipe - “Alg.” to det diff 2 groups"></a>Recipe - “Alg.” to det diff 2 groups</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjwz2p6pwbj30ss0800yg.jpg" alt="image-20201021151034270" style="zoom:50%;" />
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjwz98g5m6j30w80gg441.jpg" alt="image-20201021151651242"></p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201021151729667.png" alt="image-20201021151729667" style="zoom:50%;" />
+
+
+
+<h4 id="t-distribution"><a href="#t-distribution" class="headerlink" title="t-distribution"></a>t-distribution</h4><img src="/Users/joe/Library/Application Support/typora-user-images/image-20201021153100112.png" alt="image-20201021153100112" style="zoom:50%;" />
+
+
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjwzoc9lbcj30v60bq79s.jpg" alt="image-20201021153122530"></p>
+<ul>
+<li><strong>ν –&gt; ( nu ) : degrees of freedom</strong><ul>
+<li>it contols how wide or skinny the PDF is</li>
+</ul>
+</li>
+<li>t-distribution can also have a mean and scale parameter, but again we won’t be using those here!</li>
+</ul>
+<h4 id="Test-Statistic-–-t-changes-w-conditions"><a href="#Test-Statistic-–-t-changes-w-conditions" class="headerlink" title="Test Statistic – t changes w/ conditions"></a>Test Statistic – t changes w/ conditions</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx0gewu0rj30wy0ck452.jpg" alt="image-20201021155820879" style="zoom:50%;" />
+
+
+
+<h4 id="t-Distribution-amp-Statistically-Significant"><a href="#t-Distribution-amp-Statistically-Significant" class="headerlink" title="t-Distribution &amp; Statistically Significant !"></a>t-Distribution &amp; Statistically Significant !</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx0j6fpp4j30x40ggdnl.jpg" alt="image-20201021160100750" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx0kszdisj30w207078e.jpg" alt="image-20201021160234547" style="zoom:50%;" />
+
+
+
+<h3 id="P-Values"><a href="#P-Values" class="headerlink" title="P-Values"></a>P-Values</h3><p><strong>Def: the probability of detecting a difference</strong> even when the 2 groups are the same</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx0oikuw8j30w60aqjz7.jpg" alt="image-20201021160608180" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx0p3y1fqj30w80fcaik.jpg" alt="image-20201021160642311" style="zoom:50%;" />
+
+
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201021160957827.png" alt="image-20201021160957827" style="zoom:50%;" />
+
+
+
+<h5 id="Reject-when-p-value-is-small"><a href="#Reject-when-p-value-is-small" class="headerlink" title="Reject when p-value is small!"></a>Reject when p-value is small!</h5><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx0ur3ea5j30w80b0gsl.jpg" alt="image-20201021161208051"></p>
+<h5 id="t-↑-P↓-–-gt-Difference↑"><a href="#t-↑-P↓-–-gt-Difference↑" class="headerlink" title="t ↑ P↓ –&gt; Difference↑"></a>t ↑ P↓ –&gt; Difference↑</h5><p>ref: <a href="https://medium.com/@chih.sheng.huang821/%E7%B5%B1%E8%A8%88%E5%AD%B8-%E5%A4%A7%E5%AE%B6%E9%83%BD%E5%96%9C%E6%AD%A1%E5%95%8F%E7%9A%84%E7%B3%BB%E5%88%97-p%E5%80%BC%E6%98%AF%E4%BB%80%E9%BA%BC-2c03dbe8fddf" target="_blank" rel="noopener">https://medium.com/@chih.sheng.huang821/%E7%B5%B1%E8%A8%88%E5%AD%B8-%E5%A4%A7%E5%AE%B6%E9%83%BD%E5%96%9C%E6%AD%A1%E5%95%8F%E7%9A%84%E7%B3%BB%E5%88%97-p%E5%80%BC%E6%98%AF%E4%BB%80%E9%BA%BC-2c03dbe8fddf</a></p>
+<p>t很大，p就很小，&lt; 0.05，就代表接受了吧，接受 H0</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx2si9q7fj30xg0hydog.jpg" alt="image-20201021171910329" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx2t0yycnj30vw0bkwnz.jpg" alt="image-20201021171940301" style="zoom:50%;" />
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="Test-Characteristics-Assumptions-and-Modifications"><a href="#Test-Characteristics-Assumptions-and-Modifications" class="headerlink" title="Test Characteristics, Assumptions, and Modifications"></a>Test Characteristics, Assumptions, and Modifications</h3><img src="/Users/joe/Library/Application Support/typora-user-images/image-20201021172151896.png" alt="image-20201021172151896" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx2yvb58lj30wq0gedk8.jpg" alt="image-20201021172516783" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx35tglhkj30wa06i0wq.jpg" alt="image-20201021173158134" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx3b5ccpoj30xq0nadrl.jpg" alt="image-20201021173705468" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx3d8x0xmj30uu0gcjwm.jpg" alt="image-20201021173906854" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx3f3vxv6j30x80gsqaj.jpg" alt="image-20201021174053806" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx3qxt8ymj30uo0gsds7.jpg" alt="image-20201021175215927" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx3tn16ejj30wk0f6wq6.jpg" alt="image-20201021175451838" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx3vsr8gfj30vk0a8q81.jpg" alt="image-20201021175656571" style="zoom:50%;" />
+
+
+
+
+
+
+
+<ul>
+<li>Does one advertisement have a better click through rate than another as determined by statistical significance?</li>
+<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx54d5ht6j30wg0k248y.jpg" alt="image-20201021183945851"></li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx53skq4qj30xg0h8dku.jpg" alt="image-20201021183912717" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx554z8skj30xi06smz1.jpg" alt="image-20201021184031122" style="zoom:50%;" />
+
+<ul>
+<li>t-test w/ same or diff variance? or try both then compare?</li>
+</ul>
+<h4 id="Key-points"><a href="#Key-points" class="headerlink" title="Key points"></a>Key points</h4><ul>
+<li><p>this data represents clicked for news on various advertisements but need not be th case.</p>
+<ul>
+<li>or headlines</li>
+<li>diff landing pages/ website designs/ logo</li>
+<li>key points structure of data</li>
+<li>compter sees are the numbers</li>
+<li>doing comparisons at the same time</li>
+</ul>
+</li>
+<li><p>how do i collect data? </p>
+<ul>
+<li>only i can answer<ul>
+<li>write a script to get my data off Hadoop; mapreduct spark ; web php&amp;mysql</li>
+<li>3rd party software, then download as csv</li>
+</ul>
+</li>
+<li>ml side vs de side, the part we get the data will not be considered ML. That wouel just be regular programming or even maybe it’s just navigating web then download csv.</li>
+</ul>
+</li>
+<li><p>so, to understand the format is just ok.</p>
+</li>
+<li><p>all data is the same</p>
+</li>
+</ul>
+<ul>
+<li><p>Try ex_ttest.py</p>
+<p>​    </p>
+</li>
+</ul>
+<h3 id="Chi-Square-Test-Statistic"><a href="#Chi-Square-Test-Statistic" class="headerlink" title="Chi-Square Test Statistic"></a>Chi-Square Test Statistic</h3><p>Chi-Square is not self-explanatory</p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201021230553830.png" alt="image-20201021230553830" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjxctwr4xpj30wg0g0jy9.jpg" alt="image-20201021230630656" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjxcvo1p9kj30xa0ge7d2.jpg" alt="image-20201021230812035" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjxcw6n0njj30re08qju5.jpg" alt="image-20201021230841374" style="zoom:50%;" />
+
+
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjxcwno3mpj30u40eaahq.jpg" alt="image-20201021230909261" style="zoom:50%;" />
+
+
+
+<h3 id="CTR-AB-in-Code"><a href="#CTR-AB-in-Code" class="headerlink" title="CTR AB in Code"></a>CTR AB in Code</h3><h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjxe1yiwqfj30um0e8tij.jpg" alt="image-20201021234850706"></p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjxe3u0a7cj30u60dsgwj.jpg" alt="image-20201021235039422" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjxe4h9kkaj30va0d8wob.jpg" alt="image-20201021235115920" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjxeb4tqz0j30mw09sadg.jpg" alt="image-20201021235739720" style="zoom:50%;" />
+
+
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201021235849357.png" alt="image-20201021235849357" style="zoom:50%;" />
+
+<ul>
+<li>FP - type I error</li>
+</ul>
+<h4 id="Bonferroni-Correction"><a href="#Bonferroni-Correction" class="headerlink" title="Bonferroni Correction"></a>Bonferroni Correction</h4></div><hr></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/62/">62</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
   $('#nav').addClass('is-mobile')
   $('footer').addClass('is-mobile')
   $('#top-container').addClass('is-mobile')

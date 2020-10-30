@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="AB_Test/Bayesian_ML/Sec2 - High Level Picture!"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>AB_Test/Bayesian_ML/Sec2 - High Level Picture! | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-180692466-1', 'auto');
+ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Real-World-E-G-of-A-B-Testing"><span class="toc-number">1.</span> <span class="toc-text">Real-World E.G. of A&#x2F;B Testing</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Drug"><span class="toc-number">1.0.1.</span> <span class="toc-text">Drug</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Website"><span class="toc-number">1.0.2.</span> <span class="toc-text">Website</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Biz-Flyers"><span class="toc-number">1.0.3.</span> <span class="toc-text">Biz Flyers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cloud-Storage"><span class="toc-number">1.0.4.</span> <span class="toc-text">Cloud Storage</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pattern"><span class="toc-number">1.1.</span> <span class="toc-text">Pattern</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Bayesian-ML"><span class="toc-number">2.</span> <span class="toc-text">Bayesian ML</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#In-this-Lecture"><span class="toc-number">2.0.1.</span> <span class="toc-text">In this Lecture!</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem"><span class="toc-number">2.0.2.</span> <span class="toc-text">Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Way-1-–-Freq"><span class="toc-number">2.0.2.1.</span> <span class="toc-text">Way 1 – Freq.</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Way-2-–-Baysian"><span class="toc-number">2.0.2.2.</span> <span class="toc-text">Way 2 – Baysian</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sampling"><span class="toc-number">2.0.3.</span> <span class="toc-text">Sampling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ML-Models"><span class="toc-number">2.0.4.</span> <span class="toc-text">ML Models</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bayesian-Networks"><span class="toc-number">2.0.5.</span> <span class="toc-text">Bayesian Networks</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Non-Bayesian-Example"><span class="toc-number">2.0.5.1.</span> <span class="toc-text">Non-Bayesian Example</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Bayesian-Network"><span class="toc-number">2.0.5.2.</span> <span class="toc-text">Bayesian Network</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LDA"><span class="toc-number">2.0.5.3.</span> <span class="toc-text">LDA</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Sum"><span class="toc-number">3.</span> <span class="toc-text">Sum</span></a></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">306</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">47</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">AB_Test/Bayesian_ML/Sec2 - High Level Picture!</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-05</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="Real-World-E-G-of-A-B-Testing"><a href="#Real-World-E-G-of-A-B-Testing" class="headerlink" title="Real-World E.G. of A/B Testing"></a>Real-World E.G. of A/B Testing</h1><h3 id="Drug"><a href="#Drug" class="headerlink" title="Drug"></a>Drug</h3><img src="/Users/joe/Library/Application Support/typora-user-images/image-20201022162224014.png" alt="image-20201022162224014" style="zoom:50%;" />
+
+<h3 id="Website"><a href="#Website" class="headerlink" title="Website"></a>Website</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjus6uqvswj31200najy9.jpg" alt="image-20201019174113739" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjus7uutbwj311y0lkqa2.jpg" alt="image-20201019174212598" style="zoom: 50%;" />
+
+
+
+<h3 id="Biz-Flyers"><a href="#Biz-Flyers" class="headerlink" title="Biz Flyers"></a>Biz Flyers</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjus96lyu7j311u0lk4c4.jpg" alt="image-20201019174328806" style="zoom:50%;" />
+
+
+
+<h3 id="Cloud-Storage"><a href="#Cloud-Storage" class="headerlink" title="Cloud Storage"></a>Cloud Storage</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjusa2wqt8j30zw0lkala.jpg" alt="image-20201019174420871" style="zoom:50%;" />
+
+
+
+
+
+<h2 id="Pattern"><a href="#Pattern" class="headerlink" title="Pattern"></a>Pattern</h2><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjuscv6owxj30z60k0wke.jpg" alt="image-20201019174701794"></p>
+<h1 id="Bayesian-ML"><a href="#Bayesian-ML" class="headerlink" title="Bayesian ML"></a>Bayesian ML</h1><ul>
+<li>Bayes rule is not BML per se, but rather just basic probability!</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201019175324972.png" alt="image-20201019175324972" style="zoom:50%;" />
+
+
+
+<h3 id="In-this-Lecture"><a href="#In-this-Lecture" class="headerlink" title="In this Lecture!"></a>In this Lecture!</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjuslglrm0j30yg0cedlg.jpg" alt="image-20201019175517025" style="zoom:50%;" />
+
+
+
+<h3 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h3><p><strong><em>Want to model the height of all the students of our class using a Gaussian</em></strong></p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjusms8i5kj30z60jejv9.jpg" alt="image-20201019175633724" style="zoom:50%;" />
+
+
+
+<h4 id="Way-1-–-Freq"><a href="#Way-1-–-Freq" class="headerlink" title="Way 1 – Freq."></a>Way 1 – Freq.</h4><ul>
+<li><p>collect data</p>
+</li>
+<li><p>using maximum likelihood estimation, we would inf the mean and variance to do this!</p>
+</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201019180138139.png" alt="image-20201019180138139" style="zoom: 50%;" />
+
+
+
+
+
+<h4 id="Way-2-–-Baysian"><a href="#Way-2-–-Baysian" class="headerlink" title="Way 2 – Baysian"></a>Way 2 – Baysian</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjustzb9pjj30rs0bon06.jpg" alt="image-20201019180328594" style="zoom:50%;" />
+
+<h3 id="Sampling"><a href="#Sampling" class="headerlink" title="Sampling"></a>Sampling</h3><img src="/Users/joe/Library/Application Support/typora-user-images/image-20201019180541609.png" alt="image-20201019180541609" style="zoom:50%;" />
+
+
+
+<h3 id="ML-Models"><a href="#ML-Models" class="headerlink" title="ML Models"></a>ML Models</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjusxw6u5tj30z20iin1m.jpg" alt="image-20201019180714117" style="zoom:33%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjusyvky65j30xc0jen11.jpg" alt="image-20201019180810406" style="zoom:50%;" />
+
+<ul>
+<li>Not Interested in findingthe vector W! <strong>BUT the distribution</strong> of the random vector !<ul>
+<li>we want to find P of W given X &amp; Y where X &amp; Y is our training data</li>
+</ul>
+</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjut0z2lrej30xi0kw7aj.jpg" alt="image-20201019181011767" style="zoom:50%;" />
+
+
+
+
+
+<h3 id="Bayesian-Networks"><a href="#Bayesian-Networks" class="headerlink" title="Bayesian Networks"></a>Bayesian Networks</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjut2ojxvaj30zi0iwdkq.jpg" alt="image-20201019181150246" style="zoom:50%;" />
+
+
+
+
+
+<h4 id="Non-Bayesian-Example"><a href="#Non-Bayesian-Example" class="headerlink" title="Non-Bayesian Example"></a>Non-Bayesian Example</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjut3kuk5xj30zs0j8jxv.jpg" alt="image-20201019181241715" style="zoom:50%;" />
+
+
+
+<h4 id="Bayesian-Network"><a href="#Bayesian-Network" class="headerlink" title="Bayesian Network"></a>Bayesian Network</h4><img src="/Users/joe/Library/Application Support/typora-user-images/image-20201019181342225.png" alt="image-20201019181342225" style="zoom:50%;" />
+
+<ul>
+<li>So! with base that, we can model these dependencies explicitly!<ul>
+<li>Whereas, when using NN, we usually use the same model and let the NN figure out what the weights should be.</li>
+</ul>
+</li>
+</ul>
+<h4 id="LDA"><a href="#LDA" class="headerlink" title="LDA"></a>LDA</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjut7itzkuj30xq0kggr0.jpg" alt="image-20201019181628953" style="zoom:50%;" />
+
+
+
+<h1 id="Sum"><a href="#Sum" class="headerlink" title="Sum"></a>Sum</h1><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjutcgncymj30yo0mu10z.jpg" alt="image-20201019182113813" style="zoom: 50%;" />
+
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/04/05/AB_Test/Bayesian_ML/Sec2%20-%20High%20Level%20Picture!/">http://yoursite.com/2019/04/05/AB_Test/Bayesian_ML/Sec2%20-%20High%20Level%20Picture!/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/04/10/System-Design/9p/2019-04-09-Design%20Chat%20System/"><i class="fa fa-chevron-left">  </i><span>System-Design/9p/2019-04-09-Design Chat System</span></a></div><div class="next-post pull-right"><a href="/2019/04/05/AB_Test/Bayesian_ML/Sec3%20-%20Bayes%20Rule%20&amp;%20Prob%20Review/"><span>AB_Test/Bayesian_ML/Sec3 - Bayes Rule &amp; Prob Review</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>

@@ -13,355 +13,88 @@ ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = {
     error: 'Copy error',
     noSupport: 'The browser does not support'
   }
-} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">298</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">45</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2018/07/20/Deeplearning.ai/2018-07-20-Deeplearning.ai_Course4-ObjectDetection&amp;StyleTransfer/">Deeplearning.ai/2018-07-20-Deeplearning.ai_Course4-ObjectDetection&amp;StyleTransfer</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-07-20</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Deep-Learning/">Deep-Learning</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Deep-Learning/AI/">AI</a></span><div class="content"><p>Deeplearning.ai_Course4.md</p>
-<h1 align="center">目标检测</h1>
-目标检测是计算机视觉领域中一个新兴的应用方向，其任务是对输入图像进行分类的同时，检测图像中是否包含某些目标，并对他们准确定位并标识。
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="false"><div class="author-info"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">306</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">47</span></a></div></div></div><nav class="no-bg" id="nav"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="site-info"><div id="site-title">Awaken Desparado</div><div id="site-sub-title"></div></div></nav><div id="content-outer"><div class="layout" id="content-inner"><div class="recent-post-item article-container"><a class="article-title" href="/2018/11/23/DevOps/2018-11-23-C++%20ReArrange/">DevOps/2018-11-23-C++ ReArrange</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-23</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/C/">C++</a></span><div class="content"><h3 id="1-cout-of-char"><a href="#1-cout-of-char" class="headerlink" title="1.  cout of char*"></a>1.  cout of <code>char*</code></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> *str = <span class="string">"hellogogo"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="keyword">char</span> *pstr = str;</span><br><span class="line">  <span class="built_in">cout</span> <span class="string">"The address of pstr is: "</span> &lt;&lt; pstr &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line">-------------------------</span><br><span class="line"> <span class="string">"The address of pstr is: hellogogo"</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="目标定位"><a href="#目标定位" class="headerlink" title="目标定位"></a>目标定位</h2><p>定位分类问题不仅要求判断出图片中物体的种类，还要在图片中标记出它的具体位置，用<strong>边框（Bounding Box，或者称包围盒）</strong>把物体圈起来。一般来说，定位分类问题通常只有一个较大的对象位于图片中间位置；而在目标检测问题中，图片可以含有多个对象，甚至单张图片中会有多个不同分类的对象。</p>
-<p>为了定位图片中汽车的位置，可以让神经网络多输出 4 个数字，标记为 $b_x$、$b_y$、$b_h$、$b_w$。将图片左上角标记为 (0, 0)，右下角标记为 (1, 1)，则有：</p>
-<ul>
-<li>红色方框的中心点：($b_x$，$b_y$)</li>
-<li>边界框的高度：$b_h$</li>
-<li>边界框的宽度：$b_w$</li>
-</ul>
-<p>因此，训练集不仅包含对象分类标签，还包含表示边界框的四个数字。定义目标标签 Y 如下：</p>
-<p>$$\left[\begin{matrix}P_c\\ b_x\\ b_y\\ b_h\\ b_w\\ c_1\\ c_2\\ c_3\end{matrix}\right]$$</p>
-<p>则有：</p>
-<p>$$P_c=1, Y = \left[\begin{matrix}1\\ b_x\\ b_y\\ b_h\\ b_w\\ c_1\\ c_2\\ c_3\end{matrix}\right]<br>$$</p>
-<p>其中，$c_n$表示存在第 $n$个种类的概率；如果 $P_c=0$，表示没有检测到目标，则输出标签后面的 7 个参数都是无效的，可以忽略（用 ? 来表示）。</p>
-<p>$$P_c=0, Y = \left[\begin{matrix}0\\ ?\\ ?\\ ?\\ ?\\ ?\\ ?\\ ?\end{matrix}\right]$$</p>
-<p>损失函数可以表示为 $L(\hat y, y)$，如果使用平方误差形式，对于不同的 $P_c$有不同的损失函数（注意下标 $i$指标签的第 $i$个值）：</p>
-<ol>
-<li><p>$P_c=1$，即$y_1=1$：</p>
-<p> $L(\hat y,y)=(\hat y_1-y_1)^2+(\hat y_2-y_2)^2+\cdots+(\hat y_8-y_8)^2$</p>
-</li>
-<li><p>$P_c=0$，即$y_1=0$：</p>
-<p> $L(\hat y,y)=(\hat y_1-y_1)^2$</p>
-</li>
-</ol>
-<p>除了使用平方误差，也可以使用逻辑回归损失函数，类标签 $c_1,c_2,c_3$ 也可以通过 softmax 输出。相比较而言，平方误差已经能够取得比较好的效果。</p>
-<h2 id="特征点检测"><a href="#特征点检测" class="headerlink" title="特征点检测"></a>特征点检测</h2><p>神经网络可以像标识目标的中心点位置那样，通过输出图片上的特征点，来实现对目标特征的识别。在标签中，这些特征点以多个二维坐标的形式表示。</p>
-<p>通过检测人脸特征点可以进行情绪分类与判断，或者应用于 AR 领域等等。也可以透过检测姿态特征点来进行人体姿态检测。</p>
-<h2 id="目标检测"><a href="#目标检测" class="headerlink" title="目标检测"></a>目标检测</h2><p>想要实现目标检测，可以采用<strong>基于滑动窗口的目标检测（Sliding Windows Detection）</strong>算法。该算法的步骤如下：</p>
-<ol>
-<li>训练集上搜集相应的各种目标图片和非目标图片，样本图片要求尺寸较小，相应目标居于图片中心位置并基本占据整张图片。</li>
-<li>使用训练集构建 CNN 模型，使得模型有较高的识别率。</li>
-<li>选择大小适宜的窗口与合适的固定步幅，对测试图片进行从左到右、从上倒下的滑动遍历。每个窗口区域使用已经训练好的 CNN 模型进行识别判断。</li>
-<li>可以选择更大的窗口，然后重复第三步的操作。</li>
-</ol>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7himisg18j30oy0ahjxj.jpg" alt="Sliding-windows-detection"></p>
-<p>滑动窗口目标检测的<strong>优点</strong>是原理简单，且不需要人为选定目标区域；<strong>缺点</strong>是需要人为直观设定滑动窗口的大小和步幅。滑动窗口过小或过大，步幅过大均会降低目标检测的正确率。另外，每次滑动都要进行一次 CNN 网络计算，如果滑动窗口和步幅较小，计算成本往往很大。</p>
-<p>所以，滑动窗口目标检测算法虽然简单，但是性能不佳，效率较低。</p>
-<h2 id="基于卷积的滑动窗口实现"><a href="#基于卷积的滑动窗口实现" class="headerlink" title="基于卷积的滑动窗口实现"></a>基于卷积的滑动窗口实现</h2><p>相比从较大图片多次截取，在卷积层上应用滑动窗口目标检测算法可以提高运行速度。所要做的仅是将全连接层换成卷积层，即使用与上一层尺寸一致的滤波器进行卷积运算。</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7himfw9zbj30pu0dgafa.jpg" alt="Convolution-implementation-of-sliding-windows"></p>
-<p>如图，对于 16x16x3 的图片，步长为 2，CNN 网络得到的输出层为 2x2x4。其中，2x2 表示共有 4 个窗口结果。对于更复杂的 28x28x3 的图片，得到的输出层为 8x8x4，共 64 个窗口结果。最大池化层的宽高和步长相等。</p>
-<p>运行速度提高的原理：在滑动窗口的过程中，需要重复进行 CNN 正向计算。因此，不需要将输入图片分割成多个子集，分别执行向前传播，而是将它们作为一张图片输入给卷积网络进行一次 CNN 正向计算。这样，公共区域的计算可以共享，以降低运算成本。</p>
-<p>相关论文：<a href="https://arxiv.org/pdf/1312.6229.pdf" target="_blank" rel="noopener">Sermanet et al., 2014. OverFeat: Integrated Recognition, Localization and Detection using Convolutional Networks</a></p>
-<h2 id="边框预测"><a href="#边框预测" class="headerlink" title="边框预测"></a>边框预测</h2><p>在上述算法中，边框的位置可能无法完美覆盖目标，或者大小不合适，或者最准确的边框并非正方形，而是长方形。</p>
-<p><strong>YOLO（You Only Look Once）算法</strong>可以用于得到更精确的边框。YOLO 算法将原始图片划分为 n×n 网格，并将<a href="http://kyonhuang.top/Andrew-Ng-Deep-Learning-notes/#/Convolutional_Neural_Networks/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B?id=%e7%9b%ae%e6%a0%87%e5%ae%9a%e4%bd%8d" target="_blank" rel="noopener">目标定位</a>一节中提到的图像分类和目标定位算法，逐一应用在每个网格中，每个网格都有标签如：</p>
-<p>$$\left[\begin{matrix}P_c\\ b_x\\ b_y\\ b_h\\ b_w\\ c_1\\ c_2\\ c_3\end{matrix}\right]$$</p>
-<p>若某个目标的中点落在某个网格，则该网格负责检测该对象。</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7himdh2caj318n0l4nb2.jpg" alt="Bounding-Box-Predictions"></p>
-<p>如上面的示例中，如果将输入的图片划分为 3×3 的网格、需要检测的目标有 3 类，则每一网格部分图片的标签会是一个 8 维的列矩阵，最终输出的就是大小为 3×3×8 的结果。要得到这个结果，就要训练一个输入大小为 100×100×3，输出大小为 3×3×8 的 CNN。在实践中，可能使用更为精细的 19×19 网格，则两个目标的中点在同一个网格的概率更小。</p>
-<p>YOLO 算法的优点：</p>
-<ol>
-<li>和图像分类和目标定位算法类似，显式输出边框坐标和大小，不会受到滑窗分类器的步长大小限制。</li>
-<li>仍然只进行一次 CNN 正向计算，效率很高，甚至可以达到实时识别。</li>
-</ol>
-<p>如何编码边框 $b_x$、$b_y$、$b_h$、$b_w$？YOLO 算法设 $b_x$、$b_y$、$b_h$、$b_w$ 的值是相对于网格长的比例。则 $b_x$、$b_y$ 在 0 到 1 之间，而 $b_h$、$b_w$ 可以大于 1。当然，也有其他参数化的形式，且效果可能更好。这里只是给出一个通用的表示方法。</p>
-<p>相关论文：<a href="https://arxiv.org/pdf/1506.02640.pdf" target="_blank" rel="noopener">Redmon et al., 2015. You Only Look Once: Unified, Real-Time Object Detection</a>。Ng 认为该论文较难理解。</p>
-<h2 id="交互比"><a href="#交互比" class="headerlink" title="交互比"></a>交互比</h2><p><strong>交互比（IoU, Intersection Over Union）</strong>函数用于评价对象检测算法，它计算预测边框和实际边框交集（I）与并集（U）之比：</p>
-<p>$$IoU = \frac{I}{U}$$</p>
-<p>IoU 的值在 0～1 之间，且越接近 1 表示目标的定位越准确。IoU 大于等于 0.5 时，一般可以认为预测边框是正确的，当然也可以更加严格地要求一个更高的阈值。</p>
-<h2 id="非极大值抑制"><a href="#非极大值抑制" class="headerlink" title="非极大值抑制"></a>非极大值抑制</h2><p>YOLO 算法中，可能有很多网格检测到同一目标。<strong>非极大值抑制（Non-max Suppression）</strong>会通过清理检测结果，找到每个目标中点所位于的网格，确保算法对每个目标只检测一次。</p>
-<p>进行非极大值抑制的步骤如下：</p>
-<ol>
-<li>将包含目标中心坐标的可信度 $P_c$ 小于阈值（例如 0.6）的网格丢弃；</li>
-<li>选取拥有最大 $P_c$ 的网格；</li>
-<li>分别计算该网格和其他所有网格的 IoU，将 IoU 超过预设阈值的网格丢弃；</li>
-<li>重复第 2~3 步，直到不存在未处理的网格。</li>
-</ol>
-<p>上述步骤适用于单类别目标检测。进行多个类别目标检测时，对于每个类别，应该单独做一次非极大值抑制。</p>
-<h2 id="Anchor-Boxes"><a href="#Anchor-Boxes" class="headerlink" title="Anchor Boxes"></a>Anchor Boxes</h2><p>到目前为止，我们讨论的情况都是一个网格只检测一个对象。如果要将算法运用在多目标检测上，需要用到 Anchor Boxes。一个网格的标签中将包含多个 Anchor Box，相当于存在多个用以标识不同目标的边框。</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7him3m8zxj30p20bqjw9.jpg" alt="Overlapping-objects"></p>
-<p>在上图示例中，我们希望同时检测人和汽车。因此，每个网格的的标签中含有两个 Anchor Box。输出的标签结果大小从 3×3×8 变为 3×3×16。若两个 $P_c$ 都大于预设阈值，则说明检测到了两个目标。</p>
-<p>在单目标检测中，图像中的目标被分配给了包含该目标中点的那个网格；引入 Anchor Box 进行多目标检测时，图像中的目标则被分配到了包含该目标中点的那个网格以及具有最高 IoU 值的该网格的 Anchor Box。</p>
-<p>Anchor Boxes 也有局限性，对于同一网格有三个及以上目标，或者两个目标的 Anchor Box 高度重合的情况处理不好。</p>
-<p>Anchor Box 的形状一般通过人工选取。高级一点的方法是用 k-means 将两类对象形状聚类，选择最具代表性的 Anchor Box。</p>
-<p>如果对以上内容不是很理解，在“3.9 YOLO 算法”一节中视频的第 5 分钟，有一个更为直观的示例。</p>
-<h2 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h2><p>前面介绍的滑动窗口目标检测算法对一些明显没有目标的区域也进行了扫描，这降低了算法的运行效率。为了解决这个问题，<strong>R-CNN（Region CNN，带区域的 CNN）</strong>被提出。通过对输入图片运行<strong>图像分割算法</strong>，在不同的色块上找出<strong>候选区域（Region Proposal）</strong>，就只需要在这些区域上运行分类器。</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7him6eqfhj30p607o0zs.jpg" alt="R-CNN"></p>
-<p>R-CNN 的缺点是运行速度很慢，所以有一系列后续研究工作改进。例如 Fast R-CNN（与基于卷积的滑动窗口实现相似，但得到候选区域的聚类步骤依然很慢）、Faster R-CNN（使用卷积对图片进行分割）。不过大多数时候还是比 YOLO 算法慢。</p>
-<p>相关论文：</p>
-<ul>
-<li>R-CNN：<a href="https://arxiv.org/pdf/1311.2524.pdf" target="_blank" rel="noopener">Girshik et al., 2013. Rich feature hierarchies for accurate object detection and semantic segmentation</a></li>
-<li>Fast R-CNN：<a href="https://arxiv.org/pdf/1504.08083.pdf" target="_blank" rel="noopener">Girshik, 2015. Fast R-CNN</a></li>
-<li>Faster R-CNN：<a href="https://arxiv.org/pdf/1506.01497v3.pdf" target="_blank" rel="noopener">Ren et al., 2016. Faster R-CNN: Towards real-time object detection with region proposal networks</a></li>
-</ul>
-<h2 id="——————–"><a href="#——————–" class="headerlink" title="——————–"></a>——————–</h2><h1 align="center">特殊应用：人脸识别和神经风格转换</h1>
-## 人脸识别
 
-<p><strong>人脸验证（Face Verification）</strong>和<strong>人脸识别（Face Recognition）</strong>的区别：</p>
-<ul>
-<li>人脸验证：一般指一个一对一问题，只需要验证输入的人脸图像是否与某个已知的身份信息对应；</li>
-<li>人脸识别：一个更为复杂的一对多问题，需要验证输入的人脸图像是否与多个已知身份信息中的某一个匹配。</li>
-</ul>
-<p>一般来说，由于需要匹配的身份信息更多导致错误率增加，人脸识别比人脸验证更难一些。</p>
-<h3 id="One-Shot-学习"><a href="#One-Shot-学习" class="headerlink" title="One-Shot 学习"></a>One-Shot 学习</h3><p>人脸识别所面临的一个挑战是要求系统只采集某人的一个面部样本，就能快速准确地识别出这个人，即只用一个训练样本来获得准确的预测结果。这被称为<strong>One-Shot 学习</strong>。</p>
-<p>有一种方法是假设数据库中存有 N 个人的身份信息，对于每张输入图像，用 Softmax 输出 N+1 种标签，分别对应每个人以及都不是。然而这种方法的实际效果很差，因为过小的训练集不足以训练出一个稳健的神经网络；并且如果有新的身份信息入库，需要重新训练神经网络，不够灵活。</p>
-<p>因此，我们通过学习一个 Similarity 函数来实现 One-Shot 学习过程。Similarity 函数定义了输入的两幅图像的差异度，其公式如下：</p>
-<p>$$Similarity  = d(img1, img2)$$</p>
-<p>可以设置一个超参数 $τ$ 作为阈值，作为判断两幅图片是否为同一个人的依据。</p>
-<h3 id="Siamese-网络"><a href="#Siamese-网络" class="headerlink" title="Siamese 网络"></a>Siamese 网络</h3><p>实现 Similarity 函数的一种方式是使用<strong>Siamese 网络</strong>，它是一种对两个不同输入运行相同的卷积网络，然后对它们的结果进行比较的神经网络。</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hiofwbebj30ni0bewg1.jpg" alt="Siamese"></p>
-<p>如上图示例，将图片 $x^{(1)}$、$x^{(2)}$ 分别输入两个相同的卷积网络中，经过全连接层后不再进行 Softmax，而是得到特征向量 $f(x^{(1)})$、$f(x^{(2)})$。这时，Similarity 函数就被定义为两个特征向量之差的 L2 范数：</p>
-<p>$$d(x^{(1)}, x^{(2)}) = ||f(x^{(1)}) - f(x^{(2)})||^2_2$$</p>
-<p>相关论文：<a href="http://www.cs.wayne.edu/~mdong/taigman_cvpr14.pdf" target="_blank" rel="noopener">Taigman et al., 2014, DeepFace closing the gap to human level performance</a></p>
-<h3 id="Triplet-损失"><a href="#Triplet-损失" class="headerlink" title="Triplet 损失"></a>Triplet 损失</h3><p><strong>Triplet 损失函数</strong>用于训练出合适的参数，以获得高质量的人脸图像编码。“Triplet”一词来源于训练这个神经网络需要大量包含 Anchor（靶目标）、Positive（正例）、Negative（反例）的图片组，其中 Anchor 和 Positive 需要是同一个人的人脸图像。</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hiodz3jsj30fs0bz77i.jpg" alt="Training-set-using-triplet-loss"></p>
-<p>对于这三张图片，应该有：</p>
-<p>$$||f(A) - f(P)||^2_2 + \alpha \le ||f(A) - f(N)||^2_2$$</p>
-<p>其中，$\alpha$ 被称为<strong>间隔（margin）</strong>，用于确保 $f()$ 不会总是输出零向量（或者一个恒定的值）。</p>
-<p>Triplet 损失函数的定义：</p>
-<p>$$L(A, P, N) = max(||f(A) - f(P)||^2_2 - ||f(A) - f(N)||^2_2 + \alpha, 0)$$</p>
-<p>其中，因为 $||f(A) - f(P)||^2_2 - ||f(A) - f(N)||^2_2 + \alpha$ 的值需要小于等于 0，因此取它和 0 的更大值。</p>
-<p>对于大小为 $m$ 的训练集，代价函数为：</p>
-<p>$$J = \sum^m_{i=1}L(A^{(i)}, P^{(i)}, N^{(i)})$$</p>
-<p>通过梯度下降最小化代价函数。</p>
-<p>在选择训练样本时，随机选择容易使 Anchor 和 Positive 极为接近，而 Anchor 和 Negative 相差较大，以致训练出来的模型容易抓不到关键的区别。因此，最好的做法是人为增加 Anchor 和 Positive 的区别，缩小 Anchor 和 Negative 的区别，促使模型去学习不同人脸之间的关键差异。</p>
-<p>相关论文：<a href="https://arxiv.org/pdf/1503.03832.pdf" target="_blank" rel="noopener">Schroff et al., 2015,  FaceNet: A unified embedding for face recognition and clustering</a></p>
-<h3 id="二分类结构"><a href="#二分类结构" class="headerlink" title="二分类结构"></a>二分类结构</h3><p>除了 Triplet 损失函数，二分类结构也可用于学习参数以解决人脸识别问题。其做法是输入一对图片，将两个 Siamese 网络产生的特征向量输入至同一个 Sigmoid 单元，输出 1 则表示是识别为同一人，输出 0 则表示识别为不同的人。</p>
-<p>Sigmoid 单元对应的表达式为：</p>
-<p>$$\hat y = \sigma (\sum^K_{k=1}w_k|f(x^{(i)})_{k} - x^{(j)})_{k}| + b)$$</p>
-<p>其中，$w_k$ 和 $b$ 都是通过梯度下降算法迭代训练得到的参数。上述计算表达式也可以用另一种表达式代替：</p>
-<p>$$\hat y = \sigma (\sum^K_{k=1}w_k<br>\frac{(f(x^{(i)})_k - f(x^{(j)})_k)^2}{f(x^{(i)})_k + f(x^{(j)})_k} + b)$$</p>
-<p>其中，$\frac{(f(x^{(i)})_k - f(x^{(j)})_k)^2}{f(x^{(i)})_k + f(x^{(j)})_k}$ 被称为 $\chi$ 方相似度。</p>
-<p>无论是对于使用 Triplet 损失函数的网络，还是二分类结构，为了减少计算量，可以提前计算好编码输出 $f(x)$ 并保存。这样就不必存储原始图片，并且每次进行人脸识别时只需要计算测试图片的编码输出。</p>
-<h2 id="神经风格迁移"><a href="#神经风格迁移" class="headerlink" title="神经风格迁移"></a>神经风格迁移</h2><p><strong>神经风格迁移（Neural style transfer）</strong>将参考风格图像的风格“迁移”到另外一张内容图像中，生成具有其特色的图像。</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hioa4airj30pq0btk2v.jpg" alt="Neural-style-transfer"></p>
-<h3 id="深度卷积网络在学什么？"><a href="#深度卷积网络在学什么？" class="headerlink" title="深度卷积网络在学什么？"></a>深度卷积网络在学什么？</h3><p>想要理解如何实现神经风格转换，首先要理解在输入图像数据后，一个深度卷积网络从中都学到了些什么。我们借助可视化来做到这一点。</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hio81mcsj30ok0d7wpn.jpg" alt="Visualizing-deep-layers"></p>
-<p>我们通过遍历所有的训练样本，找出使该层激活函数输出最大的 9 块图像区域。可以看出，浅层的隐藏层通常检测出的是原始图像的边缘、颜色、阴影等简单信息。随着层数的增加，隐藏单元能捕捉的区域更大，学习到的特征也由从边缘到纹理再到具体物体，变得更加复杂。</p>
-<p>相关论文：<a href="https://arxiv.org/pdf/1311.2901.pdf" target="_blank" rel="noopener">Zeiler and Fergus., 2013, Visualizing and understanding convolutional networks</a></p>
-<h3 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h3><p>神经风格迁移生成图片 G 的代价函数如下：</p>
-<p>$$J(G) = \alpha \cdot J_{content}(C, G) + \beta \cdot J_{style}(S, G)$$</p>
-<p>其中，$\alpha$、$\beta$ 是用于控制相似度比重的超参数。</p>
-<p>神经风格迁移的算法步骤如下：</p>
-<ol>
-<li>随机生成图片 G 的所有像素点；</li>
-<li>使用梯度下降算法使代价函数最小化，以不断修正 G 的所有像素点。</li>
-</ol>
-<p>相关论文：<a href="https://arxiv.org/pdf/1508.06576v2.pdf" target="_blank" rel="noopener">Gatys al., 2015. A neural algorithm of artistic style</a></p>
-<h4 id="内容代价函数"><a href="#内容代价函数" class="headerlink" title="内容代价函数"></a>内容代价函数</h4><p>上述代价函数包含一个内容代价部分和风格代价部分。我们先来讨论内容代价函数 $J_{content}(C, G)$，它表示内容图片 C 和生成图片 G 之间的相似度。</p>
-<p>$J_{content}(C, G)$ 的计算过程如下：</p>
-<ul>
-<li>使用一个预训练好的 CNN（例如 VGG）；</li>
-<li>选择一个隐藏层 $l$ 来计算内容代价。$l$ 太小则内容图片和生成图片像素级别相似，$l$ 太大则可能只有具体物体级别的相似。因此，$l$ 一般选一个中间层；</li>
-<li>设 $a^{(C)[l]}$、$a^{(G)[l]}$ 为 C 和 G 在 $l$ 层的激活，则有：</li>
-</ul>
-<p>$$J_{content}(C, G) = \frac{1}{2}||(a^{(C)[l]} - a^{(G)[l]})||^2$$</p>
-<p>$a^{(C)[l]}$ 和 $a^{(G)[l]}$ 越相似，则 $J_{content}(C, G)$ 越小。</p>
-<h4 id="风格代价函数"><a href="#风格代价函数" class="headerlink" title="风格代价函数"></a>风格代价函数</h4><p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hio60a4bj30a50g07a6.jpg" alt="Intuition-about-style-of-an-image"></p>
-<p>每个通道提取图片的特征不同，比如标为红色的通道提取的是图片的垂直纹理特征，标为黄色的通道提取的是图片的橙色背景特征。那么计算这两个通道的相关性，相关性的大小，即表示原始图片既包含了垂直纹理也包含了该橙色背景的可能性大小。通过 CNN，“风格”被定义为同一个隐藏层不同通道之间激活值的相关系数，因其反映了原始图片特征间的相互关系。</p>
-<p>对于风格图像 S，选定网络中的第 $l$ 层，则相关系数以一个 gram 矩阵的形式表示：</p>
-<p>$$G^{[l](S)}_{kk’} = \sum^{n^{[l]}_H}_{i=1} \sum^{n^{[l]}_W}_{j=1} a^{[l](S)}_{ijk} a^{[l](S)}_{ijk’}$$</p>
-<p>其中，$i$ 和 $j$ 为第 $l$ 层的高度和宽度；$k$ 和 $k’$ 为选定的通道，其范围为 $1$ 到 $n_C^{[l]}$；$a^{[l](S)}_{ijk}$ 为激活。</p>
-<p>同理，对于生成图像 G，有：</p>
-<p>$$G^{[l](G)}_{kk’} = \sum^{n^{[l]}_H}_{i=1} \sum^{n^{[l]}_W}_{j=1} a^{[l](G)}_{ijk} a^{[l](G)}_{ijk’}$$</p>
-<p>因此，第 $l$ 层的风格代价函数为：</p>
-<p>$$J^{[l]}_{style}(S, G) = \frac{1}{(2n^{[l]}_Hn^{[l]}_Wn^{[l]}_C)^2} \sum_k \sum_{k’}(G^{[l](S)}_{kk’} - G^{[l](G)}_{kk’})^2$$</p>
-<p>如果对各层都使用风格代价函数，效果会更好。因此有：</p>
-<p>$$J_{style}(S, G) = \sum_l \lambda^{[l]} J^{[l]}_{style}(S, G)$$</p>
-<p>其中，$lambda$ 是用于设置不同层所占权重的超参数。</p>
-<h3 id="推广至一维和三维"><a href="#推广至一维和三维" class="headerlink" title="推广至一维和三维"></a>推广至一维和三维</h3><p>之前我们处理的都是二维图片，实际上卷积也可以延伸到一维和三维数据。我们举两个示例来说明。</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hio1u4fij30lb06qgmr.jpg" alt="1D-3D-Convolution"></p>
-<p>EKG 数据（心电图）是由时间序列对应的每个瞬间的电压组成，是一维数据。一般来说我们会用 RNN（循环神经网络）来处理，不过如果用卷积处理，则有：</p>
-<ul>
-<li>输入时间序列维度：14 x 1</li>
-<li>滤波器尺寸：5 x 1，滤波器个数：16</li>
-<li>输出时间序列维度：10 x 16</li>
-</ul>
-<p>而对于三维图片的示例，有</p>
-<ul>
-<li>输入 3D 图片维度：14 x 14 x 14 x 1</li>
-<li>滤波器尺寸：5 x 5 x 5 x 1，滤波器个数：16</li>
-<li>输出 3D 图片维度：10 x 10 x 10 x 16</li>
-</ul>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/07/15/Deeplearning.ai/2018-07-15-Deeplearning.ai_Course4/">Deeplearning.ai/2018-07-15-Deeplearning.ai_Course4</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-07-15</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Deep-Learning/">Deep-Learning</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Deep-Learning/AI/">AI</a></span><div class="content"><h3 id="More-Edge-Detection"><a href="#More-Edge-Detection" class="headerlink" title="More Edge Detection"></a>More Edge Detection</h3><p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hgvsxddgj30oc13o1kx.jpg" alt="image-20190930131327684"></p>
-<h3 id="FC-image-20190930131559243-Users-joe-Library-Application-Support-typora-user-images-image-20190930131559243-png"><a href="#FC-image-20190930131559243-Users-joe-Library-Application-Support-typora-user-images-image-20190930131559243-png" class="headerlink" title="FC![image-20190930131559243](/Users/joe/Library/Application Support/typora-user-images/image-20190930131559243.png)"></a>FC![image-20190930131559243](/Users/joe/Library/Application Support/typora-user-images/image-20190930131559243.png)</h3><h3 id="ResNet"><a href="#ResNet" class="headerlink" title="ResNet"></a>ResNet</h3><p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hh5larukj31540u0u0x.jpg" alt="image-20190930132251760"></p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hh6b4jv8j30u00znnpd.jpg" alt="image-20190930132333911"></p>
-<h3 id="1X1"><a href="#1X1" class="headerlink" title="1X1"></a>1X1</h3><p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hh9e9z08j30vm0sukhp.jpg" alt="image-20190930132631493"></p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hh9q42hqj31320ps1kx.jpg" alt="image-20190930132651113"></p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hhajkqtsj30u00wl7wh.jpg" alt="image-20190930132738243"></p>
-<h3 id="Inception"><a href="#Inception" class="headerlink" title="Inception"></a>Inception</h3><p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hhhrhpwsj30u00vohdt.jpg" alt="image-20190930133434192"></p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hhja5itdj30wi0u01kx.jpg" alt="image-20190930133601668"></p>
-<p>“事 实 上 ， 如 果 你 读 过 论 文 的 原 文 ， 你 就 会 发 现 ， 这 里 其 实 还 有 一 些 分 支 ， 我 现 在 把 它 们 加 上 去 。 所 以 这 些 分 支 有 什  么 用 呢 ？ 在 网 络 的 最 后 几 层 ， 通 常 称 为 金 连 接 层 ， 在 它 之 后 是 一 个 s 。 ftmax 层 （ 编 号 1 ） 来 做 出 预 测 ， 这 些 分 支  （ 编 号 2 ） 所 做 的 就 是 通 过 隐 藏 层 （ 编 号 引 来 做 出 预 氵 则 ， 所 以 这 其 实 是 一 个 s 。 ftmax 输 出 （ 编 号 2 ） ， 这 （ 编 号  1 ） 也 是 。 是 另 一 条 分 支 （ 编 号 4 ） ， 它 也 包 含 了 一 个 隐 藏 层 ， 通 过 一 些 全 连 接 层 ， 然 后 有 一 个 so 代 max 来 预  测 ， 输 出 结 果 的 标 签 。  你 应 该 把 它 看 做 Incepti 。 n 网 络 的 一 个 细 节 ， 它 确 保 了 即 便 是 隐 藏 单 元 和 中 间 层 （ 编 号 5 ） 也 参 与 了 特 征 计 算 ， 它  们 也 能 预 测 图 片 的 分 类 。 它 在 Inception 网 络 中 ， 起 到 一 种 调 整 的 效 果 ， 并 且 能 防 止 网 络 发 生 过 拟 合 。  ”</p>
-<h3 id="迁移学习"><a href="#迁移学习" class="headerlink" title="迁移学习"></a>迁移学习</h3><p>在“搭建机器学习项目”课程中，<a href="http://kyonhuang.top/Andrew-Ng-Deep-Learning-notes/#/Structuring_Machine_Learning_Projects/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88ML%EF%BC%89%E7%AD%96%E7%95%A5%EF%BC%882%EF%BC%89?id=%e8%bf%81%e7%a7%bb%e5%ad%a6%e4%b9%a0" target="_blank" rel="noopener">迁移学习</a>已经被提到过。计算机视觉是一个经常用到迁移学习的领域。在搭建计算机视觉的应用时，相比于从头训练权重，下载别人已经训练好的网络结构的权重，用其做<strong>预训练</strong>，然后转换到自己感兴趣的任务上，有助于加速开发。</p>
-<p>对于已训练好的卷积神经网络，可以将所有层都看作是<strong>冻结的</strong>，只需要训练与你的 Softmax 层有关的参数即可。大多数深度学习框架都允许用户指定是否训练特定层的权重。</p>
-<p>而冻结的层由于不需要改变和训练，可以看作一个固定函数。可以将这个固定函数存入硬盘，以便后续使用，而不必每次再使用训练集进行训练了。</p>
-<p>上述的做法适用于你只有一个较小的数据集。如果你有一个更大的数据集，应该冻结更少的层，然后训练后面的层。越多的数据意味着冻结越少的层，训练更多的层。如果有一个极大的数据集，你可以将开源的网络和它的权重整个当作初始化（代替随机初始化），然后训练整个网络。</p>
-<h3 id="数据扩增"><a href="#数据扩增" class="headerlink" title="数据扩增"></a>数据扩增</h3><p>计算机视觉领域的应用都需要大量的数据。当数据不够时，<strong>数据扩增（Data Augmentation）</strong>就有帮助。常用的数据扩增包括镜像翻转、随机裁剪、色彩转换。</p>
-<p>其中，色彩转换是对图片的 RGB 通道数值进行随意增加或者减少，改变图片色调。另外，<strong>PCA 颜色增强</strong>指更有针对性地对图片的 RGB 通道进行主成分分析（Principles Components Analysis，PCA），对主要的通道颜色进行增加或减少，可以采用高斯扰动做法来增加有效的样本数量。具体的 PCA 颜色增强做法可以查阅 AlexNet 的相关论文或者开源代码。</p>
-<p>在构建大型神经网络的时候，数据扩增和模型训练可以由两个或多个不同的线程并行来实现。</p>
-<h3 id="计算机视觉现状"><a href="#计算机视觉现状" class="headerlink" title="计算机视觉现状"></a>计算机视觉现状</h3><p>通常，学习算法有两种知识来源：</p>
-<ul>
-<li>被标记的数据</li>
-<li>手工工程</li>
-</ul>
-<p><strong>手工工程（Hand-engineering，又称 hacks）</strong>指精心设计的特性、网络体系结构或是系统的其他组件。手工工程是一项非常重要也比较困难的工作。在数据量不多的情况下，手工工程是获得良好表现的最佳方式。正因为数据量不能满足需要，历史上计算机视觉领域更多地依赖于手工工程。近几年数据量急剧增加，因此手工工程量大幅减少。</p>
-<p>另外，在模型研究或者竞赛方面，有一些方法能够有助于提升神经网络模型的性能：</p>
-<ul>
-<li>集成（Ensembling）：独立地训练几个神经网络，并平均输出它们的输出</li>
-<li>Multi-crop at test time：将数据扩增应用到测试集，对结果进行平均</li>
-</ul>
-<p>但是由于这些方法计算和内存成本较大，一般不适用于构建实际的生产项目。</p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/06/15/Deeplearning.ai/2018-06-15-Deeplearning.ai_Course1/">Deeplearning.ai/2018-06-15-Deeplearning.ai_Course1</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-06-15</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Deep-Learning/">Deep-Learning</a><i class="fa fa-angle-right" aria-hidden="true"></i><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Deep-Learning/AI/">AI</a></span><div class="content"><h3 id="Course1"><a href="#Course1" class="headerlink" title="Course1"></a>Course1</h3><h4 id="Week1"><a href="#Week1" class="headerlink" title="Week1"></a>Week1</h4><p>Would structured or unstructured data have features such as pixel values or individual words?</p>
-<p>Ans: Unstructured data</p>
-<h4 id="Week2"><a href="#Week2" class="headerlink" title="Week2"></a>Week2</h4><p>![image-20190906215336217](/Users/joe/Library/Application Support/typora-user-images/image-20190906215336217.png)</p>
-<p>![image-20190906215454393](/Users/joe/Library/Application Support/typora-user-images/image-20190906215454393.png)</p>
-<h5 id="Logistic-Regression’s-Gradient-Descent"><a href="#Logistic-Regression’s-Gradient-Descent" class="headerlink" title="Logistic Regression’s Gradient Descent"></a>Logistic Regression’s Gradient Descent</h5><p>![image-20190906215703253](/Users/joe/Library/Application Support/typora-user-images/image-20190906215703253.png)</p>
-<p><a href="https://ithelp.ithome.com.tw/articles/10193718" target="_blank" rel="noopener">https://ithelp.ithome.com.tw/articles/10193718</a></p>
-<h6 id="My-Note"><a href="#My-Note" class="headerlink" title="My Note"></a>My Note</h6><p>![image-20190906215840755](/Users/joe/Library/Application Support/typora-user-images/image-20190906215840755.png)</p>
-<h6 id="Cross-Entropy"><a href="#Cross-Entropy" class="headerlink" title="Cross Entropy"></a>Cross Entropy</h6><p>![image-20190906215928611](/Users/joe/Library/Application Support/typora-user-images/image-20190906215928611.png)</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hgpf462kj31440u0x6n.jpg" alt="image-20190930130717483"></p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hgre16lwj318q0u0u0x.jpg" alt="image-20190930130913470"></p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7hgs6tkroj30yk0nkqpv.jpg" alt="image-20190930131000168"></p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/05/08/CVs/2018-05-08-GEMM-how-caffe-implements-CNN/">CVs/2018-05-08-GEMM-how-caffe-implements-CNN</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-05-08</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/CV/">CV</a></span><div class="content"><h1 id="Img2col"><a href="#Img2col" class="headerlink" title="Img2col"></a>Img2col</h1><p>ref: <a href="https://petewarden.com/2015/04/20/why-gemm-is-at-the-heart-of-deep-learning/" target="_blank" rel="noopener">https://petewarden.com/2015/04/20/why-gemm-is-at-the-heart-of-deep-learning/</a></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gejzl2gv8lj30fa07tq5m.jpg" alt="patches"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gejzl4t9kuj30fa070dhu.jpg" alt="im2col_corrected"></p>
-<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gejzl83aijj30fa09776o.jpg" alt="im2colmult_corrected"></p>
-</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/05/06/Python/2018-05-06-Faster%20than%20O(N)%20--%20SortedContainers/">Python/2018-05-06-Faster than O(N) -- SortedContainers</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-05-06</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span><div class="content"><p>ref: <a href="http://www.grantjenks.com/docs/sortedcontainers/" target="_blank" rel="noopener">http://www.grantjenks.com/docs/sortedcontainers/</a></p>
-<p>For Map/TreeMap data structure, we may use <a href="http://www.grantjenks.com/docs/sortedcontainers/" target="_blank" rel="noopener">sortedcontainers</a> library.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> sortedcontainers <span class="keyword">import</span> SortedList</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sl = SortedList([<span class="string">'e'</span>, <span class="string">'a'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'b'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sl</span><br><span class="line">SortedList([<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sl *= <span class="number">10</span>_000_000</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sl.count(<span class="string">'c'</span>)</span><br><span class="line"><span class="number">10000000</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sl[<span class="number">-3</span>:]</span><br><span class="line">[<span class="string">'e'</span>, <span class="string">'e'</span>, <span class="string">'e'</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> sortedcontainers <span class="keyword">import</span> SortedDict</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sd = SortedDict(&#123;<span class="string">'c'</span>: <span class="number">3</span>, <span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sd</span><br><span class="line">SortedDict(&#123;<span class="string">'a'</span>: <span class="number">1</span>, <span class="string">'b'</span>: <span class="number">2</span>, <span class="string">'c'</span>: <span class="number">3</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>sd.popitem(index=<span class="number">-1</span>)</span><br><span class="line">(<span class="string">'c'</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> sortedcontainers <span class="keyword">import</span> SortedSet</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ss = SortedSet(<span class="string">'abracadabra'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ss</span><br><span class="line">SortedSet([<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'r'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>ss.bisect_left(<span class="string">'c'</span>)</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
 
-<p>All of the operations shown above run in faster than linear time.</p>
-<p>Ref: <a href="https://support.leetcode.com/hc/en-us/articles/360011833974-What-are-the-environments-for-the-programming-languages-" target="_blank" rel="noopener">https://support.leetcode.com/hc/en-us/articles/360011833974-What-are-the-environments-for-the-programming-languages-</a></p>
-<blockquote>
-<h1 id="What-are-the-environments-for-the-programming-languages"><a href="#What-are-the-environments-for-the-programming-languages" class="headerlink" title="What are the environments for the programming languages?"></a>What are the environments for the programming languages?</h1><ul>
-<li><p>1 month ago</p>
-</li>
-<li></li>
-<li><p>Updated</p>
-</li>
+<h3 id="2-compiled-by-c-or-c"><a href="#2-compiled-by-c-or-c" class="headerlink" title="2. compiled by c or c++"></a>2. compiled by c or c++</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> __cpluscplu</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"cpp"</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">else</span></span></span><br><span class="line">	print(<span class="string">"c"</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-compiled-time-OP-symbol"><a href="#3-compiled-time-OP-symbol" class="headerlink" title="3. compiled time OP symbol"></a>3. compiled time OP symbol</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> id[<span class="keyword">sizeof</span>(<span class="keyword">unsigned</span> <span class="keyword">long</span>)];</span><br><span class="line"></span><br><span class="line"><span class="comment">// Compiled OK, cuz sizeof is COMPILING time symbol, which is determined in compile, regarded as machine-dependent constant.</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4"><a href="#4" class="headerlink" title="4."></a>4.</h3></div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/11/20/DevOps/2018-11-20-Source-Tree-Error/">DevOps/2018-11-20-Source-Tree-Error</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-20</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/DevOps/">DevOps</a></span><div class="content"><p>Error: The following untracked working tree files would be overwritten by checkout:</p>
+<p>Sol:</p>
+<p>​    開啟SourceTree通過命令列，進入本地版本倉庫目錄下，直接執行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clean -d -fx</span><br></pre></td></tr></table></figure>
+
+<p>即可。可能很多人都不明白-d，-fx到底是啥意思，其實git clean -d -fx表示：刪除 一些 沒有 git add 的 檔案；</p>
+<p>​    git clean 引數 </p>
+<p>​    -n 顯示將要刪除的檔案和目錄；</p>
+<p>​    -x —–刪除忽略檔案已經對git來說不識別的檔案</p>
+<p>​    -d —–刪除未被新增到git的路徑中的檔案</p>
+<p>​    -f —–強制執行</p>
+<p>​    git clean -n</p>
+<p>​    git clean -df</p>
+<p>​    git clean -f</p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/11/20/ML/2018-11-20-ML%20Review-1/">ML/2018-11-20-ML Review-1</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-20</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/Machine-Learning/">Machine-Learning</a></span><div class="content"><h3 id="1-SVM"><a href="#1-SVM" class="headerlink" title="1. SVM"></a>1. SVM</h3><p>Ref: <a href="https://blog.csdn.net/sinat_35512245/article/details/54984251" target="_blank" rel="noopener">https://blog.csdn.net/sinat_35512245/article/details/54984251</a><br>$$<br>d=|w^Tx+b|||w||　　　　　　　　　　　（１）<br>$$<br>其中，||w||为w的范数。</p>
+<p>当点A表示某一实例$x_i$，其类标记为yi=+1yi=+1。点A与超平面的距离记作didi，那么<br>$$<br>di=wTxi+b||w||　　　　　　　　　　（２）<br>$$<br>当点A表示某一实例xixi，其类标记为yi=−1yi=−1。点A与超平面的距离记作didi，那么<br>$$<br>di=−wTxi+b||w||　　　　　　　　　（３）<br>$$<br>一般地，点xixi与超平面的距离是<br>$$<br>di=yiwTxi+b||w||　　　　　　　　　（４）<br>$$<br>公式（４）也被称为超平面关于样本点xixi的几何间隔。</p>
+<h4 id="最大间隔分离超平面"><a href="#最大间隔分离超平面" class="headerlink" title="最大间隔分离超平面"></a>最大间隔分离超平面</h4><p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g9cwe8dihaj30c007cdgl.jpg" alt="这里写图片描述"></p>
+<p>如上图所示，距离超平面最近的这几个训练样本点被称为<strong>支持向量</strong>，两个异类支持向量（即分别位于超平面两侧的点）到超平面的距离之和为<br>$$<br>d=2/||w||　　　　　　　　　　　　　　　（５）<br>$$<br>上面（5）的d称为间隔（margin）。<br>要求得最大间隔（即最大化 $2/w$），就是要满足：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g9cwamnyyij309h02sjrb.jpg" alt="这里写图片描述"></p>
+<p>显然，为了最大化间隔，仅需最大化$||w||^{−1}$，这等价于最小化$||w||^2$，于是上式可以重写为：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g9cwaz5iy0j309u02mdfs.jpg" alt="这里写图片描述"></p>
+<p>这就是支持向量机的基本模型。</p>
+<p><strong>到目前为止，我们的 SVM 还比较弱，只能处理线性的情况，下面我们将引入核函数，进而推广到非线性分类问题。</strong></p>
+<p><strong>非线性支持向量机和核函数</strong></p>
+<p>非线性分类问题是指通过利用非线性模型才能很好地进行分类的问题。先看一个例子：</p>
+<hr>
+<h3 id="2-DeepLearning-Frameworks-Dynamic-vs-Static-Graphs"><a href="#2-DeepLearning-Frameworks-Dynamic-vs-Static-Graphs" class="headerlink" title="2. DeepLearning Frameworks: Dynamic vs Static Graphs"></a>2. DeepLearning Frameworks: Dynamic vs Static Graphs</h3><h1 id="动态图-vs-静态图"><a href="#动态图-vs-静态图" class="headerlink" title="动态图 vs. 静态图"></a>动态图 vs. 静态图</h1><p>ref: <a href="https://www.cnblogs.com/yifdu25/p/8763717.html" target="_blank" rel="noopener">https://www.cnblogs.com/yifdu25/p/8763717.html</a></p>
+<p>在 fast.ai，我们在选择框架时优先考虑程序员编程的便捷性（能更方便地进行调试和更直观地设计），而不是框架所能带来的模型加速能力。这也正是我们选择 PyTorch 的理由，因为它是一个<strong>具有动态图机制的灵活框架</strong>。</p>
+<p>依据采用动态计算或是静态计算的不同，可以将这些众多的深度学习框架划分成两大阵营，当然也有些框架同时具有动态计算和静态计算两种机制（比如 MxNet 和最新的 TensorFlow）。动态计算意味着程序将按照我们编写命令的顺序进行执行。这种机制将使得调试更加容易，并且也使得我们将大脑中的想法转化为实际代码变得更加容易。而静态计算则意味着程序在编译执行时将先生成神经网络的结构，然后再执行相应操作。从理论上讲，静态计算这样的机制允许编译器进行更大程度的优化，但是这也意味着你所期望的程序与编译器实际执行之间存在着更多的代沟。这也意味着，代码中的错误将更加难以发现（比如，如果计算图的结构出现问题，你可能只有在代码执行到相应操作的时候才能发现它）。<strong>尽管理论上而言，静态计算图比动态计算图具有更好的性能，但是在实践中我们经常发现并不是这样的。</strong></p>
+<p>谷歌的 TensorFlow 主要使用了静态计算图，而 Facebook 的 PyTorch 则使用了动态计算图机制。（注：TensorFlow 在两周前宣布了一个动态计算选项 Eager Execution（<a href="http://t.cn/RlZizQ2），不过该特性还比较新颖并且" target="_blank" rel="noopener">http://t.cn/RlZizQ2），不过该特性还比较新颖并且</a> TensorFlow 的文档和项目依然以静态计算为主）。在九月份，fast.ai 宣布将在今年的课程中采用 PyTorch 框架进行教学以及开发 fast.ai 自己的框架（实际上就是采用了更好的编码方式对 PyTorch 进行高级封装）。简而言之，以下是我们选择 PyTorch 的几个原因（更详细的原因请参见这里<a href="http://t.cn/Rpqj6pu）：" target="_blank" rel="noopener">http://t.cn/Rpqj6pu）：</a></p>
+<ul>
+<li>更加容易调试</li>
+<li>动态计算更适用于自然语言处理</li>
+<li>传统的面向对象编程风格（这对我们来说更加自然）</li>
+<li>TensorFlow 中采用的诸如 scope 和 sessions 等不寻常的机制容易使人感到疑惑不解，而且需要花费更多时间学习</li>
 </ul>
-<p><a href="https://support.leetcode.com/hc/en-us/articles/360011833974-What-are-the-environments-for-the-programming-languages-/subscription.html" target="_blank" rel="noopener">Follow</a></p>
-<table>
-<thead>
-<tr>
-<th>Language</th>
-<th>Version</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>C++</td>
-<td>clang 9</td>
-<td>Uses the C++17 standard.</td>
-</tr>
-<tr>
-<td>Java</td>
-<td>java 13.0.1</td>
-<td>Includes <code>Pair</code> class, with documentation at <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/util/Pair.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/8/javafx/api/javafx/util/Pair.html</a></td>
-</tr>
-<tr>
-<td>Python</td>
-<td>python 2.7.12</td>
-<td>For Map/TreeMap data structure, you may use <a href="http://www.grantjenks.com/docs/sortedcontainers/" target="_blank" rel="noopener">sortedcontainers</a> library.</td>
-</tr>
-<tr>
-<td>Python3</td>
-<td>Python 3.8</td>
-<td>For Map/TreeMap data structure, you may use <a href="http://www.grantjenks.com/docs/sortedcontainers/" target="_blank" rel="noopener">sortedcontainers</a> library.</td>
-</tr>
-<tr>
-<td>MySQL</td>
-<td>mysql-server 5.7.21</td>
-<td></td>
-</tr>
-<tr>
-<td>MS SQL</td>
-<td>mssql 14.0.3</td>
-<td></td>
-</tr>
-<tr>
-<td>Oracle</td>
-<td>Oracle SQL 11.2</td>
-<td></td>
-</tr>
-<tr>
-<td>C</td>
-<td>gcc 8.2</td>
-<td>For hash table operations, you may use <a href="https://troydhanson.github.io/uthash/" target="_blank" rel="noopener">uthash</a>. <code>&quot;uthash.h&quot;</code> is included by default.</td>
-</tr>
-<tr>
-<td>C#</td>
-<td>mono 5.18.0</td>
-<td>Run with <code>/debug</code> flag, with <a href="https://docs.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-7" target="_blank" rel="noopener">full support for C# 7</a>.</td>
-</tr>
-<tr>
-<td>JavaScript</td>
-<td>nodejs 10.15.0</td>
-<td>Run with <code>--harmony</code> flag, enabling <a href="http://node.green/" target="_blank" rel="noopener">new ES6 features</a>. <a href="https://lodash.com/" target="_blank" rel="noopener">lodash.js</a> library is included by default.</td>
-</tr>
-<tr>
-<td>Ruby</td>
-<td>ruby 2.4.5</td>
-<td></td>
-</tr>
-<tr>
-<td>Bash</td>
-<td>bash 4.3.30</td>
-<td></td>
-</tr>
-<tr>
-<td>Swift</td>
-<td>swift 5.0.1</td>
-<td></td>
-</tr>
-<tr>
-<td>Go</td>
-<td>go 1.13</td>
-<td></td>
-</tr>
-<tr>
-<td>Scala</td>
-<td>Scala 2.13</td>
-<td></td>
-</tr>
-<tr>
-<td>Kotlin</td>
-<td>Kotlin 1.3.10</td>
-<td></td>
-</tr>
-<tr>
-<td>Rust</td>
-<td>1.40.0</td>
-<td>edition = 2018, supports <a href="https://crates.io/crates/rand" target="_blank" rel="noopener">rand</a> from crates.io</td>
-</tr>
-<tr>
-<td>PHP</td>
-<td>PHP 7.2</td>
-<td></td>
-</tr>
-</tbody></table>
-</blockquote>
-<p>ref: <a href="https://leetcode.com/discuss/general-discussion/452863/how-do-you-deal-with-no-treeset-or-treemap-in-python" target="_blank" rel="noopener">https://leetcode.com/discuss/general-discussion/452863/how-do-you-deal-with-no-treeset-or-treemap-in-python</a></p>
-<blockquote>
-<p>There are quite a few problems that can use TreeSet or TreeMap, but it seems python does not have anything? Any tips on how to deal with this. Recently switched over from java to pyhton</p>
-<p><a href="https://leetcode.com/problems/the-skyline-problem/" target="_blank" rel="noopener">https://leetcode.com/problems/the-skyline-problem/</a> -&gt; Needs removal O log(n)<br><a href="https://leetcode.com/problems/k-empty-slots/" target="_blank" rel="noopener">https://leetcode.com/problems/k-empty-slots/</a> -&gt; TreeMap is a accepted solution</p>
-<p>Thanks,<br>Uv</p>
-<p>Comments: 1</p>
-<p>BestMost VotesNewest to OldestOldest to Newest</p>
-<p>Preview</p>
-<p>Post</p>
-<p><a href="https://leetcode.com/leetcode" target="_blank" rel="noopener"><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gejri4cfqej305k05kmx8.jpg" alt="LeetCode&#39;s avatar"></a></p>
-<p><a href="https://leetcode.com/leetcode" target="_blank" rel="noopener">LeetCode</a>Admin3460</p>
-<p>December 17, 2019 9:45 AM</p>
-<p>Read More</p>
-<p><a href="https://support.leetcode.com/hc/en-us/articles/360011833974-What-are-the-environments-for-the-programming-languages-" target="_blank" rel="noopener">https://support.leetcode.com/hc/en-us/articles/360011833974-What-are-the-environments-for-the-programming-languages-</a></p>
-<p>Please take a look at the environments for the programming languages above. For Python you may use <a href="http://www.grantjenks.com/docs/sortedcontainers/" target="_blank" rel="noopener">sortedcontainers</a> library for TreeSet/TreeMap data structure.</p>
-</blockquote>
-</div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/55/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><span class="page-number current">56</span><a class="page-number" href="/page/57/">57</a><span class="space">&hellip;</span><a class="page-number" href="/page/60/">60</a><a class="extend next" rel="next" href="/page/57/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+<p>谷歌在推广 TensorFlow 上已经花费了大量的资源，其投入要远远大于任何其它公司或者团队，并且我想这也是为什么 TensorFlow 会如此出名的原因之一（对于很多深度学习的门外汉，TensorFlow 是他们唯一听说过的框架）。正如之前所述，TensorFlow 在几周前发布了动态计算选项，这将解决了一些上述提到的问题。然后许多人就向 fast.ai 提问说我们是否考虑迁移回 TensorFlow 框架。<strong>但是目前 TensorFlow 提供的动态选项还比较新颖而且开发也不够完善，所以我们依然选择继续愉快地使用 PyTorch</strong>。但是 TensorFlow 团队非常乐意于接受我们的想法，我们也很高兴看到我们的 fastai 库（<a href="http://t.cn/RYyK6jC）被移植到" target="_blank" rel="noopener">http://t.cn/RYyK6jC）被移植到</a> TensorFlow 中。</p>
+<hr>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/11/06/DevOps/2018-11-06-Jupyter%20Ipykernel/">DevOps/2018-11-06-Jupyter Ipykernel</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-06</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/DevOps/">DevOps</a></span><div class="content"><h2 id="Conda"><a href="#Conda" class="headerlink" title="Conda"></a>Conda</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">list all env:</span><br><span class="line"></span><br><span class="line">conda info --env</span><br><span class="line"></span><br><span class="line">create a simple virtual env:</span><br><span class="line"></span><br><span class="line">conda create -n YourEnvName python=3*</span><br><span class="line"></span><br><span class="line">delete virtual env</span><br><span class="line"></span><br><span class="line">conda env remove -n NAME</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Jupyter"><a href="#Jupyter" class="headerlink" title="Jupyter"></a>Jupyter</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> activate myenv</span><br><span class="line">pip install ipykernel</span><br><span class="line">python -m ipykernel install --user --name myenv --display-name <span class="string">"Python (myenv)"</span></span><br></pre></td></tr></table></figure>
+
+<p><em>Installed kernelspec joe_segmentation_36 in /mnt/raid1/home/huangjiancong/.local/share/jupyter/kernels/joe_segmentation_36</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(joe4_py36) xxx@hpc4:~$ python -m ipykernel install --user --name joe4_py36_kernel --display-name <span class="string">"Joe4_Py36_Kernel"</span></span><br></pre></td></tr></table></figure>
+
+<p><em>Installed kernelspec joe4_py36_kernel in /mnt/raid4/home/huangjiancong/.local/share/jupyter/kernels/joe4_py36_kernel</em></p>
+</div><hr></div><div class="recent-post-item article-container"><a class="article-title" href="/2018/11/05/DevOps/2018-11-05-Docker%20Note/">DevOps/2018-11-05-Docker Note</a><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-05</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fa fa-inbox article-meta__icon" aria-hidden="true"></i><a class="article-meta__categories" href="/categories/DevOps/">DevOps</a></span><div class="content"><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">Docker:</span><br><span class="line">$ docker pull ubuntu:<span class="number">18.04</span></span><br><span class="line">因此将会获取官方镜像 library/ubuntu 仓库</span><br><span class="line"></span><br><span class="line">$ docker <span class="keyword">run</span><span class="bash"> -it (—rm 表示<span class="built_in">exit</span>后自动删除掉) ubuntu:18.04 bash  或 把it 改成dt</span></span><br><span class="line">root@<span class="number">569</span>c032785f2:/<span class="comment"># pwd</span></span><br><span class="line">/</span><br><span class="line">root@aaa:<span class="comment"># exit</span></span><br><span class="line">$ docker exec -it $CON_ID bash</span><br><span class="line"></span><br><span class="line">$ docker ps -a  &lt;==例出所有containers ;  docker rm $CON_ID</span><br><span class="line">$ docker ps -n5</span><br><span class="line">$ docker stop $CON_ID</span><br><span class="line">$ docker start $CON_ID</span><br><span class="line"></span><br><span class="line">╰$ cat Dockerfile</span><br><span class="line"><span class="keyword">FROM</span> registry.cn-hangzhou.aliyuncs.com/eigenlab/ideal-video:latest</span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">'aaaaaaaaaaaaaaaaa'</span> &gt; ./test_aaa.log</span></span><br><span class="line">╰$ docker build -t aaa:v1</span><br><span class="line">╰$ docker image prune</span><br><span class="line">WARNING! This will remove all dangling images.</span><br><span class="line">Are you sure you want to continue? [y/N] y</span><br><span class="line">Deleted Images:</span><br><span class="line">deleted: sha256:<span class="number">0015</span>c03359ec60e4f133bb382dc0662f976dbebed7cdf70bf50bd9efca82052e</span><br><span class="line"></span><br><span class="line">Total reclaimed space: <span class="number">0</span>B</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Docker:</span><br><span class="line">$ docker pull ubuntu:<span class="number">18.04</span></span><br><span class="line">因此将会获取官方镜像 library/ubuntu 仓库</span><br><span class="line"></span><br><span class="line">$ docker <span class="keyword">run</span><span class="bash"> -it (—rm 表示<span class="built_in">exit</span>后自动删除掉) ubuntu:18.04 bash  或 把it 改成dt</span></span><br><span class="line">root@<span class="number">569</span>c032785f2:/<span class="comment"># pwd</span></span><br><span class="line">/</span><br><span class="line">root@aaa:<span class="comment"># exit</span></span><br><span class="line">$ docker exec -it $CON_ID bash</span><br><span class="line"></span><br><span class="line">$ docker ps -a  &lt;==例出所有containers ;  docker rm $CON_ID</span><br><span class="line">$ docker ps -n5</span><br><span class="line">$ docker stop $CON_ID</span><br><span class="line">$ docker start $CON_ID</span><br><span class="line"></span><br><span class="line">╰$ cat Dockerfile</span><br><span class="line"><span class="keyword">FROM</span> registry.cn-hangzhou.aliyuncs.com/eigenlab/ideal-video:latest</span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">'aaaaaaaaaaaaaaaaa'</span> &gt; ./test_aaa.log</span></span><br><span class="line">╰$ docker build -t aaa:v1</span><br><span class="line">╰$ docker image prune</span><br><span class="line">WARNING! This will remove all dangling images.</span><br><span class="line">Are you sure you want to continue? [y/N] y</span><br><span class="line">Deleted Images:</span><br><span class="line">deleted: sha256:<span class="number">0015</span>c03359ec60e4f133bb382dc0662f976dbebed7cdf70bf50bd9efca82052e</span><br><span class="line"></span><br><span class="line">Total reclaimed space: <span class="number">0</span>B</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run  -p 5599:5599 -p 8023:22 --name=<span class="string">"wazowski_joe_1106"</span> -v ~/workspace:/remote_workspace -it registry.cn-hangzhou.aliyuncs.com/eigenlab/wazowski_1688_leo:44 bash</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">huangjiancong@hpc3:~$ sudo docker port wazowski_joe_1106  22</span><br><span class="line">[sudo] password <span class="keyword">for</span> huangjiancong:</span><br><span class="line">Sorry, try again.</span><br><span class="line">[sudo] password <span class="keyword">for</span> huangjiancong:</span><br><span class="line">0.0.0.0:8023</span><br><span class="line">huangjiancong@hpc3:~$ ss -tulwn | grep 8023</span><br><span class="line">tcp    LISTEN     0      128      :::8023                 :::*</span><br></pre></td></tr></table></figure>
+
+
+
+<p>不过没有关系，知道原理就行，根据提示 <strong>Offending ECDSA key in /root/.ssh/known_hosts:9</strong> ，删除路径中的第九行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sed -i <span class="string">'9d'</span> /root/.ssh/known_hosts</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Docker check mounted path </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect -f <span class="string">"&#123;&#123; .Mounts &#125;&#125;"</span>  7a96</span><br></pre></td></tr></table></figure>
+
+<p>[{bind  /home/$USER/workspace/exp/docker_/opencv347 /workspace/remote_opencv347   true rprivate}]</p>
+</div><hr></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/55/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/55/">55</a><span class="page-number current">56</span><a class="page-number" href="/page/57/">57</a><span class="space">&hellip;</span><a class="page-number" href="/page/62/">62</a><a class="extend next" rel="next" href="/page/57/"><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_uv"><i class="fa fa-user"></i><span id="busuanzi_value_site_uv"></span><span></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i><span id="busuanzi_value_site_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
   $('#nav').addClass('is-mobile')
   $('footer').addClass('is-mobile')
   $('#top-container').addClass('is-mobile')

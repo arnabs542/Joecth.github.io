@@ -1,0 +1,212 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="AB_Test/Bayesian_ML/Sec4 - Traditional AB Testing"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>AB_Test/Bayesian_ML/Sec4 - Traditional AB Testing | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-180692466-1', 'auto');
+ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Confidence-Interval"><span class="toc-number">1.</span> <span class="toc-text">Confidence Interval</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AB-Testing"><span class="toc-number">2.</span> <span class="toc-text">AB Testing</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Setup"><span class="toc-number">2.1.</span> <span class="toc-text">Setup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Recipe-“Alg-”-to-det-diff-2-groups"><span class="toc-number">2.2.</span> <span class="toc-text">Recipe - “Alg.” to det diff 2 groups</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#t-distribution"><span class="toc-number">2.2.1.</span> <span class="toc-text">t-distribution</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Test-Statistic-–-t-changes-w-conditions"><span class="toc-number">2.2.2.</span> <span class="toc-text">Test Statistic – t changes w&#x2F; conditions</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#t-Distribution-amp-Statistically-Significant"><span class="toc-number">2.2.3.</span> <span class="toc-text">t-Distribution &amp; Statistically Significant !</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P-Values"><span class="toc-number">2.3.</span> <span class="toc-text">P-Values</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Reject-when-p-value-is-small"><span class="toc-number">2.3.0.1.</span> <span class="toc-text">Reject when p-value is small!</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#t-↑-P↓-–-gt-Difference↑"><span class="toc-number">2.3.0.2.</span> <span class="toc-text">t ↑ P↓ –&gt; Difference↑</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-number">2.4.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Test-Characteristics-Assumptions-and-Modifications"><span class="toc-number">2.5.</span> <span class="toc-text">Test Characteristics, Assumptions, and Modifications</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Key-points"><span class="toc-number">2.5.1.</span> <span class="toc-text">Key points</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Chi-Square-Test-Statistic"><span class="toc-number">2.6.</span> <span class="toc-text">Chi-Square Test Statistic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CTR-AB-in-Code"><span class="toc-number">2.7.</span> <span class="toc-text">CTR AB in Code</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary"><span class="toc-number"></span> <span class="toc-text">Summary</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Bonferroni-Correction"><span class="toc-number">0.0.1.</span> <span class="toc-text">Bonferroni Correction</span></a></li></ol></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">306</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">47</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">AB_Test/Bayesian_ML/Sec4 - Traditional AB Testing</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-10-13</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/RL/">RL</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="Confidence-Interval"><a href="#Confidence-Interval" class="headerlink" title="Confidence Interval"></a>Confidence Interval</h2><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx390jkcxj30tu03owfq.jpg" alt="image-20201021173502064" style="zoom:50%;" />
+
+<p>★ 特別是針對 expectation的！</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjwx16ej9xj30vs0d2tf2.jpg" alt="image-20201021135953919" style="zoom:50%;" />
+
+
+
+<h2 id="AB-Testing"><a href="#AB-Testing" class="headerlink" title="AB Testing"></a>AB Testing</h2><h3 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjwyvowthyj30tw0f443o.jpg" alt="image-20201021150350153" style="zoom:50%;" />
+
+
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201021150437924.png" alt="image-20201021150437924" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjwz0gasqoj30qw0cggqm.jpg" alt="image-20201021150824783" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjwz16tu87j30ry0400ur.jpg" alt="image-20201021150907155" style="zoom:50%;" />
+
+
+
+<h3 id="Recipe-“Alg-”-to-det-diff-2-groups"><a href="#Recipe-“Alg-”-to-det-diff-2-groups" class="headerlink" title="Recipe - “Alg.” to det diff 2 groups"></a>Recipe - “Alg.” to det diff 2 groups</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjwz2p6pwbj30ss0800yg.jpg" alt="image-20201021151034270" style="zoom:50%;" />
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjwz98g5m6j30w80gg441.jpg" alt="image-20201021151651242"></p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201021151729667.png" alt="image-20201021151729667" style="zoom:50%;" />
+
+
+
+<h4 id="t-distribution"><a href="#t-distribution" class="headerlink" title="t-distribution"></a>t-distribution</h4><img src="/Users/joe/Library/Application Support/typora-user-images/image-20201021153100112.png" alt="image-20201021153100112" style="zoom:50%;" />
+
+
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjwzoc9lbcj30v60bq79s.jpg" alt="image-20201021153122530"></p>
+<ul>
+<li><strong>ν –&gt; ( nu ) : degrees of freedom</strong><ul>
+<li>it contols how wide or skinny the PDF is</li>
+</ul>
+</li>
+<li>t-distribution can also have a mean and scale parameter, but again we won’t be using those here!</li>
+</ul>
+<h4 id="Test-Statistic-–-t-changes-w-conditions"><a href="#Test-Statistic-–-t-changes-w-conditions" class="headerlink" title="Test Statistic – t changes w/ conditions"></a>Test Statistic – t changes w/ conditions</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx0gewu0rj30wy0ck452.jpg" alt="image-20201021155820879" style="zoom:50%;" />
+
+
+
+<h4 id="t-Distribution-amp-Statistically-Significant"><a href="#t-Distribution-amp-Statistically-Significant" class="headerlink" title="t-Distribution &amp; Statistically Significant !"></a>t-Distribution &amp; Statistically Significant !</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx0j6fpp4j30x40ggdnl.jpg" alt="image-20201021160100750" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx0kszdisj30w207078e.jpg" alt="image-20201021160234547" style="zoom:50%;" />
+
+
+
+<h3 id="P-Values"><a href="#P-Values" class="headerlink" title="P-Values"></a>P-Values</h3><p><strong>Def: the probability of detecting a difference</strong> even when the 2 groups are the same</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx0oikuw8j30w60aqjz7.jpg" alt="image-20201021160608180" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx0p3y1fqj30w80fcaik.jpg" alt="image-20201021160642311" style="zoom:50%;" />
+
+
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201021160957827.png" alt="image-20201021160957827" style="zoom:50%;" />
+
+
+
+<h5 id="Reject-when-p-value-is-small"><a href="#Reject-when-p-value-is-small" class="headerlink" title="Reject when p-value is small!"></a>Reject when p-value is small!</h5><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx0ur3ea5j30w80b0gsl.jpg" alt="image-20201021161208051"></p>
+<h5 id="t-↑-P↓-–-gt-Difference↑"><a href="#t-↑-P↓-–-gt-Difference↑" class="headerlink" title="t ↑ P↓ –&gt; Difference↑"></a>t ↑ P↓ –&gt; Difference↑</h5><p>ref: <a href="https://medium.com/@chih.sheng.huang821/%E7%B5%B1%E8%A8%88%E5%AD%B8-%E5%A4%A7%E5%AE%B6%E9%83%BD%E5%96%9C%E6%AD%A1%E5%95%8F%E7%9A%84%E7%B3%BB%E5%88%97-p%E5%80%BC%E6%98%AF%E4%BB%80%E9%BA%BC-2c03dbe8fddf" target="_blank" rel="noopener">https://medium.com/@chih.sheng.huang821/%E7%B5%B1%E8%A8%88%E5%AD%B8-%E5%A4%A7%E5%AE%B6%E9%83%BD%E5%96%9C%E6%AD%A1%E5%95%8F%E7%9A%84%E7%B3%BB%E5%88%97-p%E5%80%BC%E6%98%AF%E4%BB%80%E9%BA%BC-2c03dbe8fddf</a></p>
+<p>t很大，p就很小，&lt; 0.05，就代表接受了吧，接受 H0</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx2si9q7fj30xg0hydog.jpg" alt="image-20201021171910329" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx2t0yycnj30vw0bkwnz.jpg" alt="image-20201021171940301" style="zoom:50%;" />
+
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="Test-Characteristics-Assumptions-and-Modifications"><a href="#Test-Characteristics-Assumptions-and-Modifications" class="headerlink" title="Test Characteristics, Assumptions, and Modifications"></a>Test Characteristics, Assumptions, and Modifications</h3><img src="/Users/joe/Library/Application Support/typora-user-images/image-20201021172151896.png" alt="image-20201021172151896" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx2yvb58lj30wq0gedk8.jpg" alt="image-20201021172516783" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx35tglhkj30wa06i0wq.jpg" alt="image-20201021173158134" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx3b5ccpoj30xq0nadrl.jpg" alt="image-20201021173705468" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx3d8x0xmj30uu0gcjwm.jpg" alt="image-20201021173906854" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx3f3vxv6j30x80gsqaj.jpg" alt="image-20201021174053806" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx3qxt8ymj30uo0gsds7.jpg" alt="image-20201021175215927" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx3tn16ejj30wk0f6wq6.jpg" alt="image-20201021175451838" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx3vsr8gfj30vk0a8q81.jpg" alt="image-20201021175656571" style="zoom:50%;" />
+
+
+
+
+
+
+
+<ul>
+<li>Does one advertisement have a better click through rate than another as determined by statistical significance?</li>
+<li><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx54d5ht6j30wg0k248y.jpg" alt="image-20201021183945851"></li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx53skq4qj30xg0h8dku.jpg" alt="image-20201021183912717" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjx554z8skj30xi06smz1.jpg" alt="image-20201021184031122" style="zoom:50%;" />
+
+<ul>
+<li>t-test w/ same or diff variance? or try both then compare?</li>
+</ul>
+<h4 id="Key-points"><a href="#Key-points" class="headerlink" title="Key points"></a>Key points</h4><ul>
+<li><p>this data represents clicked for news on various advertisements but need not be th case.</p>
+<ul>
+<li>or headlines</li>
+<li>diff landing pages/ website designs/ logo</li>
+<li>key points structure of data</li>
+<li>compter sees are the numbers</li>
+<li>doing comparisons at the same time</li>
+</ul>
+</li>
+<li><p>how do i collect data? </p>
+<ul>
+<li>only i can answer<ul>
+<li>write a script to get my data off Hadoop; mapreduct spark ; web php&amp;mysql</li>
+<li>3rd party software, then download as csv</li>
+</ul>
+</li>
+<li>ml side vs de side, the part we get the data will not be considered ML. That wouel just be regular programming or even maybe it’s just navigating web then download csv.</li>
+</ul>
+</li>
+<li><p>so, to understand the format is just ok.</p>
+</li>
+<li><p>all data is the same</p>
+</li>
+</ul>
+<ul>
+<li><p>Try ex_ttest.py</p>
+<p>​    </p>
+</li>
+</ul>
+<h3 id="Chi-Square-Test-Statistic"><a href="#Chi-Square-Test-Statistic" class="headerlink" title="Chi-Square Test Statistic"></a>Chi-Square Test Statistic</h3><p>Chi-Square is not self-explanatory</p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201021230553830.png" alt="image-20201021230553830" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjxctwr4xpj30wg0g0jy9.jpg" alt="image-20201021230630656" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjxcvo1p9kj30xa0ge7d2.jpg" alt="image-20201021230812035" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjxcw6n0njj30re08qju5.jpg" alt="image-20201021230841374" style="zoom:50%;" />
+
+
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjxcwno3mpj30u40eaahq.jpg" alt="image-20201021230909261" style="zoom:50%;" />
+
+
+
+<h3 id="CTR-AB-in-Code"><a href="#CTR-AB-in-Code" class="headerlink" title="CTR AB in Code"></a>CTR AB in Code</h3><h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjxe1yiwqfj30um0e8tij.jpg" alt="image-20201021234850706"></p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjxe3u0a7cj30u60dsgwj.jpg" alt="image-20201021235039422" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjxe4h9kkaj30va0d8wob.jpg" alt="image-20201021235115920" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjxeb4tqz0j30mw09sadg.jpg" alt="image-20201021235739720" style="zoom:50%;" />
+
+
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201021235849357.png" alt="image-20201021235849357" style="zoom:50%;" />
+
+<ul>
+<li>FP - type I error</li>
+</ul>
+<h4 id="Bonferroni-Correction"><a href="#Bonferroni-Correction" class="headerlink" title="Bonferroni Correction"></a>Bonferroni Correction</h4></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/10/13/AB_Test/Bayesian_ML/Sec4%20-%20Traditional%20AB%20Testing/">http://yoursite.com/2020/10/13/AB_Test/Bayesian_ML/Sec4%20-%20Traditional%20AB%20Testing/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2020/10/13/AB_Test/Bayesian_ML/MyArrangement_1022/"><i class="fa fa-chevron-left">  </i><span>AB_Test/Bayesian_ML/MyArrangement_1022</span></a></div><div class="next-post pull-right"><a href="/2020/04/09/jupyter-demo/2020-04-09-SNPS%20stock%20prediction/"><span>jupyter-demo/2020-04-09-SNPS stock prediction</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>

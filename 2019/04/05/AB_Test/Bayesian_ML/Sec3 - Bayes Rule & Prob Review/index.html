@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="AB_Test/Bayesian_ML/Sec3 - Bayes Rule &amp; Prob Review"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>AB_Test/Bayesian_ML/Sec3 - Bayes Rule &amp; Prob Review | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-180692466-1', 'auto');
+ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Bayes-Rule"><span class="toc-number">1.</span> <span class="toc-text">Bayes Rule!</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Prob-amp-Bayes-Rule"><span class="toc-number">1.1.</span> <span class="toc-text">Prob. &amp; Bayes Rule</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Discrete"><span class="toc-number">1.1.1.</span> <span class="toc-text">Discrete</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Conditional-Distribution"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">Conditional Distribution</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Conditional-fr-Conditional"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">Conditional fr Conditional!</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Continuous"><span class="toc-number">1.1.2.</span> <span class="toc-text">Continuous</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Conditional-Distribution-1"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">Conditional Distribution</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Bayes’-Rule-–-gt-CONTINUOUS"><span class="toc-number">1.1.3.</span> <span class="toc-text">Bayes’ Rule !!! –&gt; CONTINUOUS !!!</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Calculating-Probabilities-w-Case"><span class="toc-number">1.2.</span> <span class="toc-text">Calculating Probabilities w&#x2F; Case!</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Condition-Join-divided-by-Marginal"><span class="toc-number">1.2.1.</span> <span class="toc-text">Condition &#x3D; Join divided by Marginal</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Alternate-Calculation"><span class="toc-number">1.2.2.</span> <span class="toc-text">Alternate Calculation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IDD-Independence"><span class="toc-number">1.2.3.</span> <span class="toc-text">IDD - Independence</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Independence-for-Conditional"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">Independence for Conditional</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gambler’s-Fallacy"><span class="toc-number">1.3.</span> <span class="toc-text">Gambler’s Fallacy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IID-–-independent-amp-identically-distributed"><span class="toc-number">1.3.1.</span> <span class="toc-text">IID – independent &amp; identically distributed</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Ans-1-amp-2"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">Ans 1 &amp; 2</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Monty-Hall-Problem"><span class="toc-number">1.4.</span> <span class="toc-text">Monty Hall Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Conclusion"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">Conclusion</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Maximum-Likelihood"><span class="toc-number">1.5.</span> <span class="toc-text">Maximum Likelihood</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Bernoulli-Distribution"><span class="toc-number">1.5.1.</span> <span class="toc-text">Bernoulli Distribution</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#P-x-–-gt-P-Xi-θ"><span class="toc-number">1.5.1.0.1.</span> <span class="toc-text">P(x) –&gt; P(Xi|θ)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q-Using-the-likelihood-function-can-we-maximize-it-so-that-we-find-a-value-of-θ-that-make-sense"><span class="toc-number">1.5.2.</span> <span class="toc-text">Q: Using the likelihood function, can we maximize it so that we find a value of θ that make sense?</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Log-Likelihood"><span class="toc-number">1.5.2.1.</span> <span class="toc-text">Log-Likelihood</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Mechanical-Work…"><span class="toc-number">1.5.2.2.</span> <span class="toc-text">Mechanical Work…</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Common-Mistake-–-w-Binomial-Distribution-in-any-order"><span class="toc-number">1.5.2.3.</span> <span class="toc-text">Common Mistake ! – w&#x2F; Binomial Distribution (in any order)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CTR-Click-Through-Rate"><span class="toc-number">1.6.</span> <span class="toc-text">CTR (Click-Through Rate)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Maximum-Likelihood-Gaussian"><span class="toc-number">1.7.</span> <span class="toc-text">Maximum Likelihood - Gaussian</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Application"><span class="toc-number">1.7.0.1.</span> <span class="toc-text">Application</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#null"><span class="toc-number">1.7.0.2.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Likelihood-amp-PDFs-Problem-Setup"><span class="toc-number">1.7.0.3.</span> <span class="toc-text">Likelihood &amp; PDFs, Problem Setup</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PDF-of-Gaussian"><span class="toc-number">1.7.0.4.</span> <span class="toc-text">PDF of Gaussian</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Maximum-Likelihood-Estimation"><span class="toc-number">1.7.0.5.</span> <span class="toc-text">Maximum Likelihood Estimation</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Calculus-Solution"><span class="toc-number">1.7.0.6.</span> <span class="toc-text">Calculus Solution</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#求極值"><span class="toc-number">1.7.0.7.</span> <span class="toc-text">求極值</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MLE-Gaussian-Cont"><span class="toc-number">1.8.</span> <span class="toc-text">MLE - Gaussian (Cont.)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CDF-amp-Percentile"><span class="toc-number">1.9.</span> <span class="toc-text">CDF &amp; Percentile</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">306</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">47</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">AB_Test/Bayesian_ML/Sec3 - Bayes Rule &amp; Prob Review</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2019-04-05</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/SystemDesign/">SystemDesign</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h1 id="Bayes-Rule"><a href="#Bayes-Rule" class="headerlink" title="Bayes Rule!"></a>Bayes Rule!</h1><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjuthg4w9nj30jw096ac1.jpg" alt="image-20201019182601639" style="zoom: 33%;" />
+
+<h2 id="Prob-amp-Bayes-Rule"><a href="#Prob-amp-Bayes-Rule" class="headerlink" title="Prob. &amp; Bayes Rule"></a>Prob. &amp; Bayes Rule</h2><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjutlf6i9bj30za0ig404.jpg" alt="image-20201019182858873" style="zoom:50%;" />
+
+
+
+<h3 id="Discrete"><a href="#Discrete" class="headerlink" title="Discrete"></a>Discrete</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjutlaybhrj30xk0ds775.jpg" alt="image-20201019182944310" style="zoom:50%;" />
+
+<h4 id="Conditional-Distribution"><a href="#Conditional-Distribution" class="headerlink" title="Conditional Distribution"></a>Conditional Distribution</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjutmo75ezj30zm0doq6l.jpg" alt="image-20201019183102856" style="zoom:50%;" />
+
+
+
+<h4 id="Conditional-fr-Conditional"><a href="#Conditional-fr-Conditional" class="headerlink" title="Conditional fr Conditional!"></a>Conditional fr Conditional!</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjutpnue79j310e0j2wk1.jpg" alt="image-20201019183355332" style="zoom:50%;" />
+
+
+
+<h3 id="Continuous"><a href="#Continuous" class="headerlink" title="Continuous"></a>Continuous</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjutryhh9gj30zo0gkq7e.jpg" alt="image-20201019183607220" style="zoom:50%;" />
+
+<h4 id="Conditional-Distribution-1"><a href="#Conditional-Distribution-1" class="headerlink" title="Conditional Distribution"></a>Conditional Distribution</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjutu27glcj30vk0isq6r.jpg" alt="image-20201019183809083" style="zoom: 50%;" />
+
+<h3 id="Bayes’-Rule-–-gt-CONTINUOUS"><a href="#Bayes’-Rule-–-gt-CONTINUOUS" class="headerlink" title="Bayes’ Rule !!! –&gt; CONTINUOUS !!!"></a>Bayes’ Rule !!! –&gt; CONTINUOUS !!!</h3><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjutw112d9j31080ia0yf.jpg" alt="image-20201019184002424"></p>
+<h2 id="Calculating-Probabilities-w-Case"><a href="#Calculating-Probabilities-w-Case" class="headerlink" title="Calculating Probabilities w/ Case!"></a>Calculating Probabilities w/ Case!</h2><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvoqv9k8gj310q0j4n2z.jpg" alt="image-20201020122737975" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvosiz527j31140k0n7d.jpg" alt="image-20201020122914649" style="zoom:50%;" />
+
+<h3 id="Condition-Join-divided-by-Marginal"><a href="#Condition-Join-divided-by-Marginal" class="headerlink" title="Condition = Join divided by Marginal"></a>Condition = Join divided by Marginal</h3><h3 id="Alternate-Calculation"><a href="#Alternate-Calculation" class="headerlink" title="Alternate Calculation"></a>Alternate Calculation</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvscjxadvj30zy0k879l.jpg" alt="image-20201020143217030" style="zoom:50%;" />
+
+<h3 id="IDD-Independence"><a href="#IDD-Independence" class="headerlink" title="IDD - Independence"></a>IDD - Independence</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvsdknfhxj30xc0nitci.jpg" alt="image-20201020143316361" style="zoom:50%;" />
+
+
+
+
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvsf78jyyj31040isq99.jpg" alt="image-20201020143449798"></p>
+<h4 id="Independence-for-Conditional"><a href="#Independence-for-Conditional" class="headerlink" title="Independence for Conditional"></a>Independence for Conditional</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvsiyhxnzj311e0ow7ah.jpg" alt="image-20201020143826804" style="zoom:50%;" />
+
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvslhssd9j30zk0oin1u.jpg" alt="image-20201020144053289" style="zoom:50%;" /><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvswjxwcdj30vw03ejrz.jpg" alt="image-20201020145130551"></p>
+<ul>
+<li><p><strong><em>This is EQUAL to all of the distributions conditioned on country as per our definition of independence!</em></strong></p>
+<p>∴ for this dataset, <strong>BUY</strong> isindependent of <strong>COUNTRY</strong></p>
+</li>
+</ul>
+<h2 id="Gambler’s-Fallacy"><a href="#Gambler’s-Fallacy" class="headerlink" title="Gambler’s Fallacy"></a>Gambler’s Fallacy</h2><h3 id="IID-–-independent-amp-identically-distributed"><a href="#IID-–-independent-amp-identically-distributed" class="headerlink" title="IID – independent &amp; identically distributed"></a>IID – independent &amp; identically distributed</h3><ul>
+<li>Each outcome is independent and they all came from the same distribution</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201020145807892.png" alt="image-20201020145807892" style="zoom:50%;" />
+
+
+
+<h4 id="Ans-1-amp-2"><a href="#Ans-1-amp-2" class="headerlink" title="Ans 1 &amp; 2"></a>Ans 1 &amp; 2</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvt58y2dcj311o0najyx.jpg" alt="image-20201020145952243" style="zoom:50%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201020150125934.png" alt="image-20201020150125934" style="zoom:50%;" />
+
+
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201020150422562.png" alt="image-20201020150422562" style="zoom:50%;" />
+
+
+
+<h2 id="Monty-Hall-Problem"><a href="#Monty-Hall-Problem" class="headerlink" title="Monty Hall Problem"></a>Monty Hall Problem</h2><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvtai5bimj30yq0jm45d.jpg" alt="image-20201020150454973" style="zoom:50%;" />
+
+
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201020150640460.png" alt="image-20201020150640460" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvtd1iyq8j311k0jkjyg.jpg" alt="image-20201020150721160" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvtgs19r7j311y0k8dlp.jpg" alt="image-20201020151056561" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvtkqxcd2j31260oe45b.jpg" alt="image-20201020151445468" style="zoom:50%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201020151512849.png" alt="image-20201020151512849" style="zoom:50%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201020151617547.png" alt="image-20201020151617547" style="zoom:50%;" />
+
+<h4 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h4><ul>
+<li>Change</li>
+</ul>
+<h2 id="Maximum-Likelihood"><a href="#Maximum-Likelihood" class="headerlink" title="Maximum Likelihood"></a>Maximum Likelihood</h2><p>for stat modeling!</p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvtom8ogbj311s0k0wlr.jpg" alt="image-20201020151829253" style="zoom:50%;" />
+
+
+
+<h3 id="Bernoulli-Distribution"><a href="#Bernoulli-Distribution" class="headerlink" title="Bernoulli Distribution"></a>Bernoulli Distribution</h3><p>e.g. P(head) = 0.6; </p>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201020152029033.png" alt="image-20201020152029033" style="zoom:50%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201020152128697.png" alt="image-20201020152128697" style="zoom: 50%;" />
+
+<h5 id="P-x-–-gt-P-Xi-θ"><a href="#P-x-–-gt-P-Xi-θ" class="headerlink" title="P(x) –&gt; P(Xi|θ)"></a>P(x) –&gt; P(Xi|θ)</h5><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvtw9rslyj310m0o2aey.jpg" alt="image-20201020152550239"></p>
+<ul>
+<li>Assuming that each coin toss was <strong><em>IID</em></strong></li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvtynrsllj30x40iqwjs.jpg" alt="image-20201020152808080"></p>
+<ul>
+<li><strong><em>want to find which value of theta will maxmize it!</em></strong> –&gt; What theta maxmize the “<strong>Likelihood</strong>“ ?</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201020153036284.png" alt="image-20201020153036284" style="zoom:50%;" />
+
+
+
+<h3 id="Q-Using-the-likelihood-function-can-we-maximize-it-so-that-we-find-a-value-of-θ-that-make-sense"><a href="#Q-Using-the-likelihood-function-can-we-maximize-it-so-that-we-find-a-value-of-θ-that-make-sense" class="headerlink" title="Q: Using the likelihood function, can we maximize it so that we find a value of θ that make sense?"></a>Q: Using the likelihood function, can we maximize it so that we find a value of θ that make sense?</h3><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvu39wkmcj310w0jywjf.jpg" alt="image-20201020153234485" style="zoom:50%;" />
+
+<h4 id="Log-Likelihood"><a href="#Log-Likelihood" class="headerlink" title="Log-Likelihood"></a>Log-Likelihood</h4><img src="/Users/joe/Library/Application Support/typora-user-images/image-20201020153358064.png" alt="image-20201020153358064" style="zoom:50%;" />
+
+<h4 id="Mechanical-Work…"><a href="#Mechanical-Work…" class="headerlink" title="Mechanical Work…"></a>Mechanical Work…</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvu5vjqhdj30yg0om78i.jpg" alt="image-20201020153503832"></p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvu77cgtlj311c0jon1o.jpg" alt="image-20201020153620832" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvu7spjnrj30xi0g8whm.jpg" alt="image-20201020153655026" style="zoom:50%;" />
+
+
+
+<h4 id="Common-Mistake-–-w-Binomial-Distribution-in-any-order"><a href="#Common-Mistake-–-w-Binomial-Distribution-in-any-order" class="headerlink" title="Common Mistake ! – w/ Binomial Distribution (in any order)"></a>Common Mistake ! – w/ Binomial Distribution (in any order)</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvv92z2xtj30ze0oqwix.jpg" alt="image-20201020161244820" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvvbzrpclj30zg0gqq9f.jpg" alt="image-20201020161532486" style="zoom:50%;" />
+
+
+
+<h2 id="CTR-Click-Through-Rate"><a href="#CTR-Click-Through-Rate" class="headerlink" title="CTR (Click-Through Rate)"></a>CTR (Click-Through Rate)</h2><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvvfh826cj30zs0j67b1.jpg" alt="image-20201020161853475" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvvhk1or3j310u0ogq8q.jpg" alt="image-20201020162053806" style="zoom:50%;" />
+
+
+
+<h2 id="Maximum-Likelihood-Gaussian"><a href="#Maximum-Likelihood-Gaussian" class="headerlink" title="Maximum Likelihood - Gaussian"></a>Maximum Likelihood - Gaussian</h2><img src="/Users/joe/Library/Application Support/typora-user-images/image-20201020172125730.png" alt="image-20201020172125730" style="zoom:50%;" />
+
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201020172214965.png" alt="image-20201020172214965" style="zoom:50%;" />
+
+
+
+<h4 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h4><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvxawbdmkj31160o448n.jpg" alt="image-20201020172341759" style="zoom:50%;" />
+
+<ul>
+<li>But I can choose anything + still use MLE!</li>
+</ul>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h4 id="Likelihood-amp-PDFs-Problem-Setup"><a href="#Likelihood-amp-PDFs-Problem-Setup" class="headerlink" title="Likelihood &amp; PDFs, Problem Setup"></a>Likelihood &amp; PDFs, Problem Setup</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvxfhffnpj31160fq7bh.jpg" alt="image-20201020172805561"></p>
+<h4 id="PDF-of-Gaussian"><a href="#PDF-of-Gaussian" class="headerlink" title="PDF of Gaussian"></a>PDF of Gaussian</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvxhfw3enj31040k0426.jpg" alt="image-20201020172958585"></p>
+<ul>
+<li>normalizing coeff</li>
+<li>symmetric about mu</li>
+<li>bellcurve, same on both sides</li>
+</ul>
+<h4 id="Maximum-Likelihood-Estimation"><a href="#Maximum-Likelihood-Estimation" class="headerlink" title="Maximum Likelihood Estimation"></a>Maximum Likelihood Estimation</h4><ul>
+<li><strong>want to find the parameters that best describe the data</strong></li>
+<li>In other words, what values of MU and Sigma make the most sense given the data that we collected? <ul>
+<li>These values will MAXimize the likelihood</li>
+</ul>
+</li>
+<li>if taking mu=100, BAD!</li>
+<li>The balue that is a greate choice would be the one that maximizes the likelihood</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvxiko4ncj310a0ny7cr.jpg" alt="image-20201020173103845" style="zoom:50%;" />
+
+
+
+<h4 id="Calculus-Solution"><a href="#Calculus-Solution" class="headerlink" title="Calculus Solution"></a>Calculus Solution</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvxjvzencj30xw0j80wm.jpg" alt="image-20201020173219504"></p>
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjvxkf1u5rj30wo0jeae3.jpg" alt="image-20201020173250508" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjw2xx8m7lj30y80jsdkm.jpg" alt="image-20201020203848650" style="zoom:50%;" />
+
+<img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjw2zsdqglj310u0i40wg.jpg" alt="image-20201020204036228" style="zoom:50%;" />
+
+<h4 id="求極值"><a href="#求極值" class="headerlink" title="求極值"></a>求極值</h4><p><img src="https://tva1.sinaimg.cn/large/007S8ZIlgy1gjw3259alwj310i0oe78g.jpg" alt="image-20201020204250076"></p>
+<h2 id="MLE-Gaussian-Cont"><a href="#MLE-Gaussian-Cont" class="headerlink" title="MLE - Gaussian (Cont.)"></a>MLE - Gaussian (Cont.)</h2><h2 id="CDF-amp-Percentile"><a href="#CDF-amp-Percentile" class="headerlink" title="CDF &amp; Percentile"></a>CDF &amp; Percentile</h2></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/04/05/AB_Test/Bayesian_ML/Sec3%20-%20Bayes%20Rule%20&amp;%20Prob%20Review/">http://yoursite.com/2019/04/05/AB_Test/Bayesian_ML/Sec3%20-%20Bayes%20Rule%20&amp;%20Prob%20Review/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="prev-post pull-left"><a href="/2019/04/05/AB_Test/Bayesian_ML/Sec2%20-%20High%20Level%20Picture!/"><i class="fa fa-chevron-left">  </i><span>AB_Test/Bayesian_ML/Sec2 - High Level Picture!</span></a></div><div class="next-post pull-right"><a href="/2019/04/05/System-Design/9p/2019-04-05-Location%20Based%20Service%20Design%20&amp;%20Uber/"><span>System-Design/9p/2019-04-05-Location Based Service Design &amp; Uber</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>

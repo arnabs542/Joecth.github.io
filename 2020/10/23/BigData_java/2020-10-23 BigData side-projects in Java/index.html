@@ -1,0 +1,153 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="BigData_java/2020-10-23 BigData side-projects in Java"><meta name="keywords" content=""><meta name="author" content="Joe Huang"><meta name="copyright" content="Joe Huang"><title>BigData_java/2020-10-23 BigData side-projects in Java | Awaken Desparado</title><link rel="shortcut icon" href="/melody-favicon.ico"><link rel="stylesheet" href="/css/index.css?version=1.6.1"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css?version=1.6.1"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="dns-prefetch" href="https://www.google-analytics.com"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-180692466-1', 'auto');
+ga('send', 'pageview');</script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  }
+} </script><meta name="generator" content="Hexo 4.1.1"></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div id="sidebar" data-display="true"><div class="toggle-sidebar-info text-center"><span data-toggle="Toggle article">Toggle site</span><hr></div><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Kafka"><span class="toc-number">1.</span> <span class="toc-text">Kafka</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Demo-創建一個-Topic"><span class="toc-number">1.1.</span> <span class="toc-text">Demo: 創建一個 Topic</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Back-door-我可優化的"><span class="toc-number">1.2.</span> <span class="toc-text">Back-door 我可優化的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#On-IntelliJ"><span class="toc-number">1.3.</span> <span class="toc-text">On IntelliJ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven"><span class="toc-number">1.4.</span> <span class="toc-text">Maven</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Producer-Keyhash"><span class="toc-number">1.5.</span> <span class="toc-text">Producer Keyhash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Producer-onCompletion"><span class="toc-number">1.6.</span> <span class="toc-text">Producer onCompletion</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Kafka-再論"><span class="toc-number">1.7.</span> <span class="toc-text">Kafka 再論</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info__avatar text-center"><img src="/img/avatar.png"></div><div class="author-info__name text-center">Joe Huang</div><div class="author-info__description text-center"></div><hr><div class="author-info-articles"><a class="author-info-articles__archives article-meta" href="/archives"><span class="pull-left">Articles</span><span class="pull-right">306</span></a><a class="author-info-articles__tags article-meta" href="/tags"><span class="pull-left">Tags</span><span class="pull-right">25</span></a><a class="author-info-articles__categories article-meta" href="/categories"><span class="pull-left">Categories</span><span class="pull-right">47</span></a></div></div></div><div id="content-outer"><div class="no-bg" id="top-container"><div id="page-header"><span class="pull-left"> <a id="site-name" href="/">Awaken Desparado</a></span><i class="fa fa-bars toggle-menu pull-right" aria-hidden="true"></i><span class="pull-right menus">   <a class="site-page" href="/">Home</a><a class="site-page" href="/archives">Archives</a><a class="site-page" href="/tags">Tags</a><a class="site-page" href="/categories">Categories</a></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title">BigData_java/2020-10-23 BigData side-projects in Java</div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 2020-10-23</time><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/BigData-java/">BigData_java</a></div></div></div><div class="layout" id="content-inner"><article id="post"><div class="article-container" id="post-content"><h2 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h2><p><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk04dmxpk5j3102032di4.jpg" alt="image-20201024083045739" style="zoom:50%;" /><img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk04idtk1hj30zw0480vt.jpg" alt="image-20201024083519950"></p>
+<img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk04j5lnuhj30zg0b8k1x.jpg" alt="image-20201024083605168" style="zoom:50%;" />
+
+
+
+<img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk04jvx04vj30zm04wte3.jpg" alt="image-20201024083647240" style="zoom:50%;" />
+
+
+
+<h3 id="Demo-創建一個-Topic"><a href="#Demo-創建一個-Topic" class="headerlink" title="Demo: 創建一個 Topic"></a>Demo: 創建一個 Topic</h3><img src="/Users/joe/Library/Application Support/typora-user-images/image-20201024085524024.png" alt="image-20201024085524024" style="zoom: 50%;" />
+
+<ul>
+<li>未發送 key，按默認的 round-robin</li>
+<li>Offset 就是個 id，跟 訊息長短沒關</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk056hkxnkj30vu03gacf.jpg" alt="image-20201024085829960" style="zoom:50%;" />
+
+
+
+<h3 id="Back-door-我可優化的"><a href="#Back-door-我可優化的" class="headerlink" title="Back-door 我可優化的"></a>Back-door 我可優化的</h3><p>Kafka 其中一台掛了怎辦？備份</p>
+<ul>
+<li>兩個放在同個機房(rack) –&gt; latency不會過大</li>
+<li>另一個在不同城市，我要replicate的時候比較慢，但ok</li>
+<li>所以在latency、reliability找了平衡</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk05k9xsnfj30vi0f8wpp.jpg" alt="image-20201024091144456" style="zoom:67%;" />
+
+
+
+<ul>
+<li>TERMs: ack、latency、Throughput</li>
+</ul>
+<h3 id="On-IntelliJ"><a href="#On-IntelliJ" class="headerlink" title="On IntelliJ"></a>On IntelliJ</h3><ul>
+<li>Zookeeper要先在背后起来</li>
+<li>機器之間一定是通過network，network時就只能序列化變一個個地byte，<ul>
+<li>int serializer</li>
+<li>string serializer.  –&gt; 大多數情況都是這傢伙</li>
+</ul>
+</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk0735ftpqj30xs06c79h.jpg" alt="image-20201024100429381" style="zoom:50%;" />
+
+<ul>
+<li>producer.flush() – 會幫把數據直接沖到kafka queue裡去<ul>
+<li>存在問題! </li>
+<li>只是個blocking call，但不是同步</li>
+<li>就跟你这个info绑定了，要是你没跟我说你成功，我就会有个线程，一是在盯你，我一直浪费</li>
+</ul>
+</li>
+<li>Producer.send(recordNoKey) 一定是 Async的</li>
+</ul>
+<img src="/Users/joe/Library/Application Support/typora-user-images/image-20201024101109235.png" alt="image-20201024101109235" style="zoom:50%;" />
+
+<ul>
+<li>Producer 自己就是個 client之一</li>
+<li>三次握手也不需我們實現不然太蝦</li>
+</ul>
+<ul>
+<li>那个是partition id，不是replica 的id</li>
+</ul>
+<h3 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h3><p>軟體管理工具 – FB、Uber都有用</p>
+<p>項目管理工具</p>
+<h3 id="Producer-Keyhash"><a href="#Producer-Keyhash" class="headerlink" title="Producer Keyhash"></a>Producer Keyhash</h3><ul>
+<li>key如果被detect到是有東西，就會有hash去hash 去決定把這個partition發送到哪個 broker上面去；否則就是 round-robin</li>
+</ul>
+<h3 id="Producer-onCompletion"><a href="#Producer-onCompletion" class="headerlink" title="Producer onCompletion"></a>Producer onCompletion</h3><img src="/Users/joe/Library/Application Support/typora-user-images/image-20201025230649208.png" alt="image-20201025230649208" style="zoom: 67%;" />
+
+<ul>
+<li>production 不要用! 會變單線程<ul>
+<li>難道因為一個人的login失敗了，我就要stop整個producer嗎？</li>
+<li>我要做的事應該是producer不傻</li>
+</ul>
+</li>
+<li>一般是async時也過陣子來查看</li>
+<li>一般在prod不需要知道發去了哪裡，在roundrobin裡不需要知道<ul>
+<li>如果想知道話，也不是好奇；而是假設consumer的處理性特殊 – groupby key – 要是roundrobin就會分到10台機器，現在的shuffle洗牌才能把它們放到一台機器上去；要是很常，我的處理就意味不高效! 為了高效，我就會不再roundrobin，而是hashbykey!<ul>
+<li>所有的bigdata key 都在一台機器上，就不再要洗牌，雖然是全局的groupby；一旦沒有全局的groupby，我就很快</li>
+<li>即然我指定了我的key，我就可以很有信心知道這條要去哪台機器，因為kafka會去handle</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Kafka-再論"><a href="#Kafka-再論" class="headerlink" title="Kafka 再論"></a>Kafka 再論</h3><ul>
+<li><p>Kafka 啟動時會設定這個cluster要幾台機器組成</p>
+</li>
+<li><p>Kafka 是個 Pull 模型，因為</p>
+<ul>
+<li><p>Scalibility : 它是個很好的decouple的作用，把 producer、consumer很好地分開了；各自壞了不會影響到對方。</p>
+<ul>
+<li>如果這個Topic很多下游在訂閱，kafka要是push的話，它會忙死，而且下游搞不好還沒要你這更新</li>
+<li>它忙壞了，根本無法 scale-up</li>
+</ul>
+</li>
+<li><p>Diversity : – LEVERAGE &amp; STALIBILITY</p>
+<ul>
+<li><p>每個consumer都有自己的配置、自己的處理方式和節奏，kafka應該把處理信息的能動性(Leverage) 給 consumer。</p>
+</li>
+<li><p>要是這個組比較窮，或他們的priority低，他們處理數據不來，而且也沒budget；或許可以48hr再生一個結果就好。</p>
+<p>consumer可更穩定 (STALIBILITY)</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>每次我的好友建tweet時，該pull or push？</p>
+</li>
+<li><p>consumer 跟 partition有綁定的關係！只會給一個consumer去讀</p>
+<ul>
+<li>consumer去監聽partition</li>
+<li>平行就一定會有race condition<ol>
+<li>第 0 條該誰去讀？consumer0還是consumer4?</li>
+<li>假設真的通過層層複雜的設計，各自讀一條<ul>
+<li>我讀完時我要是早處理完時？</li>
+<li>我讀0時你讀1，你又不去commit，一方面在race了，一台機器上是idempotency，跨機器時呢？consumer不知道1號partition有沒有被讀成，怎辦？那consumer0跟consumer4還要有一個交流的體系</li>
+<li>交替讀的時候還是會出現問題</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>所以沒必要多台consumer監聽一個partion的必要</li>
+<li>系統裡不是最快就是最好的，當數據小時沒差。要是平行時的overhead大時，開一台就ok啦</li>
+</ul>
+</li>
+<li><p>中轉，一週後刪了；它的作用就不是保持數據的，才能scalible<br>往上強堆機器又要花錢!</p>
+</li>
+<li><p>問題就是: 工程師寫consumer會處理錯</p>
+</li>
+</ul>
+<img src="https://tva1.sinaimg.cn/large/0081Kckwgy1gk1yqkmwomj30rq0agwks.jpg" alt="image-20201025224640508" style="zoom: 67%;" />
+
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Joe Huang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://yoursite.com/2020/10/23/BigData_java/2020-10-23%20BigData%20side-projects%20in%20Java/">http://yoursite.com/2020/10/23/BigData_java/2020-10-23%20BigData%20side-projects%20in%20Java/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="post-meta__tag-list"></div><nav id="pagination"><div class="next-post pull-right"><a href="/2020/10/23/BigData_java/2020-10-23%20Kafka%20Infrastructure%20&amp;%20Details/"><span>BigData_java/2020-10-23 Kafka Infrastructure &amp; Details</span><i class="fa fa-chevron-right"></i></a></div></nav></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2013 - 2020 By Joe Huang</div><div class="framework-info"><span>Driven - </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme - </span><a href="https://github.com/Molunerfinn/hexo-theme-melody" target="_blank" rel="noopener"><span>Melody</span></a></div><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fa fa-file-o"></i><span id="busuanzi_value_page_pv"></span><span></span></span></div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@latest/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-ui-pack@latest/velocity.ui.min.js"></script><script src="/js/utils.js?version=1.6.1"></script><script src="/js/fancybox.js?version=1.6.1"></script><script src="/js/sidebar.js?version=1.6.1"></script><script src="/js/copy.js?version=1.6.1"></script><script src="/js/fireworks.js?version=1.6.1"></script><script src="/js/transition.js?version=1.6.1"></script><script src="/js/scroll.js?version=1.6.1"></script><script src="/js/head.js?version=1.6.1"></script><script>if(/Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent)) {
+  $('#nav').addClass('is-mobile')
+  $('footer').addClass('is-mobile')
+  $('#top-container').addClass('is-mobile')
+}</script></body></html>
